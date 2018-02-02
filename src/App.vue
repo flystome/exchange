@@ -1,23 +1,35 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <header is='Header' />
+    <div class="btc-container">
+      <div class="container">
+        <router-view/>
+      </div>
+    </div>
+    <footer is='Footer' />
   </div>
 </template>
 
 <script>
+import Header from '@/components/Pages/Header/Header'
+import Footer from '@/components/Pages/Footer/Footer'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Header,
+    Footer
+  }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body{
+  font-family: '微软雅黑';
 }
+
+.btc-container{
+  background: #f2f2f2;
+  padding-bottom: 13px;
+}
+
 </style>

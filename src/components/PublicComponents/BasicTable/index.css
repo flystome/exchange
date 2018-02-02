@@ -1,0 +1,36 @@
+.btc-tableRemark{
+  float: right;
+  color: #777;
+  font-size: 12px;
+}
+
+.btc-table-container{
+  background: #fff;
+  margin-top: 10px;
+  overflow: auto;
+}
+
+.btc-table{
+  color: #777;
+  margin: 10px 0;
+  padding: 3px 25px;
+}
+
+.btc-table caption{
+  color: #000;
+  border-bottom: 1px solid #f2f2f2;
+  margin: 0 7px;
+}
+
+.btc-table tbody tr td{
+    text-align: center;
+    border: none
+}
+
+.btc-tableTextright{
+  text-align: initial!important;
+}
+
+.btc-tableTextleft{
+  text-align: end!important;
+}

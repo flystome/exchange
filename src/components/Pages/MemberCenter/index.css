@@ -1,0 +1,184 @@
+.btc-member-bt{
+  background: #4382f7;
+  border: none;
+  padding: 8px 23px;
+  color: white;
+  border-radius: 3px;
+  float: right;
+  margin-top: 20px;
+}
+
+.btc-member-container{
+  background: white;
+  padding: 13px;
+  margin-top: 10px;
+}
+
+.btc-member-avatar{
+  float: left
+}
+
+.btc-member-info{
+  padding-left: 23px;
+  float: left;
+  padding-top: 14px;
+}
+
+.btc-member-assetCount{
+  margin-top: 7px;
+}
+
+.btc-member-infoEmail{
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.btc-member-blockHeader{
+  border-bottom: 1px solid #f2f2f2;
+  padding-bottom: 8px;
+  margin: 0 18px;
+}
+
+.btc-member-handleServer{
+  margin-left: 25px;
+}
+
+.btc-member-handleNew{
+  float: right;
+}
+
+.btc-member-handleNew img{
+  margin-right: 5px;
+  vertical-align: sub;
+}
+
+.btc-member-qContainer{
+  color: #ccc;
+  margin-top: 10px;
+  padding-right: 16px;
+  padding-left: 22px;
+  padding-bottom: 5px;
+  margin-left: 15px;
+  border-bottom: 1px solid #f2f2f2;
+  font-family: '微软雅黑';
+}
+
+.btc-member-question{
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.btc-member-qTime{
+  float: right;
+  font-size: 12px;
+  color: #ccc;
+  font-weight: initial;
+}
+
+.btc-member-qTitle,.btc-member-question{
+  color: #666666;
+  margin: 7px 0;
+}
+
+.btc-textCenter{
+  text-align: center
+}
+
+.btc-textCenter > div > div {
+  padding: 10px 0
+}
+
+.btc-img .btc-r-border img{
+  position: absolute;
+  left: 20px;
+}
+
+.btc-img{
+  text-align: start
+}
+
+.btc-member-padding{
+  padding-top: 12px;
+  padding-bottom: 13px;
+  font-weight: 600;
+}
+
+.btc-r-border{
+  border-right: 1px solid #f2f2f2;
+  padding-bottom: 32px;
+  height: 125px;
+}
+
+.btc-link{
+  color: #4f89f5;
+}
+
+.btc-link:hover{
+  text-decoration: none;
+  cursor: pointer;
+  color: #4f89f5;
+}
+
+.font-w{
+  font-weight: 600;
+}
+
+.btc-marginT20{
+  margin-top: 20px;
+}
+
+.btc-marginT10{
+  margin-top: 10px;
+}
+
+.btc-member-L{
+  position: relative;
+  left: 65px;
+}
+
+.btc-member-process{
+  margin-top: 13px;
+}
+
+.btc-member-process img{
+  margin-top: 10px
+}
+
+@media (max-width: 992px) {
+  .btc-img{
+    text-align: center
+  }
+  .btc-textCenter > div > div{
+    border-bottom: 1px solid #f2f2f2;
+    padding: 25px 0;
+  }
+  .btc-r-border:nth-child(2){
+    height: initial;
+  }
+  .btc-img .btc-r-border img{
+    position: initial;
+  }
+  .btc-member-L{
+    position: initial;
+    margin-top: 12px;
+  }
+  .btc-img > div{
+    height: initial;
+  }
+}
+
+@media (max-width: 492px) {
+  .btc-member-bt{
+    float: left;
+    margin-left: 20px;
+  }
+  .btc-member-handleNew{
+    float: initial;
+    display: block;
+    margin-top: 10px;
+  }
+}
+
+.btc-member-info label{
+  background-color: #bebebe
+}
