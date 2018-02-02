@@ -144,21 +144,21 @@ import BasicTable from 'Components/BasicTable/BasicTable'
 const url = 'http://192.168.1.114:3000'
 export default {
   name: 'MemberCenter',
-  created () {
+  async created () {
     let that = this
-    this.$ajax({
+    const ajax = await this.$ajax({
       method: 'post',
-      url: `${url}/settinggs/user_data`,
+      url: `${url}/settings/user_data`,
       data: {
         member_id: that.$route.query.member_id
       }
-    }).then(d => d)
+    })
+    const data = ajax.data
+    this.$data.user = data
   },
   data () {
     return {
-      user: {
-        email: '80834004@qq.com'
-      },
+      user: '',
       LoginRecord: {
         captionTitle: '登录记录（最近5条）',
         Item: [{content: ['登录时间', 'ip', '登陆所在地']}].concat(new Array(5).fill({
