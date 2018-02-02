@@ -10,12 +10,12 @@
 
 .btc-member-container{
   background: white;
-  padding: 13px;
+  padding: 12px 12px;
   margin-top: 10px;
 }
 
 .btc-member-avatar{
-  float: left
+  float: left;
 }
 
 .btc-member-info{
@@ -40,7 +40,7 @@
 }
 
 .btc-member-handleServer{
-  margin-left: 25px;
+  margin-left: 32px;
 }
 
 .btc-member-handleNew{
@@ -64,8 +64,9 @@
 }
 
 .btc-member-question{
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
+  margin-top: 14px;
 }
 
 .btc-member-qTime{
@@ -76,8 +77,13 @@
 }
 
 .btc-member-qTitle,.btc-member-question{
-  color: #666666;
-  margin: 7px 0;
+  color: #333333;
+  margin-top: 7px;
+}
+
+.btc-member-qContext{
+  padding: 14px 0 21px 0;
+  line-height: 24px;
 }
 
 .btc-textCenter{
@@ -179,6 +185,8 @@
   }
 }
 
-.btc-member-info label{
-  background-color: #bebebe
+.btc-member-info .label{
+  padding: 2px 5px;
+  background-color: #bebebe;
+  font-weight: inherit;
 }

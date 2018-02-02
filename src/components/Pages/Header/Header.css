@@ -8,6 +8,10 @@
   margin-top: 10px;
 }
 
+.nav-margin a{
+  margin: 0 6px;
+}
+
 @media(max-width: 767px){
     .navbar-right{
       float: right

@@ -4,7 +4,7 @@
       <div class="col-md-6">
           <img src="static/img/avatar.jpg" class="img-circle btc-member-avatar">
           <div class="btc-member-info">
-            <span class="btc-member-infoEmail">80834004@qq.com</span>
+            <span class="btc-member-infoEmail">{{ user.email }}</span>
             <span class="label label-default">未认证</span>
               <div class="btc-member-assetCount">
                 资产总量 : 0.69845550 BTC
@@ -16,7 +16,7 @@
         <button class="btc-member-bt">修改密码</button>
       </div>
     </div>
-    <div class="row btc-member-container btc-textCenter">
+    <div class="row btc-member-container btc-textCenter btc-marginT10">
         <div class="row">
           <div class="col-md-3">
             <div class="btc-r-border">
@@ -27,7 +27,7 @@
               邮箱验证
               </div>
               <div class="row">
-                80834004@qq.com
+                {{ user.email }}
               </div>
             </div>
             <div class="col-md-12">
@@ -119,7 +119,7 @@
     </basic-table>
     <div class="row btc-member-handleRecord btc-member-container">
       <header class="btc-member-blockHeader">
-        <span class="btc-member-handleCount">客服处理记录</span>
+        <span class="btc-member-handleCount font-w">客服处理记录</span>
         <a class="btc-member-handleServer btc-link">查看已结束服务单</a>
         <a class="btc-member-handleNew btc-link"><img src="static/img/center_new.png" alt="新建问题">新建我的问题</a>
       </header>
@@ -141,10 +141,24 @@
 </template>
 <script>
 import BasicTable from 'Components/BasicTable/BasicTable'
+const url = 'http://192.168.1.114:3000'
 export default {
   name: 'MemberCenter',
+  created () {
+    let that = this
+    this.$ajax({
+      method: 'post',
+      url: `${url}/settinggs/user_data`,
+      data: {
+        member_id: that.$route.query.member_id
+      }
+    }).then(d => d)
+  },
   data () {
     return {
+      user: {
+        email: '80834004@qq.com'
+      },
       LoginRecord: {
         captionTitle: '登录记录（最近5条）',
         Item: [{content: ['登录时间', 'ip', '登陆所在地']}].concat(new Array(5).fill({
@@ -184,5 +198,5 @@ export default {
 </script>
 
 <style>
-@import './index.css'
+@import './MemberCenter.css'
 </style>

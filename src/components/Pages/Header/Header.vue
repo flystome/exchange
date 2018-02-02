@@ -25,5 +25,5 @@
 </template>
 
 <style lang='css'>
-@import './index.css'
+@import './Header.css'
 </style>

@@ -72,5 +72,5 @@
 </template>
 
 <style lang='css'>
-@import './index.css'
+@import './Footer.css'
 </style>

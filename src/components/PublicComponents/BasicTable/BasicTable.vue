@@ -2,7 +2,7 @@
   <div class="row btc-table-container">
     <div class="bs-example btc-table" data-example-id="simple-table">
       <table class="table">
-        <caption>{{table.captionTitle}}<slot name='remark'></slot></caption>
+        <caption class="font-w">{{table.captionTitle}}<slot name='remark'></slot></caption>
         <tbody>
           <tr v-for="(item, length) in table.Item" :key='length'>
             <td v-for="(data,index)  in item.content" :key="index"
@@ -24,5 +24,5 @@ export default {
 </script>
 
 <style>
-@import './index.css'
+@import './BasicTable.css'
 </style>
