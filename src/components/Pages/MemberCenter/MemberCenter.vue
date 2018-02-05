@@ -141,14 +141,17 @@
 </template>
 <script>
 import BasicTable from 'Components/BasicTable/BasicTable'
-const url = 'http://192.168.1.114:3000'
+
+const url = 'http://localhost:3000'
+
 export default {
   name: 'MemberCenter',
   async created () {
     let that = this
+
     const ajax = await this.$ajax({
       method: 'post',
-      url: `${url}/settings/user_data`,
+      url: `${url}/settings/member_data.json`,
       data: {
         member_id: that.$route.query.member_id
       }
