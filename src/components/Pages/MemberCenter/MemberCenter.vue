@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container btc-member-center">
     <div class="row btc-member-container">
       <div class="col-md-6">
           <img src="static/img/avatar.jpg" class="img-circle btc-member-avatar">
@@ -112,7 +112,6 @@
           </div>
           </div>
         </div>
-
     </div>
     <basic-table :table='LoginRecord'>
       <span slot="remark" class="btc-tableRemark">如有问题请及时联系我们</span>
@@ -141,14 +140,14 @@
 </template>
 <script>
 import BasicTable from 'Components/BasicTable/BasicTable'
-const url = 'http://192.168.1.114:3000'
+const url = 'http://192.168.1.113:3000'
 export default {
   name: 'MemberCenter',
   async created () {
     let that = this
     const ajax = await this.$ajax({
       method: 'post',
-      url: `${url}/settings/user_data`,
+      url: `${url}/settings/member_data`,
       data: {
         member_id: that.$route.query.member_id
       }
@@ -167,15 +166,15 @@ export default {
       },
       RecommendCount: {
         captionTitle: '推荐统计',
-        Item: new Array(5).fill({
+        Item: [{content: ['日期', '用户数', '新用户', '页面浏览', '跳出率']}].concat(new Array(5).fill({
           content: ['2018-01-23', '123456465', '1', '1.2H', '32%']
-        })
+        }))
       },
       RecommendUser: {
         captionTitle: '推荐的用户数',
-        Item: new Array(5).fill({
+        Item: [{content: ['账户', 'ip 地址', '登录所在地', '浏览器', '注册时间', '是否激活']}].concat(new Array(5).fill({
           content: ['2018-01-23', '192.168.1.110', 'Shenzhen China', '谷歌浏览器', '2018-01-23 18:04:57', '是']
-        })
+        }))
       },
       handleRecord: [{
         question: '提币问题',

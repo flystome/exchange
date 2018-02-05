@@ -8,6 +8,10 @@
   margin-top: 20px;
 }
 
+.btc-member-center > div:last-child .btc-tableTextleft{
+  text-align: center!important;
+}
+
 .btc-member-container{
   background: white;
   padding: 12px 12px;

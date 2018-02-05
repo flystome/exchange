@@ -28,6 +28,7 @@ body{
 }
 
 .btc-container{
+  min-height: 610px;
   background: #f2f2f2;
   padding-bottom: 13px;
 }
