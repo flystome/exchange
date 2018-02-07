@@ -1,7 +1,7 @@
 import VueI18n from 'vue-i18n'
 import Vue from 'vue'
 import en from './en'
-import zh from './zh-cn'
+import zh from './zh-CN'
 
 Vue.use(VueI18n)
 const messages = {

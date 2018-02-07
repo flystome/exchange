@@ -29,5 +29,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./login.scss"
+@import "./Login.scss"
 </style>
