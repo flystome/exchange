@@ -82,9 +82,8 @@ body{
 </style>
 
 <style lang="scss">
-$margin: '5','10','15','20','25','30','35','45','50','55','60';
-
-@each $len in $margin{
+@for $len from 0 through 100 {
+  @if $len%5 == 0{
   .btc-marginT#{$len}{
     margin-top: #{$len}px
   }
@@ -99,16 +98,17 @@ $margin: '5','10','15','20','25','30','35','45','50','55','60';
   }
 
   .btc-paddingT#{$len}{
-    margin-top: #{$len}px
+    padding-top: #{$len}px
   }
   .btc-paddingB#{$len}{
-    margin-left: #{$len}px
+    padding-left: #{$len}px
   }
   .btc-paddingL#{$len}{
-    margin-right: #{$len}px
+    padding-right: #{$len}px
   }
   .btc-paddingR#{$len}{
-    margin-bottom: #{$len}px
+    padding-bottom: #{$len}px
+  }
   }
 }
 </style>

@@ -1,0 +1,34 @@
+.btc-validateIdentity{
+  padding: 12px 30px 15px 55px;
+}
+
+.btc-validateIdentity .btc-UploadExplain{
+  width: 140px;
+}
+
+.btc-validateIdentity .btc-Upload-block{
+  margin-top: 20px;
+}
+
+.btc-validateIdentity footer{
+  overflow: hidden;
+}
+
+.btc-validateIdentity footer button{
+  margin-top: 15px;
+}
+
+.btc-validateIdentity input[type='file']{
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  top: 0;
+}
+
+.btc-validateIdentity input[type='radio']{
+  position: relative;
+  top: 2px
+}
+

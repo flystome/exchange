@@ -67,11 +67,11 @@
           <form>
             <div class="row">
               <span class="btc-marginR20">登录密码</span>
-              <input type="text" v-model="password">
+              <basic-input v-model="password"></basic-input>
             </div>
             <div class="row btc-marginT20">
               <span class="btc-marginR20">谷歌验证码</span>
-              <input type="text" v-model="otp">
+              <basic-input v-model="otp"></basic-input>
             </div>
           </form>
         </div>
@@ -90,6 +90,7 @@
 <script>
 var QRCode = require('qrcode')
 export default {
+  name: 'ValidateGoogle',
   created () {
     this._post({
       url: '/settings/member_data.json',
@@ -105,7 +106,7 @@ export default {
       google: '',
       step: 1,
       otp: '',
-      password: 'y1193993@mvrht.net'
+      password: ''
     }
   },
   methods: {

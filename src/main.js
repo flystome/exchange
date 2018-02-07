@@ -3,6 +3,8 @@
 
 // template dependencies
 import BasicButton from 'Components/BasicButton/BasicButton'
+import BasicInput from 'Components/BasicInput/BasicInput'
+import UploadImg from 'Components/UploadImg/UploadImg'
 import QrCode from 'Components/QrCode/QrCode'
 import App from './App'
 
@@ -24,7 +26,9 @@ Vue.prototype.$moment = moment
 
 const components = [
   BasicButton,
-  QrCode
+  BasicInput,
+  QrCode,
+  UploadImg
 ]
 components.forEach(component => {
   Vue.component(component.name, component)

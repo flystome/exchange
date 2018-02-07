@@ -1,0 +1,50 @@
+<template>
+    <div class="btc-UploadImg">
+      <div class="btc-UploadExplain btc-marginR20 btc-marginT50">
+        {{ Upload.UploadExplain }}
+      </div>
+      <div class="btc-Upload-block">
+        <div class="row">
+          <basic-button :text='"点击上传"'>
+            <input type="file" @change='ShowImg'  accept="image/jpeg,image/jpg" slot="file">
+          </basic-button>
+        </div>
+        <div class="row btc-marginT20 btc-marginB20">
+          {{ Upload.ImgExplain }}
+        </div>
+        <div class="row">
+          <img src="~Img/validate-uploadimg.jpg" v-if="UploadImg === ''">
+          <img width="320" height="200" :src="UploadImg" v-else>
+          <img  class="btc-UploadImg-model btc-marginL100" :src="requireImg(Upload.ImgModel)">
+        </div>
+      </div>
+    </div>
+</template>
+
+<script>
+export default {
+  name: 'UploadImg',
+  props: ['Upload'],
+  data () {
+    return {
+      UploadImg: ''
+    }
+  },
+  methods: {
+    ShowImg (el) {
+      var FileRead = new FileReader()
+      FileRead.readAsDataURL(el.target.files[0])
+      FileRead.onload = (d) => {
+        this.UploadImg = d.srcElement.result
+      }
+    },
+    requireImg (img) {
+      return require(`../../../../static/img/${img}`)
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+  @import './UploadImg.scss'
+</style>
