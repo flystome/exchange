@@ -11,6 +11,12 @@
             </td>
           </tr>
         </tbody>
+        <!-- <div class="text-center btc-table-record">
+            <div>
+                <img src="~Img/norecord.png" >
+                <div class="btc-marginT15">占无记录</div>
+            </div>
+        </div> -->
       </table>
     </div>
   </div>

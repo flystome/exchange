@@ -1,29 +1,34 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
+
+// template dependencies
+import BasicButton from 'Components/BasicButton/BasicButton'
+import QrCode from 'Components/QrCode/QrCode'
 import App from './App'
-import router from './router'
 
 // js dependencies
-import axios from 'axios'
-import qs from 'qs'
+import Vue from 'vue'
+import router from './router'
+import moment from 'moment'
+
+// import store from './store'
+import { _post } from './axios'
 
 // css dependencies
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-axios.interceptors.request.use(function (config) {
-  config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-  if (config.method === 'post') {
-    config.data = qs.stringify({
-      ...config.data
-    })
-  }
-  return config
-}, function (error) {
-  return Promise.reject(error)
-})
+moment.locale('zh-cn')
 Vue.config.productionTip = false
-Vue.prototype.$ajax = axios
+Vue.prototype._post = _post
+Vue.prototype.$moment = moment
+
+const components = [
+  BasicButton,
+  QrCode
+]
+components.forEach(component => {
+  Vue.component(component.name, component)
+})
 
 /* eslint-disable no-new */
 new Vue({

@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from 'Pages/Login/Login'
-import Register from 'Pages/Register/Register'
-import MemberCenter from 'Pages/MemberCenter/MemberCenter'
+const Login = () => import('Pages/Login/Login')
+const Register = () => import('Pages/Register/Register')
+const MemberCenter = () => import('Pages/MemberCenter/MemberCenter')
+const ValidateEmail = () => import('Pages/Validate/Email/Email')
+const ValidateGoogle = () => import('Pages/Validate/Google/Google')
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -23,6 +25,25 @@ export default new Router({
       path: '/membercenter',
       name: 'membercenter',
       component: MemberCenter
+    },
+    {
+      path: '/validate/email',
+      name: 'ValidateEmail',
+      component: ValidateEmail
+    },
+    {
+      path: '/validate/google',
+      name: 'ValidateGoogle',
+      component: ValidateGoogle
     }
   ]
 })
+
+// router.beforeEach((to, from, next) => {
+//   console.log(to.path)
+//   if (to.fullPath === '/') {
+//     next({path: '/menmbercenter'})
+//   }
+// })
+
+export default router

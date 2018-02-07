@@ -38,3 +38,7 @@
 .btc-tableTextleft{
   text-align: end!important;
 }
+
+.btc-table-record > div{
+  margin: 70px 0;
+}

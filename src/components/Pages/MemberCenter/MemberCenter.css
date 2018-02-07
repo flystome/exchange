@@ -1,21 +1,11 @@
 .btc-member-bt{
-  background: #4382f7;
-  border: none;
-  padding: 8px 23px;
-  color: white;
-  border-radius: 3px;
   float: right;
   margin-top: 20px;
+  float: right;
 }
 
 .btc-member-center > div:last-child .btc-tableTextleft{
   text-align: center!important;
-}
-
-.btc-member-container{
-  background: white;
-  padding: 12px 12px;
-  margin-top: 10px;
 }
 
 .btc-member-avatar{
@@ -91,7 +81,7 @@
 }
 
 .btc-textCenter{
-  text-align: center
+  text-align: center;
 }
 
 .btc-textCenter > div > div {
@@ -107,38 +97,18 @@
   text-align: start
 }
 
+.btc-member-vc .btc-r-border > :first-child{
+  height: 53px;
+}
+
 .btc-member-padding{
-  padding-top: 12px;
+  padding-top: 25px;
   padding-bottom: 13px;
-  font-weight: 600;
 }
 
 .btc-r-border{
-  border-right: 1px solid #f2f2f2;
-  padding-bottom: 32px;
+  margin-bottom: 35px;
   height: 125px;
-}
-
-.btc-link{
-  color: #4f89f5;
-}
-
-.btc-link:hover{
-  text-decoration: none;
-  cursor: pointer;
-  color: #4f89f5;
-}
-
-.font-w{
-  font-weight: 600;
-}
-
-.btc-marginT20{
-  margin-top: 20px;
-}
-
-.btc-marginT10{
-  margin-top: 10px;
 }
 
 .btc-member-L{
@@ -153,6 +123,18 @@
 .btc-member-process img{
   margin-top: 10px
 }
+
+.btc-member-validata{
+  border: 1px solid #4382f7;
+  padding: 7px 18px;
+  display: inline-block;
+  margin-bottom: 25px;
+}
+
+.btc-member-p12{
+  padding: 12px;
+}
+
 
 @media (max-width: 992px) {
   .btc-img{
