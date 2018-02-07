@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 
-const requestUrl = 'http://192.168.1.113:3000'
+const requestUrl = 'http://192.168.1.114:3000'
 
 axios.interceptors.request.use(function (config) {
   config.headers['Content-Type'] = 'application/x-www-form-urlencoded'

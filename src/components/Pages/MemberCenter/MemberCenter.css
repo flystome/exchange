@@ -129,6 +129,18 @@
   padding: 7px 18px;
   display: inline-block;
   margin-bottom: 25px;
+  position: relative;
+}
+
+.btc-member-validata img{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.btc-member-validata span{
+  position: relative;
+  z-index: 2;
 }
 
 .btc-member-p12{
