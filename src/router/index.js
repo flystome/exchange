@@ -23,8 +23,8 @@ const router = new Router({
       component: Register
     },
     {
-      path: '/membercenter',
-      name: 'membercenter',
+      path: '/member_center',
+      name: 'member_center',
       component: MemberCenter
     },
     {

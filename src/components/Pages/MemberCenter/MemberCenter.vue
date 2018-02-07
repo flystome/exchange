@@ -34,7 +34,7 @@
             </div>
             <div class="col-md-12">
               <div class="row">
-                等级1
+                {{$t("level.level_1")}}
               </div>
               <div class="row btc-marginT20">
                 <img src="static/img/right.jpg" v-if='this.data.activated'>
@@ -185,7 +185,6 @@ export default {
     this._post({
       url: '/settings/member_data.json',
       data: {
-        member_id: 326
       }
     }, (d) => {
       var data = d.data

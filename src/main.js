@@ -12,6 +12,8 @@ import App from './App'
 import Vue from 'vue'
 import router from './router'
 import moment from 'moment'
+import VueI18n from 'vue-i18n'
+import message from './common/js/i18n'
 
 // import store from './store'
 import { _post } from './axios'
@@ -23,6 +25,12 @@ moment.locale('zh-cn')
 Vue.config.productionTip = false
 Vue.prototype._post = _post
 Vue.prototype.$moment = moment
+Vue.use(VueI18n)
+
+const i18n = new VueI18n({
+  locale: 'zh',
+  message: message
+})
 
 const components = [
   BasicButton,
@@ -39,5 +47,6 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  i18n
 })
