@@ -8,12 +8,7 @@
 <script>
 export default {
   name: 'BasicButton',
-  props: ['text'],
-  methods: {
-    updateImg (a) {
-      console.log(a)
-    }
-  }
+  props: ['text']
 }
 </script>
 

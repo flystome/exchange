@@ -2,61 +2,61 @@
   <footer class="btc-footer">
     <nav class="container hidden-xs">
       <div class="col-sm-9">
-        <h4>比特币家族</h4>
+        <h4>{{$t("concepts.btc_family")}}</h4>
         <div class="row">
           <ul>
-            <li><a href="/coin/btc">比特币</a></li>
-            <li><a href="/coin/bch">比特币现金</a></li>
-            <li><a href="/coin/btg">比特币黄金</a></li>
-            <li><a href="/coin/bcd">比特币钻石</a></li>
-            <li><a href="/coin/sbtc">超级比特币</a></li>
-            <li><a href="/coin/lbtc">闪电比特币</a></li>
-            <li><a href="/coin/btp">比特币白金</a></li>
-            <li><a href="/coin/god">比特币上帝</a></li>
-            <li><a href="/coin/bcx">比特无限</a></li>
-            <li><a href="/coin/bck">比特币王者</a></li>
-            <li><a href="/coin/bth">比特热点</a></li>
-            <li><a href="/coin/bta">比特币荣耀</a></li>
-            <li><a href="/coin/btw">比特币世界</a></li>
-            <li><a href="/coin/bpa">比特币披萨</a></li>
-            <li><a href="/coin/btf">比特币信仰</a></li>
-            <li><a href="/coin/btn">新比特币</a></li>
-            <li><a href="/coin/bti">比特币钛</a></li>
-            <li><a href="/coin/fbtc">快速比特币</a></li>
-            <li><a href="/coin/bifi">BitcoinFile</a></li>
+            <li><a href="/coin/btc">{{$t("coins.btc")}}</a></li>
+            <li><a href="/coin/bch">{{$t("coins.bch")}}</a></li>
+            <li><a href="/coin/btg">{{$t("coins.bch")}}</a></li>
+            <li><a href="/coin/bcd">{{$t("coins.bcd")}}</a></li>
+            <li><a href="/coin/sbtc">{{$t("coins.sbtc")}}</a></li>
+            <li><a href="/coin/lbtc">{{$t("coins.lbtc")}}</a></li>
+            <li><a href="/coin/btp">{{$t("coins.btp")}}</a></li>
+            <li><a href="/coin/god">{{$t("coins.god")}}</a></li>
+            <li><a href="/coin/bcx">{{$t("coins.bcx")}}</a></li>
+            <li><a href="/coin/bck">{{$t("coins.bck")}}</a></li>
+            <li><a href="/coin/bth">{{$t("coins.bth")}}</a></li>
+            <li><a href="/coin/bta">{{$t("coins.bta")}}</a></li>
+            <li><a href="/coin/btw">{{$t("coins.btw")}}</a></li>
+            <li><a href="/coin/bpa">{{$t("coins.bpa")}}</a></li>
+            <li><a href="/coin/btf">{{$t("coins.bch")}}</a></li>
+            <li><a href="/coin/btn">{{$t("coins.btf")}}</a></li>
+            <li><a href="/coin/bti">{{$t("coins.bti")}}</a></li>
+            <li><a href="/coin/fbtc">{{$t("coins.fbtc")}}</a></li>
+            <li><a href="/coin/bifi">{{$t("coins.bifi")}}</a></li>
           </ul>
         </div>
-        <h4>以太坊家族</h4>
+        <h4>{{$t("concepts.eth_family")}}</h4>
         <div class="row">
           <ul>
-            <li><a href="/coin/eth">以太坊</a></li>
-            <li><a href="/coin/etc">以太经典</a></li>
-            <li><a href="/coin/etf">以太雾</a></li>
-            <li><a href="/coin/qtum">量子链</a></li>
-            <li><a href="/coin/eos">EOS</a></li>
-            <li><a href="/coin/rep">Angur</a></li>
-            <li><a href="/coin/omg">OmiseGo</a></li>
+            <li><a href="/coin/eth">{{$t("coins.eth")}}</a></li>
+            <li><a href="/coin/etc">{{$t("coins.etc")}}</a></li>
+            <li><a href="/coin/etf">{{$t("coins.etf")}}</a></li>
+            <li><a href="/coin/qtum">{{$t("coins.qtum")}}</a></li>
+            <li><a href="/coin/eos">{{$t("coins.eos")}}</a></li>
+            <li><a href="/coin/rep">{{$t("coins.rep")}}</a></li>
+            <li><a href="/coin/omg">{{$t("coins.omg")}}</a></li>
           </ul>
         </div>
-        <h4>云存储</h4>
+        <h4>{{$t("concepts.storage")}}</h4>
         <div class="row">
           <ul>
-            <li><a href="/coin/wkc">链克</a></li>
-            <li><a href="/coin/llt">流量币</a></li>
+            <li><a href="/coin/wkc">{{$t("coins.wkc")}}</a></li>
+            <li><a href="/coin/llt">{{$t("coins.llt")}}</a></li>
           </ul>
         </div>
-        <h4>其他</h4>
+        <h4>{{$t("concepts.others")}}</h4>
         <div class="row">
           <ul>
-            <li><a href="/coin/ltc">莱特币</a></li>
-            <li><a href="/coin/lch">莱特币现金</a></li>
-            <li><a href="/coin/xmr">门罗币</a></li>
-            <li><a href="/coin/dash">达世币</a></li>
-            <li><a href="/coin/xrp">瑞波币</a></li>
-            <li><a href="/coin/hsr">超级现金</a></li>
-            <li><a href="/coin/doge">狗狗币</a></li>
-            <li><a href="/coin/xem">新经币</a></li>
-            <li><a href="/coin/nxt">未来币</a></li>
+            <li><a href="/coin/ltc">{{$t("coins.ltc")}}</a></li>
+            <li><a href="/coin/lch">{{$t("coins.lch")}}</a></li>
+            <li><a href="/coin/xmr">{{$t("coins.xmr")}}</a></li>
+            <li><a href="/coin/dash">{{$t("coins.dash")}}</a></li>
+            <li><a href="/coin/xrp">{{$t("coins.xrp")}}</a></li>
+            <li><a href="/coin/hsr">{{$t("coins.hsr")}}</a></li>
+            <li><a href="/coin/doge">{{$t("coins.doge")}}</a></li>
+            <li><a href="/coin/xem">{{$t("coins.xem")}}</a></li>
+            <li><a href="/coin/nxt">{{$t("coins.nxt")}}</a></li>
           </ul>
         </div>
       </div>

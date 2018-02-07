@@ -29,13 +29,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       ],
     },
     headers: {
-      "Access-Control-Allow-Origin": "http://192.168.1.110:3000",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization",
-      "Access-Control-Allow-Credentials": "true"
     },
     hot: true,
-    contentBase: false, // since we use CopyWebpackPlugin.
+    contentBase: __dirname + '/', // since we use CopyWebpackPlugin.
     compress: true,
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,
@@ -70,7 +66,13 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         to: config.dev.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    new webpack.optimize.CommonsChunkPlugin('common.js'),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+
+    })
   ]
 })
 

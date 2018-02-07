@@ -14,7 +14,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
+  create () {
+    this.$store.dispatch('getData')
+  },
   data () {
     return {
       error: '',
@@ -24,6 +28,9 @@ export default {
         confirmPassword: ''
       }
     }
+  },
+  computed: {
+    ...mapGetters(['loginData'])
   }
 }
 </script>

@@ -6,10 +6,9 @@
           <div class="btc-member-info">
             <span class="btc-member-infoEmail">{{ data.email }}</span>
               <div class="btc-member-assetCount">
-                资产总量 : 0.69845550 BTC
+                资产总量 : 0 BTC
               </div>
           </div>
-
       </div>
       <div class="col-md-6">
         <basic-button :text='"修改密码"' class="btc-member-bt"></basic-button>
@@ -23,8 +22,11 @@
                 <img class='btc-marginT5' src="static/img/letter.jpg">
               </div>
               <div class="row ">
-                <span class="btc-member-validata btc-link">
-                    <span>{{$t("auth.email")}}</span>
+                <span class="btc-member-validata btc-link" :class="{'btc-active': !data.activated}">
+                    <span v-if='this.data.activated'>{{$t("auth.email")}}</span>
+                    <span v-else>
+                      {{$t("auth.send_email")}}
+                    </span>
                   <img v-if='this.data.activated' src="~Img/validate-true.jpg" alt="已认证">
                 </span>
               </div>
@@ -34,7 +36,7 @@
             </div>
             <div class="col-md-12">
               <div class="row">
-                {{$t("auth.level.level_1")}}
+                <strong>{{$t("auth.level.level_1")}}</strong>
               </div>
               <div class="row btc-marginT20">
                 <img src="static/img/right.jpg" v-if='this.data.activated'>
@@ -51,12 +53,14 @@
                 <img src="static/img/phone.jpg">
               </div>
               <div class="row">
-                <span class="btc-member-validata btc-link btc-marginR10">
-                    <span>手机验证</span>
+                <span class="btc-member-validata btc-link btc-marginR10" :class="{'btc-active': !data.sms_activated}">
+                    <span>{{ $t("auth.phone") }}</span>
                     <img v-if='this.data.sms_activated' src="~Img/validate-true.jpg" alt="已认证">
                   </span>
-                <span class="btc-member-validata btc-link btc-marginL10">
-                    <span>谷歌验证</span>
+                <span class="btc-member-validata btc-link btc-marginL10"
+                :class="{'btc-active': !data.app_activated}"
+                @click="goPath('/validate/google',data && data.app_activated,false)">
+                    <span>{{$t("auth.google")}}</span>
                     <img v-if='this.data.app_activated' src="~Img/validate-true.jpg" alt="已认证">
                 </span>
               </div>
@@ -66,7 +70,7 @@
             </div>
             <div class="col-md-12">
               <div class="row">
-                {{$t("auth.level.level_2")}}
+                <strong>{{$t("auth.level.level_2")}}</strong>
               </div>
               <div class="row btc-marginT20">
                 <img src="static/img/right.jpg" v-if='this.data.sms_activated && this.data.app_activated'>
@@ -82,8 +86,8 @@
                 <img src="static/img/authentication.jpg">
               </div>
               <div class="row">
-                <span class="btc-member-validata btc-link">
-                  实名认证
+                <span class="btc-member-validata btc-link" @click="goPath('/validate/identity', name_activated,false)" :class="{'btc-active': !this.name_activated}">
+                  {{$t("auth.real_name")}}
                 </span>
               </div>
               <div class="">
@@ -92,7 +96,7 @@
             </div>
              <div class="col-md-12">
               <div class="row">
-                {{$t("auth.level.level_3")}}
+                <strong>{{$t("auth.level.level_3")}}</strong>
               </div>
               <div class="row btc-marginT20">
                 <img src="static/img/right.jpg" v-if='this.name_activated'>
@@ -187,6 +191,7 @@ export default {
   },
   data () {
     return {
+      HOST_URL: process.env.HOST_URL,
       name_activated: false,
       wexin_activated: false,
       data: '',
@@ -205,6 +210,19 @@ export default {
       tickets: []
     }
   },
+  methods: {
+    goPath (path, status, href) {
+      if (status) {
+        return
+      }
+      if (href) {
+        location.href = `${this.HOST_URL}${path}`
+      }
+      this.$router.push({
+        path: path
+      })
+    }
+  },
   computed: {
     ...mapGetters(['loginData'])
   },
@@ -219,9 +237,7 @@ export default {
   watch: {
     loginData (d) {
       if (d.errors) {
-        this.$router.push({
-          path: '/login'
-        })
+        this.location.href = `${this.HOST_URL}/signin`
       } else {
         var data = d
         this.data = data
@@ -264,6 +280,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import './MemberCenter.css'
 </style>

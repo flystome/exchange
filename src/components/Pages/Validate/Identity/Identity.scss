@@ -27,8 +27,13 @@
   top: 0;
 }
 
-.btc-validateIdentity input[type='radio']{
-  position: relative;
-  top: 2px
+.btc-validateIdentity{
+  input[type='radio']{
+    position: relative;
+    top: 2px
+  }
+  .btc-news-prompt{
+    height: 26px;
+    right: -75px;
+  }
 }
-

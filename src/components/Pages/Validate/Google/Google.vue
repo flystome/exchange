@@ -14,7 +14,7 @@
     </div>
     <template v-if="step === 1">
       <div class="row btc-validate-gpt btc-marginB60" style="margin-bottom: 105px;">
-        <div class="col-md-5 text-center btc-b-r  btc-validate-googleApp">
+        <div class="col-md-4 col-xs-12 col-md-offset-2 text-center btc-b-r  btc-validate-googleApp">
             <img src="~Img/validate-google.jpg">
           <div class="row btc-f btc-marginT10">
             <strong>
@@ -22,13 +22,13 @@
             </strong>
           </div>
         </div>
-        <div class="col-md-6 btc-marginT20">
+        <div class="col-md-5 col-xs-12 col-md-offset-1 text-center btc-marginT20">
           <div class="row">
             请于应用商店下载安装Google Authenticator（谷歌验证器）
           </div>
           <div class="row btc-marginT20">
-            <img src="~Img/validate-iosapp.jpg" class="btc-marginR5">
-            <img src="~Img/validate-gplay.png">
+            <img src="~Img/validate-iosapp.jpg" class="btc-marginR5 col-xs-24">
+            <img src="~Img/validate-gplay.png" class="col-xs-24">
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
       <div class="row btc-validate-gpt">
         <div class="col-md-6 text-center btc-b-r">
           <div class="row">
-            <qr-code :dateUrl="qrcode(google.google_uri)"></qr-code>
+            <qr-code :dateUrl="qrcode(loginData.google_uri)"></qr-code>
           </div>
           <div class="row btc-marginT15">
             使用
@@ -55,28 +55,30 @@
             扫描二维码
           </div>
         </div>
-        <div class="col-md-6 btc-marginL45 btc-validate-gmr">
-          <div class="row btc-marginL45">
+        <div class="col-md-6 text-center">
+          <div class="row ">
             <strong class="btc-link ">
-              {{ google.google_otp_secret }}
+              {{ loginData.google_otp_secret }}
             </strong>
           </div>
-          <div class="row btc-marginT20 btc-marginL45">
-            若无法扫描，请将该16位密匙手动输入到谷歌验证码APP里
+          <div class="row btc-marginT20 ">
+            <span>
+              若无法扫描，请将该16位密匙手动输入到谷歌验证码APP里
+            </span>
           </div>
-          <form>
+          <form id="form">
             <div class="row">
-              <span class="btc-marginR20">登录密码</span>
-              <basic-input v-model="password"></basic-input>
+              <span class="col-md-4 col-xs-4">登录密码</span>
+              <basic-input class="col-md-7 col-xs-6" v-model="password"></basic-input>
             </div>
             <div class="row btc-marginT20">
-              <span class="btc-marginR20">谷歌验证码</span>
-              <basic-input v-model="otp"></basic-input>
+              <span class="col-md-4 col-xs-4">谷歌验证码</span>
+              <basic-input class="col-md-7 col-xs-6" v-model="otp"></basic-input>
             </div>
           </form>
         </div>
       </div>
-      <div class="row text-right btc-marginT60">
+      <div class="row text-right btc-marginT80">
         <span @click="minusStep" class="btc-link btc-fl btc-marginT30 btc-poniter">返回上一步</span>
         <span class="btc-color666 btc-marginR20">
           已经安装 App
@@ -88,21 +90,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 var QRCode = require('qrcode')
 export default {
   name: 'ValidateGoogle',
   created () {
-    this._post({
-      url: '/settings/member_data.json',
-      data: {
-        member_id: 336
-      }
-    }, (d) => {
-      this.google = d.data
-    })
+    this.$store.dispatch('getData')
   },
   data () {
     return {
+      HOST_URL: process.env.HOST_URL,
       google: '',
       step: 1,
       otp: '',
@@ -125,9 +122,8 @@ export default {
       return dateUrl
     },
     gValidate () {
-      console.log(this.google.google_otp_secret)
       this._post({
-        url: '/verify/authentication_info',
+        url: `${this.HOST_URL}/verify/authentication_info`,
         data: {
           member_id: 336,
           password: this.password,
@@ -139,6 +135,14 @@ export default {
       }, (d) => {
         console.log(d)
       })
+    }
+  },
+  computed: {
+    ...mapGetters(['loginData'])
+  },
+  watch: {
+    loginData (d) {
+      console.log(d)
     }
   }
 }
