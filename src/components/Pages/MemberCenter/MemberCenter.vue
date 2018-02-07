@@ -37,8 +37,12 @@
                 等级1
               </div>
               <div class="row btc-marginT20">
-                <img src="static/img/right.jpg">
+                <img src="static/img/right.jpg" v-if='this.data.activated'>
+                <span class='btc-member-step' v-else>
+                    1
+                </span>
               </div>
+
             </div>
           </div>
         <div class="col-md-3 btc-b-r">
@@ -62,10 +66,13 @@
             </div>
             <div class="col-md-12">
               <div class="row">
-                等级1
+                等级2
               </div>
               <div class="row btc-marginT20">
-                <img src="static/img/right.jpg">
+                <img src="static/img/right.jpg" v-if='this.data.sms_activated && this.data.app_activated'>
+                <span class='btc-member-step' v-else>
+                    2
+                </span>
               </div>
             </div>
         </div>
@@ -85,10 +92,13 @@
             </div>
              <div class="col-md-12">
               <div class="row">
-                等级1
+                等级3
               </div>
               <div class="row btc-marginT20">
-                <img src="static/img/right.jpg">
+                <img src="static/img/right.jpg" v-if='this.name_activated'>
+                <span class='btc-member-step' v-else>
+                    3
+                </span>
               </div>
             </div>
           </div>
@@ -108,10 +118,13 @@
             </div>
              <div class="col-md-12">
             <div class="row">
-              等级1
+              等级4
             </div>
             <div class="row btc-marginT20">
-              <img src="static/img/right.jpg">
+                <img src="static/img/right.jpg" v-if='this.wexin_activated'>
+                <span class='btc-member-step' v-else>
+                    4
+                </span>
             </div>
           </div>
           </div>
@@ -214,6 +227,8 @@ export default {
   },
   data () {
     return {
+      name_activated: false,
+      wexin_activated: false,
       data: '',
       LoginRecord: {
         captionTitle: '登录记录（最近5条）',

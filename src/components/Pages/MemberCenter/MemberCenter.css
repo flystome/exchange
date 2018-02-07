@@ -138,6 +138,17 @@
   right: 0;
 }
 
+.btc-member-step{
+  background: #bebebe;
+  padding: 3px 9px;
+  font-weight: 700;
+  border-radius: 19px;
+  color: white;
+  display: inline-block;
+  margin-top: 1px;
+  text-indent: -1px;
+}
+
 .btc-member-validata span{
   position: relative;
   z-index: 2;
