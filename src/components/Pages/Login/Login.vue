@@ -1,11 +1,33 @@
 <template>
-  <div class="btc-">
+  <div class="btc-login btc-container-block">
+    <div class="title">
+      <strong>
+        注册新账户
+      </strong>
+    </div>
     <form class="form-signin">
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="邮箱" required="" autofocus="">
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="登录密码" required="">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+      <label>{{ error }}</label>
+      <basic-input placeholder='邮箱'></basic-input>
+      <basic-input placeholder='登录密码'></basic-input>
     </form>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      error: '',
+      data: {
+        emali: '',
+        password: '',
+        confirmPassword: ''
+      }
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+@import "./login.scss"
+</style>

@@ -29,7 +29,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       ],
     },
     headers: {
-      "Access-Control-Allow-Origin": "localhost:3000",
+      "Access-Control-Allow-Origin": "http://192.168.1.110:3000",
       "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
       "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization",
       "Access-Control-Allow-Credentials": "true"

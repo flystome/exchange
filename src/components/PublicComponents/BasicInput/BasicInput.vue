@@ -1,7 +1,7 @@
 <template>
-  <input type="text"
+  <input  type="text"
     @input="$emit('input', $event.target.value)"
-    class="btc-basicInput"/>
+    class="btc-basicInput btc-b"/>
 </template>
 
 <script>

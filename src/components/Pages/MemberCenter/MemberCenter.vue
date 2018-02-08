@@ -17,14 +17,14 @@
     </div>
     <div class="row btc-member-vc btc-container-block btc-member-p12 btc-textCenter btc-marginT10">
         <div class="row btc-paddingT25">
-          <div class="col-md-3 btc-b-r">
+          <div class="col-sm-6 col-md-4 btc-b-r">
             <div class="btc-r-border">
               <div class="row">
                 <img class='btc-marginT5' src="static/img/letter.jpg">
               </div>
               <div class="row ">
                 <span class="btc-member-validata btc-link">
-                    <span>邮箱验证</span>
+                    <span>{{$t("auth.email")}}</span>
                   <img v-if='this.data.activated' src="~Img/validate-true.jpg" alt="已认证">
                 </span>
               </div>
@@ -34,7 +34,7 @@
             </div>
             <div class="col-md-12">
               <div class="row">
-                {{$t("level.level_1")}}
+                {{$t("auth.level.level_1")}}
               </div>
               <div class="row btc-marginT20">
                 <img src="static/img/right.jpg" v-if='this.data.activated'>
@@ -45,7 +45,7 @@
 
             </div>
           </div>
-        <div class="col-md-3 btc-b-r">
+        <div class="col-sm-6 col-md-4 btc-b-r">
             <div class="btc-r-border">
               <div class="row">
                 <img src="static/img/phone.jpg">
@@ -60,13 +60,13 @@
                     <img v-if='this.data.app_activated' src="~Img/validate-true.jpg" alt="已认证">
                 </span>
               </div>
-              <div class="row">
+              <div class="">
                 韩国用户实名认证，提现，改密等二次验证
               </div>
             </div>
             <div class="col-md-12">
               <div class="row">
-                等级2
+                {{$t("auth.level.level_2")}}
               </div>
               <div class="row btc-marginT20">
                 <img src="static/img/right.jpg" v-if='this.data.sms_activated && this.data.app_activated'>
@@ -76,7 +76,7 @@
               </div>
             </div>
         </div>
-          <div class="col-md-3 btc-b-r">
+          <div class="col-sm-12 col-md-4 btc-b-r">
             <div class="btc-r-border">
               <div class="row">
                 <img src="static/img/authentication.jpg">
@@ -86,13 +86,13 @@
                   实名认证
                 </span>
               </div>
-              <div class="row">
+              <div class="">
                 非韩国国籍用户完成实名认证方式。
               </div>
             </div>
              <div class="col-md-12">
               <div class="row">
-                等级3
+                {{$t("auth.level.level_3")}}
               </div>
               <div class="row btc-marginT20">
                 <img src="static/img/right.jpg" v-if='this.name_activated'>
@@ -102,7 +102,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-3 btc-b-r">
+          <!-- <div class="col-sm-6 col-md-3 btc-b-r">
             <div class="btc-r-border">
               <div class="row">
                 <img src="static/img/wechat.jpg">
@@ -127,7 +127,7 @@
                 </span>
             </div>
           </div>
-          </div>
+          </div> -->
         </div>
     </div>
     <basic-table :table='LoginRecord'>
@@ -160,6 +160,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import moment from 'moment'
 import BasicTable from 'Components/BasicTable/BasicTable'
 moment.locale('zh-cn')
@@ -182,47 +183,7 @@ var browser = (explorer) => {
 export default {
   name: 'MemberCenter',
   created () {
-    this._post({
-      url: '/settings/member_data.json',
-      data: {
-      }
-    }, (d) => {
-      var data = d.data
-      this.data = data
-      this.LoginRecord.Item = [{content: ['登录时间', 'ip', '登陆所在地']}].concat(this.data.recent_signin_histories.map(d => {
-        return {
-          content: [
-            this.$moment(d.created_at).format('L h:mm:ss'),
-            d.ip,
-            d.location
-          ]
-        }
-      }))
-      this.RecommendCount.Item = [{content: ['日期', '用户数', '新用户', '页面浏览', '跳出率']}].concat(this.data.referral_datas.map(d => {
-        return {
-          content: [
-            this.$moment(d.created_at).format('L h:mm:ss'),
-            d.users,
-            d.new_users,
-            d.page_views,
-            d.bounce_rate
-          ]
-        }
-      }))
-      this.RecommendUser.Item = [{content: ['账户', 'ip 地址', '登录所在地', '浏览器', '注册时间', '是否激活']}].concat(this.data.referral_signup_history.map((_, index) => {
-        return {
-          content: [
-            data.referral_signup_history[index].member_id,
-            data.referral_signup_history[index].ip,
-            data.referral_signup_history[index].location ? data.referral_signup_history[index].location : '占无',
-            browser(data.recent_signin_histories[index].ua),
-            this.$moment(data.referrals[index].created_at).format('L h:mm:ss'),
-            data.referrals[index].activated ? '是' : '否'
-          ]
-        }
-      }))
-      this.tickets = data.tickets
-    })
+    this.$store.dispatch('getData')
   },
   data () {
     return {
@@ -244,6 +205,9 @@ export default {
       tickets: []
     }
   },
+  computed: {
+    ...mapGetters(['loginData'])
+  },
   filters: {
     moment (date) {
       return moment(date).format('L h:mm:ss')
@@ -251,6 +215,51 @@ export default {
   },
   components: {
     BasicTable
+  },
+  watch: {
+    loginData (d) {
+      if (d.errors) {
+        this.$router.push({
+          path: '/login'
+        })
+      } else {
+        var data = d
+        this.data = data
+        this.data.recent_signin_histories.length === 0 ? this.LoginRecord.Item = '' : this.LoginRecord.Item = [{content: ['登录时间', 'ip', '登陆所在地']}].concat(this.data.recent_signin_histories.map(d => {
+          return {
+            content: [
+              this.$moment(d.created_at).format('L h:mm:ss'),
+              d.ip,
+              d.location
+            ]
+          }
+        }))
+        this.data.referral_datas.length === 0 ? this.RecommendCount.Item = '' : this.RecommendCount.Item = [{content: ['日期', '用户数', '新用户', '页面浏览', '跳出率']}].concat(this.data.referral_datas.map(d => {
+          return {
+            content: [
+              this.$moment(d.created_at).format('L h:mm:ss'),
+              d.users,
+              d.new_users,
+              d.page_views,
+              d.bounce_rate
+            ]
+          }
+        }))
+        this.data.referral_signup_history.length === 0 ? this.RecommendUser.Item = '' : this.RecommendUser.Item = [{content: ['账户', 'ip 地址', '登录所在地', '浏览器', '注册时间', '是否激活']}].concat(this.data.referral_signup_history.map((_, index) => {
+          return {
+            content: [
+              data.referral_signup_history[index].member_id,
+              data.referral_signup_history[index].ip,
+              data.referral_signup_history[index].location ? data.referral_signup_history[index].location : '占无',
+              browser(data.recent_signin_histories[index].ua),
+              this.$moment(data.referrals[index].created_at).format('L h:mm:ss'),
+              data.referrals[index].activated ? '是' : '否'
+            ]
+          }
+        }))
+        this.tickets = data.tickets
+      }
+    }
   }
 }
 </script>

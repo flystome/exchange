@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 
-const requestUrl = 'http://localhost:3000'
+const requestUrl = 'http://192.168.1.110:3000'
 axios.defaults.withCredentials = true
 
 axios.interceptors.request.use(function (config) {

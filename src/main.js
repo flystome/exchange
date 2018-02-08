@@ -12,10 +12,10 @@ import App from './App'
 import Vue from 'vue'
 import router from './router'
 import moment from 'moment'
-import VueI18n from 'vue-i18n'
-import message from './common/js/i18n'
+import i18n from '@/common/js/i18n/i18n.js'
+// import 'bootstrap/js/dropdown.js'
 
-// import store from './store'
+import store from './store'
 import { _post } from './axios'
 
 // css dependencies
@@ -25,12 +25,6 @@ moment.locale('zh-cn')
 Vue.config.productionTip = false
 Vue.prototype._post = _post
 Vue.prototype.$moment = moment
-Vue.use(VueI18n)
-
-const i18n = new VueI18n({
-  locale: 'zh',
-  message: message
-})
 
 const components = [
   BasicButton,
@@ -46,7 +40,8 @@ components.forEach(component => {
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  i18n,
+  store,
   template: '<App/>',
-  i18n
+  components: { App }
 })

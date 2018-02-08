@@ -52,6 +52,10 @@ body{
   cursor: pointer;
 }
 
+.btc-b{
+  border: 1px solid #f2f2f2;
+}
+
 .btc-b-r{
   border-right:1px solid #f2f2f2;
 }

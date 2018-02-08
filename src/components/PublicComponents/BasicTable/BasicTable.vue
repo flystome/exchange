@@ -1,5 +1,5 @@
 <template>
-  <div class="row btc-table-container">
+  <div class="row btc-table-container hidden-xs">
     <div class="bs-example btc-table" data-example-id="simple-table">
       <table class="table">
         <caption class="font-w">{{table.captionTitle}}<slot name='remark'></slot></caption>

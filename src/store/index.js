@@ -3,19 +3,33 @@ import Vuex from 'vuex'
 import { _post } from '../axios'
 Vue.use(Vuex)
 
-const state = {}
-_post({
-  url: '/settings/member_data.json',
-  data: {
-    member_id: 326
+const actions = {
+  getData ({commit}) {
+    _post({
+      url: '/settings/member_data.json'
+    }, (d) => {
+      commit('getData', d)
+    })
   }
-}, (d) => {
-  console.log(d)
-  state.data = d.data
-})
+}
+
+const getters = {
+  loginData: state => state.loginData
+}
+
+const mutations = {
+  getData (state, data) {
+    state.loginData = data.data
+  }
+}
 
 const store = new Vuex.Store({
-  state: state
+  state: {
+    loginData: ''
+  },
+  mutations,
+  actions,
+  getters
 })
 
 export default store

@@ -1,0 +1,66 @@
+.navbar-Home{
+  color: #49627b;
+  background: #232e3a;
+  height: 60px;
+  padding: 10px 0;
+}
+.nav-margin{
+  margin-top: 10px;
+}
+
+.nav-margin a{
+  margin: 0 6px;
+}
+
+@media(max-width: 767px){
+    .navbar-right{
+      float: right
+    }
+    .nav-pills{
+      float: left
+    }
+}
+
+@media(max-width: 767px){
+  .navbar-right{
+    float: right
+  }
+  .nav-pills{
+    float: left
+  }
+}
+
+.login-active .dropdown-toggle{
+  padding: 0
+}
+
+.navbar-Home{
+  .login-active {
+    font-size: 12px;
+    .btc-img-position{
+      position: relative;
+      top: 2px
+    }
+    :nth-child(1) img{
+      position: relative;
+      top: -1px
+    }
+    :nth-child(2) img{
+      position: relative;
+      top: -2px
+    }
+    :nth-child(3) img{
+      position: relative;
+      top: 1px
+    }
+  }
+  .title {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1400px){
+  .navbar-Home > header {
+    width: 1400px;
+  }
+}
