@@ -16,6 +16,7 @@ import i18n from '@/common/js/i18n/i18n.js'
 
 import store from './store'
 import { _post } from './axios'
+import 'bootstrap/js/dropdown.js'
 
 // css dependencies
 import 'bootstrap/dist/css/bootstrap.min.css'
