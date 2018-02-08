@@ -13,7 +13,6 @@ import Vue from 'vue'
 import router from './router'
 import moment from 'moment'
 import i18n from '@/common/js/i18n/i18n.js'
-// import 'bootstrap/js/dropdown.js'
 
 import store from './store'
 import { _post } from './axios'

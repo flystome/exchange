@@ -18,7 +18,7 @@
         </ul>
       </li>
     </ul>
-    <ul class="nav navbar-nav navbar-right nav-margin" v-if="loginData.errors">
+    <ul class="nav navbar-nav navbar-right nav-margin" v-if="loginData === '' || loginData.errors">
     请<router-link :to='"/login"'>登录</router-link>或<router-link :to='"/register"'>注册</router-link>后操作
     </ul>
     <ul class="hidden-xs nav login-active navbar-nav navbar-right nav-margin" v-else>
@@ -54,6 +54,12 @@
 import { mapGetters } from 'vuex'
 export default {
   create () {
+    console.log(1)
+    this._post({
+      url: '/settings/member_data.json'
+    }, (d) => {
+      console.log(d)
+    })
     this.$store.dispatch('getData')
   },
   computed: {
