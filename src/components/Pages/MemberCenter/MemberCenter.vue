@@ -52,11 +52,11 @@
               </div>
               <div class="row">
                 <span class="btc-member-validata btc-link btc-marginR10">
-                    <span>手机验证</span>
+                    <span>{{ $t("auth.phone") }}</span>
                     <img v-if='this.data.sms_activated' src="~Img/validate-true.jpg" alt="已认证">
                   </span>
                 <span class="btc-member-validata btc-link btc-marginL10">
-                    <span>谷歌验证</span>
+                    <span>{{$t("auth.google")}}</span>
                     <img v-if='this.data.app_activated' src="~Img/validate-true.jpg" alt="已认证">
                 </span>
               </div>
