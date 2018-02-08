@@ -6,7 +6,7 @@
           <div class="btc-member-info">
             <span class="btc-member-infoEmail">{{ data.email }}</span>
               <div class="btc-member-assetCount">
-                资产总量 : 0.69845550 BTC
+                资产总量 : 0 BTC
               </div>
           </div>
 
