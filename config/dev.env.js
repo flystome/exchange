@@ -3,5 +3,6 @@ const merge = require('webpack-merge')
 const prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
-  NODE_ENV: '"development"'
+  NODE_ENV: '"development"',
+  HOST_URL: '"192.168.1.110:3000"'
 })

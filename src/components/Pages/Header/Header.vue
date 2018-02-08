@@ -3,8 +3,8 @@
      <header class="container navbar navbar-static-top clearfix" role="navigation">
      <ul class="nav nav-pills navbar-header">
        <img src="~Img/logo.png" class="btc-fl btc-marginT5">
-      <li role="presentation" class="btc-marginL30"><a href="#">主页</a></li>
-      <li role="presentation"><a href="#">交易</a></li>
+      <li role="presentation" class="btc-marginL30"><a :href="`http://${HOST_URL}`">主页</a></li>
+      <li role="presentation"><a :href="`http://${HOST_URL}/xchg`">交易</a></li>
       <li role="presentation" class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
           IFO分叉 <span class="caret"></span>
@@ -53,14 +53,18 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  create () {
-    console.log(1)
+  created () {
     this._post({
       url: '/settings/member_data.json'
     }, (d) => {
       console.log(d)
     })
     this.$store.dispatch('getData')
+  },
+  data () {
+    return {
+      HOST_URL: process.env.HOST_URL
+    }
   },
   computed: {
     ...mapGetters(['loginData'])
