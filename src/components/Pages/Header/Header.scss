@@ -2,7 +2,7 @@
   color: #49627b;
   background: #232e3a;
   height: 60px;
-  padding: 10px 0;
+  padding: 5px 0;
 }
 .nav-margin{
   margin-top: 10px;
@@ -35,6 +35,40 @@
 }
 
 .navbar-Home{
+  .navbar-default{
+    background-color:#232e3a;
+    border-color:#232e3a;
+    z-index: 100;
+    .container-fluid{
+      .navbar-collapse{
+        .navbar-nav{
+          >.active{
+            a{
+              background-color: #ededee;
+              border-radius: 5px;
+              color: #49627b;
+            }
+          }
+          >li{
+            a{
+              color: #337ab7;
+              &:hover{
+                color: #49627b;
+                background-color: #ededee;
+                border-radius: 5px;
+              }
+
+            }
+          }
+
+        }
+        .navbar-right{
+          height: 50px;
+          line-height: 50px;
+        }
+      }
+    }
+  }
   .login-active {
     font-size: 12px;
     .btc-img-position{

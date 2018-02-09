@@ -11,13 +11,25 @@
 }
 
 .btc-validateGoogle .btc-validate-googleApp{
-  margin-right: 90px;
+  /* margin-right: 90px;
   text-align: end;
-  padding-right: 115px;
+  padding-right: 115px; */
   margin-top: 20px;
   padding-bottom: 20px;
 }
 
+@media (max-width: 400px) {
+  .btc-marginT20 .btc-marginR5{
+    margin-right:0;
+    margin-bottom:5px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .btc-validateGoogle .btc-b-r{
+    border-right:none;
+  }
+}
 .btc-validate-gpt{
   padding-top: 135px
 }
@@ -26,7 +38,7 @@
   margin-right: -90px;
 }
 
-.btc-validate-gmr form{
+#form{
   margin-top: 75px
 }
 

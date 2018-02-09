@@ -9,7 +9,6 @@
                 资产总量 : 0 BTC
               </div>
           </div>
-
       </div>
       <div class="col-md-6">
         <basic-button :text='"修改密码"' class="btc-member-bt"></basic-button>
