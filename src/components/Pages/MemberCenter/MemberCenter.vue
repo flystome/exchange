@@ -238,9 +238,7 @@ export default {
   watch: {
     loginData (d) {
       if (d.errors) {
-        this.$router.push({
-          path: '/login'
-        })
+        this.location.href = `${this.HOST_URL}/signin`
       } else {
         var data = d
         this.data = data

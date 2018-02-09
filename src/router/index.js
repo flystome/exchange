@@ -12,7 +12,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'member_center',
+      name: 'home',
       component: MemberCenter
     },
     {

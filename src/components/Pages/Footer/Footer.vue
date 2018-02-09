@@ -26,7 +26,7 @@
             <li><a href="/coin/bifi">{{$t("coins.bifi")}}</a></li>
           </ul>
         </div>
-        <h4>{{$t("coins.eth_family")}}</h4>
+        <h4>{{$t("concepts.eth_family")}}</h4>
         <div class="row">
           <ul>
             <li><a href="/coin/eth">{{$t("coins.eth")}}</a></li>

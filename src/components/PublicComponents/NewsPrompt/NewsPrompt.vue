@@ -1,7 +1,7 @@
 <template>
   <div class="btc-news-prompt">
-    <transition name="news-prompt">
-      <span v-if="prompt.display">
+    <transition name="prompt">
+      <span v-if="prompt.display" class="btc-news-animation">
         {{ prompt.text }}
       </span>
     </transition>
@@ -15,12 +15,17 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style>
   .btc-news-prompt{
     position: relative;
-    transition: 1s all;
   }
-  .news-prompt-enter,.news-prompt-leave-active{
-    transform: translateX(-20px)
+  .btc-news-animation{
+    color: #fc4a4a;
+    position: absolute;
+    transition: all 0.5s;
+  }
+  .prompt-enter, .prompt-leave-to {
+    transform: translateX(30px);
+    opacity: 0;
   }
 </style>

@@ -26,7 +26,7 @@
       </li>
       <li class="btc-marginL15 btc-img-position">
         <img src="~Img/assetlog.png">
-        0.95687320 BTC
+        0 BTC
       </li>
       <li class="btc-marginL15">
         <img src="~Img/letterlog.png">
