@@ -9,7 +9,6 @@
                 资产总量 : 0.69845550 BTC
               </div>
           </div>
-
       </div>
       <div class="col-md-6">
         <basic-button :text='"修改密码"' class="btc-member-bt"></basic-button>
@@ -219,9 +218,9 @@ export default {
   watch: {
     loginData (d) {
       if (d.errors) {
-        this.$router.push({
-          path: '/login'
-        })
+        // this.$router.push({
+        //   path: '/login'
+        // })
       } else {
         var data = d
         this.data = data
