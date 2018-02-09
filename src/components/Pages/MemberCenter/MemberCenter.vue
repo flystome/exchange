@@ -6,7 +6,7 @@
           <div class="btc-member-info">
             <span class="btc-member-infoEmail">{{ data.email }}</span>
               <div class="btc-member-assetCount">
-                资产总量 : 0.69845550 BTC
+                资产总量 : 0 BTC
               </div>
           </div>
       </div>
@@ -51,11 +51,11 @@
               </div>
               <div class="row">
                 <span class="btc-member-validata btc-link btc-marginR10">
-                    <span>手机验证</span>
+                    <span>{{ $t("auth.phone") }}</span>
                     <img v-if='this.data.sms_activated' src="~Img/validate-true.jpg" alt="已认证">
                   </span>
                 <span class="btc-member-validata btc-link btc-marginL10">
-                    <span>谷歌验证</span>
+                    <span>{{$t("auth.google")}}</span>
                     <img v-if='this.data.app_activated' src="~Img/validate-true.jpg" alt="已认证">
                 </span>
               </div>

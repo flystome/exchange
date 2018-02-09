@@ -14,7 +14,7 @@
     </div>
     <template v-if="step === 1">
       <div class="row btc-validate-gpt btc-marginB60" style="margin-bottom: 105px;">
-        <div class="col-md-5 text-center btc-b-r  btc-validate-googleApp">
+        <div class="col-md-4 col-xs-12 col-md-offset-2 text-center btc-b-r  btc-validate-googleApp">
             <img src="~Img/validate-google.jpg">
           <div class="row btc-f btc-marginT10">
             <strong>
@@ -22,13 +22,13 @@
             </strong>
           </div>
         </div>
-        <div class="col-md-6 btc-marginT20">
+        <div class="col-md-5 col-xs-12 col-md-offset-1 text-center btc-marginT20">
           <div class="row">
             请于应用商店下载安装Google Authenticator（谷歌验证器）
           </div>
           <div class="row btc-marginT20">
-            <img src="~Img/validate-iosapp.jpg" class="btc-marginR5">
-            <img src="~Img/validate-gplay.png">
+            <img src="~Img/validate-iosapp.jpg" class="btc-marginR5 col-xs-24">
+            <img src="~Img/validate-gplay.png" class="col-xs-24">
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
       <div class="row btc-validate-gpt">
         <div class="col-md-6 text-center btc-b-r">
           <div class="row">
-            <qr-code :dateUrl="qrcode(google.google_uri)"></qr-code>
+            <qr-code :dateUrl="qrcode('123456')"></qr-code>
           </div>
           <div class="row btc-marginT15">
             使用
@@ -55,23 +55,25 @@
             扫描二维码
           </div>
         </div>
-        <div class="col-md-6 btc-marginL45 btc-validate-gmr">
-          <div class="row btc-marginL45">
+        <div class="col-md-6 text-center">
+          <div class="row ">
             <strong class="btc-link ">
               {{ google.google_otp_secret }}
             </strong>
           </div>
-          <div class="row btc-marginT20 btc-marginL45">
-            若无法扫描，请将该16位密匙手动输入到谷歌验证码APP里
+          <div class="row btc-marginT20 ">
+            <span>
+              若无法扫描，请将该16位密匙手动输入到谷歌验证码APP里
+            </span>
           </div>
-          <form>
+          <form id="form">
             <div class="row">
-              <span class="btc-marginR20">登录密码</span>
-              <basic-input v-model="password"></basic-input>
+              <span class="col-md-4 col-xs-4">登录密码</span>
+              <basic-input class="col-md-7 col-xs-6" v-model="password"></basic-input>
             </div>
             <div class="row btc-marginT20">
-              <span class="btc-marginR20">谷歌验证码</span>
-              <basic-input v-model="otp"></basic-input>
+              <span class="col-md-4 col-xs-4">谷歌验证码</span>
+              <basic-input class="col-md-7 col-xs-6" v-model="otp"></basic-input>
             </div>
           </form>
         </div>

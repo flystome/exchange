@@ -279,7 +279,8 @@ const zh = {
       'level_4': `等级 4`
     },
     'email': `邮箱验证`,
-    'phone': `手机实名认证`,
+    'phone': `手机认证`,
+    'google': `谷歌认证`,
     'bank_account': `银行账户认证`,
     'double_channel': `双渠道追加认证 (可选)`,
     'phone_ps': `请用本人实名认证的手机进行身份认证`,
