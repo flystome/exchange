@@ -43,7 +43,7 @@
       <div class="row btc-validate-gpt">
         <div class="col-md-6 text-center btc-b-r">
           <div class="row">
-            <qr-code :dateUrl="qrcode('123')"></qr-code>
+            <qr-code :dateUrl="qrcode(loginData.google_uri)"></qr-code>
           </div>
           <div class="row btc-marginT15">
             使用
@@ -58,7 +58,7 @@
         <div class="col-md-6 btc-marginL45 btc-validate-gmr">
           <div class="row btc-marginL45">
             <strong class="btc-link ">
-              {{ google.google_otp_secret }}
+              {{ loginData.google_otp_secret }}
             </strong>
           </div>
           <div class="row btc-marginT20 btc-marginL45">
@@ -97,6 +97,7 @@ export default {
   },
   data () {
     return {
+      HOST_URL: process.env.HOST_URL,
       google: '',
       step: 1,
       otp: '',
@@ -120,7 +121,7 @@ export default {
     },
     gValidate () {
       this._post({
-        url: '/verify/authentication_info',
+        url: `${this.HOST_URL}/verify/authentication_info`,
         data: {
           member_id: 336,
           password: this.password,
@@ -132,9 +133,14 @@ export default {
       }, (d) => {
         console.log(d)
       })
-    },
-    computed: {
-      ...mapGetters(['loginData'])
+    }
+  },
+  computed: {
+    ...mapGetters(['loginData'])
+  },
+  watch: {
+    loginData (d) {
+      console.log(d)
     }
   }
 }
