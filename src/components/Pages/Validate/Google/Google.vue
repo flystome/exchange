@@ -76,7 +76,7 @@
           </form>
         </div>
       </div>
-      <div class="row text-right btc-marginT60">
+      <div class="row text-right btc-marginT80">
         <span @click="minusStep" class="btc-link btc-fl btc-marginT30 btc-poniter">返回上一步</span>
         <span class="btc-color666 btc-marginR20">
           已经安装 App
