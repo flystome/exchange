@@ -6,6 +6,7 @@ import BasicButton from 'Components/BasicButton/BasicButton'
 import BasicInput from 'Components/BasicInput/BasicInput'
 import UploadImg from 'Components/UploadImg/UploadImg'
 import QrCode from 'Components/QrCode/QrCode'
+import NewsPrompt from 'Components/NewsPrompt/NewsPrompt'
 import App from './App'
 
 // js dependencies
@@ -30,7 +31,8 @@ const components = [
   BasicButton,
   BasicInput,
   QrCode,
-  UploadImg
+  UploadImg,
+  NewsPrompt
 ]
 components.forEach(component => {
   Vue.component(component.name, component)

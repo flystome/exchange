@@ -37,7 +37,7 @@
             </div>
             <div class="col-md-12">
               <div class="row">
-                {{$t("auth.level.level_1")}}
+                <strong>{{$t("auth.level.level_1")}}</strong>
               </div>
               <div class="row btc-marginT20">
                 <img src="static/img/right.jpg" v-if='this.data.activated'>
@@ -71,7 +71,7 @@
             </div>
             <div class="col-md-12">
               <div class="row">
-                {{$t("auth.level.level_2")}}
+                <strong>{{$t("auth.level.level_2")}}</strong>
               </div>
               <div class="row btc-marginT20">
                 <img src="static/img/right.jpg" v-if='this.data.sms_activated && this.data.app_activated'>
@@ -97,7 +97,7 @@
             </div>
              <div class="col-md-12">
               <div class="row">
-                {{$t("auth.level.level_3")}}
+                <strong>{{$t("auth.level.level_3")}}</strong>
               </div>
               <div class="row btc-marginT20">
                 <img src="static/img/right.jpg" v-if='this.name_activated'>

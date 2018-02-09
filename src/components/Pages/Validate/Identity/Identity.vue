@@ -28,6 +28,7 @@
             </div>
         </div>
         <div class="row btc-marginT25">
+          <news-prompt :prompt="this.prompt"></news-prompt>
           <div class="row">
             <span class="btc-marginR20 btc-marginL40">姓氏</span>
             <basic-input v-model="user.surname"></basic-input>
@@ -71,6 +72,10 @@ export default {
   data () {
     return {
       user: {
+        prompt: {
+          display: false,
+          text: '123456'
+        },
         surname: '',
         name: '',
         IdCard: ''

@@ -48,7 +48,6 @@
 import { mapGetters } from 'vuex'
 export default {
   created () {
-    console.log(process.env.HOST_URL)
     this.$store.dispatch('getData')
   },
   data () {
