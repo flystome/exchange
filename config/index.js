@@ -11,10 +11,10 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      "/settings/member_data": {
-        target: `${env.HOST_URL}`,
-        changeOrigin: true
-      }
+      // "/settings/member_data": {
+      //   target: `${env.HOST_URL}`,
+      //   changeOrigin: true
+      // }
     },
 
     // Various Dev Server settings

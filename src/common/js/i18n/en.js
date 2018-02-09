@@ -269,6 +269,7 @@ const en = {
     'email': `Email Authentication`,
     'phone': `Mobile Phone Authentication`,
     'google': `Google Authentication`,
+    'real_name': `real name Authentication`,
     'bank_account': `Bank Account Authentication`,
     'double_channel': `Double Channel Authentication`,
     'phone_ps': `Use your ID-identified mobile phone for authentication`,

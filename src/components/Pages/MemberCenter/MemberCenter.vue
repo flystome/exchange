@@ -23,8 +23,11 @@
                 <img class='btc-marginT5' src="static/img/letter.jpg">
               </div>
               <div class="row ">
-                <span class="btc-member-validata btc-link">
-                    <span>{{$t("auth.email")}}</span>
+                <span class="btc-member-validata btc-link" :class="{'btc-active': !data.activated}">
+                    <span v-if='this.data.activated'>{{$t("auth.email")}}</span>
+                    <span v-else>
+                      {{$t("auth.email")}}
+                    </span>
                   <img v-if='this.data.activated' src="~Img/validate-true.jpg" alt="已认证">
                 </span>
               </div>
@@ -51,12 +54,14 @@
                 <img src="static/img/phone.jpg">
               </div>
               <div class="row">
-                <span class="btc-member-validata btc-link btc-marginR10">
+                <span class="btc-member-validata btc-link btc-marginR10" :class="{'btc-active': !data.sms_activated}">
                     <span>{{ $t("auth.phone") }}</span>
                     <img v-if='this.data.sms_activated' src="~Img/validate-true.jpg" alt="已认证">
                   </span>
-                <span class="btc-member-validata btc-link btc-marginL10">
-                    <span @click="goPath('/validate/google',data && data.app_activated,false)">{{$t("auth.google")}}</span>
+                <span class="btc-member-validata btc-link btc-marginL10"
+                :class="{'btc-active': !data.app_activated}"
+                @click="goPath('/validate/google',data && data.app_activated,false)">
+                    <span>{{$t("auth.google")}}</span>
                     <img v-if='this.data.app_activated' src="~Img/validate-true.jpg" alt="已认证">
                 </span>
               </div>
@@ -83,7 +88,7 @@
               </div>
               <div class="row">
                 <span class="btc-member-validata btc-link" @click="goPath('/validate/identity', name_activated,false)">
-                  实名认证
+                  {{$t("auth.real_name")}}
                 </span>
               </div>
               <div class="">
