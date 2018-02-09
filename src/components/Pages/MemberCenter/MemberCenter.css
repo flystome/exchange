@@ -126,10 +126,15 @@
 
 .btc-member-validata{
   border: 1px solid #4382f7;
-  padding: 7px 18px;
+  padding: 5px 18px;
   display: inline-block;
   margin-bottom: 25px;
   position: relative;
+}
+
+.btc-active:hover{
+  background: #4382f7; 
+  color: white;
 }
 
 .btc-member-validata img{

@@ -22,7 +22,7 @@
     <ul class="hidden-xs nav login-active navbar-nav navbar-right nav-margin" v-else>
       <li class="btc-img-position">
         <img src="~Img/avatarlog.png">
-        80834004@qq.com
+        {{ loginData.email }}
       </li>
       <li class="btc-marginL15 btc-img-position">
         <img src="~Img/assetlog.png">
@@ -48,6 +48,7 @@
 import { mapGetters } from 'vuex'
 export default {
   created () {
+    console.log(process.env.HOST_URL)
     this.$store.dispatch('getData')
   },
   data () {

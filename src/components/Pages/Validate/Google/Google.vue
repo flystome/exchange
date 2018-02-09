@@ -43,7 +43,7 @@
       <div class="row btc-validate-gpt">
         <div class="col-md-6 text-center btc-b-r">
           <div class="row">
-            <qr-code :dateUrl="qrcode(google.google_uri)"></qr-code>
+            <qr-code :dateUrl="qrcode('123')"></qr-code>
           </div>
           <div class="row btc-marginT15">
             使用
@@ -88,18 +88,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 var QRCode = require('qrcode')
 export default {
   name: 'ValidateGoogle',
   created () {
-    this._post({
-      url: '/settings/member_data.json',
-      data: {
-        member_id: 336
-      }
-    }, (d) => {
-      this.google = d.data
-    })
+    this.$store.dispatch('getData')
   },
   data () {
     return {
@@ -125,7 +119,6 @@ export default {
       return dateUrl
     },
     gValidate () {
-      console.log(this.google.google_otp_secret)
       this._post({
         url: '/verify/authentication_info',
         data: {
@@ -139,6 +132,9 @@ export default {
       }, (d) => {
         console.log(d)
       })
+    },
+    computed: {
+      ...mapGetters(['loginData'])
     }
   }
 }

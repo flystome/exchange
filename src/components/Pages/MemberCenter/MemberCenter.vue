@@ -56,7 +56,7 @@
                     <img v-if='this.data.sms_activated' src="~Img/validate-true.jpg" alt="已认证">
                   </span>
                 <span class="btc-member-validata btc-link btc-marginL10">
-                    <span>{{$t("auth.google")}}</span>
+                    <span @click="goPath('/validate/google',data && data.app_activated,false)">{{$t("auth.google")}}</span>
                     <img v-if='this.data.app_activated' src="~Img/validate-true.jpg" alt="已认证">
                 </span>
               </div>
@@ -82,7 +82,7 @@
                 <img src="static/img/authentication.jpg">
               </div>
               <div class="row">
-                <span class="btc-member-validata btc-link">
+                <span class="btc-member-validata btc-link" @click="goPath('/validate/identity', name_activated,false)">
                   实名认证
                 </span>
               </div>
@@ -187,6 +187,7 @@ export default {
   },
   data () {
     return {
+      HOST_URL: process.env.HOST_URL,
       name_activated: false,
       wexin_activated: false,
       data: '',
@@ -203,6 +204,19 @@ export default {
         Item: ''
       },
       tickets: []
+    }
+  },
+  methods: {
+    goPath (path, status, href) {
+      if (status) {
+        return
+      }
+      if (href) {
+        location.href = `${this.HOST_URL}${path}`
+      }
+      this.$router.push({
+        path: path
+      })
     }
   },
   computed: {
@@ -264,6 +278,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import './MemberCenter.css'
 </style>
