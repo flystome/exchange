@@ -279,6 +279,7 @@ const zh = {
       'level_4': `等级 4`
     },
     'email': `邮箱验证`,
+    'send_email': `再次发送`,
     'phone': `手机认证`,
     'google': `谷歌认证`,
     'real_name': `实名认证`,

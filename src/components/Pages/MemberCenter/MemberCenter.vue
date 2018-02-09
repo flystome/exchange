@@ -26,7 +26,7 @@
                 <span class="btc-member-validata btc-link" :class="{'btc-active': !data.activated}">
                     <span v-if='this.data.activated'>{{$t("auth.email")}}</span>
                     <span v-else>
-                      {{$t("auth.email")}}
+                      {{$t("auth.send_email")}}
                     </span>
                   <img v-if='this.data.activated' src="~Img/validate-true.jpg" alt="已认证">
                 </span>
@@ -87,7 +87,7 @@
                 <img src="static/img/authentication.jpg">
               </div>
               <div class="row">
-                <span class="btc-member-validata btc-link" @click="goPath('/validate/identity', name_activated,false)">
+                <span class="btc-member-validata btc-link" @click="goPath('/validate/identity', name_activated,false)" :class="{'btc-active': !this.name_activated}">
                   {{$t("auth.real_name")}}
                 </span>
               </div>
