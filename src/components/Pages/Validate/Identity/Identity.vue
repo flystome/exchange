@@ -28,6 +28,7 @@
             </div>
         </div>
         <div class="row btc-marginT25">
+          <news-prompt :prompt="prompt"></news-prompt>
           <div class="row">
             <span class="btc-marginR20 btc-marginL40">姓氏</span>
             <basic-input v-model="user.surname"></basic-input>
@@ -70,6 +71,10 @@ export default {
   name: 'ValidateIdentity',
   data () {
     return {
+      prompt: {
+        display: false,
+        text: '密码错误'
+      },
       user: {
         surname: '',
         name: '',
@@ -85,6 +90,6 @@ export default {
 }
 </script>
 
-<style>
-@import './Identity'
+<style lang='scss'>
+@import './Identity.scss'
 </style>
