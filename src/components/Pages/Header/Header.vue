@@ -56,8 +56,8 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="z-index:100">
           <ul class="nav navbar-nav">
-            <li class="active"><a :href="`${HOST_URL}`">主页 <span class="sr-only">(current)</span></a></li>
-            <li><a :href="`${HOST_URL}/xchg`">交易</a></li>
+            <li class="btc-link"><a :href="`${HOST_URL}`">主页 <span class="sr-only">(current)</span></a></li>
+            <li class="btc-link"><a :href="`${HOST_URL}/xchg`">交易</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IFO分叉 <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -67,8 +67,29 @@
               </ul>
             </li>
           </ul>
-          <ul class="nav navbar-nav navbar-right" v-if="loginData === '' || loginData.errors">
-            请<a :href="`${HOST_URL}/signin`">登录</a>或<a :href="`${HOST_URL}/signup`">注册</a>后操作
+          <ul class="nav navbar-nav navbar-right btc-header-signin" v-if="loginData === '' || loginData.errors">
+            请<a  :href="`${HOST_URL}/signin`">登录</a>或<a :href="`${HOST_URL}/signup`">注册</a>后操作
+          </ul>
+          <ul class="nav navbar-nav navbar-right" v-else>
+             <li class="btc-img-position">
+              <img src="~Img/avatarlog.png">
+              {{ this.loginData.email }}
+            </li>
+            <li class="btc-marginL15 btc-img-position">
+              <img src="~Img/assetlog.png">
+              0 BTC
+            </li>
+            <li class="btc-marginL15">
+              <img src="~Img/letterlog.png">
+            </li>
+            <li role="presentation" class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <img src="~Img/countrylog.png" class="btc-marginL5 btc-marginR5"><span @click="changeLang('zh')">中国大陆</span> <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a @click="changeLang('en')">其他国家</a></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>

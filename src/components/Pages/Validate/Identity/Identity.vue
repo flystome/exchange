@@ -30,37 +30,42 @@
         <div class="row btc-marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
           <div class="row">
-            <span class="btc-marginR20 btc-marginL40">姓氏</span>
-            <basic-input v-model="user.surname"></basic-input>
+            <span class="btc-marginR20 btc-marginL40 btc-fl">姓氏</span>
+            <basic-input class="col-md-4 col-xs-5" v-model="user.surname"></basic-input>
           </div>
           <div class="row btc-marginT20">
-            <span class="btc-marginR20 btc-marginL40">名字</span>
-            <basic-input v-model="user.name"></basic-input>
+            <span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>
+            <basic-input class="col-md-4 col-xs-5" v-model="user.name"></basic-input>
           </div>
           <div class="row btc-marginT20">
-            <span class="btc-marginR20">有效身份证</span>
-            <basic-input v-model="user.IdCard"></basic-input>
+            <span class="btc-marginR20 btc-fl">有效身份证</span>
+            <basic-input class="col-md-4 col-xs-5" v-model="user.IdCard"></basic-input>
           </div>
         </div>
       </div>
     </div>
-    <upload-img :Upload='{
+    <upload-img ref="id_document_front_file_attributes" :Upload='{
         UploadExplain: "本人有效身份证正面照",
         ImgExplain: "请确保照片的内容完整并清晰可见，仅支持jpg图片格式。",
-        ImgModel: "validate-indentity1.jpg"
+        ImgModel: "validate-indentity1.png"
       }'></upload-img>
-    <upload-img :Upload='{
+    <upload-img ref="id_document_back_file_attributes" :Upload='{
         UploadExplain: "本人身份证背面照片  ",
         ImgExplain: "请确保照片的内容完整并清晰可见，身份证必须在有效期内，仅支持jpg格式",
-        ImgModel: "validate-indentity2.jpg"
+        ImgModel: "validate-indentity2.png"
       }'></upload-img>
-    <upload-img :Upload='{
+    <upload-img ref="id_document_selfie_holding_file_attributes" :Upload='{
         UploadExplain: "手持本人身份证正面照",
         ImgExplain: "请确保照片的内容完整并清晰可见，身份证必须在有效期内，仅支持jpg格式",
-        ImgModel: "validate-indentity3.jpg"
+        ImgModel: "validate-indentity3.png"
+      }'></upload-img>
+      <upload-img :Upload='{
+        UploadExplain: "手持本人身份证正面照",
+        ImgExplain: "上传三个月内账单，仅支持jpg格式，请确保照片的内容完整并清晰可见",
+        ImgModel: "validate-indentity4.png"
       }'></upload-img>
       <footer class="btc-b-t btc-marginT25">
-        <basic-button class="btc-fr" :text='"全部提交"'>
+        <basic-button @click.native="uploadImg" class="btc-fr" :text='"全部提交"'>
         </basic-button>
       </footer>
   </div>
@@ -79,12 +84,55 @@ export default {
         surname: '',
         name: '',
         IdCard: ''
-      },
-      Upload: {
-        UploadExplain: '本人有效身份证正面照',
-        ImgExplain: '请确保照片的内容完整并清晰可见，仅支持jpg图片格式。',
-        ImgModel: 'validate-indentity1.jpg'
       }
+    }
+  },
+  methods: {
+      objectToFormData (obj, form, namespace) {
+        var fd = form || new FormData()
+        var formKey
+        for (var property in obj) {
+          if (obj.hasOwnProperty(property)) {
+            if (namespace) {
+              formKey = namespace + '[' + property + ']'
+            } else {
+              formKey = property
+            }
+            // if the property is an object, but not a File,
+            // use recursivity.
+            if (typeof obj[property] === 'object' && !(obj[property] instanceof File)) {
+              this.objectToFormData(obj[property], fd, formKey)
+            } else {
+              // if it's a string or a File object
+              fd.append(formKey, obj[property])
+            }
+          }
+        }
+        return fd;
+    },
+    uploadImg () {
+      var formData = new FormData()
+      var z = this.objectToFormData({
+        id_document_front_file_attributes: {
+          file: this.$refs['id_document_front_file_attributes'].$refs['input'].files[0]
+        },
+        id_document_back_file_attributes: {
+          file: this.$refs['id_document_back_file_attributes'].$refs['input'].files[0]
+        },
+        id_document_selfie_holding_file_attributes: {
+          file: this.$refs['id_document_selfie_holding_file_attributes'].$refs['input'].files[0]
+        }
+      },formData,'id_document')
+      debugger
+      this._post({
+        url: '/id_document/upload_pics.json',
+        data: z,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }, d => {
+        console.log(d)
+      })
     }
   }
 }

@@ -7,22 +7,37 @@
       </div>
     </div>
     <footer is='Footer' />
+    <wrapper></wrapper>
+    <popup-box></popup-box>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Pages/Header/Header'
 import Footer from '@/components/Pages/Footer/Footer'
+import Wrapper from '@/components/PublicComponents/Wrapper/Wrapper'
+import PopupBox from '@/components/PublicComponents/PopupBox/PopupBox'
+
 export default {
   name: 'App',
   components: {
     Header,
-    Footer
+    Footer,
+    Wrapper,
+    PopupBox
   }
 }
 </script>
 
 <style>
+[v-cloak] {
+  display: none;
+}
+
+html, body {
+  height: 100%;
+}
+
 body{
   font-family: '微软雅黑';
 }
@@ -39,13 +54,13 @@ body{
 }
 
 .btc-link{
-  color: #4f89f5;
+  color: #4382f7;
 }
 
 .btc-link:hover{
   text-decoration: none;
   cursor: pointer;
-  color: #4f89f5;
+  color: #4382f7;
 }
 
 .btc-poniter{
@@ -80,8 +95,20 @@ body{
   float: left;
 }
 
+.btc-font12{
+  font-size: 12px;
+}
+
+.btc-color333{
+  color: #333333;
+}
+
 .btc-color666{
   color: #666666;
+}
+
+.btc-color999{
+  color: #999999;
 }
 </style>
 
@@ -105,13 +132,13 @@ body{
     padding-top: #{$len}px
   }
   .btc-paddingB#{$len}{
-    padding-left: #{$len}px
+    padding-bottom: #{$len}px
   }
   .btc-paddingL#{$len}{
-    padding-right: #{$len}px
+    padding-left: #{$len}px
   }
   .btc-paddingR#{$len}{
-    padding-bottom: #{$len}px
+    padding-right: #{$len}px
   }
   }
 }

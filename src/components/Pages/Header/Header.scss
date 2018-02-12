@@ -35,26 +35,29 @@
 }
 
 .navbar-Home{
+  .btc-header-signin{
+    a{
+      margin: 6px
+    }
+  }
   .navbar-default{
     background-color:#232e3a;
     border-color:#232e3a;
-    z-index: 100;
+    z-index: 2;
     .container-fluid{
       .navbar-collapse{
         .navbar-nav{
           >.active{
             a{
-              background-color: #ededee;
               border-radius: 5px;
-              color: #49627b;
+              color: #417dee;
             }
           }
           >li{
             a{
-              color: #337ab7;
+              color: #728eaa;
               &:hover{
-                color: #49627b;
-                background-color: #ededee;
+                color: #417dee;
                 border-radius: 5px;
               }
 

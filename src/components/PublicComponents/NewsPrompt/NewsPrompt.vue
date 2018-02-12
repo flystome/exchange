@@ -1,24 +1,21 @@
 <template>
-  <div class="btc-news-prompt">
     <transition name="prompt">
-      <span v-if="prompt.display" class="btc-news-animation">
-        {{ prompt.text }}
+      <span class="btc-news-animation" v-if="text">
+        <strong>
+          {{ this.text }}
+        </strong>
       </span>
     </transition>
-  </div>
 </template>
 
 <script>
 export default {
   name: 'NewsPrompt',
-  props: ['prompt']
+  props: ['text']
 }
 </script>
 
 <style>
-  .btc-news-prompt{
-    position: relative;
-  }
   .btc-news-animation{
     color: #fc4a4a;
     position: absolute;
