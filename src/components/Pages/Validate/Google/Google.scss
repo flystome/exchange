@@ -1,0 +1,97 @@
+.btc-color666 > span{
+  margin-left: 30px;
+}
+
+.btc-validateGoogle{
+  padding: 25px 40px;
+  padding-bottom: 55px;
+  position: relative;
+  min-height: 70vh;
+  .btc-validate-gpt{
+    padding-top: 135px;
+    .btc-margin-left{
+      margin-left:6px
+    }
+  }
+
+  .btc-validate-googlekey{
+    margin-top: -3px;
+    margin-left: -34px;
+  }
+
+  .btc-validate-gmr{
+    margin-right: -90px;
+  }
+
+  form{
+    margin-top: 36px;
+    padding: 40px 0 17px 0;
+  }
+
+  form span{
+    padding-right: 29px;
+    margin-top: 4px;
+  }
+
+  .btc-validate-gmr form input{
+    width: 360px;
+    height: 40px;
+    font-size: 15px;
+    padding: 0 5px;
+  }
+
+  .btc-validate-gmr form :nth-child(1) span{
+    width: 70px;
+    display: inline-block;
+    text-align: right;
+  }
+  .btc-validate-googleApp{
+    margin-top: 20px;
+    padding-bottom: 20px;
+  }
+  .btc-basicInput{
+    font-size: 14px;
+    padding: 0 17px;
+  }
+  .btc-qrcode img{
+      width: 120px;
+      height: 120px;
+  }
+  .btc-validate-prompt{
+    position: absolute;
+    top: 45px;
+    left: -93px;
+  }
+  @media (min-width: 1200px) {
+    .btc-basicInput{
+      width: 320px
+    }
+  }
+  @media (max-width: 1200px) {
+      .btc-validate-prompt{
+        left: -78px;
+      }
+  }
+  @media (max-width: 991px) {
+    .btc-b-r{
+      border-right:none;
+    }
+    .btc-b-l{
+      border-left:none;
+    }
+    .btc-validate-textCenter{
+      text-align: center
+    }
+    .btc-validate-googlekey{
+      margin-left: 25px;
+    }
+  }
+}
+
+
+@media (max-width: 400px) {
+  .btc-marginT20 .btc-marginR5{
+    margin-right:0;
+    margin-bottom:5px;
+  }
+}

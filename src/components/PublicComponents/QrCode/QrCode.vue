@@ -1,6 +1,6 @@
 <template>
     <div class="btc-qrcode">
-      <img :src="dateUrl"/>
+      <img :src="dateUrl" :width='length' :height='length'/>
     </div>
 </template>
 
@@ -8,6 +8,6 @@
 
 export default {
   name: 'QrCode',
-  props: ['dateUrl']
+  props: ['dateUrl', 'length']
 }
 </script>

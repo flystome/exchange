@@ -16,6 +16,11 @@ const router = new Router({
       component: MemberCenter
     },
     {
+      path: '/:version',
+      name: 'version',
+      component: MemberCenter
+    },
+    {
       path: '/member_center',
       name: 'member_center',
       component: MemberCenter

@@ -16,8 +16,10 @@ import moment from 'moment'
 import i18n from '@/common/js/i18n/i18n.js'
 
 import store from './store'
-import { _post } from './axios'
+import axios from 'axios'
+import { _post, _get } from './axios'
 import 'bootstrap/js/dropdown.js'
+import 'bootstrap/js/collapse.js'
 
 // css dependencies
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -25,6 +27,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 moment.locale('zh-cn')
 Vue.config.productionTip = false
 Vue.prototype._post = _post
+Vue.prototype._get = _get
+Vue.prototype.$http = axios
+Vue.prototype._get = _get
 Vue.prototype.$moment = moment
 
 const components = [

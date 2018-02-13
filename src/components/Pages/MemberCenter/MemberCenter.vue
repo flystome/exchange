@@ -1,15 +1,14 @@
 <template>
-  <div class="container btc-member-center">
+  <div class="container btc-member-center" v-cloak>
     <div class="row btc-container-block btc-member-p12">
       <div class="col-md-6">
-          <img src="static/img/avatar.jpg" class="img-circle btc-member-avatar">
+          <img src="~Img/avatar.jpg" class="img-circle btc-member-avatar">
           <div class="btc-member-info">
             <span class="btc-member-infoEmail">{{ data.email }}</span>
               <div class="btc-member-assetCount">
                 资产总量 : 0 BTC
               </div>
           </div>
-
       </div>
       <div class="col-md-6">
         <basic-button :text='"修改密码"' class="btc-member-bt"></basic-button>
@@ -20,12 +19,12 @@
           <div class="col-sm-6 col-md-4 btc-b-r">
             <div class="btc-r-border">
               <div class="row">
-                <img class='btc-marginT5' src="static/img/letter.jpg">
+                <img class='btc-marginT5' src="~Img/letter.jpg">
               </div>
               <div class="row ">
                 <span class="btc-member-validata btc-link" :class="{'btc-active': !data.activated}">
                     <span v-if='this.data.activated'>{{$t("auth.email")}}</span>
-                    <span v-else>
+                    <span v-else @click="sendEmail">
                       {{$t("auth.send_email")}}
                     </span>
                   <img v-if='this.data.activated' src="~Img/validate-true.jpg" alt="已认证">
@@ -40,7 +39,7 @@
                 <strong>{{$t("auth.level.level_1")}}</strong>
               </div>
               <div class="row btc-marginT20">
-                <img src="static/img/right.jpg" v-if='this.data.activated'>
+                <img src="~Img/right.jpg" v-if='this.data.activated'>
                 <span class='btc-member-step' v-else>
                     1
                 </span>
@@ -51,7 +50,7 @@
         <div class="col-sm-6 col-md-4 btc-b-r">
             <div class="btc-r-border">
               <div class="row">
-                <img src="static/img/phone.jpg">
+                <img src="~Img/phone.jpg">
               </div>
               <div class="row">
                 <span class="btc-member-validata btc-link btc-marginR10" :class="{'btc-active': !data.sms_activated}">
@@ -74,7 +73,7 @@
                 <strong>{{$t("auth.level.level_2")}}</strong>
               </div>
               <div class="row btc-marginT20">
-                <img src="static/img/right.jpg" v-if='this.data.sms_activated && this.data.app_activated'>
+                <img src="~Img/right.jpg" v-if='this.data.sms_activated && this.data.app_activated'>
                 <span class='btc-member-step' v-else>
                     2
                 </span>
@@ -84,7 +83,7 @@
           <div class="col-sm-12 col-md-4 btc-b-r">
             <div class="btc-r-border">
               <div class="row">
-                <img src="static/img/authentication.jpg">
+                <img src="~Img/authentication.jpg">
               </div>
               <div class="row">
                 <span class="btc-member-validata btc-link" @click="goPath('/validate/identity', name_activated,false)" :class="{'btc-active': !this.name_activated}">
@@ -100,7 +99,7 @@
                 <strong>{{$t("auth.level.level_3")}}</strong>
               </div>
               <div class="row btc-marginT20">
-                <img src="static/img/right.jpg" v-if='this.name_activated'>
+                <img src="~Img/right.jpg" v-if='this.name_activated'>
                 <span class='btc-member-step' v-else>
                     3
                 </span>
@@ -110,7 +109,7 @@
           <!-- <div class="col-sm-6 col-md-3 btc-b-r">
             <div class="btc-r-border">
               <div class="row">
-                <img src="static/img/wechat.jpg">
+                <img src="~Img/wechat.jpg">
               </div>
             <div class="row">
               <span class="btc-member-validata btc-link">
@@ -126,7 +125,7 @@
               等级4
             </div>
             <div class="row btc-marginT20">
-                <img src="static/img/right.jpg" v-if='this.wexin_activated'>
+                <img src="~Img/right.jpg" v-if='this.wexin_activated'>
                 <span class='btc-member-step' v-else>
                     4
                 </span>
@@ -142,7 +141,7 @@
       <header class="btc-member-blockHeader">
         <span class="btc-member-handleCount"><strong>客服处理记录</strong></span>
         <a class="btc-member-handleServer btc-link">查看已结束服务单</a>
-        <a class="btc-member-handleNew btc-link"><img src="static/img/center_new.png" alt="新建问题">新建我的问题</a>
+        <a class="btc-member-handleNew btc-link btc-font12"><img src="~Img/center_new.png" alt="新建问题">新建我的问题</a>
       </header>
        <div class="btc-member-qContainer" v-for="(data, index) in tickets" :key="index">
           <div class="btc-member-question">
@@ -155,8 +154,7 @@
         </div>
         <div class="text-center btc-table-record" v-if="this.tickets.length === 0">
             <div>
-                <img src="~Img/norecord.png" >
-                <div class="btc-marginT15">占无记录</div>
+                <div class="btc-marginT15 btc-font12 btc-color999">暂无记录</div>
             </div>
         </div>
     </div>
@@ -187,9 +185,6 @@ var browser = (explorer) => {
 }
 export default {
   name: 'MemberCenter',
-  created () {
-    this.$store.dispatch('getData')
-  },
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
@@ -212,6 +207,13 @@ export default {
     }
   },
   methods: {
+    sendEmail () {
+      this._get({
+        url: `/activations/new`
+      }, (d) => {
+        console.log(d)
+      })
+    },
     goPath (path, status, href) {
       if (status) {
         return
@@ -238,7 +240,7 @@ export default {
   watch: {
     loginData (d) {
       if (d.errors) {
-        this.location.href = `${this.HOST_URL}/signin`
+        document.location.href = `${this.HOST_URL}/signin`
       } else {
         var data = d
         this.data = data
@@ -281,6 +283,6 @@ export default {
 }
 </script>
 
-<style scoped>
-@import './MemberCenter.css'
+<style scoped lang='scss'>
+@import './MemberCenter.scss'
 </style>
