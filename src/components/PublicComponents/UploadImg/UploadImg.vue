@@ -14,7 +14,7 @@
         {{ Upload.ImgExplain }}
       </div>
       <div class="row">
-        <img src="~Img/validate-uploadimg.jpg" v-if="UploadImg === ''">
+        <img src="~Img/validate-uploading.jpg" v-if="UploadImg === ''">
         <img width="320" height="200" :src="UploadImg" v-else>
         <img class="btc-UploadImg-model btc-marginL100" :src="requireImg(Upload.ImgModel)">
       </div>
