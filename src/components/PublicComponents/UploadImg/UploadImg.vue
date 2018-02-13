@@ -23,35 +23,35 @@
 </template>
 
 <script>
-  export default {
-    name: 'UploadImg',
-    props: ['Upload'],
-    data () {
-      return {
-        UploadImg: '',
-        prompt: ''
+export default {
+  name: 'UploadImg',
+  props: ['Upload'],
+  data () {
+    return {
+      UploadImg: '',
+      prompt: ''
+    }
+  },
+  methods: {
+    promptEmpty () {
+      this.prompt = ''
+    },
+    ShowImg (el) {
+      if (el.target.files[0].size > 2 * 1024 * 1024) {
+        this.prompt = '图片不允许超过2m'
+      } else {
+        var FileRead = new FileReader()
+        FileRead.readAsDataURL(el.target.files[0])
+        FileRead.onload = (d) => {
+          this.UploadImg = d.srcElement.result
+        }
       }
     },
-    methods: {
-      promptEmpty () {
-        this.prompt = ''
-      },
-      ShowImg (el) {
-        if (el.target.files[0].size > 2*1024*1024) {
-          this.prompt = '图片不允许超过2m'
-        } else {
-            var FileRead = new FileReader()
-            FileRead.readAsDataURL(el.target.files[0])
-            FileRead.onload = (d) => {
-            this.UploadImg = d.srcElement.result
-          }
-        }
-      },
-      requireImg (img) {
-        return require(`../../../../static/img/${img}`)
-      }
+    requireImg (img) {
+      return require(`../../../../static/img/${img}`)
     }
   }
+}
 </script>
 
 <style lang="scss">

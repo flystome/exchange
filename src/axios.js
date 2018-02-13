@@ -1,11 +1,11 @@
 import axios from 'axios'
-import qs from 'qs'
+// import qs from 'qs'
 const requestUrl = process.env.HOST_URL
-axios.defaults.withCredentials = true
+// axios.defaults.withCredentials = true
 console.log(process.env.HOST_URL)
 
 axios.interceptors.request.use(function (config) {
-  config.headers['DataType'] = 'application/json;charset=utf-8'
+  // config.headers['DataType'] = 'application/json;charset=utf-8'
   // if (config.method === 'post') {
   //   debugger
   //   console.log(config.data)
@@ -27,7 +27,8 @@ export const _post = async ({url, data, headers}, callback) => {
       method: 'post',
       url: requestUrl + url,
       data: data,
-      headers: headers
+      headers: headers,
+      withCredentials: true
     }).catch(err => console.log(err))
     callback(ajax)
     return
@@ -44,6 +45,15 @@ export const _get = async ({url, data}, callback) => {
   const ajax = await axios({
     method: 'get',
     url: requestUrl + url,
+    data: data
+  })
+  callback(ajax)
+}
+
+export const _httpget = async ({url, data}, callback) => {
+  const ajax = await axios({
+    method: 'get',
+    url: url,
     data: data
   })
   callback(ajax)

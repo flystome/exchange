@@ -6,7 +6,10 @@ Vue.use(Vuex)
 const actions = {
   getData ({ commit, state }) {
     _post({
-      url: '/settings/member_data.json'
+      url: '/settings/member_data.json',
+      headers: {
+        'DataType': 'application/json;charset=utf-8'
+      }
     }, (d) => {
       commit('getData', d)
     })

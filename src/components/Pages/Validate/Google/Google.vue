@@ -127,6 +127,9 @@ export default {
         url: '/verify/refresh_auth.json',
         data: {
           refresh: true
+        },
+        headers: {
+          'DataType': 'application/json;charset=utf-8'
         }
       }, d => {
         d = d.data
@@ -162,6 +165,9 @@ export default {
             otp: this.otp,
             otp_secret: this.loginData.google_otp_secret
           }
+        },
+        headers: {
+          'DataType': 'application/json;charset=utf-8'
         }
       }, (d) => {
         if (d.data.status_code === '0') {
