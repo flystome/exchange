@@ -6,7 +6,7 @@
           <img src="~Img/Hint-success.png" class="btc-marginT55 btc-marginB35">
        </div>
        <div>
-        成功开启谷歌验证
+         {{message}}
        </div>
        <div class="btc-paddingB30">
         <basic-button @click.native="PopupBoxDisplay" class="btc-marginT50" :text='"确定"'></basic-button>
@@ -19,6 +19,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 export default {
+  props: ['message'],
   methods: {
     ...mapMutations(['PopupBoxDisplay'])
   },

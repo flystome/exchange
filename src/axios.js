@@ -41,11 +41,13 @@ export const _post = async ({url, data, headers}, callback) => {
   callback(ajax)
 }
 
-export const _get = async ({url, data}, callback) => {
+export const _get = async ({url, data, headers}, callback) => {
   const ajax = await axios({
     method: 'get',
     url: requestUrl + url,
-    data: data
+    data: data,
+    withCredentials: true,
+    headers: headers
   })
   callback(ajax)
 }

@@ -1,6 +1,6 @@
 <template>
     <transition name="PopupBox">
-      <component class="btc-popupBox" v-if="PopupBox" :is="component"></component>
+      <component class="btc-popupBox" v-if="PopupBox" :is="component" v-bind:message='message'></component>
     </transition>
 </template>
 
@@ -11,7 +11,8 @@ export default {
   name: 'PopupBox',
   data () {
     return {
-      component: 'Hint'
+      component: 'Hint',
+      message: 'this is so good'
     }
   },
   computed: {
@@ -30,7 +31,7 @@ export default {
     width: 100%;
     height: 100%;
     left: 0;
-    background: balck;
+    background: black;
     transition: all 0.23s;
   }
   .PopupBox-enter, .PopupBox-leave-to {

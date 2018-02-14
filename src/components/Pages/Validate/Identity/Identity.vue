@@ -14,7 +14,7 @@
           <div class="row">
             <select name="country-select" id="country-selector" v-model="selectedCountry">
               <option></option>
-              <option v-for="country in countries">{{country.name}}</option>
+              <option v-for="country in countries" :key="country.name">{{country.name}}</option>
             </select>
             <!--<div class="btc-fl btc-marginR25">-->
               <!--<input type="radio" id="country-china" value="1" v-model="user.country">-->
@@ -103,6 +103,7 @@ export default {
       this._httpget({
         url: `https://restcountries.eu/rest/v1/all`
       }, d => {
+        console.log(d.data)
         this.countries = d.data
       })
     },

@@ -24,8 +24,9 @@ const mutations = {
   getData (state, data) {
     state.loginData = data.data
   },
-  PopupBoxDisplay (state, data) {
+  PopupBoxDisplay (state, message) {
     state.PopupBox = !state.PopupBox
+    console.log(message)
   }
 }
 

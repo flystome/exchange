@@ -79,7 +79,7 @@
             </div>
             <div class="row">
               <span class="col-md-4 col-xs-4 text-right">登录密码</span>
-              <basic-input @focus.native="promptEmpty()" class="col-md-7 col-xs-6" placeholder='请输入您在本站的账户登录密码' v-model="password"></basic-input>
+              <basic-input @focus.native="promptEmpty()" type="password" class="col-md-7 col-xs-6" placeholder='请输入您在本站的账户登录密码' v-model="password"></basic-input>
             </div>
             <div class="row btc-marginT20">
               <span class="col-md-4 col-xs-4 text-right">谷歌验证码</span>
@@ -111,7 +111,8 @@ export default {
       step: 1,
       otp: '',
       password: '',
-      prompt: ''
+      prompt: '',
+      message: 'this is so fucking goood'
     }
   },
   methods: {
@@ -173,7 +174,7 @@ export default {
         if (d.data.status_code === '0') {
           this.prompt = d.data.errors
         } else {
-          this.PopupBoxDisplay()
+          this.PopupBoxDisplay(this.message)
         }
       })
     },

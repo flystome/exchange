@@ -50,7 +50,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" :href="`${HOST_URL}`">
             <img src="~Img/logo.png">
           </a>
         </div>
@@ -71,7 +71,7 @@
             请<a  :href="`${HOST_URL}/signin`">登录</a>或<a :href="`${HOST_URL}/signup`">注册</a>后操作
           </ul>
           <ul class="nav navbar-nav navbar-right" v-else>
-             <li class="btc-img-position">
+             <li class="btc-img-position" @click="goPath('/')">
               <img src="~Img/avatarlog.png">
               {{ this.loginData.email }}
             </li>
@@ -112,6 +112,22 @@ export default {
   methods: {
     changeLang (str) {
       this.$i18n.locale = str
+    },
+    goPath (path, status, href) {
+      if (status) {
+        return
+      }
+      if (href) {
+        location.href = `${this.HOST_URL}${path}`
+      }
+      this.$router.push({
+        path: path
+      })
+    },
+    goHome () {
+      this.$router.push('/', () => {
+        this.$store.dispatch('getData')
+      })
     }
   },
   computed: {

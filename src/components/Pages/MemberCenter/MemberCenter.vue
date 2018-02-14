@@ -209,7 +209,10 @@ export default {
   methods: {
     sendEmail () {
       this._get({
-        url: `/activations/new`
+        url: `/activations/mobile_new`,
+        headers: {
+          'DataType': 'application/json;charset=utf-8'
+        }
       }, (d) => {
         console.log(d)
       })
