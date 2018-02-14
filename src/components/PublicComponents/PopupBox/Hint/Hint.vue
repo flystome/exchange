@@ -6,7 +6,7 @@
           <img src="~Img/Hint-success.png" class="btc-marginT55 btc-marginB35">
        </div>
        <div>
-         {{message}}
+         {{this.PopupBox.message}}
        </div>
        <div class="btc-paddingB30">
         <basic-button @click.native="PopupBoxDisplay" class="btc-marginT50" :text='"确定"'></basic-button>
@@ -39,6 +39,7 @@ export default {
     position: relative;
     margin: 0 auto;
     box-shadow:0 0 30px #bbbbbb;
+    z-index: 99999;
   }
   button{
     width: 100%;

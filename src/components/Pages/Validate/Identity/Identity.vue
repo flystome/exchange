@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 export default {
   name: 'ValidateIdentity',
   created () {
@@ -95,7 +96,8 @@ export default {
         country: ''
       },
       countries: [],
-      selectedCountry: 'South Korea'
+      selectedCountry: 'South Korea',
+      identity_hint: '实名认证信息上传成功'
     }
   },
   methods: {
@@ -129,6 +131,7 @@ export default {
       }
       return fd
     },
+    ...mapMutations(['PopupBoxDisplay']),
     uploadImg () {
       var formData = new FormData()
       var z = this.objectToFormData({
@@ -155,7 +158,11 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }, d => {
-        console.log(d)
+        if (d.data.status_code === '0') {
+          this.prompt = d.data.errors
+        } else {
+          this.PopupBoxDisplay(this.identity_hint)
+        }
       })
     }
   }

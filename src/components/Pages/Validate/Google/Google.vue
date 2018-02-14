@@ -112,7 +112,7 @@ export default {
       otp: '',
       password: '',
       prompt: '',
-      message: 'this is so fucking goood'
+      google_hint: '谷歌验证已经成功'
     }
   },
   methods: {
@@ -174,7 +174,7 @@ export default {
         if (d.data.status_code === '0') {
           this.prompt = d.data.errors
         } else {
-          this.PopupBoxDisplay(this.message)
+          this.PopupBoxDisplay(this.google_hint)
         }
       })
     },

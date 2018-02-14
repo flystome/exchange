@@ -10,9 +10,9 @@
               </div>
           </div>
       </div>
-      <div class="col-md-6">
+      <a class="col-md-6" :href="`${HOST_URL}/identity/edit`">
         <basic-button :text='"修改密码"' class="btc-member-bt"></basic-button>
-      </div>
+      </a>
     </div>
     <div class="row btc-member-vc btc-container-block btc-member-p12 btc-textCenter btc-marginT10">
         <div class="row btc-paddingT25">
@@ -140,8 +140,8 @@
     <div class="row btc-member-handleRecord btc-member-p12 btc-container-block">
       <header class="btc-member-blockHeader">
         <span class="btc-member-handleCount"><strong>客服处理记录</strong></span>
-        <a class="btc-member-handleServer btc-link">查看已结束服务单</a>
-        <a class="btc-member-handleNew btc-link btc-font12"><img src="~Img/center_new.png" alt="新建问题">新建我的问题</a>
+        <a class="btc-member-handleServer btc-link" :href="`${HOST_URL}/tickets?closed=true`">查看已结束服务单</a>
+        <a class="btc-member-handleNew btc-link btc-font12" :href="`${HOST_URL}/tickets/new`"><img src="~Img/center_new.png" alt="新建问题">新建我的问题</a>
       </header>
        <div class="btc-member-qContainer" v-for="(data, index) in tickets" :key="index">
           <div class="btc-member-question">
@@ -163,7 +163,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import moment from 'moment'
 import BasicTable from 'Components/BasicTable/BasicTable'
 moment.locale('zh-cn')
@@ -190,6 +190,7 @@ export default {
       HOST_URL: process.env.HOST_URL,
       name_activated: false,
       wexin_activated: false,
+      email_sent_message: '邮件发送成功，请前往您的邮箱激活账号',
       data: '',
       LoginRecord: {
         captionTitle: '登录记录（最近5条）',
@@ -207,6 +208,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['PopupBoxDisplay']),
     sendEmail () {
       this._get({
         url: `/activations/mobile_new`,
@@ -214,7 +216,12 @@ export default {
           'DataType': 'application/json;charset=utf-8'
         }
       }, (d) => {
-        console.log(d)
+        if (d.data.status_code === '0') {
+          this.prompt = d.data.errors
+          this.PopupBoxDisplay(this.email_sent_message)
+        } else {
+          this.PopupBoxDisplay(this.email_sent_message)
+        }
       })
     },
     goPath (path, status, href) {

@@ -25,7 +25,8 @@ const mutations = {
     state.loginData = data.data
   },
   PopupBoxDisplay (state, message) {
-    state.PopupBox = !state.PopupBox
+    state.PopupBox.status = !state.PopupBox.status
+    state.PopupBox.message = message
     console.log(message)
   }
 }
@@ -34,7 +35,10 @@ const store = new Vuex.Store({
   state: {
     loginData: '',
     Wrapper: false,
-    PopupBox: false
+    PopupBox: {
+      status: false,
+      message: ''
+    }
   },
   mutations,
   actions,

@@ -71,7 +71,7 @@
             请<a  :href="`${HOST_URL}/signin`">登录</a>或<a :href="`${HOST_URL}/signup`">注册</a>后操作
           </ul>
           <ul class="nav navbar-nav navbar-right" v-else>
-             <li class="btc-img-position" @click="goPath('/')">
+             <li class="btc-img-position" @click="goHome('/')" style="cursor: pointer">
               <img src="~Img/avatarlog.png">
               {{ this.loginData.email }}
             </li>
