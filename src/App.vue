@@ -2,9 +2,7 @@
   <div id="app">
     <header is='Header' />
     <div class="btc-container">
-      <div class="container">
-        <router-view/>
-      </div>
+      <router-view/>
     </div>
     <footer is='Footer' />
     <wrapper></wrapper>
@@ -46,11 +44,13 @@ body{
   background: #f2f2f2;
   padding-bottom: 13px;
   min-height: 70vh;
+  padding-top: 3px;
 }
 
 .btc-container-block{
   background: white;
   margin-top: 10px;
+  overflow: hidden;
 }
 
 .btc-link{

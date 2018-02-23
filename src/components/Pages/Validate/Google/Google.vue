@@ -1,6 +1,6 @@
 <template>
   <div class="btc-validateGoogle container btc-container-block">
-    <div class="row btc-color666">
+    <div class=" btc-color666">
       谷歌认证
       <span class="btc-color333">
         <span :class="{'btc-link': step === 1 }">
@@ -13,26 +13,26 @@
       </span>
     </div>
     <template v-if="step === 1">
-      <div class="row btc-validate-gpt btc-marginB60" style="margin-bottom: 105px;">
+      <div class=" btc-validate-gpt btc-marginB60" style="margin-bottom: 105px;">
         <div class="col-md-4 col-xs-12 col-md-offset-2 text-center btc-b-r  btc-validate-googleApp">
             <img src="~Img/google-authentication.png">
-          <div class="row btc-f btc-marginT10">
+          <div class=" btc-f btc-marginT10">
             <strong>
               Google Authenticator
             </strong>
           </div>
         </div>
         <div class="col-md-5 col-xs-12 col-md-offset-1  btc-marginT20 btc-validate-textCenter">
-          <div class="row">
+          <div >
             请于应用商店下载安装Google Authenticator（谷歌验证器）
           </div>
-          <div class="row btc-marginT20">
+          <div class=" btc-marginT20">
             <img src="~Img/validate-iosapp.png" class="btc-marginR5 col-xs-24">
             <img src="~Img/validate-gplay.png" class="col-xs-24">
           </div>
         </div>
       </div>
-      <div class="row text-right btc-marginT40">
+      <div class=" text-right btc-marginT40">
         <span class="btc-color999 btc-marginR20">
           已经安装 App
         </span>
@@ -40,19 +40,19 @@
       </div>
     </template>
     <template v-if="step === 2">
-      <div class="row btc-validate-gpt">
+      <div class=" btc-validate-gpt">
         <div class="col-md-6">
           <div class="col-md-6 text-center">
-            <div class="row">
+            <div >
               <qr-code :length='"120px"' :dateUrl="qrcode(loginData.google_uri)"></qr-code>
             </div>
-            <div class="row btc-marginT15 btc-margin-left">
+            <div class=" btc-marginT15 btc-margin-left">
               使用
               <strong>
                 谷歌验证 App
               </strong>
             </div>
-            <div class="row btc-marginT5 btc-marginR35 btc-margin-left">
+            <div class=" btc-marginT5 btc-marginR35 btc-margin-left">
               扫描二维码
             </div>
             <div class="btc-marginT5 btc-margin-left">
@@ -60,12 +60,12 @@
             </div>
           </div>
           <div class="col-md-6 btc-validate-textCenter btc-validate-googlekey">
-              <div class="row btc-marginT10">
+              <div class=" btc-marginT10">
                 <strong class="btc-link ">
                   {{ loginData.google_otp_secret }}
                 </strong>
               </div>
-              <div class="row btc-marginT20">
+              <div class=" btc-marginT20">
               <span>
                 若无法扫描，请将该16位密匙手动输入到谷歌验证码APP里
               </span>
@@ -77,18 +77,18 @@
             <div class="col-md-12 btc-validate-prompt">
               <news-prompt :text='prompt'></news-prompt>
             </div>
-            <div class="row">
+            <div >
               <span class="col-md-4 col-xs-4 text-right">登录密码</span>
               <basic-input @focus.native="promptEmpty()" type="password" class="col-md-7 col-xs-6" placeholder='请输入您在本站的账户登录密码' v-model="password"></basic-input>
             </div>
-            <div class="row btc-marginT20">
+            <div class=" btc-marginT20">
               <span class="col-md-4 col-xs-4 text-right">谷歌验证码</span>
               <basic-input  @focus.native="promptEmpty()" class="col-md-7 col-xs-6" placeholder='请输入谷歌验证APP里的谷歌验证码' v-model="otp"></basic-input>
             </div>
           </form>
         </div>
       </div>
-      <div class="row text-right btc-marginT90">
+      <div class=" text-right btc-marginT90">
         <span @click="minusStep" class="btc-link btc-fl btc-marginT25 btc-poniter">返回上一步</span>
         <span class="btc-color999 btc-marginR20">
           已经完成上述所有步骤

@@ -1,10 +1,10 @@
 <template>
-  <div class="row btc-table-container hidden-xs">
+  <div class="btc-table-container hidden-xs">
     <div class="bs-example btc-table" data-example-id="simple-table">
       <table class="table">
         <caption class="font-w"><strong>{{table.captionTitle}}</strong><slot name='remark'></slot></caption>
         <tbody>
-          <tr v-for="(item, length) in table.Item" :key='length'>
+          <tr v-for="(item, length) in table.Item" :key='length' v-if="length < 6">
             <td v-for="(data,index)  in item.content" :key="index" :style="{width: toPercent()}"
             :class="{'btc-tableTextright':index === 0,'btc-tableTextleft': index === item.content.length-1}">
               {{data}}
@@ -17,6 +17,7 @@
             </div>
         </div>
       </table>
+      <slot name='more'></slot>
     </div>
   </div>
 </template>

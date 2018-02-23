@@ -1,6 +1,6 @@
 .navbar-Home{
   color: #49627b;
-  background: #232e3a;
+  background: #181f28;
   height: 60px;
   padding: 5px 0;
 }
@@ -35,16 +35,40 @@
 }
 
 .navbar-Home{
+  .navbar-brand{
+    padding: 12px 0px;
+    padding-right: 25px;
+  }
+  .btc-country{
+    cursor: pointer;
+    .dropdown-toggle{
+      background-color: initial;
+      padding-bottom: 18px;
+      &:hover{
+        background-color: initial;
+      }
+      &:focus{
+        background-color: initial;
+      }
+    }
+    .dropdown-menu{
+      right: 10px;
+      width: 99px;
+      min-width: 0;
+      a{
+        padding: 3px 9px;
+      }
+    }
+  }
   .btc-header-signin{
     a{
       margin: 6px
     }
   }
   .navbar-default{
-    background-color:#232e3a;
-    border-color:#232e3a;
+    background-color:#181f28;
+    border-color:#181f28;
     z-index: 2;
-    .container-fluid{
       .navbar-collapse{
         .navbar-nav{
           >.active{
@@ -67,18 +91,13 @@
         }
         .navbar-right{
           height: 50px;
-          line-height: 50px;
+          line-height: 48px;
+          margin-right: -27px;
         }
       }
-    }
   }
   .login-active {
     font-size: 12px;
-    .btc-img-position{
-      position: relative;
-      top: 2px;
-      cursor: pointer;
-    }
     :nth-child(1) img{
       position: relative;
       top: -1px
@@ -94,6 +113,19 @@
   }
   .title {
     font-size: 16px;
+  }
+  .btc-img-position{
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+  }
+  .btc-header-avatar{
+    position: relative;
+    top: -2px;
+  }
+  .btc-header-asset{
+    position: relative;
+    top: -2px;
   }
 }
 

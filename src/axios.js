@@ -2,20 +2,8 @@ import axios from 'axios'
 // import qs from 'qs'
 const requestUrl = process.env.HOST_URL
 // axios.defaults.withCredentials = true
-console.log(process.env.HOST_URL)
 
 axios.interceptors.request.use(function (config) {
-  // config.headers['DataType'] = 'application/json;charset=utf-8'
-  // if (config.method === 'post') {
-  //   debugger
-  //   console.log(config.data)
-  //   console.log(qs.stringify({
-  //     ...config.data
-  //   }))
-  //   config.data = qs.stringify({
-  //     ...config.data
-  //   })
-  // }
   return config
 }, function (error) {
   return Promise.reject(error)

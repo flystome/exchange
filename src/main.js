@@ -13,8 +13,9 @@ import App from './App'
 import Vue from 'vue'
 import router from './router'
 import moment from 'moment'
+import VeeValidate from 'vee-validate'
+import zh_CN from 'vee-validate/dist/locale/zh_CN'
 import i18n from '@/common/js/i18n/i18n.js'
-
 import store from './store'
 import axios from 'axios'
 import { _post, _get, _httpget } from './axios'
@@ -23,6 +24,14 @@ import 'bootstrap/js/collapse.js'
 
 // css dependencies
 import 'bootstrap/dist/css/bootstrap.min.css'
+
+Vue.use(VeeValidate, {
+  i18n,
+  i18nRootKey: 'validation',
+  dictionary: {
+    zh_CN
+  }
+});
 
 moment.locale('zh-cn')
 Vue.config.productionTip = false

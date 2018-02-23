@@ -27,7 +27,6 @@ const mutations = {
   PopupBoxDisplay (state, message) {
     state.PopupBox.status = !state.PopupBox.status
     state.PopupBox.message = message
-    console.log(message)
   }
 }
 

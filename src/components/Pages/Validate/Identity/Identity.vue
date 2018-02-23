@@ -1,5 +1,5 @@
 <template>
-  <div class="btc-container-block btc-validateIdentity">
+  <div class="btc-container-block btc-validateIdentity container">
     <header class="btc-marginB40">
         <strong>
           身份认证
@@ -26,7 +26,6 @@
               <!--<label for="country-others">其他国家或者地区</label>-->
               <!--<img class="btc-marginL5" src="~Img/validate-country.jpg">-->
             <!--</div>-->
-
           </div>
             <div class="row btc-marginT15">
               请确保您使用本人的真实身份进行验证，我们会保护您的个人信息安全。
@@ -37,6 +36,10 @@
           <div class="row">
             <span class="btc-marginR20 btc-marginL40 btc-fl">姓名</span>
             <basic-input class="col-md-4 col-xs-5" v-model="user.name"></basic-input>
+              <!-- <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" type="text" placeholder="Email">
+              <p>
+                <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+              </p> -->
           </div>
           <!--<div class="row btc-marginT20">-->
             <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
@@ -77,12 +80,10 @@
 </template>
 
 <script>
+import countries from '@/common/js/countries'
 import {mapMutations} from 'vuex'
 export default {
   name: 'ValidateIdentity',
-  created () {
-    this.getCountriesList()
-  },
   data () {
     return {
       prompt: {
@@ -95,20 +96,12 @@ export default {
         IdCard: '',
         country: ''
       },
-      countries: [],
+      countries: countries,
       selectedCountry: 'South Korea',
       identity_hint: '实名认证信息上传成功'
     }
   },
   methods: {
-    getCountriesList () {
-      this._httpget({
-        url: `https://restcountries.eu/rest/v1/all`
-      }, d => {
-        console.log(d.data)
-        this.countries = d.data
-      })
-    },
     objectToFormData (obj, form, namespace) {
       var fd = form || new FormData()
       var formKey
