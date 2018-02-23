@@ -4,6 +4,7 @@
 // template dependencies
 import BasicButton from 'Components/BasicButton/BasicButton'
 import BasicInput from 'Components/BasicInput/BasicInput'
+import BasicTable from 'Components/BasicTable/BasicTable'
 import UploadImg from 'Components/UploadImg/UploadImg'
 import QrCode from 'Components/QrCode/QrCode'
 import NewsPrompt from 'Components/NewsPrompt/NewsPrompt'
@@ -14,7 +15,7 @@ import Vue from 'vue'
 import router from './router'
 import moment from 'moment'
 import VeeValidate from 'vee-validate'
-import zh_CN from 'vee-validate/dist/locale/zh_CN'
+import zh from 'vee-validate/dist/locale/zh_CN'
 import i18n from '@/common/js/i18n/i18n.js'
 import store from './store'
 import axios from 'axios'
@@ -29,9 +30,9 @@ Vue.use(VeeValidate, {
   i18n,
   i18nRootKey: 'validation',
   dictionary: {
-    zh_CN
+    zh
   }
-});
+})
 
 moment.locale('zh-cn')
 Vue.config.productionTip = false
@@ -44,6 +45,7 @@ Vue.prototype.$moment = moment
 const components = [
   BasicButton,
   BasicInput,
+  BasicTable,
   QrCode,
   UploadImg,
   NewsPrompt

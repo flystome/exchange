@@ -38,14 +38,20 @@
               0 BTC
             </li>
             <li class="btc-marginL15">
-              <img src="~Img/letterlog.png">
+              <a :href="`${HOST_URL}/conversations`" class="btc-header-letter">
+                <img src="~Img/letterlog.png">
+              </a>
             </li>
             <li role="presentation" class="dropdown btc-country">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <img src="~Img/countrylog.png" class="btc-marginL5 btc-marginR5"><span @click="changeLang('zh')">简体中文</span> <span class="caret"></span>
+                <img :src="requireImg(locale[0].language)" class="btc-marginL5 btc-marginR5">
+                <span @click="changeLang(locale[0].language)">{{locale[0].name}}</span><span class="caret">
+                </span>
               </a>
               <ul class="dropdown-menu">
-                <li><a @click="changeLang('en')"><img src="~Img/us.png" class='btc-marginR5'>English</a></li>
+                <li v-for="(locale,index) in locale" :key="locale.language" v-if="index > 0">
+                  <a @click="changeLang(locale.language, index + 1)"><img :src="requireImg(locale.language)" class='btc-marginR5'>{{locale.name}}</a>
+                </li>
               </ul>
             </li>
           </ul>
@@ -62,12 +68,24 @@ export default {
   },
   data () {
     return {
-      HOST_URL: process.env.HOST_URL
+      HOST_URL: process.env.HOST_URL,
+      locale: [{
+        language: 'zh',
+        name: '简体中文'
+      },
+      {
+        language: 'en',
+        name: 'English'
+      }]
     }
   },
   methods: {
-    changeLang (str) {
+    requireImg (img) {
+      return require(`../../../../static/img/${img}.png`)
+    },
+    changeLang (str, index) {
       this.$i18n.locale = str
+      this.locale.splice(1 - 1, 1, ...this.locale.splice(index - 1, 1, this.locale[1 - 1]))
     },
     goPath (path, status, href) {
       if (status) {

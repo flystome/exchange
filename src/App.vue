@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header is='Header' />
-    <div class="btc-container">
+    <div class="btc-container" v-cloak>
       <keep-alive>
         <router-view/>
       </keep-alive>
