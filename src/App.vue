@@ -2,7 +2,9 @@
   <div id="app">
     <header is='Header' />
     <div class="btc-container">
-      <router-view/>
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
     </div>
     <footer is='Footer' />
     <wrapper></wrapper>
