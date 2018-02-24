@@ -1,17 +1,17 @@
 <template>
-  <div class="btc-container-block btc-validateIdentity container">
+  <div class="btc-container-block btc-validateIdentity">
     <header class="btc-marginB40">
         <strong>
-          身份认证
+          {{$t('validate_identity.real_name_authentication')}}
         </strong>
     </header>
-    <div class="row btc-marginL0 btc-marginB30">
+    <div class=" btc-marginL0 btc-marginB30">
       <div class="btc-fl">
         选择类型
       </div>
       <div class="btc-marginL100">
         <div class="btc-marginL70">
-          <div class="row">
+          <div class="">
             <select name="country-select" id="country-selector" v-model="selectedCountry">
               <option></option>
               <option v-for="country in countries" :key="country.name">{{country.name}}</option>
@@ -27,25 +27,24 @@
               <!--<img class="btc-marginL5" src="~Img/validate-country.jpg">-->
             <!--</div>-->
           </div>
-            <div class="row btc-marginT15">
+            <div class=" btc-marginT15">
               请确保您使用本人的真实身份进行验证，我们会保护您的个人信息安全。
             </div>
         </div>
-        <div class="row btc-marginT25">
+        <div class=" btc-marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
-          <div class="row">
-            <span class="btc-marginR20 btc-marginL40 btc-fl">姓名</span>
-            <basic-input class="col-md-4 col-xs-5" v-model="user.name"></basic-input>
+          <div class="">
+            <basic-input class="col-md-4 col-xs-5" :placeholder='"姓氏"' v-model="user.name"></basic-input>
               <!-- <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" type="text" placeholder="Email">
               <p>
                 <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
               </p> -->
           </div>
-          <!--<div class="row btc-marginT20">-->
+          <!--<div class=" btc-marginT20">-->
             <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
-            <!--<basic-input class="col-md-4 col-xs-5" v-model="user.name"></basic-input>-->
+            <!--<basic-input  v-model="user.name"></basic-input>-->
           <!--</div>-->
-          <div class="row btc-marginT20">
+          <div class=" btc-marginT20">
             <span class="btc-marginR20 btc-fl">有效身份证</span>
             <basic-input class="col-md-4 col-xs-5" v-model="user.IdCard"></basic-input>
           </div>

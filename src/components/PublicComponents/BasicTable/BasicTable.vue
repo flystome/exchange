@@ -13,7 +13,7 @@
         </tbody>
         <div class="text-center btc-table-record" v-if="table.Item.length === 0">
             <div>
-                <div class="btc-marginT15 btc-font12 btc-color999">暂无记录</div>
+                <div class="btc-marginT15 btc-font12 btc-color999">{{$t('member_center.no_record')}}</div>
             </div>
         </div>
       </table>

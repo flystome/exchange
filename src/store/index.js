@@ -22,11 +22,15 @@ const getters = {
 
 const mutations = {
   getData (state, data) {
+    state.language = data.headers['content-language'] === '' ? 'en' : data.headers['content-language'] 
     state.loginData = data.data
   },
   PopupBoxDisplay (state, message) {
     state.PopupBox.status = !state.PopupBox.status
     state.PopupBox.message = message
+  },
+  ChangeLanguage (state, lang) {
+    state.language = lang
   }
 }
 
@@ -37,7 +41,8 @@ const store = new Vuex.Store({
     PopupBox: {
       status: false,
       message: ''
-    }
+    },
+    language: ''
   },
   mutations,
   actions,

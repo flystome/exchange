@@ -1,22 +1,22 @@
 <template>
   <div @click="promptEmpty" class="btc-UploadImg">
+    <div class="btc-Upload-block">
+      <div>
+        <!-- <basic-button :text='"点击上传"'>
+          <input type="file" ref="input"  @change='ShowImg'  accept="image/jpeg,image/jpg" slot="file">
+        </basic-button> -->
+        <news-prompt class="btc-marginT25 btc-marginL25" :text='prompt'></news-prompt>
+      </div>
     <div class="btc-UploadExplain btc-marginR20 btc-marginT45">
       {{ Upload.UploadExplain }}
     </div>
-    <div class="btc-Upload-block">
-      <div class="row">
-        <basic-button :text='"点击上传"'>
-          <input type="file" ref="input"  @change='ShowImg'  accept="image/jpeg,image/jpg" slot="file">
-        </basic-button>
-        <news-prompt class="btc-marginT25 btc-marginL25" :text='prompt'></news-prompt>
-      </div>
-      <div class="row btc-marginT20 btc-marginB20">
+      <div class=" btc-marginT20 btc-marginB20">
         {{ Upload.ImgExplain }}
       </div>
-      <div class="row">
-        <img src="~Img/validate-uploading.jpg" v-if="UploadImg === ''">
+      <div>
+        <img class="btc-UploadImg-model btc-marginR100" :src="requireImg(Upload.ImgModel)">
+        <img src="~Img/validate-uploading.png" v-if="UploadImg === ''">
         <img width="320" height="200" :src="UploadImg" v-else>
-        <img class="btc-UploadImg-model btc-marginL100" :src="requireImg(Upload.ImgModel)">
       </div>
     </div>
   </div>

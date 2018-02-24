@@ -8,6 +8,7 @@ import BasicTable from 'Components/BasicTable/BasicTable'
 import UploadImg from 'Components/UploadImg/UploadImg'
 import QrCode from 'Components/QrCode/QrCode'
 import NewsPrompt from 'Components/NewsPrompt/NewsPrompt'
+import Title from 'Pages/Title/Title'
 import App from './App'
 
 // js dependencies
@@ -16,6 +17,7 @@ import router from './router'
 import moment from 'moment'
 import VeeValidate from 'vee-validate'
 import zh from 'vee-validate/dist/locale/zh_CN'
+import en from 'vee-validate/dist/locale/en'
 import i18n from '@/common/js/i18n/i18n.js'
 import store from './store'
 import axios from 'axios'
@@ -30,7 +32,8 @@ Vue.use(VeeValidate, {
   i18n,
   i18nRootKey: 'validation',
   dictionary: {
-    zh
+    'zh-CN': zh,
+    en
   }
 })
 
@@ -63,3 +66,11 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+new Vue({
+  router,
+  i18n,
+  store,
+  template: `<Title></Title>`,
+  components: { Title }
+}).$mount('#title')

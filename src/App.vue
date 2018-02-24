@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header is='Header' />
-    <div class="btc-container" v-cloak>
+    <div class="btc-container container" v-cloak>
       <keep-alive>
         <router-view/>
       </keep-alive>
@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Header from '@/components/Pages/Header/Header'
 import Footer from '@/components/Pages/Footer/Footer'
 import Wrapper from '@/components/PublicComponents/Wrapper/Wrapper'
@@ -25,11 +26,28 @@ export default {
     Footer,
     Wrapper,
     PopupBox
+  },
+  computed: {
+    ...mapGetters(['loginData'])
   }
 }
 </script>
 
 <style>
+.input.is-danger, .textarea.is-danger {
+    border-color: #ff3860;
+}
+
+.help {
+    display: block;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.help.is-danger {
+    color: #ff3860;
+}
+
 [v-cloak] {
   display: none;
 }

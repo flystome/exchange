@@ -14,10 +14,10 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="z-index:100">
           <ul class="nav navbar-nav">
-            <li class="btc-link"><a :href="`${HOST_URL}`">主页 <span class="sr-only">(current)</span></a></li>
-            <li class="btc-link"><a :href="`${HOST_URL}/xchg`">交易</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">IFO分叉 <span class="caret"></span></a>
+            <li class="btc-link"><a :href="`${HOST_URL}`">{{$t('nav.home')}} <span class="sr-only">(current)</span></a></li>
+            <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.transaction')}}</a></li>
+            <li class="dropdown btc-ifo">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$t('nav.IFO')}} <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a :href="`${HOST_URL}/ifo/btc`">BTC</a></li>
                 <li><a :href="`${HOST_URL}/ifo/ltc`">LTC</a></li>
@@ -26,7 +26,7 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right btc-header-signin" v-if="loginData === '' || loginData.errors">
-            请<a :href="`${HOST_URL}/signin`">登录</a>或<a :href="`${HOST_URL}/signup`">注册</a>后操作
+            {{$t('nav.please')}}<a :href="`${HOST_URL}/signin`">{{$t('nav.login')}}</a>{{$t('nav.or')}}<a :href="`${HOST_URL}/signup`">{{$t('nav.register')}}</a>{{$t('nav.operate')}}
           </ul>
           <ul class="nav navbar-nav navbar-right" v-else>
             <li class="btc-img-position" @click="goHome('/')" style="cursor: pointer">
@@ -44,12 +44,12 @@
             </li>
             <li role="presentation" class="dropdown btc-country">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <img :src="requireImg(locale[0].language)" class="btc-marginL5 btc-marginR5">
-                <span @click="changeLang(locale[0].language)">{{locale[0].name}}</span><span class="caret">
+                <img :src="requireImg(getLanguage.language)" class="btc-marginL5 btc-marginR5">
+                <span>{{getLanguage.name}}</span><span class="caret">
                 </span>
               </a>
               <ul class="dropdown-menu">
-                <li v-for="(locale,index) in locale" :key="locale.language" v-if="index > 0">
+                <li v-for="(locale,index) in locale" :key="locale.language">
                   <a @click="changeLang(locale.language, index + 1)"><img :src="requireImg(locale.language)" class='btc-marginR5'>{{locale.name}}</a>
                 </li>
               </ul>
@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState, mapMutations } from 'vuex'
 export default {
   created () {
     this.$store.dispatch('getData')
@@ -70,7 +70,7 @@ export default {
     return {
       HOST_URL: process.env.HOST_URL,
       locale: [{
-        language: 'zh',
+        language: 'zh-CN',
         name: '简体中文'
       },
       {
@@ -80,12 +80,15 @@ export default {
     }
   },
   methods: {
+    localed () {
+      this.$i18n.locale = this.language
+    },
     requireImg (img) {
       return require(`../../../../static/img/${img}.png`)
     },
-    changeLang (str, index) {
+    changeLang (str) {
+      this.ChangeLanguage(str)
       this.$i18n.locale = str
-      this.locale.splice(1 - 1, 1, ...this.locale.splice(index - 1, 1, this.locale[1 - 1]))
     },
     goPath (path, status, href) {
       if (status) {
@@ -102,10 +105,22 @@ export default {
       this.$router.push('/', () => {
         this.$store.dispatch('getData')
       })
-    }
+    },
+    ...mapMutations(['ChangeLanguage'])
   },
   computed: {
-    ...mapGetters(['loginData'])
+    getLanguage () {
+      this.localed()
+      var lang = ''
+      this.locale.map((d, index) => {
+        if (d.language === this.language) {
+          lang = d
+        }
+      })
+      return lang
+    },
+    ...mapGetters(['loginData']),
+    ...mapState(['language'])
   }
 }
 </script>

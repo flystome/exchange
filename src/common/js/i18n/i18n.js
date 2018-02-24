@@ -5,12 +5,12 @@ import zh from './zh-CN'
 
 Vue.use(VueI18n)
 const messages = {
-  en,
-  zh
+  'zh-CN': zh,
+  en: en.en
 }
 
 const i18n = new VueI18n({
-  locale: 'zh',
+  locale: 'en',
   messages
 })
 

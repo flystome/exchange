@@ -1,9 +1,9 @@
 .btc-basic-button{
   background: #4382f7;
   border: none;
-  padding: 6px 0;
+  padding: 6px 14px;
   color: white;
-  width: 120px;
   margin-top: 20px;
   position: relative;
+  min-width: 120px;
 }

@@ -3,6 +3,8 @@
   background: #181f28;
   height: 60px;
   padding: 5px 0;
+  z-index: 99;
+  position: relative;
 }
 .nav-margin{
   margin-top: 10px;
@@ -38,6 +40,14 @@
   .navbar-brand{
     padding: 12px 0px;
     padding-right: 25px;
+  }
+  .btc-ifo{
+    a{
+      background: initial!important;
+    }
+    ul{
+      margin-top: 3px;
+    }
   }
   .btc-country{
     cursor: pointer;
@@ -92,7 +102,7 @@
         .navbar-right{
           height: 50px;
           line-height: 48px;
-          margin-right: -27px;
+          margin-right: -33px;
         }
       }
   }
