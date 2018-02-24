@@ -89,6 +89,12 @@ export default {
     changeLang (str) {
       this.ChangeLanguage(str)
       this.$i18n.locale = str
+      this._post({
+        url: '/settings/get_language',
+        data: {
+          'content_language': str
+        }
+      })
     },
     goPath (path, status, href) {
       if (status) {

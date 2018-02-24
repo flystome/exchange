@@ -1,13 +1,18 @@
 <template>
-  <div>
-    <input v-validate="'required|email'" class="btc-basicInput btc-b" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" type="text" placeholder="Email"  @input="$emit('input', $event.target.value)">
-    <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+  <div style="height: 24px;">
+    <input v-validate="`required|${type}`" class="btc-basicInput btc-b"
+    :class="{'input': true, 'is-danger': errors.has(type) }"
+    :name="type"
+    type="text"
+    :placeholder="placeholder"
+     @input="$emit('input', $event.target.value)">
+    <span v-show="errors.has(type)" class="help is-danger">{{ errors.first(type) }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['per'],
+  props: ['placeholder', 'type'],
   name: 'BasicInput'
 }
 </script>

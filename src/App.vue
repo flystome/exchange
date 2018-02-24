@@ -36,6 +36,7 @@ export default {
 <style>
 .input.is-danger, .textarea.is-danger {
     border-color: #ff3860;
+    background: white;
 }
 
 .help {

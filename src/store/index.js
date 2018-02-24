@@ -22,7 +22,7 @@ const getters = {
 
 const mutations = {
   getData (state, data) {
-    state.language = data.headers['content-language'] === '' ? 'en' : data.headers['content-language'] 
+    state.language = data.headers['content-language'] === '' ? 'en' : data.headers['content-language']
     state.loginData = data.data
   },
   PopupBoxDisplay (state, message) {

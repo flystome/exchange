@@ -240,6 +240,12 @@ export default {
       this.$router.push({
         path: path
       })
+    },
+    getTicket () {
+      this.tickets = this.loginData.tickets
+      this.tickets.sort((a, b) => {
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      })
     }
   },
   computed: {
@@ -315,11 +321,7 @@ export default {
             ]
           }
         }))
-        var tickets = this.tickets
-        tickets = this.loginData.tickets
-        tickets.sort((a, b) => {
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        })
+        this.getTicket()
       }
       return obj
     }

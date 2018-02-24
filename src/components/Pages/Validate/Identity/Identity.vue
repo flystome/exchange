@@ -6,13 +6,10 @@
         </strong>
     </header>
     <div class=" btc-marginL0 btc-marginB30">
-      <div class="btc-fl">
-        选择类型
-      </div>
-      <div class="btc-marginL100">
-        <div class="btc-marginL70">
-          <div class="">
-            <select name="country-select" id="country-selector" v-model="selectedCountry">
+      <div>
+        <div>
+          <div>
+            <select v-model="selectedCountry">
               <option></option>
               <option v-for="country in countries" :key="country.name">{{country.name}}</option>
             </select>
@@ -33,8 +30,8 @@
         </div>
         <div class=" btc-marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
-          <div class="">
-            <basic-input class="col-md-4 col-xs-5" :placeholder='"姓氏"' v-model="user.name"></basic-input>
+          <div class="col-md-12">
+            <basic-input class="col-md-4 col-xs-5" :placeholder='"姓氏"' :type='"email"' v-model="user.name"></basic-input>
               <!-- <input v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" name="email" type="text" placeholder="Email">
               <p>
                 <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
@@ -44,9 +41,11 @@
             <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
             <!--<basic-input  v-model="user.name"></basic-input>-->
           <!--</div>-->
-          <div class=" btc-marginT20">
-            <span class="btc-marginR20 btc-fl">有效身份证</span>
-            <basic-input class="col-md-4 col-xs-5" v-model="user.IdCard"></basic-input>
+          <div class="btc-marginT40 col-md-12">
+            <basic-input class="col-md-4 col-xs-5" :placeholder='"名字"' :type='"ip"'  v-model="user.IdCard"></basic-input>
+          </div>
+          <div class="btc-marginT40 col-md-12">
+            <basic-input class="col-md-4 col-xs-5" :placeholder='"有效身份证"' :type='"ip"'  v-model="user.IdCard"></basic-input>
           </div>
         </div>
       </div>
