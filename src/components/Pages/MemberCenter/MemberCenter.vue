@@ -3,7 +3,8 @@
     <div class="btc-container-block btc-member-p12">
       <div class="col-md-6">
           <a :href="`${HOST_URL}/member/edit`">
-             <img src="~Img/avatar.png" class="img-circle btc-member-avatar">
+             <img src="~Img/avatar.png" class="img-circle btc-member-avatar" v-if="!loginData.member_avatar">
+             <img class="img-circle btc-member-avatar"   :src="loginData.member_avatar" v-else>
           </a>
           <div class="btc-member-info">
             <span class="btc-member-infoEmail">{{ loginData.email }}</span>
@@ -312,7 +313,7 @@ export default {
         data.referral_signup_history.length === 0 ? obj.Item = '' : obj.Item = [{content: [this.$t('member_center.account'), this.$t('member_center.ip_adress'), this.$t('member_center.login_location'), this.$t('member_center.browser'), this.$t('member_center.login_time'), this.$t('member_center.activated')]}].concat(this.loginData.referral_signup_history.map((_, index) => {
           return {
             content: [
-              this.loginData.referral_signup_history[index].member_id,
+              this.loginData.referrals[index].referrals_account_name,
               this.loginData.referral_signup_history[index].ip,
               this.loginData.referral_signup_history[index].location ? this.loginData.referral_signup_history[index].location : '占无',
               this.bser(this.loginData.recent_signin_histories[index].ua),

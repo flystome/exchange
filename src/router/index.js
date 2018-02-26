@@ -4,6 +4,7 @@ const MemberCenter = () => import('Pages/MemberCenter/MemberCenter')
 const ValidateEmail = () => import('Pages/Validate/Email/Email')
 const ValidateGoogle = () => import('Pages/Validate/Google/Google')
 const ValidateIdentity = () => import('Pages/Validate/Identity/Identity')
+const ValidateSms = () => import('Pages/Validate/Sms/Sms')
 
 Vue.use(Router)
 
@@ -39,6 +40,11 @@ const router = new Router({
       path: '/validate/identity',
       name: 'ValidateIdentity',
       component: ValidateIdentity
+    },
+    {
+      path: '/validate/sms',
+      name: 'ValidateSms',
+      component: ValidateSms
     }
   ]
 })

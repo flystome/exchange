@@ -1,5 +1,8 @@
 .btc-validateIdentity{
   padding: 12px 30px 15px 55px;
+  .btc-validateIdentity-uploadimg .btc-UploadExplain{
+    margin-top: 10px
+  }
 }
 
 .btc-validateIdentity .btc-UploadExplain{
@@ -7,7 +10,7 @@
 }
 
 .btc-validateIdentity .btc-Upload-block{
-  margin-top: 20px;
+  // margin-top: 15px;
 }
 
 .btc-validateIdentity footer{
@@ -41,3 +44,7 @@
 // .btc-basicInput{
 //   width: 360px;
 // }
+
+.btc-UploadExplain:first-child{
+  margin-top: 200px
+}

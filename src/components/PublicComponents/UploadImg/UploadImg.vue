@@ -5,10 +5,10 @@
         <!-- <basic-button :text='"点击上传"'>
           <input type="file" ref="input"  @change='ShowImg'  accept="image/jpeg,image/jpg" slot="file">
         </basic-button> -->
-        <news-prompt class="btc-marginT25 btc-marginL25" :text='prompt'></news-prompt>
       </div>
-    <div class="btc-UploadExplain btc-marginR20 btc-marginT45">
+    <div class="btc-UploadExplain btc-marginR20 btc-marginT50">
       {{ Upload.UploadExplain }}
+        <news-prompt class="btc-marginT25 btc-marginL25" :text='prompt'></news-prompt>
     </div>
       <div class=" btc-marginT20 btc-marginB20">
         {{ Upload.ImgExplain }}

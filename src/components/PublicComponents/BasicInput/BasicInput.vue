@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 24px;">
+  <div style="min-height: 66px;">
     <input v-validate="`required|${type}`" class="btc-basicInput btc-b"
     :class="{'input': true, 'is-danger': errors.has(type) }"
     :name="type"

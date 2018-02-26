@@ -23,6 +23,9 @@ const getters = {
 const mutations = {
   getData (state, data) {
     state.language = data.headers['content-language'] === '' ? 'en' : data.headers['content-language']
+    data.data.referrals.map((d, index) => {
+      d['referrals_account_name'] = data.data.referrals_account_name[index]
+    })
     state.loginData = data.data
   },
   PopupBoxDisplay (state, message) {

@@ -5,7 +5,7 @@
           {{$t('validate_identity.real_name_authentication')}}
         </strong>
     </header>
-    <div class=" btc-marginL0 btc-marginB30">
+    <div class=" btc-marginL0">
       <div>
         <div>
           <div>
@@ -30,42 +30,36 @@
         </div>
         <div class=" btc-marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
-          <div>
             <basic-input :placeholder='"姓氏"' :type='"email"' v-model="user.name"></basic-input>
-          </div>
           <!--<div class=" btc-marginT20">-->
             <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
             <!--<basic-input  v-model="user.name"></basic-input>-->
           <!--</div>-->
-          <div class="btc-marginT40">
             <basic-input  :placeholder='"名字"' :type='"ip"'  v-model="user.IdCard"></basic-input>
-          </div>
-          <div class="btc-marginT40">
             <basic-input  :placeholder='"有效身份证"' :type='"ip"'  v-model="user.IdCard"></basic-input>
-          </div>
         </div>
       </div>
     </div>
-    <upload-img ref="id_document_front_file_attributes" :Upload='{
-        UploadExplain: "本人有效身份证正面照",
-        ImgExplain: "请确保照片的内容完整并清晰可见，仅支持jpg图片格式。",
-        ImgModel: "validate-indentity1.png"
-      }'></upload-img>
-    <upload-img ref="id_document_back_file_attributes" :Upload='{
-        UploadExplain: "本人身份证背面照片  ",
-        ImgExplain: "请确保照片的内容完整并清晰可见，身份证必须在有效期内，仅支持jpg格式",
-        ImgModel: "validate-indentity2.png"
-      }'></upload-img>
-    <upload-img ref="id_document_selfie_holding_file_attributes" :Upload='{
-        UploadExplain: "手持本人身份证正面照",
-        ImgExplain: "请确保照片的内容完整并清晰可见，身份证必须在有效期内，仅支持jpg格式",
-        ImgModel: "validate-indentity3.png"
-      }'></upload-img>
-      <upload-img ref="id_bill_file_attributes" :Upload='{
-        UploadExplain: "三个月内账单照片",
-        ImgExplain: "上传三个月内账单，仅支持jpg格式，请确保照片的内容完整并清晰可见",
-        ImgModel: "validate-indentity4.png"
-      }'></upload-img>
+        <upload-img class="btc-validateIdentity-uploadimg" ref="id_document_front_file_attributes" :Upload='{
+            UploadExplain: "本人有效身份证正面照",
+            ImgExplain: "请确保照片的内容完整并清晰可见，仅支持jpg图片格式。",
+            ImgModel: "validate-indentity1.png"
+          }'></upload-img>
+        <upload-img ref="id_document_back_file_attributes" :Upload='{
+            UploadExplain: "本人身份证背面照片  ",
+            ImgExplain: "请确保照片的内容完整并清晰可见，身份证必须在有效期内，仅支持jpg格式",
+            ImgModel: "validate-indentity2.png"
+          }'></upload-img>
+        <upload-img ref="id_document_selfie_holding_file_attributes" :Upload='{
+            UploadExplain: "手持本人身份证正面照",
+            ImgExplain: "请确保照片的内容完整并清晰可见，身份证必须在有效期内，仅支持jpg格式",
+            ImgModel: "validate-indentity3.png"
+          }'></upload-img>
+          <upload-img ref="id_bill_file_attributes" :Upload='{
+            UploadExplain: "三个月内账单照片",
+            ImgExplain: "上传三个月内账单，仅支持jpg格式，请确保照片的内容完整并清晰可见",
+            ImgModel: "validate-indentity4.png"
+          }'></upload-img>
       <footer class="btc-b-t btc-marginT25">
         <basic-button @click.native="uploadImg" class="btc-fr" :text='"全部提交"'>
         </basic-button>

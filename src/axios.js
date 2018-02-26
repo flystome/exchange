@@ -4,9 +4,8 @@ const requestUrl = process.env.HOST_URL
 // axios.defaults.withCredentials = true
 
 axios.interceptors.request.use(function (config) {
+  config.headers['DataType'] = 'application/json;charset=utf-8'
   return config
-}, function (error) {
-  return Promise.reject(error)
 })
 
 export const _post = async ({url, data, headers}, callback) => {
@@ -18,7 +17,9 @@ export const _post = async ({url, data, headers}, callback) => {
       headers: headers,
       withCredentials: true
     }).catch(err => console.log(err))
-    callback(ajax)
+    if (callback) {
+      callback(ajax)
+    }
     return
   }
   const ajax = await axios({
@@ -26,7 +27,9 @@ export const _post = async ({url, data, headers}, callback) => {
     url: requestUrl + url,
     data: data
   }).catch(err => console.log(err))
-  callback(ajax)
+  if (callback) {
+    callback(ajax)
+  }
 }
 
 export const _get = async ({url, data, headers}, callback) => {
@@ -37,7 +40,9 @@ export const _get = async ({url, data, headers}, callback) => {
     withCredentials: true,
     headers: headers
   })
-  callback(ajax)
+  if (callback) {
+    callback(ajax)
+  }
 }
 
 export const _httpget = async ({url, data}, callback) => {
@@ -46,5 +51,7 @@ export const _httpget = async ({url, data}, callback) => {
     url: url,
     data: data
   })
-  callback(ajax)
+  if (callback) {
+    callback(ajax)
+  }
 }
