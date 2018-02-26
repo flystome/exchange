@@ -31,8 +31,6 @@
   </div>
 </template>
 
-
-
 <style scoped lang='scss'>
 @import './ExtractCurrency.scss'
 </style>

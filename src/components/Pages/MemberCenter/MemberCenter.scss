@@ -9,8 +9,11 @@
 }
 
 .btc-member-avatar{
+  $len: 80px;
   float: left;
   cursor: pointer;
+  max-height: $len;
+  max-width: $len;
 }
 
 .btc-member-handleRecord{
