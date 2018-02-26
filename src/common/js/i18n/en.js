@@ -164,6 +164,15 @@ const en = {
       'deposit_btc': {
         'title': `BTC Deposit`
       },
+      'deposit_eth': {
+        'title': `ETH Deposit`
+      },
+      'deposit_usdt': {
+        'title': `USDT Deposit`
+      },
+      'deposit_sxcb': {
+        'title': `SXCB Deposit`
+      },
       'deposit_coin': {
         'address': `Address`,
         'new_address': `New Address`,
@@ -176,7 +185,7 @@ const en = {
       },
       'deposit_history': {
         'title': `Deposit History`,
-        'number': `#`,
+        'number': null,
         'identification': `Identification Code`,
         'time': `Time`,
         'txid': `Transaction ID`,
@@ -211,6 +220,15 @@ const en = {
       },
       'withdraw_btc': {
         'title': `BTC Withdraw`
+      },
+      'withdraw_eth': {
+        'title': `ETH Withdraw`
+      },
+      'withdraw_usdt': {
+        'title': `USDT Withdraw`
+      },
+      'withdraw_sxcb': {
+        'title': `SXCB Withdraw`
       },
       'withdraw_coin': {
         'intro': `Please fill in the address and amount, then submit the form. It will be confirmed in 10 minutes`,
@@ -250,34 +268,42 @@ const en = {
       }
     },
     'auth': {
-      'please_active_two_factor': `Please set mobile number or google authenticator first.`,
-      'submit': `Submit`,
-      'email': `Email Verification`,
-      'phone': `SMS`,
-      'google': `Google Auth`,
-      'send_email': `Send Email`,
-      'otp_placeholder': `6-digit password`,
-      'google_app': `Google Authenticator`,
-      'real_name': `Real Name Authentication`,
-      'sms': `SMS Verification Messages`,
-      'send_code': `Send Code`,
-      'send_code_alt': `Resend in COUNT seconds`,
+      'please_active_two_factor': `Please set mobile number or google authenticator first.,`,
+      'submit': `Submit,`,
+      'email': `Email Authentication`,
+      'phone': `Mobile Phone Authentication`,
+      'google': `Google Auth,`,
+      'send_email': `Send Email,`,
+      'otp_placeholder': `6-digit password,`,
+      'google_app': `Google Authenticator,`,
+      'real_name': `Real Name Authentication,`,
+      'sms': `SMS Verification Messages,`,
+      'send_code': `Send Code,`,
+      'send_code_alt': `Resend in COUNT seconds,`,
+      'hints': {
+        'app': `Google Authenticator will re-generate a new password every thirty seconds, please input timely.`,
+        'sms': `We'll send a text message to you phone with verify code.`
+      },
       'level': {
         'level_1': `Level 1`,
         'level_2': `Level 2`,
         'level_3': `Level 3`,
         'level_4': `Level 4`
       },
-      'hints': {
-        'app': `Google Authenticator will re-generate a new password every thirty seconds, please input timely.`,
-        'sms': `We'll send a text message to you phone with verify code.`
-      }
+      'bank_account': `Bank Account Authentication`,
+      'double_channel': `Double Channel Authentication`,
+      'phone_ps': `Use your ID-identified mobile phone for authentication`,
+      'bank_account_ps': `KRW withdrawal bank account authentication`,
+      'double_channel_ps': `Use Kakaopay authentication for safe transaction`
     },
     'markets': {
       'market_list': {
         'all': `All Market`,
         'cny': `CNY Market`,
-        'btc': `BTC Market`
+        'btc': `BTC Market`,
+        'eth': `ETH Market`,
+        'usdt': `USDT Market`,
+        'sxcb': `SXCB Market`
       }
     },
     'sort': {
@@ -305,7 +331,7 @@ const en = {
       'login_time': `Login Time`,
       'ip_adress': `IP Adress`,
       'login_location': `Login Location`,
-      'have_questions_to_contact_us': `If you have any questions, please contact us in time`,
+      'have_questions_to_contact_us': `If you have any questions please contact us in time`,
       'customer_service_record': `Customer service record`,
       'view_the_end_service_list': `View the end of the service list`,
       'show_more': `Show More`,
@@ -321,9 +347,9 @@ const en = {
       'browser': `Browser`,
       'register_time': `Register Time`,
       'activated': `Activated`,
-      'yes': `Yes`,
-      'no': `No`,
-      'no_record': `No record`,
+      'true': true,
+      'false': false,
+      'no_record': `No Record`,
       'korean_user_use_twice_verification': `South Korean user real name certification, presentation, modification and other twice verification`,
       'completion_of_real_name_authentication': `Non Korean nationality users complete the real name authentication method.`
     },
@@ -340,17 +366,15 @@ const en = {
       'submissions': `Submissions`
     },
     'browser': {
-      'chrome': 'Chrome',
-      'firefox': 'Firefox',
-      'opera': 'Opera',
-      'safari': 'Safari',
-      'netscape': 'Netscape',
-      'ie': 'IE'
+      'chrome': `Chrome`,
+      'firefox': `Firefox`,
+      'opera': `Opera`,
+      'safari': `Safari`,
+      'netscape': `Netscape`,
+      'ie': `IE`
     },
-    'title': {
-      'member_center': `Member Center`,
-      'validate_google': 'Validate Google',
-      'validate_identity': 'Validate Identity'
+    'extract_currency': {
+      'total_assets': `Total Assets`
     }
   }
 }
