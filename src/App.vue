@@ -75,13 +75,13 @@ body{
 }
 
 .btc-link{
-  color: #4382f7;
+  color: #4382f7!important
 }
 
 .btc-link:hover{
-  text-decoration: none;
+  text-decoration: none!important;
   cursor: pointer;
-  color: #4382f7;
+  color: #4382f7!important;
 }
 
 .btc-poniter{
