@@ -268,18 +268,18 @@ const en = {
       }
     },
     "auth": {
-      "please_active_two_factor": "Please set mobile number or google authenticator first.,",
-      "submit": "Submit,",
+      "please_active_two_factor": "Please set mobile number or google authenticator first.",
+      "submit": "Submit",
       "email": "Email Authentication",
       "phone": "SMS",
-      "google": "Google Auth,",
-      "send_email": "Send Email,",
-      "otp_placeholder": "6-digit password,",
-      "google_app": "Google Authenticator,",
-      "real_name": "Real Name Authentication,",
-      "sms": "SMS Verification Messages,",
-      "send_code": "Send Code,",
-      "send_code_alt": "Resend in COUNT seconds,",
+      "google": "Google Auth",
+      "send_email": "Send Email",
+      "otp_placeholder": "6-digit password",
+      "google_app": "Google Authenticator",
+      "real_name": "Real Name Authenticatio",
+      "sms": "SMS Verification Messages",
+      "send_code": "Send Code",
+      "send_code_alt": "Resend in COUNT seconds",
       "hints": {
         "app": "Google Authenticator will re-generate a new password every thirty seconds, please input timely.",
         "sms": "We'll send a text message to you phone with verify code."
@@ -347,8 +347,8 @@ const en = {
       "browser": "Browser",
       "register_time": "Register Time",
       "activated": "Activated",
-      "Yes": 'yes',
-      "No": 'no',
+      "yes": 'yes',
+      "no": 'no',
       "no_record": "No Record",
       "korean_user_use_twice_verification": "South Korean user real name certification, presentation, modification and other twice verification",
       "completion_of_real_name_authentication": "Non Korean nationality users complete the real name authentication method."
@@ -364,6 +364,11 @@ const en = {
       "utilities_credit_card_bills": "Utilities / Credit Card Bills",
       "three_months_bill": "Upload three months bill, only support JPG format, please ensure that the content of the photo is complete and clear.",
       "submissions": "Submissions"
+    },
+    "validate_sms": {
+      "binding_cell_phone_authentication": "Binding cell phone authentication",
+      "send_identify_code": "Send Identify Code",
+      "confirm": "Confirm"
     },
     "browser": {
       "chrome": "Chrome",
@@ -405,6 +410,20 @@ const en = {
       "validate_identity": "Validate Identity",
       "validate_sms": "Validate Sms",
       "currency_extract": "Currency Extract"
+    },
+    "validation": {
+      "wef": "fe"
+    },
+    "prompt": {
+      "identify_code_error": "Identify code error",
+      "identify_code_can_not_empty": "Identify code can not be empty",
+      "cell_phone_number_can_not_be_empty": "Cell phone number can not be empty",
+      "passowrd_error": "passowrd_error",
+      "passowrd_can_not_empty": "The password can not be empty"
+    },
+    "placeholder": {
+      "cell_phone_number": "Cell Phone Number",
+      "identify_code": "Identify Code"
     }
   }
 }
