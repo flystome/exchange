@@ -50,7 +50,8 @@
               <qr-code :length='"120px"' :dateUrl="qrcode(loginData.google_uri)"></qr-code>
             </div>
             <div class="row btc-marginT15 btc-margin-left useGoogle">
-              {{$t('validate_google.using_Google_to_verify_App')}}
+              {{$t('validate_google.using')}}
+              <strong>{{$t('validate_google.Google_to_verify_App')}}</strong>
             </div>
             <div class="row btc-marginT5 useGoogle">
               {{$t('validate_google.Scan_qrcode')}}
@@ -90,7 +91,7 @@
           </form>
         </div>
       </div>
-      <div class="text-right btc-marginT80 minusStep">
+      <div class="text-right btc-marginT70 minusStep">
         <span @click="minusStep" class="col-xs-12 col-md-1 btc-link btc-fl btc-marginT25 btc-poniter" style="display:inline-block">{{$t('validate_google.prve')}}</span>
         <span class="btc-color999 btc-marginR20 btc-marginT25" style="display:inline-block">
           {{$t('validate_google.All_steps_completed')}}
