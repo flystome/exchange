@@ -59,7 +59,7 @@
                 <img src="~Img/phone.png">
               </div>
               <div >
-                <span class="btc-member-validata btc-link btc-marginR10" :class="{'btc-active': !loginData.sms_activated}">
+                <span class="btc-member-validata btc-link btc-marginR10" @click="goPath('/validate/sms', loginData.sms_activated,false)" :class="{'btc-active': !loginData.sms_activated}">
                     <span>{{ $t("auth.phone") }}</span>
                     <img v-if='loginData.sms_activated' src="~Img/validate-true.png" alt="已认证">
                   </span>
@@ -214,6 +214,10 @@ export default {
         return this.$t('browser.safari')
       } else if (explorer.indexOf('Netscape') >= 0) {
         return this.$t('browser.netscape')
+      } else if (explorer.indexOf('rv:10')) {
+        return 'IE 10'
+      } else if (explorer.indexOf('rv:11')) {
+        return 'IE 11'
       }
     },
     toTickets (id) {

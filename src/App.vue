@@ -61,6 +61,12 @@ body{
   font-family: '微软雅黑';
 }
 
+.btc-white-btn{
+  border: 1px solid #4382f7;
+  color: #4382f7;
+  background: white;
+}
+
 .btc-container{
   background: #f2f2f2;
   padding-bottom: 13px;
@@ -75,13 +81,13 @@ body{
 }
 
 .btc-link{
-  color: #4382f7;
+  color: #4382f7!important
 }
 
 .btc-link:hover{
-  text-decoration: none;
+  text-decoration: none!important;
   cursor: pointer;
-  color: #4382f7;
+  color: #4382f7!important;
 }
 
 .btc-poniter{

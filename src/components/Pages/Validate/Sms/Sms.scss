@@ -1,0 +1,49 @@
+.btc-validate-sms{
+  padding: 25px 40px;
+  padding-bottom: 55px;
+  min-height: 70vh;
+  header{
+
+  }
+  .btc-sms-container{
+    padding: 130px 31% 195px 31%;
+  }
+  .btc-basic-option{
+    width: 70px!important;
+    height: 32px;
+    text-indent: 6px;
+    background: white!important;
+  }
+  .btc-sms-phone{
+    display: flex;
+    & > div{
+      flex: 1
+    }
+  }
+  .btc-sms-code{
+    display: flex;
+    & > div{
+      flex: 1
+    }
+  }
+  .btc-newsPrompt{
+    margin-bottom: 4px;
+  }
+  .btc-white-btn{
+    height: 32px;
+    margin-left: 10px;
+  }
+}
+@media (max-width: 992px){
+  .btc-sms-container{
+    padding: 130px 150px 195px 150px!important;
+  }
+}
+
+
+@media (max-width: 768px){
+  .btc-sms-container{
+    padding: 130px 5px 195px 5px!important;
+  }
+}
+

@@ -1,7 +1,10 @@
 <template>
-    <select @input="$emit('input', $event.target.value)">
-      <option></option>
-      <option v-for="data in data" :key="data.name">{{data.name}}</option>
+    <select class="btc-basic-option" @input="$emit('selected', $event.target.value)">
+      <option v-for="data of data"
+      :value="data.name"
+      :key="data.name">
+      {{data.value}}
+      </option>
     </select>
 </template>
 
@@ -11,3 +14,7 @@ export default {
   props: ['data']
 }
 </script>
+
+<style lang="scss" scoped>
+@import './BasicOption'
+</style>

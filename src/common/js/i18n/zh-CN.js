@@ -303,6 +303,9 @@ const zh = {
     'change_1d_pct': `24小时涨幅`,
     'code': `代码`,
     'turnover': `成交额`
+  },
+  'validation': {
+    "mobile": '阿'
   }
 }
 
