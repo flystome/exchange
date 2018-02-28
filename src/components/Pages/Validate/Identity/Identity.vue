@@ -1,6 +1,6 @@
 <template>
   <div class="btc-container-block btc-validateIdentity">
-    <header class="btc-marginB40">
+    <header class="title">
         <strong>
           {{$t('validate_identity.real_name_authentication')}}
         </strong>
@@ -9,7 +9,7 @@
       <div>
         <div>
           <div>
-            <select v-model="selectedCountry">
+            <select class="btc-basicselect" v-model="selectedCountry">
               <option></option>
               <option v-for="country in countries" :key="country.name">{{country.name}}</option>
             </select>
@@ -24,44 +24,44 @@
               <!--<img class="btc-marginL5" src="~Img/validate-country.jpg">-->
             <!--</div>-->
           </div>
-            <div class=" btc-marginT15">
-              请确保您使用本人的真实身份进行验证，我们会保护您的个人信息安全。
-            </div>
+          <div class=" btc-marginT15">
+              {{$t('validate_identity.using_true_identity')}}
+          </div>
         </div>
         <div class=" btc-marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
-            <basic-input :placeholder='"姓氏"' :type='"email"' v-model="user.name"></basic-input>
+            <basic-input :placeholder='$t("validate_identity.surname")' :type='"email"' v-model="user.name"></basic-input>
           <!--<div class=" btc-marginT20">-->
             <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
             <!--<basic-input  v-model="user.name"></basic-input>-->
           <!--</div>-->
-            <basic-input  :placeholder='"名字"' :type='"ip"'  v-model="user.IdCard"></basic-input>
-            <basic-input  :placeholder='"有效身份证"' :type='"ip"'  v-model="user.IdCard"></basic-input>
+            <basic-input  :placeholder='$t("validate_identity.Name")' :type='"ip"'  v-model="user.IdCard"></basic-input>
+            <basic-input  :placeholder='$t("validate_identity.Valid_Id_Card")' :type='"ip"'  v-model="user.IdCard"></basic-input>
         </div>
       </div>
     </div>
         <upload-img class="btc-validateIdentity-uploadimg" ref="id_document_front_file_attributes" :Upload='{
-            UploadExplain: "本人有效身份证正面照",
-            ImgExplain: "请确保照片的内容完整并清晰可见，仅支持jpg图片格式。",
+            UploadExplain: $t("validate_identity.positive_identity_card_photo"),
+            ImgExplain: $t("validate_identity.only_support_jpg_photo"),
             ImgModel: "validate-indentity1.png"
           }'></upload-img>
         <upload-img ref="id_document_back_file_attributes" :Upload='{
-            UploadExplain: "本人身份证背面照片  ",
-            ImgExplain: "请确保照片的内容完整并清晰可见，身份证必须在有效期内，仅支持jpg格式",
+            UploadExplain: $t("validate_identity.id_card_back_photo"),
+            ImgExplain: $t("validate_identity.only_support_jpg_photo"),
             ImgModel: "validate-indentity2.png"
           }'></upload-img>
         <upload-img ref="id_document_selfie_holding_file_attributes" :Upload='{
-            UploadExplain: "手持本人身份证正面照",
-            ImgExplain: "请确保照片的内容完整并清晰可见，身份证必须在有效期内，仅支持jpg格式",
+            UploadExplain: $t("validate_identity.held_ID_card"),
+            ImgExplain: $t("validate_identity.only_support_jpg_photo"),
             ImgModel: "validate-indentity3.png"
           }'></upload-img>
           <upload-img ref="id_bill_file_attributes" :Upload='{
-            UploadExplain: "三个月内账单照片",
-            ImgExplain: "上传三个月内账单，仅支持jpg格式，请确保照片的内容完整并清晰可见",
+            UploadExplain: $t("validate_identity.utilities_credit_card_bills"),
+            ImgExplain: $t("validate_identity.three_months_bill"),
             ImgModel: "validate-indentity4.png"
           }'></upload-img>
       <footer class="btc-b-t btc-marginT25">
-        <basic-button @click.native="uploadImg" class="btc-fr" :text='"全部提交"'>
+        <basic-button @click.native="uploadImg" class="btc-fr col-xs-12 col-md-1 pull-right" :text='$t("validate_identity.submissions")'>
         </basic-button>
       </footer>
   </div>

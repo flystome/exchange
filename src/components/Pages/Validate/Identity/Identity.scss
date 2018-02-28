@@ -1,12 +1,12 @@
 .btc-validateIdentity{
-  padding: 12px 30px 15px 55px;
+  padding: 12px 190px 15px;
   .btc-validateIdentity-uploadimg .btc-UploadExplain{
     margin-top: 10px
   }
 }
 
 .btc-validateIdentity .btc-UploadExplain{
-  width: 140px;
+  // width: 140px;
 }
 
 .btc-validateIdentity .btc-Upload-block{
@@ -47,4 +47,37 @@
 
 .btc-UploadExplain:first-child{
   margin-top: 200px
+}
+
+.title{
+  padding-bottom: 13px;
+  border-bottom: 1px solid #e7e7e7;
+  margin-bottom: 17px;
+}
+
+.btc-basicselect{
+  border: none;
+  border: 1px solid #dfe0e1;
+  border-right: none;
+  height: 32px;
+  width: 100%;
+  padding-left: 7px;
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  background: url("~Img/selectoption.png") no-repeat right #f2f2f2;
+}
+
+@media (max-width: 990px){
+  .btc-validateIdentity{
+    padding: 12px 100px 15px;
+  }
+  .btc-b-t{
+    border-top:none;
+  }
+}
+@media (max-width: 550px){
+  .btc-validateIdentity{
+    padding: 12px 10px 15px;
+  }
 }
