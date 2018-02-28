@@ -365,7 +365,7 @@ const en = {
       'three_months_bill': `Upload three months bill, only support JPG format, please ensure that the content of the photo is complete and clear.`,
       'submissions': `Submissions`,
       'using_true_identity': `Please be sure to verify using your true identity and we will protect your personal information`,
-      'held_ID_card': `A front photo of hand-held ID card`
+      'held_id_card': `A front photo of hand-held ID card`
     },
     "validate_sms": {
       "binding_cell_phone_authentication": "Binding cell phone authentication",
@@ -380,30 +380,43 @@ const en = {
       "netscape": "Netscape",
       "ie": "IE"
     },
-    "extract_currency": {
+    "withdraw_currency": {
       "total_assets": "Total Assets",
       "frozen_assets": "Frozen assets",
       "deposit": "Deposit",
       "withdraw": "Withdraw",
-      "extract_currency_address": "Extract Currency Address",
-      "Amount_to_withdraw": "Amount to withdraw",
+      "withdraw_currency_address": "Withdraw Currency Address",
+      "Amount_to_withdraw": "Amount to Withdraw",
       "google_validate": "Google Validate",
-      "extract_all": "Extract All",
+      "withdraw_all": "Withdraw All",
       "tariff_description": "Tariff description",
       "reminder": "Reminder",
       "min_currency": "Minimum amount of currency：0.001。",
       "confirm_apply_for_success": "After the request is successful, please go to the mailbox to click the link to confirm the request, and you can track the status of the Recharge and historical records page.",
       "make_sure_safe": "Be sure to make sure that computers and browsers are safe to prevent information from being tampered or leaked.",
-      "btc_extract_currency_record": "BTC Extract currency record",
+      "btc_withdraw_currency_record": "BTC Withdraw currency record",
       "number": "Number",
-      "extract_time": "Extract Time",
-      "extract_address": "Extract Address",
+      "withdraw_time": "Withdraw Time",
+      "withdraw_address": "Withdraw Address",
       "actual_account": "Actual Account",
       "absenteeism_expenses": "Absenteeism expenses",
       "statu_and_operation": "statu / operation",
       "available_balance": "Available balance",
-      "remaining_withdraw": "Remaining withdraw amount of money",
-      "minimum_withdraw_amount_of_money": "Minimum withdraw amount of money"
+      "remaining_withdraw": "Remaining Withdraw amount of money",
+      "minimum_withdraw_amount_of_money": "Minimum Withdraw amount of money",
+      "remark_label": "Remark Label",
+      "use_a_new_address": "Use a new address",
+      "sms": "SMS",
+      "send_identify_code": "Send Identify Code",
+      "set_as_default": "Set As Default",
+      "delete": "Delete"
+    },
+    "deposit_currency":{
+      'withdraw_address': 'Withdraw Address',
+      'generating_address_qrcode': "Generating Address Qrcode",
+      "use_wallet_service": "Please use your commonly used wallet service, local purse, online wallet, or mobile wallet, choose to pay or send.",
+      "font_descripe": "In the payment or payment of your wallet, copy the following special currency address which is specially recharged for you, fill in the amount you want to recharge to the account in the amount, and don't forget to pay a certain ore fee to ensure that the transaction is confirmed by the whole network as soon as possible. You can also scan the two-dimensional code in the mobile end purse to pay. You can recharge the special currency address and the two-dimensional code.",
+      "operation_done": "After the above operation is done, click send payment, the transaction will be broadcast to the whole network, so you can see the status of the transaction. When the transaction reaches the 1 confirmation of the whole network (about 10 to 60 minutes), the system will automatically recharge to the account. You can inquire in the disclosure of the assets."
     },
     "title": {
       "member_center": "Member Center",
@@ -411,7 +424,8 @@ const en = {
       "validate_google": "Validate Google",
       "validate_identity": "Validate Identity",
       "validate_sms": "Validate Sms",
-      "currency_extract": "Currency Extract"
+      "currency_withdraw": "Currency withdraw",
+      "currency_deposit": "Currency Deposit"
     },
     "validation": {
       "wef": "fe"

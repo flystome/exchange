@@ -5,7 +5,7 @@
 import BasicButton from 'Components/BasicButton/BasicButton'
 import BasicInput from 'Components/BasicInput/BasicInput'
 import BasicTable from 'Components/BasicTable/BasicTable'
-import BasicOption from 'Components/BasicOption/BasicOption'
+import BasicSelect from 'Components/BasicSelect/BasicSelect'
 import UploadImg from 'Components/UploadImg/UploadImg'
 import QrCode from 'Components/QrCode/QrCode'
 import NewsPrompt from 'Components/NewsPrompt/NewsPrompt'
@@ -52,7 +52,7 @@ const components = [
   BasicButton,
   BasicInput,
   BasicTable,
-  BasicOption,
+  BasicSelect,
   QrCode,
   UploadImg,
   NewsPrompt

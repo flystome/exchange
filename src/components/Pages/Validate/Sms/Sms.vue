@@ -6,7 +6,7 @@
     <div class="btc-sms-container">
       <news-prompt :text='prompt'></news-prompt>
       <div class="btc-sms-phone">
-        <basic-option v-model="phoneNumber" :data='phoneData'></basic-option>
+        <basic-select v-model="phoneNumber" :data='phoneData'></basic-select>
         <basic-input :type='"CellPhone"' :placeholder='$t("placeholder.cell_phone_number")'>
         </basic-input>
       </div>
@@ -30,10 +30,7 @@ export default {
     return {
       prompt: '',
       phoneNumber: '+86',
-      phoneData: [{
-        value: '+86',
-        name: '+86'
-      }]
+      phoneData: Array(7).fill('+86')
     }
   }
 }

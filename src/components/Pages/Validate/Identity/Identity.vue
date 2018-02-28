@@ -9,10 +9,8 @@
       <div>
         <div>
           <div>
-            <select class="btc-basicselect" v-model="selectedCountry">
-              <option></option>
-              <option v-for="country in countries" :key="country.name">{{country.name}}</option>
-            </select>
+            <basic-select :data='countries' :value="selectedCountry"  v-on:selected="selectedCountry = arguments[0]">>
+            </basic-select>
             <!--<div class="btc-fl btc-marginR25">-->
               <!--<input type="radio" id="country-china" value="1" v-model="user.country">-->
               <!--<label for="country-china">韩国</label>-->
