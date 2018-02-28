@@ -1,23 +1,26 @@
 <template>
   <div class="btc-member-center" >
-    <div class="btc-container-block btc-member-p12">
+    <div class="btc-container-block text">
       <div class="col-md-6">
-          <a :href="`${HOST_URL}/member/edit`">
-             <img src="~Img/avatar.png" class="img-circle btc-member-avatar" v-if="!loginData.member_avatar">
-             <img class="img-circle btc-member-avatar"   :src="loginData.member_avatar" v-else>
+        <a :href="`${HOST_URL}/member/edit`">
+            <img src="~Img/avatar.png" class="img-circle btc-member-avatar" v-if="!loginData.member_avatar">
+            <img class="img-circle btc-member-avatar"   :src="loginData.member_avatar" v-else>
+        </a>
+        <div class="btc-member-info">
+          <span class="btc-member-infoEmail">{{ loginData.email }}</span>
+          <a :href="`${HOST_URL}/identity/edit`">
+            {{$t("member_center.change_password")}}
           </a>
-          <div class="btc-member-info">
-            <span class="btc-member-infoEmail">{{ loginData.email }}</span>
-              <div class="btc-member-assetCount">
-                {{$t('member_center.total_assets')}} : 0 BTC
-              </div>
+          <div class="btc-member-assetCount">
+            {{$t('member_center.total_assets')}} : 0 BTC
           </div>
+        </div>
       </div>
-      <a class="col-md-6" :href="`${HOST_URL}/identity/edit`">
+      <a :href="`${HOST_URL}/identity/edit`">
         <basic-button :text='$t("member_center.change_password")' class="btc-member-bt"></basic-button>
       </a>
     </div>
-    <div class=" btc-member-vc btc-paddingB40 btc-paddingT40 btc-container-block  btc-textCenter btc-marginT10">
+    <div class="btc-member-vc btc-paddingB40 btc-paddingT40 btc-container-block  btc-textCenter btc-marginT10">
         <div >
           <div class="col-sm-6 col-md-4 btc-b-r">
             <div class="btc-r-border">
