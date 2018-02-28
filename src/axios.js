@@ -48,7 +48,7 @@ export const _get = async ({url, data, headers}, callback) => {
 export const _httpget = async ({url, data}, callback) => {
   const ajax = await axios({
     method: 'get',
-    url: url,
+    url: requestUrl + url,
     data: data
   })
   if (callback) {

@@ -148,10 +148,14 @@
       }
       .btc-deposit-address > div{
         position: relative;
-        background: #f2f2f2;
-        border:1px solid #dfe0e1;
-        height: 135px;
-        padding: 2px 4px;
+        & > div{
+          position: relative;
+          background: #f2f2f2;
+          border:1px solid #dfe0e1;
+          height: 135px;
+          padding: 2px 4px;
+          overflow: auto;
+        }
         img {
           position: absolute;
           bottom: -1px;
