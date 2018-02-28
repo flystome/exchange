@@ -442,21 +442,21 @@ const en = {
       "identify_code": "Identify Code"
     },
     'validate_google': {
-      'Download_Google_Verified_App': `Download Google Verified App`,
-      'Scan_qrcode_and_enter_code': `Scan qrcode and enter verification code`,
-      'download_Authenticator_at_store': `Please download Google Authenticator at the application store`,
+      'download_google_verified_App': `Download Google Verified App`,
+      'scan_qrcode_and_enter_code': `Scan qrcode and enter verification code`,
+      'download_authenticator_at_store': `Please download Google Authenticator at the application store`,
       'app_already_installed': `App already installed`,
       'next': `Next`,
       'using': `Using`,
-      'Google_to_verify_App': `Google to verify App`,
-      'Scan_qrcode': `Scan qrcode`,
+      'google_to_verify_App': `Google to verify App`,
+      'scan_qrcode': `Scan qrcode`,
       'cant_scan_enter_keys': `If you can't scan, please manually enter the 16 bit keys into the Google verification code APP`,
-      'Refresh_qrcode': `Refresh qrcode`,
+      'refresh_qrcode': `Refresh qrcode`,
       'prve': `Prev`,
-      'Login_password': `Login password`,
-      'Google_verification_code': `Google verification code`,
-      'All_steps_completed': `All the above steps have been completed`,
-      'Google_verification': `Google verification`
+      'login_password': `Login password`,
+      'google_verification_code': `Google verification code`,
+      'all_steps_completed': `All the above steps have been completed`,
+      'google_verification': `Google verification`
     }
   }
 }
