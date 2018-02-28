@@ -1,7 +1,6 @@
 <template>
   <button class="btc-basic-button">
     {{ text }}
-    <slot name="file" ></slot>
   </button>
 </template>
 

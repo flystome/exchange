@@ -3,20 +3,24 @@
     <div class="btc-Upload-block">
       <div>
         <!-- <basic-button :text='"点击上传"'>
-          <input type="file" ref="input"  @change='ShowImg'  accept="image/jpeg,image/jpg" slot="file">
+
         </basic-button> -->
+
       </div>
-    <div class="btc-UploadExplain btc-marginR20 btc-marginT50">
-      {{ Upload.UploadExplain }}
-        <news-prompt class="btc-marginT25 btc-marginL25" :text='prompt'></news-prompt>
-    </div>
+      <div class="btc-UploadExplain btc-marginR20 btc-marginT50">
+        <strong>{{ Upload.UploadExplain }}</strong>
+          <news-prompt class="btc-marginT25 btc-marginL25" :text='prompt'></news-prompt>
+      </div>
       <div class=" btc-marginT20 btc-marginB20">
         {{ Upload.ImgExplain }}
       </div>
-      <div>
-        <img class="btc-UploadImg-model btc-marginR100" :src="requireImg(Upload.ImgModel)">
-        <img src="~Img/validate-uploading.png" v-if="UploadImg === ''">
-        <img width="320" height="200" :src="UploadImg" v-else>
+      <div class="validate-uploadImg">
+        <img class="btc-UploadImg-model col-xs-6" :src="requireImg(Upload.ImgModel)">
+        <div class="uploading col-xs-6">
+          <img src="~Img/validate-uploading.png" v-if="UploadImg === ''" width="100%">
+          <img width="100%" height="100%" :src="UploadImg" v-else>
+          <input type="file" ref="input"  @change='ShowImg'  accept="image/jpeg,image/jpg" slot="file">
+        </div>
       </div>
     </div>
   </div>

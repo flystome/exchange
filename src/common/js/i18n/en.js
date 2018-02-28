@@ -353,17 +353,19 @@ const en = {
       "korean_user_use_twice_verification": "South Korean user real name certification, presentation, modification and other twice verification",
       "completion_of_real_name_authentication": "Non Korean nationality users complete the real name authentication method."
     },
-    "validate_identity": {
-      "real_name_authentication": "Real Name Authentication",
-      "surname": "Surname",
-      "Name": "Name",
-      "Valid_Id_Card": "Valid_Id_Card",
-      "positive_identity_card_photo": "Positive Identity Card Photo",
-      "only_support_jpg_photo": "Please make sure that the content of the photo is complete and clearly visible, only supporting the JPG picture format.",
-      "id_card_back_photo": "ID Card Back Photo",
-      "utilities_credit_card_bills": "Utilities / Credit Card Bills",
-      "three_months_bill": "Upload three months bill, only support JPG format, please ensure that the content of the photo is complete and clear.",
-      "submissions": "Submissions"
+    'validate_identity': {
+      'real_name_authentication': `Real Name Authentication`,
+      'surname': `Surname`,
+      'Name': `Name`,
+      'Valid_Id_Card': `Valid Id Card`,
+      'positive_identity_card_photo': `Positive Identity Card Photo`,
+      'only_support_jpg_photo': `Please make sure that the content of the photo is complete and clearly visible, only supporting the JPG picture format.`,
+      'id_card_back_photo': `ID Card Back Photo`,
+      'utilities_credit_card_bills': `Utilities / Credit Card Bills`,
+      'three_months_bill': `Upload three months bill, only support JPG format, please ensure that the content of the photo is complete and clear.`,
+      'submissions': `Submissions`,
+      'using_true_identity': `Please be sure to verify using your true identity and we will protect your personal information`,
+      'held_ID_card': `A front photo of hand-held ID card`
     },
     "validate_sms": {
       "binding_cell_phone_authentication": "Binding cell phone authentication",
@@ -424,6 +426,23 @@ const en = {
     "placeholder": {
       "cell_phone_number": "Cell Phone Number",
       "identify_code": "Identify Code"
+    },
+    'validate_google': {
+      'Download_Google_Verified_App': `Download Google Verified App`,
+      'Scan_qrcode_and_enter_code': `Scan qrcode and enter verification code`,
+      'download_Authenticator_at_store': `Please download Google Authenticator at the application store`,
+      'app_already_installed': `App already installed`,
+      'next': `Next`,
+      'using': `Using`,
+      'Google_to_verify_App': `Google to verify App`,
+      'Scan_qrcode': `Scan qrcode`,
+      'cant_scan_enter_keys': `If you can't scan, please manually enter the 16 bit keys into the Google verification code APP`,
+      'Refresh_qrcode': `Refresh qrcode`,
+      'prve': `Prev`,
+      'Login_password': `Login password`,
+      'Google_verification_code': `Google verification code`,
+      'All_steps_completed': `All the above steps have been completed`,
+      'Google_verification': `Google verification`
     }
   }
 }
