@@ -144,7 +144,7 @@ const en = {
         "title": "Chinese Yuan Deposit",
         "desc": "To deposit via Bank transfer, please follow these steps:",
         "desc_item_1": "1. Submit the form to get the identification code.",
-        "desc_item_2": "2. Transfer the money to exchange's bank account. Please make sure your referral code was written on the form you fill in.",
+        "desc_item_2": "2. Transfer the money to exchanges bank account. Please make sure your referral code was written on the form you fill in.",
         "desc_item_3": "3. Your deposit will be confirmed as soon as the money is received.",
         "attention": "Attention: The name of your bank account must be the same as your account name on our site, otherwise your deposit may fail.",
         "from": "From",
@@ -268,21 +268,21 @@ const en = {
       }
     },
     "auth": {
-      "please_active_two_factor": "Please set mobile number or google authenticator first.",
-      "submit": "Submit",
-      "email": "Email Authentication",
-      "phone": "SMS",
+      "email": "Verify Email",
+      "phone": "Verify Cell Phone",
       "google": "Google Auth",
       "send_email": "Send Email",
-      "otp_placeholder": "6-digit password",
+      "real_name": "Verify Real Name",
+      "please_active_two_factor": "Please set mobile number or google authenticator first.",
+      "submit": "Submit",
+      "otp_placeholder": "6-digit code",
       "google_app": "Google Authenticator",
-      "real_name": "Real Name Authenticatio",
       "sms": "SMS Verification Messages",
       "send_code": "Send Code",
       "send_code_alt": "Resend in COUNT seconds",
       "hints": {
         "app": "Google Authenticator will re-generate a new password every thirty seconds, please input timely.",
-        "sms": "We'll send a text message to you phone with verify code."
+        "sms": "Well send a text message to you phone with verify code."
       },
       "level": {
         "level_1": "Level 1",
@@ -316,61 +316,60 @@ const en = {
     },
     "nav": {
       "home": "Home Page",
-      "transaction": "Transaction",
+      "transaction": "Trade",
       "IFO": "IFO Bifurcation",
       "please": "Please",
       "login": "login",
       "or": "or",
-      "register": "register",
-      "operate": "then operate"
+      "register": "register"
     },
     "member_center": {
       "total_assets": "Total Assets",
       "change_password": "Change Password",
-      "login_record": "Login record (last 5)",
+      "login_record": "Login Record (Last 5)",
       "login_time": "Login Time",
-      "ip_adress": "IP Adress",
+      "ip_adress": "IP Address",
       "login_location": "Login Location",
-      "have_questions_to_contact_us": "If you have any questions please contact us in time",
-      "customer_service_record": "Customer service record",
-      "view_the_end_service_list": "View the end of the service list",
+      "have_questions_to_contact_us": "If any suspicious login, please contact us in time.",
+      "customer_service_record": "Tickets",
+      "view_the_end_service_list": "Closed Tickets",
       "show_more": "Show More",
-      "new_questions": "New Questions",
-      "recommended_statistics": "Recommended Statistics",
+      "new_questions": "New Ticket",
+      "recommended_statistics": "Referrals",
       "date": "Date",
-      "number_of_users": "Number of users",
-      "new_user": "New User",
-      "page_browsing": "Page Browsing",
+      "number_of_users": "Users",
+      "new_user": "New Users",
+      "page_browsing": "Page Views",
       "bounce_rate": "Bounce Rate",
-      "recommended_users": "Recommended Users",
+      "recommended_users": "Registered Referrals",
       "account": "Account",
       "browser": "Browser",
       "register_time": "Register Time",
       "activated": "Activated",
-      "yes": 'yes',
-      "no": 'no',
+      "yes": "Yes",
+      "no": "No",
       "no_record": "No Record",
       "korean_user_use_twice_verification": "South Korean user real name certification, presentation, modification and other twice verification",
       "completion_of_real_name_authentication": "Non Korean nationality users complete the real name authentication method."
     },
-    'validate_identity': {
-      'real_name_authentication': `Real Name Authentication`,
-      'surname': `Surname`,
-      'Name': `Name`,
-      'Valid_Id_Card': `Valid Id Card`,
-      'positive_identity_card_photo': `Positive Identity Card Photo`,
-      'only_support_jpg_photo': `Please make sure that the content of the photo is complete and clearly visible, only supporting the JPG picture format.`,
-      'id_card_back_photo': `ID Card Back Photo`,
-      'utilities_credit_card_bills': `Utilities / Credit Card Bills`,
-      'three_months_bill': `Upload three months bill, only support JPG format, please ensure that the content of the photo is complete and clear.`,
-      'submissions': `Submissions`,
-      'using_true_identity': `Please be sure to verify using your true identity and we will protect your personal information`,
-      'held_ID_card': `A front photo of hand-held ID card`
+    "validate_identity": {
+      "real_name_authentication": "Real Name Verification",
+      "surname": "Surname/Given Name",
+      "name": "Family Name",
+      "valid_id_card": "ID Card Number",
+      "positive_identity_card_photo": "ID Card Front",
+      "only_support_jpg_photo": "Make sure the content of the photo is complete and clearly visible, only JPG format acceptable.",
+      "id_card_back_photo": "ID Card Back",
+      "utilities_credit_card_bills": "Proof Of Residence",
+      "three_months_bill": "Proof of residence document must contain name, address and be dated less than 3 months ago.",
+      "submissions": "Submit",
+      "using_true_identity": "Verify using your real identity, and your personal information won't be disclosed to others.",
+      "held_id_card": "Upload a photo with your face and your ID card inside. Only JPG format accepted."
     },
     "validate_sms": {
-      "binding_cell_phone_authentication": "Binding cell phone authentication",
-      "send_identify_code": "Send Identify Code",
-      "confirm": "Confirm"
+      "binding_cell_phone_authentication": "Verify Your Cell Phone",
+      "send_identify_code": "Send Code",
+      "confirm": "Submit"
     },
     "browser": {
       "chrome": "Chrome",
@@ -380,30 +379,31 @@ const en = {
       "netscape": "Netscape",
       "ie": "IE"
     },
-    "extract_currency": {
+    "withdraw_currency": {
       "total_assets": "Total Assets",
       "frozen_assets": "Frozen assets",
       "deposit": "Deposit",
       "withdraw": "Withdraw",
-      "extract_currency_address": "Extract Currency Address",
+      "withdraw_currency_address": "Withdraw Currency Address",
       "Amount_to_withdraw": "Amount to withdraw",
       "google_validate": "Google Validate",
-      "extract_all": "Extract All",
+      "withdraw_all": "Withdraw All",
       "tariff_description": "Tariff description",
       "reminder": "Reminder",
       "min_currency": "Minimum amount of currency：0.001。",
       "confirm_apply_for_success": "After the request is successful, please go to the mailbox to click the link to confirm the request, and you can track the status of the Recharge and historical records page.",
       "make_sure_safe": "Be sure to make sure that computers and browsers are safe to prevent information from being tampered or leaked.",
-      "btc_extract_currency_record": "BTC Extract currency record",
+      "btc_withdraw_currency_record": "BTC withdraw currency record",
       "number": "Number",
-      "extract_time": "Extract Time",
-      "extract_address": "Extract Address",
+      "withdraw_time": "Withdraw Time",
+      "withdraw_address": "Withdraw Address",
       "actual_account": "Actual Account",
       "absenteeism_expenses": "Absenteeism expenses",
       "statu_and_operation": "statu / operation",
       "available_balance": "Available balance",
       "remaining_withdraw": "Remaining withdraw amount of money",
-      "minimum_withdraw_amount_of_money": "Minimum withdraw amount of money"
+      "minimum_withdraw_amount_of_money": "Minimum withdraw amount of money",
+      "remark_label": "Remark Label"
     },
     "title": {
       "member_center": "Member Center",
@@ -411,10 +411,10 @@ const en = {
       "validate_google": "Validate Google",
       "validate_identity": "Validate Identity",
       "validate_sms": "Validate Sms",
-      "currency_extract": "Currency Extract"
+      "currency_withdraw": "Currency withdraw"
     },
     "validation": {
-      "wef": "fe"
+      "CellPhone": "fe"
     },
     "prompt": {
       "identify_code_error": "Identify code error",
@@ -427,22 +427,22 @@ const en = {
       "cell_phone_number": "Cell Phone Number",
       "identify_code": "Identify Code"
     },
-    'validate_google': {
-      'Download_Google_Verified_App': `Download Google Verified App`,
-      'Scan_qrcode_and_enter_code': `Scan qrcode and enter verification code`,
-      'download_Authenticator_at_store': `Please download Google Authenticator at the application store`,
-      'app_already_installed': `App already installed`,
-      'next': `Next`,
-      'using': `Using`,
-      'Google_to_verify_App': `Google to verify App`,
-      'Scan_qrcode': `Scan qrcode`,
-      'cant_scan_enter_keys': `If you can't scan, please manually enter the 16 bit keys into the Google verification code APP`,
-      'Refresh_qrcode': `Refresh qrcode`,
-      'prve': `Prev`,
-      'Login_password': `Login password`,
-      'Google_verification_code': `Google verification code`,
-      'All_steps_completed': `All the above steps have been completed`,
-      'Google_verification': `Google verification`
+    "validate_google": {
+      "download_google_verified_app": "Download Google Verified App",
+      "scan_qrcode_and_enter_code": "Scan qrcode and enter verification code",
+      "download_authenticator_at_store": "Please download Google Authenticator at the application store",
+      "app_already_installed": "App already installed",
+      "next": "Next",
+      "using": "Using",
+      "google_to_verify_app": "Google to verify App",
+      "scan_qrcode": "Scan qrcode",
+      "cant_scan_enter_keys": "If you can't scan, please manually enter the 16 bit keys into the Google verification code APP",
+      "refresh_qrcode": "Refresh qrcode",
+      "prve": "Prev",
+      "login_password": "Login password",
+      "google_verification_code": "Google verification code",
+      "all_steps_completed": "All the above steps have been completed",
+      "google_verification": "Google Verification"
     }
   }
 }

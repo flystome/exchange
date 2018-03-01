@@ -190,13 +190,17 @@
 }
 
 .btc-member-validata{
-  border: 1px solid #4382f7;
+  border: 1px solid #666666;
+  color: #666666 !important;
   padding: 2px 14px;
   display: inline-block;
   margin-bottom: 16px;
   position: relative;
 }
-
+.btc-active{
+  border-color: #4382f7;
+  color: #4382f7 !important;
+}
 .btc-active:hover{
   background: #4382f7;
   color: white !important;

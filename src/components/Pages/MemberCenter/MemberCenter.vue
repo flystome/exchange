@@ -136,13 +136,17 @@
       </div>
       </basic-table>
       <basic-table :table='getRecommendUser'>
-        <div slot="more" class="text-center btc-b-t btc-table-more">
+        <!-- <div slot="more" class="text-center btc-b-t btc-table-more">
           <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('member_center.show_more')}}</a>
+        </div> -->
+        <div class="text-center btc-table-more col-md-6">
+          <a :href="`${HOST_URL}/tickets`" class="btc-link ">{{$t('member_center.show_more')}}</a>
+        </div>
+        <div class="text-center btc-table-more btc-b-l col-md-6">
+          <a :href="`${HOST_URL}/tickets/new`" class="btc-link ">{{$t('member_center.new_questions')}}</a>
         </div>
       </basic-table>
     </template>
-
-
   </div>
 </template>
 <script>
@@ -159,7 +163,7 @@ export default {
       wexin_activated: false,
       email_sent_message: '邮件发送成功，请前往您的邮箱激活账号',
       tickets: [],
-      step:1
+      step: 1
     }
   },
   methods: {
@@ -286,6 +290,7 @@ export default {
         data.referrals.sort((a, b) => {
           return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         })
+        this.getTicket()
         data.referral_signup_history.length === 0 ? obj.Item = '' : obj.Item = [{content: [this.$t('member_center.account'), this.$t('member_center.ip_adress'), this.$t('member_center.login_location'), this.$t('member_center.browser'), this.$t('member_center.login_time'), this.$t('member_center.activated')]}].concat(this.loginData.referral_signup_history.map((_, index) => {
           return {
             content: [
@@ -298,7 +303,6 @@ export default {
             ]
           }
         }))
-        this.getTicket()
       }
       return obj
     }
