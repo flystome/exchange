@@ -1,6 +1,6 @@
 <template>
   <div class="btc-member-center" >
-    <div class="btc-container-block text">
+    <div class="btc-container-block btc-membercenter-header">
       <div class="col-md-6">
         <a :href="`${HOST_URL}/member/edit`">
             <img src="~Img/avatar.png" class="img-circle btc-member-avatar" v-if="!loginData.member_avatar">
@@ -16,139 +16,96 @@
           </div>
         </div>
       </div>
-      <a :href="`${HOST_URL}/identity/edit`">
-        <basic-button :text='$t("member_center.change_password")' class="btc-member-bt"></basic-button>
-      </a>
+      <div class="btc-member-bt">
+        <span @click="minusStep" :class="{'btc-link': step === 1 }">账户</span>
+        <span>|</span>
+        <span @click="addStep" :class="{'btc-link': step === 2 }">
+          {{$t('member_center.recommended_statistics')}}
+        </span>
+        <span>|</span>
+        <span>
+          <a style="color:#fff" :href="`${HOST_URL}/documents/api_v2`">API</a>
+        </span>
+      </div>
     </div>
-    <div class="btc-member-vc btc-paddingB40 btc-paddingT40 btc-container-block  btc-textCenter btc-marginT10">
-        <div >
-          <div class="col-sm-6 col-md-4 btc-b-r">
-            <div class="btc-r-border">
-              <div >
-                <img class='btc-marginT5' src="~Img/letter.png">
-              </div>
-              <div class=" ">
-                <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.activated}">
-                    <span v-if='loginData.activated'>{{$t("auth.email")}}</span>
-                    <span v-else @click="sendEmail">
-                      {{$t("auth.send_email")}}
-                    </span>
-                  <img v-if='loginData.activated' src="~Img/validate-true.png" alt="已认证">
-                </span>
-              </div>
-              <div >
-                {{ loginData.email }}
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div >
-                <strong>{{$t("auth.level.level_1")}}</strong>
-              </div>
-              <div class=" btc-marginT20">
-                <img src="~Img/right.png" v-if='loginData.activated'>
-                <span class='btc-member-step' v-else>
-                    1
-                </span>
-              </div>
-
-            </div>
+    <div class="btc-member-ver">
+      <div class="btc-member-stepsblock">
+        <img src="~Img/member-email.png" class="btc-paddingR20 btc-paddingT5" alt="">
+        <div class="btc-member-steps">
+          <div class="btc-marginB5">
+            {{ loginData.email }}
           </div>
-        <div class="col-sm-6 col-md-4 btc-b-r btc-membercenter-google">
-            <div class="btc-r-border">
-              <div >
-                <img src="~Img/phone.png">
-              </div>
-              <div >
-                <span class="btc-member-validata btc-link btc-marginR10" @click="goPath('/validate/sms', loginData.sms_activated,false)" :class="{'btc-active': !loginData.sms_activated}">
-                    <span>{{ $t("auth.phone") }}</span>
-                    <img v-if='loginData.sms_activated' src="~Img/validate-true.png" alt="已认证">
-                  </span>
-                <span class="btc-member-validata btc-link btc-marginL10"
-                :class="{'btc-active': !loginData.app_activated}"
-                @click="goPath('/validate/google',loginData && loginData.app_activated,false)">
-                    <span>{{$t("auth.google")}}</span>
-                    <img v-if='loginData.app_activated' src="~Img/validate-true.png" alt="已认证">
-                </span>
-              </div>
-              <div class="col-md-12">
-                {{$t('member_center.korean_user_use_twice_verification')}}
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div >
-                <strong>{{$t("auth.level.level_2")}}</strong>
-              </div>
-              <div class=" btc-marginT20">
-                <img src="~Img/right.png" v-if='loginData.sms_activated && loginData.app_activated'>
-                <span class='btc-member-step' v-else>
-                    2
-                </span>
-              </div>
-            </div>
-        </div>
-          <div class="col-sm-12 col-md-4 btc-b-r btc-membercenter-identity">
-            <div class="btc-r-border">
-              <div >
-                <img src="~Img/authentication.png">
-              </div>
-              <div >
-                <span class="btc-member-validata btc-link" @click="goPath('/validate/identity', name_activated,false)" :class="{'btc-active': !this.name_activated}">
-                  {{$t("auth.real_name")}}
-                </span>
-              </div>
-              <div class="col-md-12">
-                {{$t("member_center.completion_of_real_name_authentication")}}
-              </div>
-            </div>
-             <div class="col-md-12">
-              <div >
-                <strong>{{$t("auth.level.level_3")}}</strong>
-              </div>
-              <div class=" btc-marginT20">
-                <img src="~Img/right.png" v-if='this.name_activated'>
-                <span class='btc-member-step' v-else>
-                    3
-                </span>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="col-sm-6 col-md-3 btc-b-r">
-            <div class="btc-r-border">
-              <div >
-                <img src="~Img/wechat.jpg">
-              </div>
-            <div >
-              <span class="btc-member-validata btc-link">
-                双渠道追加认证（可选）
+          <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.activated}">
+              <span v-if='loginData.activated'>{{$t("auth.email")}}</span>
+              <span v-else @click="sendEmail">
+                {{$t("auth.send_email")}}
               </span>
-            </div>
-            <div >
-              请用kakaopay认证保障交易安全
-            </div>
-            </div>
-             <div class="col-md-12">
-            <div >
-              等级4
-            </div>
-            <div class=" btc-marginT20">
-                <img src="~Img/right.png" v-if='this.wexin_activated'>
-                <span class='btc-member-step' v-else>
-                    4
-                </span>
-            </div>
-          </div>
-          </div> -->
+            <img v-if='loginData.activated' src="~Img/validate-true.png" alt="已认证">
+          </span>
         </div>
+        <div class="pull-right btc-paddingT15">
+          <strong>{{$t("auth.level.level_1")}}</strong>
+            <img src="~Img/right.png" v-if='loginData.activated'>
+            <span class='btc-member-step' v-else>
+                1
+            </span>
+        </div>
+      </div>
+      <div class="btc-member-stepsblock btc-marginL10 btc-marginR10">
+        <img src="~Img/member-google.png" class="btc-paddingR20 btc-paddingT5" alt="">
+        <div class="btc-member-steps">
+          <div class="btc-marginB5">
+            提现，改密等二次认证
+          </div>
+          <span class="btc-member-validata btc-link btc-marginR10" @click="goPath('/validate/sms', loginData.sms_activated,false)" :class="{'btc-active': !loginData.sms_activated}">
+            <span>{{ $t("auth.phone") }}</span>
+            <img v-if='loginData.sms_activated' src="~Img/validate-true.png" alt="已认证">
+          </span>
+          <span class="btc-member-validata btc-link"
+          :class="{'btc-active': !loginData.app_activated}"
+          @click="goPath('/validate/google',loginData && loginData.app_activated,false)">
+              <span>{{$t("auth.google")}}</span>
+              <img v-if='loginData.app_activated' src="~Img/validate-true.png" alt="已认证">
+          </span>
+        </div>
+        <div class="pull-right btc-paddingT15">
+          <strong>{{$t("auth.level.level_2")}}</strong>
+          <img src="~Img/right.png" v-if='loginData.activated'>
+          <span class='btc-member-step' v-else>
+              2
+          </span>
+        </div>
+      </div>
+      <div class="btc-member-stepsblock">
+        <img src="~Img/member-identity.png" class="btc-paddingR20 btc-paddingT5" alt="">
+        <div class="btc-member-steps">
+          <div class="btc-marginB5">
+            非韩国籍用户完成实名认证
+          </div>
+          <span class="btc-member-validata btc-link btc-marginR10" @click="goPath('/validate/identity', name_activated,false)" :class="{'btc-active': !this.name_activated}">
+            <span>{{$t("auth.real_name")}}</span>
+            <img v-if='loginData.sms_activated' src="~Img/validate-true.png" alt="已认证">
+          </span>
+        </div>
+        <div class="pull-right btc-paddingT15">
+          <strong>{{$t("auth.level.level_3")}}</strong>
+          <img src="~Img/right.png" v-if='loginData.activated'>
+          <span class='btc-member-step' v-else>
+              3
+          </span>
+        </div>
+      </div>
     </div>
-    <basic-table :table='getLoginRecord'>
+    <template v-if="step === 1">
+      <basic-table :table='getLoginRecord'>
       <span slot="remark" class="btc-tableRemark">{{$t('member_center.have_questions_to_contact_us')}}</span>
-    </basic-table>
-    <div class="btc-member-handleRecord  btc-container-block">
-      <header class="btc-member-blockHeader">
-        <span class="btc-member-handleCount"><strong>{{$t('member_center.customer_service_record')}}</strong></span>
-        <a class="btc-member-handleServer btc-link" :href="`${HOST_URL}/tickets?closed=true`">{{$t('member_center.view_the_end_service_list')}}</a>
-      </header>
-       <div class="btc-member-qContainer" v-for="(data, index) in tickets" :key="index" @click="toTickets(data.id)" v-if="data.aasm_state === 'open'">
+      </basic-table>
+      <div class="btc-member-handleRecord  btc-container-block">
+        <header class="btc-member-blockHeader">
+          <span class="btc-member-handleCount"><strong>{{$t('member_center.customer_service_record')}}</strong></span>
+          <a class="btc-member-handleServer btc-link" :href="`${HOST_URL}/tickets?closed=true`">{{$t('member_center.view_the_end_service_list')}}</a>
+        </header>
+        <div class="btc-member-qContainer" v-for="(data, index) in tickets" :key="index" @click="toTickets(data.id)" v-if="data.aasm_state === 'open'">
           <div class="btc-member-question" :class="{'is-dispose':data.aasm_state === 'closed' }">
             {{data.content}}
             <span class="btc-member-qTime">{{ data.created_at | moment }}</span>
@@ -170,17 +127,22 @@
             <a :href="`${HOST_URL}/tickets/new`" class="btc-link ">{{$t('member_center.new_questions')}}</a>
           </div>
         </template>
-    </div>
-    <basic-table :table='getRecommendCount'>
+      </div>
+    </template>
+    <template v-if="step === 2">
+      <basic-table :table='getRecommendCount'>
       <div slot="more" class="text-center btc-b-t btc-table-more">
         <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('member_center.show_more')}}</a>
       </div>
-    </basic-table>
-    <basic-table :table='getRecommendUser'>
-      <div slot="more" class="text-center btc-b-t btc-table-more">
-        <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('member_center.show_more')}}</a>
-      </div>
-    </basic-table>
+      </basic-table>
+      <basic-table :table='getRecommendUser'>
+        <div slot="more" class="text-center btc-b-t btc-table-more">
+          <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('member_center.show_more')}}</a>
+        </div>
+      </basic-table>
+    </template>
+
+
   </div>
 </template>
 <script>
@@ -196,10 +158,17 @@ export default {
       name_activated: false,
       wexin_activated: false,
       email_sent_message: '邮件发送成功，请前往您的邮箱激活账号',
-      tickets: []
+      tickets: [],
+      step:1
     }
   },
   methods: {
+    addStep () {
+      this.step++
+    },
+    minusStep () {
+      this.step--
+    },
     ...mapMutations(['PopupBoxDisplay']),
     bser (explorer) {
       if (explorer.indexOf('MSIE') >= 0) {

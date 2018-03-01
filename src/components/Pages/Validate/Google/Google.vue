@@ -12,7 +12,7 @@
       </span>
     </div>
     <template v-if="step === 1">
-      <div class="row btc-validate-gpt btc-marginB60" style="margin-bottom: 105px;">
+      <div class="row btc-validate-gpt btc-marginB60" style="margin-bottom: 140px;">
         <div class="col-md-4 col-xs-12 col-md-offset-2 text-center btc-b-r  btc-validate-googleApp">
             <img src="~Img/google-authentication.png">
           <div class="row btc-f btc-marginT10">
@@ -27,10 +27,14 @@
           </div>
           <div class="row btc-marginT20">
             <div class="col-xs-6">
-              <img src="~Img/validate-iosapp.png" class="btc-marginR5 googleImg">
+              <a href="https://itunes.apple.com/cn/app/google-authent icator/id388497605?mt=8">
+                <img src="~Img/validate-iosapp.png" class="btc-marginR5 googleImg">
+              </a>
             </div>
             <div class="col-xs-6">
-              <img src="~Img/validate-gplay.png" class="googleImg img-margin">
+              <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2">
+                <img src="~Img/validate-gplay.png" class="googleImg img-margin">
+              </a>
             </div>
           </div>
         </div>
@@ -91,12 +95,12 @@
           </form>
         </div>
       </div>
-      <div class="text-right btc-marginT70 minusStep">
-        <span @click="minusStep" class="col-xs-12 col-md-1 btc-link btc-fl btc-marginT25 btc-poniter" style="display:inline-block">{{$t('validate_google.prve')}}</span>
-        <span class="btc-color999 btc-marginR20 btc-marginT5" style="display:inline-block">
+      <div class="text-right btc-marginT100 minusStep">
+        <span @click="minusStep" class="col-xs-12 col-md-1 btc-link btc-fl btc-marginT10 btc-poniter" style="display:inline-block">{{$t('validate_google.prve')}}</span>
+        <span class="btc-color999 btc-marginR20 btc-marginT15" style="display:inline-block">
           {{$t('validate_google.All_steps_completed')}}
         </span>
-        <basic-button class="col-xs-12 col-md-2 pull-right" :text='$t("validate_google.Google_verification")' @click.native='gValidate'></basic-button>
+        <basic-button class="col-xs-12 col-md-2 pull-right btc-marginT15" :text='$t("validate_google.Google_verification")' @click.native='gValidate'></basic-button>
       </div>
     </template>
   </div>
