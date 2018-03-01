@@ -40,10 +40,7 @@
         </div>
       </div>
       <div class="text-right btc-marginT40">
-        <span class="btc-color999 btc-marginR20 btc-marginT5 alreadyApp" style="display:inline-block">
-          {{$t('validate_google.app_already_installed')}}
-        </span>
-          <basic-button class="col-xs-12 col-md-1 pull-right" @click.native="addStep" :text='$t("validate_google.next")'></basic-button>
+        <basic-button class="col-xs-12 col-md-1 pull-right" @click.native="addStep" :text='$t("validate_google.next")'></basic-button>
       </div>
     </template>
     <template v-if="step === 2">
@@ -97,9 +94,6 @@
       </div>
       <div class="text-right btc-marginT100 minusStep">
         <span @click="minusStep" class="col-xs-12 col-md-1 btc-link btc-fl btc-marginT10 btc-poniter" style="display:inline-block">{{$t('validate_google.prve')}}</span>
-        <span class="btc-color999 btc-marginR20 btc-marginT15" style="display:inline-block">
-          {{$t('validate_google.all_steps_completed')}}
-        </span>
         <basic-button class="col-xs-12 col-md-2 pull-right btc-marginT15" :text='$t("validate_google.google_verification")' @click.native='gValidate'></basic-button>
       </div>
     </template>
