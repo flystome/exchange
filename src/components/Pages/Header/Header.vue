@@ -26,7 +26,7 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right btc-header-signin" v-if="loginData === '' || loginData.errors">
-            {{$t('nav.please')}}<a :href="`${HOST_URL}/signin`">{{$t('nav.login')}}</a>{{$t('nav.or')}}<a :href="`${HOST_URL}/signup`">{{$t('nav.register')}}</a>{{$t('nav.operate')}}
+            {{$t('nav.please')}}<a :href="`${HOST_URL}/signin`">{{$t('nav.login')}}</a>{{$t('nav.or')}}<a :href="`${HOST_URL}/signup`">{{$t('nav.register')}}</a>
           </ul>
           <ul class="nav navbar-nav navbar-right" v-else>
             <li class="btc-img-position" @click="goHome('/')" style="cursor: pointer">

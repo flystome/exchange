@@ -272,7 +272,7 @@ const en = {
       "phone": "Verify Cell Phone",
       "google": "Google Auth",
       "send_email": "Send Email",
-      "real_name": "Real Name Authentication",
+      "real_name": "Verify Real Name",
       "please_active_two_factor": "Please set mobile number or google authenticator first.",
       "submit": "Submit",
       "otp_placeholder": "6-digit code",
@@ -414,7 +414,7 @@ const en = {
       "currency_withdraw": "Currency withdraw"
     },
     "validation": {
-      "fwef": "fe"
+      "CellPhone": "fe"
     },
     "prompt": {
       "identify_code_error": "Identify code error",

@@ -3,16 +3,16 @@
     <div class="row btc-color666">
       <span class="btc-color333">
         <span :class="{'btc-link': step === 1 }">
-          {{$t('validate_google.Download_Google_Verified_App')}}
+          {{$t('validate_google.download_google_verified_app')}}
         </span>
         >
         <span :class="{'btc-link': step === 2 }">
-          {{$t('validate_google.Scan_qrcode_and_enter_code')}}
+          {{$t('validate_google.scan_qrcode_and_enter_code')}}
         </span>
       </span>
     </div>
     <template v-if="step === 1">
-      <div class="row btc-validate-gpt btc-marginB60" style="margin-bottom: 105px;">
+      <div class="row btc-validate-gpt btc-marginB60" style="margin-bottom: 140px;">
         <div class="col-md-4 col-xs-12 col-md-offset-2 text-center btc-b-r  btc-validate-googleApp">
             <img src="~Img/google-authentication.png">
           <div class="row btc-f btc-marginT10">
@@ -23,14 +23,18 @@
         </div>
         <div class="col-md-5 col-xs-12 col-md-offset-1  btc-marginT30 btc-validate-textCenter">
           <div class='row'>
-            {{$t('validate_google.download_Authenticator_at_store')}}
+            {{$t('validate_google.download_authenticator_at_store')}}
           </div>
           <div class="row btc-marginT20">
             <div class="col-xs-6">
-              <img src="~Img/validate-iosapp.png" class="btc-marginR5 googleImg">
+              <a href="https://itunes.apple.com/cn/app/google-authent icator/id388497605?mt=8" target="_blank">
+                <img src="~Img/validate-iosapp.png" class="btc-marginR5 googleImg">
+              </a>
             </div>
             <div class="col-xs-6">
-              <img src="~Img/validate-gplay.png" class="googleImg img-margin">
+              <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">
+                <img src="~Img/validate-gplay.png" class="googleImg img-margin">
+              </a>
             </div>
           </div>
         </div>
@@ -51,10 +55,10 @@
             </div>
             <div class="row btc-marginT15 btc-margin-left useGoogle">
               {{$t('validate_google.using')}}
-              <strong>{{$t('validate_google.Google_to_verify_App')}}</strong>
+              <strong>{{$t('validate_google.google_to_verify_app')}}</strong>
             </div>
             <div class="row btc-marginT5 useGoogle">
-              {{$t('validate_google.Scan_qrcode')}}
+              {{$t('validate_google.scan_qrcode')}}
             </div>
             <!-- <div class="btc-marginT5 btc-margin-left">
               <basic-button @click.native="RenovateQrcode" :text='"刷新二维码"'></basic-button>
@@ -72,7 +76,7 @@
               </span>
               <div class="refreshqrcode btc-marginT15" @click="RenovateQrcode">
                 <img src="~Img/RefreshQrcode.png" alt="">
-                {{$t('validate_google.Refresh_qrcode')}}
+                {{$t('validate_google.refresh_qrcode')}}
               </div>
             </div>
           </div>
@@ -83,20 +87,20 @@
               <news-prompt :text='prompt'></news-prompt>
             </div>
             <div class='row'>
-              <basic-input @focus.native="promptEmpty()" type="password" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.Login_password")' v-model="password"></basic-input>
+              <basic-input @focus.native="promptEmpty()" type="password" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
             </div>
             <div class="row">
-              <basic-input  @focus.native="promptEmpty()" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.Google_verification_code")' v-model="otp"></basic-input>
+              <basic-input  @focus.native="promptEmpty()" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
             </div>
           </form>
         </div>
       </div>
-      <div class="text-right btc-marginT70 minusStep">
-        <span @click="minusStep" class="col-xs-12 col-md-1 btc-link btc-fl btc-marginT25 btc-poniter" style="display:inline-block">{{$t('validate_google.prve')}}</span>
-        <span class="btc-color999 btc-marginR20 btc-marginT5" style="display:inline-block">
-          {{$t('validate_google.All_steps_completed')}}
+      <div class="text-right btc-marginT100 minusStep">
+        <span @click="minusStep" class="col-xs-12 col-md-1 btc-link btc-fl btc-marginT10 btc-poniter" style="display:inline-block">{{$t('validate_google.prve')}}</span>
+        <span class="btc-color999 btc-marginR20 btc-marginT15" style="display:inline-block">
+          {{$t('validate_google.all_steps_completed')}}
         </span>
-        <basic-button class="col-xs-12 col-md-2 pull-right" :text='$t("validate_google.Google_verification")' @click.native='gValidate'></basic-button>
+        <basic-button class="col-xs-12 col-md-2 pull-right btc-marginT15" :text='$t("validate_google.google_verification")' @click.native='gValidate'></basic-button>
       </div>
     </template>
   </div>

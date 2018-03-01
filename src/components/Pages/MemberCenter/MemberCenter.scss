@@ -1,7 +1,46 @@
 .btc-member-bt{
+  color: #fff;
   float: right;
-  margin-top: 20px;
-  float: right;
+  cursor: pointer;
+}
+
+.btc-member-center {
+  .btc-membercenter-header{
+    padding: 12px 30px 112px 50px;
+    background: url("~Img/membercenter.png") no-repeat center;
+  }
+  .btc-membercenter-header{
+    .btc-member-choose{
+
+    }
+  }
+  .btc-member-ver{
+    // background-color: #fff;
+    // max-width: 1080px;
+    min-height: 96px;
+    margin-top: -80px;
+    padding-left: 40px;
+    .btc-member-stepsblock{
+      min-width: 346px;
+      float: left;
+      background-color: #fff;
+      padding: 25px 16px 25px 18px;
+      >img{
+        float: left;
+      }
+      .btc-member-steps{
+        float: left;
+        color: #666666;
+        >div{
+          font-size: 14px;
+        }
+        .btc-member-validata{
+          margin-bottom: 0;
+        }
+      }
+
+    }
+  }
 }
 
 .btc-member-center > div:last-child .btc-tableTextleft{
@@ -9,7 +48,7 @@
 }
 
 .btc-member-avatar{
-  $len: 80px;
+  $len: 64px;
   float: left;
   cursor: pointer;
   max-height: $len;
@@ -26,13 +65,21 @@
 }
 
 .btc-member-info{
-  padding-left: 23px;
+  padding-left: 16px;
   float: left;
-  padding-top: 14px;
+  padding-top: 8px;
+  color:  #fff;
+  .btc-member-infoEmail{
+    font-size: 16px;
+  }
+  >a{
+    color: #4f89f5;
+  }
 }
 
 .btc-member-assetCount{
   margin-top: 7px;
+  color: #bebebe;
 }
 
 .btc-member-infoEmail{
@@ -143,16 +190,20 @@
 }
 
 .btc-member-validata{
-  border: 1px solid #4382f7;
-  padding: 5px 18px;
+  border: 1px solid #666666;
+  color: #666666 !important;
+  padding: 2px 14px;
   display: inline-block;
   margin-bottom: 16px;
   position: relative;
 }
-
+.btc-active{
+  border-color: #4382f7;
+  color: #4382f7 !important;
+}
 .btc-active:hover{
   background: #4382f7;
-  color: white!important;
+  color: white !important;
 }
 
 .btc-member-validata img{
@@ -163,12 +214,13 @@
 
 .btc-member-step{
   background: #bebebe;
-  padding: 3px 8.7px;
+  padding: 0px 5px;
   font-weight: 700;
   border-radius: 19px;
   color: white;
   display: inline-block;
   margin-top: 1px;
+  font-size: 12px;
 }
 
 .btc-member-validata span{

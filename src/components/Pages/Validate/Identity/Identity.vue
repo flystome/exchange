@@ -35,8 +35,8 @@
             <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
             <!--<basic-input  v-model="user.name"></basic-input>-->
           <!--</div>-->
-            <basic-input  :placeholder='$t("validate_identity.Name")' :type='"ip"'  v-model="user.IdCard"></basic-input>
-            <basic-input  :placeholder='$t("validate_identity.Valid_Id_Card")' :type='"ip"'  v-model="user.IdCard"></basic-input>
+            <basic-input  :placeholder='$t("validate_identity.name")' :type='"ip"'  v-model="user.IdCard"></basic-input>
+            <basic-input  :placeholder='$t("validate_identity.valid_id_card")' :type='"ip"'  v-model="user.IdCard"></basic-input>
         </div>
       </div>
     </div>
