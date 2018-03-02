@@ -364,7 +364,8 @@ const en = {
       "three_months_bill": "Proof of residence document must contain name, address and be dated less than 3 months ago.",
       "submissions": "Submit",
       "using_true_identity": "Verify using your real identity, and your personal information won't be disclosed to others.",
-      "held_id_card": "Upload a photo with your face and your ID card inside. Only JPG format accepted."
+      "held_id_card": "Upload a photo with your face and your ID card inside. Only JPG format accepted.",
+      "example": "Example"
     },
     "validate_sms": {
       "binding_cell_phone_authentication": "Verify Your Cell Phone",
@@ -414,7 +415,7 @@ const en = {
       "currency_withdraw": "Currency withdraw"
     },
     "validation": {
-      "CellPhone": "fe"
+      "fwef": "fe"
     },
     "prompt": {
       "identify_code_error": "Identify code error",

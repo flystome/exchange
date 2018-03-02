@@ -18,6 +18,29 @@
 .uploading{
   position: relative;
   display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btc-UploadImg-model{
+  width: 320px;
+  height: 200px;
+  margin-right: 120px;
+
+  >img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  >span{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 7px 14px;
+    background: #bebebe;
+    color: #fff;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -28,25 +51,76 @@
     .col-xs-6{
       padding: 0;
     }
-      >img{
-        width: 320px;
-        height: 200px;
-        margin-right: 120px;
-      }
-      .uploading{
-        width: 320px;
-        height: 200px;
-      }
+    .btc-UploadImg-model{
+
+    }
+    .uploading{
+      width: 320px;
+      height: 200px;
+    }
     }
 }
 
 @media (max-width: 1200px) {
   .validate-uploadImg{
-    >img{
+    .col-xs-6{
+      width: 50% !important;
+    }
+    .btc-UploadImg-model{
+      width: 100%;
+      height: 100%;
+      margin-right: 0;
       padding-left: 0;
+      >span{
+        bottom: 0;
+        right: 15px;
+        padding: 3px 8px;
+      }
+      >img{
+
+      }
     }
     .uploading{
       padding-right: 0;
+      height: 165px;
+    }
+  }
+}
+@media (max-width: 990px){
+  .uploading{
+    height: 153px !important;
+  }
+}
+@media (max-width: 548px){
+  .uploading{
+    height: 146px !important;
+  }
+}
+@media (max-width: 420px){
+  .uploading{
+    height: 104px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .validate-uploadImg{
+    .col-xs-6{
+      height: 89px;
+    }
+    .btc-UploadImg-model{
+      padding-left: 5px;
+      >span{
+        padding: 0 2px;
+        font-size: 12px;
+      }
+
+    }
+    .uploading{
+      padding-left: 5px;
+      height: 89px !important;
+      >img{
+        height: 100%;
+      }
     }
   }
 }
