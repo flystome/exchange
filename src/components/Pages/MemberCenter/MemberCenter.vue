@@ -18,14 +18,14 @@
           </div>
         </div>
         <div class="btc-member-bt">
-          <span @click="account" :class="{'btc-link': step === 1 }">账户</span>
+          <span @click="account" :class="{'btc-link': step === 1 }">{{$t("member_center.account")}}</span>
           <span>|</span>
           <span @click="referrals" :class="{'btc-link': step === 2 }">
             {{$t('member_center.recommended_statistics')}}
           </span>
           <span>|</span>
           <span>
-            <a style="color:#fff" :href="`${HOST_URL}/documents/api_v2`">API</a>
+            <a style="color:#fff" :href="`${HOST_URL}/documents/api_v2`">{{$t("member_center.api")}}</a>
           </span>
         </div>
       </div>
@@ -34,7 +34,7 @@
           <img src="~Img/member-email.png" class="btc-paddingR20 btc-paddingT5" alt="">
           <div class="btc-member-steps">
             <div class="btc-marginB5">
-              {{ loginData.email }}
+            {{ loginData.email }}
             </div>
             <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.activated}">
                 <span v-if='loginData.activated'>{{$t("auth.email")}}</span>
@@ -55,8 +55,8 @@
         <div class="btc-member-stepsblock btc-marginL10 btc-marginR10">
           <img src="~Img/member-google.png" class="btc-paddingR20 btc-paddingT5" alt="">
           <div class="btc-marginB5">
-              提现，改密等二次认证
-            </div>
+            {{$t("member_center.korean_user_use_twice_verification")}}
+          </div>
           <div class="btc-member-steps">
             <p class="btc-member-validata btc-link btc-marginR10" @click="goPath('/validate/sms', loginData.sms_activated,false)" :class="{'btc-active': !loginData.sms_activated}">
               <span>{{ $t("auth.phone") }}</span>
@@ -79,10 +79,10 @@
         </div>
         <div class="btc-member-stepsblock">
           <img src="~Img/member-identity.png" class="btc-paddingR20 btc-paddingT5" alt="">
-          <div class="btc-member-steps">
-            <div class="btc-marginB5">
-              非韩国籍用户完成实名认证
+          <div class="btc-marginB5">
+             {{$t("member_center.completion_of_real_name_authentication")}}
             </div>
+          <div class="btc-member-steps">
             <span class="btc-member-validata btc-link btc-marginR10" @click="goPath('/validate/identity', name_activated,false)" :class="{'btc-active': !this.name_activated}">
               <span>{{$t("auth.real_name")}}</span>
               <img v-if='loginData.sms_activated' src="~Img/validate-true.png" alt="已认证">

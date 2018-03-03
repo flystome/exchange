@@ -20,9 +20,10 @@
           <span>{{$t('validate_identity.example')}}</span>
         </div>
         <div class="uploading col-xs-6 ">
-            <img src="~Img/validate-uploading.png" v-if="UploadImg === ''" width="100%">
-            <img width="100%" height="100%" :src="UploadImg" v-else>
-            <input type="file" ref="input"  @change='ShowImg'  accept="image/jpeg,image/jpg" slot="file">
+          <span>点击上传</span>
+          <img src="~Img/validate-uploading.png" v-if="UploadImg === ''" width="100%">
+          <img width="100%" height="100%" class="alredy-img" style="z-index:10" :src="UploadImg" v-else>
+          <input type="file" ref="input" style="z-index:10" @change='ShowImg'  accept="image/jpeg,image/jpg" slot="file">
         </div>
       </div>
     </div>
@@ -37,7 +38,8 @@ export default {
     return {
       UploadImg: '',
       prompt: '',
-      height: ''
+      height: '',
+      state: true
     }
   },
   methods: {
@@ -45,6 +47,7 @@ export default {
       this.prompt = ''
     },
     ShowImg (el) {
+      this.$emit('ShowImg', this.UploadImg)
       if (el.target.files[0].size > 2 * 1024 * 1024) {
         this.prompt = '图片不允许超过2m'
       } else {

@@ -41,15 +41,15 @@
       </div>
     </div>
     <div class="btc-indentity-prompt">
-      <news-prompt :text='text'></news-prompt>
-      <upload-img id="indentity1" class="btc-validateIdentity-uploadimg" ref="id_document_front_file_attributes" :Upload='{
+      <news-prompt :text='uploadtext'></news-prompt>
+      <upload-img @ShowImg="getstate" id="indentity1" class="btc-validateIdentity-uploadimg" ref="id_document_front_file_attributes" :Upload='{
           UploadExplain: $t("validate_identity.positive_identity_card_photo"),
           ImgExplain: $t("validate_identity.only_support_jpg_photo"),
           ImgModel: "validate-indentity1.png"
         }'></upload-img>
     </div>
     <div class="btc-indentity-prompt">
-      <news-prompt :text='text'></news-prompt>
+      <news-prompt :text='uploadtext'></news-prompt>
       <upload-img id="indentity2" ref="id_document_back_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.id_card_back_photo"),
         ImgExplain: $t("validate_identity.only_support_jpg_photo"),
@@ -57,7 +57,7 @@
       }'></upload-img>
     </div>
     <div class="btc-indentity-prompt">
-      <news-prompt :text='text'></news-prompt>
+      <news-prompt :text='uploadtext'></news-prompt>
       <upload-img id="indentity3" ref="id_document_selfie_holding_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.held_id_card"),
         ImgExplain: $t("validate_identity.only_support_jpg_photo"),
@@ -65,7 +65,7 @@
       }'></upload-img>
     </div>
     <div class="btc-indentity-prompt">
-      <news-prompt :text='text'></news-prompt>
+      <news-prompt :text='uploadtext'></news-prompt>
       <upload-img id="indentity4" ref="id_bill_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.utilities_credit_card_bills"),
         ImgExplain: $t("validate_identity.three_months_bill"),
@@ -91,7 +91,8 @@ export default {
         text: '密码错误'
         // prompt: '',
       },
-      text: '',
+      uploadtext: '',
+      img: false,
       user: {
         surname: '',
         name: '',
@@ -127,22 +128,34 @@ export default {
       return fd
     },
     ...mapMutations(['PopupBoxDisplay']),
+    getstate (state) {
+      // if (state) {
+      //   this.text = ''
+      // }
+      // console.log(state)
+      this.img = state
+    },
     uploadImg () {
       if (!this.$refs['id_document_front_file_attributes'].$refs['input'].files[0]) {
-        // $(window).scrollTop($("#indentity1").offset().top)
-        this.text = '请上传文件'
+        document.getElementById('indentity1').scrollIntoView(true)
+        this.uploadtext = '请上传文件'
         return
+      } else {
+
       }
       if (!this.$refs['id_document_back_file_attributes'].$refs['input'].files[0]) {
-        this.text = '请上传文件'
+        document.getElementById('indentity2').scrollIntoView(true)
+        this.uploadtext = '请上传文件'
         return
       }
       if (!this.$refs['id_document_selfie_holding_file_attributes'].$refs['input'].files[0]) {
-        this.text = '请上传文件'
+        document.getElementById('indentity3').scrollIntoView(true)
+        this.uploadtext = '请上传文件'
         return
       }
       if (!this.$refs['id_bill_file_attributes'].$refs['input'].files[0]) {
-        this.text = '请上传文件'
+        document.getElementById('indentity4').scrollIntoView(true)
+        this.uploadtext = '请上传文件'
         return
       }
       var formData = new FormData()

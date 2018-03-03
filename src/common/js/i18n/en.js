@@ -321,7 +321,13 @@ const en = {
       "please": "Please",
       "login": "login",
       "or": "or",
-      "register": "register"
+      "register": "register",
+      "wallet": "Wallet",
+      "announcement": "Announcement",
+      "q&a": "Q\u0026A",
+      "settings": "Settings",
+      "member_info": "Member Info",
+      "exit": "Exit"
     },
     "member_center": {
       "total_assets": "Total Assets",
@@ -350,7 +356,8 @@ const en = {
       "no": "No",
       "no_record": "No Record",
       "korean_user_use_twice_verification": "South Korean user real name certification, presentation, modification and other twice verification",
-      "completion_of_real_name_authentication": "Non Korean nationality users complete the real name authentication method."
+      "completion_of_real_name_authentication": "Non Korean nationality users complete the real name authentication method.",
+      "api": "API"
     },
     "validate_identity": {
       "real_name_authentication": "Real Name Verification",

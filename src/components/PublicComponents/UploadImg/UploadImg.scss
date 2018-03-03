@@ -21,6 +21,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  >span{
+    position: absolute;
+    bottom: 36px;
+    font-size: 23px;
+    color: #e2e2e2;
+  }
+  .alredy-img{
+    max-height: 200px
+  }
 }
 
 .btc-UploadImg-model{
@@ -56,9 +65,8 @@
     }
     .uploading{
       width: 320px;
-      height: 200px;
     }
-    }
+  }
 }
 
 @media (max-width: 1200px) {
@@ -82,23 +90,42 @@
     }
     .uploading{
       padding-right: 0;
-      height: 165px;
+      .alredy-img{
+        max-height: 165px
+      }
+      >span{
+        bottom: 28px;
+        font-size: 20px;
+      }
     }
   }
 }
 @media (max-width: 990px){
   .uploading{
-    height: 153px !important;
+    .alredy-img{
+      max-height: 153px !important;
+    }
+    >span{
+      bottom: 15px !important;
+    }
   }
 }
 @media (max-width: 548px){
   .uploading{
-    height: 146px !important;
+    .alredy-img{
+      max-height: 146px !important;
+    }
   }
 }
 @media (max-width: 420px){
   .uploading{
-    height: 104px !important;
+    .alredy-img{
+      max-height: 146px !important;
+    }
+    >span{
+      font-size: 12px !important;
+      bottom: 18px !important;
+    }
   }
 }
 
@@ -117,7 +144,7 @@
     }
     .uploading{
       padding-left: 5px;
-      height: 89px !important;
+      // height: 89px !important;
       >img{
         height: 100%;
       }
