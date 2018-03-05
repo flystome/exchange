@@ -41,7 +41,7 @@ Validator.extend('IdCard', {
     return (data && data.validation) || 'Something went wrong'
   },
   validate: value => {
-    return /\S+/.test(value)
+    return /[a-zA-z\d]{5,}/.test(value)
   }
 })
 

@@ -204,9 +204,9 @@ export default {
       }, (d) => {
         if (d.data.status_code === '0') {
           this.prompt = d.data.errors
-          this.PopupBoxDisplay(this.email_sent_message)
+          this.PopupBoxDisplay({message: this.email_sent_message})
         } else {
-          this.PopupBoxDisplay(this.email_sent_message)
+          this.PopupBoxDisplay({message: this.email_sent_message})
         }
       })
     },
