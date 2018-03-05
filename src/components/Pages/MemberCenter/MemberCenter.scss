@@ -21,10 +21,10 @@
     margin-top: -80px;
     padding-left: 40px;
     .btc-member-stepsblock{
-      max-width: 346px;
+      width: 346px;
       float: left;
       background-color: #fff;
-      padding: 25px 16px 25px 18px;
+      padding: 25px 0;
       >img{
         float: left;
       }
@@ -190,8 +190,8 @@
 }
 
 .btc-member-validata{
-  border: 1px solid #666666;
-  color: #666666 !important;
+  border: 1px solid #bebebe;
+  color: #999999 !important;
   padding: 2px 14px;
   display: inline-block;
   margin-bottom: 16px;
@@ -206,10 +206,35 @@
   color: white !important;
 }
 
+
+.btc-verifying-prompt{
+  position: relative;
+  .verifying-prompt{
+    position: absolute;
+    left: 50%;
+    margin-left: -20px;
+    font-size: 12px;
+    border: 1px solid #bebebe;
+    bottom: -14px;
+    background-color: #f2f2f2;
+    padding: 0 2px;
+    display: none;
+  }
+}
+.btc-verifying{
+  color: #666666 !important;
+  border-color: #666666;
+  &:hover{
+    .verifying-prompt{
+      display: block;
+    }
+  }
+}
+
 .btc-member-validata img{
   position: absolute;
   bottom: -1px;
-  right: 0;
+  right: -1px;
 }
 
 .btc-member-step{
