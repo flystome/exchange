@@ -30,9 +30,10 @@ const mutations = {
     })
     state.loginData = data.data
   },
-  PopupBoxDisplay (state, message) {
+  PopupBoxDisplay (state, obj) {
     state.PopupBox.status = !state.PopupBox.status
-    state.PopupBox.message = message
+    state.PopupBox.message = obj.message
+    obj.url ? state.PopupBox.url = obj.url : state.PopupBox.url = ''
   },
   ChangeLanguage (state, lang) {
     state.language = lang
@@ -45,7 +46,8 @@ const store = new Vuex.Store({
     Wrapper: false,
     PopupBox: {
       status: false,
-      message: ''
+      message: '',
+      url: ''
     },
     language: ''
   },

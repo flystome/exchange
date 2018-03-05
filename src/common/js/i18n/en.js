@@ -372,7 +372,10 @@ const en = {
       "submissions": "Submit",
       "using_true_identity": "Verify using your real identity, and your personal information won't be disclosed to others.",
       "held_id_card": "Upload a photo with your face and your ID card inside. Only JPG format accepted.",
-      "example": "Example"
+      "example": "Example",
+      "click_upload": "Click upload",
+      "information_upload_success": "Real-name authentication information upload success",
+      "please_upload_file": "Please upload the file"
     },
     "validate_sms": {
       "binding_cell_phone_authentication": "Binding cell phone authentication",
@@ -454,22 +457,22 @@ const en = {
       "cell_phone_number": "Cell Phone Number",
       "identify_code": "Identify Code"
     },
-    'validate_google': {
-      'download_google_verified_App': `Download Google Verified App`,
-      'scan_qrcode_and_enter_code': `Scan qrcode and enter verification code`,
-      'download_authenticator_at_store': `Please download Google Authenticator at the application store`,
-      'app_already_installed': `App already installed`,
-      'next': `Next`,
-      'using': `Using`,
-      'google_to_verify_App': `Google to verify App`,
-      'scan_qrcode': `Scan qrcode`,
-      'cant_scan_enter_keys': `If you can't scan, please manually enter the 16 bit keys into the Google verification code APP`,
-      'refresh_qrcode': `Refresh qrcode`,
-      'prve': `Prev`,
-      'login_password': `Login password`,
-      'google_verification_code': `Google verification code`,
-      'all_steps_completed': `All the above steps have been completed`,
-      'google_verification': `Google verification`
+    "validate_google": {
+      "download_google_verified_app": "Download Google Authenticator App",
+      "scan_qrcode_and_enter_code": "Scan QR code and enter code",
+      "download_authenticator_at_store": "Download Google Authenticator in AppStore or Google Play",
+      "next": "Next",
+      "using": "Using",
+      "google_to_verify_app": "Google Authenticator",
+      "scan_qrcode": "to scan QR code",
+      "cant_scan_enter_keys": "If scaning doesn't work, please manually enter the 16 character key into Google Authenticator",
+      "refresh_qrcode": "Refresh qrcode",
+      "prve": "Back",
+      "login_password": "Login Password",
+      "google_verification_code": "Code Displayed in Google Authenticator",
+      "google_verification": "Verify",
+      "app_already_installed": "APP already installed",
+      'all_steps_completed': `All the above steps have been completed`
     }
   }
 }

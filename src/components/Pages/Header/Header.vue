@@ -15,9 +15,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="z-index:100">
           <ul class="nav navbar-nav">
             <li class="btc-link"><a :href="`${HOST_URL}`">{{$t('nav.home')}} <span class="sr-only">(current)</span></a></li>
-            <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.wallet')}}</a></li>
+            <li class="btc-link"><a :href="`${HOST_URL}/markets/ethbtc`">{{$t('nav.transaction')}}</a></li>
+            <li class="btc-link"><a :href="`${HOST_URL}/currency/extract`">{{$t('nav.wallet')}}</a></li>
             <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.announcement')}}</a></li>
-            <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.qa')}}</a></li>
+            <li class="btc-link"><a :href="`${HOST_URL}/`">{{$t('nav.qa')}}</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right btc-header-signin" v-if="loginData === '' || loginData.errors">
             {{$t('nav.please')}}<a :href="`${HOST_URL}/signin`">{{$t('nav.login')}}</a>{{$t('nav.or')}}<a :href="`${HOST_URL}/signup`">{{$t('nav.register')}}</a>
@@ -40,9 +41,9 @@
                 {{ this.loginData.email }}
                 <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a :href="`${HOST_URL}/ifo/btc`">{{$t('nav.settings')}}</a></li>
-                <li><a :href="`${HOST_URL}/ifo/ltc`">{{$t('nav.member_info')}}</a></li>
-                <li><a :href="`${HOST_URL}/ifo/eth`">{{$t('nav.exit')}}</a></li>
+                <li><a :href="`${HOST_URL}/`">{{$t('nav.settings')}}</a></li>
+                <li><a :href="`${HOST_URL}/`">{{$t('nav.member_info')}}</a></li>
+                <!-- <li><a :href="`${HOST_URL}/`">{{$t('nav.exit')}}</a></li> -->
               </ul>
             </li>
             <li role="presentation" class="dropdown btc-country btc-img-position">

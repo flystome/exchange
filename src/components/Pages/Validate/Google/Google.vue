@@ -175,7 +175,7 @@ export default {
         if (d.data.status_code === '0') {
           this.prompt = d.data.errors
         } else {
-          this.PopupBoxDisplay(this.google_hint)
+          this.PopupBoxDisplay({message: this.google_hint})
         }
       })
     },

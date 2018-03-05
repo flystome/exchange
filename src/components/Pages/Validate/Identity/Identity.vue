@@ -39,47 +39,43 @@
       </div>
     </div>
     <div class="btc-indentity-prompt">
-      <!-- <news-prompt :text='uploadtext'></news-prompt> -->
-      <upload-img  id="indentity1" class="btc-validateIdentity-uploadimg" ref="id_document_front_file_attributes" :Upload='{
+      <upload-img id="indentity1" class="btc-validateIdentity-uploadimg" ref="id_document_front_file_attributes" :Upload='{
           UploadExplain: $t("validate_identity.positive_identity_card_photo"),
           ImgExplain: $t("validate_identity.only_support_jpg_photo"),
           ImgModel: "validate-indentity1.png"
         }'
-        v-on:prompt='a.indentity1 = ""'
-        :verifyImg='a.indentity1'
+        v-on:prompt='verifymsg.indentity1 = ""'
+        :verifyImg='verifymsg.indentity1'
         ></upload-img>
     </div>
     <div class="btc-indentity-prompt">
-      <!-- <news-prompt :text='uploadtext'></news-prompt> -->
       <upload-img id="indentity2" ref="id_document_back_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.id_card_back_photo"),
         ImgExplain: $t("validate_identity.only_support_jpg_photo"),
         ImgModel: "validate-indentity2.png"
       }'
-      v-on:prompt='a.indentity2 = ""'
-      :verifyImg='a.indentity2'
+      v-on:prompt='verifymsg.indentity2 = ""'
+      :verifyImg='verifymsg.indentity2'
       ></upload-img>
     </div>
     <div class="btc-indentity-prompt">
-      <!-- <news-prompt :text='uploadtext'></news-prompt> -->
       <upload-img id="indentity3" ref="id_document_selfie_holding_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.held_id_card"),
         ImgExplain: $t("validate_identity.only_support_jpg_photo"),
         ImgModel: "validate-indentity3.png"
       }'
-      v-on:prompt='a.indentity3 = ""'
-      :verifyImg='a.indentity3'
+      v-on:prompt='verifymsg.indentity3 = ""'
+      :verifyImg='verifymsg.indentity3'
       ></upload-img>
     </div>
     <div class="btc-indentity-prompt">
-      <!-- <news-prompt :text='uploadtext'></news-prompt> -->
       <upload-img id="indentity4" ref="id_bill_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.utilities_credit_card_bills"),
         ImgExplain: $t("validate_identity.three_months_bill"),
         ImgModel: "validate-indentity4.png",
       }'
-      v-on:prompt='a.indentity4 = ""'
-      :verifyImg='a.indentity4'
+      v-on:prompt='verifymsg.indentity4 = ""'
+      :verifyImg='verifymsg.indentity4'
       ></upload-img>
     </div>
     <footer class="btc-b-t btc-marginT25">
@@ -108,7 +104,7 @@ export default {
         country: '',
         last_name: ''
       },
-      a: {
+      verifymsg: {
         indentity1: '',
         indentity2: '',
         indentity3: '',
@@ -116,7 +112,7 @@ export default {
       },
       countries: countries,
       selectedCountry: 'South Korea',
-      identity_hint: this.$t('validate_identity.three_months_bill')
+      identity_hint: this.$t('validate_identity.information_upload_success')
     }
   },
   methods: {
@@ -145,21 +141,21 @@ export default {
     },
     ...mapMutations(['PopupBoxDisplay']),
     uploadImg () {
-      if (!this.$refs['id_document_front_file_attributes'].$refs['input'].files[0]) {
-        document.getElementById('indentity1').scrollIntoView(true)
-        this.a.indentity1 = '请上传文件'
-      }
-      if (!this.$refs['id_document_back_file_attributes'].$refs['input'].files[0]) {
-        document.getElementById('indentity2').scrollIntoView(true)
-        this.a.indentity2 = '请上传文件'
+      if (!this.$refs['id_bill_file_attributes'].$refs['input'].files[0]) {
+        document.getElementById('indentity4').scrollIntoView(true)
+        this.verifymsg.indentity4 = this.$t('validate_identity.please_upload_file')
       }
       if (!this.$refs['id_document_selfie_holding_file_attributes'].$refs['input'].files[0]) {
         document.getElementById('indentity3').scrollIntoView(true)
-        this.a.indentity3 = '请上传文件'
+        this.verifymsg.indentity3 = this.$t('validate_identity.please_upload_file')
       }
-      if (!this.$refs['id_bill_file_attributes'].$refs['input'].files[0]) {
-        document.getElementById('indentity4').scrollIntoView(true)
-        this.a.indentity4 = '请上传文件'
+      if (!this.$refs['id_document_back_file_attributes'].$refs['input'].files[0]) {
+        document.getElementById('indentity2').scrollIntoView(true)
+        this.verifymsg.indentity2 = this.$t('validate_identity.please_upload_file')
+      }
+      if (!this.$refs['id_document_front_file_attributes'].$refs['input'].files[0]) {
+        document.getElementById('indentity1').scrollIntoView(true)
+        this.verifymsg.indentity1 = this.$t('validate_identity.please_upload_file')
       }
       var formData = new FormData()
       var z = this.objectToFormData({
@@ -189,8 +185,7 @@ export default {
       }, d => {
         if (d.data.status_code === '0') {
           this.prompt = d.data.errors
-        } else {
-          this.PopupBoxDisplay(this.identity_hint)
+          this.PopupBoxDisplay({message: this.identity_hint, url: '/member_center'})
         }
       })
     }
