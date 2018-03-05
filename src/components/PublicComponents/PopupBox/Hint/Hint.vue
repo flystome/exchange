@@ -19,7 +19,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 export default {
-  props: ['message'],
+  name: 'Hint',
   methods: {
     ...mapMutations(['PopupBoxDisplay'])
   },

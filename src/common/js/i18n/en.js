@@ -322,7 +322,12 @@ const en = {
       "login": "login",
       "or": "or",
       "register": "register",
-      "operate": "then operate"
+      "wallet": "Wallet",
+      "announcement": "Announcement",
+      "qa": "Q\u0026A",
+      "settings": "Settings",
+      "member_info": "Member Info",
+      "exit": "Exit"
     },
     "member_center": {
       "total_assets": "Total Assets",
@@ -351,21 +356,23 @@ const en = {
       "no": 'no',
       "no_record": "No Record",
       "korean_user_use_twice_verification": "South Korean user real name certification, presentation, modification and other twice verification",
-      "completion_of_real_name_authentication": "Non Korean nationality users complete the real name authentication method."
+      "completion_of_real_name_authentication": "Non Korean nationality users complete the real name authentication method.",
+      "api": "API"
     },
-    'validate_identity': {
-      'real_name_authentication': `Real Name Authentication`,
-      'surname': `Surname`,
-      'Name': `Name`,
-      'Valid_Id_Card': `Valid Id Card`,
-      'positive_identity_card_photo': `Positive Identity Card Photo`,
-      'only_support_jpg_photo': `Please make sure that the content of the photo is complete and clearly visible, only supporting the JPG picture format.`,
-      'id_card_back_photo': `ID Card Back Photo`,
-      'utilities_credit_card_bills': `Utilities / Credit Card Bills`,
-      'three_months_bill': `Upload three months bill, only support JPG format, please ensure that the content of the photo is complete and clear.`,
-      'submissions': `Submissions`,
-      'using_true_identity': `Please be sure to verify using your true identity and we will protect your personal information`,
-      'held_id_card': `A front photo of hand-held ID card`
+    "validate_identity": {
+      "real_name_authentication": "Real Name Verification",
+      "surname": "Surname/Given Name",
+      "name": "Family Name",
+      "valid_id_card": "ID Card Number",
+      "positive_identity_card_photo": "ID Card Front",
+      "only_support_jpg_photo": "Make sure the content of the photo is complete and clearly visible, only JPG format acceptable.",
+      "id_card_back_photo": "ID Card Back",
+      "utilities_credit_card_bills": "Proof Of Residence",
+      "three_months_bill": "Proof of residence document must contain name, address and be dated less than 3 months ago.",
+      "submissions": "Submit",
+      "using_true_identity": "Verify using your real identity, and your personal information won't be disclosed to others.",
+      "held_id_card": "Upload a photo with your face and your ID card inside. Only JPG format accepted.",
+      "example": "Example"
     },
     "validate_sms": {
       "binding_cell_phone_authentication": "Binding cell phone authentication",
@@ -430,7 +437,7 @@ const en = {
       "validate_google": "Validate Google",
       "validate_identity": "Validate Identity",
       "validate_sms": "Validate Sms",
-      "currency_withdraw": "Currency withdraw",
+      "currency_withdraw": "Currency Withdraw",
       "currency_deposit": "Currency Deposit"
     },
     "validation": {

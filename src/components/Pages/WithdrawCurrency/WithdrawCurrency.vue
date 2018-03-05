@@ -45,20 +45,20 @@
             value: this.$t("withdraw_currency.withdraw_currency_address")
           }]' v-model="this.withdrawAddress"></basic-option> -->
           <div @click.stop="ChoiceStatus(!choice)" class="btc-withdraw-address btc-b-l" :style="{background:`url('${requireImg('select')}') 100% 100%`}">
-            {{ $t('withdraw_currency.withdraw_currency_address') }}
+            {{ Address }}
           </div>
           <div v-if="choice" @click.stop="ChoiceStatus(true)" class='btc-b btc-address-contain '>
             <div class="btc-address-height">
-              <div class="btc-pointer">
+              <div class="btc-pointer" v-for="(data, index) in FundSources[CurrencyType]" :key="index" @click.stop="ChoiceAddress(index)">
                   <div class="btc-fl">
                     <div class="btc-color999">
                       <strong>
-                        bch钱包btc地址A
+                        {{ data.extra }}
                       </strong>
                     </div>
                     <div>
                       <strong>
-                        1Bv9EYCrCKjtusatU1LiwcAnKRHVSsGjpr1Bv9EYCrCKjtusatU1Liw......
+                        {{ data.uid }}
                       </strong>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
           </div>
           <template v-else>
             <div class="btc-marginT15 btc-withdraw-add" style="display: flex" v-if="withdrawAddress">
-              <basic-input class="btc-withdraw-all" v-model="RemarkLabel"  :placeholder='$t("withdraw_currency.remark_label")'>
+              <basic-input class="btc-withdraw-all" v-model="RemarkLabel" :placeholder='$t("withdraw_currency.remark_label")'>
               </basic-input>
               <basic-input class="btc-withdraw-all" v-model="WithdrawCurrencyAddress" :placeholder='$t("withdraw_currency.withdraw_currency_address")'>
               </basic-input>
@@ -80,8 +80,8 @@
             <div class="btc-withdraw-explain">
               <span>{{ $t('withdraw_currency.available_balance') }}</span> 0 BTC <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> 0 BTC
             </div>
-              <basic-input class="btc-withdraw-all" style="display: flex;" :placeholder="$t('withdraw_currency.Amount_to_withdraw')">
-                <basic-button class="btc-link" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
+              <basic-input :key="'WithdrawAll'" ref='WithdrawAll' class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
+                <basic-button @click.native="WithdrawAll" class="btc-link" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
               </basic-input>
             <div class="btc-withdraw-explain"><span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }}</span> 0.001 <span class="btc-fr btc-link"><img src="~Img/tariff-description.png">{{$t('withdraw_currency.tariff_description')}}</span></div>
             <div class="btc-choice-validate">
@@ -183,6 +183,8 @@ export default {
       WithdrawCurrencyAddress: '',
       RemarkLabel: '',
       CurrencyType: 'btc',
+      Balance: '',
+      Address: this.$t('withdraw_currency.withdraw_currency_address'),
       WithdrawRecord: {
         captionTitle: this.$t('withdraw_currency.withdraw_currency_record'),
         item: []
@@ -192,7 +194,7 @@ export default {
         item: []
       },
       validate: this.$t('withdraw_currency.google_validate'),
-      FundSources:''
+      FundSources: ''
     }
   },
   filters: {
@@ -201,9 +203,13 @@ export default {
     }
   },
   methods: {
+    WithdrawAll () {
+      this.$refs['WithdrawAll'].$el.children[0].value = this.Balance
+    },
     AddAddress () {
       this.withdrawAddress = true
       this.ChoiceStatus(false)
+      this.Address = this.$t('withdraw_currency.withdraw_currency_address')
     },
     requireImg (img) {
       return require(`../../../../static/img/${img}.png`)
@@ -211,17 +217,20 @@ export default {
     ChoiceCoin (index) {
       this.length = index
       this.GetCoin(this.currencies[index])
+      this.CurrencyType = this.currencies[index]
+      this.Address = this.$t('withdraw_currency.withdraw_currency_address')
     },
     ChoiceStatus (boolean) {
       this.choice = boolean
     },
     ChoiceAddress (index) {
-      this.RemarkLabel = m[index]
-      this.WithdrawCurrencyAddress = m[index]
+      this.withdrawAddress = false
+      this.Address = this.FundSources[this.CurrencyType][index].uid
+      this.ChoiceStatus(false)
     },
     GetCoin (c) {
       this._get({
-        url: `/funds/${c ? c : 'btc'}/account_info`,
+        url: `/funds/${c || 'btc'}/account_info`,
         headers: {
           'DataType': 'application/json;charset=utf-8'
         }
@@ -230,6 +239,7 @@ export default {
         var objd = this.depositRecord
         var withdraws = d.data.withdraws
         var deposits = d.data.deposits
+        this.Balance = d.data.account.balance
         withdraws.length === 0 ? obj.item = [] : obj.item = [{content: [
           this.$t('withdraw_currency.number'),
           this.$t('withdraw_currency.withdraw_time'),
@@ -246,7 +256,7 @@ export default {
               d.fund_uid,
               d.amount,
               d.fee,
-              `${d.aasm_state_title}${d.aaasm_state === ('submitting' || 'submitted' || 'accepted') ? ' / <span>取消<span>' : ''}`
+              `${d.aasm_state_title}${d.aasm_state === ('submitting' || 'submitted' || 'accepted') ? ` / <span class='btc-link'>${this.$t('withdraw_currency.cancel')}<span>` : ''}`
             ]
           }
         }))
@@ -265,12 +275,13 @@ export default {
               d.txid,
               d.amount,
               d.confirmations,
-              `${d.aasm_state_title}${d.aaasm_state === ('submitting' || 'submitted' || 'accepted') ? ' / <span>取消<span>' : ''}`
+              `${d.aasm_state_title}${d.aasm_state === ('submitting' || 'submitted' || 'accepted') ? ` / <span class='btc-link'>${this.$t('withdraw_currency.cancel')}<span>` : ''}`
             ]
           }
         }))
+        obj.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('withdraw_currency.withdraw_currency_record')}`
+        objd.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('deposit_currency.deposit_record')}`
       })
-    obj.captionTitle = `${c ? c : 'btc'} ${this.$t('withdraw_currency.withdraw_currency_record')}`
     }
   },
   mounted () {

@@ -7,21 +7,26 @@
         </basic-button> -->
 
       </div>
-      <div class="btc-UploadExplain btc-marginR20 btc-marginT50">
+      <div class="btc-UploadExplain btc-marginR20 btc-marginT25">
         <strong>{{ Upload.UploadExplain }}</strong>
-          <news-prompt class="btc-marginT25 btc-marginL25" :text='prompt'></news-prompt>
+          <news-prompt class="btc-marginL25" :text='prompt'></news-prompt>
       </div>
       <div class=" btc-marginT20 btc-marginB20">
         {{ Upload.ImgExplain }}
       </div>
       <div class="validate-uploadImg">
-        <img class="btc-UploadImg-model col-xs-6" :src="requireImg(Upload.ImgModel)">
-        <div class="uploading col-xs-6">
+        <div class="col-xs-6 btc-UploadImg-model">
+          <img :src="requireImg(Upload.ImgModel)" ref="height"  >
+          <span>{{$t('validate_identity.example')}}</span>
+        </div>
+        <div class="uploading col-xs-6 ">
+          <span>点击上传</span>
           <img src="~Img/validate-uploading.png" v-if="UploadImg === ''" width="100%">
-          <img width="100%" height="100%" :src="UploadImg" v-else>
-          <input type="file" ref="input"  @change='ShowImg'  accept="image/jpeg,image/jpg" slot="file">
+          <img width="100%" height="100%" class="alredy-img" style="z-index:10" :src="UploadImg" v-else>
+          <input type="file" ref="input" style="z-index:10" @change='ShowImg'  accept="image/jpeg,image/jpg" slot="file">
         </div>
       </div>
+      <news-prompt class="btc-marginL25" :text='verifyImg'></news-prompt>
     </div>
   </div>
 </template>
@@ -29,11 +34,12 @@
 <script>
 export default {
   name: 'UploadImg',
-  props: ['Upload'],
+  props: ['Upload', 'verifyImg'],
   data () {
     return {
       UploadImg: '',
-      prompt: ''
+      prompt: '',
+      height: ''
     }
   },
   methods: {
@@ -41,6 +47,7 @@ export default {
       this.prompt = ''
     },
     ShowImg (el) {
+      this.$emit('prompt')
       if (el.target.files[0].size > 2 * 1024 * 1024) {
         this.prompt = '图片不允许超过2m'
       } else {

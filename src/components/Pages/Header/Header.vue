@@ -15,24 +15,14 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="z-index:100">
           <ul class="nav navbar-nav">
             <li class="btc-link"><a :href="`${HOST_URL}`">{{$t('nav.home')}} <span class="sr-only">(current)</span></a></li>
-            <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.transaction')}}</a></li>
-            <li class="dropdown btc-ifo">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{$t('nav.IFO')}} <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a :href="`${HOST_URL}/ifo/btc`">BTC</a></li>
-                <li><a :href="`${HOST_URL}/ifo/ltc`">LTC</a></li>
-                <li><a :href="`${HOST_URL}/ifo/eth`">ETH</a></li>
-              </ul>
-            </li>
+            <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.wallet')}}</a></li>
+            <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.announcement')}}</a></li>
+            <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.qa')}}</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right btc-header-signin" v-if="loginData === '' || loginData.errors">
             {{$t('nav.please')}}<a :href="`${HOST_URL}/signin`">{{$t('nav.login')}}</a>{{$t('nav.or')}}<a :href="`${HOST_URL}/signup`">{{$t('nav.register')}}</a>
           </ul>
           <ul class="nav navbar-nav navbar-right" v-else>
-            <li class="btc-img-position" @click="goHome('/')" style="cursor: pointer">
-              <img src="~Img/avatarlog.png" class="btc-header-avatar">
-              {{ this.loginData.email }}
-            </li>
             <li class="btc-marginL15 btc-img-position">
               <img src="~Img/assetlog.png"  class="btc-header-asset">
               0 BTC
@@ -42,18 +32,31 @@
                 <img src="~Img/letterlog.png">
               </a>
             </li>
-            <li role="presentation" class="dropdown btc-country">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <img :src="requireImg(getLanguage.language)" class="btc-marginL5 btc-marginR5">
+            <li class="btc-img-position dropdown btc-ifo" style="cursor: pointer">
+              <!-- <img src="~Img/avatarlog.png" class="btc-header-avatar">
+              {{ this.loginData.email }} -->
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <img src="~Img/avatarlog.png" class="btc-header-avatar">
+                {{ this.loginData.email }}
+                <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a :href="`${HOST_URL}/ifo/btc`">{{$t('nav.settings')}}</a></li>
+                <li><a :href="`${HOST_URL}/ifo/ltc`">{{$t('nav.member_info')}}</a></li>
+                <li><a :href="`${HOST_URL}/ifo/eth`">{{$t('nav.exit')}}</a></li>
+              </ul>
+            </li>
+            <li role="presentation" class="dropdown btc-country btc-img-position">
+              <a class="dropdown-toggle btc-paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <span>{{getLanguage.name}}</span><span class="caret">
                 </span>
               </a>
               <ul class="dropdown-menu">
                 <li v-for="(locale,index) in locale" :key="locale.language">
-                  <a @click="changeLang(locale.language, index + 1)"><img :src="requireImg(locale.language)" class='btc-marginR5'>{{locale.name}}</a>
+                  <a @click="changeLang(locale.language, index + 1)">{{locale.name}}</a>
                 </li>
               </ul>
             </li>
+
           </ul>
         </div>
     </nav>
