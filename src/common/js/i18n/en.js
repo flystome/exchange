@@ -409,7 +409,8 @@ const en = {
       "sms": "SMS",
       "send_identify_code": "Send Identify Code",
       "set_as_default": "Set As Default",
-      "delete": "Delete"
+      "delete": "Delete",
+      "cancel": "Cancel"
     },
     "deposit_currency":{
       'withdraw_address': 'Withdraw Address',

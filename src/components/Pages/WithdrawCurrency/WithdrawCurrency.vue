@@ -20,7 +20,7 @@
           <router-link to="/currency/withdraw" class="btc-poniter" :class="{'btc-link':route === 'withdraw'}">
             <strong>
               {{ $t('withdraw_currency.withdraw') }}
-            </strong>
+          </strong>
           </router-link>
         </div>
       </div>
@@ -168,6 +168,7 @@ export default {
           this.currencies.push(a.code)
         }
       })
+      this.FundSources = d.data.fund_sources
     })
     this.GetCoin()
     this.route = this.$route.path.slice(this.$route.path.lastIndexOf('/') + 1)
@@ -181,6 +182,7 @@ export default {
       withdrawAddress: false,
       WithdrawCurrencyAddress: '',
       RemarkLabel: '',
+      CurrencyType: 'btc',
       WithdrawRecord: {
         captionTitle: this.$t('withdraw_currency.withdraw_currency_record'),
         item: []
@@ -189,7 +191,8 @@ export default {
         captionTitle: this.$t('deposit_currency.deposit_record'),
         item: []
       },
-      validate: this.$t('withdraw_currency.google_validate')
+      validate: this.$t('withdraw_currency.google_validate'),
+      FundSources:''
     }
   },
   filters: {
@@ -267,6 +270,7 @@ export default {
           }
         }))
       })
+    obj.captionTitle = `${c ? c : 'btc'} ${this.$t('withdraw_currency.withdraw_currency_record')}`
     }
   },
   mounted () {

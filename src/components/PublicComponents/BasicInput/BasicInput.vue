@@ -9,7 +9,7 @@
     <span v-show="errors.has(type)" class="help is-danger">{{ errors.first(type) }}</span>
   </div>
   <div v-else>
-    <input v-validate="`required|${type}`" class="btc-basicInput btc-b"
+    <input class="btc-basicInput btc-b"
     :placeholder="placeholder"
      @input="$emit('input', $event.target.value)">
      <slot name='button'></slot>
