@@ -85,14 +85,21 @@
               </basic-input>
             <div class="btc-withdraw-explain"><span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }}</span> 0.001 <span class="btc-fr btc-link"><img src="~Img/tariff-description.png">{{$t('withdraw_currency.tariff_description')}}</span></div>
             <div class="btc-choice-validate">
-              <basic-select :data="[this.$t('withdraw_currency.google_validate'),this.$t('withdraw_currency.sms')]" :value="validate"  v-on:selected="validate = arguments[0]">>
+              <basic-select :data="[this.$t('withdraw_currency.google_validate'),this.$t('withdraw_currency.sms')]"
+              :value="validate"
+              v-on:selected="validate = arguments[0]">>
               </basic-select>
-              <basic-input :key="validate" class="btc-marginB30">
+              <basic-input v-model="WithdrawData.otp" :key="validate" class="btc-marginB30">
               </basic-input>
               <button v-if="validate === 'SMS'" class="btc-white-btn">{{$t('withdraw_currency.send_identify_code')}}</button>
             </div>
-            <basic-button style="width:100%" :text="$t('withdraw_currency.withdraw')">
+            <basic-button @click.native="Withdraw" style="width:100%" :text="$t('withdraw_currency.withdraw')">
             </basic-button>
+            <div v-if="Rucaptcha">
+              <basic-input v-model="WithdrawData.rucaptcha"  class="btc-marginB30">
+              </basic-input>
+              <img :src="`${HOST_URL}/rucaptcha`">
+            </div>
           </template>
         </div>
         <div class="btc-withdraw-currency">
@@ -137,7 +144,7 @@
           </ul>
       </div>
     </div>
-    <basic-table :captionTitle='WithdrawRecord.captionTitle' :item='WithdrawRecord.item' v-if="route === 'withdraw'">
+    <basic-table ref="a" :captionTitle='WithdrawRecord.captionTitle' :item='WithdrawRecord.item' v-if="route === 'withdraw'">
       <div slot="more" class="text-center btc-b-t btc-table-more">
         <a class="btc-link ">{{$t('member_center.show_more')}}</a>
       </div>
@@ -161,6 +168,7 @@ export default {
         'DataType': 'application/json;charset=utf-8'
       }
     }, (d) => {
+      d.data.rucaptcha && (this.Rucaptcha = d.data.rucaptcha)
       d.data.currencies.forEach((a) => {
         if (a.code === 'btc') {
           this.currencies.unshift(a.code)
@@ -175,6 +183,7 @@ export default {
   },
   data () {
     return {
+      HOST_URL: process.env.HOST_URL,
       length: 0,
       currencies: [],
       route: '',
@@ -185,6 +194,11 @@ export default {
       CurrencyType: 'btc',
       Balance: '',
       Address: this.$t('withdraw_currency.withdraw_currency_address'),
+      Rucaptcha: false,
+      WithdrawData: {
+        otp: '',
+        rucaptcha: ''
+      },
       WithdrawRecord: {
         captionTitle: this.$t('withdraw_currency.withdraw_currency_record'),
         item: []
@@ -219,6 +233,7 @@ export default {
       this.GetCoin(this.currencies[index])
       this.CurrencyType = this.currencies[index]
       this.Address = this.$t('withdraw_currency.withdraw_currency_address')
+      this.$refs['WithdrawAll'].$el.children[0].value = ''
     },
     ChoiceStatus (boolean) {
       this.choice = boolean
@@ -229,58 +244,102 @@ export default {
       this.ChoiceStatus(false)
     },
     GetCoin (c) {
-      this._get({
-        url: `/funds/${c || 'btc'}/account_info`,
+      this.$nextTick(() => {
+        this._get({
+          url: `/funds/${c || 'btc'}/account_info`,
+          headers: {
+            'DataType': 'application/json;charset=utf-8'
+          }
+        }, (d) => {
+          var obj = this.WithdrawRecord
+          var objd = this.depositRecord
+          var withdraws = d.data.withdraws
+          var deposits = d.data.deposits
+          d.data.account && (this.Balance = d.data.account.balance)
+          withdraws.length === 0 ? obj.item = [] : obj.item = [{content: [
+            this.$t('withdraw_currency.number'),
+            this.$t('withdraw_currency.withdraw_time'),
+            this.$t('withdraw_currency.withdraw_currency_address'),
+            this.$t('withdraw_currency.actual_account'),
+            this.$t('withdraw_currency.absenteeism_expenses'),
+            this.$t('withdraw_currency.statu_and_operation')
+          ]
+          }].concat(withdraws.map(d => {
+            return {
+              content: [
+                d.id,
+                this.$moment(d.created_at).format('L H:mm:ss'),
+                d.fund_uid,
+                d.amount,
+                d.fee,
+                `${d.aasm_state_title}${d.aasm_state === ('submitting' || 'submitted' || 'accepted') ? ` / <span class='btc-cancel btc-link'>${this.$t('withdraw_currency.cancel')}</span>` : ''}`
+              ]
+            }
+          }))
+
+          deposits.length === 0 ? objd.item = [] : objd.item = [{content: [
+            this.$t('deposit_currency.deposit_date'),
+            this.$t('deposit_currency.trading_hash'),
+            this.$t('deposit_currency.recharge_amount'),
+            this.$t('deposit_currency.confirmation_number'),
+            this.$t('withdraw_currency.statu_and_operation')
+          ]
+          }].concat(deposits.map(d => {
+            return {
+              content: [
+                this.$moment(d.created_at).format('L H:mm:ss'),
+                d.txid,
+                d.amount,
+                d.confirmations,
+                d.aasm_state_title
+              ]
+            }
+          }))
+          obj.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('withdraw_currency.withdraw_currency_record')}`
+          objd.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('deposit_currency.deposit_record')}`
+        })
+      })
+    },
+    Withdraw () {
+      var validate = this.validate === this.$t('withdraw_currency.google_validate') ? {
+        type: 'app',
+        otp: this.WithdrawData.otp
+      } : {
+        type: 'sms',
+        otp: this.WithdrawData.otp
+      }
+
+      var obj = this.withdrawAddress ? {
+        withdraw: {
+          type: 'new',
+          sum: 10,
+          extra: 'label',
+          uid: 'address'
+        },
+        two_factor: validate
+      } : {
+        withdraw: {
+          type: 'exist',
+          sum: 10,
+          fund_source: 70
+        },
+        two_factor: validate,
+        _rucaptcha: this.WithdrawData.rucaptcha
+      }
+      this._post({
+        url: `/funds/${this.CurrencyType}/create_withdraw`,
+        data: obj,
         headers: {
           'DataType': 'application/json;charset=utf-8'
         }
       }, (d) => {
-        var obj = this.WithdrawRecord
-        var objd = this.depositRecord
-        var withdraws = d.data.withdraws
-        var deposits = d.data.deposits
-        this.Balance = d.data.account.balance
-        withdraws.length === 0 ? obj.item = [] : obj.item = [{content: [
-          this.$t('withdraw_currency.number'),
-          this.$t('withdraw_currency.withdraw_time'),
-          this.$t('withdraw_currency.withdraw_currency_address'),
-          this.$t('withdraw_currency.actual_account'),
-          this.$t('withdraw_currency.absenteeism_expenses'),
-          this.$t('withdraw_currency.statu_and_operation')
-        ]
-        }].concat(withdraws.map(d => {
-          return {
-            content: [
-              d.id,
-              this.$moment(d.created_at).format('L H:mm:ss'),
-              d.fund_uid,
-              d.amount,
-              d.fee,
-              `${d.aasm_state_title}${d.aasm_state === ('submitting' || 'submitted' || 'accepted') ? ` / <span class='btc-link'>${this.$t('withdraw_currency.cancel')}<span>` : ''}`
-            ]
-          }
-        }))
-
-        deposits.length === 0 ? objd.item = [] : objd.item = [{content: [
-          this.$t('deposit_currency.deposit_date'),
-          this.$t('deposit_currency.trading_hash'),
-          this.$t('deposit_currency.recharge_amount'),
-          this.$t('deposit_currency.confirmation_number'),
-          this.$t('withdraw_currency.statu_and_operation')
-        ]
-        }].concat(deposits.map(d => {
-          return {
-            content: [
-              this.$moment(d.created_at).format('L H:mm:ss'),
-              d.txid,
-              d.amount,
-              d.confirmations,
-              `${d.aasm_state_title}${d.aasm_state === ('submitting' || 'submitted' || 'accepted') ? ` / <span class='btc-link'>${this.$t('withdraw_currency.cancel')}<span>` : ''}`
-            ]
-          }
-        }))
-        obj.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('withdraw_currency.withdraw_currency_record')}`
-        objd.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('deposit_currency.deposit_record')}`
+        console.log(d)
+      })
+    },
+    cancelWithdraw (id) {
+      this.$http({
+        method: 'delete',
+        url: `/funds/${id}/cancel_withdraw`
       })
     }
   },
@@ -291,6 +350,13 @@ export default {
   watch: {
     $route (to) {
       this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
+    },
+    'WithdrawRecord.item' () {
+      this.$nextTick(() => {
+        this.$refs['a'].$el.addEventListener('click', () => {
+          this.cancelWithdraw(1)
+        })
+      })
     }
   }
 }

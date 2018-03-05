@@ -6,11 +6,12 @@
           <slot name='remark'></slot>
         </caption>
         <tbody>
-          <tr v-for="(item, length) in item" :key='length' v-if="length < 6">
+          <tr v-for="(item, length) in item" :key='length' v-if="length < 100">
             <td v-for="(data,index)  in item.content"
             :key="index" :style="{width: toPercent()}"
             :class="{'btc-tableTextright':index === 0,'btc-tableTextleft': index === item.content.length-1}"
             v-html="data">
+           <slot name="f"></slot>
             </td>
           </tr>
         </tbody>
