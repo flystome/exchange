@@ -30,47 +30,59 @@
         </div>
         <div class="btc-marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
-            <basic-input :placeholder='$t("validate_identity.surname")' :type='"email"' v-model="user.name"></basic-input>
+            <basic-input :placeholder='$t("validate_identity.surname")' :type='"first_name"' v-model="user.first_name"></basic-input>
           <!--<div class=" btc-marginT20">-->
             <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
             <!--<basic-input  v-model="user.name"></basic-input>-->
           <!--</div>-->
-            <basic-input  :placeholder='$t("validate_identity.name")' :type='"ip"'  v-model="user.IdCard"></basic-input>
-            <basic-input  :placeholder='$t("validate_identity.valid_id_card")' :type='"ip"'  v-model="user.IdCard"></basic-input>
+            <basic-input  :placeholder='$t("validate_identity.name")' :type='"last_name"'  v-model="user.last_name"></basic-input>
+            <basic-input  :placeholder='$t("validate_identity.valid_id_card")' :type='"IdCard"'  v-model="user.IdCard"></basic-input>
         </div>
       </div>
     </div>
     <div class="btc-indentity-prompt">
-      <news-prompt :text='uploadtext'></news-prompt>
-      <upload-img @ShowImg="getstate" id="indentity1" class="btc-validateIdentity-uploadimg" ref="id_document_front_file_attributes" :Upload='{
+      <!-- <news-prompt :text='uploadtext'></news-prompt> -->
+      <upload-img  id="indentity1" class="btc-validateIdentity-uploadimg" ref="id_document_front_file_attributes" :Upload='{
           UploadExplain: $t("validate_identity.positive_identity_card_photo"),
           ImgExplain: $t("validate_identity.only_support_jpg_photo"),
           ImgModel: "validate-indentity1.png"
-        }'></upload-img>
+        }'
+        v-on:prompt='a.indentity1 = ""'
+        :verifyImg='a.indentity1'
+        ></upload-img>
     </div>
     <div class="btc-indentity-prompt">
-      <news-prompt :text='uploadtext'></news-prompt>
+      <!-- <news-prompt :text='uploadtext'></news-prompt> -->
       <upload-img id="indentity2" ref="id_document_back_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.id_card_back_photo"),
         ImgExplain: $t("validate_identity.only_support_jpg_photo"),
         ImgModel: "validate-indentity2.png"
-      }'></upload-img>
+      }'
+      v-on:prompt='a.indentity2 = ""'
+      :verifyImg='a.indentity2'
+      ></upload-img>
     </div>
     <div class="btc-indentity-prompt">
-      <news-prompt :text='uploadtext'></news-prompt>
+      <!-- <news-prompt :text='uploadtext'></news-prompt> -->
       <upload-img id="indentity3" ref="id_document_selfie_holding_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.held_id_card"),
         ImgExplain: $t("validate_identity.only_support_jpg_photo"),
         ImgModel: "validate-indentity3.png"
-      }'></upload-img>
+      }'
+      v-on:prompt='a.indentity3 = ""'
+      :verifyImg='a.indentity3'
+      ></upload-img>
     </div>
     <div class="btc-indentity-prompt">
-      <news-prompt :text='uploadtext'></news-prompt>
+      <!-- <news-prompt :text='uploadtext'></news-prompt> -->
       <upload-img id="indentity4" ref="id_bill_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.utilities_credit_card_bills"),
         ImgExplain: $t("validate_identity.three_months_bill"),
-        ImgModel: "validate-indentity4.png"
-      }'></upload-img>
+        ImgModel: "validate-indentity4.png",
+      }'
+      v-on:prompt='a.indentity4 = ""'
+      :verifyImg='a.indentity4'
+      ></upload-img>
     </div>
     <footer class="btc-b-t btc-marginT25">
       <basic-button @click.native="uploadImg" class="btc-fr col-xs-12 col-md-1 pull-right" :text='$t("validate_identity.submissions")'>
@@ -89,23 +101,29 @@ export default {
       prompt: {
         display: false,
         text: '密码错误'
-        // prompt: '',
       },
-      uploadtext: '',
       img: false,
       user: {
         surname: '',
-        name: '',
+        first_name: '',
         IdCard: '',
-        country: ''
+        country: '',
+        last_name: ''
+      },
+      a: {
+        indentity1: '',
+        indentity2: '',
+        indentity3: '',
+        indentity4: ''
       },
       countries: countries,
       selectedCountry: 'South Korea',
-      identity_hint: '实名认证信息上传成功'
+      identity_hint: this.$t("validate_identity.three_months_bill")
     }
   },
   methods: {
     objectToFormData (obj, form, namespace) {
+      /* eslint-disable no-new */
       var fd = form || new FormData()
       var formKey
       for (var property in obj) {
@@ -128,39 +146,27 @@ export default {
       return fd
     },
     ...mapMutations(['PopupBoxDisplay']),
-    getstate (state) {
-      // if (state) {
-      //   this.text = ''
-      // }
-      // console.log(state)
-      this.img = state
-    },
     uploadImg () {
       if (!this.$refs['id_document_front_file_attributes'].$refs['input'].files[0]) {
         document.getElementById('indentity1').scrollIntoView(true)
-        this.uploadtext = '请上传文件'
-        return
-      } else {
-
+        this.a.indentity1 = '请上传文件'
       }
       if (!this.$refs['id_document_back_file_attributes'].$refs['input'].files[0]) {
         document.getElementById('indentity2').scrollIntoView(true)
-        this.uploadtext = '请上传文件'
-        return
+        this.a.indentity2 = '请上传文件'
       }
       if (!this.$refs['id_document_selfie_holding_file_attributes'].$refs['input'].files[0]) {
         document.getElementById('indentity3').scrollIntoView(true)
-        this.uploadtext = '请上传文件'
-        return
+        this.a.indentity3 = '请上传文件'
       }
       if (!this.$refs['id_bill_file_attributes'].$refs['input'].files[0]) {
         document.getElementById('indentity4').scrollIntoView(true)
-        this.uploadtext = '请上传文件'
-        return
+        this.a.indentity4 = '请上传文件'
       }
       var formData = new FormData()
       var z = this.objectToFormData({
-        name: this.user.name,
+        first_name: this.user.first_name,
+        last_name: this.user.last_name,
         id_document_number: this.user.IdCard,
         country: this.selectedCountry,
         id_document_front_file_attributes: {

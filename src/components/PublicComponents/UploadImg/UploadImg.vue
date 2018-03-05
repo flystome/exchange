@@ -26,6 +26,7 @@
           <input type="file" ref="input" style="z-index:10" @change='ShowImg'  accept="image/jpeg,image/jpg" slot="file">
         </div>
       </div>
+      <news-prompt class="btc-marginL25" :text='verifyImg'></news-prompt>
     </div>
   </div>
 </template>
@@ -33,13 +34,12 @@
 <script>
 export default {
   name: 'UploadImg',
-  props: ['Upload'],
+  props: ['Upload', 'verifyImg'],
   data () {
     return {
       UploadImg: '',
       prompt: '',
-      height: '',
-      state: true
+      height: ''
     }
   },
   methods: {
@@ -47,7 +47,7 @@ export default {
       this.prompt = ''
     },
     ShowImg (el) {
-      this.$emit('ShowImg', this.UploadImg)
+      this.$emit('prompt')
       if (el.target.files[0].size > 2 * 1024 * 1024) {
         this.prompt = '图片不允许超过2m'
       } else {

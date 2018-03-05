@@ -324,7 +324,7 @@ const en = {
       "register": "register",
       "wallet": "Wallet",
       "announcement": "Announcement",
-      "q&a": "Q\u0026A",
+      "qa": "Q\u0026A",
       "settings": "Settings",
       "member_info": "Member Info",
       "exit": "Exit"

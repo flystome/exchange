@@ -17,7 +17,7 @@
             <li class="btc-link"><a :href="`${HOST_URL}`">{{$t('nav.home')}} <span class="sr-only">(current)</span></a></li>
             <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.wallet')}}</a></li>
             <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.announcement')}}</a></li>
-            <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.q&a')}}</a></li>
+            <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.qa')}}</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right btc-header-signin" v-if="loginData === '' || loginData.errors">
             {{$t('nav.please')}}<a :href="`${HOST_URL}/signin`">{{$t('nav.login')}}</a>{{$t('nav.or')}}<a :href="`${HOST_URL}/signup`">{{$t('nav.register')}}</a>
@@ -32,7 +32,7 @@
                 <img src="~Img/letterlog.png">
               </a>
             </li>
-            <li class="btc-img-position dropdown btc-ifo" @click="goHome('/')" style="cursor: pointer">
+            <li class="btc-img-position dropdown btc-ifo" style="cursor: pointer">
               <!-- <img src="~Img/avatarlog.png" class="btc-header-avatar">
               {{ this.loginData.email }} -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
