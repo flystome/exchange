@@ -47,7 +47,7 @@
           <div @click.stop="ChoiceStatus(!choice)" class="btc-withdraw-address btc-b-l" :style="{background:`url('${requireImg('select')}') 100% 100%`}">
             {{ Address }}
           </div>
-          <div v-if="choice" @click.stop="ChoiceStatus(true)" class='btc-b btc-address-contain '>
+          <div v-if="choice" @click.stop="ChoiceStatus(true)" class='btc-b btc-address-contain'>
             <div class="btc-address-height">
               <div class="btc-pointer" v-for="(data, index) in FundSources[CurrencyType]" :key="index" @click.stop="ChoiceAddress(index)">
                   <div class="btc-fl">
@@ -80,14 +80,14 @@
             <div class="btc-withdraw-explain">
               <span>{{ $t('withdraw_currency.available_balance') }}</span> 0 BTC <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> 0 BTC
             </div>
-              <basic-input :key="'WithdrawAll'" ref='WithdrawAll' class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
+              <basic-input ref='WithdrawAll' class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
                 <basic-button @click.native="WithdrawAll" class="btc-link" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
               </basic-input>
             <div class="btc-withdraw-explain"><span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }}</span> 0.001 <span class="btc-fr btc-link"><img src="~Img/tariff-description.png">{{$t('withdraw_currency.tariff_description')}}</span></div>
             <div class="btc-choice-validate">
               <basic-select :data="[this.$t('withdraw_currency.google_validate'),this.$t('withdraw_currency.sms')]" :value="validate"  v-on:selected="validate = arguments[0]">>
               </basic-select>
-              <basic-input  class="btc-marginB30">
+              <basic-input :key="validate" class="btc-marginB30">
               </basic-input>
               <button v-if="validate === 'SMS'" class="btc-white-btn">{{$t('withdraw_currency.send_identify_code')}}</button>
             </div>
