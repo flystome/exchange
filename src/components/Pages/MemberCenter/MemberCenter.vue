@@ -115,9 +115,8 @@
         </div>
       </div>
     </div>
-    <div class="container">
-      <template v-if="step === 1">
-      <basic-table :table='getLoginRecord'>
+    <template v-if="step === 1">
+      <basic-table :captionTitle='getLoginRecord.captionTitle' :item='getLoginRecord.Item'>
       <span slot="remark" class="btc-tableRemark">{{$t('member_center.have_questions_to_contact_us')}}</span>
       </basic-table>
       <div class="btc-member-handleRecord  btc-container-block">
@@ -150,20 +149,18 @@
       </div>
     </template>
     <template v-if="step === 2">
-      <basic-table :table='getRecommendCount'>
+      <basic-table :captionTitle='getRecommendCount.captionTitle' :item='getRecommendCount.Item'>
       <div slot="more" class="text-center btc-b-t btc-table-more">
         <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('member_center.show_more')}}</a>
       </div>
       </basic-table>
-      <basic-table :table='getRecommendUser'>
-        <div slot="more" class="text-center btc-b-t btc-table-more">
+      <basic-table :captionTitle='getRecommendUser.captionTitle' :item='getRecommendUser.Item'>
+         <div slot="more" class="text-center btc-b-t btc-table-more">
           <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('member_center.show_more')}}</a>
         </div>
       </basic-table>
     </template>
     </div>
-
-  </div>
 </template>
 <script>
 import { mapGetters, mapMutations } from 'vuex'

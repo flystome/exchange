@@ -94,6 +94,10 @@ body{
   cursor: pointer;
 }
 
+.btc-pointer{
+  cursor: pointer;
+}
+
 .btc-b{
   border: 1px solid #f2f2f2;
 }

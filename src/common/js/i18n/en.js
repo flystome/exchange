@@ -144,7 +144,7 @@ const en = {
         "title": "Chinese Yuan Deposit",
         "desc": "To deposit via Bank transfer, please follow these steps:",
         "desc_item_1": "1. Submit the form to get the identification code.",
-        "desc_item_2": "2. Transfer the money to exchanges bank account. Please make sure your referral code was written on the form you fill in.",
+        "desc_item_2": "2. Transfer the money to exchange's bank account. Please make sure your referral code was written on the form you fill in.",
         "desc_item_3": "3. Your deposit will be confirmed as soon as the money is received.",
         "attention": "Attention: The name of your bank account must be the same as your account name on our site, otherwise your deposit may fail.",
         "from": "From",
@@ -268,21 +268,21 @@ const en = {
       }
     },
     "auth": {
-      "email": "Verify Email",
-      "phone": "Verify Cell Phone",
-      "google": "Google Auth",
-      "send_email": "Send Email",
-      "real_name": "Verify Real Name",
       "please_active_two_factor": "Please set mobile number or google authenticator first.",
       "submit": "Submit",
-      "otp_placeholder": "6-digit code",
+      "email": "Email Authentication",
+      "phone": "SMS",
+      "google": "Google Auth",
+      "send_email": "Send Email",
+      "otp_placeholder": "6-digit password",
       "google_app": "Google Authenticator",
+      "real_name": "Real Name Authenticatio",
       "sms": "SMS Verification Messages",
       "send_code": "Send Code",
       "send_code_alt": "Resend in COUNT seconds",
       "hints": {
         "app": "Google Authenticator will re-generate a new password every thirty seconds, please input timely.",
-        "sms": "Well send a text message to you phone with verify code."
+        "sms": "We'll send a text message to you phone with verify code."
       },
       "level": {
         "level_1": "Level 1",
@@ -316,7 +316,7 @@ const en = {
     },
     "nav": {
       "home": "Home Page",
-      "transaction": "Trade",
+      "transaction": "Transaction",
       "IFO": "IFO Bifurcation",
       "please": "Please",
       "login": "login",
@@ -332,28 +332,28 @@ const en = {
     "member_center": {
       "total_assets": "Total Assets",
       "change_password": "Change Password",
-      "login_record": "Login Record (Last 5)",
+      "login_record": "Login record (last 5)",
       "login_time": "Login Time",
-      "ip_adress": "IP Address",
+      "ip_adress": "IP Adress",
       "login_location": "Login Location",
-      "have_questions_to_contact_us": "If any suspicious login, please contact us in time.",
-      "customer_service_record": "Tickets",
-      "view_the_end_service_list": "Closed Tickets",
+      "have_questions_to_contact_us": "If you have any questions please contact us in time",
+      "customer_service_record": "Customer service record",
+      "view_the_end_service_list": "View the end of the service list",
       "show_more": "Show More",
-      "new_questions": "New Ticket",
-      "recommended_statistics": "Referrals",
+      "new_questions": "New Questions",
+      "recommended_statistics": "Recommended Statistics",
       "date": "Date",
-      "number_of_users": "Users",
-      "new_user": "New Users",
-      "page_browsing": "Page Views",
+      "number_of_users": "Number of users",
+      "new_user": "New User",
+      "page_browsing": "Page Browsing",
       "bounce_rate": "Bounce Rate",
-      "recommended_users": "Registered Referrals",
+      "recommended_users": "Recommended Users",
       "account": "Account",
       "browser": "Browser",
       "register_time": "Register Time",
       "activated": "Activated",
-      "yes": "Yes",
-      "no": "No",
+      "yes": 'yes',
+      "no": 'no',
       "no_record": "No Record",
       "korean_user_use_twice_verification": "South Korean user real name certification, presentation, modification and other twice verification",
       "completion_of_real_name_authentication": "Non Korean nationality users complete the real name authentication method.",
@@ -378,9 +378,9 @@ const en = {
       "please_upload_file": "Please upload the file"
     },
     "validate_sms": {
-      "binding_cell_phone_authentication": "Verify Your Cell Phone",
-      "send_identify_code": "Send Code",
-      "confirm": "Submit"
+      "binding_cell_phone_authentication": "Binding cell phone authentication",
+      "send_identify_code": "Send Identify Code",
+      "confirm": "Confirm"
     },
     "browser": {
       "chrome": "Chrome",
@@ -396,7 +396,7 @@ const en = {
       "deposit": "Deposit",
       "withdraw": "Withdraw",
       "withdraw_currency_address": "Withdraw Currency Address",
-      "Amount_to_withdraw": "Amount to withdraw",
+      "Amount_to_withdraw": "Amount to Withdraw",
       "google_validate": "Google Validate",
       "withdraw_all": "Withdraw All",
       "tariff_description": "Tariff description",
@@ -404,7 +404,7 @@ const en = {
       "min_currency": "Minimum amount of currency：0.001。",
       "confirm_apply_for_success": "After the request is successful, please go to the mailbox to click the link to confirm the request, and you can track the status of the Recharge and historical records page.",
       "make_sure_safe": "Be sure to make sure that computers and browsers are safe to prevent information from being tampered or leaked.",
-      "btc_withdraw_currency_record": "BTC withdraw currency record",
+      "withdraw_currency_record": "Withdraw currency record",
       "number": "Number",
       "withdraw_time": "Withdraw Time",
       "withdraw_address": "Withdraw Address",
@@ -412,9 +412,27 @@ const en = {
       "absenteeism_expenses": "Absenteeism expenses",
       "statu_and_operation": "statu / operation",
       "available_balance": "Available balance",
-      "remaining_withdraw": "Remaining withdraw amount of money",
-      "minimum_withdraw_amount_of_money": "Minimum withdraw amount of money",
-      "remark_label": "Remark Label"
+      "remaining_withdraw": "Remaining Withdraw amount of money",
+      "minimum_withdraw_amount_of_money": "Minimum Withdraw amount of money",
+      "remark_label": "Remark Label",
+      "use_a_new_address": "Use a new address",
+      "sms": "SMS",
+      "send_identify_code": "Send Identify Code",
+      "set_as_default": "Set As Default",
+      "delete": "Delete",
+      "cancel": "Cancel"
+    },
+    "deposit_currency":{
+      'withdraw_address': 'Withdraw Address',
+      'generating_address_qrcode': "Generating Address Qrcode",
+      "use_wallet_service": "Please use your commonly used wallet service, local purse, online wallet, or mobile wallet, choose to pay or send.",
+      "font_descripe": "In the payment or payment of your wallet, copy the following special currency address which is specially recharged for you, fill in the amount you want to recharge to the account in the amount, and don't forget to pay a certain ore fee to ensure that the transaction is confirmed by the whole network as soon as possible. You can also scan the two-dimensional code in the mobile end purse to pay. You can recharge the special currency address and the two-dimensional code.",
+      "operation_done": "After the above operation is done, click send payment, the transaction will be broadcast to the whole network, so you can see the status of the transaction. When the transaction reaches the 1 confirmation of the whole network (about 10 to 60 minutes), the system will automatically recharge to the account. You can inquire in the disclosure of the assets.",
+      "deposit_record": "Deposit Record",
+      "deposit_date": "Deposit Date",
+      "trading_hash": "Trading Hash",
+      "recharge_amount": "Recharge Amount",
+      "confirmation_number": "Confirmation Number"
     },
     "title": {
       "member_center": "Member Center",
@@ -422,10 +440,11 @@ const en = {
       "validate_google": "Validate Google",
       "validate_identity": "Validate Identity",
       "validate_sms": "Validate Sms",
-      "currency_withdraw": "Currency withdraw"
+      "currency_withdraw": "Currency Withdraw",
+      "currency_deposit": "Currency Deposit"
     },
     "validation": {
-      "fwef": "fe"
+      "wef": "fe"
     },
     "prompt": {
       "identify_code_error": "Identify code error",
@@ -452,7 +471,8 @@ const en = {
       "login_password": "Login Password",
       "google_verification_code": "Code Displayed in Google Authenticator",
       "google_verification": "Verify",
-      "app_already_installed": "APP already installed"
+      "app_already_installed": "APP already installed",
+      'all_steps_completed': `All the above steps have been completed`
     }
   }
 }
