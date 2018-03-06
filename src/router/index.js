@@ -6,6 +6,7 @@ const ValidateGoogle = () => import('Pages/Validate/Google/Google')
 const ValidateIdentity = () => import('Pages/Validate/Identity/Identity')
 const WithdrawCurrency = () => import('Pages/WithdrawCurrency/WithdrawCurrency')
 const ValidateSms = () => import('Pages/Validate/Sms/Sms')
+const HomePage = () => import('Pages/HomePage/HomePage')
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: MemberCenter
+    },
+    {
+      path: '/homepage',
+      name: 'HomePage',
+      component: HomePage
     },
     {
       path: '/:version',
