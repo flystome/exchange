@@ -79,7 +79,7 @@
       ></upload-img>
     </div>
     <footer class="btc-b-t btc-marginT25">
-      <basic-button @click.native="uploadImg" class="btc-fr col-xs-12 col-md-1 pull-right" :text='$t("validate_identity.submissions")'>
+      <basic-button @click.native="uploadImg" class="btc-fr col-xs-12 col-md-1 pull-right" :disabled="disabled" :text='$t("validate_identity.submissions")'>
       </basic-button>
     </footer>
   </div>
@@ -96,6 +96,7 @@ export default {
         display: false,
         text: '密码错误'
       },
+      disabled: false,
       img: false,
       user: {
         surname: '',
@@ -184,6 +185,7 @@ export default {
         }
       }, d => {
         if (d.data.status_code === '0') {
+          this.disabled = true
           this.prompt = d.data.errors
           this.PopupBoxDisplay({message: this.identity_hint, url: '/member_center', type: 'success'})
         } else if (d.data.status_code === '1') {

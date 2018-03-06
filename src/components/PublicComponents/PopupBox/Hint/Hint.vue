@@ -28,7 +28,7 @@ export default {
   methods: {
     gopath () {
       if (this.PopupBox.url) {
-        this.$router.push({path: this.PopupBox.url})
+        this.$router.push(this.PopupBox.url, () => { this.$store.dispatch('getData') })
       }
       this.PopupBoxDisplay()
     },
