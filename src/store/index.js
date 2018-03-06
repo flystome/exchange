@@ -32,8 +32,8 @@ const mutations = {
   },
   PopupBoxDisplay (state, obj) {
     state.PopupBox.status = !state.PopupBox.status
-    state.PopupBox.message = obj.message
-    obj.url ? state.PopupBox.url = obj.url : state.PopupBox.url = ''
+    state.PopupBox.message = obj && obj.message
+    obj && obj.url ? state.PopupBox.url = obj.url : state.PopupBox.url = ''
   },
   ChangeLanguage (state, lang) {
     state.language = lang

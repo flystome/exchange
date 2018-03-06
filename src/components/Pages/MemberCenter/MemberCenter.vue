@@ -30,11 +30,11 @@
         </div>
       </div>
       <div class="btc-member-ver">
-        <div class="btc-member-stepsblock">
-          <div class="col-md-2">
+        <div class="btc-member-stepsblock col-md-4 col-xs-12">
+          <div class="col-md-2 col-xs-1">
             <img src="~Img/member-email.png" class="btc-paddingR20 btc-paddingT5" alt="">
           </div>
-          <div class="col-md-8">
+          <div class="col-md-8 col-xs-10">
             <div class="btc-member-steps">
               <div class="btc-marginB5">
               {{ loginData.email }}
@@ -48,18 +48,18 @@
               </span>
             </div>
           </div>
-          <div class="col-md-1">
+          <div class="col-md-1 col-xs-1">
             <div class="pull-right btc-paddingT15">
               <img src="~Img/right.png" v-if='loginData.activated'>
               <img src="~Img/false.png" alt="" v-else>
             </div>
           </div>
         </div>
-        <div class="btc-member-stepsblock btc-marginL10 btc-marginR10">
-          <div class="col-md-2">
-            <img src="~Img/member-google.png" class="btc-paddingL10" alt="">
+        <div class="btc-member-stepsblock btc-marginL10 btc-marginR10 col-md-4 col-xs-12">
+          <div class="col-md-2 col-xs-1">
+            <img src="~Img/member-google.png" alt="">
           </div>
-          <div class="col-md-8">
+          <div class="col-md-8 col-xs-10">
             <div class="btc-marginB5">
               {{$t("member_center.korean_user_use_twice_verification")}}
             </div>
@@ -76,38 +76,38 @@
               </span>
             </div>
           </div>
-          <div class="col-md-1">
+          <div class="col-md-1 col-xs-1">
             <div class="pull-right btc-paddingT15">
               <img src="~Img/right.png" v-if='loginData.sms_activated && loginData.app_activated'>
               <img src="~Img/false.png" alt="" v-else>
             </div>
           </div>
         </div>
-        <div class="btc-member-stepsblock">
-          <div class="col-md-2">
-            <img src="~Img/member-identity.png" class="btc-paddingL10" alt="">
+        <div class="btc-member-stepsblock col-md-4 col-xs-12">
+          <div class="col-md-2 col-xs-1">
+            <img src="~Img/member-identity.png" alt="">
           </div>
-          <div class="col-md-8">
+          <div class="col-md-8 col-xs-10">
             <div class="btc-marginB5">
               {{$t("member_center.completion_of_real_name_authentication")}}
             </div>
             <div class="btc-member-steps btc-verifying-prompt">
               <span class="btc-member-validata btc-link"
-              @click="goPath('/validate/identity', loginData.id_document.aasm_state==='verified' || loginData.id_document.aasm_state==='verifying',false)"
-              :class="{'btc-active': loginData.id_document.aasm_state==='unverified',
-              'btc-verifying':loginData.id_document.aasm_state==='verifying'}">
+              @click="goPath('/validate/identity', (loginData.id_document && loginData.id_document.aasm_state) ===' verified' || (loginData.id_document && loginData.id_document.aasm_state)==='verifying',false)"
+              :class="{'btc-active': (loginData.id_document && loginData.id_document.aasm_state)==='unverified',
+              'btc-verifying':(loginData.id_document && loginData.id_document.aasm_state)==='verifying'}">
                 <span>{{$t("auth.real_name")}}</span>
-                <img v-if='loginData.id_document.aasm_state==="verified"' src="~Img/validate-true.png" alt="已认证">
-                <img v-else-if='loginData.id_document.aasm_state==="verifying"' src="~Img/verifying.png" alt="认证中">
-                <img v-else-if='loginData.id_document.aasm_state==="unverified"' src="~Img/unverified.png" alt="认证失败">
+                <img v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' src="~Img/validate-true.png" alt="已认证">
+                <img v-else-if='(loginData.id_document && loginData.id_document.aasm_state)==="verifying"' src="~Img/verifying.png" alt="认证中">
+                <img v-else-if='(loginData.id_document && loginData.id_document.aasm_state)==="unverified"' src="~Img/unverified.png" alt="认证失败">
                 <span class="verifying-prompt">认证中</span>
               </span>
 
             </div>
           </div>
-          <div class="col-md-1">
+          <div class="col-md-1 col-xs-1">
             <div class="pull-right btc-paddingT15">
-              <img src="~Img/right.png" v-if='loginData.id_document.aasm_state==="verified"'>
+              <img src="~Img/right.png" v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"'>
               <img src="~Img/false.png" alt="" v-else>
             </div>
           </div>
@@ -116,6 +116,7 @@
       </div>
     </div>
     <template v-if="step === 1">
+      <div class="container">
       <basic-table :captionTitle='getLoginRecord.captionTitle' :item='getLoginRecord.Item'>
       <span slot="remark" class="btc-tableRemark">{{$t('member_center.have_questions_to_contact_us')}}</span>
       </basic-table>
@@ -147,8 +148,10 @@
           </div>
         </template>
       </div>
+      </div>
     </template>
     <template v-if="step === 2">
+      <div class="container">
       <basic-table :captionTitle='getRecommendCount.captionTitle' :item='getRecommendCount.Item'>
       <div slot="more" class="text-center btc-b-t btc-table-more">
         <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('member_center.show_more')}}</a>
@@ -159,6 +162,7 @@
           <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('member_center.show_more')}}</a>
         </div>
       </basic-table>
+      </div>
     </template>
     </div>
 </template>
@@ -174,7 +178,7 @@ export default {
       HOST_URL: process.env.HOST_URL,
       name_activated: false,
       wexin_activated: false,
-      email_sent_message: '邮件发送成功，请前往您的邮箱激活账号',
+      email_sent_message: this.$t('member_center.email_sent_message'),
       tickets: [],
       step: 1
     }

@@ -28,13 +28,13 @@
         </div>
         <div class="btc-marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
-            <basic-input :placeholder='$t("validate_identity.surname")' :type='"first_name"' v-model="user.first_name"></basic-input>
+            <basic-input ref='first_name' :placeholder='$t("validate_identity.surname")' :type='"first_name"' v-model="user.first_name"></basic-input>
           <!--<div class=" btc-marginT20">-->
             <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
             <!--<basic-input  v-model="user.name"></basic-input>-->
           <!--</div>-->
-            <basic-input  :placeholder='$t("validate_identity.name")' :type='"last_name"'  v-model="user.last_name"></basic-input>
-            <basic-input  :placeholder='$t("validate_identity.valid_id_card")' :type='"IdCard"'  v-model="user.IdCard"></basic-input>
+            <basic-input ref='last_name' :placeholder='$t("validate_identity.name")' :type='"last_name"'  v-model="user.last_name"></basic-input>
+            <basic-input ref="IdCard"  :placeholder='$t("validate_identity.valid_id_card")' :type='"IdCard"'  v-model="user.IdCard"></basic-input>
         </div>
       </div>
     </div>
@@ -141,23 +141,35 @@ export default {
       return fd
     },
     ...mapMutations(['PopupBoxDisplay']),
-    uploadImg () {
-      if (!this.$refs['id_bill_file_attributes'].$refs['input'].files[0]) {
+    async uploadImg () {
+      const first = await this.$refs['first_name'].$validator.validateAll()
+      const last = await this.$refs['last_name'].$validator.validateAll()
+      const IdCard = await this.$refs['IdCard'].$validator.validateAll()
+      const billFile = this.$refs['id_bill_file_attributes'].$refs['input'].files[0]
+      const holdingFile = this.$refs['id_document_selfie_holding_file_attributes'].$refs['input'].files[0]
+      const backF = this.$refs['id_document_back_file_attributes'].$refs['input'].files[0]
+      const frontF = this.$refs['id_document_front_file_attributes'].$refs['input'].files[0]
+      if (!billFile) {
         document.getElementById('indentity4').scrollIntoView(true)
         this.verifymsg.indentity4 = this.$t('validate_identity.please_upload_file')
       }
-      if (!this.$refs['id_document_selfie_holding_file_attributes'].$refs['input'].files[0]) {
+      if (!holdingFile) {
         document.getElementById('indentity3').scrollIntoView(true)
         this.verifymsg.indentity3 = this.$t('validate_identity.please_upload_file')
       }
-      if (!this.$refs['id_document_back_file_attributes'].$refs['input'].files[0]) {
+      if (!backF) {
         document.getElementById('indentity2').scrollIntoView(true)
         this.verifymsg.indentity2 = this.$t('validate_identity.please_upload_file')
       }
-      if (!this.$refs['id_document_front_file_attributes'].$refs['input'].files[0]) {
+      if (!frontF) {
         document.getElementById('indentity1').scrollIntoView(true)
         this.verifymsg.indentity1 = this.$t('validate_identity.please_upload_file')
       }
+
+      if (!first || !last || !IdCard || !billFile || !holdingFile || !backF || !frontF) {
+        return
+      }
+      this.disabled = true
       var formData = new FormData()
       var z = this.objectToFormData({
         first_name: this.user.first_name,
@@ -185,7 +197,6 @@ export default {
         }
       }, d => {
         if (d.data.status_code === '0') {
-          this.disabled = true
           this.prompt = d.data.errors
           this.PopupBoxDisplay({message: this.identity_hint, url: '/member_center'})
         }
