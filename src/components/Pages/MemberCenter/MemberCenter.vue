@@ -26,6 +26,90 @@
         </div>
       </div>
       <div class="btc-member-ver">
+        <div class="media">
+          <div>
+            <div class="media-left">
+              <a href="#">
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-email.png" data-holder-rendered="true">
+              </a>
+            </div>
+            <div class="media-body">
+              <!-- <h5 class="media-heading">{{ loginData.email }}</h5> -->
+              <h5 class="media-heading">{{ loginData.email }}</h5>
+              <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.activated}">
+                <span v-if='loginData.activated'>{{$t("auth.email")}}</span>
+                <span v-else @click="sendEmail">
+                  {{$t("auth.send_email")}}
+                </span>
+                <img v-if='loginData.activated' src="~Img/validate-true.png" alt="已认证">
+              </span>
+            </div>
+            <div class="media-right">
+              <a href="#">
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='loginData.activated' data-holder-rendered="true" >
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="media">
+          <div>
+            <div class="media-left">
+              <a href="#">
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-google.png" data-holder-rendered="true">
+              </a>
+            </div>
+            <div class="media-body">
+              <h5 class="media-heading">{{$t("member_center.korean_user_use_twice_verification")}}</h5>
+              <span class="btc-member-validata btc-link btc-marginR10" @click="validatephone" :class="{'btc-active': !loginData.sms_activated}">
+                  <span>{{ $t("auth.phone") }}</span>
+                  <img v-if='loginData.sms_activated' src="~Img/validate-true.png" alt="已认证">
+                </span>
+                <span class="btc-member-validata btc-link btc-marginT10" :class="{'btc-active': !loginData.app_activated}" @click="validateAuth">
+                  <span>{{$t("auth.google")}}</span>
+                  <img v-if='loginData.app_activated' src="~Img/validate-true.png" alt="已认证">
+                </span>
+            </div>
+            <div class="media-right">
+              <a href="#">
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='loginData.sms_activated && loginData.app_activated' data-holder-rendered="true" >
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="media">
+          <div>
+            <div class="media-left">
+              <a href="#">
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-identity.png" data-holder-rendered="true">
+              </a>
+            </div>
+            <div class="media-body ">
+              <h5 class="media-heading">{{$t("member_center.completion_of_real_name_authentication")}}</h5>
+              <div class="btc-verifying-prompt">
+                <span class="btc-member-validata btc-link"
+                  @click="validateAll"
+                  :class="{'btc-active': (loginData.id_document && loginData.id_document.aasm_state)==='unverified',
+                  'btc-verifying':(loginData.id_document && loginData.id_document.aasm_state)==='verifying'}">
+                  <span>{{$t("auth.real_name")}}</span>
+                  <img v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' src="~Img/validate-true.png" alt="已认证">
+                  <img v-else-if='(loginData.id_document && loginData.id_document.aasm_state)==="verifying"' src="~Img/verifying.png" alt="认证中">
+                  <img v-else-if='(loginData.id_document && loginData.id_document.aasm_state)==="unverified"' src="~Img/unverified.png" alt="认证失败">
+                  <span class="verifying-prompt">认证中</span>
+                </span>
+              </div>
+            </div>
+            <div class="media-right">
+              <a href="#">
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' data-holder-rendered="true" >
+                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
+              </a>
+            </div>
+          </div>
+        </div>
+
+
         <!-- <div class="btc-member-stepsblock col-md-4 col-xs-12">
           <div class="col-md-2 col-xs-1">
             <img src="~Img/member-email.png" class="btc-paddingR20 btc-paddingT5" alt="">
@@ -51,33 +135,7 @@
             </div>
           </div>
         </div> -->
-        <div class="media">
-          <div class="media-left">
-            <a href="#">
-              <img class="media-object" src="~Img/member-email.png">
-            </a>
-          </div>
-          <div class="media-body">
-            <div class="btc-member-steps">
-              <div class="btc-marginB5">
-              {{ loginData.email }}
-              </div>
-              <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.activated}">
-                  <span v-if='loginData.activated'>{{$t("auth.email")}}</span>
-                  <span v-else @click="sendEmail">
-                    {{$t("auth.send_email")}}
-                  </span>
-                <img v-if='loginData.activated' src="~Img/validate-true.png" alt="已认证">
-              </span>
-            </div>
-          </div>
-          <div class="media-right">
-            <a href="#">
-              <img class="media-object" src="~Img/member-email.png">
-            </a>
-          </div>
-        </div>
-        <div class="btc-member-stepsblock btc-marginL10 btc-marginR10 col-md-4 col-xs-12">
+        <!-- <div class="btc-member-stepsblock btc-marginL10 btc-marginR10 col-md-4 col-xs-12">
           <div class="col-md-2 col-xs-1">
             <img src="~Img/member-google.png" alt="">
           </div>
@@ -86,12 +144,12 @@
               {{$t("member_center.korean_user_use_twice_verification")}}
             </div>
             <div class="btc-member-steps">
-              <!-- <p class="btc-member-validata btc-link btc-marginR10" @click="goPath('/validate/sms', loginData.sms_activated,false)" :class="{'btc-active': !loginData.sms_activated}"> -->
+              <p class="btc-member-validata btc-link btc-marginR10" @click="goPath('/validate/sms', loginData.sms_activated,false)" :class="{'btc-active': !loginData.sms_activated}">
               <p class="btc-member-validata btc-link btc-marginR10" @click="validatephone" :class="{'btc-active': !loginData.sms_activated}">
                 <span>{{ $t("auth.phone") }}</span>
                 <img v-if='loginData.sms_activated' src="~Img/validate-true.png" alt="已认证">
               </p>
-              <!-- <span class="btc-member-validata btc-link btc-marginT10" :class="{'btc-active': !loginData.app_activated}" @click="goPath('/validate/google',loginData && loginData.app_activated,false)"> -->
+              <span class="btc-member-validata btc-link btc-marginT10" :class="{'btc-active': !loginData.app_activated}" @click="goPath('/validate/google',loginData && loginData.app_activated,false)">
               <span class="btc-member-validata btc-link btc-marginT10" :class="{'btc-active': !loginData.app_activated}" @click="validateAuth">
                 <span>{{$t("auth.google")}}</span>
                 <img v-if='loginData.app_activated' src="~Img/validate-true.png" alt="已认证">
@@ -104,8 +162,8 @@
               <img src="~Img/false.png" alt="" v-else>
             </div>
           </div>
-        </div>
-        <div class="btc-member-stepsblock col-md-4 col-xs-12">
+        </div> -->
+        <!-- <div class="btc-member-stepsblock col-md-4 col-xs-12">
           <div class="col-md-2 col-xs-1">
             <img src="~Img/member-identity.png" alt="">
           </div>
@@ -133,7 +191,7 @@
             </div>
           </div>
 
-        </div>
+        </div> -->
       </div>
     </div>
     <template v-if="step === 1">
