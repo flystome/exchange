@@ -4,7 +4,9 @@ const requestUrl = process.env.HOST_URL
 // axios.defaults.withCredentials = true
 
 axios.interceptors.request.use(function (config) {
-  config.headers['DataType'] = 'application/json;charset=utf-8'
+  config.headers = {
+    'DataType': 'application/json;charset=utf-8'
+  }
   return config
 })
 

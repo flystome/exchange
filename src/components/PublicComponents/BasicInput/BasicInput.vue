@@ -4,6 +4,7 @@
     :class="{'input': true, 'is-danger': errors.has(type) }"
     :name="type"
     type="text"
+    :value='value'
     :placeholder="placeholder"
      @input="$emit('input', $event.target.value)">
     <span v-show="errors.has(type)" class="help is-danger">{{ errors.first(type) }}</span>
@@ -11,6 +12,7 @@
   <div v-else>
     <input class="btc-basicInput btc-b"
     :placeholder="placeholder"
+    :value='value'
      @input="$emit('input', $event.target.value)">
      <slot name='button'></slot>
   </div>
@@ -18,7 +20,7 @@
 
 <script>
 export default {
-  props: ['placeholder', 'type'],
+  props: ['placeholder', 'type', 'value'],
   name: 'BasicInput'
 }
 </script>

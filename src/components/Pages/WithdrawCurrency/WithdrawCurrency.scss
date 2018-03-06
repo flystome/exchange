@@ -158,8 +158,8 @@
         }
         img {
           position: absolute;
-          bottom: -1px;
-          right: -1px;
+          bottom: 0px;
+          right: 0px;
           cursor: pointer;
         }
       }
@@ -241,6 +241,9 @@
       input{
         border-left: none;
       }
+    }
+    .btc-qrcode{
+      margin-top: -25px;
     }
 }
 

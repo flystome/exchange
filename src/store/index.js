@@ -22,7 +22,6 @@ const getters = {
 
 const mutations = {
   getData (state, data) {
-    // state.language = data.headers['content-language'] === '' ? 'en' : data.headers['content-language']
     state.language = 'en'
     state.language = data.headers['content-language'] === '' ? 'en' : data.headers['content-language']
     data.data.referrals.map((d, index) => {
@@ -31,9 +30,17 @@ const mutations = {
     state.loginData = data.data
   },
   PopupBoxDisplay (state, obj) {
+    if (!obj) {
+      obj = {
+        type: 'success',
+        url: '',
+        message: ''
+      }
+    }
+    state.PopupBox.type = obj.type
     state.PopupBox.status = !state.PopupBox.status
     state.PopupBox.message = obj.message
-    obj.url ? state.PopupBox.url = obj.url : state.PopupBox.url = ''
+    state.PopupBox.url = obj.url ? obj.url : ''
   },
   ChangeLanguage (state, lang) {
     state.language = lang
@@ -45,6 +52,7 @@ const store = new Vuex.Store({
     loginData: '',
     Wrapper: false,
     PopupBox: {
+      type: 'success',
       status: false,
       message: '',
       url: ''

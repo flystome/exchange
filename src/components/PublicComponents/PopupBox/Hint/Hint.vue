@@ -3,7 +3,9 @@
     <div class="btc-hint">
       <div class="text-center btc-hint-middle btc-paddingR30 btc-paddingL30">
        <div>
-          <img src="~Img/Hint-success.png" class="btc-marginT55 btc-marginB35">
+          <img v-if="PopupBox.type === 'success' " src="~Img/Hint-success.png" class="btc-marginT55 btc-marginB35">
+          <img v-else-if="PopupBox.type === 'warn'" src="~Img/Hint-warn.png" class="btc-marginT55 btc-marginB35">
+          <img v-else src="~Img/Hint-error.png" class="btc-marginT55 btc-marginB35">
        </div>
        <div>
          {{this.PopupBox.message}}
@@ -11,7 +13,6 @@
        <div class="btc-paddingB30">
         <a @click.stop="gopath">
           <basic-button class="btc-marginT50" :text='"确定"'>
-            <!-- <a ></a> -->
           </basic-button>
         </a>
        </div>

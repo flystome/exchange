@@ -263,7 +263,7 @@ const en = {
         "coin_done": "Coin Done",
         "done": "Done",
         "almost_done": "Almost Done",
-        "canceled": "Canceld",
+        "canceled": "Canceled",
         "failed": "Failed"
       }
     },
@@ -420,10 +420,11 @@ const en = {
       "send_identify_code": "Send Identify Code",
       "set_as_default": "Set As Default",
       "delete": "Delete",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "resend": "Resend"
     },
     "deposit_currency":{
-      'withdraw_address': 'Withdraw Address',
+      'deposit_address': 'Address',
       'generating_address_qrcode': "Generating Address Qrcode",
       "use_wallet_service": "Please use your commonly used wallet service, local purse, online wallet, or mobile wallet, choose to pay or send.",
       "font_descripe": "In the payment or payment of your wallet, copy the following special currency address which is specially recharged for you, fill in the amount you want to recharge to the account in the amount, and don't forget to pay a certain ore fee to ensure that the transaction is confirmed by the whole network as soon as possible. You can also scan the two-dimensional code in the mobile end purse to pay. You can recharge the special currency address and the two-dimensional code.",
@@ -432,7 +433,8 @@ const en = {
       "deposit_date": "Deposit Date",
       "trading_hash": "Trading Hash",
       "recharge_amount": "Recharge Amount",
-      "confirmation_number": "Confirmation Number"
+      "confirmation_number": "Confirmation Number",
+      "identifying_code": "Identifying Code"
     },
     "title": {
       "member_center": "Member Center",

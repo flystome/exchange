@@ -185,7 +185,9 @@ export default {
       }, d => {
         if (d.data.status_code === '0') {
           this.prompt = d.data.errors
-          this.PopupBoxDisplay({message: this.identity_hint, url: '/member_center'})
+          this.PopupBoxDisplay({message: this.identity_hint, url: '/member_center', type: 'success'})
+        } else if (d.data.status_code === '1') {
+          this.PopupBoxDisplay({message: d.data.errors, type: 'error'})
         }
       })
     }
