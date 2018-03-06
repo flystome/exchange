@@ -32,25 +32,6 @@
   }
 }
 
-
-@media(max-width: 767px){
-    .navbar-right{
-      float: right
-    }
-    .nav-pills{
-      float: left
-    }
-}
-
-@media(max-width: 767px){
-  .navbar-right{
-    float: right
-  }
-  .nav-pills{
-    float: left
-  }
-}
-
 .login-active .dropdown-toggle{
   padding: 0
 }
@@ -122,6 +103,9 @@
           height: 50px;
           line-height: 48px;
           margin-right: -33px;
+          .message{
+            display: none;
+          }
           .btc-country{
             >a{
               padding-left: 0;
@@ -167,9 +151,23 @@
   }
 }
 
+@media(max-width: 767px){
+  .navbar-right{
+    .message{
+      display: inline-block !important;
+    }
+    .btc-ifo{
+      border-top: 1px;
+    }
+  }
+  .nav-pills{
+    float: left
+  }
+}
+
 @media(max-width: 992px){
   .navbar-right{
-    display: none
+    // display: none
   }
 }
 
