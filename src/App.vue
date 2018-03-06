@@ -71,7 +71,6 @@ body{
   background: #f2f2f2;
   padding-bottom: 13px;
   min-height: 70vh;
-  padding-top: 3px;
 }
 
 .btc-container-block{
@@ -96,6 +95,10 @@ body{
 
 .btc-pointer{
   cursor: pointer;
+}
+
+.btc-b-def{
+  border: 1px solid #dfe0e1;
 }
 
 .btc-b{
