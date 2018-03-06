@@ -19,4 +19,30 @@ Validator.extend('CellPhone', {
   }
 })
 
+Validator.extend('first_name', {
+  getMessage (field, params, data) {
+    return (data && data.validation) || 'Something went wrong'
+  },
+  validate: value => {
+    return /\S+/.test(value)
+  }
+})
+
+Validator.extend('last_name', {
+  getMessage (field, params, data) {
+    return (data && data.validation) || 'Something went wrong'
+  },
+  validate: value => {
+    return /\S+/.test(value)
+  }
+})
+Validator.extend('IdCard', {
+  getMessage (field, params, data) {
+    return (data && data.validation) || 'Something went wrong'
+  },
+  validate: value => {
+    return /[a-zA-z\d]{5,}/.test(value)
+  }
+})
+
 export default dictionary

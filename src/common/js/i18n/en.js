@@ -321,7 +321,13 @@ const en = {
       "please": "Please",
       "login": "login",
       "or": "or",
-      "register": "register"
+      "register": "register",
+      "wallet": "Wallet",
+      "announcement": "Announcement",
+      "qa": "Q\u0026A",
+      "settings": "Settings",
+      "member_center": "Member Center",
+      "exit": "Exit"
     },
     "member_center": {
       "total_assets": "Total Assets",
@@ -350,7 +356,9 @@ const en = {
       "no": "No",
       "no_record": "No Record",
       "korean_user_use_twice_verification": "South Korean user real name certification, presentation, modification and other twice verification",
-      "completion_of_real_name_authentication": "Non Korean nationality users complete the real name authentication method."
+      "completion_of_real_name_authentication": "Non Korean nationality users complete the real name authentication method.",
+      "api": "API",
+      "email_sent_message": "Mail is successful, please go to your mailbox to activate your account"
     },
     "validate_identity": {
       "real_name_authentication": "Real Name Verification",
@@ -364,7 +372,11 @@ const en = {
       "three_months_bill": "Proof of residence document must contain name, address and be dated less than 3 months ago.",
       "submissions": "Submit",
       "using_true_identity": "Verify using your real identity, and your personal information won't be disclosed to others.",
-      "held_id_card": "Upload a photo with your face and your ID card inside. Only JPG format accepted."
+      "held_id_card": "Upload a photo with your face and your ID card inside. Only JPG format accepted.",
+      "example": "Example",
+      "click_upload": "Click upload",
+      "information_upload_success": "Real-name authentication information upload success",
+      "please_upload_file": "Please upload the file"
     },
     "validate_sms": {
       "binding_cell_phone_authentication": "Verify Your Cell Phone",
@@ -394,6 +406,7 @@ const en = {
       "confirm_apply_for_success": "After the request is successful, please go to the mailbox to click the link to confirm the request, and you can track the status of the Recharge and historical records page.",
       "make_sure_safe": "Be sure to make sure that computers and browsers are safe to prevent information from being tampered or leaked.",
       "btc_withdraw_currency_record": "BTC withdraw currency record",
+      "withdraw_currency_record": "BTC withdraw currency record",
       "number": "Number",
       "withdraw_time": "Withdraw Time",
       "withdraw_address": "Withdraw Address",
@@ -401,9 +414,30 @@ const en = {
       "absenteeism_expenses": "Absenteeism expenses",
       "statu_and_operation": "statu / operation",
       "available_balance": "Available balance",
-      "remaining_withdraw": "Remaining withdraw amount of money",
-      "minimum_withdraw_amount_of_money": "Minimum withdraw amount of money",
-      "remark_label": "Remark Label"
+      "remaining_withdraw": "Remaining Withdraw amount of money",
+      "minimum_withdraw_amount_of_money": "Minimum Withdraw amount of money",
+      "remark_label": "Remark Label",
+      "use_a_new_address": "Use a new address",
+      "sms": "SMS",
+      "send_identify_code": "Send Identify Code",
+      "set_as_default": "Set As Default",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "resend": "Resend"
+    },
+    "deposit_currency":{
+      'deposit_address': 'Address',
+      'copy_address': "Copy Address",
+      "use_wallet_service": "Please use your commonly used wallet service, local purse, online wallet, or mobile wallet, choose to pay or send.",
+      "font_descripe": "In the payment or payment of your wallet, copy the following special currency address which is specially recharged for you, fill in the amount you want to recharge to the account in the amount, and don't forget to pay a certain ore fee to ensure that the transaction is confirmed by the whole network as soon as possible. You can also scan the two-dimensional code in the mobile end purse to pay. You can recharge the special currency address and the two-dimensional code.",
+      "operation_done": "After the above operation is done, click send payment, the transaction will be broadcast to the whole network, so you can see the status of the transaction. When the transaction reaches the 1 confirmation of the whole network (about 10 to 60 minutes), the system will automatically recharge to the account. You can inquire in the disclosure of the assets.",
+      "deposit_record": "Deposit Record",
+      "deposit_date": "Deposit Date",
+      "trading_hash": "Trading Hash",
+      "recharge_amount": "Recharge Amount",
+      "confirmation_number": "Confirmation Number",
+      "identifying_code": "Identifying Code",
+      "temporarily_unable_deposit": "Temporarily unable to deposit"
     },
     "title": {
       "member_center": "Member Center",
@@ -438,9 +472,13 @@ const en = {
       "cant_scan_enter_keys": "If scaning doesn't work, please manually enter the 16 character key into Google Authenticator",
       "refresh_qrcode": "Refresh qrcode",
       "prve": "Back",
-      "login_password": "Login password",
+      "login_password": "Login Password",
       "google_verification_code": "Code Displayed in Google Authenticator",
-      "google_verification": "Verify"
+      "google_verification": "Verify",
+      "app_already_installed": "APP already installed"
+    },
+    "hint": {
+      "confirm": "Confirm"
     }
   }
 }

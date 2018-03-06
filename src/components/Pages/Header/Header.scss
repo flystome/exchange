@@ -5,6 +5,12 @@
   padding: 5px 0;
   z-index: 99;
   position: relative;
+  .navbar-default{
+    #bs-example-navbar-collapse-1{
+      border-color: none !important;
+    }
+  }
+
 }
 .nav-margin{
   margin-top: 10px;
@@ -13,6 +19,19 @@
 .nav-margin a{
   margin: 0 6px;
 }
+
+.btc-ifo,
+.btc-country{
+  .dropdown-menu{
+    margin-top: 1px !important;
+  }
+}
+.btc-country{
+  .dropdown-menu{
+    margin-top: -1px !important;
+  }
+}
+
 
 @media(max-width: 767px){
     .navbar-right{
@@ -103,6 +122,11 @@
           height: 50px;
           line-height: 48px;
           margin-right: -33px;
+          .btc-country{
+            >a{
+              padding-left: 0;
+            }
+          }
         }
       }
   }

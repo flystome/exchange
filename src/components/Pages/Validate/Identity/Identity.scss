@@ -62,10 +62,19 @@
   height: 32px;
   width: 100%;
   padding-left: 7px;
-  appearance:none;
-  -moz-appearance:none;
-  -webkit-appearance:none;
-  background: url("~Img/selectoption.png") no-repeat right #f2f2f2;
+}
+
+.btc-indentity-prompt{
+  position: relative;
+  padding-bottom: 25px;
+  .btc-newsPrompt{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    .btc-news-animation{
+      position: relative;
+    }
+  }
 }
 
 @media (max-width: 990px){

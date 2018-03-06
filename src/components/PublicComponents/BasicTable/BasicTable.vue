@@ -2,19 +2,31 @@
   <div class="btc-table-container hidden-xs">
     <div class="bs-example btc-table" data-example-id="simple-table">
       <table class="table">
-        <caption class="font-w"><strong>{{table.captionTitle}}</strong><slot name='remark'></slot></caption>
+        <caption class="font-w"><strong>{{captionTitle}}</strong>
+          <slot name='remark'></slot>
+        </caption>
         <tbody>
-          <tr v-for="(item, length) in table.Item" :key='length' v-if="length < 6">
-            <td v-for="(data,index)  in item.content" :key="index" :style="{width: toPercent()}"
-            :class="{'btc-tableTextright':index === 0,'btc-tableTextleft': index === item.content.length-1}">
-              {{data}}
+          <tr v-for="(item, length) in item" :key='length' v-if="length < 100">
+            <td v-for="(data,index)  in item.content"
+            :key="index" :style="{width: toPercent()}"
+            :class="{
+            'btc-tableTextright':index === 0,
+            'btc-tableTextleft': index === item.content.length-1,
+            'btc-tableHover': data.hover
+            }">
+            {{ typeof data !== 'object' ? data : data.context }}
+           <slot v-if="(data.type && data.type['aasm_state']) === ('submitting' || 'submitted' || 'accepted') "
+           name="cancel"
+           :data='data'
+           :id='data.id'>
+           </slot>
             </td>
           </tr>
         </tbody>
-        <div class="text-center btc-table-record" v-if="table.Item.length === 0">
-            <div>
-                <div class="btc-marginT15 btc-font12 btc-color999">{{$t('member_center.no_record')}}</div>
-            </div>
+        <div class="text-center btc-table-record" v-if="item.length === 0">
+          <div>
+            <div class="btc-marginT15 btc-font12 btc-color999">{{$t('member_center.no_record')}}</div>
+          </div>
         </div>
       </table>
       <slot name='more'></slot>
@@ -25,10 +37,10 @@
 <script>
 export default {
   name: 'BasicTable',
-  props: ['table'],
+  props: ['captionTitle', 'item'],
   methods: {
     toPercent () {
-      var str = Number(1 / this.table.Item[0].content.length * 100)
+      var str = Number(1 / this.item[0].content.length * 100)
       str += '%'
       return str
     }
@@ -37,5 +49,5 @@ export default {
 </script>
 
 <style>
-@import './BasicTable.css'
+  @import './BasicTable.css'
 </style>

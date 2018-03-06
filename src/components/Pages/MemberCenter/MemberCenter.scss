@@ -3,10 +3,16 @@
   float: right;
   cursor: pointer;
 }
-
+.btc-container {
+  >div{
+    .container{
+      padding: 0
+    }
+  }
+}
 .btc-member-center {
   .btc-membercenter-header{
-    padding: 12px 30px 112px 50px;
+    padding: 12px 30px 112px 25px;
     background: url("~Img/membercenter.png") no-repeat center;
   }
   .btc-membercenter-header{
@@ -21,10 +27,10 @@
     margin-top: -80px;
     padding-left: 40px;
     .btc-member-stepsblock{
-      min-width: 346px;
+      width: 346px;
       float: left;
       background-color: #fff;
-      padding: 25px 16px 25px 18px;
+      padding: 25px 0;
       >img{
         float: left;
       }
@@ -65,7 +71,6 @@
 }
 
 .btc-member-info{
-  padding-left: 16px;
   float: left;
   padding-top: 8px;
   color:  #fff;
@@ -190,8 +195,8 @@
 }
 
 .btc-member-validata{
-  border: 1px solid #666666;
-  color: #666666 !important;
+  border: 1px solid #bebebe;
+  color: #999999 !important;
   padding: 2px 14px;
   display: inline-block;
   margin-bottom: 16px;
@@ -206,10 +211,35 @@
   color: white !important;
 }
 
+
+.btc-verifying-prompt{
+  position: relative;
+  .verifying-prompt{
+    position: absolute;
+    left: 50%;
+    margin-left: -20px;
+    font-size: 12px;
+    border: 1px solid #bebebe;
+    bottom: -14px;
+    background-color: #f2f2f2;
+    padding: 0 2px;
+    display: none;
+  }
+}
+.btc-verifying{
+  color: #666666 !important;
+  border-color: #666666;
+  &:hover{
+    .verifying-prompt{
+      display: block;
+    }
+  }
+}
+
 .btc-member-validata img{
   position: absolute;
   bottom: -1px;
-  right: 0;
+  right: -1px;
 }
 
 .btc-member-step{
@@ -236,6 +266,20 @@
   border: none;
 }
 
+@media(max-width: 1200px){
+  .btc-member-ver{
+    padding-left: 0 !important;
+    .col-md-4{
+      width: 33.33333333333% !important;
+    }
+    .btc-member-stepsblock{
+      &:nth-child(2){
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  }
+}
 
 @media (max-width: 992px) {
   .btc-member-vc{
@@ -260,6 +304,29 @@
   }
   .btc-img > div{
     height: initial;
+  }
+}
+
+@media(max-width: 981px){
+  .btc-member-ver{
+    .col-md-4{
+      width: 100% !important;
+    }
+  }
+}
+
+@media (max-width: 566px) {
+  .btc-member-ver{
+    .btc-member-stepsblock{
+      padding-right: 10px !important;
+      .col-xs-10{
+        padding-left: 30px;
+        padding-right: 0;
+      }
+      .col-xs-1{
+        padding-right: 0;
+      }
+    }
   }
 }
 
