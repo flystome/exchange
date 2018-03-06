@@ -89,17 +89,6 @@ export default {
     requireImg (img) {
       return require(`../../../../static/img/${img}.png`)
     },
-    goPath (path, status, href) {
-      if (status) {
-        return
-      }
-      if (href) {
-        location.href = `${this.HOST_URL}${path}`
-      }
-      this.$router.push({
-        path: path
-      })
-    },
     validateEmail () {
       if (!this.loginData.activated) {
         alert(1)

@@ -4,11 +4,14 @@
   background-color: #fff;
   .btc-homepage-header{
     min-height: 320px;
+    margin-top: -3px;
     background:linear-gradient(to bottom, #206eff, #2f9aff);
     .carousel{
       position: absolute;
       width: 100%;
       min-height: 320px;
+      left: 0;
+      background:linear-gradient(to bottom, #206eff, #2f9aff);
     }
     .carousel-inner{
       height: 320px;
