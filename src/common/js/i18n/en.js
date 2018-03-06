@@ -416,7 +416,7 @@ const en = {
       "available_balance": "Available balance",
       "remaining_withdraw": "Remaining Withdraw amount of money",
       "minimum_withdraw_amount_of_money": "Minimum Withdraw amount of money",
-      "remark_label": "Remark Label",
+      "remark_label": "Remark",
       "use_a_new_address": "Use a new address",
       "sms": "SMS",
       "send_identify_code": "Send Identify Code",

@@ -282,7 +282,7 @@ export default {
       this.Rucaptcha += `?${Math.random()}`
     },
     WithdrawAll () {
-      this.WithdrawData.amount = this.Remain
+      this.WithdrawData.amount = Number(this.Remain).toFixed(3)
     },
     AddAddress () {
       this.withdrawAddress = true
