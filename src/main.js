@@ -5,7 +5,7 @@
 import BasicButton from 'Components/BasicButton/BasicButton'
 import BasicInput from 'Components/BasicInput/BasicInput'
 import BasicTable from 'Components/BasicTable/BasicTable'
-import BasicOption from 'Components/BasicOption/BasicOption'
+import BasicSelect from 'Components/BasicSelect/BasicSelect'
 import UploadImg from 'Components/UploadImg/UploadImg'
 import QrCode from 'Components/QrCode/QrCode'
 import NewsPrompt from 'Components/NewsPrompt/NewsPrompt'
@@ -16,7 +16,8 @@ import App from './App'
 import Vue from 'vue'
 import router from './router'
 import moment from 'moment'
-import VeeValidate from 'vee-validate'
+import VeeValidate, { Validator } from 'vee-validate'
+import dictionary from '@/common/js/validation/validation'
 import zh from 'vee-validate/dist/locale/zh_CN'
 import en from 'vee-validate/dist/locale/en'
 import i18n from '@/common/js/i18n/i18n.js'
@@ -37,6 +38,7 @@ Vue.use(VeeValidate, {
     en
   }
 })
+Validator.localize(dictionary)
 
 moment.locale('zh-cn')
 Vue.config.productionTip = false
@@ -50,7 +52,7 @@ const components = [
   BasicButton,
   BasicInput,
   BasicTable,
-  BasicOption,
+  BasicSelect,
   QrCode,
   UploadImg,
   NewsPrompt

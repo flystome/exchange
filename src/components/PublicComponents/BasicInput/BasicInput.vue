@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height: 66px;">
+  <div v-if="type" style="min-height: 66px;">
     <input v-validate="`required|${type}`" class="btc-basicInput btc-b"
     :class="{'input': true, 'is-danger': errors.has(type) }"
     :name="type"
@@ -7,6 +7,12 @@
     :placeholder="placeholder"
      @input="$emit('input', $event.target.value)">
     <span v-show="errors.has(type)" class="help is-danger">{{ errors.first(type) }}</span>
+  </div>
+  <div v-else>
+    <input class="btc-basicInput btc-b"
+    :placeholder="placeholder"
+     @input="$emit('input', $event.target.value)">
+     <slot name='button'></slot>
   </div>
 </template>
 

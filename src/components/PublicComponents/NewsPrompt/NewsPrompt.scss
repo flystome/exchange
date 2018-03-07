@@ -1,0 +1,14 @@
+.btc-news-animation{
+  color: #fc4a4a;
+  position: absolute;
+  transition: all 0.5s;
+}
+.prompt-enter, .prompt-leave-to {
+  transform: translateX(30px);
+  opacity: 0;
+}
+
+.btc-newsPrompt{
+  height: 13px;
+  display: inline-block;
+}
