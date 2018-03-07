@@ -141,6 +141,11 @@ body{
 .btc-color999{
   color: #999999;
 }
+@media (max-width: 992px){
+  .btc-container {
+    padding: 0;
+  }
+}
 </style>
 
 <style lang="scss">
