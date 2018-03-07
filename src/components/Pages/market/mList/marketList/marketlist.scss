@@ -1,0 +1,30 @@
+.market {
+  .hd {
+    height: 36px;
+    line-height: 36px;
+    background: #1f2a36;
+    padding-left: 0;
+    li {
+      display: inline-block;
+      width: 35%;
+      color: #42637d;
+      font-size: 14px;
+      .caret {
+        margin-left: 5px;
+      }
+      .caret-up {
+        display: inline-block;
+        border-color: transparent transparent #728eaa transparent;
+        vertical-align: 5px;
+      }
+      .caret-down {
+        border-color: #728eaa transparent transparent transparent;
+        vertical-align: 2px;
+        margin-left: -10px;
+      }
+      &:last-child {
+        width: 30%;
+      }
+    }
+  }
+}

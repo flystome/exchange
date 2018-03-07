@@ -6,6 +6,8 @@ const ValidateGoogle = () => import('Pages/Validate/Google/Google')
 const ValidateIdentity = () => import('Pages/Validate/Identity/Identity')
 const WithdrawCurrency = () => import('Pages/WithdrawCurrency/WithdrawCurrency')
 const ValidateSms = () => import('Pages/Validate/Sms/Sms')
+const Markets = () => import('Pages/market/mList/mlist')
+// import MarketList from './components/Pages/market/mList'
 
 Vue.use(Router)
 
@@ -16,6 +18,11 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: MemberCenter
+    },
+    {
+      path: '/markets',
+      name: 'Markets',
+      component: Markets
     },
     {
       path: '/:version',
