@@ -1,7 +1,7 @@
 <template>
   <footer class="btc-footer">
     <nav class="container hidden-xs">
-      <div class="col-sm-9">
+      <!-- <div class="col-sm-9">
         <h4>{{$t("concepts.btc_family")}}</h4>
         <div class="row">
           <ul>
@@ -66,11 +66,101 @@
           <li><a href="/yellow_page">酷站</a></li>
           <li><a href="/quote">行情</a></li>
         </ul><br>
-        <h4>联系我们</h4><a class="btn btn-wide btn-danger" href="/tickets/new">意见反馈</a></div>
+        <h4>联系我们</h4><a class="btn btn-wide btn-danger" href="/tickets/new">意见反馈</a>
+      </div> -->
+      <div class="btc-footer-logo col-md-5 col-sm-3">
+        <img src="~Img/logo.png" alt="">
+        <p class="btc-marginB15">{{ $t("footer.introduction") }}</p>
+        <p>{{ $t("footer.copyright") }}</p>
+      </div>
+      <ul class="btc-info pull-left btc-marginR80">
+        <li class="">{{ $t("footer.support") }}</li>
+        <li><a :href="`${HOST_URL}/documents/api_v2`">{{ $t("footer.api") }}</a></li>
+        <li><a>{{ $t("footer.help") }}</a></li>
+        <li><a>{{ $t("footer.announcements") }}</a></li>
+      </ul>
+      <ul class="btc-info pull-left btc-marginR80">
+        <li class="">{{ $t("footer.service") }}</li>
+        <li><a>{{ $t("footer.application") }}</a></li>
+        <li><a>{{ $t("footer.rate_details") }}</a></li>
+      </ul>
+      <ul class="btc-info pull-left">
+        <li class="">{{ $t("footer.about") }}</li>
+        <li><a>{{ $t("footer.about_us") }}</a></li>
+        <li><a>{{ $t("footer.user_agreement") }}</a></li>
+        <li><a>{{ $t("footer.privacy_policy") }}</a></li>
+      </ul>
+      <ul class="btc-footer-us pull-right btc-marginT45 btc-marginR30">
+        <li class="btc-marginB15"><a>{{ $t("footer.contact_us") }}</a></li>
+        <li class="btc-marginB15"><a href="mailto:support@hotex.com">support@hotex.com</a></li>
+        <li role="presentation" class="dropdown btc-country btc-img-position">
+          <a class="dropdown-toggle btc-paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <span>{{getLanguage.name}}</span><span class="caret">
+            </span>
+          </a>
+          <ul class="dropdown-menu text-center">
+            <li v-for="(locale,index) in locale" :key="locale.language">
+              <a @click="changeLang(locale.language, index + 1)">{{locale.name}}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
     </nav>
   </footer>
 </template>
 
-<style lang='css'>
-@import './Footer.css'
+<script>
+import { mapState, mapMutations } from 'vuex'
+export default {
+  data () {
+    return {
+      HOST_URL: process.env.HOST_URL,
+      locale: [{
+        language: 'zh-CN',
+        name: '简体中文'
+      },
+      {
+        language: 'en',
+        name: 'English'
+      }]
+    }
+  },
+  methods: {
+    localed () {
+      // this.$i18n.locale = this.language
+    },
+    changeLang (str) {
+      this.ChangeLanguage(str)
+      this.$i18n.locale = str
+      this._post({
+        url: '/settings/get_language.json',
+        headers: {
+          'DataType': 'application/json;charset=utf-8'
+        },
+        data: {
+          'content_language': str
+        }
+      })
+    },
+    ...mapMutations(['ChangeLanguage'])
+  },
+  computed: {
+    getLanguage () {
+      this.localed()
+      var lang = ''
+      this.locale.map((d, index) => {
+        if (d.language === this.language) {
+          lang = d
+        }
+      })
+      return lang
+    },
+    ...mapState(['language'])
+  }
+}
+</script>
+
+<style scoped lang='scss'>
+@import './Footer.scss'
 </style>

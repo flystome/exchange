@@ -1,9 +1,13 @@
 <template>
   <div class="btc-container-block btc-validateIdentity">
     <header class="title">
-        <strong>
-          {{$t('validate_identity.real_name_authentication')}}
-        </strong>
+        <router-link to='/' class="btc-link">
+          {{$t('title.member_center')}}
+        </router-link>
+        >
+        <span>
+          {{$t('title.validate_identity')}}
+        </span>
     </header>
     <div class=" btc-marginL0">
       <div>
@@ -28,13 +32,13 @@
         </div>
         <div class="btc-marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
-            <basic-input ref='first_name' :placeholder='$t("validate_identity.surname")' :type='"first_name"' v-model="user.first_name"></basic-input>
+            <basic-input ref='first_name' :placeholder='$t("validate_identity.surname")' :validate='"first_name"' v-model="user.first_name"></basic-input>
           <!--<div class=" btc-marginT20">-->
             <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
             <!--<basic-input  v-model="user.name"></basic-input>-->
           <!--</div>-->
-            <basic-input ref='last_name' :placeholder='$t("validate_identity.name")' :type='"last_name"'  v-model="user.last_name"></basic-input>
-            <basic-input ref="IdCard"  :placeholder='$t("validate_identity.valid_id_card")' :type='"IdCard"'  v-model="user.IdCard"></basic-input>
+            <basic-input ref='last_name' :placeholder='$t("validate_identity.name")' :validate='"last_name"'  v-model="user.last_name"></basic-input>
+            <basic-input ref="IdCard"  :placeholder='$t("validate_identity.valid_id_card")' :validate='"IdCard"'  v-model="user.IdCard"></basic-input>
         </div>
       </div>
     </div>
@@ -196,11 +200,10 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }, d => {
-        if (d.data.status_code === '0') {
-          this.prompt = d.data.errors
-          this.PopupBoxDisplay({message: this.identity_hint, url: '/member_center', type: 'success'})
-        } else if (d.data.status_code === '1') {
-          this.PopupBoxDisplay({message: d.data.errors, type: 'error'})
+        if (d.data.success) {
+          this.PopupBoxDisplay({message: this.$t('api_server.validate_identity.success_200'), url: '/member_center', type: 'success'})
+        } else {
+          this.PopupBoxDisplay({message: this.$t('api_server.validate_identity.error_1001'), type: 'error'})
         }
       })
     }

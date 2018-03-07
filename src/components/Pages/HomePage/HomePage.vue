@@ -27,7 +27,7 @@
           <!-- <div class="btc-nologin"> -->
             <form>
               <span>登录HOTEX</span>
-              <basic-input :type='"email"' placeholder="输入邮箱" class="btc-input"></basic-input>
+              <basic-input :validate='"email"' placeholder="输入邮箱" class="btc-input"></basic-input>
               <basic-input type="password" placeholder="输入密码" class="btc-input"></basic-input>
               <basic-button class="btc-button" :text='"登录"'></basic-button>
               <div>

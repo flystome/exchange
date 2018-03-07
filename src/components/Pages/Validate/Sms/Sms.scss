@@ -2,9 +2,6 @@
   padding: 25px 40px;
   padding-bottom: 55px;
   min-height: 70vh;
-  header{
-
-  }
   .btc-sms-container{
     padding: 130px 31% 195px 31%;
   }
@@ -17,9 +14,11 @@
   .btc-sms-choice{
     height: 32px;
     border-right: none;
-    flex: 0.2!important;
+    flex: 0.1!important;
+    white-space: nowrap;
   }
   .btc-sms-phone{
+    position: relative;
     display: flex;
     & > div{
       flex: 1
@@ -27,6 +26,7 @@
   }
   .btc-sms-code{
     display: flex;
+    height: 60px;
     & > div{
       flex: 1
     }
@@ -41,16 +41,55 @@
   .btc-sms-choice{
     padding-top: 5px;
     padding-left: 3px;
+    position: relative;
+    padding: 5px 10px 5px 4px;
     span{
       position: absolute;
+      top: 4px;
     }
     div{
-      min-width: 20px;
+      min-width: 16px;
       display: inline-block;
       height: 24px;
-      margin-left: 11px;
+      margin-left: 14px;
+      margin-right: 12px;
       outline: none;
-      background: red;
+      border: none;
+    }
+    img{
+      position: absolute;
+      display: inline-block;
+      right: 6px;
+      top: 11px;
+      cursor: pointer;
+    }
+  }
+  .btc-code-list{
+    background: #f2f2f2;
+    height: 200px;
+    overflow: auto;
+    position: absolute;
+    z-index: 1;
+    top: 32px;
+    width: 100%;
+    border-top: none;
+    cursor: pointer;
+    .btc-code-number{
+      float: left;
+      margin-left: 18px;
+    }
+    li{
+      padding: 2px 0;
+      &:hover{
+        background: white!important;
+        .btc-code-name{
+          color: #4382f7;
+        }
+      }
+    }
+    ul{
+      padding: 0;
+      list-style: none;
     }
   }
 }

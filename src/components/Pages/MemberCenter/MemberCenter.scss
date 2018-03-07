@@ -63,23 +63,26 @@
       float: left;
       padding-right: 5px;
       padding-left: 5px;
+      .media-body{
+        >span{
+          margin-top: 3px;
+          margin-bottom: 13px;
+        }
+        .sendbutton{
+          background-color: transparent;
+          border: none;
+          padding: 0;
+        }
+      }
       >div{
         background-color: #fff;
-        padding: 25px 10px 25px 15px;
+        padding: 25px 10px 12px 15px;
       }
       &:first-child{
         margin-top: 15px;
       }
       &:nth-child(3){
         margin-right: 0;
-      }
-      .media-right{
-        padding-left: 0;
-        >a{
-          >img{
-            cursor: default;
-          }
-        }
       }
     }
   }
@@ -235,6 +238,7 @@
   padding: 2px 14px;
   display: inline-block;
   position: relative;
+  cursor: default;
 }
 .btc-active{
   border-color: #4382f7;
@@ -243,12 +247,14 @@
 .btc-active:hover{
   background: #4382f7;
   color: white !important;
+  cursor: pointer;
 }
 
 
 .btc-verifying-prompt{
   position: relative;
   padding-bottom: 13px;
+  margin-top: 8px;
   .verifying-prompt{
     position: absolute;
     left: 50%;
@@ -342,38 +348,9 @@
   }
 }
 
-@media(max-width: 981px){
-  .btc-member-ver{
-    .media{
-      &:nth-child(1){
-        .media-body{
-          h5{
-            width: 112px;
-            word-wrap: break-word;
-          }
-        }
-      }
-    }
-  }
-}
-
 @media(max-width: 640px){
   .btc-membercenter-header{
     padding-bottom: 88px !important;
-  }
-  .btc-member-ver{
-    .media{
-      width: 100% !important;
-      margin-top: 5px;
-      &:nth-child(1){
-        .media-body{
-          h5{
-            width: 100%;
-            word-wrap: break-word;
-          }
-        }
-      }
-    }
   }
 }
 

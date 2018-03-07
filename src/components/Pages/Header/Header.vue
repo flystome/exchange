@@ -14,13 +14,13 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="z-index:100">
           <ul class="nav navbar-nav">
-            <li class="btc-link"><a @click="goPath('/homepage')">{{$t('nav.home')}} <span class="sr-only">(current)</span></a></li>
+            <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.home')}} <span class="sr-only">(current)</span></a></li>
             <li class="btc-link"><a :href="`${HOST_URL}/markets/ethbtc`">{{$t('nav.transaction')}}</a></li>
             <li class="btc-link"><a @click="validateEmail">{{$t('nav.wallet')}}</a></li>
             <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.announcement')}}</a></li>
             <li class="btc-link"><a :href="`${HOST_URL}/`">{{$t('nav.qa')}}</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right btc-header-signin" v-if="loginData === '' || loginData.errors">
+          <ul class="nav navbar-nav navbar-right btc-header-signin btc-marginT15" v-if="loginData === '' || loginData.errors">
             {{$t('nav.please')}}<a :href="`${HOST_URL}/signin`">{{$t('nav.login')}}</a>{{$t('nav.or')}}<a :href="`${HOST_URL}/signup`">{{$t('nav.register')}}</a>
           </ul>
           <ul class="nav navbar-nav navbar-right" v-else>
@@ -54,7 +54,6 @@
                 </li>
               </ul>
             </li>
-
           </ul>
         </div>
     </nav>

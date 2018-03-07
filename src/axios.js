@@ -22,6 +22,7 @@ export const _post = async ({url, data, headers}, callback) => {
     url: requestUrl + url,
     data: data
   }).catch(err => console.log(err))
+  console.log(ajax)
   if (callback) {
     callback(ajax)
   }

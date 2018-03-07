@@ -2,12 +2,12 @@
   <div class="btc-validateGoogle  btc-container-block">
     <div class="row btc-color666">
       <span class="btc-color333">
-        <span :class="{'btc-link': step === 1 }">
-          {{$t('validate_google.download_google_verified_app')}}
-        </span>
+        <router-link to='/' class="btc-link">
+          {{$t('title.member_center')}}
+        </router-link>
         >
-        <span :class="{'btc-link': step === 2 }">
-          {{$t('validate_google.scan_qrcode_and_enter_code')}}
+        <span>
+          {{$t('title.validate_google')}}
         </span>
       </span>
     </div>
@@ -78,16 +78,16 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 text-center">
+        <div class="col-md-6">
           <form class="btc-b-l">
             <div class="col-md-12 btc-validate-prompt">
               <news-prompt :text='prompt'></news-prompt>
             </div>
             <div class='row'>
-              <basic-input @focus.native="promptEmpty()" type="password" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
+              <basic-input @focus.native="promptEmpty()" type='password' ref="password" :validate="'password'" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
             </div>
             <div class="row">
-              <basic-input  @focus.native="promptEmpty()" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
+              <basic-input  @focus.native="promptEmpty()" ref="verfiycode" :validate='"verify code"' class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
             </div>
           </form>
         </div>
@@ -112,8 +112,7 @@ export default {
       step: 1,
       otp: '',
       password: '',
-      prompt: '',
-      google_hint: '谷歌验证已经成功'
+      prompt: ''
     }
   },
   methods: {
@@ -134,9 +133,8 @@ export default {
           'DataType': 'application/json;charset=utf-8'
         }
       }, d => {
-        d = d.data
-        this.loginData.google_otp_secret = d.google_otp_secret
-        this.loginData.google_uri = d.google_otp_secret
+        this.loginData.google_otp_secret = d.data.google_otp_secret
+        this.loginData.google_uri = d.data.google_otp_secret
       })
     },
     qrcode (str) {
@@ -150,13 +148,10 @@ export default {
     promptEmpty () {
       this.prompt = ''
     },
-    gValidate () {
-      if (!this.password) {
-        this.prompt = '请输入登录密码'
-        return
-      }
-      if (!this.otp) {
-        this.prompt = '请输入谷歌验证码'
+    async gValidate () {
+      const password = await this.$refs['password'].$validator.validateAll()
+      const verfiycode = await this.$refs['verfiycode'].$validator.validateAll()
+      if (!password || !verfiycode) {
         return
       }
       this._post({
@@ -172,11 +167,11 @@ export default {
           'DataType': 'application/json;charset=utf-8'
         }
       }, (d) => {
-        if (d.data.status_code === '0') {
-          this.prompt = d.data.errors
-          this.PopupBoxDisplay({message: prompt, type: 'error'})
+        console.log(d)
+        if (d.data.error) {
+          this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.error_${d.data.error.code}`), type: 'error'})
         } else {
-          this.PopupBoxDisplay({message: d.data.success, type: 'success'})
+          this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.success_200`), type: 'success'})
         }
       })
     },
@@ -184,11 +179,6 @@ export default {
   },
   computed: {
     ...mapGetters(['loginData'])
-  },
-  watch: {
-    loginData (d) {
-      console.log(d)
-    }
   }
 }
 </script>

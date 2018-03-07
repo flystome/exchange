@@ -4,10 +4,10 @@ country.map((a) => {
   countries.push(a.name)
 })
 var callingCountries = require('country-data').countries
-
 export const callingdata = callingCountries.all.map((d) => {
   if (!d.countryCallingCodes[0]) return
   return {
+    alpha: d.alpha2,
     name: d.name,
     number: d.countryCallingCodes[0]
   }

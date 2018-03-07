@@ -185,7 +185,8 @@ export default {
     this._get({
       url: '/funds/home.json'
     }, (d) => {
-      var channel = pusher.subscribe(`private-${d.data.sn}`)
+      var d = d.data.success
+      var channel = pusher.subscribe(`private-${d.sn}`)
       channel.bind('deposit_address', (data) => {
         if (typeof this.DepositAddress !== 'object') {
           this.DepositAddress = {
@@ -197,12 +198,12 @@ export default {
           }
         }
       })
-      this.TotalAssets = Number(d.data.total_assets.usdt_worth).toFixed(2)
-      if (d.data.notice) {
-        this.PopupBoxDisplay({message: d.data.notice.message, type: d.data.notice.type})
+      this.TotalAssets = Number(d.total_assets.usdt_worth).toFixed(2)
+      if (d.notice) {
+        this.PopupBoxDisplay({message: d.notice.message, type: d.notice.type})
       }
-      d.data.rucaptcha && (this.Rucaptcha = d.data.rucaptcha)
-      d.data.currencies.forEach((a) => {
+      d.rucaptcha && (this.Rucaptcha = d.rucaptcha)
+      d.currencies.forEach((a) => {
         if (a.code === 'btc') {
           this.currencies.unshift({
             code: a.code,
@@ -215,8 +216,8 @@ export default {
           })
         }
       })
-      this.FundSources = d.data.fund_sources
-      this.GetCoin(false, d.data.fund_sources, d.data.sn)
+      this.FundSources = d.fund_sources
+      this.GetCoin(false, d.fund_sources, d.sn)
     })
     this.route = this.$route.path.slice(this.$route.path.lastIndexOf('/') + 1)
   },
@@ -327,7 +328,8 @@ export default {
         this._get({
           url: `/funds/${c || 'btc'}/account_info`
         }, (d) => {
-          if (d.data.status === 2) {
+          var d = d.data.success
+          if (d.code === 201) {
             this.PopupBoxDisplay({message: '', type: 'warn'})
             this.ChangePopupBox({
               buttondisplay: false,
@@ -344,21 +346,21 @@ export default {
               }, 1000)
             }, 10000)
           }
-          this.WithdrAwable = d.data.withdrawable
-          this.Remain = d.data.today_withdraw_remain
-          this.Locked = d.data.account.locked
+          this.WithdrAwable = d.withdrawable
+          this.Remain = d.today_withdraw_remain
+          this.Locked = d.account.locked
           var obj = this.WithdrawRecord
           var objd = this.depositRecord
-          var withdraws = d.data.withdraws
-          var deposits = d.data.deposits
-          if (d.data.address) {
+          var withdraws = d.withdraws
+          var deposits = d.deposits
+          if (d.address) {
             this.deposit_address_display = true
-            this.deposit_address = d.data.address
+            this.deposit_address = d.address
           } else {
             this.deposit_address_display = false
             this.deposit_address = ''
           }
-          d.data.account && (this.Balance = d.data.account.balance)
+          d.account && (this.Balance = d.account.balance)
           withdraws.length === 0 ? obj.item = [] : obj.item = [{content: [
             this.$t('withdraw_currency.number'),
             this.$t('withdraw_currency.withdraw_time'),
@@ -427,16 +429,17 @@ export default {
       this._delete({
         url: `/funds/${id}/delete_fund_source.json`
       }, (d) => {
-        if (d.data.status === 0) {
+        var d = d.data
+        if (d.success) {
           if (id === this.WithdrawData.Address_id) {
             this.Address = this.$t('withdraw_currency.withdraw_currency_address')
             this.WithdrawData.Address_id = ''
             this.ChoiceStatus(false)
           }
-          this.PopupBoxDisplay({message: d.data.message, type: 'success'})
+          this.PopupBoxDisplay({message: this.$t('api_server.currency_withdraw.delete_fund_source_200'), type: 'success'})
           funds.splice(index, 1)
         } else {
-          this.PopupBoxDisplay({message: d.data.message, type: 'error'})
+          this.PopupBoxDisplay({message: this.$t('api_server.currency_withdraw.delete_fund_source_1001'), type: 'error'})
         }
       })
     },
@@ -444,7 +447,8 @@ export default {
       this._post({
         url: `/funds/${id}/set_default_fund_source.json`
       }, (d) => {
-        if (d.data.status === 0) {
+        var d = d.data
+        if (d.success) {
           this.FundSources[this.CurrencyType].forEach((d) => {
             if (d.is_default) {
               d.is_default = false
@@ -453,9 +457,9 @@ export default {
               d.is_default = true
             }
           })
-          this.PopupBoxDisplay({message: d.data.message, type: 'success'})
+          this.PopupBoxDisplay({message: this.$t('api_server.currency_withdraw.set_fund_source_200'), type: 'success'})
         } else {
-          this.PopupBoxDisplay({message: d.data.message, type: 'error'})
+          this.PopupBoxDisplay({message: this.$t('api_server.currency_withdraw.set_fund_source_1001'), type: 'error'})
         }
       })
     },
@@ -466,8 +470,8 @@ export default {
       this._post({
         url: '/funds/send_sms'
       }, (d) => {
-        if (d.data.status === 1) {
-          this.PopupBoxDisplay({message: d.data.error, type: 'error'})
+        if (d.data.error) {
+          this.PopupBoxDisplay({message: this.$t('withdraw_currency.send_phone_error_1001'), type: 'error'})
         } else {
           this.CountDown()
         }
@@ -507,12 +511,11 @@ export default {
         url: `/funds/${this.CurrencyType}/create_withdraw`,
         data: obj
       }, (d) => {
-        if (d.data.rucaptcha) {
-          this.Rucaptcha = d.data.rucaptcha
+        if (d.data.success.rucaptcha) {
+          this.Rucaptcha = d.data.success.rucaptcha
         }
-        var prompt = d.data.message
-        if (d.data.status === 0) {
-          this.PopupBoxDisplay({message: prompt, type: 'success'})
+        if (d.data.success) {
+          this.PopupBoxDisplay({message: 'dw', type: 'success'})
         } else if (d.data.status === 2) {
           this.PopupBoxDisplay({message: d.data.message, type: 'success'})
         } else {
@@ -524,15 +527,14 @@ export default {
       this._delete({
         url: `/funds/${id}/cancel_withdraw`
       }, (d) => {
-        var prompt = d.data.message
-        if (d.data.status === 0) {
-          this.PopupBoxDisplay({message: prompt, type: 'success'})
+        if (d.data.success) {
+          this.PopupBoxDisplay({message: this.$t('api_server.currency_withdraw.Withdraw_canceled_200'), type: 'success'})
           var type = data.type
           type.aasm_state_title = this.$t('funds.withdraw_history.canceled')
           data.context = this.$t('funds.withdraw_history.canceled')
           type.aasm_state = 'canceled'
         } else {
-          this.PopupBoxDisplay({message: prompt, type: 'error'})
+          this.PopupBoxDisplay({message: this.$t('api_server.currency_withdraw.Withdraw_canceled_1001'), type: 'error'})
         }
       })
     },
