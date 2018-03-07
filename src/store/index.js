@@ -44,6 +44,9 @@ const mutations = {
   },
   ChangeLanguage (state, lang) {
     state.language = lang
+  },
+  ChangePopupBox (state, { from, to }) {
+    state.PopupBox[from] = to
   }
 }
 
@@ -63,5 +66,4 @@ const store = new Vuex.Store({
   actions,
   getters
 })
-
 export default store
