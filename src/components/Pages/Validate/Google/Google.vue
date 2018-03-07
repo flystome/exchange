@@ -1,19 +1,18 @@
 <template>
   <div class="btc-validateGoogle  btc-container-block">
     <div class="row btc-color666">
-      谷歌认证
       <span class="btc-color333">
         <span :class="{'btc-link': step === 1 }">
-          下载谷歌验证 App
+          {{$t('validate_google.download_google_verified_app')}}
         </span>
         >
         <span :class="{'btc-link': step === 2 }">
-          扫描二维码及输入验证码
+          {{$t('validate_google.scan_qrcode_and_enter_code')}}
         </span>
       </span>
     </div>
     <template v-if="step === 1">
-      <div class="row btc-validate-gpt btc-marginB60" style="margin-bottom: 105px;">
+      <div class="row btc-validate-gpt btc-marginB60" style="margin-bottom: 140px;">
         <div class="col-md-4 col-xs-12 col-md-offset-2 text-center btc-b-r  btc-validate-googleApp">
             <img src="~Img/google-authentication.png">
           <div class="row btc-f btc-marginT10">
@@ -22,21 +21,26 @@
             </strong>
           </div>
         </div>
-        <div class="col-md-5 col-xs-12 col-md-offset-1  btc-marginT20 btc-validate-textCenter">
+        <div class="col-md-5 col-xs-12 col-md-offset-1  btc-marginT30 btc-validate-textCenter">
           <div class='row'>
-            请于应用商店下载安装Google Authenticator（谷歌验证器）
+            {{$t('validate_google.download_authenticator_at_store')}}
           </div>
           <div class="row btc-marginT20">
-            <img src="~Img/validate-iosapp.png" class="btc-marginR5 col-xs-24">
-            <img src="~Img/validate-gplay.png" class="col-xs-24">
+            <div class="col-xs-6">
+              <a href="https://itunes.apple.com/cn/app/google-authent icator/id388497605?mt=8" target="_blank">
+                <img src="~Img/validate-iosapp.png" class="btc-marginR5 googleImg">
+              </a>
+            </div>
+            <div class="col-xs-6">
+              <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">
+                <img src="~Img/validate-gplay.png" class="googleImg img-margin">
+              </a>
+            </div>
           </div>
         </div>
       </div>
-      <div class=" text-right btc-marginT40">
-        <span class="btc-color999 btc-marginR20">
-          已经安装 App
-        </span>
-          <basic-button @click.native="addStep" :text='"下一步"'></basic-button>
+      <div class="text-right btc-marginT40">
+        <basic-button class="col-xs-12 col-md-1 pull-right" @click.native="addStep" :text='$t("validate_google.next")'></basic-button>
       </div>
     </template>
     <template v-if="step === 2">
@@ -46,18 +50,16 @@
             <div class='row'>
               <qr-code :length='"120px"' :dateUrl="qrcode(loginData.google_uri)"></qr-code>
             </div>
-            <div class="row btc-marginT15 btc-margin-left">
-              使用
-              <strong>
-                谷歌验证 App
-              </strong>
+            <div class="row btc-marginT15 btc-margin-left useGoogle">
+              {{$t('validate_google.using')}}
+              <strong>{{$t('validate_google.google_to_verify_app')}}</strong>
             </div>
-            <div class="row btc-marginT5 btc-marginR35 btc-margin-left">
-              扫描二维码
+            <div class="row btc-marginT5 useGoogle">
+              {{$t('validate_google.scan_qrcode')}}
             </div>
-            <div class="btc-marginT5 btc-margin-left">
+            <!-- <div class="btc-marginT5 btc-margin-left">
               <basic-button @click.native="RenovateQrcode" :text='"刷新二维码"'></basic-button>
-            </div>
+            </div> -->
           </div>
           <div class="col-md-6 btc-validate-textCenter btc-validate-googlekey">
               <div class="row btc-marginT10">
@@ -67,8 +69,12 @@
               </div>
               <div class="row btc-marginT20">
               <span>
-                若无法扫描，请将该16位密匙手动输入到谷歌验证码APP里
+                {{$t('validate_google.cant_scan_enter_keys')}}
               </span>
+              <div class="refreshqrcode btc-marginT15" @click="RenovateQrcode">
+                <img src="~Img/RefreshQrcode.png" alt="">
+                {{$t('validate_google.refresh_qrcode')}}
+              </div>
             </div>
           </div>
         </div>
@@ -78,22 +84,17 @@
               <news-prompt :text='prompt'></news-prompt>
             </div>
             <div class='row'>
-              <span class="col-md-4 col-xs-4 text-right">登录密码</span>
-              <basic-input @focus.native="promptEmpty()" type="password" class="col-md-7 col-xs-6" placeholder='请输入您在本站的账户登录密码' v-model="password"></basic-input>
+              <basic-input @focus.native="promptEmpty()" type="password" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
             </div>
-            <div class="row btc-marginT20">
-              <span class="col-md-4 col-xs-4 text-right">谷歌验证码</span>
-              <basic-input  @focus.native="promptEmpty()" class="col-md-7 col-xs-6" placeholder='请输入谷歌验证APP里的谷歌验证码' v-model="otp"></basic-input>
+            <div class="row">
+              <basic-input  @focus.native="promptEmpty()" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
             </div>
           </form>
         </div>
       </div>
-      <div class=" text-right btc-marginT90">
-        <span @click="minusStep" class="btc-link btc-fl btc-marginT25 btc-poniter">返回上一步</span>
-        <span class="btc-color999 btc-marginR20">
-          已经完成上述所有步骤
-        </span>
-          <basic-button :text='"开启谷歌验证"' @click.native='gValidate'></basic-button>
+      <div class="text-right btc-marginT100 minusStep">
+        <span @click="minusStep" class="col-xs-12 col-md-1 btc-link btc-fl btc-marginT10 btc-poniter" style="display:inline-block">{{$t('validate_google.prve')}}</span>
+        <basic-button class="col-xs-12 col-md-2 pull-right btc-marginT15" :text='$t("validate_google.google_verification")' @click.native='gValidate'></basic-button>
       </div>
     </template>
   </div>
@@ -174,7 +175,7 @@ export default {
         if (d.data.status_code === '0') {
           this.prompt = d.data.errors
         } else {
-          this.PopupBoxDisplay(this.google_hint)
+          this.PopupBoxDisplay({message: this.google_hint})
         }
       })
     },

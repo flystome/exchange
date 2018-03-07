@@ -9,7 +9,11 @@
          {{this.PopupBox.message}}
        </div>
        <div class="btc-paddingB30">
-        <basic-button @click.native="PopupBoxDisplay" class="btc-marginT50" :text='"确定"'></basic-button>
+        <a @click.stop="gopath">
+          <basic-button class="btc-marginT50" :text='"确定"'>
+            <!-- <a ></a> -->
+          </basic-button>
+        </a>
        </div>
       </div>
     </div>
@@ -19,8 +23,14 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 export default {
-  props: ['message'],
+  name: 'Hint',
   methods: {
+    gopath () {
+      if (this.PopupBox.url) {
+        this.$router.push(this.PopupBox.url, () => { this.$store.dispatch('getData') })
+      }
+      this.PopupBoxDisplay()
+    },
     ...mapMutations(['PopupBoxDisplay'])
   },
   computed: {

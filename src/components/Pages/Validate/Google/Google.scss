@@ -9,14 +9,6 @@
   min-height: 70vh;
   .btc-validate-gpt{
     padding-top: 135px;
-    .btc-margin-left{
-      margin-left:6px
-    }
-  }
-
-  .btc-validate-googlekey{
-    margin-top: -3px;
-    margin-left: -34px;
   }
 
   .btc-validate-gmr{
@@ -24,8 +16,8 @@
   }
 
   form{
-    margin-top: 36px;
-    padding: 40px 0 17px 0;
+    margin: 40px 0 17px 0;
+    padding-top: 15px;
   }
 
   form span{
@@ -62,6 +54,29 @@
     top: 45px;
     left: -93px;
   }
+  .useGoogle{
+    text-align: initial;
+    margin-left: 64px;
+  }
+
+  .refreshqrcode{
+    color: #4382f7;
+    cursor: pointer;
+  }
+
+  .btc-poniter{
+    display: block;
+    border: 1px solid #4382f7;
+    text-align: center;
+    line-height: 30px;
+    min-width: 120px;
+  }
+  .img-margin{
+    margin-left: -40px;
+  }
+
+
+
   @media (min-width: 1200px) {
     .btc-basicInput{
       width: 320px
@@ -71,8 +86,18 @@
       .btc-validate-prompt{
         left: -78px;
       }
+      .img-margin{
+        margin-left: 0;
+      }
+      .useGoogle{
+        text-align: initial;
+        margin-left: 40px;
+      }
   }
   @media (max-width: 991px) {
+    form{
+      padding: 20px 0 0 0;
+    }
     .btc-b-r{
       border-right:none;
     }
@@ -82,16 +107,48 @@
     .btc-validate-textCenter{
       text-align: center
     }
-    .btc-validate-googlekey{
-      margin-left: 25px;
+    .btc-validate-gpt{
+      padding-top:25px;
+      margin-bottom: 0 !important;
+    }
+    .minusStep{
+      margin-top: 0;
+      position: relative;
+      >span{
+        &:nth-child(1){
+          margin-top: 0;
+          position: absolute;
+          left: 0;
+          top: 100px;
+        }
+        &:nth-child(2){
+          float: left;
+          text-align: left;
+          margin-top: 0;
+        }
+      }
+      >button{
+        margin-top: 10px;
+      }
+    }
+    .useGoogle{
+      text-align: center;
+      margin-left: 0;
+    }
+    .alreadyApp{
+      float: left;
     }
   }
+  @media (max-width: 768px) {
+  }
 }
-
 
 @media (max-width: 400px) {
   .btc-marginT20 .btc-marginR5{
     margin-right:0;
     margin-bottom:5px;
+  }
+  .googleImg{
+    width: 100%;
   }
 }

@@ -4,8 +4,9 @@ const MemberCenter = () => import('Pages/MemberCenter/MemberCenter')
 const ValidateEmail = () => import('Pages/Validate/Email/Email')
 const ValidateGoogle = () => import('Pages/Validate/Google/Google')
 const ValidateIdentity = () => import('Pages/Validate/Identity/Identity')
-const ExtractCurrency = () => import('Pages/ExtractCurrency/ExtractCurrency')
+const WithdrawCurrency = () => import('Pages/WithdrawCurrency/WithdrawCurrency')
 const ValidateSms = () => import('Pages/Validate/Sms/Sms')
+const HomePage = () => import('Pages/HomePage/HomePage')
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: MemberCenter
+    },
+    {
+      path: '/homepage',
+      name: 'HomePage',
+      component: HomePage
     },
     {
       path: '/:version',
@@ -43,9 +49,10 @@ const router = new Router({
       component: ValidateIdentity
     },
     {
-      path: '/currency/extract',
-      name: 'ExtractCurrency',
-      component: ExtractCurrency
+      path: '/currency/withdraw',
+      alias: '/currency/deposit',
+      name: 'WithdrawCurrency',
+      component: WithdrawCurrency
     },
     {
       path: '/validate/sms',
