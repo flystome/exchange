@@ -216,7 +216,7 @@ export default {
       }, (d) => {
         if (d.data.status_code === '1') {
           this.prompt = d.data.errors
-          this.PopupBoxDisplay({message: prompt, type: 'success'})
+          this.PopupBoxDisplay({message: this.email_sent_message, type: 'success'})
         } else {
           this.PopupBoxDisplay({message: d.data.errors, type: 'error'})
         }
@@ -234,7 +234,7 @@ export default {
       })
     },
     getTicket () {
-      console.log(this.loginData.tickets)
+      // console.log(this.loginData.tickets)
       this.tickets = this.loginData.tickets
       this.tickets.sort((a, b) => {
         return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
@@ -242,21 +242,21 @@ export default {
     },
     validatephone () {
       if (!this.loginData.activated) {
-        this.goPath('/validate/bootvalidate')
+        this.goPath('/prompt')
       } else {
         this.goPath('/validate/sms', this.loginData.sms_activated, false)
       }
     },
     validateAuth () {
       if (!this.loginData.activated) {
-        this.goPath('/validate/bootvalidate')
+        this.goPath('/prompt')
       } else {
         this.goPath('/validate/google', this.loginData && this.loginData.app_activated, false)
       }
     },
     validateAll () {
       if (!this.loginData.activated && !this.loginData.sms_activated) {
-        this.goPath('/validate/bootvalidate')
+        this.goPath('/prompt')
       } else {
         this.goPath('/validate/identity', (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verified' || (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verifying', false)
       }

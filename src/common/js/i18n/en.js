@@ -315,19 +315,19 @@ const en = {
       "turnover": "Turnover"
     },
     "nav": {
-      "home": "Home Page",
-      "transaction": "Trade",
-      "IFO": "IFO Bifurcation",
+      "home": "Home",
+      "transaction": "Market",
       "please": "Please",
       "login": "login",
       "or": "or",
       "register": "register",
-      "wallet": "Wallet",
-      "announcement": "Announcement",
-      "qa": "Q\u0026A",
+      "wallet": "Funds",
+      "announcement": "Announcements",
+      "qa": "FAQ",
       "settings": "Settings",
-      "member_info": "Member Info",
-      "exit": "Exit"
+      "member_center": "Dashboard",
+      "exit": "Exit",
+      "message": "Message"
     },
     "member_center": {
       "total_assets": "Total Assets",
@@ -336,7 +336,7 @@ const en = {
       "login_time": "Login Time",
       "ip_adress": "IP Address",
       "login_location": "Login Location",
-      "have_questions_to_contact_us": "If any suspicious login, please contact us in time.",
+      "have_questions_to_contact_us": "If any suspicious login show up, please contact us immediately.",
       "customer_service_record": "Tickets",
       "view_the_end_service_list": "Closed Tickets",
       "show_more": "Show More",
@@ -355,10 +355,10 @@ const en = {
       "yes": "Yes",
       "no": "No",
       "no_record": "No Record",
-      "korean_user_use_twice_verification": "South Korean user real name certification, presentation, modification and other twice verification",
-      "completion_of_real_name_authentication": "Non Korean nationality users complete the real name authentication method.",
+      "korean_user_use_twice_verification": "Tier 2: Cell Phone Verification",
+      "completion_of_real_name_authentication": "Tier 3: Real Name Verification",
       "api": "API",
-      "email_sent_message": "Mail is successful, please go to your mailbox to activate your account"
+      "email_sent_message": "Mail is sent, please go to your mailbox to activate your account."
     },
     "validate_identity": {
       "real_name_authentication": "Real Name Verification",
@@ -406,7 +406,6 @@ const en = {
       "confirm_apply_for_success": "After the request is successful, please go to the mailbox to click the link to confirm the request, and you can track the status of the Recharge and historical records page.",
       "make_sure_safe": "Be sure to make sure that computers and browsers are safe to prevent information from being tampered or leaked.",
       "btc_withdraw_currency_record": "BTC withdraw currency record",
-      "withdraw_currency_record": "BTC withdraw currency record",
       "number": "Number",
       "withdraw_time": "Withdraw Time",
       "withdraw_address": "Withdraw Address",
@@ -414,8 +413,8 @@ const en = {
       "absenteeism_expenses": "Absenteeism expenses",
       "statu_and_operation": "statu / operation",
       "available_balance": "Available balance",
-      "remaining_withdraw": "Remaining Withdraw amount of money",
-      "minimum_withdraw_amount_of_money": "Minimum Withdraw amount of money",
+      "remaining_withdraw": "Remaining withdraw amount of money",
+      "minimum_withdraw_amount_of_money": "Minimum withdraw amount of money",
       "remark_label": "Remark",
       "use_a_new_address": "Use a new address",
       "sms": "SMS",
@@ -424,11 +423,11 @@ const en = {
       "delete": "Delete",
       "cancel": "Cancel",
       "resend": "Resend",
-      "temporarily_can_not_withdraw":"temporarily Can Not Withdraw"
+      "temporarily_can_not_withdraw": "temporarily Can Not Withdraw"
     },
-    "deposit_currency":{
-      'deposit_address': 'Address',
-      'copy_address': "Copy Address",
+    "deposit_currency": {
+      "deposit_address": "Address",
+      "copy_address": "Copy Address",
       "use_wallet_service": "Please use your commonly used wallet service, local purse, online wallet, or mobile wallet, choose to pay or send.",
       "font_descripe": "In the payment or payment of your wallet, copy the following special currency address which is specially recharged for you, fill in the amount you want to recharge to the account in the amount, and don't forget to pay a certain ore fee to ensure that the transaction is confirmed by the whole network as soon as possible. You can also scan the two-dimensional code in the mobile end purse to pay. You can recharge the special currency address and the two-dimensional code.",
       "operation_done": "After the above operation is done, click send payment, the transaction will be broadcast to the whole network, so you can see the status of the transaction. When the transaction reaches the 1 confirmation of the whole network (about 10 to 60 minutes), the system will automatically recharge to the account. You can inquire in the disclosure of the assets.",
@@ -446,18 +445,14 @@ const en = {
       "validate_google": "Validate Google",
       "validate_identity": "Validate Identity",
       "validate_sms": "Validate Sms",
-      "currency_withdraw": "Currency Withdraw",
-      "currency_despoit": "currency Despoit"
-    },
-    "validation": {
-      "fwef": "fe"
+      "currency_withdraw": "Currency withdraw"
     },
     "prompt": {
-      "identify_code_error": "Identify code error",
-      "identify_code_can_not_empty": "Identify code can not be empty",
-      "cell_phone_number_can_not_be_empty": "Cell phone number can not be empty",
-      "passowrd_error": "passowrd_error",
-      "passowrd_can_not_empty": "The password can not be empty"
+      "email_not_certified": "Email is not verified.",
+      "phone_not_certified": "Phone is unverified",
+      "google_not_certified": "Google Auth not bound",
+      "not_certified_prompt": "Help us keeping bad guys out of your account by using both your phone",
+      "go_validate": "Do Validation"
     },
     "placeholder": {
       "cell_phone_number": "Cell Phone Number",
@@ -480,7 +475,7 @@ const en = {
       "app_already_installed": "APP already installed"
     },
     "hint": {
-      "confirm": "Confirm",
+      "confirm": "OK",
       "generating_address": "Generating Deposit Address",
       "completion": "Completion",
       "server_exception": "Server Exception"

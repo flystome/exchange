@@ -9,7 +9,7 @@
         <!-- <basic-select v-model="phoneNumber" :data='phoneData'></basic-select> -->
         <div class="btc-sms-choice btc-b-def">
           +
-          <input class="" contenteditable="true" />
+          <div class="" contenteditable="true" ></div>
         </div>
         <basic-input :type='"CellPhone"' :placeholder='$t("placeholder.cell_phone_number")'>
         </basic-input>
@@ -43,7 +43,6 @@ export default {
       this._post({
         url: `${this.HOST_URL}/fefe`,
         data: {
-
         }
       }, (d) => {
         console.log(d.data)
