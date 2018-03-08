@@ -171,13 +171,13 @@
   </div>
 </template>
 <script>
-import { mapMutations, mapState } from 'vuex'
+import { mapMutations } from 'vuex'
 import Clipboard from 'clipboard'
 var QRCode = require('qrcode')
 export default {
   name: 'withdrawCurrency',
   created () {
-     console.log(this.DepositAddress['706'])
+    console.log(this.DepositAddress['706'])
     // {
     //   var message
     //   var len = 0
