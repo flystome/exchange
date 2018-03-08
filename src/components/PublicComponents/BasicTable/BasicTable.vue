@@ -9,8 +9,11 @@
           <tr v-for="(item, length) in item" :key='length' v-if="length < 100">
             <td v-for="(data,index)  in item.content"
             :key="index" :style="{width: toPercent()}"
-            :class="{'btc-tableTextright':index === 0,'btc-tableTextleft': index === item.content.length-1}"
-            >
+            :class="{
+            'btc-tableTextright':index === 0,
+            'btc-tableTextleft': index === item.content.length-1,
+            'btc-tableHover': data.hover
+            }">
             {{ typeof data !== 'object' ? data : data.context }}
            <slot v-if="(data.type && data.type['aasm_state']) === ('submitting' || 'submitted' || 'accepted') "
            name="cancel"

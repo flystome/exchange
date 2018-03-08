@@ -48,3 +48,11 @@
   margin-top: 6px;
   font-size: 12px;
 }
+
+.btc-tableHover{
+  display: block;
+  width: 380px!important;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}

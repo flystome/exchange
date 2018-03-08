@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { _post } from '../axios'
+import pusher from '@/common/js/pusher'
 Vue.use(Vuex)
 
 const actions = {
@@ -11,6 +12,12 @@ const actions = {
         'DataType': 'application/json;charset=utf-8'
       }
     }, (d) => {
+      var channel = pusher.subscribe(`private-${d.data.sn}`)
+      channel.bind('deposit_address', (data) => {
+        if (!state.DepositAddress[data.attributes.account_id]) {
+          commit('AddAddress', data)
+        }
+      })
       commit('getData', d)
     })
   }
@@ -28,6 +35,10 @@ const mutations = {
       d['referrals_account_name'] = data.data.referrals_account_name[index]
     })
     state.loginData = data.data
+  },
+  AddAddress (state, data) {
+    var address = state.DepositAddress
+    address[data.attributes.account_id] = data.attributes.deposit_address
   },
   PopupBoxDisplay (state, obj) {
     if (!obj) {
@@ -60,7 +71,9 @@ const store = new Vuex.Store({
       message: '',
       url: ''
     },
-    language: ''
+    language: '',
+    DepositAddress: {
+    }
   },
   mutations,
   actions,

@@ -435,7 +435,8 @@ const en = {
       "trading_hash": "Trading Hash",
       "recharge_amount": "Recharge Amount",
       "confirmation_number": "Confirmation Number",
-      "identifying_code": "Identifying Code"
+      "identifying_code": "Identifying Code",
+      "temporarily_unable_deposit": "Temporarily unable to deposit"
     },
     "title": {
       "member_center": "Member Center",
