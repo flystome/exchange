@@ -26,6 +26,7 @@ import axios from 'axios'
 import { _post, _get, _delete } from './axios'
 import 'bootstrap/js/dropdown.js'
 import 'bootstrap/js/collapse.js'
+import 'bootstrap/js/carousel.js'
 
 // css dependencies
 import 'bootstrap/dist/css/bootstrap.min.css'

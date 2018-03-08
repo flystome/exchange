@@ -24,11 +24,11 @@
             {{$t('nav.please')}}<a :href="`${HOST_URL}/signin`">{{$t('nav.login')}}</a>{{$t('nav.or')}}<a :href="`${HOST_URL}/signup`">{{$t('nav.register')}}</a>
           </ul>
           <ul class="nav navbar-nav navbar-right" v-else>
-            <li class="btc-marginL15 btc-img-position">
+            <li class="btc-marginL15 btc-img-position hidden-md">
               <img src="~Img/assetlog.png"  class="btc-header-asset">
               0 BTC
             </li>
-            <li class="btc-marginL15">
+            <li class="btc-marginL15 hidden-md">
               <a :href="`${HOST_URL}/conversations`" class="btc-header-letter">
                 <img src="~Img/letterlog.png">
               </a>
@@ -46,7 +46,7 @@
                 <!-- <li><a :href="`${HOST_URL}/`">{{$t('nav.exit')}}</a></li> -->
               </ul>
             </li>
-            <li role="presentation" class="dropdown btc-country btc-img-position">
+            <li role="presentation" class="dropdown btc-country btc-img-position hidden-md">
               <a class="dropdown-toggle btc-paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <span>{{getLanguage.name}}</span><span class="caret">
                 </span>

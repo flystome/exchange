@@ -261,6 +261,20 @@
   border: none;
 }
 
+@media(max-width: 1200px){
+  .btc-member-ver{
+    padding-left: 0 !important;
+    .col-md-4{
+      width: 33.33333333333% !important;
+    }
+    .btc-member-stepsblock{
+      &:nth-child(2){
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  }
+}
 
 @media (max-width: 992px) {
   .btc-member-vc{
@@ -285,6 +299,14 @@
   }
   .btc-img > div{
     height: initial;
+  }
+}
+
+@media(max-width: 981px){
+  .btc-member-ver{
+    .col-md-4{
+      width: 100% !important;
+    }
   }
 }
 
