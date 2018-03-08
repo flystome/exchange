@@ -3,10 +3,6 @@
     <div class="btc-member-center container">
       <div class="btc-container-block btc-membercenter-header">
         <div class="col-md-6">
-          <a :href="`${HOST_URL}/member/edit`">
-              <img src="~Img/avatar.png" class="img-circle btc-member-avatar" v-if="!loginData.member_avatar">
-              <img class="img-circle btc-member-avatar"   :src="loginData.member_avatar" v-else>
-          </a>
           <div class="btc-member-info">
             <span class="btc-member-infoEmail">{{ loginData.email }}</span>
             <a :href="`${HOST_URL}/identity/edit`">
@@ -30,7 +26,7 @@
         </div>
       </div>
       <div class="btc-member-ver">
-        <div class="btc-member-stepsblock col-md-4 col-xs-12">
+        <!-- <div class="btc-member-stepsblock col-md-4 col-xs-12">
           <div class="col-md-2 col-xs-1">
             <img src="~Img/member-email.png" class="btc-paddingR20 btc-paddingT5" alt="">
           </div>
@@ -48,11 +44,37 @@
               </span>
             </div>
           </div>
-          <div class="col-md-1 col-xs-1">
+          <div class="col-md-1 col-xs-1 pull-right">
             <div class="pull-right btc-paddingT15">
               <img src="~Img/right.png" v-if='loginData.activated'>
               <img src="~Img/false.png" alt="" v-else>
             </div>
+          </div>
+        </div> -->
+        <div class="media">
+          <div class="media-left">
+            <a href="#">
+              <img class="media-object" src="~Img/member-email.png">
+            </a>
+          </div>
+          <div class="media-body">
+            <div class="btc-member-steps">
+              <div class="btc-marginB5">
+              {{ loginData.email }}
+              </div>
+              <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.activated}">
+                  <span v-if='loginData.activated'>{{$t("auth.email")}}</span>
+                  <span v-else @click="sendEmail">
+                    {{$t("auth.send_email")}}
+                  </span>
+                <img v-if='loginData.activated' src="~Img/validate-true.png" alt="已认证">
+              </span>
+            </div>
+          </div>
+          <div class="media-right">
+            <a href="#">
+              <img class="media-object" src="~Img/member-email.png">
+            </a>
           </div>
         </div>
         <div class="btc-member-stepsblock btc-marginL10 btc-marginR10 col-md-4 col-xs-12">
@@ -64,19 +86,19 @@
               {{$t("member_center.korean_user_use_twice_verification")}}
             </div>
             <div class="btc-member-steps">
-              <p class="btc-member-validata btc-link btc-marginR10" @click="goPath('/validate/sms', loginData.sms_activated,false)" :class="{'btc-active': !loginData.sms_activated}">
+              <!-- <p class="btc-member-validata btc-link btc-marginR10" @click="goPath('/validate/sms', loginData.sms_activated,false)" :class="{'btc-active': !loginData.sms_activated}"> -->
+              <p class="btc-member-validata btc-link btc-marginR10" @click="validatephone" :class="{'btc-active': !loginData.sms_activated}">
                 <span>{{ $t("auth.phone") }}</span>
                 <img v-if='loginData.sms_activated' src="~Img/validate-true.png" alt="已认证">
               </p>
-              <span class="btc-member-validata btc-link btc-marginT10"
-              :class="{'btc-active': !loginData.app_activated}"
-              @click="goPath('/validate/google',loginData && loginData.app_activated,false)">
-                  <span>{{$t("auth.google")}}</span>
-                  <img v-if='loginData.app_activated' src="~Img/validate-true.png" alt="已认证">
+              <!-- <span class="btc-member-validata btc-link btc-marginT10" :class="{'btc-active': !loginData.app_activated}" @click="goPath('/validate/google',loginData && loginData.app_activated,false)"> -->
+              <span class="btc-member-validata btc-link btc-marginT10" :class="{'btc-active': !loginData.app_activated}" @click="validateAuth">
+                <span>{{$t("auth.google")}}</span>
+                <img v-if='loginData.app_activated' src="~Img/validate-true.png" alt="已认证">
               </span>
             </div>
           </div>
-          <div class="col-md-1 col-xs-1">
+          <div class="col-md-1 col-xs-1 pull-right">
             <div class="pull-right btc-paddingT15">
               <img src="~Img/right.png" v-if='loginData.sms_activated && loginData.app_activated'>
               <img src="~Img/false.png" alt="" v-else>
@@ -93,7 +115,7 @@
             </div>
             <div class="btc-member-steps btc-verifying-prompt">
               <span class="btc-member-validata btc-link"
-              @click="goPath('/validate/identity', (loginData.id_document && loginData.id_document.aasm_state) ===' verified' || (loginData.id_document && loginData.id_document.aasm_state)==='verifying',false)"
+              @click="validateAll"
               :class="{'btc-active': (loginData.id_document && loginData.id_document.aasm_state)==='unverified',
               'btc-verifying':(loginData.id_document && loginData.id_document.aasm_state)==='verifying'}">
                 <span>{{$t("auth.real_name")}}</span>
@@ -102,10 +124,9 @@
                 <img v-else-if='(loginData.id_document && loginData.id_document.aasm_state)==="unverified"' src="~Img/unverified.png" alt="认证失败">
                 <span class="verifying-prompt">认证中</span>
               </span>
-
             </div>
           </div>
-          <div class="col-md-1 col-xs-1">
+          <div class="col-md-1 col-xs-1 pull-right">
             <div class="pull-right btc-paddingT15">
               <img src="~Img/right.png" v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"'>
               <img src="~Img/false.png" alt="" v-else>
@@ -244,6 +265,27 @@ export default {
       this.tickets.sort((a, b) => {
         return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       })
+    },
+    validatephone () {
+      if (!this.loginData.activated) {
+        alert(1)
+      } else {
+        this.goPath('/validate/sms', this.loginData.sms_activated, false)
+      }
+    },
+    validateAuth () {
+      if (!this.loginData.activated) {
+        alert(2)
+      } else {
+        this.goPath('/validate/google', this.loginData && this.loginData.app_activated, false)
+      }
+    },
+    validateAll () {
+      if (!this.loginData.activated && !this.loginData.sms_activated && !this.loginData.app_activated) {
+        alert(2)
+      } else {
+        this.goPath('/validate/identity')
+      }
     }
   },
   computed: {

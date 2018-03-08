@@ -326,7 +326,7 @@ const en = {
       "announcement": "Announcement",
       "qa": "Q\u0026A",
       "settings": "Settings",
-      "member_info": "Member Info",
+      "member_center": "Member Center",
       "exit": "Exit"
     },
     "member_center": {
