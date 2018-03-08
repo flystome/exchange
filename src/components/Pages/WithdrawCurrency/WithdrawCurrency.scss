@@ -20,6 +20,18 @@
       display: block;
       float: none;
     }
+    .btc-qrcode{
+      margin-left: 15px!important;
+    }
+    .btc-deposit-currency{
+      border: none;
+      padding: 0!important;
+      padding-top: 40px!important;
+      .btc-deposit-address{
+        text-align: center;
+        padding: 0;
+      }
+    }
 }
 
 @media (max-width: 768px) {
@@ -37,6 +49,15 @@
       display: inline-block;
       margin: 0
     }
+    .btc-currency-withdraw .btc-fl  {
+      & > span{
+        display: block;
+        margin-bottom: 8px;
+      }
+    img{
+      margin-left: 0
+    }
+  }
 }
 
 @media (min-width: 768px) {
@@ -68,6 +89,9 @@
       float: none;
     }
   }
+  .btc-tableHover{
+    width:  250px!important;
+  }
 }
 
 .btc-member-center {
@@ -86,11 +110,13 @@
             }
             .btc-fl {
                 span {
-                    color: #999999;
                     img {
                         position: relative;
                         top: 2px;
                     }
+                }
+                a{
+                  color: #999999
                 }
             }
             .btc-fr {
