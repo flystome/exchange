@@ -171,7 +171,7 @@
   </div>
 </template>
 <script>
-import { mapMutations, mapState } from 'vuex'
+import { mapMutations } from 'vuex'
 import Clipboard from 'clipboard'
 import pusher from '@/common/js/pusher'
 // var channel = pusher.subscribe(`private-${d.data.sn}`)

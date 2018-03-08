@@ -78,9 +78,8 @@
               <th style="cursor:  pointer;" @click="werw" class="upordpwn">
                 日涨跌
                   <img v-if="change === 'no'" src="~Img/both.png" alt="">
-                  <img v-else-if="change" src="~Img/up.png" alt="">
-                  <img v-else-if="!change" src="~Img/down.png" alt="">
-                  <!-- <img src="~Img/up.png" alt=""> -->
+                  <img v-else-if="!change" src="~Img/up.png" alt="">
+                  <img v-else-if="change" src="~Img/down.png" alt="">
               </th>
               <th>价格趋势</th>
               <th></th>
@@ -91,7 +90,7 @@
               <td>
                 <a class="btc-homepage-currency">
                   <div>
-                    <img :src="requireImg(`market-${item[`${Object.keys(item)[0]}`].name.split('/')[0].toLowerCase()}`)">
+                    <!-- <img :src="requireImg(`market-${item[`${Object.keys(item)[0]}`].name.split('/')[0].toLowerCase()}`)"> -->
                   </div>
                   <div>
                     <b>{{ item[`${Object.keys(item)[0]}`].name }}</b>
@@ -190,12 +189,12 @@ export default {
         headers: {
           'DataType': 'application/json;charset=utf-8'
         }}, (d) => {
-        // console.log(d.data)
         this.getetc = d.data[type]
       })
     },
     werw () {
       this.change = !this.change
+      console.log(this.change)
       this.changedate()
     },
     changedate () {
