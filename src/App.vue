@@ -141,6 +141,19 @@ body{
 .btc-color999{
   color: #999999;
 }
+ul,li {
+  list-style:  none;
+}
+.clearfix:after{
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0;
+}
+.clearfix{
+    zoom:1;
+}
 @media (max-width: 992px){
   .btc-container {
     padding: 0;

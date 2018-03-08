@@ -1,6 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-
+// css dependencies
+import 'bootstrap/dist/css/bootstrap.min.css'
 // template dependencies
 import BasicButton from 'Components/BasicButton/BasicButton'
 import BasicInput from 'Components/BasicInput/BasicInput'
@@ -26,9 +27,7 @@ import axios from 'axios'
 import { _post, _get, _httpget } from './axios'
 import 'bootstrap/js/dropdown.js'
 import 'bootstrap/js/collapse.js'
-
-// css dependencies
-import 'bootstrap/dist/css/bootstrap.min.css'
+import Pusher from 'pusher-js'
 
 Vue.use(VeeValidate, {
   i18n,
@@ -78,3 +77,17 @@ new Vue({
   template: `<Title></Title>`,
   components: { Title }
 }).$mount('#title')
+
+Pusher.Runtime.createXHR = function () {
+  var xhr = new XMLHttpRequest()
+  xhr.withCredentials = true
+  return xhr
+}
+
+// const pusher = new Pusher('11227a46061409170fd5', {
+//   cluster: 'ap1',
+//   authEndpoint: '192.168.1.120:3000/pusher/auth',
+//   encrypted: true
+// })
+
+// const globalChannel = pusher.subscribe('market-global')
