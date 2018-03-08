@@ -187,11 +187,22 @@ export default {
     }, (d) => {
       var channel = pusher.subscribe(`private-${d.data.sn}`)
         channel.bind('deposit_address', (data) => {
-          if (!this.DepositAddress[data.attributes.account_id]) {
-            this.DepositAddress.push({
-              id: data.attributes.account_id,
-              address: data.attributes.deposit_address
-            })
+          // this.DepositAddress.forEach((data, index) => {
+          //   if (!data.id === data) {
+          //     this.DepositAddress.push({
+          //       id: data.attributes.account_id,
+          //       address: data.attributes.deposit_address
+          //     })
+          //   }
+          // })
+          if (typeof this.DepositAddress !== 'object') {
+            this.DepositAddress = {
+              [data.attributes.account_id]: data.attributes.deposit_address
+            }
+          } else {
+            if (!Object.keys(this.DepositAddress).includes((data.attributes.account_id).toString())) {
+              this.DepositAddress[data.attributes.account_id] = data.attributes.deposit_address
+            }
           }
       })
       this.Remain = d.data.today_withdraw_remain
@@ -229,7 +240,7 @@ export default {
         point: '.'
       },
       length: 0,
-      DepositAddress: [],
+      DepositAddress: '',
       currencies: [],
       route: '',
       deposit_address_display: false,
@@ -244,6 +255,7 @@ export default {
       Locked: '',
       Address: this.$t('withdraw_currency.withdraw_currency_address'),
       Rucaptcha: false,
+      Time: '',
       WithdrawData: {
         Address_id: '',
         otp: '',
@@ -310,6 +322,20 @@ export default {
         }, (d) => {
           if (d.data.status === 2) {
             this.PopupBoxDisplay({message: '123', type: 'warn'})
+            this.ChangePopupBox({
+              buttondisplay: false,
+              type: 'warn',
+              message: 'wait',
+            })
+            this.Time = setTimeout(() => {
+              this.ChangePopupBox({
+                message: '失败',
+                type: 'error',
+              })
+              setTimeout(() => {
+                this.PopupBoxDisplay()
+              }, 1000)
+            }, 10000)
           }
           this.Locked = d.data.account.locked
           var obj = this.WithdrawRecord
@@ -533,7 +559,26 @@ export default {
       this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
     },
     DepositAddress (to, from) {
-      console.log(to, from)
+      if (Object.keys(to).length > Object.keys(from).length) {
+        // this.ChangePopupBox({
+        //   message: 'success',
+        //   type: 'success'
+        // })
+        // this.ChangePopupBox({
+        //   type: 'success'
+        // })
+        clearTimeout(this.Time)
+        this.ChangePopupBox({
+          type: 'success',
+          message: 'success',
+        })
+        setTimeout(() => {
+          this.PopupBoxDisplay()
+          this.ChangePopupBox({
+            buttondisplay: true,
+          })
+        }, 2000)
+      }
     }
   }
 }

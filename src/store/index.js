@@ -52,13 +52,22 @@ const mutations = {
     state.PopupBox.type = obj.type
     state.PopupBox.status = !state.PopupBox.status
     state.PopupBox.message = obj && obj.message
+    // if (!obj.buttondisplay)  state.PopupBox.buttondisplay = true
     obj && obj.url ? state.PopupBox.url = obj.url : state.PopupBox.url = ''
   },
   ChangeLanguage (state, lang) {
     state.language = lang
   },
-  ChangePopupBox (state, { from, to }) {
-    state.PopupBox[from] = to
+  ChangePopupBox (state, obj) {
+    ({
+      type: state.PopupBox.type,
+      message: state.PopupBox.message,
+      buttondisplay: state.PopupBox.buttondisplay
+    } = {
+      type: obj.type ? obj.type : state.PopupBox.type,
+      message: obj.message ? obj.message : state.PopupBox.message,
+      buttondisplay: Object.keys(obj).includes('buttondisplay') ? obj.buttondisplay : state.PopupBox.buttondisplay
+    })
   }
 }
 
@@ -70,7 +79,9 @@ const store = new Vuex.Store({
       type: 'success',
       status: false,
       message: '',
-      url: ''
+      url: '',
+      buttonText: '',
+      buttondisplay: true
     },
     language: '',
     DepositAddress: {

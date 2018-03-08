@@ -475,6 +475,9 @@ const en = {
       "google_verification_code": "Code Displayed in Google Authenticator",
       "google_verification": "Verify",
       "app_already_installed": "APP already installed"
+    },
+    "hint": {
+      "confirm": "Confirm"
     }
   }
 }

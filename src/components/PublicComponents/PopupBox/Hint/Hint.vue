@@ -12,7 +12,7 @@
        </div>
        <div class="btc-paddingB30">
         <a @click.stop="gopath">
-          <basic-button class="btc-marginT50" :text='"确定"'>
+          <basic-button class="btc-marginT50" :text='buttonText' :class="{'btc-hint-hidden': !this.PopupBox.buttondisplay}">
           </basic-button>
         </a>
        </div>
@@ -35,6 +35,9 @@ export default {
     ...mapMutations(['PopupBoxDisplay'])
   },
   computed: {
+    buttonText () {
+      return this.PopupBox.buttonText ? this.PopupBox.buttonText : this.$t("hint.confirm")
+    },
     ...mapState(['PopupBox'])
   }
 }
@@ -51,6 +54,9 @@ export default {
     margin: 0 auto;
     box-shadow:0 0 30px #bbbbbb;
     z-index: 99999;
+  }
+  .btc-hint-hidden{
+    visibility: hidden;
   }
   button{
     width: 100%;
