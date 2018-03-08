@@ -28,17 +28,17 @@
     <div class="btc-container-block">
       <div class="btc-withdraw-coin">
         <a v-for="(coin,index) in this.currencies"
-        :class="{'is-chioce': index === length}"
-        @click='ChoiceCoin(index)'
+        :class="{'is-chioce':index === length, 'is-enabled': !coin.node_enabled}"
+        @click='ChoiceCoin(index, coin.node_enabled)'
         class="btc-b"
-        :key="coin">
-          <img :src="requireImg(`market-${coin}`)">
+        :key="coin.code">
+          <img :src="requireImg(`market-${coin.code}`)">
           <span>
-            {{ coin | toUpperCase }}
+            {{ coin.code | toUpperCase }}
           </span>
         </a>
       </div>
-      <div class="btc-b" v-if="route === 'withdraw'">
+      <div class="btc-b btc-withdraw-formContainer" v-if="route === 'withdraw'">
         <div class="btc-withdraw-form">
           <!-- <basic-option :data='[{
             name: "withdraw_currency_address",
@@ -47,9 +47,9 @@
           <div @click.stop="ChoiceStatus(!choice)" class="btc-withdraw-address btc-b-l" :style="{background:`url('${requireImg('select')}') 100% 100%`}">
             {{ Address }}
           </div>
-          <div v-if="choice" @click.stop="ChoiceStatus(true)" class='btc-b btc-address-contain'>
+          <div v-show="choice" @click.stop="ChoiceStatus(true)" class='btc-b btc-address-contain'>
             <div class="btc-address-height">
-              <div class="btc-pointer" v-for="(data, index) in FundSources[CurrencyType]" :key="index" @click.stop="ChoiceAddress(index)">
+              <div class="btc-pointer" v-for="(data, index) in FundSources[CurrencyType]" :key="index" @click.stop="ChoiceAddress(index, data.id)">
                   <div class="btc-fl">
                     <div class="btc-color999">
                       <strong>
@@ -62,7 +62,9 @@
                       </strong>
                     </div>
                 </div>
-                <div class="btc-fr"><span>{{$t('withdraw_currency.set_as_default')}}</span>丨<span>{{$t('withdraw_currency.delete')}}</span></div>
+                <div class="btc-fr"><span
+                @click.stop="DefaultFunds(data.id)">{{$t('withdraw_currency.set_as_default')}}</span>丨<span
+                @click.stop="DeleteFunds(data.id, FundSources[CurrencyType], index)">{{$t('withdraw_currency.delete')}}</span></div>
                 </div>
             </div>
             <div class="btc-addnew btc-pointer text-center" @click.stop="AddAddress">
@@ -70,37 +72,37 @@
                 {{$t('withdraw_currency.use_a_new_address')}}
             </div>
           </div>
-          <template v-else>
+          <div v-show='!choice'>
             <div class="btc-marginT15 btc-withdraw-add" style="display: flex" v-if="withdrawAddress">
-              <basic-input class="btc-withdraw-all" v-model="RemarkLabel" :placeholder='$t("withdraw_currency.remark_label")'>
+              <basic-input class="btc-withdraw-all" v-model="WithdrawData.remark" :placeholder='$t("withdraw_currency.remark_label")'>
               </basic-input>
-              <basic-input class="btc-withdraw-all" v-model="WithdrawCurrencyAddress" :placeholder='$t("withdraw_currency.withdraw_currency_address")'>
+              <basic-input class="btc-withdraw-all" v-model="WithdrawData.newAddress" :placeholder='$t("withdraw_currency.withdraw_currency_address")'>
               </basic-input>
             </div>
             <div class="btc-withdraw-explain">
-              <span>{{ $t('withdraw_currency.available_balance') }}</span> 0 BTC <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> 0 BTC
+              <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance }} BTC <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Locked }} BTC
             </div>
-              <basic-input ref='WithdrawAll' class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
+              <basic-input ref='WithdrawAll' v-model="WithdrawData.amount" class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
                 <basic-button @click.native="WithdrawAll" class="btc-link" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
               </basic-input>
             <div class="btc-withdraw-explain"><span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }}</span> 0.001 <span class="btc-fr btc-link"><img src="~Img/tariff-description.png">{{$t('withdraw_currency.tariff_description')}}</span></div>
             <div class="btc-choice-validate">
-              <basic-select :data="[this.$t('withdraw_currency.google_validate'),this.$t('withdraw_currency.sms')]"
+              <basic-select key="'choice_verfiy'" :data="[this.$t('withdraw_currency.google_validate'),this.$t('withdraw_currency.sms')]"
               :value="validate"
               v-on:selected="validate = arguments[0]">>
               </basic-select>
-              <basic-input v-model="WithdrawData.otp" :key="validate" class="btc-marginB30">
+              <basic-input v-model="WithdrawData.otp" :key="validate" class="btc-marginB10">
               </basic-input>
-              <button v-if="validate === 'SMS'" class="btc-white-btn">{{$t('withdraw_currency.send_identify_code')}}</button>
+              <button @click="SendSms" v-if="validate === 'SMS'" class="btc-white-btn">{{ timer }}</button>
             </div>
-            <basic-button @click.native="Withdraw" style="width:100%" :text="$t('withdraw_currency.withdraw')">
-            </basic-button>
             <div v-if="Rucaptcha">
-              <basic-input v-model="WithdrawData.rucaptcha"  class="btc-marginB30">
+              <basic-input :placeholder="$t('deposit_currency.identifying_code')" v-model="WithdrawData.rucaptcha"  class="btc-marginT10">
               </basic-input>
-              <img :src="`${HOST_URL}/rucaptcha`">
+              <img @click="ChangeRucaptcha" class="btc-pointer btc-marginB10" :key="'rucaptcha'" :src="`${HOST_URL}${Rucaptcha}`">
             </div>
-          </template>
+            <basic-button :class="{'btc-marginT30': !Rucaptcha}" @click.native="Withdraw" style="width:100%" :text="$t('withdraw_currency.withdraw')">
+            </basic-button>
+          </div>
         </div>
         <div class="btc-withdraw-currency">
           <ul>
@@ -118,17 +120,16 @@
         </div>
       </div>
       <div v-else class="btc-deposit-currency btc-paddingT40 btc-b">
-        <div class="text-right btc-deposit-qrcode col-md-5">
-          <img src="~Img/deposit-qrcode.png">
+        <div v-if="deposit_address_display" class="text-right btc-deposit-qrcode col-md-5 btc-marginT5">
+          <qr-code :length='"230"' :dateUrl="qrcode(deposit_address)"></qr-code>
         </div>
         <div class="btc-deposit-address col-md-5">
           <div>
-            <div contenteditable="true" id="copy">
-              {{ $t('withdraw_currency.withdraw_address') }}
+            <div id="copy">
+              {{ deposit_address }}
             </div>
-            <img  class='btn-copy' data-clipboard-target="#copy" src="~Img/deposit-paste.png">
           </div>
-          <basic-button class="btc-marginT15" :text='$t("deposit_currency.generating_address_qrcode")'></basic-button>
+          <basic-button  data-clipboard-target="#copy" class="btc-marginT30 btn-copy" :text='$t("deposit_currency.copy_address")'></basic-button>
         </div>
         <ul class="btc-marginT80">
             <strong class="btc-withdraw-remind">{{ $t('withdraw_currency.reminder') }}</strong>
@@ -144,7 +145,13 @@
           </ul>
       </div>
     </div>
-    <basic-table ref="a" :captionTitle='WithdrawRecord.captionTitle' :item='WithdrawRecord.item' v-if="route === 'withdraw'">
+    <basic-table :captionTitle='WithdrawRecord.captionTitle' :item='WithdrawRecord.item' v-if="route === 'withdraw'">
+      <template slot="cancel"
+      slot-scope="props">
+      <a>
+        / <span @click="cancelWithdraw(props.id, props.data)" class="btc-link">{{$t('withdraw_currency.cancel')}}</span>
+      </a>
+      </template>
       <div slot="more" class="text-center btc-b-t btc-table-more">
         <a class="btc-link ">{{$t('member_center.show_more')}}</a>
       </div>
@@ -156,48 +163,113 @@
     </basic-table>
   </div>
 </template>
-
 <script>
+import { mapMutations } from 'vuex'
 import Clipboard from 'clipboard'
+import Pusher from 'pusher-js'
+var QRCode = require('qrcode')
 export default {
   name: 'withdrawCurrency',
   created () {
+    // {
+    //   var message
+    //   var len = 0
+    //   var timer = setInterval(() => {
+    //   message = ''
+    //   len++
+    //   this.ChangePopupBox({
+    //     from: 'message',
+    //     to: len
+    //   })
+    //   }, 2000)
+    //   this.PopupBoxDisplay({message: len, type: 'success'})
+    // }
     this._get({
-      url: '/funds/home.json',
-      headers: {
-        'DataType': 'application/json;charset=utf-8'
-      }
+      url: '/funds/home.json'
     }, (d) => {
+      if (d.data.notice) {
+        this.PopupBoxDisplay({message: d.data.notice.message, type: d.data.notice.type})
+      }
       d.data.rucaptcha && (this.Rucaptcha = d.data.rucaptcha)
       d.data.currencies.forEach((a) => {
         if (a.code === 'btc') {
-          this.currencies.unshift(a.code)
+          this.currencies.unshift({
+            code: a.code,
+            node_enabled: a.node_enabled
+          })
         } else {
-          this.currencies.push(a.code)
+          this.currencies.push({
+            code: a.code,
+            node_enabled: a.node_enabled
+          })
         }
       })
       this.FundSources = d.data.fund_sources
+      this.GetCoin(false, d.data.fund_sources)
+
+      var config = {
+        cluster: 'ap1',
+        encrypted: true,
+        key: '11227a46061409170fd5',
+        wsHost: 'api-ap1.pusher.com',
+        wsPort: '80',
+        wssPort: '443'
+      }
+      console.log(Pusher)
+      Pusher.Runtime.createXHR = function () {
+        var xhr = new XMLHttpRequest()
+        xhr.withCredentials = true
+        return xhr
+      }
+      var pusher = new Pusher(config.key, {
+        authEndpoint: this.HOST_URL + '/pusher/auth',
+        auth: {
+          headers: {
+            'DataType': 'application/json;charset=utf-8'
+          }
+      },
+        cluster: config.cluster,
+        encrypted: config.encrypted
+      })
+      var channel = pusher.subscribe(`private-${d.data.sn}`)
+      channel.bind('deposit_address', (data) => {
+        console.log(data)
+        return
+        alert('An event was triggered with message: ' + data.message)
+      })
     })
-    this.GetCoin()
     this.route = this.$route.path.slice(this.$route.path.lastIndexOf('/') + 1)
   },
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
+      warn: {
+        length: 0,
+        message: '',
+        type: 'success',
+        point: '.'
+      },
       length: 0,
       currencies: [],
       route: '',
+      deposit_address_display: false,
+      deposit_address: this.$t('deposit_currency.deposit_address'),
       choice: false,
+      second: -1,
+      resend: false,
       withdrawAddress: false,
-      WithdrawCurrencyAddress: '',
-      RemarkLabel: '',
       CurrencyType: 'btc',
       Balance: '',
+      Locked: '',
       Address: this.$t('withdraw_currency.withdraw_currency_address'),
       Rucaptcha: false,
       WithdrawData: {
+        Address_id: '',
         otp: '',
-        rucaptcha: ''
+        rucaptcha: '',
+        amount: '',
+        remark: '',
+        newAddress: ''
       },
       WithdrawRecord: {
         captionTitle: this.$t('withdraw_currency.withdraw_currency_record'),
@@ -217,45 +289,57 @@ export default {
     }
   },
   methods: {
+    ChangeRucaptcha () {
+      this.Rucaptcha += `?${Math.random()}`
+    },
     WithdrawAll () {
-      this.$refs['WithdrawAll'].$el.children[0].value = this.Balance
+      this.WithdrawData.amount = this.Locked
     },
     AddAddress () {
       this.withdrawAddress = true
       this.ChoiceStatus(false)
       this.Address = this.$t('withdraw_currency.withdraw_currency_address')
+      this.WithdrawData.Address_id = ''
     },
     requireImg (img) {
       return require(`../../../../static/img/${img}.png`)
     },
-    ChoiceCoin (index) {
+    ChoiceCoin (index, type) {
+      if (!type) return
       this.length = index
-      this.GetCoin(this.currencies[index])
-      this.CurrencyType = this.currencies[index]
+      this.GetCoin(this.currencies[index].code)
+      this.CurrencyType = this.currencies[index].code
       this.Address = this.$t('withdraw_currency.withdraw_currency_address')
-      this.$refs['WithdrawAll'].$el.children[0].value = ''
+      this.WithdrawData.Address_id = ''
+      this.WithdrawData.amount = ''
     },
     ChoiceStatus (boolean) {
       this.choice = boolean
     },
-    ChoiceAddress (index) {
+    ChoiceAddress (index, id) {
+      this.WithdrawData.Address_id = id
       this.withdrawAddress = false
       this.Address = this.FundSources[this.CurrencyType][index].uid
       this.ChoiceStatus(false)
     },
-    GetCoin (c) {
+    GetCoin (c, funds) {
       this.$nextTick(() => {
         this._get({
-          url: `/funds/${c || 'btc'}/account_info`,
-          headers: {
-            'DataType': 'application/json;charset=utf-8'
-          }
+          url: `/funds/${c || 'btc'}/account_info`
         }, (d) => {
           var obj = this.WithdrawRecord
           var objd = this.depositRecord
           var withdraws = d.data.withdraws
           var deposits = d.data.deposits
+          if (d.data.address) {
+            this.deposit_address_display = true
+            this.deposit_address = d.data.address
+          } else {
+            this.deposit_address_display = false
+            this.deposit_address = ''
+          }
           d.data.account && (this.Balance = d.data.account.balance)
+          d.data.account && (this.Locked = d.data.account.locked)
           withdraws.length === 0 ? obj.item = [] : obj.item = [{content: [
             this.$t('withdraw_currency.number'),
             this.$t('withdraw_currency.withdraw_time'),
@@ -265,14 +349,17 @@ export default {
             this.$t('withdraw_currency.statu_and_operation')
           ]
           }].concat(withdraws.map(d => {
+            var title = `${d.aasm_state_title}`
+            var id = d.id
             return {
               content: [
-                d.id,
+                id,
                 this.$moment(d.created_at).format('L H:mm:ss'),
                 d.fund_uid,
                 d.amount,
                 d.fee,
-                `${d.aasm_state_title}${d.aasm_state === ('submitting' || 'submitted' || 'accepted') ? ` / <span class='btc-cancel btc-link'>${this.$t('withdraw_currency.cancel')}</span>` : ''}`
+                { type: d, context: title, id: id }
+                // ${d.aasm_state === ('submitting' || 'submitted' || 'accepted') ? ` / <span class='btc-cancel btc-link'>${this.$t('withdraw_currency.cancel')}</span>` : ''}
               ]
             }
           }))
@@ -297,7 +384,74 @@ export default {
           }))
           obj.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('withdraw_currency.withdraw_currency_record')}`
           objd.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('deposit_currency.deposit_record')}`
+
+          if (funds) {
+            funds['btc'].forEach((d) => {
+              if (d.is_default) {
+                this.Address = d.uid
+                this.WithdrawData.Address_id = d.id
+              }
+            })
+          } else {
+            if (!this.FundSources[c]) return
+            this.FundSources[c].forEach((d) => {
+              if (d.is_default) {
+                this.Address = d.uid
+                this.WithdrawData.Address_id = d.id
+              }
+            })
+          }
         })
+      })
+    },
+    DeleteFunds (id, funds, index) {
+      this._delete({
+        url: `/funds/${id}/delete_fund_source.json`
+      }, (d) => {
+        if (d.data.status === 0) {
+          if (id === this.WithdrawData.Address_id) {
+            this.Address = this.$t('withdraw_currency.withdraw_currency_address')
+            this.WithdrawData.Address_id = ''
+            this.ChoiceStatus(false)
+          }
+          this.PopupBoxDisplay({message: d.data.message, type: 'success'})
+          funds.splice(index, 1)
+        } else {
+          this.PopupBoxDisplay({message: d.data.message, type: 'error'})
+        }
+      })
+    },
+    DefaultFunds (id) {
+      this._post({
+        url: `/funds/${id}/set_default_fund_source.json`
+      }, (d) => {
+        if (d.data.status === 0) {
+          this.FundSources[this.CurrencyType].forEach((d) => {
+            if (d.is_default) {
+              d.is_default = false
+            }
+            if (d.id === id) {
+              d.is_default = true
+            }
+          })
+          this.PopupBoxDisplay({message: d.data.message, type: 'success'})
+        } else {
+          this.PopupBoxDisplay({message: d.data.message, type: 'error'})
+        }
+      })
+    },
+    SendSms () {
+      if (this.second > 0) {
+        return
+      }
+      this._post({
+        url: '/funds/send_sms'
+      }, (d) => {
+        if (d.data.status === 1) {
+          this.PopupBoxDisplay({message: d.data.error, type: 'error'})
+        } else {
+          this.CountDown()
+        }
       })
     },
     Withdraw () {
@@ -312,35 +466,78 @@ export default {
       var obj = this.withdrawAddress ? {
         withdraw: {
           type: 'new',
-          sum: 10,
-          extra: 'label',
-          uid: 'address'
+          sum: this.WithdrawData.amount,
+          extra: this.WithdrawData.remark,
+          uid: this.WithdrawData.newAddress
         },
         two_factor: validate
       } : {
         withdraw: {
           type: 'exist',
-          sum: 10,
-          fund_source: 70
+          sum: this.WithdrawData.amount,
+          fund_source: this.WithdrawData.Address_id
         },
         two_factor: validate,
         _rucaptcha: this.WithdrawData.rucaptcha
       }
       this._post({
         url: `/funds/${this.CurrencyType}/create_withdraw`,
-        data: obj,
-        headers: {
-          'DataType': 'application/json;charset=utf-8'
-        }
+        data: obj
       }, (d) => {
-        console.log(d)
+        if (d.data.rucaptcha) {
+          this.Rucaptcha = d.data.rucaptcha
+        }
+        var prompt = d.data.message
+        if (d.data.status === 0) {
+          this.PopupBoxDisplay({message: prompt, type: 'success'})
+        } else if (d.data.status === 2) {
+          this.PopupBoxDisplay({message: d.data.message, type: 'success'})
+        } else {
+          this.PopupBoxDisplay({message: d.data.error, type: 'error'})
+        }
       })
     },
-    cancelWithdraw (id) {
-      this.$http({
-        method: 'delete',
+    cancelWithdraw (id, data) {
+      this._delete({
         url: `/funds/${id}/cancel_withdraw`
+      }, (d) => {
+        var prompt = d.data.message
+        if (d.data.status === 0) {
+          this.PopupBoxDisplay({message: prompt, type: 'success'})
+          var type = data.type
+          type.aasm_state_title = this.$t('funds.withdraw_history.canceled')
+          data.context = this.$t('funds.withdraw_history.canceled')
+          type.aasm_state = 'canceled'
+        } else {
+          this.PopupBoxDisplay({message: prompt, type: 'error'})
+        }
       })
+    },
+    CountDown () {
+      this.second = 60
+      this.resend = true
+      var timer = setInterval(() => {
+        this.second--
+        if (this.second < 0) {
+          clearInterval(timer)
+        }
+      }, 1000)
+    },
+    qrcode (str) {
+      var dateUrl = ''
+      QRCode.toDataURL(str, {widht: 120, height: 120}, (err, string) => {
+        if (err) console.log(err)
+        dateUrl = string
+      })
+      return dateUrl
+    },
+    ...mapMutations(['PopupBoxDisplay', 'ChangePopupBox'])
+  },
+  computed: {
+    timer () {
+      return this.resend ? (this.second < 0
+        ? this.$t('withdraw_currency.resend')
+        : `${this.$t('withdraw_currency.resend')} ${this.second}s`) : this.$t('withdraw_currency.send_identify_code')
     }
   },
   mounted () {
@@ -350,13 +547,6 @@ export default {
   watch: {
     $route (to) {
       this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
-    },
-    'WithdrawRecord.item' () {
-      this.$nextTick(() => {
-        this.$refs['a'].$el.addEventListener('click', () => {
-          this.cancelWithdraw(1)
-        })
-      })
     }
   }
 }

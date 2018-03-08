@@ -23,7 +23,7 @@ import en from 'vee-validate/dist/locale/en'
 import i18n from '@/common/js/i18n/i18n.js'
 import store from './store'
 import axios from 'axios'
-import { _post, _get, _httpget } from './axios'
+import { _post, _get, _delete } from './axios'
 import 'bootstrap/js/dropdown.js'
 import 'bootstrap/js/collapse.js'
 import 'bootstrap/js/carousel.js'
@@ -45,8 +45,8 @@ moment.locale('zh-cn')
 Vue.config.productionTip = false
 Vue.prototype._post = _post
 Vue.prototype._get = _get
+Vue.prototype._delete = _delete
 Vue.prototype.$http = axios
-Vue.prototype._httpget = _httpget
 Vue.prototype.$moment = moment
 
 const components = [

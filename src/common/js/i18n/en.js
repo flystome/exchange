@@ -263,7 +263,7 @@ const en = {
         "coin_done": "Coin Done",
         "done": "Done",
         "almost_done": "Almost Done",
-        "canceled": "Canceld",
+        "canceled": "Canceled",
         "failed": "Failed"
       }
     },
@@ -413,9 +413,29 @@ const en = {
       "absenteeism_expenses": "Absenteeism expenses",
       "statu_and_operation": "statu / operation",
       "available_balance": "Available balance",
-      "remaining_withdraw": "Remaining withdraw amount of money",
-      "minimum_withdraw_amount_of_money": "Minimum withdraw amount of money",
-      "remark_label": "Remark Label"
+      "remaining_withdraw": "Remaining Withdraw amount of money",
+      "minimum_withdraw_amount_of_money": "Minimum Withdraw amount of money",
+      "remark_label": "Remark Label",
+      "use_a_new_address": "Use a new address",
+      "sms": "SMS",
+      "send_identify_code": "Send Identify Code",
+      "set_as_default": "Set As Default",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "resend": "Resend"
+    },
+    "deposit_currency":{
+      'deposit_address': 'Address',
+      'copy_address': "Copy Address",
+      "use_wallet_service": "Please use your commonly used wallet service, local purse, online wallet, or mobile wallet, choose to pay or send.",
+      "font_descripe": "In the payment or payment of your wallet, copy the following special currency address which is specially recharged for you, fill in the amount you want to recharge to the account in the amount, and don't forget to pay a certain ore fee to ensure that the transaction is confirmed by the whole network as soon as possible. You can also scan the two-dimensional code in the mobile end purse to pay. You can recharge the special currency address and the two-dimensional code.",
+      "operation_done": "After the above operation is done, click send payment, the transaction will be broadcast to the whole network, so you can see the status of the transaction. When the transaction reaches the 1 confirmation of the whole network (about 10 to 60 minutes), the system will automatically recharge to the account. You can inquire in the disclosure of the assets.",
+      "deposit_record": "Deposit Record",
+      "deposit_date": "Deposit Date",
+      "trading_hash": "Trading Hash",
+      "recharge_amount": "Recharge Amount",
+      "confirmation_number": "Confirmation Number",
+      "identifying_code": "Identifying Code"
     },
     "title": {
       "member_center": "Member Center",

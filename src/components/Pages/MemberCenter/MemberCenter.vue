@@ -220,11 +220,11 @@ export default {
           'DataType': 'application/json;charset=utf-8'
         }
       }, (d) => {
-        if (d.data.status_code === '0') {
+        if (d.data.status_code === '1') {
           this.prompt = d.data.errors
-          this.PopupBoxDisplay({message: this.email_sent_message})
+          this.PopupBoxDisplay({message: prompt, type: 'success'})
         } else {
-          this.PopupBoxDisplay({message: this.email_sent_message})
+          this.PopupBoxDisplay({message: d.data.errors, type: 'error'})
         }
       })
     },
