@@ -63,7 +63,8 @@
     </div>
     <div class="container">
       <div class="btc-homepage-markets btc-marginT30">
-        <basic-button v-for="(item,index) in currency" :key="index" class="btc-button pull-left" :class="{'btc-active':!(indexs==index)}" @click.native="currencyTab(index)" :text='item'></basic-button>
+        <basic-button v-for="(item,index) in currency" :data-id="item" :key="index" class="btc-button pull-left" :class="{'btc-active':!(indexs==index)}"
+        @click.native="currencyTab(index,item)" :text='item+"交易区"'></basic-button>
         <basic-input class="pull-right btc-search" placeholder='搜索'>
           <img src="~Img/search.png" alt="">
         </basic-input>
@@ -74,12 +75,12 @@
               <th>价格USDT</th>
               <th>交易量(USDT)</th>
               <th>总市值(USDT)</th>
-              <th class="upordpwn">
+              <th style="cursor:  pointer;" @click="werw" class="upordpwn">
                 日涨跌
-                <div>
-                  <img src="~Img/up.png" alt="">
-                  <img src="~Img/down.png" alt="">
-                </div>
+                  <img v-if="change === 'no'" src="~Img/both.png" alt="">
+                  <img v-else-if="change" src="~Img/up.png" alt="">
+                  <img v-else-if="!change" src="~Img/down.png" alt="">
+                  <!-- <img src="~Img/up.png" alt=""> -->
               </th>
               <th>价格趋势</th>
               <th></th>
@@ -90,7 +91,7 @@
               <td>
                 <a class="btc-homepage-currency">
                   <div>
-                    <img src="~Img/market-btc.png" alt="">
+                    <img :src="requireImg(`market-${item[`${Object.keys(item)[0]}`].name.split('/')[0].toLowerCase()}`)">
                   </div>
                   <div>
                     <b>{{ item[`${Object.keys(item)[0]}`].name }}</b>
@@ -98,11 +99,15 @@
                 </a>
               </td>
               <td>
-                <span>0.004570<span style="color:#999">/$51.64</span></span>
+                <span>{{ item[`${Object.keys(item)[0]}`].last }}<span style="color:#999">/${{ item[`${Object.keys(item)[0]}`].legal_worth }}</span></span>
               </td>
-              <td>22654.06</td>
-              <td>965,896,574</td>
-              <td>+3.26%</td>
+              <td>{{ item[`${Object.keys(item)[0]}`].volume }}</td>
+              <td>{{ (item[`${Object.keys(item)[0]}`].volume*item[`${Object.keys(item)[0]}`].last).toFixed(2) }}</td>
+              <td>
+                <div style="color:#fd4041" v-if="item[`${Object.keys(item)[0]}`].percent>0">+{{ item[`${Object.keys(item)[0]}`].percent.toFixed(2) }}%</div>
+                <div style="color:#00c4a2" v-else-if="item[`${Object.keys(item)[0]}`].percent<0">-{{ item[`${Object.keys(item)[0]}`].percent.toFixed(2) }}%</div>
+                <div style="color:#999999" v-else>+{{ item[`${Object.keys(item)[0]}`].percent.toFixed(2) }}</div>
+              </td>
               <td></td>
               <td>
                 <a>交易</a>
@@ -121,7 +126,7 @@
         </div>
         <span class="col-md-4 pull-right btc-marginT10"></span>
       </div>
-      <div class="btc-homepage-info btc-marginB75 btc-marginT25">
+      <div class="btc-homepage-info btc-marginT25 text-center">
         <a class="col-md-2 col-md-offset-1">
           <img src="~Img/homepage-us.png" alt="">
           <span class="btc-marginT15">联系我们</span>
@@ -149,7 +154,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
 </template>
@@ -158,15 +162,16 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'homepage',
   created () {
-    this.getdata()
+    this.getdata('usdt')
   },
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
       open: true,
-      currency: ['USDT交易区', 'BTC交易区', 'ETH交易区'],
+      currency: ['USDT', 'BTC', 'ETH'],
       indexs: 0,
-      getetc: ''
+      getetc: '',
+      change: 'no'
     }
   },
   methods: {
@@ -176,17 +181,33 @@ export default {
     requireImg (img) {
       return require(`../../../../static/img/${img}.png`)
     },
-    currencyTab (index) {
+    currencyTab (index, item) {
       this.indexs = index
+      this.getdata(item.toLowerCase())
     },
-    getdata () {
+    getdata (type) {
       this._get({ url: '/home.json',
         headers: {
           'DataType': 'application/json;charset=utf-8'
         }}, (d) => {
-        console.log(d.data.btc)
-        this.getetc = d.data.btc
+        // console.log(d.data)
+        this.getetc = d.data[type]
       })
+    },
+    werw () {
+      this.change = !this.change
+      this.changedate()
+    },
+    changedate () {
+      if (this.change) {
+        this.getetc.sort((q, a) => {
+          return a[Object.keys(a)].percent - q[Object.keys(q)].percent
+        })
+      } else {
+        this.getetc.sort((q, a) => {
+          return q[Object.keys(q)].percent - a[Object.keys(a)].percent
+        })
+      }
     }
   },
   computed: {
