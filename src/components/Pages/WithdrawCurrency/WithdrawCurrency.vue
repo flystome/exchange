@@ -5,11 +5,11 @@
           <div class="btc-fl">
             <span>
               <img src="~Img/asset-total.png">
-              {{$t('withdraw_currency.total_assets')}} <span>{{ TotalAssets }}</span> BTC
+              {{$t('withdraw_currency.total_assets')}} <span>{{ TotalAssets }}</span> USDT
             </span>
             <img class="btc-marginL45 btc-marginR5" src="~Img/asset-freeze.png">
             <a class='btc-color999'>
-              {{$t('withdraw_currency.frozen_assets')}} {{ Locked }} BTC
+              {{$t('withdraw_currency.frozen_assets')}} {{ Locked }} USDT
             </a>
           </div>
           <div class="btc-fr">
@@ -173,27 +173,27 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 import Clipboard from 'clipboard'
+import pusher from '@/common/js/pusher'
+// var channel = pusher.subscribe(`private-${d.data.sn}`)
+//   channel.bind('deposit_address', (data) => {
+//   console.log(data)
+// })
 var QRCode = require('qrcode')
 export default {
   name: 'withdrawCurrency',
   created () {
-     console.log(this.DepositAddress['706'])
-    // {
-    //   var message
-    //   var len = 0
-    //   var timer = setInterval(() => {
-    //   message = ''
-    //   len++
-    //   this.ChangePopupBox({
-    //     from: 'message',
-    //     to: len
-    //   })
-    //   }, 2000)
-    //   this.PopupBoxDisplay({message: len, type: 'success'})
-    // }
     this._get({
       url: '/funds/home.json'
     }, (d) => {
+      var channel = pusher.subscribe(`private-${d.data.sn}`)
+        channel.bind('deposit_address', (data) => {
+          if (!this.DepositAddress[data.attributes.account_id]) {
+            this.DepositAddress.push({
+              id: data.attributes.account_id,
+              address: data.attributes.deposit_address
+            })
+          }
+      })
       this.Remain = d.data.today_withdraw_remain
       this.TotalAssets = Number(d.data.total_assets.btc_worth).toFixed(2)
       if (d.data.notice) {
@@ -229,6 +229,7 @@ export default {
         point: '.'
       },
       length: 0,
+      DepositAddress: [],
       currencies: [],
       route: '',
       deposit_address_display: false,
@@ -307,8 +308,8 @@ export default {
         this._get({
           url: `/funds/${c || 'btc'}/account_info`
         }, (d) => {
-          if (this.DepositAddress[d.data.account.account_id]) {
-            console.log('fuck')
+          if (d.data.status === 2) {
+            this.PopupBoxDisplay({message: '123', type: 'warn'})
           }
           this.Locked = d.data.account.locked
           var obj = this.WithdrawRecord
@@ -521,9 +522,6 @@ export default {
       return this.resend ? (this.second < 0
         ? this.$t('withdraw_currency.resend')
         : `${this.$t('withdraw_currency.resend')} ${this.second}s`) : this.$t('withdraw_currency.send_identify_code')
-    },
-    DepositAddress () {
-      return this.$store.state.DepositAddress
     }
   },
   mounted () {
@@ -534,8 +532,8 @@ export default {
     $route (to) {
       this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
     },
-    DepositAddress (a) {
-      console.log(a)
+    DepositAddress (to, from) {
+      console.log(to, from)
     }
   }
 }

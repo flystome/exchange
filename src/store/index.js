@@ -12,12 +12,13 @@ const actions = {
         'DataType': 'application/json;charset=utf-8'
       }
     }, (d) => {
-      var channel = pusher.subscribe(`private-${d.data.sn}`)
-      channel.bind('deposit_address', (data) => {
-        if (!state.DepositAddress[data.attributes.account_id]) {
-          commit('AddAddress', data)
-        }
-      })
+      if (/signin/.test(d.request.responseURL)) location.href = `${d.request.responseURL}?from=${location.href}`
+      // var channel = pusher.subscribe(`private-${d.data.sn}`)
+      // channel.bind('deposit_address', (data) => {
+      //   if (!state.DepositAddress[data.attributes.account_id]) {
+      //     commit('AddAddress', data)
+      //   }
+      // })
       commit('getData', d)
     })
   }

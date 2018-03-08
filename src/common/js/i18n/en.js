@@ -405,7 +405,7 @@ const en = {
       "min_currency": "Minimum amount of currency：0.001。",
       "confirm_apply_for_success": "After the request is successful, please go to the mailbox to click the link to confirm the request, and you can track the status of the Recharge and historical records page.",
       "make_sure_safe": "Be sure to make sure that computers and browsers are safe to prevent information from being tampered or leaked.",
-      "btc_withdraw_currency_record": "BTC withdraw currency record",
+      "withdraw_currency_record": "BTC withdraw currency record",
       "number": "Number",
       "withdraw_time": "Withdraw Time",
       "withdraw_address": "Withdraw Address",
