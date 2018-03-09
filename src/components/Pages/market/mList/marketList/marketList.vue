@@ -1,14 +1,14 @@
 <template>
   <div class="market">
     <ul class="hd clearfix">
-      <li class="text-center" v-for="(head, index) in heads" :key="head" :data-time = '0'  @click="sortList($event,index)">
+      <li class="text-center" v-for="(head, index) in heads" :key="head" :data-time = '0'  @click="sortList(index)">
         <span>{{head}}</span>
         <i class="caret caret-up"></i>
         <i class="caret caret-down"></i>
       </li>
     </ul>
     <ul class="bd">
-      <li class="list" v-for="item in curData" :key="item.quote_currency">
+      <li class="list" v-for="item in oldData" :key="item.quote_currency">
         <div class="list-coin">
           <div class="icon"><i class="fa fa-star"></i></div>
           <div class="item">
@@ -38,11 +38,11 @@ export default {
       coins: ['quote_currency', 'last', 'percent'],
       times: 0,
       currencyIndex: 0,
-      oldData: this.curData
+      oldData: null
     }
   },
   mounted: function () {
-
+    this.initData()
   },
   filters: {
     fixed2: function (params) {
@@ -55,45 +55,48 @@ export default {
       return (+params).toPrecision(3)
     }
   },
-  comouted: {
-    this.updateData()
+  watch: {
+    curData: function (val, oldVal) {
+      if (!val) {
+        this.oldData = []
+      } else {
+        this.oldData = JSON.parse(JSON.stringify(val))
+      }
+    }
   },
   methods: {
-    updateData: function () {
-      this.$nextTick(function () {
-        this.oldData = this.curData
-        console.log(this.curData)
-      })
-    }
-    sortList: function (e, index) {
+    initData: function () {
+      if (!this.curData) return ''
+      this.oldData = JSON.parse(JSON.stringify(this.curData))
+    },
+    sortList: function (index) {
       var order = this.coins[index]
       if (this.currencyIndex !== index) {
         this.currencyIndex = index
-        this.times = 1
+        this.times = 0
       }
-
-      if (this.times === 1) {
-        this.curData.sort(function (a, b) {
+      if (this.times === 0) {
+        this.oldData.sort(function (a, b) {
           if (index === 2) {
             return a[order] - b[order]
           } else {
             return a[order].localeCompare(b[order])
           }
         })
-        this.time = 2
-      } else if (this.times === 2) {
-        this.curData.sort(function (a, b) {
+        this.times = 1
+      } else if (this.times === 1) {
+        this.oldData.sort(function (a, b) {
           if (index === 2) {
             return b[order] - a[order]
           } else {
             return b[order].localeCompare(a[order])
           }
         })
-        this.time = 0
+        this.times = 2
       } else {
-        this.time = 1
+        this.times = 0
+        this.oldData = JSON.parse(JSON.stringify(this.curData))
       }
-      console.log(this.curData, this.oldData)
     }
   }
 }

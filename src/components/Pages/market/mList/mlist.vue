@@ -5,7 +5,7 @@
       @click="changemarket(index,hd)">{{hd}}</li>
     </ul>
     <ul class="marketBd">
-      <marketList :curData = "curData[currencyindex]"></marketList>
+      <marketList :curData = "curData[currencyindex]" :tarData = "curData[currencyindex]" ></marketList>
     </ul>
   </div>
 </template>
