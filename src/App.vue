@@ -67,13 +67,6 @@ body{
   background: white;
 }
 
-.btc-container{
-  background: #f2f2f2;
-  padding-bottom: 13px;
-  min-height: 70vh;
-  padding-top: 3px;
-}
-
 .btc-container-block{
   background: white;
   margin-top: 10px;
@@ -141,24 +134,7 @@ body{
 .btc-color999{
   color: #999999;
 }
-ul,li {
-  list-style:  none;
-}
-.clearfix:after{
-    display: block;
-    clear: both;
-    content: "";
-    visibility: hidden;
-    height: 0;
-}
-.clearfix{
-    zoom:1;
-}
-@media (max-width: 992px){
-  .btc-container {
-    padding: 0;
-  }
-}
+
 </style>
 
 <style lang="scss">

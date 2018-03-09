@@ -2,7 +2,7 @@
   <div id="markets">
     <ul class="marketsHd clearfix">
       <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}"
-      @click="changemarket(index,hd)">{{$t(hd)}}</li>
+      @click="changemarket(index,hd)">{{hd}}</li>
     </ul>
     <ul class="marketBd">
       <marketList :curData = "curData[currencyindex]"></marketList>
@@ -17,7 +17,7 @@ export default {
   name: 'markets',
   data () {
     return {
-      hds: ['favorite', 'btc', 'eth'],
+      hds: [this.$t('markets.favorite'), 'btc', 'eth'],
       currencyindex: 0,
       marketData: null,
       curData: []
@@ -30,7 +30,6 @@ export default {
     this.fetchData()
   },
   methods: {
-    // ...mapGetters(['loginData']),
     fetchData: function () {
       var self = this
       this._httpget({
@@ -41,8 +40,8 @@ export default {
         var marketData = JSON.parse(data.request.response)
         self.curData = []
         self.curData.push(self.initDate(marketData))
-        self.curData.push(marketData['btc'])
-        self.curData.push(marketData['eth'])
+        self.curData.push(self.getItem(marketData['btc']))
+        self.curData.push(self.getItem(marketData['eth']))
       })
     },
     changemarket: function (index, item) {
@@ -55,6 +54,15 @@ export default {
         this.getLocal(data)
       }
     },
+    getItem: function (data) {
+      var arr = []
+      for (var i in data) {
+        for (var item in data[i]) {
+          arr.push(data[i][item])
+        }
+      }
+      return arr
+    },
     getFavorite: function (data) {
       var arr = []
       for (var key in data) {
@@ -64,7 +72,7 @@ export default {
           for (var i = 0; i < len; i++) {
             for (var item in list[i]) {
               if (list[i][item]['is_portfolios'] === true) {
-                arr.push(list[i])
+                arr.push(list[i][item])
               }
             }
           }
@@ -85,7 +93,7 @@ export default {
           for (var i = 0; i < len; i++) {
             for (var item in list[i]) {
               if (localList.indexOf(item) !== -1) {
-                arr.push(list[i])
+                arr.push(list[i][item])
               }
             }
           }
