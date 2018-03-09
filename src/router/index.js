@@ -7,7 +7,7 @@ const ValidateIdentity = () => import('Pages/Validate/Identity/Identity')
 const WithdrawCurrency = () => import('Pages/WithdrawCurrency/WithdrawCurrency')
 const ValidateSms = () => import('Pages/Validate/Sms/Sms')
 const HomePage = () => import('Pages/HomePage/HomePage')
-const BootValidate = () => import('Pages/Validate/BootValidate/BootValidate')
+const Prompt = () => import('Pages/Prompt/Prompt')
 
 Vue.use(Router)
 
@@ -23,6 +23,11 @@ const router = new Router({
       path: '/homepage',
       name: 'HomePage',
       component: HomePage
+    },
+    {
+      path: '/prompt',
+      name: 'Prompt',
+      component: Prompt
     },
     {
       path: '/:version',
@@ -59,11 +64,6 @@ const router = new Router({
       path: '/validate/sms',
       name: 'ValidateSms',
       component: ValidateSms
-    },
-    {
-      path: '/validate/bootvalidate',
-      name: 'BootValidate',
-      component: BootValidate
     }
   ]
 })
