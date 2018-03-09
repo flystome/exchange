@@ -112,7 +112,7 @@ export default {
       step: 1,
       otp: '',
       password: '',
-      prompt: '',
+      prompt: ''
     }
   },
   methods: {
@@ -152,7 +152,7 @@ export default {
     async gValidate () {
       const password = await this.$refs['password'].$validator.validateAll()
       const verfiycode = await this.$refs['verfiycode'].$validator.validateAll()
-      if(!password && !verfiycode) {
+      if (!password && !verfiycode) {
         return
       }
       this._post({

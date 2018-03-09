@@ -54,7 +54,7 @@ export default {
       SmsData: {
         CellPhone: '',
         CellPhonecode: '86',
-        CountryName: '',
+        CountryName: 'CN',
         verifyCode: ''
       },
       phoneData: Array(7).fill('+86')
@@ -65,7 +65,8 @@ export default {
       this._post({
         url: `/verify/send_code.json`,
         data: {
-          phone_number: `+${this.SmsData.CellPhonecode}${this.SmsData.CellPhone}`
+          phone_number: `+${this.SmsData.CellPhonecode}${this.SmsData.CellPhone}`,
+          country: this.SmsData.CountryName
         }
       }, (d) => {
         console.log(d.data)

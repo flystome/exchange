@@ -11,7 +11,8 @@ const dictionary = {
 }
 
 Validator.extend('CellPhone', {
-  getMessage (field, params, data) {
+  getMessage: (field, params, data) => {
+    console.log(1)
     return (data && data.validation) || 'Something went wrong'
   },
   validate: value => {
