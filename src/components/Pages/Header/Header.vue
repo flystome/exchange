@@ -91,7 +91,7 @@ export default {
     },
     validateEmail () {
       if (!this.loginData.activated) {
-        alert(1)
+        this.goPath('/validate/bootvalidate')
       } else {
         this.goPath('/currency/withdraw')
       }

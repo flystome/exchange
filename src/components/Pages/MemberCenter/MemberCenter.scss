@@ -256,16 +256,17 @@
     color: #333333;
     display: none;
   }
-}
-.btc-verifying{
-  color: #666666 !important;
-  border-color: #666666;
-  &:hover{
-    .verifying-prompt{
-      display: block;
+  .btc-verifying{
+    color: #666666 !important;
+    border-color: #666666;
+    &:hover{
+      .verifying-prompt{
+        display: block;
+      }
     }
   }
 }
+
 
 .btc-member-validata img{
   position: absolute;
@@ -301,9 +302,6 @@
   .btc-member-ver{
     padding-left: 0 !important;
     width: 100% !important;
-    .media{
-      width: 31.5%;
-    }
     .btc-member-stepsblock{
       &:nth-child(2){
         margin-left: 0;
@@ -341,26 +339,35 @@
 
 @media(max-width: 981px){
   .btc-member-ver{
-    .col-md-4{
-      width: 100% !important;
+    .media{
+      &:nth-child(1){
+        .media-body{
+          h5{
+            width: 112px;
+            word-wrap: break-word;
+          }
+        }
+      }
     }
   }
 }
 
-@media (max-width: 566px) {
+@media(max-width: 640px){
   .btc-member-ver{
-    .btc-member-stepsblock{
-      padding-right: 10px !important;
-      .col-xs-10{
-        padding-left: 30px;
-        padding-right: 0;
-      }
-      .col-xs-1{
-        padding-right: 0;
+    .media{
+      width: 100% !important;
+      &:nth-child(1){
+        .media-body{
+          h5{
+            width: 100%;
+            word-wrap: break-word;
+          }
+        }
       }
     }
   }
 }
+
 
 @media (max-width: 492px) {
   .btc-member-bt{
