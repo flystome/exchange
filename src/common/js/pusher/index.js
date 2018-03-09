@@ -8,12 +8,13 @@ Pusher.Runtime.createXHR = function () {
 }
 var pusher = new Pusher(config.key, {
   authEndpoint: process.env.HOST_URL + '/pusher/auth',
+  wsHost: config.wsHost,
+  wsPort: config.wsPort,
   auth: {
     headers: {
       'DataType': 'application/json;charset=utf-8'
     }
   },
-  cluster: config.cluster,
   encrypted: config.encrypted
 })
 

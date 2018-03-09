@@ -477,7 +477,10 @@ const en = {
       "app_already_installed": "APP already installed"
     },
     "hint": {
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "generating_address": "Generating Deposit Address",
+      "completion": "Completion",
+      "server_exception": "Server Exception"
     }
   }
 }

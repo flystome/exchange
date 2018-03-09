@@ -5,11 +5,11 @@
           <div class="btc-fl">
             <span>
               <img src="~Img/asset-total.png">
-              {{$t('withdraw_currency.total_assets')}} <span>{{ TotalAssets }}</span> USDT
+              {{$t('withdraw_currency.total_assets')}} <span>{{ TotalAssets }}</span> {{ this.CurrencyType | toUpperCase }}
             </span>
             <img class="btc-marginL45 btc-marginR5" src="~Img/asset-freeze.png">
             <a class='btc-color999'>
-              {{$t('withdraw_currency.frozen_assets')}} {{ Locked }} USDT
+              {{$t('withdraw_currency.frozen_assets')}} {{ Locked }} {{ this.CurrencyType | toUpperCase }}
             </a>
           </div>
           <div class="btc-fr">
@@ -82,7 +82,7 @@
               </basic-input>
             </div>
             <div class="btc-withdraw-explain">
-              <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance }} USDT <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain }} USDT
+              <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance }} {{ this.CurrencyType | toUpperCase }} <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain }} {{ this.CurrencyType | toUpperCase }}
             </div>
               <basic-input ref='WithdrawAll' v-model="WithdrawData.amount" class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
                 <basic-button @click.native="WithdrawAll" class="btc-link" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
@@ -186,24 +186,16 @@ export default {
       url: '/funds/home.json'
     }, (d) => {
       var channel = pusher.subscribe(`private-${d.data.sn}`)
-        channel.bind('deposit_address', (data) => {
-          // this.DepositAddress.forEach((data, index) => {
-          //   if (!data.id === data) {
-          //     this.DepositAddress.push({
-          //       id: data.attributes.account_id,
-          //       address: data.attributes.deposit_address
-          //     })
-          //   }
-          // })
-          if (typeof this.DepositAddress !== 'object') {
-            this.DepositAddress = {
-              [data.attributes.account_id]: data.attributes.deposit_address
-            }
-          } else {
-            if (!Object.keys(this.DepositAddress).includes((data.attributes.account_id).toString())) {
-              this.DepositAddress[data.attributes.account_id] = data.attributes.deposit_address
-            }
+      channel.bind('deposit_address', (data) => {
+        if (typeof this.DepositAddress !== 'object') {
+          this.DepositAddress = {
+            [data.attributes.account_id]: data.attributes.deposit_address
           }
+        } else {
+          if (!Object.keys(this.DepositAddress).includes((data.attributes.account_id).toString())) {
+            this.DepositAddress[data.attributes.account_id] = data.attributes.deposit_address
+          }
+        }
       })
       this.Remain = d.data.today_withdraw_remain
       this.TotalAssets = Number(d.data.total_assets.btc_worth).toFixed(2)
@@ -239,6 +231,7 @@ export default {
         type: 'success',
         point: '.'
       },
+      usdt_worth: '',
       length: 0,
       DepositAddress: '',
       currencies: [],
@@ -315,22 +308,33 @@ export default {
       this.Address = this.FundSources[this.CurrencyType][index].uid
       this.ChoiceStatus(false)
     },
+    // UsdtWorth (currency) {
+    //   this._post({
+    //     url: '/funds/exchange_to_usdt.json',
+    //     data: {
+    //       currency: currency,
+    //       amount: '1'
+    //     }
+    //   }, (d) => {
+    //     this.usdt_worth = d.data.usdt_worth
+    //   })
+    // },
     GetCoin (c, funds, sn) {
       this.$nextTick(() => {
         this._get({
           url: `/funds/${c || 'btc'}/account_info`
         }, (d) => {
           if (d.data.status === 2) {
-            this.PopupBoxDisplay({message: '123', type: 'warn'})
+            this.PopupBoxDisplay({message: '', type: 'warn'})
             this.ChangePopupBox({
               buttondisplay: false,
               type: 'warn',
-              message: 'wait',
+              message: this.$t('hint.generating_address')
             })
             this.Time = setTimeout(() => {
               this.ChangePopupBox({
-                message: '失败',
-                type: 'error',
+                message: this.$t("hint.server_exception"),
+                type: 'error'
               })
               setTimeout(() => {
                 this.PopupBoxDisplay()
@@ -560,22 +564,17 @@ export default {
     },
     DepositAddress (to, from) {
       if (Object.keys(to).length > Object.keys(from).length) {
-        // this.ChangePopupBox({
-        //   message: 'success',
-        //   type: 'success'
-        // })
-        // this.ChangePopupBox({
-        //   type: 'success'
-        // })
+        this.deposit_address = to[Object.keys(to)]
+        this.deposit_address_display = true
         clearTimeout(this.Time)
         this.ChangePopupBox({
           type: 'success',
-          message: 'success',
+          message: this.$t('hint.completion')
         })
         setTimeout(() => {
           this.PopupBoxDisplay()
           this.ChangePopupBox({
-            buttondisplay: true,
+            buttondisplay: true
           })
         }, 2000)
       }
