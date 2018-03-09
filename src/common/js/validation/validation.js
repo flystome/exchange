@@ -15,7 +15,16 @@ Validator.extend('CellPhone', {
     return (data && data.validation) || 'Something went wrong'
   },
   validate: value => {
-    return value.length === 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(value)
+    return /\S+/.test(value)
+  }
+})
+
+Validator.extend('verify code', {
+  getMessage (field, params, data) {
+    return (data && data.validation) || 'Something went wrong'
+  },
+  validate: value => {
+    return /\S+/.test(value)
   }
 })
 

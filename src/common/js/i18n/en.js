@@ -381,7 +381,8 @@ const en = {
     "validate_sms": {
       "binding_cell_phone_authentication": "Verify Your Cell Phone",
       "send_identify_code": "Send Code",
-      "confirm": "Submit"
+      "confirm": "Submit",
+      "verification_code": "Verification Code"
     },
     "browser": {
       "chrome": "Chrome",

@@ -2,12 +2,12 @@
   <div class="btc-validateGoogle  btc-container-block">
     <div class="row btc-color666">
       <span class="btc-color333">
-        <span :class="{'btc-link': step === 1 }">
-          {{$t('validate_google.download_google_verified_app')}}
+        <span>
+          {{$t('title.member_center')}}
         </span>
         >
-        <span :class="{'btc-link': step === 2 }">
-          {{$t('validate_google.scan_qrcode_and_enter_code')}}
+        <span class="btc-link">
+          {{$t('title.validate_google')}}
         </span>
       </span>
     </div>
@@ -78,16 +78,16 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6 text-center">
+        <div class="col-md-6">
           <form class="btc-b-l">
             <div class="col-md-12 btc-validate-prompt">
               <news-prompt :text='prompt'></news-prompt>
             </div>
             <div class='row'>
-              <basic-input @focus.native="promptEmpty()" type="password" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
+              <basic-input @focus.native="promptEmpty()" :type="'password'" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
             </div>
             <div class="row">
-              <basic-input  @focus.native="promptEmpty()" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
+              <basic-input  @focus.native="promptEmpty()" :type='"verify code"' class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
             </div>
           </form>
         </div>
@@ -151,14 +151,6 @@ export default {
       this.prompt = ''
     },
     gValidate () {
-      if (!this.password) {
-        this.prompt = '请输入登录密码'
-        return
-      }
-      if (!this.otp) {
-        this.prompt = '请输入谷歌验证码'
-        return
-      }
       this._post({
         url: `/verify/authentication_info.json`,
         data: {

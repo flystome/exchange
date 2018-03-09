@@ -3,3 +3,4 @@
 /dist/
 /*.js
 /src/common/js/i18n
+/src/components/Pages/WithdrawCurrency/WithdrawCurrency.vue
