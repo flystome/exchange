@@ -19,15 +19,6 @@ Validator.extend('CellPhone', {
   }
 })
 
-Validator.extend('verify code', {
-  getMessage (field, params, data) {
-    return (data && data.validation) || 'Something went wrong'
-  },
-  validate: value => {
-    return /\S+/.test(value)
-  }
-})
-
 Validator.extend('first_name', {
   getMessage (field, params, data) {
     return (data && data.validation) || 'Something went wrong'

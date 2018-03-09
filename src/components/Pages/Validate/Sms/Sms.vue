@@ -63,7 +63,7 @@ export default {
   methods: {
     SendSms () {
       this._post({
-        url: `/verify/send_code`,
+        url: `/verify/send_code.json`,
         data: {
           phone_number: `+${this.SmsData.CellPhonecode}${this.SmsData.CellPhone}`
         }
@@ -73,11 +73,11 @@ export default {
     },
     ValidateSms () {
       this._post({
-        url: `/auth_sms`,
+        url: `/auth_sms.json`,
         data: {
-          "country": "CN",
-          "phone_number": `+${this.CellPhonecode}${this.CellPhone}`,
-          "otp": this.verifyCode
+          'country': 'CN',
+          'phone_number': `+${this.CellPhonecode}${this.CellPhone}`,
+          'otp': this.verifyCode
         }
       }, (d) => {
         console.log(d.data)

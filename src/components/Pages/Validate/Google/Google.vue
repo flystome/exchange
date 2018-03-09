@@ -84,10 +84,10 @@
               <news-prompt :text='prompt'></news-prompt>
             </div>
             <div class='row'>
-              <basic-input @focus.native="promptEmpty()" :type="'password'" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
+              <basic-input @focus.native="promptEmpty()" ref="password" :type="'password'" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
             </div>
             <div class="row">
-              <basic-input  @focus.native="promptEmpty()" :type='"verify code"' class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
+              <basic-input  @focus.native="promptEmpty()" ref="verfiycode" :type='"verify code"' class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
             </div>
           </form>
         </div>
@@ -113,7 +113,6 @@ export default {
       otp: '',
       password: '',
       prompt: '',
-      google_hint: '谷歌验证已经成功'
     }
   },
   methods: {
@@ -150,7 +149,12 @@ export default {
     promptEmpty () {
       this.prompt = ''
     },
-    gValidate () {
+    async gValidate () {
+      const password = await this.$refs['password'].$validator.validateAll()
+      const verfiycode = await this.$refs['verfiycode'].$validator.validateAll()
+      if(!password && !verfiycode) {
+        return
+      }
       this._post({
         url: `/verify/authentication_info.json`,
         data: {
