@@ -28,7 +28,7 @@
         </basic-input>
       </div>
       <div class="btc-sms-code">
-        <basic-input :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
+        <basic-input :type='"verfiy code"' :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
         </basic-input>
         <button class="btc-white-btn" @click="SendSms">
           {{$t('validate_sms.send_identify_code')}}
@@ -65,7 +65,7 @@ export default {
       this._post({
         url: `/verify/send_code.json`,
         data: {
-          phone_number: `+${this.SmsData.CellPhonecode}${this.SmsData.CellPhone}`,
+          phone_number: `${this.SmsData.CellPhone}`,
           country: this.SmsData.CountryName
         }
       }, (d) => {
@@ -76,8 +76,8 @@ export default {
       this._post({
         url: `/auth_sms.json`,
         data: {
-          'country': 'CN',
-          'phone_number': `+${this.CellPhonecode}${this.CellPhone}`,
+          'country': this.SmsData.CountryName,
+          'phone_number': `${this.CellPhone}`,
           'otp': this.verifyCode
         }
       }, (d) => {

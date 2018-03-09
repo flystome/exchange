@@ -16,10 +16,8 @@ import App from './App'
 import Vue from 'vue'
 import router from './router'
 import moment from 'moment'
+import dictionary from '@/common/js/validation'
 import VeeValidate, { Validator } from 'vee-validate'
-import dictionary from '@/common/js/validation/validation'
-import zh from 'vee-validate/dist/locale/zh_CN'
-import en from 'vee-validate/dist/locale/en'
 import i18n from '@/common/js/i18n/i18n.js'
 import store from './store'
 import axios from 'axios'
@@ -34,10 +32,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 Vue.use(VeeValidate, {
   i18n,
   i18nRootKey: 'validation',
-  dictionary: {
-    'zh-CN': zh,
-    en
-  }
+  dictionary: dictionary
 })
 Validator.localize(dictionary)
 
