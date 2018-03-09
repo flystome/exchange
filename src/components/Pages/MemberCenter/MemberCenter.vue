@@ -255,7 +255,7 @@ export default {
       }
     },
     validateAll () {
-      if (!this.loginData.activated && !this.loginData.sms_activated && !this.loginData.app_activated) {
+      if (!this.loginData.activated && !this.loginData.sms_activated) {
         this.goPath('/validate/bootvalidate')
       } else {
         this.goPath('/validate/identity', (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verified' || (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verifying', false)
