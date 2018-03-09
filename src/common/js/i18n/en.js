@@ -473,6 +473,13 @@ const en = {
       "google_verification": "Verify",
       "app_already_installed": "APP already installed",
       'all_steps_completed': `All the above steps have been completed`
+    },
+    "markets":{
+      "volume": "成交量",
+      "coinAndVolumn": "币种/成交量",
+      "newPrice": "最新价",
+      "change": "涨跌幅",
+      "favorite": "自选",
     }
   }
 }
