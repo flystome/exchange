@@ -108,8 +108,6 @@
             </div>
           </div>
         </div>
-
-
         <!-- <div class="btc-member-stepsblock col-md-4 col-xs-12">
           <div class="col-md-2 col-xs-1">
             <img src="~Img/member-email.png" class="btc-paddingR20 btc-paddingT5" alt="">

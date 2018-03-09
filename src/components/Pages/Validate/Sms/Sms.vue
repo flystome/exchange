@@ -6,7 +6,11 @@
     <div class="btc-sms-container">
       <news-prompt :text='prompt'></news-prompt>
       <div class="btc-sms-phone">
-        <basic-select v-model="phoneNumber" :data='phoneData'></basic-select>
+        <!-- <basic-select v-model="phoneNumber" :data='phoneData'></basic-select> -->
+        <div class="btc-sms-choice btc-b-def">
+          +
+          <input class="" contenteditable="true" />
+        </div>
         <basic-input :type='"CellPhone"' :placeholder='$t("placeholder.cell_phone_number")'>
         </basic-input>
       </div>
@@ -17,7 +21,7 @@
           {{$t('validate_sms.send_identify_code')}}
         </button>
       </div>
-      <basic-button style='width:100%' :text='$t("validate_sms.confirm")'>
+      <basic-button @click="ValidateSms" style='width:100%' :text='$t("validate_sms.confirm")'>
       </basic-button>
     </div>
   </div>
@@ -28,9 +32,22 @@ export default {
   name: 'ValidateSms',
   data () {
     return {
+      HOST_URL: process.env.HOST_URL,
       prompt: '',
       phoneNumber: '+86',
       phoneData: Array(7).fill('+86')
+    }
+  },
+  methods: {
+    ValidateSms () {
+      this._post({
+        url: `${this.HOST_URL}/fefe`,
+        data: {
+
+        }
+      }, (d) => {
+        console.log(d.data)
+      })
     }
   }
 }

@@ -97,6 +97,10 @@ body{
   cursor: pointer;
 }
 
+.btc-b-def{
+  border: 1px solid #dfe0e1;
+}
+
 .btc-b{
   border: 1px solid #f2f2f2;
 }
