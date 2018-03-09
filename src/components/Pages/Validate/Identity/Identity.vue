@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import countries from '@/common/js/countries'
+import { countries } from '@/common/js/countries'
 import {mapMutations} from 'vuex'
 export default {
   name: 'ValidateIdentity',

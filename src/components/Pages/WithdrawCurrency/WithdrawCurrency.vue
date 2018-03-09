@@ -5,11 +5,11 @@
           <div class="btc-fl">
             <span>
               <img src="~Img/asset-total.png">
-              {{$t('withdraw_currency.total_assets')}} <span>{{ TotalAssets }}</span> {{ this.CurrencyType | toUpperCase }}
+              {{$t('withdraw_currency.total_assets')}} <span>{{ TotalAssets }}</span> USDT
             </span>
             <img class="btc-marginL45 btc-marginR5" src="~Img/asset-freeze.png">
             <a class='btc-color999'>
-              {{$t('withdraw_currency.frozen_assets')}} {{ Locked }} {{ this.CurrencyType | toUpperCase }}
+              {{$t('withdraw_currency.frozen_assets')}} {{ Locked }} USDT
             </a>
           </div>
           <div class="btc-fr">
@@ -197,7 +197,7 @@ export default {
           }
         }
       })
-      this.TotalAssets = Number(d.data.total_assets.btc_worth).toFixed(2)
+      this.TotalAssets = Number(d.data.total_assets.usdt_worth).toFixed(2)
       if (d.data.notice) {
         this.PopupBoxDisplay({message: d.data.notice.message, type: d.data.notice.type})
       }
