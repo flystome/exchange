@@ -102,7 +102,6 @@
 
 .btc-member-info{
   float: left;
-  padding-top: 8px;
   color:  #fff;
   .btc-member-infoEmail{
     font-size: 16px;
@@ -353,9 +352,13 @@
 }
 
 @media(max-width: 640px){
+  .btc-membercenter-header{
+    padding-bottom: 88px !important;
+  }
   .btc-member-ver{
     .media{
       width: 100% !important;
+      margin-top: 5px;
       &:nth-child(1){
         .media-body{
           h5{
@@ -372,7 +375,8 @@
 @media (max-width: 492px) {
   .btc-member-bt{
     float: left;
-    margin-left: 20px;
+    margin-left: 15px;
+    margin-top: 5px;
   }
   .btc-member-handleNew{
     float: initial;
