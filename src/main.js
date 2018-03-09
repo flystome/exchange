@@ -27,7 +27,7 @@ import 'bootstrap/js/collapse.js'
 import 'bootstrap/js/carousel.js'
 
 // css dependencies
-import 'bootstrap/dist/css/bootstrap.min.css'
+import '@/common/css/bootstrap.css'
 
 Vue.use(VeeValidate, {
   i18n,

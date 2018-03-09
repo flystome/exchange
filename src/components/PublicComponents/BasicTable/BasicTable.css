@@ -32,11 +32,11 @@
 }
 
 .btc-tableTextright{
-  text-align: initial!important;
+  text-align: left!important;
 }
 
 .btc-tableTextleft{
-  text-align: end!important;
+  text-align: right!important;
 }
 
 .btc-table-record > div{
