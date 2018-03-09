@@ -168,9 +168,9 @@ export default {
           'DataType': 'application/json;charset=utf-8'
         }
       }, (d) => {
+        console.log(d)
         if (d.data.status_code === '0') {
-          this.prompt = d.data.errors
-          this.PopupBoxDisplay({message: prompt, type: 'error'})
+          this.PopupBoxDisplay({message: d.data, type: 'error'})
         } else {
           this.PopupBoxDisplay({message: d.data.success, type: 'success'})
         }
@@ -180,11 +180,6 @@ export default {
   },
   computed: {
     ...mapGetters(['loginData'])
-  },
-  watch: {
-    loginData (d) {
-      console.log(d)
-    }
   }
 }
 </script>
