@@ -3,10 +3,16 @@
   float: right;
   cursor: pointer;
 }
-
+.btc-container {
+  >div{
+    .container{
+      padding: 0
+    }
+  }
+}
 .btc-member-center {
   .btc-membercenter-header{
-    padding: 12px 30px 112px 50px;
+    padding: 12px 30px 112px 25px;
     background: url("~Img/membercenter.png") no-repeat center;
   }
   .btc-membercenter-header{
@@ -19,7 +25,7 @@
     // max-width: 1080px;
     min-height: 96px;
     margin-top: -80px;
-    padding-left: 40px;
+    // padding-left: 40px;
     .btc-member-stepsblock{
       width: 346px;
       float: left;
@@ -39,6 +45,36 @@
         }
       }
 
+    }
+  }
+
+  .btc-member-ver{
+    max-width: 1200px;
+    width: 100%;
+    z-index: 2;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -80px;
+    .media{
+      width: 33.3333%;
+      display: inline-block;
+      float: left;
+      padding-right: 5px;
+      padding-left: 5px;
+      >div{
+        background-color: #fff;
+        padding: 25px 10px 25px 15px;
+      }
+      &:first-child{
+        margin-top: 15px;
+      }
+      &:nth-child(3){
+        margin-right: 0;
+      }
+      .media-right{
+        padding-left: 0;
+      }
     }
   }
 }
@@ -65,7 +101,6 @@
 }
 
 .btc-member-info{
-  padding-left: 16px;
   float: left;
   padding-top: 8px;
   color:  #fff;
@@ -194,7 +229,6 @@
   color: #999999 !important;
   padding: 2px 14px;
   display: inline-block;
-  margin-bottom: 16px;
   position: relative;
 }
 .btc-active{
@@ -209,6 +243,7 @@
 
 .btc-verifying-prompt{
   position: relative;
+  padding-bottom: 13px;
   .verifying-prompt{
     position: absolute;
     left: 50%;
@@ -218,6 +253,7 @@
     bottom: -14px;
     background-color: #f2f2f2;
     padding: 0 2px;
+    color: #333333;
     display: none;
   }
 }
@@ -264,8 +300,9 @@
 @media(max-width: 1200px){
   .btc-member-ver{
     padding-left: 0 !important;
-    .col-md-4{
-      width: 33.33333333333% !important;
+    width: 100% !important;
+    .media{
+      width: 31.5%;
     }
     .btc-member-stepsblock{
       &:nth-child(2){
@@ -306,6 +343,21 @@
   .btc-member-ver{
     .col-md-4{
       width: 100% !important;
+    }
+  }
+}
+
+@media (max-width: 566px) {
+  .btc-member-ver{
+    .btc-member-stepsblock{
+      padding-right: 10px !important;
+      .col-xs-10{
+        padding-left: 30px;
+        padding-right: 0;
+      }
+      .col-xs-1{
+        padding-right: 0;
+      }
     }
   }
 }

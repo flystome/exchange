@@ -14,9 +14,9 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="z-index:100">
           <ul class="nav navbar-nav">
-            <li class="btc-link"><a :href="`${HOST_URL}`">{{$t('nav.home')}} <span class="sr-only">(current)</span></a></li>
+            <li class="btc-link"><a @click="goPath('/homepage')">{{$t('nav.home')}} <span class="sr-only">(current)</span></a></li>
             <li class="btc-link"><a :href="`${HOST_URL}/markets/ethbtc`">{{$t('nav.transaction')}}</a></li>
-            <li class="btc-link"><a :href="`${HOST_URL}/currency/extract`">{{$t('nav.wallet')}}</a></li>
+            <li class="btc-link"><a @click="validateEmail">{{$t('nav.wallet')}}</a></li>
             <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.announcement')}}</a></li>
             <li class="btc-link"><a :href="`${HOST_URL}/`">{{$t('nav.qa')}}</a></li>
           </ul>
@@ -25,7 +25,6 @@
           </ul>
           <ul class="nav navbar-nav navbar-right" v-else>
             <li class="btc-marginL15 btc-img-position hidden-md">
-              <img src="~Img/assetlog.png"  class="btc-header-asset">
               0 BTC
             </li>
             <li class="btc-marginL15 hidden-md">
@@ -41,9 +40,9 @@
                 {{ this.loginData.email }}
                 <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a :href="`${HOST_URL}/`">{{$t('nav.settings')}}</a></li>
-                <li><a :href="`${HOST_URL}/`">{{$t('nav.member_info')}}</a></li>
-                <!-- <li><a :href="`${HOST_URL}/`">{{$t('nav.exit')}}</a></li> -->
+                 <!-- <a><a :href="`${HOST_URL}/`">{{$t('nav.settings')}}</a></li> -->
+                <li><a @click="goPath('/member_center')">{{$t('nav.member_center')}}</a></li>
+                <li><a :href="`${HOST_URL}/signout`">{{$t('nav.exit')}}</a></li>
               </ul>
             </li>
             <li role="presentation" class="dropdown btc-country btc-img-position hidden-md">
@@ -89,6 +88,13 @@ export default {
     },
     requireImg (img) {
       return require(`../../../../static/img/${img}.png`)
+    },
+    validateEmail () {
+      if (!this.loginData.activated) {
+        alert(1)
+      } else {
+        this.goPath('/currency/withdraw')
+      }
     },
     changeLang (str) {
       this.ChangeLanguage(str)

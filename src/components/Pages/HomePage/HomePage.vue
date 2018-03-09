@@ -20,7 +20,6 @@
               </div>
             </div>
           </div>
-
         </div>
       <div class="container">
         <div class="btc-homepage-login">
@@ -214,6 +213,6 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 @import "./HomePage.scss"
 </style>
