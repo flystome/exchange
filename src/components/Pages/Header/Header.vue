@@ -27,7 +27,7 @@
             <li class="btc-marginL15">
               <a :href="`${HOST_URL}/conversations`" class="btc-header-letter">
                 <img src="~Img/letterlog.png">
-                <span class="message">信息</span>
+                <span class="message">{{ $t("nav.message") }}</span>
               </a>
             </li>
             <li class="btc-img-position dropdown btc-ifo" style="cursor: pointer">
@@ -48,7 +48,7 @@
                 <span>{{getLanguage.name}}</span><span class="caret">
                 </span>
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu text-center">
                 <li v-for="(locale,index) in locale" :key="locale.language">
                   <a @click="changeLang(locale.language, index + 1)">{{locale.name}}</a>
                 </li>
@@ -89,7 +89,7 @@ export default {
     },
     validateEmail () {
       if (!this.loginData.activated) {
-        this.goPath('/validate/bootvalidate')
+        this.goPath('/prompt')
       } else {
         this.goPath('/currency/withdraw')
       }

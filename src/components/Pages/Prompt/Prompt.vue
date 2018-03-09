@@ -3,25 +3,25 @@
     <div class="text-center btc-marginT100">
       <img src="~Img/bootvaildate.png" alt="" class="btc-marginB20">
       <div v-if="!loginData.activated">
-        <p class="">邮箱未验证</p>
-        <p class="btc-marginB50">Help keep the bad guys out of your account by using both your phone</p>
+        <p class="">{{ $t("prompt.email_not_certified") }}</p>
+        <p class="btc-marginB50">{{ $t("prompt.not_certified_prompt") }}</p>
       </div>
       <div v-else-if="!loginData.sms_activated">
-        <p class="">手机号未验证</p>
-        <p class="btc-marginB50">Help keep the bad guys out of your account by using both your phone</p>
+        <p class="">{{ $t("prompt.phone_not_certified") }}</p>
+        <p class="btc-marginB50">{{ $t("prompt.not_certified_prompt") }}</p>
       </div>
       <div v-else-if="!loginData.id_document.aasm_state === 'verified'">
-        <p class="">未实名认证</p>
-        <p class="btc-marginB50">Help keep the bad guys out of your account by using both your phone</p>
+        <p class="">{{ $t("prompt.google_not_certified") }}</p>
+        <p class="btc-marginB50">{{ $t("prompt.not_certified_prompt") }}</p>
       </div>
-      <basic-button @click.native="goPath('/member_center')" style="width:26%" class="btc-button" :text='"去验证"'></basic-button>
+      <basic-button @click.native="goPath('/member_center')" style="width:26%" class="btc-button" :text='$t("prompt.go_validate")'></basic-button>
     </div>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  name: 'BootValidate',
+  name: 'Prompt',
   methods: {
     goPath (path, status, href) {
       if (status) {
@@ -41,5 +41,5 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-@import "./BootValidate.scss"
+@import "./Prompt.scss"
 </style>

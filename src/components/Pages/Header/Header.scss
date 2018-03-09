@@ -6,7 +6,12 @@
   z-index: 99;
   position: relative;
   .navbar-default{
-    #bs-example-navbar-collapse-1{
+    .navbar-header{
+      .navbar-toggle{
+        margin-right: 0;
+      }
+    }
+    .navbar-collapse{
       border-color: none !important;
     }
   }
@@ -20,17 +25,17 @@
   margin: 0 6px;
 }
 
-.btc-ifo,
-.btc-country{
-  .dropdown-menu{
-    margin-top: 1px !important;
-  }
-}
 .btc-country{
   .dropdown-menu{
     margin-top: -1px !important;
+    text-align: center;
   }
 }
+// .btc-country{
+//   .dropdown-menu{
+//     margin-top: -1px !important;
+//   }
+// }
 
 .login-active .dropdown-toggle{
   padding: 0
@@ -46,7 +51,7 @@
       background: initial!important;
     }
     ul{
-      margin-top: 3px;
+      margin-top: 1px;
     }
   }
   .btc-country{
@@ -100,9 +105,6 @@
 
         }
         .navbar-right{
-          height: 50px;
-          line-height: 48px;
-          margin-right: -33px;
           .message{
             display: none;
           }
@@ -136,6 +138,9 @@
     position: relative;
     top: 2px;
     cursor: pointer;
+    >a{
+      font-size: 12px;
+    }
   }
   .btc-header-avatar{
     position: relative;
@@ -151,13 +156,21 @@
   }
 }
 
-@media(max-width: 767px){
+@media(max-width: 992px){
   .navbar-right{
+    .btc-header-letter{
+      >img{
+        display: none;
+      }
+    }
     .message{
       display: inline-block !important;
     }
     .btc-ifo{
-      border-top: 1px;
+      border-top: 1px solid;
+    }
+    .btc-country{
+      padding-left: 15px;
     }
   }
   .nav-pills{
@@ -165,9 +178,10 @@
   }
 }
 
-@media(max-width: 992px){
-  .navbar-right{
-    // display: none
+@media(max-width: 764px){
+  .navbar-header{
+    margin-left: 15px;
+    margin-right: 15px;
   }
 }
 
