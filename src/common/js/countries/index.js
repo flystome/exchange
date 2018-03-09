@@ -3,4 +3,6 @@ var countries = []
 country.map((a) => {
   countries.push(a.name)
 })
+var  callingCountries = require('country-data').callingCountries
+console.log(callingCountries)
 export default countries
