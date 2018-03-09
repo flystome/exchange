@@ -14,6 +14,11 @@
     text-indent: 6px;
     background: white!important;
   }
+  .btc-sms-choice{
+    height: 32px;
+    border-right: none;
+    flex: 0.2!important;
+  }
   .btc-sms-phone{
     display: flex;
     & > div{

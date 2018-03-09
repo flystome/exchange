@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     buttonText () {
-      return this.PopupBox.buttonText ? this.PopupBox.buttonText : this.$t("hint.confirm")
+      return this.PopupBox.buttonText ? this.PopupBox.buttonText : this.$t('hint.confirm')
     },
     ...mapState(['PopupBox'])
   }

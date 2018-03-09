@@ -326,7 +326,7 @@ const en = {
       "announcement": "Announcement",
       "qa": "Q\u0026A",
       "settings": "Settings",
-      "member_center": "Member Center",
+      "member_info": "Member Info",
       "exit": "Exit"
     },
     "member_center": {
@@ -422,7 +422,8 @@ const en = {
       "set_as_default": "Set As Default",
       "delete": "Delete",
       "cancel": "Cancel",
-      "resend": "Resend"
+      "resend": "Resend",
+      "temporarily_can_not_withdraw":"temporarily Can Not Withdraw"
     },
     "deposit_currency":{
       'deposit_address': 'Address',
@@ -444,7 +445,8 @@ const en = {
       "validate_google": "Validate Google",
       "validate_identity": "Validate Identity",
       "validate_sms": "Validate Sms",
-      "currency_withdraw": "Currency withdraw"
+      "currency_withdraw": "Currency Withdraw",
+      "currency_despoit": "currency Despoit"
     },
     "validation": {
       "fwef": "fe"
@@ -477,7 +479,10 @@ const en = {
       "app_already_installed": "APP already installed"
     },
     "hint": {
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "generating_address": "Generating Deposit Address",
+      "completion": "Completion",
+      "server_exception": "Server Exception"
     }
   }
 }
