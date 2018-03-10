@@ -1,7 +1,7 @@
 <template>
   <footer class="btc-footer">
     <nav class="container hidden-xs">
-      <div class="col-sm-9">
+      <!-- <div class="col-sm-9">
         <h4>{{$t("concepts.btc_family")}}</h4>
         <div class="row">
           <ul>
@@ -66,11 +66,44 @@
           <li><a href="/yellow_page">酷站</a></li>
           <li><a href="/quote">行情</a></li>
         </ul><br>
-        <h4>联系我们</h4><a class="btn btn-wide btn-danger" href="/tickets/new">意见反馈</a></div>
+        <h4>联系我们</h4><a class="btn btn-wide btn-danger" href="/tickets/new">意见反馈</a>
+      </div> -->
+      <div class="btc-footer-logo col-md-5 col-sm-3">
+        <img src="~Img/logo.png" alt="">
+        <p class="btc-marginB15">权威化透明化的数字资产交易平台</p>
+        <p>©2014-2018 hotex.com 版权所有</p>
+      </div>
+      <ul class="btc-info pull-left btc-marginR100">
+        <li class=""><a>支持</a></li>
+        <li><a>API</a></li>
+        <li><a>帮助</a></li>
+        <li><a>公告</a></li>
+      </ul>
+      <ul class="btc-info pull-left btc-marginR100">
+        <li class=""><a>服务</a></li>
+        <li><a>上币申请</a></li>
+        <li><a>费率详情</a></li>
+      </ul>
+      <ul class="btc-info pull-left">
+        <li class=""><a>关于</a></li>
+        <li><a>关于团队</a></li>
+        <li><a>用户协议</a></li>
+        <li><a>隐私条款</a></li>
+      </ul>
+      <ul class="btc-footer-us pull-right btc-marginT40 btc-marginR60">
+        <li class="btc-marginB15"><a>联系我们</a></li>
+        <li class="btc-marginB15"><a>support@hotex.com</a></li>
+        <li>
+          <a>
+            繁体中文
+            <img src="~Img/footer-switch.png" alt="">
+          </a></li>
+      </ul>
+
     </nav>
   </footer>
 </template>
 
-<style lang='css'>
-@import './Footer.css'
+<style scoped lang='scss'>
+@import './Footer.scss'
 </style>

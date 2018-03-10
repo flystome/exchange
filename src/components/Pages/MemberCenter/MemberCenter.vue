@@ -21,7 +21,7 @@
           </span>
           <span>|</span>
           <span>
-            <a style="color:#fff" :href="`${HOST_URL}/documents/api_v2`">{{$t("member_center.api")}}</a>
+            <a target="_blank" style="color:#fff" :href="`${HOST_URL}/api_tokens`">{{$t("member_center.api")}}</a>
           </span>
         </div>
       </div>
@@ -29,62 +29,52 @@
         <div class="media">
           <div>
             <div class="media-left">
-              <a href="#">
-                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-email.png" data-holder-rendered="true">
-              </a>
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-email.png" data-holder-rendered="true">
             </div>
             <div class="media-body">
-              <h5 class="media-heading">{{ loginData.email }}</h5>
+              <h5 class="media-heading">{{$t("member_center.tier_1")}}</h5>
               <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.activated}">
                 <span v-if='loginData.activated'>{{$t("auth.email")}}</span>
-                <span v-else @click="sendEmail">
+                <span v-else @click="sendEmail" :disabled="disabled">
                   {{$t("auth.send_email")}}
                 </span>
                 <img v-if='loginData.activated' src="~Img/validate-true.png" alt="已认证">
               </span>
             </div>
             <div class="media-right">
-              <a href="#">
-                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='loginData.activated' data-holder-rendered="true" >
-                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
-              </a>
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='loginData.activated' data-holder-rendered="true" >
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
             </div>
           </div>
         </div>
         <div class="media">
           <div>
             <div class="media-left">
-              <a href="#">
-                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-google.png" data-holder-rendered="true">
-              </a>
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-google.png" data-holder-rendered="true">
             </div>
             <div class="media-body">
               <h5 class="media-heading">{{$t("member_center.korean_user_use_twice_verification")}}</h5>
-              <span class="btc-member-validata btc-link btc-marginR10" @click="validatephone" :class="{'btc-active': !loginData.sms_activated}">
+              <span class="btc-member-validata btc-link" @click="validatephone" :class="{'btc-active': !loginData.sms_activated}">
                   <span>{{ $t("auth.phone") }}</span>
                   <img v-if='loginData.sms_activated' src="~Img/validate-true.png" alt="已认证">
                 </span>
-                <span class="btc-member-validata btc-link btc-marginT10" :class="{'btc-active': !loginData.app_activated}" @click="validateAuth">
+                <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.app_activated}" @click="validateAuth">
                   <span>{{$t("auth.google")}}</span>
                   <img v-if='loginData.app_activated' src="~Img/validate-true.png" alt="已认证">
                 </span>
             </div>
             <div class="media-right">
-              <a href="#">
-                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='loginData.sms_activated && loginData.app_activated' data-holder-rendered="true" >
-                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
-              </a>
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='loginData.sms_activated && loginData.app_activated' data-holder-rendered="true" >
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
             </div>
           </div>
         </div>
         <div class="media">
           <div>
             <div class="media-left">
-              <a href="#">
-                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-identity.png" data-holder-rendered="true">
-              </a>
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-identity.png" data-holder-rendered="true">
             </div>
-            <div class="media-body ">
+            <div class="media-body">
               <h5 class="media-heading">{{$t("member_center.completion_of_real_name_authentication")}}</h5>
               <div class="btc-verifying-prompt">
                 <span class="btc-member-validata btc-link"
@@ -100,17 +90,15 @@
               </div>
             </div>
             <div class="media-right">
-              <a href="#">
-                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' data-holder-rendered="true" >
-                <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
-              </a>
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' data-holder-rendered="true" >
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
             </div>
           </div>
         </div>
       </div>
     </div>
     <template v-if="step === 1">
-      <div class="container">
+      <div class="container table">
       <basic-table :captionTitle='getLoginRecord.captionTitle' :item='getLoginRecord.Item'>
       <span slot="remark" class="btc-tableRemark">{{$t('member_center.have_questions_to_contact_us')}}</span>
       </basic-table>
@@ -129,9 +117,12 @@
           </div>
         </div>
         <div class="text-center btc-table-record" v-if="this.tickets.length === 0">
-            <div>
-                <div class="btc-marginT15 btc-font12 btc-color999">{{$t('member_center.no_record')}}</div>
-            </div>
+          <div>
+              <div class="btc-marginT15 btc-font12 btc-color999">{{$t('member_center.no_record')}}</div>
+          </div>
+          <div class="text-center btc-table-more btc-b-t" style="margin-bottom:0px;">
+            <a :href="`${HOST_URL}/tickets/new`" class="btc-link ">{{$t('member_center.new_questions')}}</a>
+          </div>
         </div>
         <template v-else>
           <div class="text-center btc-table-more col-md-6">
@@ -174,7 +165,8 @@ export default {
       wexin_activated: false,
       email_sent_message: this.$t('member_center.email_sent_message'),
       tickets: [],
-      step: 1
+      step: 1,
+      disabled: true
     }
   },
   methods: {
@@ -208,19 +200,23 @@ export default {
       location.href = `${this.HOST_URL}/tickets/${id}`
     },
     sendEmail () {
-      this._get({
-        url: `/activations/mobile_new`,
-        headers: {
-          'DataType': 'application/json;charset=utf-8'
-        }
-      }, (d) => {
-        if (d.data.status_code === '1') {
-          this.prompt = d.data.errors
-          this.PopupBoxDisplay({message: this.email_sent_message, type: 'success'})
-        } else {
-          this.PopupBoxDisplay({message: d.data.errors, type: 'error'})
-        }
-      })
+      if (this.disabled) {
+        this._get({
+          url: `/activations/mobile_new`,
+          headers: {
+            'DataType': 'application/json;charset=utf-8'
+          }
+        }, (d) => {
+          this.disabled = true
+          if (d.data.status_code === '1') {
+            this.prompt = d.data.errors
+            this.PopupBoxDisplay({message: this.email_sent_message, type: 'success'})
+          } else {
+            this.PopupBoxDisplay({message: d.data.errors, type: 'error'})
+          }
+        })
+      }
+      this.disabled = false
     },
     goPath (path, status, href) {
       if (status) {
@@ -255,7 +251,7 @@ export default {
       }
     },
     validateAll () {
-      if (!this.loginData.activated && !this.loginData.sms_activated) {
+      if (!this.loginData.activated || !this.loginData.sms_activated) {
         this.goPath('/prompt')
       } else {
         this.goPath('/validate/identity', (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verified' || (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verifying', false)

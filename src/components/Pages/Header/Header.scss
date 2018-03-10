@@ -6,6 +6,15 @@
   z-index: 99;
   position: relative;
   .navbar-default{
+    .navbar-nav{
+      .open{
+        >a{
+          &:focus{
+            background-color: transparent;
+          }
+        }
+      }
+    }
     .navbar-header{
       .navbar-toggle{
         margin-right: 0;
@@ -15,7 +24,6 @@
       border-color: none !important;
     }
   }
-
 }
 .nav-margin{
   margin-top: 10px;
@@ -31,11 +39,6 @@
     text-align: center;
   }
 }
-// .btc-country{
-//   .dropdown-menu{
-//     margin-top: -1px !important;
-//   }
-// }
 
 .login-active .dropdown-toggle{
   padding: 0
@@ -157,6 +160,9 @@
 }
 
 @media(max-width: 992px){
+  .navbar-collapse{
+    margin-top: 3px;
+  }
   .navbar-right{
     .btc-header-letter{
       >img{
@@ -167,7 +173,7 @@
       display: inline-block !important;
     }
     .btc-ifo{
-      border-top: 1px solid;
+      border-top: 1px solid #343b42;
     }
     .btc-country{
       padding-left: 15px;
@@ -186,7 +192,7 @@
 }
 
 @media (min-width: 1000px){
-  .navbar-toggle{
-    display: none !important;
-  }
+  // .navbar-toggle{
+  //   display: none !important;
+  // }
 }
