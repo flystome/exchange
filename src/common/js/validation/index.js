@@ -29,7 +29,6 @@ Validator._merge(name, validator)
 
 Validator.extend(empty, {
   getMessage: (field, params, data) => {
-    console.log(1)
     return (data && data.validation) || 'Something went wrong'
   },
   validate: value => {

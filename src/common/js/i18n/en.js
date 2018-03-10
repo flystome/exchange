@@ -406,7 +406,7 @@ const en = {
       "min_currency": "Minimum amount of currency：0.001。",
       "confirm_apply_for_success": "After the request is successful, please go to the mailbox to click the link to confirm the request, and you can track the status of the Recharge and historical records page.",
       "make_sure_safe": "Be sure to make sure that computers and browsers are safe to prevent information from being tampered or leaked.",
-      "btc_withdraw_currency_record": "BTC withdraw currency record",
+      "withdraw_currency_record": "withdraw currency record",
       "number": "Number",
       "withdraw_time": "Withdraw Time",
       "withdraw_address": "Withdraw Address",
@@ -480,6 +480,30 @@ const en = {
       "generating_address": "Generating Deposit Address",
       "completion": "Completion",
       "server_exception": "Server Exception"
+    },
+    "api_server": {
+      "validate_google": {
+        "error_1002": "Password incorrect",
+        "error_1001": "google authentication code incorrect",
+        "success_200": "Google Authentication Success"
+      },
+      "validate_identity": {
+        "success_200": "Photo Update Successfully",
+        "error_1001": "Photo Update Failure"
+      },
+      "member_center": {
+        "success_200": "Email has been sent, please check it",
+        "error_1001": "Token errors, please Reconfirm"
+      },
+      "currency_withdraw": {
+        "set_fund_source_200": "The fund source is set as default",
+        "set_fund_source_1001" : "The fund source is set default failed",
+        "delete_fund_source_200": "Fund source deleted",
+        "delete_fund_source_1001": "Fund source delete failed",
+        "send_phone_error_1001": "Send too fast, please wait for one minute",
+        "Withdraw_canceled_200": "Withdraw request canceled",
+        "Withdraw_canceled_1001": "Withdraw request can not cancel"
+      }
     }
   }
 }

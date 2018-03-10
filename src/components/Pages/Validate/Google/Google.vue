@@ -2,11 +2,11 @@
   <div class="btc-validateGoogle  btc-container-block">
     <div class="row btc-color666">
       <span class="btc-color333">
-        <span>
+        <router-link to='/' class="btc-link">
           {{$t('title.member_center')}}
-        </span>
+        </router-link>
         >
-        <span class="btc-link">
+        <span>
           {{$t('title.validate_google')}}
         </span>
       </span>
@@ -84,10 +84,10 @@
               <news-prompt :text='prompt'></news-prompt>
             </div>
             <div class='row'>
-              <basic-input @focus.native="promptEmpty()" ref="password" :type="'password'" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
+              <basic-input @focus.native="promptEmpty()" type='password' ref="password" :validate="'password'" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
             </div>
             <div class="row">
-              <basic-input  @focus.native="promptEmpty()" ref="verfiycode" :type='"verify code"' class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
+              <basic-input  @focus.native="promptEmpty()" ref="verfiycode" :validate='"verify code"' class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
             </div>
           </form>
         </div>
@@ -133,9 +133,8 @@ export default {
           'DataType': 'application/json;charset=utf-8'
         }
       }, d => {
-        d = d.data
-        this.loginData.google_otp_secret = d.google_otp_secret
-        this.loginData.google_uri = d.google_otp_secret
+        this.loginData.google_otp_secret = d.data.google_otp_secret
+        this.loginData.google_uri = d.data.google_otp_secret
       })
     },
     qrcode (str) {
@@ -152,7 +151,7 @@ export default {
     async gValidate () {
       const password = await this.$refs['password'].$validator.validateAll()
       const verfiycode = await this.$refs['verfiycode'].$validator.validateAll()
-      if (!password && !verfiycode) {
+      if (!password || !verfiycode) {
         return
       }
       this._post({
@@ -169,10 +168,10 @@ export default {
         }
       }, (d) => {
         console.log(d)
-        if (d.data.status_code === '0') {
-          this.PopupBoxDisplay({message: d.data, type: 'error'})
+        if (d.data.error) {
+          this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.error_${d.data.error.code}`), type: 'error'})
         } else {
-          this.PopupBoxDisplay({message: d.data.success, type: 'success'})
+          this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.success_200`), type: 'success'})
         }
       })
     },

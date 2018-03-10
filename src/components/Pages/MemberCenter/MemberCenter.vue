@@ -208,11 +208,10 @@ export default {
           }
         }, (d) => {
           this.disabled = true
-          if (d.data.status_code === '1') {
-            this.prompt = d.data.errors
-            this.PopupBoxDisplay({message: this.email_sent_message, type: 'success'})
+          if (d.data.success) {
+            this.PopupBoxDisplay({message: this.$t('api_server.member_center.success_200'), type: 'success'})
           } else {
-            this.PopupBoxDisplay({message: d.data.errors, type: 'error'})
+            this.PopupBoxDisplay({message: this.$t('api_server.member_center.error_1001'), type: 'error'})
           }
         })
       }
