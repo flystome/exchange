@@ -1,22 +1,14 @@
 <template>
   <div class="market">
     <ul class="hd clearfix">
-<<<<<<< HEAD
       <li class="text-center" v-for="(head, index) in heads" :key="head" :data-time = '0'  @click="sortList(index)">
-=======
-      <li class="text-center" v-for="(head, index) in heads" :key="head" :data-time = '0'  @click="sortList($event,index)">
->>>>>>> fe238525a4fa27ee98d4be0bcee2a8aea1dfd01d
         <span>{{head}}</span>
         <i class="caret caret-up"></i>
         <i class="caret caret-down"></i>
       </li>
     </ul>
     <ul class="bd">
-<<<<<<< HEAD
       <li class="list" v-for="item in oldData" :key="item.quote_currency">
-=======
-      <li class="list" v-for="item in curData" :key="item.quote_currency">
->>>>>>> fe238525a4fa27ee98d4be0bcee2a8aea1dfd01d
         <div class="list-coin">
           <div class="icon"><i class="fa fa-star"></i></div>
           <div class="item">
@@ -46,19 +38,11 @@ export default {
       coins: ['quote_currency', 'last', 'percent'],
       times: 0,
       currencyIndex: 0,
-<<<<<<< HEAD
       oldData: null
     }
   },
   mounted: function () {
     this.initData()
-=======
-      oldData: this.curData
-    }
-  },
-  mounted: function () {
-
->>>>>>> fe238525a4fa27ee98d4be0bcee2a8aea1dfd01d
   },
   filters: {
     fixed2: function (params) {
@@ -71,7 +55,6 @@ export default {
       return (+params).toPrecision(3)
     }
   },
-<<<<<<< HEAD
   watch: {
     curData: function (val, oldVal) {
       if (!val) {
@@ -94,61 +77,26 @@ export default {
       }
       if (this.times === 0) {
         this.oldData.sort(function (a, b) {
-=======
-  comouted: {
-    this.updateData()
-  },
-  methods: {
-    updateData: function () {
-      this.$nextTick(function () {
-        this.oldData = this.curData
-        console.log(this.curData)
-      })
-    }
-    sortList: function (e, index) {
-      var order = this.coins[index]
-      if (this.currencyIndex !== index) {
-        this.currencyIndex = index
-        this.times = 1
-      }
-
-      if (this.times === 1) {
-        this.curData.sort(function (a, b) {
->>>>>>> fe238525a4fa27ee98d4be0bcee2a8aea1dfd01d
           if (index === 2) {
             return a[order] - b[order]
           } else {
             return a[order].localeCompare(b[order])
           }
         })
-<<<<<<< HEAD
         this.times = 1
       } else if (this.times === 1) {
         this.oldData.sort(function (a, b) {
-=======
-        this.time = 2
-      } else if (this.times === 2) {
-        this.curData.sort(function (a, b) {
->>>>>>> fe238525a4fa27ee98d4be0bcee2a8aea1dfd01d
           if (index === 2) {
             return b[order] - a[order]
           } else {
             return b[order].localeCompare(a[order])
           }
         })
-<<<<<<< HEAD
         this.times = 2
       } else {
         this.times = 0
         this.oldData = JSON.parse(JSON.stringify(this.curData))
       }
-=======
-        this.time = 0
-      } else {
-        this.time = 1
-      }
-      console.log(this.curData, this.oldData)
->>>>>>> fe238525a4fa27ee98d4be0bcee2a8aea1dfd01d
     }
   }
 }
