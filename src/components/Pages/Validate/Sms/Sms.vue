@@ -88,7 +88,7 @@ export default {
         return
       }
       this._post({
-        url: `/auth_sms.json`,
+        url: `verify/auth_sms.json`,
         data: {
           'country': this.SmsData.CountryName,
           'phone_number': `${this.SmsData.CellPhone}`,
