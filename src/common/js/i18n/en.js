@@ -359,7 +359,11 @@ const en = {
       "korean_user_use_twice_verification": "Tier 2: Cell Phone Verification",
       "completion_of_real_name_authentication": "Tier 3: Real Name Verification",
       "api": "API",
-      "email_sent_message": "Mail is sent, please go to your mailbox to activate your account."
+      "email_sent_message": "Mail is sent, please go to your mailbox to activate your account.",
+      "tier_1": "Tier 1",
+      "1001_hint": "Please verify your email",
+      "1002_hint": "Please verify your Cell Phone",
+      "1003_hint": "Please real name authentication",
     },
     "validate_identity": {
       "real_name_authentication": "Real Name Verification",

@@ -179,6 +179,13 @@ export default {
   },
   computed: {
     ...mapGetters(['loginData'])
+  },
+  watch: {
+    loginData () {
+      if (!this.loginData.activated) {
+        this.PopupBoxDisplay({message: this.$t('member_center.1001_hint') , type: 'warn' ,url: '/'})
+      }
+    }
   }
 }
 </script>

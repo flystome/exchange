@@ -3,5 +3,6 @@
 /dist/
 /*.js
 /src/common/js/i18n
+/src/axios.js
 /src/common/js/validation
 /src/components/Pages/WithdrawCurrency/WithdrawCurrency.vue

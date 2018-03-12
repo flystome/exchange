@@ -1,4 +1,4 @@
-@media (max-width: 992px) {
+  @media (max-width: 992px) {
     .btc-marginL50 {
         margin-left: 0;
     }
@@ -168,7 +168,7 @@
             flex-direction: row;
             flex-wrap: wrap;
             a {
-                cursor: pointer;
+                border-radius: 0;
                 padding: 0 30.4px;
                 text-align: center;
                 line-height: 38px;
@@ -200,6 +200,14 @@
         border-left: 1px solid #dfe0e1;
         cursor: pointer;
         background: #f2f2f2;
+    }
+    .btc-tableTextleft{
+      span{
+        padding: 0;
+        &:hover{
+          color: #4382f7
+        }
+      }
     }
     .btc-address-contain {
         background: #f2f2f2;

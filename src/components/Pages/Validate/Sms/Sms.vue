@@ -40,7 +40,7 @@
 
 <script>
 import { callingdata } from '@/common/js/countries'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 const _ = require('lodash')
 export default {
   name: 'ValidateSms',
@@ -105,6 +105,7 @@ export default {
         if (d.data.success) {
           this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_200'), type: 'success', url: '/member_center'})
         } else {
+          this.SmsData.verifyCode = ''
           this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_1001'), type: 'error'})
         }
       })
@@ -118,7 +119,7 @@ export default {
       this.callDisplay = state
     },
     CountDown () {
-      this.second = 5
+      this.second = 60
       this.resend = true
       var timer = setInterval(() => {
         this.second--
@@ -134,7 +135,8 @@ export default {
       return this.resend ? (this.second < 0
         ? this.$t('withdraw_currency.resend')
         : `${this.$t('withdraw_currency.resend')} ${this.second}s`) : this.$t('auth.send_code')
-    }
+    },
+    ...mapGetters(['loginData'])
   },
   filters: {
     maxlen (str) {
@@ -153,7 +155,12 @@ export default {
       if (!lock) {
         this.SmsData.CountryName = ''
       }
-    }, 500)
+    }, 500),
+    loginData () {
+      if (!this.loginData.activated) {
+        this.PopupBoxDisplay({message: this.$t('member_center.1001_hint') , type: 'warn', url: '/'})
+      }
+    }
   }
 }
 </script>

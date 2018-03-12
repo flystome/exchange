@@ -155,10 +155,19 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import moment from 'moment'
+import Cookies from 'js-cookie'
 moment.locale('zh-cn')
 
 export default {
   name: 'MemberCenter',
+  created () {
+    var code = Cookies.get('code')
+    if (code) {
+      console.log(code)
+      this.PopupBoxDisplay({message: this.$t(`member_center.${code.match(/\d+/g)[0]}_hint`), type: 'warn'})
+      Cookies.remove('code')
+    }
+  },
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
@@ -211,7 +220,7 @@ export default {
         }, (d) => {
           this.disabled = false
           if (d.data.success) {
-            this.PopupBoxDisplay({message: this.$t('api_server.member_center.sucPcess_200'), type: 'success'})
+            this.PopupBoxDisplay({message: this.$t('api_server.member_center.success_200'), type: 'success'})
           } else {
             this.PopupBoxDisplay({message: this.$t('api_server.member_center.error_1001'), type: 'error'})
           }
@@ -230,7 +239,6 @@ export default {
       })
     },
     getTicket () {
-      // console.log(this.loginData.tickets)
       this.tickets = this.loginData.tickets
       this.tickets.sort((a, b) => {
         return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()

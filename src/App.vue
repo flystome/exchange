@@ -43,6 +43,17 @@ section{
   min-height: 100%;
   padding-bottom: 217px;
 }
+.btn{
+ border-radius: 0;
+}
+.btn:hover{
+  color: white
+}
+
+.btn[disabled=true]{
+  cursor: not-allowed
+}
+
 .input.is-danger, .textarea.is-danger {
     border-color: #ff3860;
     background: white;
@@ -76,6 +87,10 @@ body{
   background: white;
 }
 
+.btc-white-btn:hover{
+  color: #4382f7;
+}
+
 .btc-container{
   background: #f2f2f2;
   padding-bottom: 13px;
@@ -89,12 +104,12 @@ body{
 }
 
 .btc-link{
-  color: #4382f7!important
+  color: #4382f7!important;
+  cursor: pointer;
 }
 
 .btc-link:hover{
   text-decoration: none!important;
-  cursor: pointer;
   color: #4382f7!important;
 }
 

@@ -91,7 +91,7 @@
 
 <script>
 import { countries } from '@/common/js/countries'
-import {mapMutations} from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'ValidateIdentity',
   data () {
@@ -206,6 +206,27 @@ export default {
           this.PopupBoxDisplay({message: this.$t('api_server.validate_identity.error_1001'), type: 'error'})
         }
       })
+    }
+  },
+  computed: {
+    ...mapGetters(['loginData'])
+  },
+  filters: {
+    maxlen (str) {
+      return str.match(/.{8}/)
+    }
+  },
+  watch: {
+    loginData (to ,from) {
+      if (!from) {
+        if (!this.loginData.activated) {
+          this.PopupBoxDisplay({message: this.$t('member_center.1001_hint') , type: 'warn' ,url: '/'})
+          return
+        }
+        if (!this.loginData.app_activated) {
+          this.PopupBoxDisplay({message: this.$t('member_center.1002_hint') , type: 'warn' ,url: '/'})
+        }
+      }
     }
   }
 }
