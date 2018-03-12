@@ -325,7 +325,7 @@ const en = {
       "announcement": "Announcements",
       "qa": "FAQ",
       "settings": "Settings",
-      "member_center": "Dashboard",
+      "member_center": "My Account",
       "exit": "Exit",
       "message": "Message"
     },
@@ -360,7 +360,6 @@ const en = {
       "completion_of_real_name_authentication": "Tier 3: Real Name Verification",
       "api": "API",
       "email_sent_message": "Mail is sent, please go to your mailbox to activate your account.",
-      "tier_1": "Tier 1",
       "1001_hint": "Please verify your email",
       "1002_hint": "Please verify your Cell Phone",
       "1003_hint": "Please real name authentication",
@@ -458,11 +457,11 @@ const en = {
       "temporarily_unable_deposit": "Temporarily unable to deposit"
     },
     "title": {
-      "member_center": "Member Center",
+      "member_center": "My Account",
       "validate_email": "Validate Email",
       "validate_google": "Validate Google",
       "validate_identity": "Validate Identity",
-      "validate_sms": "Validate Sms",
+      "validate_sms": "Validate SMS",
       "currency_withdraw": "Currency withdraw"
     },
     "prompt": {
@@ -536,7 +535,7 @@ const en = {
     },
     "footer": {
       "introduction": "Authoritative and transparent digital asset trading platform",
-      "copyright": "©2014-2018 hotex.com copyright",
+      "copyright": "©2017-2018 hotex.com Copyright",
       "support": "Support",
       "api": "API",
       "help": "Help",
