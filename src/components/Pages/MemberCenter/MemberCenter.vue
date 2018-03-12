@@ -35,9 +35,9 @@
               <h5 class="media-heading">{{$t("member_center.tier_1")}}</h5>
               <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.activated}">
                 <span v-if='loginData.activated'>{{$t("auth.email")}}</span>
-                <span v-else @click="sendEmail" :disabled="disabled">
+                <button type="button" id="myButton" data-loading-text="Loading..." class="btn sendbutton" autocomplete="off" v-else @click="sendEmail" :disabled="disabled">
                   {{$t("auth.send_email")}}
-                </span>
+                </button>
                 <img v-if='loginData.activated' src="~Img/validate-true.png" alt="已认证">
               </span>
             </div>
@@ -166,7 +166,7 @@ export default {
       email_sent_message: this.$t('member_center.email_sent_message'),
       tickets: [],
       step: 1,
-      disabled: true
+      disabled: false
     }
   },
   methods: {
@@ -200,6 +200,7 @@ export default {
       location.href = `${this.HOST_URL}/tickets/${id}`
     },
     sendEmail () {
+      this.disabled = true
       if (this.disabled) {
         this._get({
           url: `/activations/mobile_new`,
@@ -207,7 +208,7 @@ export default {
             'DataType': 'application/json;charset=utf-8'
           }
         }, (d) => {
-          this.disabled = true
+          this.disabled = false
           if (d.data.success) {
             this.PopupBoxDisplay({message: this.$t('api_server.member_center.sucPcess_200'), type: 'success'})
           } else {
@@ -215,7 +216,6 @@ export default {
           }
         })
       }
-      this.disabled = false
     },
     goPath (path, status, href) {
       if (status) {

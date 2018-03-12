@@ -1,5 +1,5 @@
 <template>
-  <div class="btc-boot btc-paddingT80">
+  <div class="btc-boot btc-paddingT80 btc-paddingB80">
     <div class="text-center btc-marginT100">
       <img src="~Img/bootvaildate.png" alt="" class="btc-marginB20">
       <div v-if="!loginData.activated">

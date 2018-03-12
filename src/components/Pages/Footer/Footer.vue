@@ -68,41 +68,98 @@
         </ul><br>
         <h4>联系我们</h4><a class="btn btn-wide btn-danger" href="/tickets/new">意见反馈</a>
       </div> -->
-      <div class="btc-footer-logo col-md-5 col-sm-3">
+      <div class="btc-footer-logo col-lg-5 col-md-3">
         <img src="~Img/logo.png" alt="">
-        <p class="btc-marginB15">权威化透明化的数字资产交易平台</p>
-        <p>©2014-2018 hotex.com 版权所有</p>
+        <p class="btc-marginB15">{{ $t("footer.introduction") }}</p>
+        <p>{{ $t("footer.copyright") }}</p>
       </div>
-      <ul class="btc-info pull-left btc-marginR100">
-        <li class=""><a>支持</a></li>
-        <li><a>API</a></li>
-        <li><a>帮助</a></li>
-        <li><a>公告</a></li>
+      <ul class="btc-info pull-left btc-marginR80">
+        <li class="">{{ $t("footer.support") }}</li>
+        <li><a :href="`${HOST_URL}/documents/api_v2`">{{ $t("footer.api") }}</a></li>
+        <li><a>{{ $t("footer.help") }}</a></li>
+        <li><a>{{ $t("footer.announcements") }}</a></li>
       </ul>
-      <ul class="btc-info pull-left btc-marginR100">
-        <li class=""><a>服务</a></li>
-        <li><a>上币申请</a></li>
-        <li><a>费率详情</a></li>
+      <ul class="btc-info pull-left btc-marginR80">
+        <li class="">{{ $t("footer.service") }}</li>
+        <li><a>{{ $t("footer.application") }}</a></li>
+        <li><a>{{ $t("footer.rate_details") }}</a></li>
       </ul>
       <ul class="btc-info pull-left">
-        <li class=""><a>关于</a></li>
-        <li><a>关于团队</a></li>
-        <li><a>用户协议</a></li>
-        <li><a>隐私条款</a></li>
+        <li class="">{{ $t("footer.about") }}</li>
+        <li><a>{{ $t("footer.about_us") }}</a></li>
+        <li><a>{{ $t("footer.user_agreement") }}</a></li>
+        <li><a>{{ $t("footer.privacy_policy") }}</a></li>
       </ul>
-      <ul class="btc-footer-us pull-right btc-marginT40 btc-marginR60">
-        <li class="btc-marginB15"><a>联系我们</a></li>
-        <li class="btc-marginB15"><a>support@hotex.com</a></li>
-        <li>
-          <a>
-            繁体中文
-            <img src="~Img/footer-switch.png" alt="">
-          </a></li>
+      <ul class="btc-footer-us pull-right btc-marginT45 btc-marginR30 dropup">
+        <li class="btc-marginB15"><a>{{ $t("footer.contact_us") }}</a></li>
+        <li class="btc-marginB15"><a href="mailto:support@hotex.com">support@hotex.com</a></li>
+        <li role="presentation" class="dropdown btc-country btc-img-position">
+          <a class="dropdown-toggle btc-paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <span>{{getLanguage.name}}</span><span class="caret">
+            </span>
+          </a>
+          <ul class="dropdown-menu text-center">
+            <li v-for="(locale,index) in locale" :key="locale.language">
+              <a @click="changeLang(locale.language, index + 1)">{{locale.name}}</a>
+            </li>
+          </ul>
+        </li>
       </ul>
 
     </nav>
   </footer>
 </template>
+
+<script>
+import { mapState, mapMutations } from 'vuex'
+export default {
+  data () {
+    return {
+      HOST_URL: process.env.HOST_URL,
+      locale: [{
+        language: 'zh-CN',
+        name: '简体中文'
+      },
+      {
+        language: 'en',
+        name: 'English'
+      }]
+    }
+  },
+  methods: {
+    localed () {
+      // this.$i18n.locale = this.language
+    },
+    changeLang (str) {
+      this.ChangeLanguage(str)
+      this.$i18n.locale = str
+      this._post({
+        url: '/settings/get_language.json',
+        headers: {
+          'DataType': 'application/json;charset=utf-8'
+        },
+        data: {
+          'content_language': str
+        }
+      })
+    },
+    ...mapMutations(['ChangeLanguage'])
+  },
+  computed: {
+    getLanguage () {
+      this.localed()
+      var lang = ''
+      this.locale.map((d, index) => {
+        if (d.language === this.language) {
+          lang = d
+        }
+      })
+      return lang
+    },
+    ...mapState(['language'])
+  }
+}
+</script>
 
 <style scoped lang='scss'>
 @import './Footer.scss'

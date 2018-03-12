@@ -358,7 +358,8 @@ const en = {
       "korean_user_use_twice_verification": "Tier 2: Cell Phone Verification",
       "completion_of_real_name_authentication": "Tier 3: Real Name Verification",
       "api": "API",
-      "email_sent_message": "Mail is sent, please go to your mailbox to activate your account."
+      "email_sent_message": "Mail is sent, please go to your mailbox to activate your account.",
+      "tier_1": "Tier 1"
     },
     "validate_identity": {
       "real_name_authentication": "Real Name Verification",
@@ -382,7 +383,8 @@ const en = {
       "binding_cell_phone_authentication": "Verify Your Cell Phone",
       "send_identify_code": "Send Code",
       "confirm": "Submit",
-      "verification_code": "Verification Code"
+      "verification_code": "Verification Code",
+      "use_right_code": "Please use the correct national area code"
     },
     "browser": {
       "chrome": "Chrome",
@@ -406,7 +408,7 @@ const en = {
       "min_currency": "Minimum amount of currency：0.001。",
       "confirm_apply_for_success": "After the request is successful, please go to the mailbox to click the link to confirm the request, and you can track the status of the Recharge and historical records page.",
       "make_sure_safe": "Be sure to make sure that computers and browsers are safe to prevent information from being tampered or leaked.",
-      "withdraw_currency_record": "withdraw currency record",
+      "withdraw_currency_record": "Withdraw Currency Record",
       "number": "Number",
       "withdraw_time": "Withdraw Time",
       "withdraw_address": "Withdraw Address",
@@ -527,6 +529,22 @@ const en = {
         "auth_sms_200": "Verify Success",
         "auth_sms_1001": "Verify Failed",
       }
+    },
+    "footer": {
+      "introduction": "Authoritative and transparent digital asset trading platform",
+      "copyright": "©2014-2018 hotex.com copyright",
+      "support": "Support",
+      "api": "API",
+      "help": "Help",
+      "announcements": "Announcements",
+      "service": "Service",
+      "application": "Apply for money",
+      "rate_details": "Rate details",
+      "about": "About",
+      "about_us": "About us",
+      "user_agreement": "User Agreement",
+      "privacy_policy": "Privacy Policy",
+      "contact_us": "Contact us"
     }
   }
 }

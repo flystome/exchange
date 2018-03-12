@@ -1,5 +1,5 @@
 import Pusher from 'pusher-js'
-
+console.log(process.env)
 var config = process.env.PUSHER_CONFIG
 Pusher.Runtime.createXHR = function () {
   var xhr = new XMLHttpRequest()

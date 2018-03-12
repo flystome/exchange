@@ -70,7 +70,7 @@ body{
 .btc-container{
   background: #f2f2f2;
   padding-bottom: 13px;
-  min-height: 70vh;
+  min-height: 79vh;
 }
 
 .btc-container-block{

@@ -1,5 +1,5 @@
 <template>
-  <div class="btc-validate-sms btc-container-block" @click="ShowCallingcode(false)">
+  <div class="btc-validate-sms btc-container-block" @click="ShowCallingcode(false);prompt = ''">
     <header class="btc-color666">
       <router-link to='/' class="btc-link">{{$t('title.member_center')}}</router-link> > <span>{{$t('title.validate_sms')}}</span>
     </header>
@@ -32,7 +32,7 @@
           {{ timer }}
         </button>
       </div>
-      <basic-button @click.native="Validate" style='width:100%' :text='$t("validate_sms.confirm")'>
+      <basic-button @click.native.stop="Validate" style='width:100%' :text='$t("validate_sms.confirm")'>
       </basic-button>
     </div>
   </div>
@@ -46,6 +46,7 @@ export default {
   name: 'ValidateSms',
   data () {
     return {
+      prompt: '',
       HOST_URL: process.env.HOST_URL,
       prompt: '',
       callDisplay: false,
@@ -86,9 +87,12 @@ export default {
       })
     },
     async Validate () {
+      if (this.SmsData.CountryName === '') {
+        this.prompt = this.$t('validate_sms.use_right_code')
+      }
       const cellphone = await this.$refs['cellphone'].$validator.validateAll()
       const verifiycode = await this.$refs['verifiycode'].$validator.validateAll()
-      if (!cellphone || !verifiycode) {
+      if (!cellphone || !verifiycode || this.SmsData.CountryName === '') {
         return
       }
       this._post({
@@ -140,11 +144,16 @@ export default {
   },
   watch: {
     'SmsData.CellPhonecode': _.debounce(function () {
+      var lock = false
       callingdata.forEach((d) => {
         if (d.number.slice(1) === this.SmsData.CellPhonecode) {
           this.SmsData.CountryName = d.alpha
+          lock = true
         }
       })
+      if (!lock) {
+        this.SmsData.CountryName = ''
+      }
     }, 500)
   }
 }
