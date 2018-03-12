@@ -1,6 +1,6 @@
 <template>
-  <footer class="btc-footer">
-    <nav class="container hidden-xs">
+  <footer class="btc-footer hidden-xs">
+    <nav class="container">
       <!-- <div class="col-sm-9">
         <h4>{{$t("concepts.btc_family")}}</h4>
         <div class="row">
@@ -90,8 +90,8 @@
         <li><a>{{ $t("footer.user_agreement") }}</a></li>
         <li><a>{{ $t("footer.privacy_policy") }}</a></li>
       </ul>
-      <ul class="btc-footer-us pull-right btc-marginT45 btc-marginR30 dropup">
-        <li class="btc-marginB15"><a>{{ $t("footer.contact_us") }}</a></li>
+      <ul class="btc-info pull-right btc-marginT30 btc-marginR30 dropup">
+        <li class="btc-marginB30">{{ $t("footer.contact_us") }}</li>
         <li class="btc-marginB15"><a href="mailto:support@hotex.com">support@hotex.com</a></li>
         <li role="presentation" class="dropdown btc-country btc-img-position">
           <a class="dropdown-toggle btc-paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">

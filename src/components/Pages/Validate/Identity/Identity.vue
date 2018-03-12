@@ -83,7 +83,7 @@
       ></upload-img>
     </div>
     <footer class="btc-b-t btc-marginT25">
-      <basic-button @click.native="uploadImg" class="btc-fr col-xs-12 col-md-1 pull-right" :disabled="disabled" :text='$t("validate_identity.submissions")'>
+      <basic-button id="myButton" data-loading-text="Loading..." autocomplete="off" @click.native="uploadImg" class="btn btc-fr col-xs-12 col-md-1 pull-right" :disabled="disabled" :text='$t("validate_identity.submissions")'>
       </basic-button>
     </footer>
   </div>

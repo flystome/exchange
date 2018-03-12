@@ -1,11 +1,13 @@
 <template>
   <div id="app">
-    <header is='Header' />
-    <div class="btc-container container" v-cloak>
-      <keep-alive>
-        <router-view/>
-      </keep-alive>
-    </div>
+    <section>
+      <header is='Header' />
+      <div class="btc-container container" v-cloak>
+        <keep-alive>
+          <router-view/>
+        </keep-alive>
+      </div>
+    </section>
     <footer is='Footer' />
     <wrapper></wrapper>
     <popup-box></popup-box>
@@ -34,6 +36,13 @@ export default {
 </script>
 
 <style>
+#app{
+  height: 100%;
+}
+section{
+  min-height: 100%;
+  padding-bottom: 217px;
+}
 .input.is-danger, .textarea.is-danger {
     border-color: #ff3860;
     background: white;
@@ -70,7 +79,7 @@ body{
 .btc-container{
   background: #f2f2f2;
   padding-bottom: 13px;
-  min-height: 79vh;
+  min-height: 70vh;
 }
 
 .btc-container-block{

@@ -1,7 +1,7 @@
 <template>
-  <div class="btc-table-container hidden-xs">
+  <div class="btc-table-container">
     <div class="bs-example btc-table" data-example-id="simple-table">
-      <table class="table">
+      <table class="table table-condensed">
         <caption class="font-w"><strong>{{captionTitle}}</strong>
           <slot name='remark'></slot>
         </caption>

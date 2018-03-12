@@ -12,11 +12,12 @@
 
 .btc-table{
   color: #666666;
-  padding: 8px 25px;
+  padding: 8px 15px;
 }
 
 .btc-table table{
   margin-bottom: 0;
+  font-size: 12px;
 }
 
 .btc-table caption{

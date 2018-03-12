@@ -78,11 +78,12 @@
               <h5 class="media-heading">{{$t("member_center.completion_of_real_name_authentication")}}</h5>
               <div class="btc-verifying-prompt">
                 <span class="btc-member-validata btc-link"
-                  @click="validateAll"
-                  :class="{'btc-active': (loginData.id_document && loginData.id_document.aasm_state)==='unverified',
-                  'btc-verifying':(loginData.id_document && loginData.id_document.aasm_state)==='verifying'}">
+                  :class="{'btc-active': loginData.id_document && loginData.id_document.aasm_state==='unverified',
+                  'btc-verifying':(loginData.id_document && loginData.id_document.aasm_state)==='verifying'}" @click="validateAll">
                   <span>{{$t("auth.real_name")}}</span>
-                  <img v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' src="~Img/validate-true.png" alt="已认证">
+                  <div v-if="loginData.sms_activated || loginData.activated">
+                    <img v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' src="~Img/validate-true.png" alt="已认证">
+                  </div>
                   <img v-else-if='(loginData.id_document && loginData.id_document.aasm_state)==="verifying"' src="~Img/verifying.png" alt="认证中">
                   <img v-else-if='(loginData.id_document && loginData.id_document.aasm_state)==="unverified"' src="~Img/unverified.png" alt="认证失败">
                   <span class="verifying-prompt">认证中</span>
@@ -100,7 +101,7 @@
     <template v-if="step === 1">
       <div class="container table">
       <basic-table :captionTitle='getLoginRecord.captionTitle' :item='getLoginRecord.Item'>
-      <span slot="remark" class="btc-tableRemark">{{$t('member_center.have_questions_to_contact_us')}}</span>
+      <a :href="`${HOST_URL}/tickets/new`" slot="remark" class="btc-tableRemark">{{$t('member_center.have_questions_to_contact_us')}}</a>
       </basic-table>
       <div class="btc-member-handleRecord  btc-container-block">
         <header class="btc-member-blockHeader">
@@ -237,21 +238,21 @@ export default {
     },
     validatephone () {
       if (!this.loginData.activated) {
-        this.goPath('/prompt')
+        this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
       } else {
         this.goPath('/validate/sms', this.loginData.sms_activated, false)
       }
     },
     validateAuth () {
       if (!this.loginData.activated) {
-        this.goPath('/prompt')
+        this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
       } else {
         this.goPath('/validate/google', this.loginData && this.loginData.app_activated, false)
       }
     },
     validateAll () {
       if (!this.loginData.activated || !this.loginData.sms_activated) {
-        this.goPath('/prompt')
+        this.PopupBoxDisplay({message: this.$t('prompt.phone_not_certified')})
       } else {
         this.goPath('/validate/identity', (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verified' || (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verifying', false)
       }
