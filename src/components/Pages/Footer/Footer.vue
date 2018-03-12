@@ -68,7 +68,7 @@
         </ul><br>
         <h4>联系我们</h4><a class="btn btn-wide btn-danger" href="/tickets/new">意见反馈</a>
       </div> -->
-      <div class="btc-footer-logo col-md-5 col-sm-3">
+      <div class="btc-footer-logo col-lg-5 col-md-3">
         <img src="~Img/logo.png" alt="">
         <p class="btc-marginB15">{{ $t("footer.introduction") }}</p>
         <p>{{ $t("footer.copyright") }}</p>
@@ -90,7 +90,7 @@
         <li><a>{{ $t("footer.user_agreement") }}</a></li>
         <li><a>{{ $t("footer.privacy_policy") }}</a></li>
       </ul>
-      <ul class="btc-footer-us pull-right btc-marginT45 btc-marginR30">
+      <ul class="btc-footer-us pull-right btc-marginT45 btc-marginR30 dropup">
         <li class="btc-marginB15"><a>{{ $t("footer.contact_us") }}</a></li>
         <li class="btc-marginB15"><a href="mailto:support@hotex.com">support@hotex.com</a></li>
         <li role="presentation" class="dropdown btc-country btc-img-position">

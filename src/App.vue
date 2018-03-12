@@ -34,9 +34,6 @@ export default {
 </script>
 
 <style>
-#app{
-  height: 100%;
-}
 .input.is-danger, .textarea.is-danger {
     border-color: #ff3860;
     background: white;
@@ -73,7 +70,7 @@ body{
 .btc-container{
   background: #f2f2f2;
   padding-bottom: 13px;
-  min-height: 70vh;
+  min-height: 79vh;
 }
 
 .btc-container-block{
