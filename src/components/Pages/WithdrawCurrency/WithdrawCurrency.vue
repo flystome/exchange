@@ -152,18 +152,18 @@
           </ul>
       </div>
     </div>
-    <basic-table :captionTitle='WithdrawRecord.captionTitle' :item='WithdrawRecord.item' v-if="route === 'withdraw'">
+    <basic-table :captionTitle='WithdrawRecord.captionTitle' :item='getWithdrawRecord' v-if="route === 'withdraw'">
       <template slot="cancel"
       slot-scope="props">
       <a>
-        / <span @click="cancelWithdraw(props.id, props.data)" class="btc-link">{{$t(`withdraw_currency.${props.data.type.aasm_state}`)}}</span>
+        / <span @click="cancelWithdraw(props.id, props.data)" class="btc-link">{{$t(`withdraw_currency.canceled`)}}</span>
       </a>
       </template>
       <div slot="more" class="text-center btc-b-t btc-table-more">
         <a class="btc-link ">{{$t('member_center.show_more')}}</a>
       </div>
     </basic-table>
-    <basic-table :captionTitle='depositRecord.captionTitle' :item='depositRecord.item' v-else>
+    <basic-table :captionTitle='depositRecord.captionTitle' :item='getDepositRecord' v-else>
       <div slot="more" class="text-center btc-b-t btc-table-more">
         <a class="btc-link ">{{$t('member_center.show_more')}}</a>
       </div>
@@ -361,15 +361,7 @@ export default {
             this.deposit_address = ''
           }
           d.account && (this.Balance = d.account.balance)
-          withdraws.length === 0 ? obj.item = [] : obj.item = [{content: [
-            this.$t('withdraw_currency.number'),
-            this.$t('withdraw_currency.withdraw_time'),
-            this.$t('withdraw_currency.withdraw_address'),
-            this.$t('withdraw_currency.actual_account'),
-            this.$t('withdraw_currency.absenteeism_expenses'),
-            this.$t('withdraw_currency.statu_and_operation')
-          ]
-          }].concat(withdraws.map(d => {
+          withdraws.length === 0 ? obj.item = [] : obj.item = obj.item.concat(withdraws.map(d => {
             var id = d.id
             return {
               content: [
@@ -378,19 +370,12 @@ export default {
                 d.fund_uid,
                 d.amount,
                 d.fee,
-                { type: d, context: this.$t(`withdraw_currency.${d.aasm_state}`), id: id }
+                { type: d, context: d.aasm_state, id: id }
               ]
             }
           }))
 
-          deposits.length === 0 ? objd.item = [] : objd.item = [{content: [
-            this.$t('deposit_currency.deposit_date'),
-            this.$t('deposit_currency.trading_hash'),
-            this.$t('deposit_currency.recharge_amount'),
-            this.$t('deposit_currency.confirmation_number'),
-            this.$t('withdraw_currency.statu_and_operation')
-          ]
-          }].concat(deposits.map(d => {
+          deposits.length === 0 ? objd.item = [] : objd.item = objd.item.concat(deposits.map(d => {
             return {
               content: [
                 this.$moment(d.created_at).format('L H:mm:ss'),
@@ -531,8 +516,8 @@ export default {
         if (d.data.success) {
           this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.Withdraw_canceled_200'), type: 'success'})
           var type = data.type
-          type.aasm_state_title = this.$t('funds.withdraw_history.canceled')
-          data.context = this.$t('funds.withdraw_history.canceled')
+          type.aasm_state_title = 'canceled'
+          data.context = 'canceled'
           type.aasm_state = 'canceled'
         } else {
           this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.Withdraw_canceled_1001'), type: 'error'})
@@ -564,6 +549,27 @@ export default {
       return this.resend ? (this.second < 0
         ? this.$t('withdraw_currency.resend')
         : `${this.$t('withdraw_currency.resend')} ${this.second}s`) : this.$t('withdraw_currency.send_identify_code')
+    },
+    getWithdrawRecord () {
+      return [{content: [
+        this.$t('withdraw_currency.number'),
+        this.$t('withdraw_currency.withdraw_time'),
+        this.$t('withdraw_currency.withdraw_address'),
+        this.$t('withdraw_currency.actual_account'),
+        this.$t('withdraw_currency.absenteeism_expenses'),
+        this.$t('withdraw_currency.statu_and_operation')
+      ]
+      }].concat(this.WithdrawRecord.item)
+    },
+    getDepositRecord () {
+      return [{content: [
+        this.$t('deposit_currency.deposit_date'),
+        this.$t('deposit_currency.trading_hash'),
+        this.$t('deposit_currency.recharge_amount'),
+        this.$t('deposit_currency.confirmation_number'),
+        this.$t('withdraw_currency.statu_and_operation')
+      ]
+      }].concat(this.depositRecord.item)
     }
   },
   mounted () {
