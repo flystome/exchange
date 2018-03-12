@@ -1,18 +1,16 @@
 <template>
-  <div class="btc-validate-sms btc-container-block">
+  <div class="btc-validate-sms btc-container-block" @click="ShowCallingcode(false)">
     <header class="btc-color666">
       <router-link to='/' class="btc-link">{{$t('title.member_center')}}</router-link> > <span>{{$t('title.validate_sms')}}</span>
     </header>
     <div class="btc-sms-container">
       <news-prompt :text='prompt'></news-prompt>
       <div class="btc-sms-phone">
-        <!-- <basic-select v-model="phoneNumber" :data='phoneData'></basic-select> -->
         <div class="btc-sms-choice btc-b-def">
           <span>+</span>
-          <div class="" contenteditable="true" >
-            {{ SmsData.CellPhonecode }}
-          </div>
-          <img @click="ShowCallingcode" src="~Img/triangle.png" >
+          <div-contenteditable v-model="SmsData.CellPhonecode">
+          </div-contenteditable>
+          <img @click.stop="ShowCallingcode(true)" src="~Img/triangle.png" >
         </div>
       <div class="btc-code-list btc-b-def" v-if="callDisplay">
         <ul>
@@ -42,6 +40,8 @@
 
 <script>
 import { callingdata } from '@/common/js/countries'
+import { mapMutations } from 'vuex'
+const _ = require('lodash')
 export default {
   name: 'ValidateSms',
   data () {
@@ -53,14 +53,14 @@ export default {
       callingcode: '',
       second: -1,
       resend: false,
+      isLocked: false,
       SmsData: {
         CellPhone: '',
         CellPhonecode: '86',
         CountryName: 'CN',
         verifyCode: '',
         Time: ''
-      },
-      phoneData: Array(7).fill('+86')
+      }
     }
   },
   methods: {
@@ -69,7 +69,6 @@ export default {
       if (!cellphone) {
         return
       }
-      this.CountDown()
       this._post({
         url: `/verify/send_code.json`,
         data: {
@@ -77,11 +76,16 @@ export default {
           country: this.SmsData.CountryName
         }
       }, (d) => {
-        console.log(d.data)
+        if (d.data.success) {
+          if (this.second < 0) {
+            this.CountDown()
+          }
+        } else {
+          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.send_code_1001'), type: 'error'})
+        }
       })
     },
     async Validate () {
-      console.log(2)
       const cellphone = await this.$refs['cellphone'].$validator.validateAll()
       const verifiycode = await this.$refs['verifiycode'].$validator.validateAll()
       if (!cellphone || !verifiycode) {
@@ -95,7 +99,11 @@ export default {
           'otp': this.SmsData.verifyCode
         }
       }, (d) => {
-        console.log(d.data)
+        if (d.data.success) {
+          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_200'), type: 'success', url: '/member_center'})
+        } else {
+          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_1001'), type: 'error'})
+        }
       })
     },
     PutCode (number, name, alpha) {
@@ -107,7 +115,7 @@ export default {
       this.callDisplay = state
     },
     CountDown () {
-      this.second = 60
+      this.second = 5
       this.resend = true
       var timer = setInterval(() => {
         this.second--
@@ -115,7 +123,8 @@ export default {
           clearInterval(timer)
         }
       }, 1000)
-    }
+    },
+    ...mapMutations(['PopupBoxDisplay', 'ChangePopupBox'])
   },
   computed: {
     timer () {
@@ -128,6 +137,15 @@ export default {
     maxlen (str) {
       return str.match(/.{8}/)
     }
+  },
+  watch: {
+    'SmsData.CellPhonecode': _.debounce(function () {
+      callingdata.forEach((d) => {
+        if (d.number.slice(1) === this.SmsData.CellPhonecode) {
+          this.SmsData.CountryName = d.alpha
+        }
+      })
+    }, 500)
   }
 }
 </script>

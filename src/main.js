@@ -9,6 +9,7 @@ import BasicSelect from 'Components/BasicSelect/BasicSelect'
 import UploadImg from 'Components/UploadImg/UploadImg'
 import QrCode from 'Components/QrCode/QrCode'
 import NewsPrompt from 'Components/NewsPrompt/NewsPrompt'
+import DivContenteditable from 'Components/DivContenteditable/DivContenteditable'
 import Title from 'Pages/Title/Title'
 import App from './App'
 
@@ -51,7 +52,8 @@ const components = [
   BasicSelect,
   QrCode,
   UploadImg,
-  NewsPrompt
+  NewsPrompt,
+  DivContenteditable
 ]
 components.forEach(component => {
   Vue.component(component.name, component)

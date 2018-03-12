@@ -156,7 +156,7 @@
       <template slot="cancel"
       slot-scope="props">
       <a>
-        / <span @click="cancelWithdraw(props.id, props.data)" class="btc-link">{{$t('withdraw_currency.cancel')}}</span>
+        / <span @click="cancelWithdraw(props.id, props.data)" class="btc-link">{{$t(`withdraw_currency.${props.data}`)}}{{props.data.type}}</span>
       </a>
       </template>
       <div slot="more" class="text-center btc-b-t btc-table-more">
@@ -198,7 +198,7 @@ export default {
           }
         }
       })
-      this.TotalAssets = Number(d.total_assets.usdt_worth).toFixed(2)
+      this.TotalAssets = Number(d.total_assets.usdt_worth).toFixed(3)
       if (d.notice) {
         this.PopupBoxDisplay({message: d.notice.message, type: d.notice.type})
       }
@@ -348,7 +348,7 @@ export default {
           }
           this.WithdrAwable = d.withdrawable
           this.Remain = d.today_withdraw_remain
-          this.Locked = d.account.locked
+          this.Locked = Number(d.account.locked).toFixed(3)
           var obj = this.WithdrawRecord
           var objd = this.depositRecord
           var withdraws = d.withdraws
@@ -370,7 +370,6 @@ export default {
             this.$t('withdraw_currency.statu_and_operation')
           ]
           }].concat(withdraws.map(d => {
-            var title = `${d.aasm_state_title}`
             var id = d.id
             return {
               content: [
@@ -379,8 +378,7 @@ export default {
                 d.fund_uid,
                 d.amount,
                 d.fee,
-                { type: d, context: title, id: id }
-                // ${d.aasm_state === ('submitting' || 'submitted' || 'accepted') ? ` / <span class='btc-cancel btc-link'>${this.$t('withdraw_currency.cancel')}</span>` : ''}
+                { type: d, context: this.$t(`withdraw_currency.${d.aasm_state}`), id: id }
               ]
             }
           }))
@@ -399,7 +397,7 @@ export default {
                 {hover: true, context: d.txid},
                 d.amount,
                 d.confirmations,
-                d.aasm_state_title
+                this.$t(`withdraw_currency.${d.aasm_state}`)
               ]
             }
           }))
@@ -436,10 +434,10 @@ export default {
             this.WithdrawData.Address_id = ''
             this.ChoiceStatus(false)
           }
-          this.PopupBoxDisplay({message: this.$t('api_server.currency_withdraw.delete_fund_source_200'), type: 'success'})
+          this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.delete_fund_source_200'), type: 'success'})
           funds.splice(index, 1)
         } else {
-          this.PopupBoxDisplay({message: this.$t('api_server.currency_withdraw.delete_fund_source_1001'), type: 'error'})
+          this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.delete_fund_source_1001'), type: 'error'})
         }
       })
     },
@@ -457,9 +455,9 @@ export default {
               d.is_default = true
             }
           })
-          this.PopupBoxDisplay({message: this.$t('api_server.currency_withdraw.set_fund_source_200'), type: 'success'})
+          this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.set_fund_source_200'), type: 'success'})
         } else {
-          this.PopupBoxDisplay({message: this.$t('api_server.currency_withdraw.set_fund_source_1001'), type: 'error'})
+          this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.set_fund_source_1001'), type: 'error'})
         }
       })
     },
@@ -471,7 +469,7 @@ export default {
         url: '/funds/send_sms'
       }, (d) => {
         if (d.data.error) {
-          this.PopupBoxDisplay({message: this.$t('withdraw_currency.send_phone_error_1001'), type: 'error'})
+          this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.send_phone_error_1001'), type: 'error'})
         } else {
           this.CountDown()
         }
@@ -511,15 +509,18 @@ export default {
         url: `/funds/${this.CurrencyType}/create_withdraw`,
         data: obj
       }, (d) => {
-        if (d.data.success.rucaptcha) {
-          this.Rucaptcha = d.data.success.rucaptcha
-        }
         if (d.data.success) {
-          this.PopupBoxDisplay({message: 'dw', type: 'success'})
-        } else if (d.data.status === 2) {
-          this.PopupBoxDisplay({message: d.data.message, type: 'success'})
+          this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.create_withdraw_200'), type: 'success'})
         } else {
-          this.PopupBoxDisplay({message: d.data.error, type: 'error'})
+          if (d.data.error.code === '1002') {
+            this.Rucaptcha = d.data.error.rucaptcha
+          }
+          if (d.data.error.code === '1003') {
+            this.Rucaptcha = d.data.error.rucaptcha
+            this.PopupBoxDisplay({message: `${this.$t('api_server.withdraw_currency.create_withdraw_1003')} ${d.data.error.c}`, type: 'error'})
+            return
+          }
+          this.PopupBoxDisplay({message: this.$t(`api_server.withdraw_currency.create_withdraw_${d.data.error.code}`), type: 'error'})
         }
       })
     },
@@ -528,13 +529,13 @@ export default {
         url: `/funds/${id}/cancel_withdraw`
       }, (d) => {
         if (d.data.success) {
-          this.PopupBoxDisplay({message: this.$t('api_server.currency_withdraw.Withdraw_canceled_200'), type: 'success'})
+          this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.Withdraw_canceled_200'), type: 'success'})
           var type = data.type
           type.aasm_state_title = this.$t('funds.withdraw_history.canceled')
           data.context = this.$t('funds.withdraw_history.canceled')
           type.aasm_state = 'canceled'
         } else {
-          this.PopupBoxDisplay({message: this.$t('api_server.currency_withdraw.Withdraw_canceled_1001'), type: 'error'})
+          this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.Withdraw_canceled_1001'), type: 'error'})
         }
       })
     },

@@ -7,8 +7,6 @@ const dictionary = {
   en
 }
 
-var empty = ['CellPhone', 'first_name', 'verify code', 'password', 'last_name']
-
 Validator.extend = function extend (name, validator, options) {
   if ( options === void 0 ) options = {}
   if (Object.prototype.toString.call(name) === '[object Array]') {
@@ -26,6 +24,17 @@ Validator._merge(name, validator)
     TARGET_RULES.push(name)
   }
 }
+
+var empty = ['first_name', 'verify code', 'password', 'last_name']
+
+Validator.extend('CellPhone', {
+  getMessage: (field, params, data) => {
+    return (data && data.validation) || 'Something went wrong'
+  },
+  validate: value => {
+    return /\d+/.test(value)
+  }
+})
 
 Validator.extend(empty, {
   getMessage: (field, params, data) => {

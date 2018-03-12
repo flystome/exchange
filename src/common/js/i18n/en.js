@@ -424,7 +424,18 @@ const en = {
       "delete": "Delete",
       "cancel": "Cancel",
       "resend": "Resend",
-      "temporarily_can_not_withdraw": "temporarily Can Not Withdraw"
+      "temporarily_can_not_withdraw": "temporarily Can Not Withdraw",
+      "canceled": "Canceled",
+      "submitting": "Submitting",
+      "submitted": "Submitted",
+      "accepted": "Accepted",
+      "suspect": "Suspect",
+      "rejected": "Rejected",
+      "processing": "Processing",
+      "almost_done": "Almost Done",
+      "done": "Done",
+      "failed": "Failed",
+      "node_audited": "Node Audited"
     },
     "deposit_currency": {
       "deposit_address": "Address",
@@ -495,14 +506,26 @@ const en = {
         "success_200": "Email has been sent, please check it",
         "error_1001": "Token errors, please Reconfirm"
       },
-      "currency_withdraw": {
+      "withdraw_currency": {
         "set_fund_source_200": "The fund source is set as default",
         "set_fund_source_1001" : "The fund source is set default failed",
         "delete_fund_source_200": "Fund source deleted",
         "delete_fund_source_1001": "Fund source delete failed",
         "send_phone_error_1001": "Send too fast, please wait for one minute",
         "Withdraw_canceled_200": "Withdraw request canceled",
-        "Withdraw_canceled_1001": "Withdraw request can not cancel"
+        "Withdraw_canceled_1001": "Withdraw request can not cancel",
+        "create_withdraw_200": "An confirm email has been sent to your mailbox",
+        "create_withdraw_1001": "Please give an valid currency param",
+        "create_withdraw_1002": "Two factor authentication failed",
+        "create_withdraw_1003": "The withdrawal requests can not be more than",
+        "create_withdraw_1004": "The withdrawal amount is above the daily limit",
+        "create_withdraw_1005": "Invalid fund source",
+        "create_withdraw_1006": "System error",
+      },
+      "validate_sms": {
+        "send_code_1001": "Send Error",
+        "auth_sms_200": "Verify Success",
+        "auth_sms_1001": "Verify Failed",
       }
     }
   }

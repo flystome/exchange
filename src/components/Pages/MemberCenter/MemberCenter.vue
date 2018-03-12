@@ -209,7 +209,7 @@ export default {
         }, (d) => {
           this.disabled = true
           if (d.data.success) {
-            this.PopupBoxDisplay({message: this.$t('api_server.member_center.success_200'), type: 'success'})
+            this.PopupBoxDisplay({message: this.$t('api_server.member_center.sucPcess_200'), type: 'success'})
           } else {
             this.PopupBoxDisplay({message: this.$t('api_server.member_center.error_1001'), type: 'error'})
           }
