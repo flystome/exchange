@@ -355,11 +355,11 @@ const en = {
       "yes": "Yes",
       "no": "No",
       "no_record": "No Record",
+      "tier_1": "Tier 1: Email Verification",
       "korean_user_use_twice_verification": "Tier 2: Cell Phone Verification",
       "completion_of_real_name_authentication": "Tier 3: Real Name Verification",
       "api": "API",
-      "email_sent_message": "Mail is sent, please go to your mailbox to activate your account.",
-      "tier_1": "Tier 1"
+      "email_sent_message": "Mail is sent, please go to your mailbox to activate your account."
     },
     "validate_identity": {
       "real_name_authentication": "Real Name Verification",
@@ -375,7 +375,7 @@ const en = {
       "using_true_identity": "Verify using your real identity, and your personal information won't be disclosed to others.",
       "held_id_card": "Upload a photo with your face and your ID card inside. Only JPG format accepted.",
       "example": "Example",
-      "click_upload": "Click upload",
+      "click_upload": "Click To Upload",
       "information_upload_success": "Real-name authentication information upload success",
       "please_upload_file": "Please upload the file"
     },
@@ -538,13 +538,13 @@ const en = {
       "help": "Help",
       "announcements": "Announcements",
       "service": "Service",
-      "application": "Apply for money",
-      "rate_details": "Rate details",
+      "application": "Apply To List",
+      "rate_details": "Fees",
       "about": "About",
-      "about_us": "About us",
+      "about_us": "About Us",
       "user_agreement": "User Agreement",
       "privacy_policy": "Privacy Policy",
-      "contact_us": "Contact us"
+      "contact_us": "Contact Us"
     }
   }
 }
