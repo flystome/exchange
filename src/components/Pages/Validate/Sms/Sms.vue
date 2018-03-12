@@ -48,7 +48,6 @@ export default {
     return {
       prompt: '',
       HOST_URL: process.env.HOST_URL,
-      prompt: '',
       callDisplay: false,
       callingdata: callingdata,
       callingcode: '',

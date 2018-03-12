@@ -156,7 +156,7 @@
       <template slot="cancel"
       slot-scope="props">
       <a>
-        / <span @click="cancelWithdraw(props.id, props.data)" class="btc-link">{{$t(`withdraw_currency.${props.data}`)}}{{props.data.type}}</span>
+        / <span @click="cancelWithdraw(props.id, props.data)" class="btc-link">{{$t(`withdraw_currency.${props.data.type.aasm_state}`)}}</span>
       </a>
       </template>
       <div slot="more" class="text-center btc-b-t btc-table-more">

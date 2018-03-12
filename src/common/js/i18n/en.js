@@ -525,8 +525,8 @@ const en = {
         "create_withdraw_1006": "System error",
       },
       "validate_sms": {
-        "send_code_1001": "Send Error",
-        "auth_sms_200": "Verify Success",
+        "send_code_1001": "Phone number is invalid",
+        "auth_sms_200": "Verify code wrong!Please re-enter",
         "auth_sms_1001": "Verify Failed",
       }
     },
