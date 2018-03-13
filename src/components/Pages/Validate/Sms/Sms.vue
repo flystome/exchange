@@ -1,5 +1,5 @@
 <template>
-  <div class="btc-validate-sms btc-container-block" @click="ShowCallingcode(false);prompt = ''">
+  <div v-if="!loginData.sms_activated && loginData.activated" @keyup.enter='Validate' class="btc-validate-sms btc-container-block" @click="ShowCallingcode(false);prompt = ''">
     <header class="btc-color666">
       <router-link to='/' class="btc-link">{{$t('title.member_center')}}</router-link> > <span>{{$t('title.validate_sms')}}</span>
     </header>
@@ -28,11 +28,11 @@
       <div class="btc-sms-code">
         <basic-input :validate='"verify code"' ref="verifiycode" :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
         </basic-input>
-        <button class="btc-white-btn" @click="SendSms">
+        <button :disabled='disabled' class="btc-white-btn" @click="SendSms">
           {{ timer }}
         </button>
       </div>
-      <basic-button @click.native.stop="Validate" style='width:100%' :text='$t("validate_sms.confirm")'>
+      <basic-button :disabled='disabled' @click.native.stop="Validate" style='width:100%' :text='$t("validate_sms.confirm")'>
       </basic-button>
     </div>
   </div>
@@ -47,6 +47,7 @@ export default {
   data () {
     return {
       prompt: '',
+      disabled: false,
       HOST_URL: process.env.HOST_URL,
       callDisplay: false,
       callingdata: callingdata,
@@ -69,6 +70,7 @@ export default {
       if (!cellphone) {
         return
       }
+      this.disabled = true
       this._post({
         url: `/verify/send_code.json`,
         data: {
@@ -76,6 +78,7 @@ export default {
           country: this.SmsData.CountryName
         }
       }, (d) => {
+        this.disabled = false
         if (d.data.success) {
           if (this.second < 0) {
             this.CountDown()
@@ -156,9 +159,25 @@ export default {
         this.SmsData.CountryName = ''
       }
     }, 500),
-    loginData () {
-      if (!this.loginData.activated) {
-        this.PopupBoxDisplay({message: this.$t('member_center.1001_hint') , type: 'warn', url: '/'})
+    loginData (to, from) {
+      if (!from) {
+        if (/sms/.test(this.$route.path)) {
+          if (!this.loginData.activated) {
+            this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
+          } else if (this.loginData.sms_activated) {
+            this.$router.push({path: '/'})
+          }
+        }
+      }
+    },
+    $route (to) {
+      this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
+      if (this.route === 'sms') {
+        if (!this.loginData.activated) {
+          this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
+        } else if (this.loginData.sms_activated) {
+          this.$router.push({path: '/'})
+        }
       }
     }
   }

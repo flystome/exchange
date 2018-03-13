@@ -362,7 +362,7 @@ const en = {
       "email_sent_message": "Mail is sent, please go to your mailbox to activate your account.",
       "tier_1": "Tier 1",
       "1001_hint": "Please verify your email",
-      "1002_hint": "Please verify your Cell Phone",
+      "1002_hint": "Please do Google validation or Cell Phone validation",
       "1003_hint": "Please real name authentication",
     },
     "validate_identity": {

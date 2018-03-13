@@ -35,7 +35,7 @@
               {{ this.loginData.email }} -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <img src="~Img/avatarlog.png" class="btc-header-avatar">
-                {{ this.loginData.email }}
+                {{ this.loginData.show_name }}
                 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                  <!-- <a><a :href="`${HOST_URL}/`">{{$t('nav.settings')}}</a></li> -->
@@ -90,7 +90,7 @@ export default {
       if (!this.loginData.activated) {
         this.goPath('/prompt')
       } else {
-        this.goPath('/currency/withdraw')
+        this.goPath('/currency/deposit')
       }
     },
     changeLang (str) {

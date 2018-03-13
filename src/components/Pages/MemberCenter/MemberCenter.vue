@@ -4,7 +4,7 @@
       <div class="btc-container-block btc-membercenter-header">
         <div class="col-md-6">
           <div class="btc-member-info">
-            <span class="btc-member-infoEmail">{{ loginData.email }}</span>
+            <span class="btc-member-infoEmail">{{ loginData.show_name }}</span>
             <a :href="`${HOST_URL}/identity/edit`">
               {{$t("member_center.change_password")}}
             </a>

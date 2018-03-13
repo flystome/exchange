@@ -43,16 +43,6 @@ section{
   min-height: 100%;
   padding-bottom: 217px;
 }
-.btn{
- border-radius: 0;
-}
-.btn:hover{
-  color: white
-}
-
-.btn[disabled=true]{
-  cursor: not-allowed
-}
 
 .input.is-danger, .textarea.is-danger {
     border-color: #ff3860;
@@ -111,6 +101,18 @@ body{
 .btc-link:hover{
   text-decoration: none!important;
   color: #4382f7!important;
+}
+
+.btn{
+ border-radius: 0;
+}
+
+.btn:hover{
+  color: white
+}
+
+#app .btn[disabled=true]{
+  cursor: not-allowed
 }
 
 .btc-poniter{

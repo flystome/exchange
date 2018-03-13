@@ -8,6 +8,7 @@ const WithdrawCurrency = () => import('Pages/WithdrawCurrency/WithdrawCurrency')
 const ValidateSms = () => import('Pages/Validate/Sms/Sms')
 const HomePage = () => import('Pages/HomePage/HomePage')
 const Prompt = () => import('Pages/Prompt/Prompt')
+const Page404 = () => import('Pages/Page404/Page404')
 
 Vue.use(Router)
 
@@ -64,6 +65,11 @@ const router = new Router({
       path: '/validate/sms',
       name: 'ValidateSms',
       component: ValidateSms
+    },
+    {
+      path: '*',
+      name: '404',
+      component: Page404
     }
   ]
 })

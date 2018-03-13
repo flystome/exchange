@@ -61,7 +61,13 @@
 
   .refreshqrcode{
     color: #4382f7;
-    cursor: pointer;
+    padding: 0;
+    border: none;
+    &:active, &:focus{
+      outline: none;
+      outline-offset: 0;
+      box-shadow: none;
+    }
   }
 
   .btc-poniter{
@@ -94,7 +100,7 @@
         margin-left: 40px;
       }
   }
-  @media (max-width: 991px) {
+  @media (max-width: 992px) {
     form{
       padding: 20px 0 0 0;
     }
@@ -138,8 +144,9 @@
     .alreadyApp{
       float: left;
     }
-  }
-  @media (max-width: 768px) {
+    .btc-validateGoogle .refreshqrcode{
+      display: block;
+    }
   }
 }
 

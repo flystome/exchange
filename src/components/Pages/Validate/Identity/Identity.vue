@@ -217,14 +217,24 @@ export default {
     }
   },
   watch: {
-    loginData (to ,from) {
+    loginData (to, from) {
       if (!from) {
-        if (!this.loginData.activated) {
-          this.PopupBoxDisplay({message: this.$t('member_center.1001_hint') , type: 'warn' ,url: '/'})
-          return
+        if (/sms/.test(this.$route.path)) {
+          if (!this.loginData.activated) {
+            this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
+          } else if (this.loginData.sms_activated) {
+            this.$router.push({path: '/'})
+          }
         }
-        if (!this.loginData.app_activated) {
-          this.PopupBoxDisplay({message: this.$t('member_center.1002_hint') , type: 'warn' ,url: '/'})
+      }
+    },
+    $route (to) {
+      this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
+      if (this.route === 'sms') {
+        if (!this.loginData.activated) {
+          this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
+        } else if (this.loginData.sms_activated) {
+          this.$router.push({path: '/'})
         }
       }
     }

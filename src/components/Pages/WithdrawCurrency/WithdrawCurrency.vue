@@ -5,11 +5,11 @@
           <div class="btc-fl">
             <span>
               <img src="~Img/asset-total.png">
-              {{$t('withdraw_currency.total_assets')}} <span>{{ TotalAssets }}</span> USDT
+              {{$t('withdraw_currency.total_assets')}} <span>{{ TotalAssets }}</span> BTC
             </span>
             <img class="btc-marginL45 btc-marginR5" src="~Img/asset-freeze.png">
             <a class='btc-color999'>
-              {{$t('withdraw_currency.frozen_assets')}} {{ Locked }} USDT
+              {{$t('withdraw_currency.frozen_assets')}} {{ Locked }} BTC
             </a>
           </div>
           <div class="btc-fr">
@@ -83,7 +83,7 @@
               </basic-input>
             </div>
             <div class="btc-withdraw-explain">
-              <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance | toFixed }} {{ this.CurrencyType | toUpperCase }} <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain | toFixed }} {{ this.CurrencyType | toUpperCase }}
+              <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance | toFixed }} BTC <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain | toFixed }} BTC
             </div>
               <basic-input ref='WithdrawAll' v-model="WithdrawData.amount" class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
                 <basic-button :disabled='disabled' @click.native="WithdrawAll" class="btc-link btn" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
@@ -201,7 +201,7 @@ export default {
           }
         }
       })
-      this.TotalAssets = Number(d.total_assets.usdt_worth).toFixed(3)
+      this.TotalAssets = Number(d.total_assets.btc_worth).toFixed(3)
       if (d.notice) {
         this.PopupBoxDisplay({message: d.notice.message, type: d.notice.type})
       }
@@ -589,22 +589,21 @@ export default {
   watch: {
     $route (to) {
       this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
-      if (!this.loginData.activated) {
-        this.PopupBoxDisplay({message: this.$t('member_center.1001_hint') , type: 'warn' ,url: '/'})
-        return
-      }
       if (this.route === 'withdraw') {
         var code = ''
         if (!this.loginData.activated) {
           code = 1001
-        }
-        if (!this.loginData.sms_activated) {
+        } else if (!(this.loginData.app_activated || this.loginData.sms_activated))  {
           code = 1002
         }
-        if (!this.loginData.app_activated) {
-          code = 1003
+        if (code) {
+          this.PopupBoxDisplay({message: this.$t(`member_center.${code}_hint`) , type: 'warn' ,url: '/'})
         }
-        this.PopupBoxDisplay({message: this.$t(`member_center.${code}_hint`) , type: 'warn' ,url: '/'})
+      } else if (this.route === 'deposit') {
+        if (!this.loginData.activated) {
+          this.PopupBoxDisplay({message: this.$t('member_center.1001_hint') , type: 'warn' ,url: '/'})
+          return
+        }
       }
     },
     DepositAddress (to, from) {
@@ -625,20 +624,23 @@ export default {
         }, 2000)
       }
     },
-    loginData () {
-      console.log(1)
-      if (/withdraw/.test(this.$route.path)) {
-        var code = ''
-        if (!this.loginData.activated) {
-          code = 1001
+    loginData (to, from) {
+      if (!from) {
+        if (/withdraw/.test(this.$route.path)) {
+          var code = ''
+          if (!this.loginData.activated) {
+            code = 1001
+          } else if (!(this.loginData.app_activated || this.loginData.sms_activated)) {
+            code = 1002
+          }
+          if (code) {
+            this.PopupBoxDisplay({message: this.$t(`member_center.${code}_hint`) , type: 'warn' ,url: '/'})
+          }
+        } else if (/deposit/.test(this.$route.path)) {
+          if (!this.loginData.activated) {
+            this.PopupBoxDisplay({message: this.$t('member_center.1001_hint') , type: 'warn' ,url: '/'})
+          }
         }
-        if (!this.loginData.app_activated) {
-          code = 1002
-        }
-        this.PopupBoxDisplay({message: this.$t(`member_center.${code}_hint`) , type: 'warn' ,url: '/'})
-      }
-      if (!this.loginData.activated) {
-        this.PopupBoxDisplay({message: this.$t('member_center.1001_hint') , type: 'warn' ,url: '/'})
       }
     }
   }
