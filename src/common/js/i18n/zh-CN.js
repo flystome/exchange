@@ -306,6 +306,13 @@ const zh = {
   },
   'validation': {
     "mobile": '阿'
+  },
+  "markets":{
+    "volume": "成交量",
+    "coinAndVolumn": "币种/成交量",
+    "newPrice": "最新价",
+    "change": "涨跌幅",
+    "favorite": "自选",
   }
 }
 

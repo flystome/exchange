@@ -489,7 +489,14 @@ const en = {
       "login_password": "Login Password",
       "google_verification_code": "Code Displayed in Google Authenticator",
       "google_verification": "Verify",
-      "app_already_installed": "APP already installed"
+      "app_already_installed": "APP already installed",
+    },
+    "markets":{
+      "volume": "成交量",
+      "coinAndVolumn": "币种/成交量",
+      "newPrice": "最新价",
+      "change": "涨跌幅",
+      "favorite": "自选",
     },
     "hint": {
       "confirm": "OK",
