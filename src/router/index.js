@@ -8,6 +8,10 @@ const WithdrawCurrency = () => import('Pages/WithdrawCurrency/WithdrawCurrency')
 const ValidateSms = () => import('Pages/Validate/Sms/Sms')
 const Markets = () => import('Pages/market/mList/mlist')
 // import MarketList from './components/Pages/market/mList'
+const HomePage = () => import('Pages/HomePage/HomePage')
+const Prompt = () => import('Pages/Prompt/Prompt')
+const Page404 = () => import('Pages/Page404/Page404')
+
 
 Vue.use(Router)
 
@@ -23,6 +27,16 @@ const router = new Router({
       path: '/markets',
       name: 'Markets',
       component: Markets
+    },
+    {
+      path: '/homepage',
+      name: 'HomePage',
+      component: HomePage
+    },
+    {
+      path: '/prompt',
+      name: 'Prompt',
+      component: Prompt
     },
     {
       path: '/:version',
@@ -59,6 +73,11 @@ const router = new Router({
       path: '/validate/sms',
       name: 'ValidateSms',
       component: ValidateSms
+    },
+    {
+      path: '*',
+      name: '404',
+      component: Page404
     }
   ]
 })

@@ -1,13 +1,13 @@
 <template>
-  <div class="btc-validateGoogle  btc-container-block">
+  <div v-if="!loginData.app_activated && loginData.activated" class="btc-validateGoogle  btc-container-block">
     <div class="row btc-color666">
       <span class="btc-color333">
-        <span :class="{'btc-link': step === 1 }">
-          {{$t('validate_google.download_google_verified_app')}}
-        </span>
+        <router-link to='/' class="btc-link">
+          {{$t('title.member_center')}}
+        </router-link>
         >
-        <span :class="{'btc-link': step === 2 }">
-          {{$t('validate_google.scan_qrcode_and_enter_code')}}
+        <span>
+          {{$t('title.validate_google')}}
         </span>
       </span>
     </div>
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="text-right btc-marginT40">
-        <basic-button class="col-xs-12 col-md-1 pull-right" @click.native="addStep" :text='$t("validate_google.next")'></basic-button>
+        <basic-button :disabled="disabled" class="btn col-xs-12 col-md-1 pull-right" @click.native="addStep" :text='$t("validate_google.next")'></basic-button>
       </div>
     </template>
     <template v-if="step === 2">
@@ -57,9 +57,6 @@
             <div class="row btc-marginT5 useGoogle">
               {{$t('validate_google.scan_qrcode')}}
             </div>
-            <!-- <div class="btc-marginT5 btc-margin-left">
-              <basic-button @click.native="RenovateQrcode" :text='"刷新二维码"'></basic-button>
-            </div> -->
           </div>
           <div class="col-md-6 btc-validate-textCenter btc-validate-googlekey">
               <div class="row btc-marginT10">
@@ -71,30 +68,30 @@
               <span>
                 {{$t('validate_google.cant_scan_enter_keys')}}
               </span>
-              <div class="refreshqrcode btc-marginT15" @click="RenovateQrcode">
+              <div class="refreshqrcode btc-marginT15 btn" :disabled="disabled" @click="RenovateQrcode">
                 <img src="~Img/RefreshQrcode.png" alt="">
                 {{$t('validate_google.refresh_qrcode')}}
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-6 text-center">
+        <div class="col-md-6">
           <form class="btc-b-l">
             <div class="col-md-12 btc-validate-prompt">
               <news-prompt :text='prompt'></news-prompt>
             </div>
             <div class='row'>
-              <basic-input @focus.native="promptEmpty()" type="password" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
+              <basic-input @focus.native="promptEmpty()" type='password' ref="password" :validate="'password'" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
             </div>
             <div class="row">
-              <basic-input  @focus.native="promptEmpty()" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
+              <basic-input  @focus.native="promptEmpty()" ref="verfiycode" :validate='"verify code"' class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
             </div>
           </form>
         </div>
       </div>
-      <div class="text-right btc-marginT100 minusStep">
+      <div class="text-right btc-marginT65 minusStep">
         <span @click="minusStep" class="col-xs-12 col-md-1 btc-link btc-fl btc-marginT10 btc-poniter" style="display:inline-block">{{$t('validate_google.prve')}}</span>
-        <basic-button class="col-xs-12 col-md-2 pull-right btc-marginT15" :text='$t("validate_google.google_verification")' @click.native='gValidate'></basic-button>
+        <basic-button :disabled="disabled" class="btn col-xs-12 col-md-2 pull-right btc-marginT15" :text='$t("validate_google.google_verification")' @click.native='gValidate'></basic-button>
       </div>
     </template>
   </div>
@@ -107,13 +104,13 @@ export default {
   name: 'ValidateGoogle',
   data () {
     return {
+      disabled: false,
       HOST_URL: process.env.HOST_URL,
       google: '',
       step: 1,
       otp: '',
       password: '',
-      prompt: '',
-      google_hint: '谷歌验证已经成功'
+      prompt: ''
     }
   },
   methods: {
@@ -125,6 +122,10 @@ export default {
       this.step--
     },
     RenovateQrcode () {
+      if (this.disabled) {
+        return
+      }
+      this.disabled = true
       this._post({
         url: '/verify/refresh_auth.json',
         data: {
@@ -134,9 +135,9 @@ export default {
           'DataType': 'application/json;charset=utf-8'
         }
       }, d => {
-        d = d.data
-        this.loginData.google_otp_secret = d.google_otp_secret
-        this.loginData.google_uri = d.google_otp_secret
+        this.disabled = false
+        this.loginData.google_otp_secret = d.data.google_otp_secret
+        this.loginData.google_uri = d.data.google_otp_secret
       })
     },
     qrcode (str) {
@@ -150,15 +151,13 @@ export default {
     promptEmpty () {
       this.prompt = ''
     },
-    gValidate () {
-      if (!this.password) {
-        this.prompt = '请输入登录密码'
+    async gValidate () {
+      const password = await this.$refs['password'].$validator.validateAll()
+      const verfiycode = await this.$refs['verfiycode'].$validator.validateAll()
+      if (!password || !verfiycode) {
         return
       }
-      if (!this.otp) {
-        this.prompt = '请输入谷歌验证码'
-        return
-      }
+      this.disabled = true
       this._post({
         url: `/verify/authentication_info.json`,
         data: {
@@ -172,10 +171,11 @@ export default {
           'DataType': 'application/json;charset=utf-8'
         }
       }, (d) => {
-        if (d.data.status_code === '0') {
-          this.prompt = d.data.errors
+        this.disabled = false
+        if (d.data.error) {
+          this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.error_${d.data.error.code}`), type: 'error'})
         } else {
-          this.PopupBoxDisplay({message: this.google_hint})
+          this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.success_200`), type: 'success'})
         }
       })
     },
@@ -185,8 +185,29 @@ export default {
     ...mapGetters(['loginData'])
   },
   watch: {
-    loginData (d) {
-      console.log(d)
+    loginData (to, from) {
+      console.log(1)
+      if (!from) {
+        if (/google/.test(this.$route.path)) {
+          if (!this.loginData.activated) {
+            this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
+          } else if (this.loginData.app_activated) {
+            console.log(1)
+            this.$router.push({path: '/'})
+          }
+        }
+      }
+    },
+    $route (to) {
+      console.log(1)
+      this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
+      if (this.route === 'google') {
+        if (!this.loginData.activated) {
+          this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
+        } else if (this.loginData.app_activated) {
+          this.$router.push({path: '/'})
+        }
+      }
     }
   }
 }

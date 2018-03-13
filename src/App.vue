@@ -1,11 +1,13 @@
 <template>
   <div id="app">
-    <header is='Header' />
-    <div class="btc-container container" v-cloak>
-      <keep-alive>
-        <router-view/>
-      </keep-alive>
-    </div>
+    <section>
+      <header is='Header' />
+      <div class="btc-container container" v-cloak>
+        <keep-alive>
+          <router-view/>
+        </keep-alive>
+      </div>
+    </section>
     <footer is='Footer' />
     <wrapper></wrapper>
     <popup-box></popup-box>
@@ -34,6 +36,14 @@ export default {
 </script>
 
 <style>
+#app{
+  height: 100%;
+}
+section{
+  min-height: 100%;
+  padding-bottom: 217px;
+}
+
 .input.is-danger, .textarea.is-danger {
     border-color: #ff3860;
     background: white;
@@ -67,20 +77,52 @@ body{
   background: white;
 }
 
+.btc-container{
+  background: #f2f2f2;
+  padding-bottom: 13px;
+  min-height: 70vh;
+}
+
 .btc-container-block{
   background: white;
   margin-top: 10px;
   overflow: hidden;
 }
 
+.btn{
+  border-radius: 0
+}
+
+.btn:active{
+ box-shadow: none;
+}
+
+.btn:hover{
+  color: white
+}
+
+
 .btc-link{
-  color: #4382f7!important
+  color: #4382f7!important;
+  cursor: pointer;
 }
 
 .btc-link:hover{
   text-decoration: none!important;
-  cursor: pointer;
   color: #4382f7!important;
+}
+
+
+.btc-white-btn:hover,.btc-white-btn:focus{
+  color: #4382f7;
+}
+
+.btc-basic-button:hover,.btc-basic-button:focus{
+  color: white;
+}
+
+#app .btn[disabled=true]{
+  cursor: not-allowed
 }
 
 .btc-poniter{
@@ -89,6 +131,10 @@ body{
 
 .btc-pointer{
   cursor: pointer;
+}
+
+.btc-b-def{
+  border: 1px solid #dfe0e1;
 }
 
 .btc-b{

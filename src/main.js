@@ -11,32 +11,35 @@ import BasicSelect from 'Components/BasicSelect/BasicSelect'
 import UploadImg from 'Components/UploadImg/UploadImg'
 import QrCode from 'Components/QrCode/QrCode'
 import NewsPrompt from 'Components/NewsPrompt/NewsPrompt'
+import DivContenteditable from 'Components/DivContenteditable/DivContenteditable'
 import Title from 'Pages/Title/Title'
 import App from './App'
 
 // js dependencies
 import Vue from 'vue'
+import { sync } from 'vuex-router-sync'
 import router from './router'
 import moment from 'moment'
+import dictionary from '@/common/js/validation'
 import VeeValidate, { Validator } from 'vee-validate'
-import dictionary from '@/common/js/validation/validation'
-import zh from 'vee-validate/dist/locale/zh_CN'
-import en from 'vee-validate/dist/locale/en'
 import i18n from '@/common/js/i18n/i18n.js'
 import store from './store'
 import axios from 'axios'
-import { _post, _get, _httpget } from './axios'
+import { _post, _get, _delete } from './axios'
 import 'bootstrap/js/dropdown.js'
 import 'bootstrap/js/collapse.js'
 import Pusher from 'pusher-js'
+import 'bootstrap/js/carousel.js'
+// css dependencies
+import '@/common/css/bootstrap.css'
+
+const unsync = sync(store, router)
+unsync()
 
 Vue.use(VeeValidate, {
   i18n,
   i18nRootKey: 'validation',
-  dictionary: {
-    'zh-CN': zh,
-    en
-  }
+  dictionary: dictionary
 })
 Validator.localize(dictionary)
 
@@ -44,8 +47,8 @@ moment.locale('zh-cn')
 Vue.config.productionTip = false
 Vue.prototype._post = _post
 Vue.prototype._get = _get
+Vue.prototype._delete = _delete
 Vue.prototype.$http = axios
-Vue.prototype._httpget = _httpget
 Vue.prototype.$moment = moment
 
 const components = [
@@ -55,7 +58,8 @@ const components = [
   BasicSelect,
   QrCode,
   UploadImg,
-  NewsPrompt
+  NewsPrompt,
+  DivContenteditable
 ]
 components.forEach(component => {
   Vue.component(component.name, component)

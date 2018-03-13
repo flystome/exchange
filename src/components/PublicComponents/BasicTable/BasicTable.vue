@@ -1,21 +1,29 @@
 <template>
-  <div class="btc-table-container hidden-xs">
+  <div class="btc-table-container">
     <div class="bs-example btc-table" data-example-id="simple-table">
-      <table class="table">
+      <table class="table table-condensed">
         <caption class="font-w"><strong>{{captionTitle}}</strong>
           <slot name='remark'></slot>
         </caption>
-        <tbody>
+        <tbody v-if="item.length > 1">
           <tr v-for="(item, length) in item" :key='length' v-if="length < 100">
             <td v-for="(data,index)  in item.content"
             :key="index" :style="{width: toPercent()}"
-            :class="{'btc-tableTextright':index === 0,'btc-tableTextleft': index === item.content.length-1}"
-            v-html="data">
-           <slot name="f"></slot>
+            :class="{
+            'btc-tableTextright':index === 0,
+            'btc-tableTextleft': index === item.content.length-1,
+            'btc-tableHover': data.hover
+            }">
+            {{ typeof data !== 'object' ? data : $t(`withdraw_currency.${data.context}`) }}
+           <slot v-if="(data.type && data.type['aasm_state']) === ('submitting' || 'submitted' || 'accepted') "
+           name="cancel"
+           :data='data'
+           :id='data.id'>
+           </slot>
             </td>
           </tr>
         </tbody>
-        <div class="text-center btc-table-record" v-if="item.length === 0">
+        <div class="text-center btc-table-record" v-else>
           <div>
             <div class="btc-marginT15 btc-font12 btc-color999">{{$t('member_center.no_record')}}</div>
           </div>

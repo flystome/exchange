@@ -1,16 +1,18 @@
 <template>
-  <div v-if="type" style="min-height: 66px;">
-    <input v-validate="`required|${type}`" class="btc-basicInput btc-b"
-    :class="{'input': true, 'is-danger': errors.has(type) }"
-    :name="type"
-    type="text"
+  <div v-if="validate" style="min-height: 66px;">
+    <input v-validate="`required|${validate}`" class="btc-basicInput btc-b"
+    :class="{'input': true, 'is-danger': errors.has(validate) }"
+    :name="validate"
+    :type="type ? type : 'text'"
+    :value='value'
     :placeholder="placeholder"
      @input="$emit('input', $event.target.value)">
-    <span v-show="errors.has(type)" class="help is-danger">{{ errors.first(type) }}</span>
+    <span v-show="errors.has(validate)" class="help is-danger">{{ errors.first(validate) }}</span>
   </div>
   <div v-else>
     <input class="btc-basicInput btc-b"
     :placeholder="placeholder"
+    :value='value'
      @input="$emit('input', $event.target.value)">
      <slot name='button'></slot>
   </div>
@@ -18,7 +20,7 @@
 
 <script>
 export default {
-  props: ['placeholder', 'type'],
+  props: ['placeholder', 'validate', 'value', 'type'],
   name: 'BasicInput'
 }
 </script>

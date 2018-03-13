@@ -3,12 +3,8 @@
     <div class="btc-member-center container">
       <div class="btc-container-block btc-membercenter-header">
         <div class="col-md-6">
-          <a :href="`${HOST_URL}/member/edit`">
-              <img src="~Img/avatar.png" class="img-circle btc-member-avatar" v-if="!loginData.member_avatar">
-              <img class="img-circle btc-member-avatar"   :src="loginData.member_avatar" v-else>
-          </a>
           <div class="btc-member-info">
-            <span class="btc-member-infoEmail">{{ loginData.email }}</span>
+            <span class="btc-member-infoEmail">{{ loginData.show_name }}</span>
             <a :href="`${HOST_URL}/identity/edit`">
               {{$t("member_center.change_password")}}
             </a>
@@ -25,82 +21,87 @@
           </span>
           <span>|</span>
           <span>
-            <a style="color:#fff" :href="`${HOST_URL}/documents/api_v2`">{{$t("member_center.api")}}</a>
+            <a target="_blank" style="color:#fff" :href="`${HOST_URL}/api_tokens`">{{$t("member_center.api")}}</a>
           </span>
         </div>
       </div>
       <div class="btc-member-ver">
-        <div class="btc-member-stepsblock">
-          <img src="~Img/member-email.png" class="btc-paddingR20 btc-paddingT5" alt="">
-          <div class="btc-member-steps">
-            <div class="btc-marginB5">
-            {{ loginData.email }}
+        <div class="media">
+          <div>
+            <div class="media-left">
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-email.png" data-holder-rendered="true">
             </div>
-            <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.activated}">
+            <div class="media-body">
+              <h5 class="media-heading">{{$t("member_center.tier_1")}}</h5>
+              <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.activated}">
                 <span v-if='loginData.activated'>{{$t("auth.email")}}</span>
-                <span v-else @click="sendEmail">
+                <button type="button" id="myButton" data-loading-text="Loading..." class="btn sendbutton" autocomplete="off" v-else @click="sendEmail" :disabled="disabled">
                   {{$t("auth.send_email")}}
-                </span>
-              <img v-if='loginData.activated' src="~Img/validate-true.png" alt="已认证">
-            </span>
-          </div>
-          <div class="pull-right btc-paddingT15">
-            <strong>{{$t("auth.level.level_1")}}</strong>
-              <img src="~Img/right.png" v-if='loginData.activated'>
-              <span class='btc-member-step' v-else>
-                  1
+                </button>
+                <img v-if='loginData.activated' src="~Img/validate-true.png" alt="已认证">
               </span>
-          </div>
-        </div>
-        <div class="btc-member-stepsblock btc-marginL10 btc-marginR10">
-          <img src="~Img/member-google.png" class="btc-paddingR20 btc-paddingT5" alt="">
-          <div class="btc-marginB5">
-            {{$t("member_center.korean_user_use_twice_verification")}}
-          </div>
-          <div class="btc-member-steps">
-            <p class="btc-member-validata btc-link btc-marginR10" @click="goPath('/validate/sms', loginData.sms_activated,false)" :class="{'btc-active': !loginData.sms_activated}">
-              <span>{{ $t("auth.phone") }}</span>
-              <img v-if='loginData.sms_activated' src="~Img/validate-true.png" alt="已认证">
-            </p>
-            <span class="btc-member-validata btc-link"
-            :class="{'btc-active': !loginData.app_activated}"
-            @click="goPath('/validate/google',loginData && loginData.app_activated,false)">
-                <span>{{$t("auth.google")}}</span>
-                <img v-if='loginData.app_activated' src="~Img/validate-true.png" alt="已认证">
-            </span>
-          </div>
-          <div class="pull-right btc-paddingT15">
-            <strong>{{$t("auth.level.level_2")}}</strong>
-            <img src="~Img/right.png" v-if='loginData.activated'>
-            <span class='btc-member-step' v-else>
-                2
-            </span>
-          </div>
-        </div>
-        <div class="btc-member-stepsblock">
-          <img src="~Img/member-identity.png" class="btc-paddingR20 btc-paddingT5" alt="">
-          <div class="btc-marginB5">
-             {{$t("member_center.completion_of_real_name_authentication")}}
             </div>
-          <div class="btc-member-steps">
-            <span class="btc-member-validata btc-link btc-marginR10" @click="goPath('/validate/identity', name_activated,false)" :class="{'btc-active': !this.name_activated}">
-              <span>{{$t("auth.real_name")}}</span>
-              <img v-if='loginData.sms_activated' src="~Img/validate-true.png" alt="已认证">
-            </span>
+            <div class="media-right">
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='loginData.activated' data-holder-rendered="true" >
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
+            </div>
           </div>
-          <div class="pull-right btc-paddingT15">
-            <strong>{{$t("auth.level.level_3")}}</strong>
-            <img src="~Img/right.png" v-if='loginData.activated'>
-            <span class='btc-member-step' v-else>
-                3
-            </span>
+        </div>
+        <div class="media">
+          <div>
+            <div class="media-left">
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-google.png" data-holder-rendered="true">
+            </div>
+            <div class="media-body">
+              <h5 class="media-heading">{{$t("member_center.korean_user_use_twice_verification")}}</h5>
+              <span class="btc-member-validata btc-link" @click="validatephone" :class="{'btc-active': !loginData.sms_activated}">
+                  <span>{{ $t("auth.phone") }}</span>
+                  <img v-if='loginData.sms_activated' src="~Img/validate-true.png" alt="已认证">
+                </span>
+                <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.app_activated}" @click="validateAuth">
+                  <span>{{$t("auth.google")}}</span>
+                  <img v-if='loginData.app_activated' src="~Img/validate-true.png" alt="已认证">
+                </span>
+            </div>
+            <div class="media-right">
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='loginData.sms_activated && loginData.app_activated' data-holder-rendered="true" >
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
+            </div>
+          </div>
+        </div>
+        <div class="media">
+          <div>
+            <div class="media-left">
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-identity.png" data-holder-rendered="true">
+            </div>
+            <div class="media-body">
+              <h5 class="media-heading">{{$t("member_center.completion_of_real_name_authentication")}}</h5>
+              <div class="btc-verifying-prompt">
+                <span class="btc-member-validata btc-link"
+                  :class="{'btc-active': loginData.id_document && loginData.id_document.aasm_state==='unverified',
+                  'btc-verifying':(loginData.id_document && loginData.id_document.aasm_state)==='verifying'}" @click="validateAll">
+                  <span>{{$t("auth.real_name")}}</span>
+                  <img v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' src="~Img/validate-true.png" alt="已认证">
+                  <img v-else-if='(loginData.id_document && loginData.id_document.aasm_state)==="verifying"' src="~Img/verifying.png" alt="认证中">
+                  <div v-if="loginData.sms_activated && loginData.activated">
+                    <img v-if='(loginData.id_document && loginData.id_document.aasm_state)==="unverified"' src="~Img/unverified.png" alt="认证失败">
+                  </div>
+                  <span class="verifying-prompt">认证中</span>
+                </span>
+              </div>
+            </div>
+            <div class="media-right">
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' data-holder-rendered="true" >
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
+            </div>
           </div>
         </div>
       </div>
     </div>
     <template v-if="step === 1">
+      <div class="container table">
       <basic-table :captionTitle='getLoginRecord.captionTitle' :item='getLoginRecord.Item'>
-      <span slot="remark" class="btc-tableRemark">{{$t('member_center.have_questions_to_contact_us')}}</span>
+      <a :href="`${HOST_URL}/tickets/new`" slot="remark" class="btc-tableRemark">{{$t('member_center.have_questions_to_contact_us')}}</a>
       </basic-table>
       <div class="btc-member-handleRecord  btc-container-block">
         <header class="btc-member-blockHeader">
@@ -117,9 +118,12 @@
           </div>
         </div>
         <div class="text-center btc-table-record" v-if="this.tickets.length === 0">
-            <div>
-                <div class="btc-marginT15 btc-font12 btc-color999">{{$t('member_center.no_record')}}</div>
-            </div>
+          <div>
+              <div class="btc-marginT15 btc-font12 btc-color999">{{$t('member_center.no_record')}}</div>
+          </div>
+          <div class="text-center btc-table-more btc-b-t" style="margin-bottom:0px;">
+            <a :href="`${HOST_URL}/tickets/new`" class="btc-link ">{{$t('member_center.new_questions')}}</a>
+          </div>
         </div>
         <template v-else>
           <div class="text-center btc-table-more col-md-6">
@@ -130,8 +134,10 @@
           </div>
         </template>
       </div>
+      </div>
     </template>
     <template v-if="step === 2">
+      <div class="container">
       <basic-table :captionTitle='getRecommendCount.captionTitle' :item='getRecommendCount.Item'>
       <div slot="more" class="text-center btc-b-t btc-table-more">
         <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('member_center.show_more')}}</a>
@@ -142,24 +148,35 @@
           <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('member_center.show_more')}}</a>
         </div>
       </basic-table>
+      </div>
     </template>
     </div>
 </template>
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import moment from 'moment'
+import Cookies from 'js-cookie'
 moment.locale('zh-cn')
 
 export default {
   name: 'MemberCenter',
+  created () {
+    var code = Cookies.get('code')
+    if (code) {
+      console.log(code)
+      this.PopupBoxDisplay({message: this.$t(`member_center.${code.match(/\d+/g)[0]}_hint`), type: 'warn'})
+      Cookies.remove('code')
+    }
+  },
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
       name_activated: false,
       wexin_activated: false,
-      email_sent_message: '邮件发送成功，请前往您的邮箱激活账号',
+      email_sent_message: this.$t('member_center.email_sent_message'),
       tickets: [],
-      step: 1
+      step: 1,
+      disabled: false
     }
   },
   methods: {
@@ -193,19 +210,22 @@ export default {
       location.href = `${this.HOST_URL}/tickets/${id}`
     },
     sendEmail () {
-      this._get({
-        url: `/activations/mobile_new`,
-        headers: {
-          'DataType': 'application/json;charset=utf-8'
-        }
-      }, (d) => {
-        if (d.data.status_code === '0') {
-          this.prompt = d.data.errors
-          this.PopupBoxDisplay({message: this.email_sent_message})
-        } else {
-          this.PopupBoxDisplay({message: this.email_sent_message})
-        }
-      })
+      this.disabled = true
+      if (this.disabled) {
+        this._get({
+          url: `/activations/mobile_new`,
+          headers: {
+            'DataType': 'application/json;charset=utf-8'
+          }
+        }, (d) => {
+          this.disabled = false
+          if (d.data.success) {
+            this.PopupBoxDisplay({message: this.$t('api_server.member_center.success_200'), type: 'success'})
+          } else {
+            this.PopupBoxDisplay({message: this.$t('api_server.member_center.error_1001'), type: 'error'})
+          }
+        })
+      }
     },
     goPath (path, status, href) {
       if (status) {
@@ -223,6 +243,29 @@ export default {
       this.tickets.sort((a, b) => {
         return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       })
+    },
+    validatephone () {
+      if (!this.loginData.activated) {
+        this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
+      } else {
+        this.goPath('/validate/sms', this.loginData.sms_activated, false)
+      }
+    },
+    validateAuth () {
+      if (!this.loginData.activated) {
+        this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
+      } else {
+        this.goPath('/validate/google', this.loginData && this.loginData.app_activated, false)
+      }
+    },
+    validateAll () {
+      if (!this.loginData.activated) {
+        this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
+      } else if (!this.loginData.sms_activated) {
+        this.PopupBoxDisplay({message: this.$t('prompt.phone_not_certified')})
+      } else {
+        this.goPath('/validate/identity', (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verified' || (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verifying', false)
+      }
     }
   },
   computed: {
@@ -286,7 +329,6 @@ export default {
         data.referrals.sort((a, b) => {
           return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         })
-        this.getTicket()
         data.referral_signup_history.length === 0 ? obj.Item = '' : obj.Item = [{content: [this.$t('member_center.account'), this.$t('member_center.ip_adress'), this.$t('member_center.login_location'), this.$t('member_center.browser'), this.$t('member_center.login_time'), this.$t('member_center.activated')]}].concat(this.loginData.referral_signup_history.map((_, index) => {
           return {
             content: [
@@ -306,6 +348,11 @@ export default {
   filters: {
     moment (date) {
       return moment(date).format('L H:mm:ss')
+    }
+  },
+  watch: {
+    loginData () {
+      this.getTicket()
     }
   }
 }

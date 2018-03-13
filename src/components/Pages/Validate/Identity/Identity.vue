@@ -1,9 +1,13 @@
 <template>
-  <div class="btc-container-block btc-validateIdentity">
+  <div v-if="!(loginData.id_document.aasm_state !=='unverify') && (loginData.sms_activated || loginData.app_activated) &&  loginData.activated" class="btc-container-block btc-validateIdentity">
     <header class="title">
-        <strong>
-          {{$t('validate_identity.real_name_authentication')}}
-        </strong>
+        <router-link to='/' class="btc-link">
+          {{$t('title.member_center')}}
+        </router-link>
+        >
+        <span>
+          {{$t('title.validate_identity')}}
+        </span>
     </header>
     <div class=" btc-marginL0">
       <div>
@@ -28,13 +32,13 @@
         </div>
         <div class="btc-marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
-            <basic-input :placeholder='$t("validate_identity.surname")' :type='"first_name"' v-model="user.first_name"></basic-input>
+            <basic-input ref='first_name' :placeholder='$t("validate_identity.surname")' :validate='"first_name"' v-model="user.first_name"></basic-input>
           <!--<div class=" btc-marginT20">-->
             <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
             <!--<basic-input  v-model="user.name"></basic-input>-->
           <!--</div>-->
-            <basic-input  :placeholder='$t("validate_identity.name")' :type='"last_name"'  v-model="user.last_name"></basic-input>
-            <basic-input  :placeholder='$t("validate_identity.valid_id_card")' :type='"IdCard"'  v-model="user.IdCard"></basic-input>
+            <basic-input ref='last_name' :placeholder='$t("validate_identity.name")' :validate='"last_name"'  v-model="user.last_name"></basic-input>
+            <basic-input ref="IdCard"  :placeholder='$t("validate_identity.valid_id_card")' :validate='"IdCard"'  v-model="user.IdCard"></basic-input>
         </div>
       </div>
     </div>
@@ -79,15 +83,15 @@
       ></upload-img>
     </div>
     <footer class="btc-b-t btc-marginT25">
-      <basic-button @click.native="uploadImg" class="btc-fr col-xs-12 col-md-1 pull-right" :text='$t("validate_identity.submissions")'>
+      <basic-button id="myButton" data-loading-text="Loading..." autocomplete="off" @click.native="uploadImg" class="btn btc-fr col-xs-12 col-md-1 pull-right" :disabled="disabled" :text='$t("validate_identity.submissions")'>
       </basic-button>
     </footer>
   </div>
 </template>
 
 <script>
-import countries from '@/common/js/countries'
-import {mapMutations} from 'vuex'
+import { countries } from '@/common/js/countries'
+import { mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'ValidateIdentity',
   data () {
@@ -96,6 +100,7 @@ export default {
         display: false,
         text: '密码错误'
       },
+      disabled: false,
       img: false,
       user: {
         surname: '',
@@ -140,23 +145,35 @@ export default {
       return fd
     },
     ...mapMutations(['PopupBoxDisplay']),
-    uploadImg () {
-      if (!this.$refs['id_bill_file_attributes'].$refs['input'].files[0]) {
+    async uploadImg () {
+      const first = await this.$refs['first_name'].$validator.validateAll()
+      const last = await this.$refs['last_name'].$validator.validateAll()
+      const IdCard = await this.$refs['IdCard'].$validator.validateAll()
+      const billFile = this.$refs['id_bill_file_attributes'].$refs['input'].files[0]
+      const holdingFile = this.$refs['id_document_selfie_holding_file_attributes'].$refs['input'].files[0]
+      const backF = this.$refs['id_document_back_file_attributes'].$refs['input'].files[0]
+      const frontF = this.$refs['id_document_front_file_attributes'].$refs['input'].files[0]
+      if (!billFile) {
         document.getElementById('indentity4').scrollIntoView(true)
         this.verifymsg.indentity4 = this.$t('validate_identity.please_upload_file')
       }
-      if (!this.$refs['id_document_selfie_holding_file_attributes'].$refs['input'].files[0]) {
+      if (!holdingFile) {
         document.getElementById('indentity3').scrollIntoView(true)
         this.verifymsg.indentity3 = this.$t('validate_identity.please_upload_file')
       }
-      if (!this.$refs['id_document_back_file_attributes'].$refs['input'].files[0]) {
+      if (!backF) {
         document.getElementById('indentity2').scrollIntoView(true)
         this.verifymsg.indentity2 = this.$t('validate_identity.please_upload_file')
       }
-      if (!this.$refs['id_document_front_file_attributes'].$refs['input'].files[0]) {
+      if (!frontF) {
         document.getElementById('indentity1').scrollIntoView(true)
         this.verifymsg.indentity1 = this.$t('validate_identity.please_upload_file')
       }
+
+      if (!first || !last || !IdCard || !billFile || !holdingFile || !backF || !frontF) {
+        return
+      }
+      this.disabled = true
       var formData = new FormData()
       var z = this.objectToFormData({
         first_name: this.user.first_name,
@@ -183,11 +200,48 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }, d => {
-        if (d.data.status_code === '0') {
-          this.prompt = d.data.errors
-          this.PopupBoxDisplay({message: this.identity_hint, url: '/member_center'})
+        if (d.data.success) {
+          this.PopupBoxDisplay({message: this.$t('api_server.validate_identity.success_200'), url: '/member_center', type: 'success'})
+        } else {
+          this.PopupBoxDisplay({message: this.$t('api_server.validate_identity.error_1001'), type: 'error'})
         }
       })
+    }
+  },
+  computed: {
+    ...mapGetters(['loginData'])
+  },
+  filters: {
+    maxlen (str) {
+      return str.match(/.{8}/)
+    }
+  },
+  watch: {
+    loginData (to, from) {
+      if (!from) {
+        if (/identity/.test(this.$route.path)) {
+          if (!this.loginData.activated) {
+            this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
+            return
+          } else if (!(this.loginData.sms_activated || this.loginData.app_activated)) {
+            this.PopupBoxDisplay({message: this.$t('member_center.1002_hint'), type: 'warn', url: '/'})
+          } else if (this.loginData.id_document.aasm_state !== 'unverify') {
+            this.$router.push({path: '/'})
+          }
+        }
+      }
+    },
+    $route (to) {
+      if (/identity/.test(this.$route.path)) {
+        if (!this.loginData.activated) {
+          this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
+          return
+        } else if (!(this.loginData.sms_activated || this.loginData.app_activated)) {
+          this.PopupBoxDisplay({message: this.$t('member_center.1002_hint'), type: 'warn', url: '/'})
+        } else if (this.loginData.id_document.aasm_state !== 'unverify') {
+          this.$router.push({path: '/'})
+        }
+      }
     }
   }
 }
