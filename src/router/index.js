@@ -12,7 +12,6 @@ const HomePage = () => import('Pages/HomePage/HomePage')
 const Prompt = () => import('Pages/Prompt/Prompt')
 const Page404 = () => import('Pages/Page404/Page404')
 
-
 Vue.use(Router)
 
 const router = new Router({

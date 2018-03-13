@@ -102,6 +102,9 @@ import { mapGetters, mapMutations } from 'vuex'
 var QRCode = require('qrcode')
 export default {
   name: 'ValidateGoogle',
+  created () {
+    this.$store.dispatch('panduan')
+  },
   data () {
     return {
       disabled: false,

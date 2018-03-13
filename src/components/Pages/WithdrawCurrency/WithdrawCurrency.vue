@@ -207,30 +207,30 @@ export default {
         }
       })
       channel.bind('withdraws', (data) => {
-        // var d = data.attributes
-        // var time = new Date(d.created_at).getTime()
-        // console.log(this.getWithdrawRecord)
-        // this.getWithdrawRecord.ite.push({
-        //   content: [
-        //     d.id,
-        //     this.$moment(d.created_at).format('L H:mm:ss'),
-        //     d.fund_uid,
-        //     d.amount,
-        //     d.fee,
-        //     { type: {
-        //       "id": d.id,
-        //       "created_at": time,
-        //       "amount": d.amount,
-        //       "fee": d.fee,
-        //       "aasm_state": d.aasm_state,
-        //       "fund_uid": d.fund_uid,
-        //       "aasm_state_title": 'Submitting',
-        //     }, context: d.aasm_state, id: d.id }
-        //   ]
-        // })
+        if (data.type === 'create') {
+          var d = data.attributes
+          var time = new Date(d.created_at).getTime()
+          this.WithdrawRecord.item.unshift({
+            content: [
+              d.id,
+              this.$moment(d.created_at).format('L H:mm:ss'),
+              d.fund_uid,
+              d.amount,
+              d.fee,
+              { type: {
+                "id": d.id,
+                "created_at": time,
+                "amount": d.amount,
+                "fee": d.fee,
+                "aasm_state": d.aasm_state,
+                "fund_uid": d.fund_uid
+              }, context: d.aasm_state, id: d.id }
+            ]
+          })
+        }
       })
       channel.bind('account', (data) => {
-        console.log(data)
+        this.Balance = data.balance
       })
       this.TotalAssets = Number(d.total_assets.btc_worth).toFixed(3)
       this.Locked = Number(d.total_assets.locked_btc_worth).toFixed(3)

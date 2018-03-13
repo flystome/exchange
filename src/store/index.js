@@ -17,6 +17,9 @@ const actions = {
       if (d.error) location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
       commit('getData', d)
     })
+  },
+  panduan ({ commit, state }) {
+    commit('panduan')
   }
 }
 
@@ -27,6 +30,9 @@ const getters = {
 }
 
 const mutations = {
+  panduan (state) {
+    console.log(state)
+  },
   getData (state, data) {
     state.language = 'en'
     state.language = data.headers['content-language'] === '' ? 'en' : data.headers['content-language']
