@@ -71,7 +71,7 @@ export default {
       HOST_URL: process.env.HOST_URL,
       locale: [{
         language: 'zh-CN',
-        name: '简体中文'
+        name: '正體中文'
       },
       {
         language: 'en',

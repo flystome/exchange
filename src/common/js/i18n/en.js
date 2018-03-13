@@ -363,6 +363,7 @@ const en = {
       "1001_hint": "Please verify your email",
       "1002_hint": "Please do Google validation or Cell Phone validation",
       "1003_hint": "Please real name authentication",
+      "verifying": "verifying"
     },
     "validate_identity": {
       "real_name_authentication": "Real Name Verification",
@@ -387,7 +388,8 @@ const en = {
       "send_identify_code": "Send Code",
       "confirm": "Submit",
       "verification_code": "Verification Code",
-      "use_right_code": "Please use the correct national area code"
+      "use_right_code": "Please use the correct national area code",
+      "google_verification_code": "Google Verification Code"
     },
     "browser": {
       "chrome": "Chrome",

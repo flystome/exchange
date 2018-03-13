@@ -201,6 +201,7 @@ export default {
         }
       }, d => {
         if (d.data.success) {
+          this.disabled = false
           this.PopupBoxDisplay({message: this.$t('api_server.validate_identity.success_200'), url: '/member_center', type: 'success'})
         } else {
           this.PopupBoxDisplay({message: this.$t('api_server.validate_identity.error_1001'), type: 'error'})

@@ -8,9 +8,9 @@
             <a :href="`${HOST_URL}/identity/edit`">
               {{$t("member_center.change_password")}}
             </a>
-            <div class="btc-member-assetCount">
+            <!-- <div class="btc-member-assetCount">
               {{$t('member_center.total_assets')}} : 0 BTC
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="btc-member-bt">
@@ -64,7 +64,7 @@
                 </span>
             </div>
             <div class="media-right">
-              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='loginData.sms_activated && loginData.app_activated' data-holder-rendered="true" >
+              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='loginData.sms_activated || loginData.app_activated' data-holder-rendered="true" >
               <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
             </div>
           </div>
@@ -86,7 +86,7 @@
                   <div v-if="loginData.sms_activated && loginData.activated">
                     <img v-if='(loginData.id_document && loginData.id_document.aasm_state)==="unverified"' src="~Img/unverified.png" alt="认证失败">
                   </div>
-                  <span class="verifying-prompt">认证中</span>
+                  <span class="verifying-prompt">{{$t('member_center.verifying')}}</span>
                 </span>
               </div>
             </div>
@@ -259,12 +259,14 @@ export default {
       }
     },
     validateAll () {
-      if (!this.loginData.activated) {
-        this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
-      } else if (!this.loginData.sms_activated) {
-        this.PopupBoxDisplay({message: this.$t('prompt.phone_not_certified')})
-      } else {
-        this.goPath('/validate/identity', (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verified' || (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verifying', false)
+      if (this.loginData.id_document.aasm_state === 'unverified') {
+        if (!this.loginData.activated) {
+          this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
+        } else if (!this.loginData.sms_activated) {
+          this.PopupBoxDisplay({message: this.$t('prompt.phone_not_certified')})
+        } else {
+          this.goPath('/validate/identity', (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verified' || (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verifying', false)
+        }
       }
     }
   },
