@@ -77,10 +77,6 @@ body{
   background: white;
 }
 
-.btc-white-btn:hover{
-  color: #4382f7;
-}
-
 .btc-container{
   background: #f2f2f2;
   padding-bottom: 13px;
@@ -93,6 +89,19 @@ body{
   overflow: hidden;
 }
 
+.btn{
+  border-radius: 0
+}
+
+.btn:active{
+ box-shadow: none;
+}
+
+.btn:hover{
+  color: white
+}
+
+
 .btc-link{
   color: #4382f7!important;
   cursor: pointer;
@@ -103,12 +112,13 @@ body{
   color: #4382f7!important;
 }
 
-.btn{
- border-radius: 0;
+
+.btc-white-btn:hover,.btc-white-btn:focus{
+  color: #4382f7;
 }
 
-.btn:hover{
-  color: white
+.btc-basic-button:hover,.btc-basic-button:focus{
+  color: white;
 }
 
 #app .btn[disabled=true]{

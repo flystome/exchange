@@ -1,5 +1,5 @@
 <template>
-  <div class="btc-container-block btc-validateIdentity">
+  <div v-if="!(loginData.id_document.aasm_state !=='unverify') && (loginData.sms_activated || loginData.app_activated) &&  loginData.activated" class="btc-container-block btc-validateIdentity">
     <header class="title">
         <router-link to='/' class="btc-link">
           {{$t('title.member_center')}}
@@ -219,21 +219,26 @@ export default {
   watch: {
     loginData (to, from) {
       if (!from) {
-        if (/sms/.test(this.$route.path)) {
+        if (/identity/.test(this.$route.path)) {
           if (!this.loginData.activated) {
             this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
-          } else if (this.loginData.sms_activated) {
+            return
+          } else if (!(this.loginData.sms_activated || this.loginData.app_activated)) {
+            this.PopupBoxDisplay({message: this.$t('member_center.1002_hint'), type: 'warn', url: '/'})
+          } else if (this.loginData.id_document.aasm_state !== 'unverify') {
             this.$router.push({path: '/'})
           }
         }
       }
     },
     $route (to) {
-      this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
-      if (this.route === 'sms') {
+      if (/identity/.test(this.$route.path)) {
         if (!this.loginData.activated) {
           this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
-        } else if (this.loginData.sms_activated) {
+          return
+        } else if (!(this.loginData.sms_activated || this.loginData.app_activated)) {
+          this.PopupBoxDisplay({message: this.$t('member_center.1002_hint'), type: 'warn', url: '/'})
+        } else if (this.loginData.id_document.aasm_state !== 'unverify') {
           this.$router.push({path: '/'})
         }
       }

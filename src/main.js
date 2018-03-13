@@ -15,6 +15,7 @@ import App from './App'
 
 // js dependencies
 import Vue from 'vue'
+import { sync } from 'vuex-router-sync'
 import router from './router'
 import moment from 'moment'
 import dictionary from '@/common/js/validation'
@@ -29,6 +30,9 @@ import 'bootstrap/js/carousel.js'
 
 // css dependencies
 import '@/common/css/bootstrap.css'
+
+const unsync = sync(store, router)
+unsync()
 
 Vue.use(VeeValidate, {
   i18n,

@@ -202,6 +202,7 @@ export default {
         }
       })
       this.TotalAssets = Number(d.total_assets.btc_worth).toFixed(3)
+      this.Locked = Number(d.total_assets.locked_btc_worth).toFixed(3)
       if (d.notice) {
         this.PopupBoxDisplay({message: d.notice.message, type: d.notice.type})
       }
@@ -343,7 +344,6 @@ export default {
           }
           this.WithdrAwable = d.withdrawable
           this.Remain = d.today_withdraw_remain
-          this.Locked = Number(d.account.locked).toFixed(3)
           var obj = this.WithdrawRecord
           var objd = this.depositRecord
           var withdraws = d.withdraws

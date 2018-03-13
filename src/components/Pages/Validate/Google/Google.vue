@@ -186,6 +186,7 @@ export default {
   },
   watch: {
     loginData (to, from) {
+      console.log(1)
       if (!from) {
         if (/google/.test(this.$route.path)) {
           if (!this.loginData.activated) {
@@ -198,6 +199,7 @@ export default {
       }
     },
     $route (to) {
+      console.log(1)
       this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
       if (this.route === 'google') {
         if (!this.loginData.activated) {
