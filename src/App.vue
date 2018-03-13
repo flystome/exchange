@@ -101,7 +101,6 @@ body{
   color: white
 }
 
-
 .btc-link{
   color: #4382f7!important;
   cursor: pointer;
@@ -111,7 +110,6 @@ body{
   text-decoration: none!important;
   color: #4382f7!important;
 }
-
 
 .btc-white-btn:hover,.btc-white-btn:focus{
   color: #4382f7;

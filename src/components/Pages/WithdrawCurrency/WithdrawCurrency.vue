@@ -83,12 +83,17 @@
               </basic-input>
             </div>
             <div class="btc-withdraw-explain">
-              <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance | toFixed }} BTC <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain | toFixed }} BTC
+              <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance | toFixed }} {{ CurrencyType | toUpperCase }} <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain | toFixed }} {{ CurrencyType | toUpperCase }}<span v-if="equivalence" style="color:black">≈{{ equivalence }} BTC</span>
+
             </div>
               <basic-input ref='WithdrawAll' v-model="WithdrawData.amount" class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
                 <basic-button :disabled='disabled' @click.native="WithdrawAll" class="btc-link btn" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
               </basic-input>
-            <div class="btc-withdraw-explain"><span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }}</span> 0.001 <span class="btc-fr btc-link"><img src="~Img/tariff-description.png">{{$t('withdraw_currency.tariff_description')}}</span></div>
+            <div class="btc-withdraw-explain"><span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }}</span> 0.001
+            <!-- <span class="btc-fr btc-link">
+              <img src="~Img/tariff-description.png">{{$t('withdraw_currency.tariff_description')}}
+            </span> -->
+              </div>
             <div class="btc-choice-validate">
               <basic-select key="'choice_verfiy'" :data="[this.$t('withdraw_currency.google_validate'),this.$t('withdraw_currency.sms')]"
               :value="validate"
@@ -201,6 +206,32 @@ export default {
           }
         }
       })
+      channel.bind('withdraws', (data) => {
+        // var d = data.attributes
+        // var time = new Date(d.created_at).getTime()
+        // console.log(this.getWithdrawRecord)
+        // this.getWithdrawRecord.ite.push({
+        //   content: [
+        //     d.id,
+        //     this.$moment(d.created_at).format('L H:mm:ss'),
+        //     d.fund_uid,
+        //     d.amount,
+        //     d.fee,
+        //     { type: {
+        //       "id": d.id,
+        //       "created_at": time,
+        //       "amount": d.amount,
+        //       "fee": d.fee,
+        //       "aasm_state": d.aasm_state,
+        //       "fund_uid": d.fund_uid,
+        //       "aasm_state_title": 'Submitting',
+        //     }, context: d.aasm_state, id: d.id }
+        //   ]
+        // })
+      })
+      channel.bind('account', (data) => {
+        console.log(data)
+      })
       this.TotalAssets = Number(d.total_assets.btc_worth).toFixed(3)
       this.Locked = Number(d.total_assets.locked_btc_worth).toFixed(3)
       if (d.notice) {
@@ -245,6 +276,7 @@ export default {
       deposit_address: this.$t('deposit_currency.deposit_address'),
       choice: false,
       second: -1,
+      equivalence: '',
       resend: false,
       withdrawAddress: false,
       CurrencyType: 'btc',
@@ -255,6 +287,7 @@ export default {
       Rucaptcha: false,
       Time: '',
       WithdrAwable: false,
+      newaa: [],
       WithdrawData: {
         Address_id: '',
         otp: '',
@@ -288,7 +321,7 @@ export default {
       this.Rucaptcha += `?${Math.random()}`
     },
     WithdrawAll () {
-      this.WithdrawData.amount = Number(this.Remain).toFixed(3)
+      this.WithdrawData.amount = Math.min(Number(this.Remain), Number(this.Balance)).toFixed(3)
     },
     AddAddress () {
       this.withdrawAddress = true
@@ -342,6 +375,7 @@ export default {
               }, 1000)
             }, 10000)
           }
+          this.equivalence = d.today_withdraw_remain_btc === d.today_withdraw_remain ? '' : d.today_withdraw_remain_btc
           this.WithdrAwable = d.withdrawable
           this.Remain = d.today_withdraw_remain
           var obj = this.WithdrawRecord

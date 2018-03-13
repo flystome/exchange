@@ -12,6 +12,8 @@ const actions = {
         'DataType': 'application/json;charset=utf-8'
       }
     }, (d) => {
+      console.log(state.route)
+      console.log(d)
       if (d.error) location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
       commit('getData', d)
     })
@@ -19,7 +21,9 @@ const actions = {
 }
 
 const getters = {
-  loginData: state => state.loginData
+  loginData: state => {
+    return state.loginData
+  }
 }
 
 const mutations = {

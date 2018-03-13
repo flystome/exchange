@@ -31,8 +31,7 @@ import 'bootstrap/js/carousel.js'
 // css dependencies
 import '@/common/css/bootstrap.css'
 
-const unsync = sync(store, router)
-unsync()
+sync(store, router)
 
 Vue.use(VeeValidate, {
   i18n,
