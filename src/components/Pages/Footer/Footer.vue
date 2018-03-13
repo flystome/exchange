@@ -68,18 +68,18 @@
         </ul><br>
         <h4>联系我们</h4><a class="btn btn-wide btn-danger" href="/tickets/new">意见反馈</a>
       </div> -->
-      <div class="btc-footer-logo col-lg-5 col-md-3">
+      <div class="btc-footer-logo col-md-5">
         <img src="~Img/logo.png" alt="">
         <p class="btc-marginB15">{{ $t("footer.introduction") }}</p>
         <p>{{ $t("footer.copyright") }}</p>
       </div>
-      <ul class="btc-info pull-left btc-marginR80">
+      <ul class="btc-info pull-left btc-marginR40">
         <li class="">{{ $t("footer.support") }}</li>
         <li><a :href="`${HOST_URL}/documents/api_v2`">{{ $t("footer.api") }}</a></li>
         <li><a>{{ $t("footer.help") }}</a></li>
         <li><a>{{ $t("footer.announcements") }}</a></li>
       </ul>
-      <ul class="btc-info pull-left btc-marginR80">
+      <ul class="btc-info pull-left btc-marginR40">
         <li class="">{{ $t("footer.service") }}</li>
         <li><a>{{ $t("footer.application") }}</a></li>
         <li><a>{{ $t("footer.rate_details") }}</a></li>

@@ -86,9 +86,10 @@ export default {
     requireImg (img) {
       return require(`../../../../static/img/${img}.png`)
     },
+    ...mapMutations(['PopupBoxDisplay']),
     validateEmail () {
       if (!this.loginData.activated) {
-        this.goPath('/prompt')
+        this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
       } else {
         this.goPath('/currency/deposit')
       }
