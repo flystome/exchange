@@ -1,20 +1,16 @@
 <template>
   <div class="market">
     <ul class="hd clearfix">
-      <li class="text-center" v-for="(head, index) in heads" :key="head" :data-time = '0'  @click="sortList(index)">
+      <li class="text-center" :class="{'up': times == 2 && currencyIndex == index , 'down': times == 1 && currencyIndex == index}"  v-for="(head, index) in heads" :key="head" :data-time = '0'  @click="sortList(index)">
         <span>{{head}}</span>
-        <i class="caret caret-up"></i>
-        <i class="caret caret-down"></i>
+        <i class="caret"></i>
       </li>
     </ul>
     <ul class="bd">
       <li class="list" v-for="item in oldData" :key="item.quote_currency">
         <div class="list-coin">
-          <div class="icon"><i class="fa fa-star"></i></div>
-          <div class="item">
-            <div class="coin">{{item.quote_currency | upper}}<span>/{{item.base_currency | upper}}</span></div>
-            <div class="vol"><span>{{$t('markets.volume')}}</span>{{item.volume | fixed3}}</div>
-          </div>
+          <div class="coin">{{item.quote_currency | upper}}<span>/{{item.base_currency | upper}}</span></div>
+          <div class="vol"><span>{{$t('markets.volume')}}</span>{{item.volume | fixed3}}</div>
         </div>
         <div class="list-price">
           <div class="price">{{item.last | fixed3}}</div>
@@ -38,7 +34,7 @@ export default {
       coins: ['quote_currency', 'last', 'percent'],
       times: 0,
       currencyIndex: 0,
-      oldData: null
+      oldData: null,
     }
   },
   mounted: function () {

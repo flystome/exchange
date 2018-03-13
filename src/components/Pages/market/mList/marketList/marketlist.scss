@@ -12,19 +12,28 @@
       color: #42637d;
       font-size: 14px;
       cursor: pointer;
+      &.up {
+        .caret {
+          opacity: 1;
+          border-color: transparent transparent #728eaa transparent;
+          border-bottom: 4px solid #4382f7;
+        }
+      }
+      &.down {
+        .caret {
+          opacity: 1;
+          color: #4382f7
+        }
+      }
       .caret {
+        opacity: 0;
         margin-left: 5px;
+        vertical-align: 3px;
+        border-top: 4px dashed;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
       }
-      .caret-up {
-        display: inline-block;
-        border-color: transparent transparent #728eaa transparent;
-        vertical-align: 5px;
-      }
-      .caret-down {
-        border-color: #728eaa transparent transparent transparent;
-        vertical-align: 2px;
-        margin-left: -10px;
-      }
+
       &:last-child {
         width: 30%;
       }
@@ -49,16 +58,6 @@
   .list-coin {
     width: 38%;
     text-indent: 10px;
-    .icon {
-      display: inline-block;
-      width: 18px;
-      height: 46px;
-      float: left;
-
-    }
-    .item {
-      padding-left: 18px;
-    }
     .coin {
       font-size: 16px;
       color: #fff;
