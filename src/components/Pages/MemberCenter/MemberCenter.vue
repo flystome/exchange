@@ -81,11 +81,11 @@
                   :class="{'btc-active': loginData.id_document && loginData.id_document.aasm_state==='unverified',
                   'btc-verifying':(loginData.id_document && loginData.id_document.aasm_state)==='verifying'}" @click="validateAll">
                   <span>{{$t("auth.real_name")}}</span>
-                  <div v-if="loginData.sms_activated || loginData.activated">
-                    <img v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' src="~Img/validate-true.png" alt="已认证">
-                  </div>
+                  <img v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' src="~Img/validate-true.png" alt="已认证">
                   <img v-else-if='(loginData.id_document && loginData.id_document.aasm_state)==="verifying"' src="~Img/verifying.png" alt="认证中">
-                  <img v-else-if='(loginData.id_document && loginData.id_document.aasm_state)==="unverified"' src="~Img/unverified.png" alt="认证失败">
+                  <div v-if="loginData.sms_activated && loginData.activated">
+                    <img v-if='(loginData.id_document && loginData.id_document.aasm_state)==="unverified"' src="~Img/unverified.png" alt="认证失败">
+                  </div>
                   <span class="verifying-prompt">认证中</span>
                 </span>
               </div>
@@ -259,7 +259,9 @@ export default {
       }
     },
     validateAll () {
-      if (!this.loginData.activated || !this.loginData.sms_activated) {
+      if (!this.loginData.activated) {
+        this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
+      } else if (!this.loginData.sms_activated) {
         this.PopupBoxDisplay({message: this.$t('prompt.phone_not_certified')})
       } else {
         this.goPath('/validate/identity', (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verified' || (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verifying', false)
