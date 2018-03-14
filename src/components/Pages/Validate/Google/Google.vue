@@ -88,9 +88,9 @@
             </div>
             <div class="row" v-if="loginData.sms_activated">
               <div class="col-md-offset-2 col-md-9 col-xs-12">
-                <basic-input class="col-md-9 col-xs-10 btc-paddingL0" :placeholder='$t("validate_sms.verification_code")' >
+                <basic-input class="col-md-9 col-xs-10 btc-paddingL0" @focus.native="promptEmpty()" ref="smscode" :validate='"verify code"' :placeholder='$t("validate_sms.verification_code")' v-model="sms_code">
                 </basic-input>
-                <button class="btc-white-btn col-md-3 col-xs-2" @click.prevent="SendSms">
+                <button class="btc-white-btn col-md-3 col-xs-2" :disabled="disabled" @click.prevent="SendSms">
                   {{ timer }}
                 </button>
               </div>
@@ -127,14 +127,12 @@ export default {
       step: 1,
       otp: '',
       password: '',
+      sms_code: '',
       prompt: '',
       second: -1,
       resend: false,
       isLocked: false,
       SmsData: {
-        CellPhone: '',
-        CellPhonecode: '86',
-        CountryName: 'CN',
         verifyCode: '',
         Time: ''
       }
@@ -190,15 +188,22 @@ export default {
             this.CountDown()
           }
         } else {
-          // this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.send_code_1001'), type: 'error'})
+          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.google_send_code_1001'), type: 'error'})
         }
       })
     },
     async gValidate () {
       const password = await this.$refs['password'].$validator.validateAll()
       const verfiycode = await this.$refs['verfiycode'].$validator.validateAll()
-      if (!password || !verfiycode) {
-        return
+      if (!this.$refs['smscode']) {
+        if (!password || !verfiycode) {
+          return
+        }
+      } else {
+        const smscode = await this.$refs['smscode'].$validator.validateAll()
+        if (!password || !verfiycode || !smscode) {
+          return
+        }
       }
       this.disabled = true
       this._post({
@@ -208,7 +213,8 @@ export default {
           google_auth: {
             otp: this.otp,
             otp_secret: this.loginData.google_otp_secret
-          }
+          },
+          sms_code: this.sms_code
         },
         headers: {
           'DataType': 'application/json;charset=utf-8'
@@ -218,7 +224,7 @@ export default {
         if (d.data.error) {
           this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.error_${d.data.error.code}`), type: 'error'})
         } else {
-          this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.success_200`), type: 'success'})
+          this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.success_200`), type: 'success', url: '/member_center'})
         }
       })
     },
