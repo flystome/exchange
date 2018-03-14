@@ -27,7 +27,7 @@ const redirect = (state, action) => {
       } else if (!(state.loginData.sms_activated || state.loginData.app_activated)) {
         action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1002_hint'), type: 'warn', url: '/'})
       } else if (state.loginData.id_document.aasm_state !== 'unverify') {
-        this.$router.push({path: '/'})
+        router.push({path: '/'})
       }
       break
     case 'WithdrawCurrency':
