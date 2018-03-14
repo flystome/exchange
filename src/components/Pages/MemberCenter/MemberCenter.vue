@@ -84,7 +84,7 @@
                   <img v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' src="~Img/validate-true.png" alt="已认证">
                   <img v-else-if='(loginData.id_document && loginData.id_document.aasm_state)==="verifying"' src="~Img/verifying.png" alt="认证中">
                   <div v-if="loginData.sms_activated && loginData.activated">
-                    <img v-if='(loginData.id_document && loginData.id_document.aasm_state)==="unverified"' src="~Img/unverified.png" alt="认证失败">
+                    <img style="background: #fff;" v-if='(loginData.id_document && loginData.id_document.aasm_state)==="unverified"' src="~Img/unverified.png" alt="认证失败">
                   </div>
                   <span class="verifying-prompt">{{$t('member_center.verifying')}}</span>
                 </span>
@@ -266,8 +266,8 @@ export default {
       if (this.loginData.id_document.aasm_state === 'unverified') {
         if (!this.loginData.activated) {
           this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
-        } else if (!this.loginData.sms_activated) {
-          this.PopupBoxDisplay({message: this.$t('prompt.phone_not_certified')})
+        } else if (!this.loginData.sms_activated && !this.loginData.app_activated) {
+          this.PopupBoxDisplay({message: this.$t('prompt.not_certified')})
         } else {
           this.goPath('/validate/identity', (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verified' || (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verifying', false)
         }

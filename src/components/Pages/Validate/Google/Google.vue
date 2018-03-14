@@ -188,7 +188,7 @@ export default {
             this.CountDown()
           }
         } else {
-          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.google_send_code_1001'), type: 'error'})
+          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.send_code_1001'), type: 'error'})
         }
       })
     },
@@ -225,6 +225,7 @@ export default {
           this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.error_${d.data.error.code}`), type: 'error'})
         } else {
           this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.success_200`), type: 'success', url: '/member_center'})
+          this.$store.dispatch('getData')
         }
       })
     },
