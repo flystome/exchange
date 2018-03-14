@@ -119,10 +119,10 @@
               {{ $t('withdraw_currency.min_currency') }}
             </li>
             <li>
-              {{ $t('withdraw_currency.make_sure_safe') }}
+              {{ $t('withdraw_currency.confirm_apply_for_success') }}
             </li>
             <li>
-              {{ $t('withdraw_currency.withdraw') }}
+              {{ $t('withdraw_currency.make_sure_safe') }}
             </li>
           </ul>
         </div>

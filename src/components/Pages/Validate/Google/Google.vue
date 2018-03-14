@@ -86,6 +86,15 @@
             <div class="row">
               <basic-input  @focus.native="promptEmpty()" ref="verfiycode" :validate='"verify code"' class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
             </div>
+            <div class="row" v-if="loginData.sms_activated">
+              <div class="col-md-offset-2 col-md-9 col-xs-12">
+                <basic-input class="col-md-9 col-xs-10 btc-paddingL0" :placeholder='$t("validate_sms.verification_code")' >
+                </basic-input>
+                <button class="btc-white-btn col-md-3 col-xs-2" @click.prevent="SendSms">
+                  {{ timer }}
+                </button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
@@ -113,7 +122,17 @@ export default {
       step: 1,
       otp: '',
       password: '',
-      prompt: ''
+      prompt: '',
+      second: -1,
+      resend: false,
+      isLocked: false,
+      SmsData: {
+        CellPhone: '',
+        CellPhonecode: '86',
+        CountryName: 'CN',
+        verifyCode: '',
+        Time: ''
+      }
     }
   },
   methods: {
@@ -154,6 +173,22 @@ export default {
     promptEmpty () {
       this.prompt = ''
     },
+    async SendSms () {
+      this._post({
+        url: `/funds/send_activate_app_auth_sms.json`,
+        headers: {
+          'DataType': 'application/json;charset=utf-8'
+        }
+      }, (d) => {
+        if (d.data.success) {
+          if (this.second < 0) {
+            this.CountDown()
+          }
+        } else {
+          // this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.send_code_1001'), type: 'error'})
+        }
+      })
+    },
     async gValidate () {
       const password = await this.$refs['password'].$validator.validateAll()
       const verfiycode = await this.$refs['verfiycode'].$validator.validateAll()
@@ -182,9 +217,24 @@ export default {
         }
       })
     },
+    CountDown () {
+      this.second = 60
+      this.resend = true
+      var timer = setInterval(() => {
+        this.second--
+        if (this.second < 0) {
+          clearInterval(timer)
+        }
+      }, 1000)
+    },
     ...mapMutations(['PopupBoxDisplay'])
   },
   computed: {
+    timer () {
+      return this.resend ? (this.second < 0
+        ? this.$t('withdraw_currency.resend')
+        : `${this.$t('withdraw_currency.resend')} ${this.second}s`) : this.$t('auth.send_code')
+    },
     ...mapGetters(['loginData'])
   },
   watch: {
