@@ -219,7 +219,7 @@ export default {
         if (d.data.error) {
           this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.error_${d.data.error.code}`), type: 'error'})
         } else {
-          this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.success_200`), type: 'success'})
+          this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.success_200`), type: 'success', url: '/member_center'})
         }
       })
     },

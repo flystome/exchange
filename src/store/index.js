@@ -36,7 +36,7 @@ const getters = {
 
 const mutations = {
   panduan (state) {
-    console.log(router.push('/validate/sms'))
+    // console.log(router.push('/validate/sms'))
   },
   getData (state, data) {
     state.language = 'en'
