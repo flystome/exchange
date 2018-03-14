@@ -420,7 +420,7 @@ export default {
           obj.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('withdraw_currency.withdraw_currency_record')}`
           objd.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('deposit_currency.deposit_record')}`
 
-          if (funds) {
+          if (Object.keys(funds).length > 0) {
             funds['btc'].forEach((d) => {
               if (d.is_default) {
                 this.Address = d.uid

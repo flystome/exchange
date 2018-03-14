@@ -363,6 +363,7 @@ const en = {
       "1001_hint": "Please verify your email",
       "1002_hint": "Please do Google validation or Cell Phone validation",
       "1003_hint": "Please real name authentication",
+      "200_hint": "Verify Email Success"
     },
     "validate_identity": {
       "real_name_authentication": "Real Name Verification",

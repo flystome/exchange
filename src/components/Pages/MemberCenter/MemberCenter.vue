@@ -163,10 +163,17 @@ export default {
   created () {
     var code = Cookies.get('code')
     if (code) {
-      console.log(code)
+      if (code.match(/\d+/g)[0] === '200') {
+        this.PopupBoxDisplay({message: this.$t(`member_center.200_hint`), type: 'success'})
+        Cookies.remove('code')
+        return
+      }
       this.PopupBoxDisplay({message: this.$t(`member_center.${code.match(/\d+/g)[0]}_hint`), type: 'warn'})
       Cookies.remove('code')
     }
+  },
+  updated () {
+    console.log(1)
   },
   data () {
     return {

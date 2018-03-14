@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { _post } from '../axios'
 import pusher from '@/common/js/pusher'
+import router from '@/router'
+import Cookies from 'js-cookie'
 Vue.use(Vuex)
 
 const actions = {
@@ -14,7 +16,10 @@ const actions = {
     }, (d) => {
       console.log(state.route)
       console.log(d)
-      if (d.error) location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
+      if (d.error) {
+        Cookies.set('status', 'nologin')
+        location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
+      }
       commit('getData', d)
     })
   },
@@ -31,7 +36,7 @@ const getters = {
 
 const mutations = {
   panduan (state) {
-    console.log(state)
+    console.log(router.push('/validate/sms'))
   },
   getData (state, data) {
     state.language = 'en'
