@@ -107,15 +107,20 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 var QRCode = require('qrcode')
 export default {
   name: 'ValidateGoogle',
-  created () {
-    this.$store.dispatch('panduan')
+  updated () {
+    if (this.redirectLock) return
+    if (this.$store.state.loginData) {
+      this.redirectLock = true
+      this.$store.dispatch('redirect')
+    }
   },
   data () {
     return {
+      redirectLock: false,
       disabled: false,
       HOST_URL: process.env.HOST_URL,
       google: '',
@@ -235,31 +240,20 @@ export default {
         ? this.$t('withdraw_currency.resend')
         : `${this.$t('withdraw_currency.resend')} ${this.second}s`) : this.$t('auth.send_code')
     },
-    ...mapGetters(['loginData'])
+    ...mapState(['loginData'])
   },
   watch: {
     loginData (to, from) {
-      console.log(1)
-      if (!from) {
+      if (from === 'none') {
         if (/google/.test(this.$route.path)) {
-          if (!this.loginData.activated) {
-            this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
-          } else if (this.loginData.app_activated) {
-            console.log(1)
-            this.$router.push({path: '/'})
-          }
+          this.$store.dispatch('redirect')
         }
       }
     },
     $route (to) {
-      console.log(1)
       this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
       if (this.route === 'google') {
-        if (!this.loginData.activated) {
-          this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
-        } else if (this.loginData.app_activated) {
-          this.$router.push({path: '/'})
-        }
+        this.$store.dispatch('redirect')
       }
     }
   }

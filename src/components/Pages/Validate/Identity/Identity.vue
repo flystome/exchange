@@ -94,6 +94,13 @@ import { countries } from '@/common/js/countries'
 import { mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'ValidateIdentity',
+  updated () {
+    if (this.redirectLock) return
+    if (this.$store.state.loginData) {
+      this.redirectLock = true
+      this.$store.dispatch('redirect')
+    }
+  },
   data () {
     return {
       prompt: {
@@ -101,6 +108,7 @@ export default {
         text: '密码错误'
       },
       disabled: false,
+      redirectLock: false,
       img: false,
       user: {
         surname: '',
@@ -221,27 +229,13 @@ export default {
     loginData (to, from) {
       if (!from) {
         if (/identity/.test(this.$route.path)) {
-          if (!this.loginData.activated) {
-            this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
-            return
-          } else if (!(this.loginData.sms_activated || this.loginData.app_activated)) {
-            this.PopupBoxDisplay({message: this.$t('member_center.1002_hint'), type: 'warn', url: '/'})
-          } else if (this.loginData.id_document.aasm_state !== 'unverify') {
-            this.$router.push({path: '/'})
-          }
+          this.$store.dispatch('redirect')
         }
       }
     },
     $route (to) {
       if (/identity/.test(this.$route.path)) {
-        if (!this.loginData.activated) {
-          this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
-          return
-        } else if (!(this.loginData.sms_activated || this.loginData.app_activated)) {
-          this.PopupBoxDisplay({message: this.$t('member_center.1002_hint'), type: 'warn', url: '/'})
-        } else if (this.loginData.id_document.aasm_state !== 'unverify') {
-          this.$router.push({path: '/'})
-        }
+         this.$store.dispatch('redirect')
       }
     }
   }

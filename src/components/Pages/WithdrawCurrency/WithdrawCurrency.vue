@@ -83,7 +83,7 @@
               </basic-input>
             </div>
             <div class="btc-withdraw-explain">
-              <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance | toFixed }} {{ CurrencyType | toUpperCase }} <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain | toFixed }} {{ CurrencyType | toUpperCase }}<span v-if="equivalence" style="color:black">≈{{ equivalence }} BTC</span>
+              <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance | toFixed }} {{ CurrencyType | toUpperCase }} <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain | toFixed }} {{ CurrencyType | toUpperCase }}<span v-if="equivalence" style="color:black">≈{{ equivalence | toFixed }} BTC</span>
 
             </div>
               <basic-input ref='WithdrawAll' v-model="WithdrawData.amount" class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
@@ -187,6 +187,13 @@ import pusher from '@/common/js/pusher'
 var QRCode = require('qrcode')
 export default {
   name: 'withdrawCurrency',
+  updated () {
+    if (this.redirectLock) return
+    if (this.$store.state.loginData) {
+      this.redirectLock = true
+      this.$store.dispatch('redirect')
+    }
+  },
   created () {
     this.disabled = true
     this._get({
@@ -233,7 +240,7 @@ export default {
         this.Locked = Number(data.total_assets.locked_btc_worth).toFixed(3)
         this.TotalAssets = Number(data.total_assets.btc_worth).toFixed(3)
         this.Remain = data.today_withdraw_remain
-        this.equivalence = d.today_withdraw_remain_btc === d.today_withdraw_remain ? '' : d.today_withdraw_remain_btc
+        this.equivalence = data.today_withdraw_remain_btc === data.today_withdraw_remain ? '' : data.today_withdraw_remain_btc
         this.Balance = data.balance
       })
       this.TotalAssets = Number(d.total_assets.btc_worth).toFixed(3)
@@ -263,6 +270,7 @@ export default {
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
+      redirectLock: false,
       TotalAssets: 0,
       warn: {
         length: 0,
@@ -358,7 +366,7 @@ export default {
       this.disabled = true
       this.$nextTick(() => {
         this._get({
-          url: `/funds/${c || 'btc'}/account_info`
+          url: `/funds/${c || 'btc'}/account_info.json`
         }, (d) => {
           this.disabled = false
           var d = d.data.success
@@ -424,7 +432,7 @@ export default {
           obj.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('withdraw_currency.withdraw_currency_record')}`
           objd.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('deposit_currency.deposit_record')}`
 
-          if (Object.keys(funds).length > 0) {
+          if (funds && Object.keys(funds).length > 0) {
             funds['btc'].forEach((d) => {
               if (d.is_default) {
                 this.Address = d.uid
@@ -627,21 +635,8 @@ export default {
   watch: {
     $route (to) {
       this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
-      if (this.route === 'withdraw') {
-        var code = ''
-        if (!this.loginData.activated) {
-          code = 1001
-        } else if (!(this.loginData.app_activated || this.loginData.sms_activated))  {
-          code = 1002
-        }
-        if (code) {
-          this.PopupBoxDisplay({message: this.$t(`member_center.${code}_hint`) , type: 'warn' ,url: '/'})
-        }
-      } else if (this.route === 'deposit') {
-        if (!this.loginData.activated) {
-          this.PopupBoxDisplay({message: this.$t('member_center.1001_hint') , type: 'warn' ,url: '/'})
-          return
-        }
+      if (/WithdrawCurrency/.test(to.name)) {
+        this.$store.dispatch('redirect')
       }
     },
     DepositAddress (to, from) {
@@ -663,21 +658,9 @@ export default {
       }
     },
     loginData (to, from) {
-      if (!from) {
-        if (/withdraw/.test(this.$route.path)) {
-          var code = ''
-          if (!this.loginData.activated) {
-            code = 1001
-          } else if (!(this.loginData.app_activated || this.loginData.sms_activated)) {
-            code = 1002
-          }
-          if (code) {
-            this.PopupBoxDisplay({message: this.$t(`member_center.${code}_hint`) , type: 'warn' ,url: '/'})
-          }
-        } else if (/deposit/.test(this.$route.path)) {
-          if (!this.loginData.activated) {
-            this.PopupBoxDisplay({message: this.$t('member_center.1001_hint') , type: 'warn' ,url: '/'})
-          }
+      if (from === 'none') {
+        if (/WithdrawCurrency/.test(to.name)) {
+          this.$store.dispatch('redirect')
         }
       }
     }

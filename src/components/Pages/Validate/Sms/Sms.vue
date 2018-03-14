@@ -44,13 +44,21 @@
 
 <script>
 import { callingdata } from '@/common/js/countries'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 const _ = require('lodash')
 export default {
   name: 'ValidateSms',
+  updated () {
+    if (this.redirectLock) return
+    if (this.$store.state.loginData) {
+      this.redirectLock = true
+      this.$store.dispatch('redirect')
+    }
+  },
   data () {
     return {
       prompt: '',
+      redirectLock: false,
       disabled: false,
       HOST_URL: process.env.HOST_URL,
       callDisplay: false,
@@ -143,7 +151,7 @@ export default {
         ? this.$t('withdraw_currency.resend')
         : `${this.$t('withdraw_currency.resend')} ${this.second}s`) : this.$t('auth.send_code')
     },
-    ...mapGetters(['loginData'])
+    ...mapState(['loginData'])
   },
   filters: {
     maxlen (str) {
@@ -164,24 +172,16 @@ export default {
       }
     }, 500),
     loginData (to, from) {
-      if (!from) {
+      if (from === 'none') {
         if (/sms/.test(this.$route.path)) {
-          if (!this.loginData.activated) {
-            this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
-          } else if (this.loginData.sms_activated) {
-            this.$router.push({path: '/'})
-          }
+          this.$store.dispatch('redirect')
         }
       }
     },
     $route (to) {
       this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
       if (this.route === 'sms') {
-        if (!this.loginData.activated) {
-          this.PopupBoxDisplay({message: this.$t('member_center.1001_hint'), type: 'warn', url: '/'})
-        } else if (this.loginData.sms_activated) {
-          this.$router.push({path: '/'})
-        }
+        this.$store.dispatch('redirect')
       }
     }
   }
