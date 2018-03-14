@@ -267,7 +267,7 @@ export default {
         if (!this.loginData.activated) {
           this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
         } else if (!this.loginData.sms_activated) {
-          this.PopupBoxDisplay({message: this.$t('prompt.phone_not_certified')})
+          // this.PopupBoxDisplay({message: this.$t('prompt.phone_not_certified')})
         } else {
           this.goPath('/validate/identity', (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verified' || (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verifying', false)
         }

@@ -540,10 +540,11 @@ const en = {
         "create_withdraw_1006": "System error",
       },
       "validate_sms": {
-        "send_code_1001": "Phone number is invalid",
-        "google_send_code_1001": "Send too fast, please wait for one minute",
+        "send_code_1002": "Phone number is invalid",
+        "send_code_1001": "Send too fast, please wait for one minute",
         "auth_sms_200": "Verify Code Success",
         "auth_sms_1001": "Verify Failed",
+        "auth_sms_1002": "The google authentication code incorrect",
       }
     },
     "footer": {

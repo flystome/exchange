@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <section>
+    <section class="btc-main">
       <header is='Header' />
       <div class="btc-container container" v-cloak>
         <keep-alive>
@@ -39,7 +39,7 @@ export default {
 #app{
   height: 100%;
 }
-section{
+.btc-main{
   min-height: 100%;
   padding-bottom: 217px;
 }

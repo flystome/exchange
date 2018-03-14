@@ -33,7 +33,7 @@
         </button>
       </div>
       <div class="btc-sms-google btc-marginB30" v-if="loginData.app_activated">
-        <basic-input :placeholder='$t("validate_sms.google_verification_code")' v-model="SmsData.googlecode">
+        <basic-input :placeholder='$t("validate_sms.google_verification_code")' :validate='"verify code"' ref="googlecode" v-model="SmsData.googlecode">
         </basic-input>
       </div>
       <basic-button @click.native.stop="Validate" style='width:100%' :text='$t("validate_sms.confirm")'>
@@ -97,7 +97,7 @@ export default {
             this.CountDown()
           }
         } else {
-          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.send_code_1001'), type: 'error'})
+          this.PopupBoxDisplay({message: this.$t(`api_server.validate_sms.send_code_${d.data.error.code}`), type: 'error'})
         }
       })
     },
@@ -107,8 +107,15 @@ export default {
       }
       const cellphone = await this.$refs['cellphone'].$validator.validateAll()
       const verifiycode = await this.$refs['verifiycode'].$validator.validateAll()
-      if (!cellphone || !verifiycode || this.SmsData.CountryName === '') {
-        return
+      if (!this.$refs['googlecode']) {
+        if (!cellphone || !verifiycode || this.SmsData.CountryName === '') {
+          return
+        }
+      } else {
+        const googlecode = await this.$refs['googlecode'].$validator.validateAll()
+        if (!cellphone || !verifiycode || !googlecode || this.SmsData.CountryName === '') {
+          return
+        }
       }
       this._post({
         url: `/verify/auth_sms.json`,
@@ -120,11 +127,12 @@ export default {
         }
       }, (d) => {
         if (d.data.success) {
-          this.$store.dispatch('getData')
           this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_200'), type: 'success', url: '/member_center'})
+          this.$store.dispatch('getData')
         } else {
           this.SmsData.verifyCode = ''
-          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_1001'), type: 'error'})
+          this.SmsData.googlecode = ''
+          this.PopupBoxDisplay({message: this.$t(`api_server.validate_sms.auth_sms_${d.data.error.code}`), type: 'error'})
         }
       })
     },
