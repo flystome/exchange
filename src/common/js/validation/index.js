@@ -25,7 +25,7 @@ Validator._merge(name, validator)
   }
 }
 
-var empty = ['first_name', 'verify code', 'password', 'last_name', 'sms_code']
+var empty = ['first_name', 'verify code', 'password', 'last_name']
 
 Validator.extend('CellPhone', {
   getMessage: (field, params, data) => {

@@ -88,7 +88,7 @@
             </div>
             <div class="row" v-if="loginData.sms_activated">
               <div class="col-md-offset-2 col-md-9 col-xs-12">
-                <basic-input class="col-md-9 col-xs-10 btc-paddingL0" @focus.native="promptEmpty()" ref="smscode" :validate='"sms_code"' :placeholder='$t("validate_sms.verification_code")' v-model="sms_code">
+                <basic-input class="col-md-9 col-xs-10 btc-paddingL0" @focus.native="promptEmpty()" ref="smscode" :validate='"verify code"' :placeholder='$t("validate_sms.verification_code")' v-model="sms_code">
                 </basic-input>
                 <button class="btc-white-btn col-md-3 col-xs-2" :disabled="disabled" @click.prevent="SendSms">
                   {{ timer }}
@@ -183,7 +183,7 @@ export default {
             this.CountDown()
           }
         } else {
-          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.send_code_1001'), type: 'error'})
+          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.google_send_code_1001'), type: 'error'})
         }
       })
     },

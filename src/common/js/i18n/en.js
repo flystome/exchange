@@ -541,7 +541,8 @@ const en = {
       },
       "validate_sms": {
         "send_code_1001": "Phone number is invalid",
-        "auth_sms_200": "Verify code wrong!Please re-enter",
+        "google_send_code_1001": "Send too fast, please wait for one minute",
+        "auth_sms_200": "Verify Code Success",
         "auth_sms_1001": "Verify Failed",
       }
     },
