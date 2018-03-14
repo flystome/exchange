@@ -33,7 +33,7 @@
         </button>
       </div>
       <div class="btc-sms-google btc-marginB30" v-if="loginData.app_activated">
-        <basic-input :placeholder='$t("validate_sms.google_verification_code")'>
+        <basic-input :placeholder='$t("validate_sms.google_verification_code")' v-model="SmsData.googlecode">
         </basic-input>
       </div>
       <basic-button @click.native.stop="Validate" style='width:100%' :text='$t("validate_sms.confirm")'>
