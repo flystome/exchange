@@ -120,6 +120,7 @@ export default {
         }
       }, (d) => {
         if (d.data.success) {
+          this.$store.dispatch('getData')
           this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_200'), type: 'success', url: '/member_center'})
         } else {
           this.SmsData.verifyCode = ''
