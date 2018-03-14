@@ -9,6 +9,8 @@ const messages = {
   en: en.en
 }
 
+console.log(en.en.withdraw_currency.withdraw_currency_address)
+
 const i18n = new VueI18n({
   locale: 'en',
   messages

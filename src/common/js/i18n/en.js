@@ -364,7 +364,9 @@ const en = {
       "1002_hint": "Please do Google validation or Cell Phone validation",
       "1003_hint": "Please real name authentication",
       "200_hint": "Verify Email Success",
-      "verifying": "verifying"
+      "verifying": "verifying",
+      "success_200": "Email has been sent, please check it",
+      "error_1001": "Token errors, please Reconfirm"
     },
     "validate_identity": {
       "real_name_authentication": "Real Name Verification",
@@ -456,7 +458,7 @@ const en = {
       "trading_hash": "Trading Hash",
       "recharge_amount": "Recharge Amount",
       "confirmation_number": "Confirmation Number",
-      "identifying_code": "Identifying Code",
+      "identifying_code": "Verify Code",
       "temporarily_unable_deposit": "Temporarily unable to deposit"
     },
     "title": {
@@ -467,6 +469,7 @@ const en = {
       "validate_sms": "Validate SMS",
       "currency_withdraw": "Withdraw Currency",
       "currency_deposit": "Deposit Currency",
+      "404": "404 Not Found"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
@@ -518,10 +521,6 @@ const en = {
       "validate_identity": {
         "success_200": "Photo Update Successfully",
         "error_1001": "Photo Update Failure"
-      },
-      "member_center": {
-        "success_200": "Email has been sent, please check it",
-        "error_1001": "Token errors, please Reconfirm"
       },
       "withdraw_currency": {
         "set_fund_source_200": "The fund source is set as default",

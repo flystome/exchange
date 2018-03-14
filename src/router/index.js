@@ -38,11 +38,6 @@ const router = new Router({
       component: Prompt
     },
     {
-      path: '/:version',
-      name: 'version',
-      component: MemberCenter
-    },
-    {
       path: '/member_center',
       name: 'member_center',
       component: MemberCenter
@@ -74,9 +69,14 @@ const router = new Router({
       component: ValidateSms
     },
     {
-      path: '*',
-      name: '404',
+      path: '/404',
+      name: 'notFund',
       component: Page404
+    },
+    {
+      path: '*',
+      name: '*',
+      redirect: '/404'
     }
   ]
 })

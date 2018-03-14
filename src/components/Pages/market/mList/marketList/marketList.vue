@@ -34,7 +34,7 @@ export default {
       coins: ['quote_currency', 'last', 'percent'],
       times: 0,
       currencyIndex: 0,
-      oldData: null,
+      oldData: null
     }
   },
   mounted: function () {
