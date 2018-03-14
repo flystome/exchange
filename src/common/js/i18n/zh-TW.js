@@ -313,6 +313,9 @@ const zh = {
     "newPrice": "最新价",
     "change": "涨跌幅",
     "favorite": "自选",
+  },
+  "nav":{
+    "member_center": "用户中心"
   }
 }
 

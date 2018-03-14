@@ -119,10 +119,10 @@
               {{ $t('withdraw_currency.min_currency') }}
             </li>
             <li>
-              {{ $t('withdraw_currency.confirm_apply_for_success') }}
+              {{ $t('withdraw_currency.make_sure_safe') }}
             </li>
             <li>
-              {{ $t('withdraw_currency.make_sure_safe') }}
+              {{ $t('withdraw_currency.withdraw') }}
             </li>
           </ul>
         </div>
@@ -230,6 +230,10 @@ export default {
         }
       })
       channel.bind('account', (data) => {
+        this.Locked = Number(data.total_assets.locked_btc_worth).toFixed(3)
+        this.TotalAssets = Number(data.total_assets.btc_worth).toFixed(3)
+        this.Remain = data.today_withdraw_remain
+        this.equivalence = d.today_withdraw_remain_btc === d.today_withdraw_remain ? '' : d.today_withdraw_remain_btc
         this.Balance = data.balance
       })
       this.TotalAssets = Number(d.total_assets.btc_worth).toFixed(3)
