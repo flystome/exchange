@@ -148,6 +148,9 @@
             ul {
                 color: #999999;
                 font-size: 12px;
+                li{
+                  list-style: disc;
+                }
             }
         }
         .btc-withdraw-explain span,
@@ -193,6 +196,9 @@
     .btc-deposit-currency{
       ul{
         display: inline-block;
+        li{
+          list-style: disc;
+        }
       }
     }
     .btc-withdraw-address {
