@@ -172,9 +172,6 @@ export default {
       Cookies.remove('code')
     }
   },
-  updated () {
-    console.log(1)
-  },
   data () {
     return {
       HOST_URL: process.env.HOST_URL,

@@ -26,7 +26,7 @@ const redirect = (state, action) => {
         return
       } else if (!(state.loginData.sms_activated || state.loginData.app_activated)) {
         action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1002_hint'), type: 'warn', url: '/'})
-      } else if (state.loginData.id_document.aasm_state !== 'unverify') {
+      } else if (state.loginData.id_document.aasm_state !== 'unverified') {
         router.push({path: '/'})
       }
       break
@@ -47,6 +47,7 @@ const redirect = (state, action) => {
         return
       }
     }
+    break
   }
 }
 
