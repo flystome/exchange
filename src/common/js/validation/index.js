@@ -1,9 +1,9 @@
-import zh from 'vee-validate/dist/locale/zh_CN'
+import zh_TW from 'vee-validate/dist/locale/zh_TW'
 import en from 'vee-validate/dist/locale/en'
 import { Validator } from 'vee-validate'
 
 const dictionary = {
-  'zh-CN': zh,
+  'zh_TW': zh_TW,
   en
 }
 
@@ -25,7 +25,7 @@ Validator._merge(name, validator)
   }
 }
 
-var empty = ['first_name', 'verify code', 'password', 'last_name']
+var empty = ['first_name', 'verify code', 'password', 'last_name', 'sms_code']
 
 Validator.extend('CellPhone', {
   getMessage: (field, params, data) => {

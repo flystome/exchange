@@ -28,7 +28,7 @@
       <div class="btc-sms-code">
         <basic-input :validate='"verify code"' ref="verifiycode" :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
         </basic-input>
-        <button :disabled='disabled' class="btc-white-btn" @click="SendSms">
+        <button :disabled="disabled" class="btc-white-btn" @click="SendSms">
           {{ timer }}
         </button>
       </div>
@@ -64,7 +64,8 @@ export default {
         CellPhonecode: '86',
         CountryName: 'CN',
         verifyCode: '',
-        Time: ''
+        Time: '',
+        googlecode: ''
       }
     }
   },
@@ -106,7 +107,8 @@ export default {
         data: {
           'country': this.SmsData.CountryName,
           'phone_number': `${this.SmsData.CellPhone}`,
-          'otp': this.SmsData.verifyCode
+          'otp': this.SmsData.verifyCode,
+          'google_code': this.SmsData.googlecode
         }
       }, (d) => {
         if (d.data.success) {

@@ -1,11 +1,11 @@
 import VueI18n from 'vue-i18n'
 import Vue from 'vue'
 import en from './en'
-import zh from './zh-CN'
+import zh_TW from './zh-TW'
 
 Vue.use(VueI18n)
 const messages = {
-  'zh-CN': zh,
+  'zh_TW': zh_TW,
   en: en.en
 }
 

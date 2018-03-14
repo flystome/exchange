@@ -512,6 +512,7 @@ const en = {
       "validate_google": {
         "error_1002": "Password incorrect",
         "error_1001": "google authentication code incorrect",
+        "error_1003": "Verify code wrong!Please re-enter",
         "success_200": "Google Authentication Success"
       },
       "validate_identity": {
