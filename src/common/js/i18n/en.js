@@ -429,7 +429,6 @@ const en = {
       "remark_label": "Remark",
       "use_a_new_address": "Use a new address",
       "sms": "SMS",
-      "google": "Google",
       "send_identify_code": "Send Identify Code",
       "set_as_default": "Set As Default",
       "delete": "Delete",
@@ -499,6 +498,27 @@ const en = {
       "google_verification": "Verify",
       "app_already_installed": "APP already installed",
     },
+    "markets":{
+      "volume": "Volume",
+      "coinAndVolumn": "币种/成交量",
+      "newPrice": "Price",
+      "change": "涨跌幅",
+      "quotes": "Quotes",
+      "trade": "Trade",
+      "currency": "Open Orders",
+      "favorite": "Favorite",
+      "volume24": "Vol",
+      "high": "High",
+      "low": "Low",
+      "candle": "Candle",
+      "depth": "Depth",
+      "history": "Trade history",
+      "price": "Price",
+      "volume": "Volume",
+      "time": "Time",
+      "buy": "Buy",
+      "sell": "Sell"
+    },
     "hint": {
       "confirm": "OK",
       "generating_address": "We are generating deposit address, please wait a few seconds.",
@@ -507,9 +527,9 @@ const en = {
     },
     "api_server": {
       "validate_google": {
-        "error_1002": "Password incorrect",
-        "error_1001": "google authentication code incorrect",
-        "error_1003": "Verify code wrong!Please re-enter",
+        "error_1002": "Password incorrect, please check it",
+        "error_1001": "The google authentication code you enter are incorrect, please check it",
+        "error_1003": "Sms code incorrect, please check it",
         "success_200": "Google Authentication Success"
       },
       "validate_identity": {
@@ -530,7 +550,7 @@ const en = {
         "Withdraw_canceled_1001": "Withdraw request can not cancel",
         "create_withdraw_200": "An confirm email has been sent to your mailbox",
         "create_withdraw_1001": "Please give an valid currency param",
-        "create_withdraw_1002": "Authentication Failed",
+        "create_withdraw_1002": "Two factor authentication failed",
         "create_withdraw_1003": "The withdrawal requests can not be more than",
         "create_withdraw_1004": "The withdrawal amount is above the daily limit",
         "create_withdraw_1005": "Invalid fund source",

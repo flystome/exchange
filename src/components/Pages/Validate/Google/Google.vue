@@ -65,7 +65,7 @@
                 </strong>
               </div>
               <div class="row btc-marginT20">
-              <span>
+              <span style="display: block;">
                 {{$t('validate_google.cant_scan_enter_keys')}}
               </span>
               <div class="refreshqrcode btc-marginT15 btn" :disabled="disabled" @click="RenovateQrcode">

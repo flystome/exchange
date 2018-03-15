@@ -73,18 +73,18 @@
         <p class="btc-marginB15">{{ $t("footer.introduction") }}</p>
         <p>{{ $t("footer.copyright") }}</p>
       </div>
-      <ul class="btc-info pull-left btc-marginR40">
+      <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
         <li class="">{{ $t("footer.support") }}</li>
         <li><a :href="`${HOST_URL}/documents/api_v2`">{{ $t("footer.api") }}</a></li>
         <li><a>{{ $t("footer.help") }}</a></li>
         <li><a>{{ $t("footer.announcements") }}</a></li>
       </ul>
-      <ul class="btc-info pull-left btc-marginR40">
+      <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
         <li class="">{{ $t("footer.service") }}</li>
         <li><a>{{ $t("footer.application") }}</a></li>
         <li><a>{{ $t("footer.rate_details") }}</a></li>
       </ul>
-      <ul class="btc-info pull-left">
+      <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
         <li class="">{{ $t("footer.about") }}</li>
         <li><a>{{ $t("footer.about_us") }}</a></li>
         <li><a>{{ $t("footer.user_agreement") }}</a></li>
