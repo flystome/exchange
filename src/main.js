@@ -32,6 +32,8 @@ import 'bootstrap/js/collapse.js'
 import Pusher from 'pusher-js'
 import 'bootstrap/js/carousel.js'
 
+sync(store, router)
+
 Vue.use(VeeValidate, {
   i18n,
   i18nRootKey: 'validation',
