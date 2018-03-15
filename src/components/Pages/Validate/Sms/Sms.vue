@@ -182,13 +182,6 @@ export default {
         this.SmsData.CountryName = ''
       }
     }, 500),
-    loginData (to, from) {
-      if (from === 'none') {
-        if (/sms/.test(this.$route.path)) {
-          this.$store.dispatch('redirect')
-        }
-      }
-    },
     $route (to) {
       this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
       if (this.route === 'sms') {

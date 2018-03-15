@@ -226,13 +226,6 @@ export default {
     }
   },
   watch: {
-    loginData (to, from) {
-      if (!from) {
-        if (/identity/.test(this.$route.path)) {
-          this.$store.dispatch('redirect')
-        }
-      }
-    },
     $route (to) {
       if (/identity/.test(this.$route.path)) {
          this.$store.dispatch('redirect')

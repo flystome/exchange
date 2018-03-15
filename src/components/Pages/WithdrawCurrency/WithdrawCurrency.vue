@@ -547,13 +547,16 @@ export default {
         this.disabled = false
         if (d.data.success) {
           this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.create_withdraw_200'), type: 'success'})
+          this.Rucaptcha = false
           this.WithdrawData.amount = ''
           this.WithdrawData.otp = ''
         } else {
-          if (d.data.error.code === '1002') {
+          if (d.data.error.code === 1002) {
             this.Rucaptcha = d.data.error.rucaptcha
+            this.PopupBoxDisplay({message: `${this.$t(`withdraw_currency.${this.validate.match(/\w+/g)[0].toLowerCase()}`)} ${this.$t('api_server.withdraw_currency.create_withdraw_1002')}`, type: 'error'})
+            return
           }
-          if (d.data.error.code === '1003') {
+          if (d.data.error.code === 1003) {
             this.Rucaptcha = d.data.error.rucaptcha
             this.PopupBoxDisplay({message: `${this.$t('api_server.withdraw_currency.create_withdraw_1003')} ${d.data.error.c}`, type: 'error'})
             return
@@ -655,13 +658,6 @@ export default {
             buttondisplay: true
           })
         }, 2000)
-      }
-    },
-    loginData (to, from) {
-      if (from === 'none') {
-        if (/WithdrawCurrency/.test(to.name)) {
-          this.$store.dispatch('redirect')
-        }
       }
     }
   }

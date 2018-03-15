@@ -250,16 +250,10 @@ export default {
     ...mapState(['loginData'])
   },
   watch: {
-    loginData (to, from) {
-      if (from === 'none') {
-        if (/google/.test(this.$route.path)) {
-          this.$store.dispatch('redirect')
-        }
-      }
-    },
     $route (to) {
       this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
       if (this.route === 'google') {
+        console.log(1)
         this.$store.dispatch('redirect')
       }
     }
