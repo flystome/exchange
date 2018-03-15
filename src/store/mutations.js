@@ -7,6 +7,7 @@ const redirect = (state, action) => {
   i18n.locale = Cookies.get('locale')
   switch (route) {
     case 'ValidateGoogle':
+    console.log(1)
       if (!state.loginData.activated) {
         action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1001_hint'), type: 'warn', url: '/'})
       } else if (state.loginData.app_activated) {
