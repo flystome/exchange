@@ -467,6 +467,7 @@ const zh = {
     "validate_sms": "驗證短信",
     "currency_withdraw": "提幣",
     "currency_deposit": "充值",
+    "404": "404 頁面",
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",

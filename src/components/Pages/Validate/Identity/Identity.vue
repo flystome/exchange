@@ -94,13 +94,13 @@ import { countries } from '@/common/js/countries'
 import { mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'ValidateIdentity',
-  updated () {
-    if (this.redirectLock) return
-    if (this.$store.state.loginData) {
-      this.redirectLock = true
-      this.$store.dispatch('redirect')
-    }
-  },
+  // updated () {
+  //   if (this.redirectLock) return
+  //   if (this.$store.state.loginData) {
+  //     this.redirectLock = true
+  //     this.$store.dispatch('redirect')
+  //   }
+  // },
   data () {
     return {
       prompt: {
@@ -229,11 +229,11 @@ export default {
     }
   },
   watch: {
-    $route (to) {
-      if (/identity/.test(this.$route.path)) {
-         this.$store.dispatch('redirect')
-      }
-    }
+    // $route (to) {
+    //   if (/identity/.test(this.$route.path)) {
+    //      this.$store.dispatch('redirect')
+    //   }
+    // }
   }
 }
 </script>

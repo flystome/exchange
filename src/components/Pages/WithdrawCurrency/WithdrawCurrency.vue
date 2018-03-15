@@ -187,13 +187,6 @@ import pusher from '@/common/js/pusher'
 var QRCode = require('qrcode')
 export default {
   name: 'withdrawCurrency',
-  updated () {
-    if (this.redirectLock) return
-    if (this.$store.state.loginData) {
-      this.redirectLock = true
-      this.$store.dispatch('redirect')
-    }
-  },
   created () {
     this.disabled = true
     this._get({
@@ -637,12 +630,11 @@ export default {
     new Clipboard('.btn-copy')
   },
   watch: {
-    $route (to) {
-      this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
-      if (/WithdrawCurrency/.test(to.name)) {
-        this.$store.dispatch('redirect')
-      }
-    },
+    // $route (to) {
+    //   if (/WithdrawCurrency/.test(to.name)) {
+    //     this.$store.dispatch('redirect')
+    //   }
+    // },
     DepositAddress (to, from) {
       if (Object.keys(to).length > Object.keys(from).length) {
         this.deposit_address = to[Object.keys(to)]

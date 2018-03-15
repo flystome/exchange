@@ -63,9 +63,9 @@
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex'
 export default {
-  created () {
-    this.$store.dispatch('getData')
-  },
+  // created () {
+  //   this.$store.dispatch('getData')
+  // },
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
