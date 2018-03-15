@@ -2,7 +2,7 @@
   <div v-if="!loginData.app_activated && loginData.activated" class="btc-validateGoogle  btc-container-block">
     <div class="row btc-color666">
       <span class="btc-color333">
-        <router-link to='/' class="btc-link">
+        <router-link :to="`${ROUTER_VERSION}/`" class="btc-link">
           {{$t('title.member_center')}}
         </router-link>
         >
@@ -123,6 +123,7 @@ export default {
       redirectLock: false,
       disabled: false,
       HOST_URL: process.env.HOST_URL,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       google: '',
       step: 1,
       otp: '',

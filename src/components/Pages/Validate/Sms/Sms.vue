@@ -1,7 +1,7 @@
 <template>
   <div v-if="!loginData.sms_activated && loginData.activated" @keyup.enter='Validate' class="btc-validate-sms btc-container-block" @click="ShowCallingcode(false);prompt = ''">
     <header class="btc-color666">
-      <router-link to='/' class="btc-link">{{$t('title.member_center')}}</router-link> > <span>{{$t('title.validate_sms')}}</span>
+      <router-link :to="`${ROUTER_VERSION}/`" class="btc-link">{{$t('title.member_center')}}</router-link> > <span>{{$t('title.validate_sms')}}</span>
     </header>
     <div class="btc-sms-container">
       <news-prompt :text='prompt'></news-prompt>
@@ -61,6 +61,7 @@ export default {
       redirectLock: false,
       disabled: false,
       HOST_URL: process.env.HOST_URL,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       callDisplay: false,
       callingdata: callingdata,
       callingcode: '',

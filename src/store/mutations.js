@@ -1,6 +1,7 @@
 import router from '@/router'
 import i18n from '@/common/js/i18n/i18n.js'
 import Cookies from 'js-cookie'
+const ROUTER_VERSION = process.env.ROUTER_VERSION
 
 const redirect = (state, action) => {
   var route = state.route.name
@@ -9,26 +10,26 @@ const redirect = (state, action) => {
     case 'ValidateGoogle':
     console.log(1)
       if (!state.loginData.activated) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1001_hint'), type: 'warn', url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1001_hint'), type: 'warn', url: `${ROUTER_VERSION}/`})
       } else if (state.loginData.app_activated) {
-        router.push({path: '/'})
+        router.push({path: `${ROUTER_VERSION}/`})
       }
       break
     case 'ValidateSms':
       if (!state.loginData.activated) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1001_hint'), type: 'warn', url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1001_hint'), type: 'warn', url: `${ROUTER_VERSION}/`})
       } else if (state.loginData.sms_activated) {
-        router.push({path: '/'})
+        router.push({path: `${ROUTER_VERSION}/`})
       }
       break
     case 'ValidateIdentity':
       if (!state.loginData.activated) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1001_hint'), type: 'warn', url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1001_hint'), type: 'warn', url: `${ROUTER_VERSION}/`})
         return
       } else if (!(state.loginData.sms_activated || state.loginData.app_activated)) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1002_hint'), type: 'warn', url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1002_hint'), type: 'warn', url: `${ROUTER_VERSION}/`})
       } else if (state.loginData.id_document.aasm_state !== 'unverified') {
-        router.push({path: '/'})
+        router.push({path: `${ROUTER_VERSION}/`})
       }
       break
     case 'WithdrawCurrency':
@@ -40,11 +41,11 @@ const redirect = (state, action) => {
         code = 1002
       }
       if (code) {
-        action.commit('PopupBoxDisplay', {message: i18n.t(`member_center.${code}_hint`) , type: 'warn' ,url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t(`member_center.${code}_hint`) , type: 'warn' ,url: `${ROUTER_VERSION}/`})
       }
     } else if (/deposit/.test(state.route.path)) {
       if (!state.loginData.activated) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1001_hint') , type: 'warn' ,url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1001_hint') , type: 'warn' ,url: `${ROUTER_VERSION}/`})
         return
       }
     }

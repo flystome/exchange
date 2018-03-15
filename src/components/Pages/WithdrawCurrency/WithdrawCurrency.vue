@@ -13,13 +13,13 @@
             </a>
           </div>
           <div class="btc-fr">
-          <router-link to="/currency/deposit" class="btc-poniter" :class="{'btc-link':route === 'deposit'}">
+          <router-link :to="`${ROUTER_VERSION}/currency/deposit`" class="btc-poniter" :class="{'btc-link':route === 'deposit'}">
             <strong>
               {{ $t('withdraw_currency.deposit') }}
             </strong>
           </router-link>
           <span>|</span>
-          <router-link to="/currency/withdraw" class="btc-poniter" :class="{'btc-link':route === 'withdraw'}">
+          <router-link :to="`${ROUTER_VERSION}/currency/withdraw`" class="btc-poniter" :class="{'btc-link':route === 'withdraw'}">
             <strong>
               {{ $t('withdraw_currency.withdraw') }}
           </strong>
@@ -270,6 +270,7 @@ export default {
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       redirectLock: false,
       TotalAssets: 0,
       warn: {

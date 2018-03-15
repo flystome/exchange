@@ -175,6 +175,7 @@ export default {
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       name_activated: false,
       wexin_activated: false,
       email_sent_message: this.$t('member_center.email_sent_message'),
@@ -237,10 +238,10 @@ export default {
         return
       }
       if (href) {
-        location.href = `${this.HOST_URL}${path}`
+        location.href = `${this.HOST_URL}${this.ROUTER_VERSION}${path}`
       }
       this.$router.push({
-        path: path
+        path: `${this.ROUTER_VERSION}${path}`
       })
     },
     getTicket () {

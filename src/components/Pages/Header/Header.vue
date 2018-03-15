@@ -69,6 +69,7 @@ export default {
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       locale: [{
         language: 'zh_TW',
         name: '正體中文'
@@ -112,14 +113,14 @@ export default {
         return
       }
       if (href) {
-        location.href = `${this.HOST_URL}${path}`
+        location.href = `${this.HOST_URL}${this.ROUTER_VERSION}${path}`
       }
       this.$router.push({
-        path: path
+        path: `${this.ROUTER_VERSION}${path}`
       })
     },
     goHome () {
-      this.$router.push('/', () => {
+      this.$router.push(`${this.ROUTER_VERSION}/`, () => {
         this.$store.dispatch('getData')
       })
     },
