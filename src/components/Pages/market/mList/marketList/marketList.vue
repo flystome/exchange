@@ -1,7 +1,7 @@
 <template>
   <div class="market">
     <ul class="hd clearfix">
-      <li class="text-center" :class="{'up': times == 2 && currencyIndex == index , 'down': times == 1 && currencyIndex == index}"  v-for="(head, index) in heads" :key="head" :data-time = '0'  @click="sortList(index)">
+      <li class="text-center" :class="{'up': times == 1 && currencyIndex == index , 'down': times == 2 && currencyIndex == index}"  v-for="(head, index) in heads" :key="head" :data-time = '0'  @click="sortList(index)">
         <span>{{head}}</span>
         <i class="caret"></i>
       </li>
@@ -17,7 +17,7 @@
           <div class="val">${{item.legal_worth}}</div>
         </div>
         <div class="list-btn">
-          <div :class="[item.percent ? 'text-up':'text-down']">{{item.percent | fixed2}}%</div>
+          <div :class="{'text-up': item.percent > 0, 'text-down': item.percent < 0}">{{item.percent | fixed2}}%</div>
         </div>
       </li>
     </ul>
@@ -48,7 +48,17 @@ export default {
       return params.toUpperCase()
     },
     fixed3: function (params) {
-      return (+params).toPrecision(3)
+      if (+params === 0) return 0
+      var arr = +params.toString().split('.')
+      var len = +params.toString().split('.')[0].length
+      console.log(len)
+      if (len > 1) {
+        return (+params).toFixed(2)
+      } else if (len === 1 && arr[0] === 0) {
+        return (+params).toFixed(4)
+      } else {
+        return (+params).toFixed(3)
+      }
     }
   },
   watch: {
