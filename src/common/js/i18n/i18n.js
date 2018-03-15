@@ -16,4 +16,6 @@ const i18n = new VueI18n({
   messages
 })
 
+console.log(process)
+
 export default i18n

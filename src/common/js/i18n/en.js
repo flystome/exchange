@@ -544,6 +544,7 @@ const en = {
         "create_withdraw_1006": "System error",
         "create_withdraw_1007": "Account balance is insufficient",
         "create_withdraw_1008": "Amount Can not be empty",
+        "create_withdraw_1009": "Verification code error"
       },
       "validate_sms": {
         "send_code_1002": "Phone number is invalid",
