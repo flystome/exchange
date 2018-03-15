@@ -48,13 +48,13 @@ import { mapMutations, mapState } from 'vuex'
 const _ = require('lodash')
 export default {
   name: 'ValidateSms',
-  updated () {
-    if (this.redirectLock) return
-    if (this.$store.state.loginData) {
-      this.redirectLock = true
-      this.$store.dispatch('redirect')
-    }
-  },
+  // updated () {
+  //   if (this.redirectLock) return
+  //   if (this.$store.state.loginData) {
+  //     this.redirectLock = true
+  //     this.$store.dispatch('redirect')
+  //   }
+  // },
   data () {
     return {
       prompt: '',
@@ -182,13 +182,13 @@ export default {
       if (!lock) {
         this.SmsData.CountryName = ''
       }
-    }, 500),
-    $route (to) {
-      this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
-      if (this.route === 'sms') {
-        this.$store.dispatch('redirect')
-      }
-    }
+    }, 500)
+    // $route (to) {
+    //   this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
+    //   if (this.route === 'sms') {
+    //     this.$store.dispatch('redirect')
+    //   }
+    // }
   }
 }
 </script>

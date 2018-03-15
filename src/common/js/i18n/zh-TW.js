@@ -467,6 +467,7 @@ const zh = {
     "validate_sms": "驗證短信",
     "currency_withdraw": "提幣",
     "currency_deposit": "充值",
+    "404": "404 頁面",
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",
@@ -533,7 +534,8 @@ const zh = {
       "create_withdraw_1006": "系統錯誤",
       "create_withdraw_1007": "帳戶餘額不足",
       "create_withdraw_1008": "金額不能為空",
-      "create_withdraw_1009": "驗證碼錯誤"
+      "create_withdraw_1009": "驗證碼錯誤",
+      "create_withdraw_1010": "未創建資產帳戶"
     },
     "validate_sms": {
       "send_code_1002": "電話號碼無效",

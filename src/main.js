@@ -18,12 +18,12 @@ import App from './App'
 // js dependencies
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
+import store from './store'
 import router from './router'
 import moment from 'moment'
 import dictionary from '@/common/js/validation'
 import VeeValidate, { Validator } from 'vee-validate'
 import i18n from '@/common/js/i18n/i18n.js'
-import store from './store'
 import axios from 'axios'
 import { _post, _get, _delete } from './axios'
 import 'bootstrap/js/dropdown.js'
@@ -32,8 +32,6 @@ import Pusher from 'pusher-js'
 import 'bootstrap/js/carousel.js'
 // css dependencies
 import '@/common/css/bootstrap.css'
-
-sync(store, router)
 
 Vue.use(VeeValidate, {
   i18n,
@@ -73,6 +71,8 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+sync(store, router)
 
 new Vue({
   router,
