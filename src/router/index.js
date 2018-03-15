@@ -72,7 +72,7 @@ const router = new Router({
     },
     {
       path: `${version}/404`,
-      name: 'notFund',
+      name: 'notFound',
       component: Page404
     },
     {
