@@ -309,10 +309,24 @@ const zh = {
   },
   "markets":{
     "volume": "成交量",
-    "coinAndVolumn": "幣種/成交量",
-    "newPrice": "最新價",
-    "change": "漲跌幅",
-    "favorite": "自選",
+    "coinAndVolumn": "币种/成交量",
+    "newPrice": "最新价",
+    "change": "涨跌幅",
+    "favorite": "自选",
+    "quotes": "行情",
+    "trade": "交易",
+    "currency": "当前委托",
+    "volume24": "24h成交量",
+    "high": "24h最高价",
+    "low": "24h最低价",
+    "candle": "K线图",
+    "depth": "深度图",
+    "history": "最新成交",
+    "price": "成交价",
+    "number": "数量",
+    "time": "时间",
+    "buy": "买入",
+    "sell": "卖出"
   },
   "nav": {
     "home": "首页",
@@ -467,6 +481,7 @@ const zh = {
     "validate_sms": "驗證短信",
     "currency_withdraw": "提幣",
     "currency_deposit": "充值",
+    "404": "404 頁面",
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",
@@ -533,7 +548,8 @@ const zh = {
       "create_withdraw_1006": "系統錯誤",
       "create_withdraw_1007": "帳戶餘額不足",
       "create_withdraw_1008": "金額不能為空",
-      "create_withdraw_1009": "驗證碼錯誤"
+      "create_withdraw_1009": "驗證碼錯誤",
+      "create_withdraw_1010": "未創建資產帳戶"
     },
     "validate_sms": {
       "send_code_1002": "電話號碼無效",

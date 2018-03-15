@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store'
 const MemberCenter = () => import('Pages/MemberCenter/MemberCenter')
 const ValidateEmail = () => import('Pages/Validate/Email/Email')
 const ValidateGoogle = () => import('Pages/Validate/Google/Google')
@@ -86,6 +87,17 @@ const router = new Router({
       redirect: `${version}/404`
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.path !== process.env.ROUTER_VERSION + '/') {
+    if (store.state.loginData === 'none') {
+      store.dispatch('getData')
+    } else {
+      store.commit('redirect', 1)
+    }
+  }
+  next()
 })
 
 export default router

@@ -65,7 +65,7 @@
                 </strong>
               </div>
               <div class="row btc-marginT20">
-              <span>
+              <span style="display: block;">
                 {{$t('validate_google.cant_scan_enter_keys')}}
               </span>
               <div class="refreshqrcode btc-marginT15 btn" :disabled="disabled" @click="RenovateQrcode">
@@ -111,13 +111,13 @@ import { mapMutations, mapState } from 'vuex'
 var QRCode = require('qrcode')
 export default {
   name: 'ValidateGoogle',
-  updated () {
-    if (this.redirectLock) return
-    if (this.$store.state.loginData) {
-      this.redirectLock = true
-      this.$store.dispatch('redirect')
-    }
-  },
+  // updated () {
+  //   if (this.redirectLock) return
+  //   if (this.$store.state.loginData) {
+  //     this.redirectLock = true
+  //     this.$store.dispatch('redirect')
+  //   }
+  // },
   data () {
     return {
       redirectLock: false,
@@ -251,13 +251,13 @@ export default {
     ...mapState(['loginData'])
   },
   watch: {
-    $route (to) {
-      this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
-      if (this.route === 'google') {
-        console.log(1)
-        this.$store.dispatch('redirect')
-      }
-    }
+    // $route (to) {
+    //   this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
+    //   if (this.route === 'google') {
+    //     console.log(1)
+    //     this.$store.dispatch('redirect')
+    //   }
+    // }
   }
 }
 </script>

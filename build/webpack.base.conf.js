@@ -41,6 +41,14 @@ module.exports = {
       'Img': resolve('static/img'),
     }
   },
+  externals: {
+    'vue': 'Vue',
+    'axios': 'axios',
+    'vuex': 'Vuex',
+    'vue-router': 'VueRouter',
+    'jquery': 'jQuery',
+    'moment': 'moment'
+  },
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),

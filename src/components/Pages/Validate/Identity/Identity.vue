@@ -32,12 +32,12 @@
         </div>
         <div class="btc-marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
-            <basic-input ref='first_name' :placeholder='$t("validate_identity.surname")' :validate='"first_name"' v-model="user.first_name"></basic-input>
+            <basic-input ref='first_name' :placeholder='$t("validate_identity.surname")' :validate='"First Name"' v-model="user.first_name"></basic-input>
           <!--<div class=" btc-marginT20">-->
             <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
             <!--<basic-input  v-model="user.name"></basic-input>-->
           <!--</div>-->
-            <basic-input ref='last_name' :placeholder='$t("validate_identity.name")' :validate='"last_name"'  v-model="user.last_name"></basic-input>
+            <basic-input ref='last_name' :placeholder='$t("validate_identity.name")' :validate='"Last Name"'  v-model="user.last_name"></basic-input>
             <basic-input ref="IdCard"  :placeholder='$t("validate_identity.valid_id_card")' :validate='"IdCard"'  v-model="user.IdCard"></basic-input>
         </div>
       </div>
@@ -94,13 +94,13 @@ import { countries } from '@/common/js/countries'
 import { mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'ValidateIdentity',
-  updated () {
-    if (this.redirectLock) return
-    if (this.$store.state.loginData) {
-      this.redirectLock = true
-      this.$store.dispatch('redirect')
-    }
-  },
+  // updated () {
+  //   if (this.redirectLock) return
+  //   if (this.$store.state.loginData) {
+  //     this.redirectLock = true
+  //     this.$store.dispatch('redirect')
+  //   }
+  // },
   data () {
     return {
       prompt: {
@@ -229,15 +229,15 @@ export default {
     }
   },
   watch: {
-    $route (to) {
-      if (/identity/.test(this.$route.path)) {
-         this.$store.dispatch('redirect')
-      }
-    }
+    // $route (to) {
+    //   if (/identity/.test(this.$route.path)) {
+    //      this.$store.dispatch('redirect')
+    //   }
+    // }
   }
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 @import './Identity.scss'
 </style>

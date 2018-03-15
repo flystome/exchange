@@ -14,6 +14,7 @@ const actions = {
         location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
       }
       commit('getData', d)
+      commit('redirect')
     })
   },
   redirect ({ commit, state }) {
