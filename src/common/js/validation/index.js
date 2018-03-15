@@ -25,7 +25,7 @@ Validator._merge(name, validator)
   }
 }
 
-var empty = ['first_name', 'verify code', 'password', 'last_name']
+var empty = ['First Name', 'verify code', 'password', 'Last Name']
 
 Validator.extend('CellPhone', {
   getMessage: (field, params, data) => {
@@ -38,6 +38,7 @@ Validator.extend('CellPhone', {
 
 Validator.extend(empty, {
   getMessage: (field, params, data) => {
+    console.log(data)
     return (data && data.validation) || 'Something went wrong'
   },
   validate: value => {

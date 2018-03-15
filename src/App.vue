@@ -64,7 +64,13 @@ export default {
 }
 
 html, body {
-  height: 100%;
+  height: auto;
+}
+
+@media (min-width: 992px) {
+  html, body {
+    height: 100%;
+  }
 }
 
 body{
