@@ -33,9 +33,9 @@
             </div>
             <div class="media-body">
               <h5 class="media-heading">{{$t("member_center.tier_1")}}</h5>
-              <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.activated}">
+              <span class="btc-member-validata btc-link" @click="sendEmail" :class="{'btc-active': !loginData.activated}">
                 <span v-if='loginData.activated'>{{$t("auth.email")}}</span>
-                <button type="button" id="myButton" data-loading-text="Loading..." class="btn sendbutton" autocomplete="off" v-else @click="sendEmail" :disabled="disabled">
+                <button type="button" id="myButton" data-text="Loading..." class="btn sendbutton" autocomplete="off" :disabled="disabled" v-else >
                   {{$t("auth.send_email")}}
                 </button>
                 <img v-if='loginData.activated' src="~Img/validate-true.png" alt="已认证">
@@ -175,6 +175,7 @@ export default {
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       name_activated: false,
       wexin_activated: false,
       email_sent_message: this.$t('member_center.email_sent_message'),
@@ -214,6 +215,7 @@ export default {
       location.href = `${this.HOST_URL}/tickets/${id}`
     },
     sendEmail () {
+      if (this.loginData.activated) return
       this.disabled = true
       if (this.disabled) {
         this._get({
@@ -236,10 +238,10 @@ export default {
         return
       }
       if (href) {
-        location.href = `${this.HOST_URL}${path}`
+        location.href = `${this.HOST_URL}${this.ROUTER_VERSION}${path}`
       }
       this.$router.push({
-        path: path
+        path: `${this.ROUTER_VERSION}${path}`
       })
     },
     getTicket () {

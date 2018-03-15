@@ -429,6 +429,7 @@ const en = {
       "remark_label": "Remark",
       "use_a_new_address": "Use a new address",
       "sms": "SMS",
+      "google": "Google",
       "send_identify_code": "Send Identify Code",
       "set_as_default": "Set As Default",
       "delete": "Delete",
@@ -522,6 +523,10 @@ const en = {
         "success_200": "Photo Update Successfully",
         "error_1001": "Photo Update Failure"
       },
+      "member_center": {
+        "success_200": "Email has been sent, please check it",
+        "error_1001": "An confirm email has been sent to your mailbox"
+      },
       "withdraw_currency": {
         "set_fund_source_200": "The fund source is set as default",
         "set_fund_source_1001" : "The fund source is set default failed",
@@ -532,11 +537,14 @@ const en = {
         "Withdraw_canceled_1001": "Withdraw request can not cancel",
         "create_withdraw_200": "An confirm email has been sent to your mailbox",
         "create_withdraw_1001": "Please give an valid currency param",
-        "create_withdraw_1002": "Two factor authentication failed",
+        "create_withdraw_1002": "Authentication Failed",
         "create_withdraw_1003": "The withdrawal requests can not be more than",
         "create_withdraw_1004": "The withdrawal amount is above the daily limit",
         "create_withdraw_1005": "Invalid fund source",
         "create_withdraw_1006": "System error",
+        "create_withdraw_1007": "Account balance is insufficient",
+        "create_withdraw_1008": "Amount Can not be empty",
+        "create_withdraw_1009": "Verification code error"
       },
       "validate_sms": {
         "send_code_1002": "Phone number is invalid",

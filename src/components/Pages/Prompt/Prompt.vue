@@ -22,16 +22,21 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'Prompt',
+  data () {
+    return {
+      ROUTER_VERSION: process.env.ROUTER_VERSION
+    }
+  },
   methods: {
     goPath (path, status, href) {
       if (status) {
         return
       }
       if (href) {
-        location.href = `${this.HOST_URL}${path}`
+        location.href = `${this.HOST_URL}${this.ROUTER_VERSION}${path}`
       }
       this.$router.push({
-        path: path
+        path: `${this.ROUTER_VERSION}${path}`
       })
     }
   },

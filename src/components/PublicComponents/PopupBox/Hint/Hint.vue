@@ -25,10 +25,15 @@
 import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'Hint',
+  data () {
+    return {
+      ROUTER_VERSION: process.env.ROUTER_VERSION
+    }
+  },
   methods: {
     gopath () {
       if (this.PopupBox.url) {
-        this.$router.push(this.PopupBox.url)
+        this.$router.push(`${this.ROUTER_VERSION}${this.PopupBox.url}`)
       }
       this.PopupBoxDisplay()
     },

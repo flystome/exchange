@@ -14,6 +14,8 @@ const Page404 = () => import('Pages/Page404/Page404')
 
 Vue.use(Router)
 
+const version = process.env.ROUTER_VERSION
+
 const router = new Router({
   mode: 'history',
   routes: [
@@ -23,60 +25,65 @@ const router = new Router({
       component: MemberCenter
     },
     {
-      path: '/markets',
+      path: `${version}/markets`,
       name: 'Markets',
       component: Markets
     },
     {
-      path: '/homepage',
+      path: `${version}/homepage`,
       name: 'HomePage',
       component: HomePage
     },
     {
-      path: '/prompt',
+      path: `${version}/prompt`,
       name: 'Prompt',
       component: Prompt
     },
     {
-      path: '/member_center',
+      path: `${version}/member_center`,
       name: 'member_center',
       component: MemberCenter
     },
     {
-      path: '/validate/email',
+      path: `${version}/validate/email`,
       name: 'ValidateEmail',
       component: ValidateEmail
     },
     {
-      path: '/validate/google',
+      path: `${version}/validate/google`,
       name: 'ValidateGoogle',
       component: ValidateGoogle
     },
     {
-      path: '/validate/identity',
+      path: `${version}/validate/identity`,
       name: 'ValidateIdentity',
       component: ValidateIdentity
     },
     {
-      path: '/currency/withdraw',
-      alias: '/currency/deposit',
+      path: `${version}/currency/withdraw`,
+      alias: `${version}/currency/deposit`,
       name: 'WithdrawCurrency',
       component: WithdrawCurrency
     },
     {
-      path: '/validate/sms',
+      path: `${version}/validate/sms`,
       name: 'ValidateSms',
       component: ValidateSms
     },
     {
-      path: '/404',
-      name: 'notFund',
+      path: `${version}/404`,
+      name: 'notFound',
       component: Page404
+    },
+    {
+      path: '/:version',
+      name: '/:version',
+      component: MemberCenter
     },
     {
       path: '*',
       name: '*',
-      redirect: '/404'
+      redirect: `${version}/404`
     }
   ]
 })

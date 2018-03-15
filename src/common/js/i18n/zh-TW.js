@@ -279,7 +279,7 @@ const zh = {
       'level_4': `等级 4`
     },
     'email': `邮箱验证`,
-    'send_email': `再次发送`,
+    'send_email': `发送邮件`,
     'phone': `手机认证`,
     'google': `谷歌认证`,
     'real_name': `实名认证`,
@@ -514,7 +514,7 @@ const zh = {
     },
     "member_center": {
       "success_200": "電子郵件已發送，請檢查它",
-      "error_1001": "錯誤提醒，請重新確認"
+      "error_1001": "確認電子郵件已發送到您的郵箱"
     },
     "withdraw_currency": {
       "set_fund_source_200": "提幣地址被設置為默認值",
@@ -531,11 +531,16 @@ const zh = {
       "create_withdraw_1004": "提幣金額高於每日限額",
       "create_withdraw_1005": "地址來源無效",
       "create_withdraw_1006": "系統錯誤",
+      "create_withdraw_1007": "帳戶餘額不足",
+      "create_withdraw_1008": "金額不能為空",
+      "create_withdraw_1009": "驗證碼錯誤"
     },
     "validate_sms": {
-      "send_code_1001": "電話號碼無效",
+      "send_code_1002": "電話號碼無效",
+      "send_code_1001": "發送速度太快，請等待一分鐘",
       "auth_sms_200": "驗證碼錯誤！請重新輸入",
       "auth_sms_1001": "驗證失敗",
+      "auth_sms_1002": "谷歌身份驗證碼不正確",
     }
   },
   "footer": {

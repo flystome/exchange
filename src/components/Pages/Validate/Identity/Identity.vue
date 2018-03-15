@@ -1,7 +1,7 @@
 <template>
   <div v-if="!(loginData.id_document && loginData.id_document.aasm_state !=='unverified') && (loginData.sms_activated || loginData.app_activated) &&  loginData.activated" class="btc-container-block btc-validateIdentity">
     <header class="title">
-        <router-link to='/' class="btc-link">
+        <router-link :to="`${ROUTER_VERSION}/`" class="btc-link">
           {{$t('title.member_center')}}
         </router-link>
         >
@@ -109,6 +109,7 @@ export default {
       },
       disabled: false,
       redirectLock: false,
+
       img: false,
       user: {
         surname: '',
@@ -124,6 +125,7 @@ export default {
         indentity4: ''
       },
       countries: countries,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       selectedCountry: 'South Korea',
       identity_hint: this.$t('validate_identity.information_upload_success')
     }
@@ -211,6 +213,7 @@ export default {
         if (d.data.success) {
           this.disabled = false
           this.PopupBoxDisplay({message: this.$t('api_server.validate_identity.success_200'), url: '/member_center', type: 'success'})
+          this.$store.dispatch('getData')
         } else {
           this.PopupBoxDisplay({message: this.$t('api_server.validate_identity.error_1001'), type: 'error'})
         }
@@ -226,13 +229,6 @@ export default {
     }
   },
   watch: {
-    loginData (to, from) {
-      if (!from) {
-        if (/identity/.test(this.$route.path)) {
-          this.$store.dispatch('redirect')
-        }
-      }
-    },
     $route (to) {
       if (/identity/.test(this.$route.path)) {
          this.$store.dispatch('redirect')
