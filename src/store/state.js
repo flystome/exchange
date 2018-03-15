@@ -9,7 +9,7 @@ const state = {
     buttonText: '',
     buttondisplay: true
   },
-  language: '',
+  language: 'en',
   DepositAddress: {
   }
 }
