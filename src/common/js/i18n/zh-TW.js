@@ -534,7 +534,8 @@ const zh = {
       "create_withdraw_1006": "系統錯誤",
       "create_withdraw_1007": "帳戶餘額不足",
       "create_withdraw_1008": "金額不能為空",
-      "create_withdraw_1009": "驗證碼錯誤"
+      "create_withdraw_1009": "驗證碼錯誤",
+      "create_withdraw_1010": "未創建資產帳戶"
     },
     "validate_sms": {
       "send_code_1002": "電話號碼無效",

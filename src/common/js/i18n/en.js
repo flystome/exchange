@@ -499,13 +499,6 @@ const en = {
       "google_verification": "Verify",
       "app_already_installed": "APP already installed",
     },
-    "markets":{
-      "volume": "成交量",
-      "coinAndVolumn": "币种/成交量",
-      "newPrice": "最新价",
-      "change": "涨跌幅",
-      "favorite": "自选",
-    },
     "hint": {
       "confirm": "OK",
       "generating_address": "We are generating deposit address, please wait a few seconds.",
@@ -544,7 +537,8 @@ const en = {
         "create_withdraw_1006": "System error",
         "create_withdraw_1007": "Account balance is insufficient",
         "create_withdraw_1008": "Amount Can not be empty",
-        "create_withdraw_1009": "Verification code error"
+        "create_withdraw_1009": "Verification code error",
+        "create_withdraw_1010": "Assets account not created"
       },
       "validate_sms": {
         "send_code_1002": "Phone number is invalid",
