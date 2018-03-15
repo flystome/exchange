@@ -33,7 +33,9 @@ const redirect = (state, action, type) => {
       }
       break
     case 'WithdrawCurrency':
-    if (/withdraw/.test(path)) {
+    console.log(path ,type)
+    if (/withdraw/.test(state.route.path)) {
+      console.log(state.loginData.activated)
       var code = ''
       if (!state.loginData.activated) {
         code = 1001
@@ -43,8 +45,9 @@ const redirect = (state, action, type) => {
       if (code) {
         action.commit('PopupBoxDisplay', {message: i18n.t(`member_center.${code}_hint`) , type: 'warn' ,url: '/'})
       }
-    } else if (/deposit/.test(path)) {
+    } else if (/deposit/.test(state.route.path)) {
       if (!state.loginData.activated) {
+        console.log(state.loginData.activated)
         action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1001_hint') , type: 'warn' ,url: '/'})
         return
       }

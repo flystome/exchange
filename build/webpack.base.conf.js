@@ -47,9 +47,7 @@ module.exports = {
     'vuex': 'Vuex',
     'vue-router': 'VueRouter',
     'jquery': 'jQuery',
-    'moment': 'moment',
-    'js-cookie': 'Cookies',
-    'qrcode': 'qrcode',
+    'moment': 'moment'
   },
   module: {
     rules: [

@@ -630,11 +630,18 @@ export default {
     new Clipboard('.btn-copy')
   },
   watch: {
-    // $route (to) {
-    //   if (/WithdrawCurrency/.test(to.name)) {
-    //     this.$store.dispatch('redirect')
-    //   }
-    // },
+    $route (to) {
+      if (/withdraw/.test(to.path)) {
+        this.route = 'withdraw'
+        this.$store.commit('redirect')
+      } else if (/deposit/.test(to.path)) {
+        this.route = 'deposit'
+        this.$store.commit('redirect', 1)
+      }
+      // if (/WithdrawCurrency/.test(to.name)) {
+      //   this.
+      // }
+    },
     DepositAddress (to, from) {
       if (Object.keys(to).length > Object.keys(from).length) {
         this.deposit_address = to[Object.keys(to)]

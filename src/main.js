@@ -32,6 +32,7 @@ import Pusher from 'pusher-js'
 import 'bootstrap/js/carousel.js'
 // css dependencies
 import '@/common/css/bootstrap.css'
+import '@/common/css/reset.css'
 
 Vue.use(VeeValidate, {
   i18n,
