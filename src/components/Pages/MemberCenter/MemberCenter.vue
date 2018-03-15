@@ -291,7 +291,7 @@ export default {
             content: [
               this.$moment(d.created_at).format('L H:mm:ss'),
               d.ip,
-              d.location
+              d.location === null ? 'Null' : d.location
             ]
           }
         }))

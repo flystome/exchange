@@ -12,10 +12,10 @@
             :class="{
             'btc-tableTextright':index === 0,
             'btc-tableTextleft': index === item.content.length-1,
-            'btc-tablehover': data.hover
+            'btc-tablehover':  Object.prototype.toString.call(data) === '[object Object]' ? data.hover : data
             }">
-            {{ typeof data !== 'object' ? data : $t(`withdraw_currency.${data.context}`) }}
-           <slot v-if="(data.type && data.type['aasm_state']) === ('submitting' || 'submitted' || 'accepted') "
+            {{ Object.prototype.toString.call(data) !== '[object Object]' ? data : $t(`withdraw_currency.${data.context}`) }}
+           <slot v-if="(Object.prototype.toString.call(data) === '[object Object]' && data.type && data.type['aasm_state']) === ('submitting' || 'submitted' || 'accepted') "
            name="cancel"
            :data='data'
            :id='data.id'>
