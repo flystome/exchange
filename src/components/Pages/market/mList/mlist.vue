@@ -12,12 +12,13 @@
 <script>
 // import { mapGetters, mapMutations } from 'vuex'
 import marketList from './marketList/marketList'
+import pusher from '@/common/js/pusher'
 
 export default {
   name: 'markets',
   data () {
     return {
-      hds: [this.$t('markets.favorite'), 'btc', 'eth'],
+      hds: [this.$t('markets.favorite'), 'btc', 'usdt'],
       currencyindex: 0,
       marketData: null,
       curData: []
@@ -27,32 +28,64 @@ export default {
     marketList
   },
   mounted: function () {
+    var self = this
     this.fetchData()
+    var channel = pusher.subscribe('market-global')
+    channel.bind('tickers', (data) => {
+      if (JSON.stringify(data) !== '{}') {
+        for (var i in data) {
+          var key = data[i]['base_currency']
+          var Arr = self.marketData[key]
+          var len = Arr.length
+          var target = null
+          for (var j = 0; j < len; j++) {
+            var arrKey = Object.keys(Arr[j])
+            if (arrKey[0] === i) {
+              target = Arr[j]
+              console.log(data[i])
+              target[arrKey].last = data[i]['last']
+              target[arrKey].percent = data[i]['percent']
+              target[arrKey].volume = data[i]['volume']
+              target[arrKey].legal_worth = data[i]['legal_worth']
+            }
+          }
+          console.log(self.marketData, target)
+          this.getCurData(self.marketData)
+        }
+      }
+      console.log(data)
+    })
   },
   methods: {
     fetchData: function () {
       var self = this
-      this._httpget({
+      this._get({
         url: '/home.json',
         data: {}
       }, function (data) {
-        console.log(data.request.response)
-        var marketData = JSON.parse(data.request.response)
-        self.curData = []
-        self.curData.push(self.initDate(marketData))
-        self.curData.push(self.getItem(marketData['btc']))
-        self.curData.push(self.getItem(marketData['eth']))
+        var getdata = JSON.parse(data.request.response)
+        self.getCurData(getdata.success)
+        self.marketData = getdata.success
+        console.log(data.request.response, self.curData)
       })
+    },
+    getCurData: function (data) {
+      this.curData = []
+      this.curData.push(this.initDate(data))
+      this.curData.push(this.getItem(data['btc']))
+      this.curData.push(this.getItem(data['usdt']))
     },
     changemarket: function (index, item) {
       this.currencyindex = index
     },
     initDate: function (data) {
+      var arr = []
       if (data.current_user) {
-        this.getFavorite(data)
+        arr = this.getFavorite(data)
       } else {
-        this.getLocal(data)
+        arr = this.getLocal(data)
       }
+      return arr
     },
     getItem: function (data) {
       var arr = []
@@ -66,7 +99,7 @@ export default {
     getFavorite: function (data) {
       var arr = []
       for (var key in data) {
-        if (key !== 'current_user') {
+        if (key !== 'current_user' && key !== 'code') {
           var list = data[key]
           var len = list.length
           for (var i = 0; i < len; i++) {

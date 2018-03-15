@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 // css dependencies
 // import 'bootstrap/dist/css/bootstrap.min.css'
+import '@/common/css/bootstrap.css'
 import '../static/style/common.css'
 // template dependencies
 import BasicButton from 'Components/BasicButton/BasicButton'
@@ -30,8 +31,6 @@ import 'bootstrap/js/dropdown.js'
 import 'bootstrap/js/collapse.js'
 import Pusher from 'pusher-js'
 import 'bootstrap/js/carousel.js'
-// css dependencies
-import '@/common/css/bootstrap.css'
 
 Vue.use(VeeValidate, {
   i18n,

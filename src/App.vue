@@ -39,10 +39,6 @@ export default {
 #app{
   height: 100%;
 }
-.btc-main{
-  min-height: 100%;
-  padding-bottom: 217px;
-}
 
 .input.is-danger, .textarea.is-danger {
     border-color: #ff3860;
@@ -81,12 +77,6 @@ body{
   border: 1px solid #4382f7;
   color: #4382f7;
   background: white;
-}
-
-.btc-container{
-  background: #f2f2f2;
-  padding-bottom: 13px;
-  min-height: 70vh;
 }
 
 .btc-container-block{
