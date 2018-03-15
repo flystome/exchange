@@ -48,9 +48,7 @@ module.exports = {
     'vue-router': 'VueRouter',
     'jquery': 'jQuery',
     'moment': 'moment',
-    'clipboard': 'clipboard',
     'js-cookie': 'Cookies',
-    'pusher': 'Pusher',
     'qrcode': 'qrcode',
   },
   module: {
