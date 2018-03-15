@@ -59,7 +59,7 @@ const mutations = {
     redirect(state, this)
   },
   getData (state, data) {
-    state.language = Cookies.get('locale') === '' ? 'en' : Cookies.get('locale')
+    state.language = Cookies.get('locale') === undefined ? 'en' : Cookies.get('locale')
     data.data.referrals.map((d, index) => {
       d['referrals_account_name'] = data.data.referrals_account_name[index]
     })
