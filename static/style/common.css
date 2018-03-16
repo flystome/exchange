@@ -39,16 +39,12 @@ ul,li {
     height: 100%;
   }
   .btc-main {
-    display: flex;
-    flex-direction: column;
     padding-bottom: 0;
     height: 100%;
     width: 100%;
-    background: #181f28;
   }
   .btc-container {
     padding: 0;
     width: 100%;
-    background: #181f28;
   }
 }

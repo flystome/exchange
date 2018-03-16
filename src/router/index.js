@@ -26,7 +26,7 @@ const router = new Router({
       component: MemberCenter
     },
     {
-      path: `${version}/markets`,
+      path: `/markets`,
       name: 'Markets',
       component: Markets
     },

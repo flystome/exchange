@@ -261,48 +261,48 @@ const zh = {
     }
   },
   'auth': {
-    'please_active_two_factor': `为了您的资金安全, 请先绑定手机或设置两步验证。`,
-    'submit': `确认`,
-    'otp_placeholder': `6位数字密码`,
-    'google_app': `谷歌身份验证器`,
-    'sms': `手机短信验证`,
-    'send_code': `获取验证码`,
-    'send_code_alt': `COUNT秒后重新发送`,
+    'please_active_two_factor': `為了您的資金安全，請先綁定手機或設置兩步驗證。`,
+    'submit': `確認`,
+    'otp_placeholder': `6位數字密碼`,
+    'google_app': `谷歌身份驗證器`,
+    'sms': `手機短信驗證`,
+    'send_code': `獲取驗證碼`,
+    'send_code_alt': `COUNT秒後重新發送`,
     'hints': {
-      'app': `谷歌验证器每三十秒会重新生成新密码，请及时输入。`,
-      'sms': `请点击“获取验证码”按纽，我们将会把验证码以短信的方式发到您的手机上。`
+      'app': `谷歌驗證器每三十秒會重新生成新密碼，請及時輸入。`,
+      'sms': `請點擊“獲取驗證碼”按鈕，我們將會把驗證碼以短信的方式發到您的手機上。`
     },
     'level': {
-      'level_1': `等级 1`,
-      'level_2': `等级 2`,
-      'level_3': `等级 3`,
-      'level_4': `等级 4`
+      'level_1': `等級 1`,
+      'level_2': `等級 2`,
+      'level_3': `等級 3`,
+      'level_4': `等級 4`
     },
-    'email': `邮箱验证`,
-    'send_email': `发送邮件`,
-    'phone': `手机认证`,
-    'google': `谷歌认证`,
-    'real_name': `实名认证`,
-    'bank_account': `银行账户认证`,
-    'double_channel': `双渠道追加认证 (可选)`,
-    'phone_ps': `请用本人实名认证的手机进行身份认证`,
-    'bank_account_ps': `用于 KRW 提现的银行账户认证`,
-    'double_channel_ps': `请用 Kakaopay 认证保障交易安全`
+    'email': `郵箱驗證`,
+    'send_email': `發送郵件`,
+    'phone': `手機認證`,
+    'google': `谷歌認證`,
+    'real_name': `實名認證`,
+    'bank_account': `銀行賬戶認證`,
+    'double_channel': `雙渠道追加認證（可選）`,
+    'phone_ps': `請用本人實名認證的手機進行身份認證`,
+    'bank_account_ps': `用於KRW提現的銀行賬戶認證`,
+    'double_channel_ps': `請用Kakaopay認證保障交易安全`
   },
   'markets': {
     'market_list': {
-      'all': `全部交易对`,
-      'cny': `CNY交易对`,
-      'btc': `BTC交易对`
+      'all': `全部交易對`,
+      'cny': `CNY交易對`,
+      'btc': `BTC交易對`
     }
   },
   'sort': {
-    'default': `推荐`,
+    'default': `推薦`,
     'market_cap': `市值`,
-    'last': `价格`,
-    'change_1d_pct': `24小时涨幅`,
-    'code': `代码`,
-    'turnover': `成交额`
+    'last': `價格`,
+    'change_1d_pct': `24小時漲幅`,
+    'code': `代碼`,
+    'turnover': `成交額`
   },
   'validation': {
     "mobile": '阿'
@@ -382,7 +382,7 @@ const zh = {
   },
   "validate_identity": {
     "real_name_authentication": "實名認證",
-    "surname": "姓/名",
+    "surname": "名",
     "name": "姓",
     "valid_id_card": "身份證號碼",
     "positive_identity_card_photo": "身份證正面",
