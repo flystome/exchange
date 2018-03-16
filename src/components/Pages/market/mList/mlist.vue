@@ -42,18 +42,15 @@ export default {
             var arrKey = Object.keys(Arr[j])
             if (arrKey[0] === i) {
               target = Arr[j]
-              console.log(data[i])
               target[arrKey].last = data[i]['last']
               target[arrKey].percent = data[i]['percent']
               target[arrKey].volume = data[i]['volume']
               target[arrKey].legal_worth = data[i]['legal_worth']
             }
           }
-          console.log(self.marketData, target)
           this.getCurData(self.marketData)
         }
       }
-      console.log(data)
     })
   },
   methods: {
@@ -66,7 +63,6 @@ export default {
         var getdata = JSON.parse(data.request.response)
         self.getCurData(getdata.success)
         self.marketData = getdata.success
-        console.log(data.request.response, self.curData)
       })
     },
     getCurData: function (data) {

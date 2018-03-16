@@ -49,15 +49,11 @@ export default {
     },
     fixed3: function (params) {
       if (+params === 0) return 0
-      var arr = +params.toString().split('.')
       var len = +params.toString().split('.')[0].length
-      console.log(len)
       if (len > 1) {
         return (+params).toFixed(2)
-      } else if (len === 1 && arr[0] === 0) {
-        return (+params).toFixed(4)
       } else {
-        return (+params).toFixed(3)
+        return (+params).toPrecision(4)
       }
     }
   },
