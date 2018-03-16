@@ -16,7 +16,7 @@
   }
 
   form{
-    margin: 40px 0 17px 0;
+    margin: 20px 0 17px 0;
     padding-top: 15px;
   }
 
@@ -128,7 +128,7 @@
           margin-top: 0;
           position: absolute;
           left: 0;
-          top: 100px;
+          top: 56px;
         }
         &:nth-child(2){
           float: left;
@@ -153,12 +153,15 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 409px) {
   .btc-marginT20 .btc-marginR5{
     margin-right:0;
     margin-bottom:5px;
   }
   .googleImg{
     width: 100%;
+  }
+  .btc-white-btn{
+    font-size: 12px;
   }
 }

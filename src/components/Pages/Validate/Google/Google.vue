@@ -88,9 +88,9 @@
             </div>
             <div class="row" v-if="loginData.sms_activated">
               <div class="col-md-offset-2 col-md-9 col-xs-12">
-                <basic-input class="col-md-9 col-xs-10 btc-paddingL0" @focus.native="promptEmpty()" ref="smscode" :validate='"verify code"' :placeholder='$t("validate_sms.verification_code")' v-model="sms_code">
+                <basic-input class="col-md-9 col-xs-9 btc-paddingL0" @focus.native="promptEmpty()" ref="smscode" :validate='"verify code"' :placeholder='$t("validate_sms.verification_code")' v-model="sms_code">
                 </basic-input>
-                <button class="btc-white-btn col-md-3 col-xs-2" :disabled="disabled" @click.prevent="SendSms">
+                <button class="btc-white-btn col-md-3 col-xs-3" :disabled="disabled" @click.prevent="SendSms">
                   {{ timer }}
                 </button>
               </div>
@@ -100,7 +100,7 @@
       </div>
       <div class="text-right btc-marginT65 minusStep">
         <span @click="minusStep" class="col-xs-12 col-md-1 btc-link btc-fl btc-marginT10 btc-poniter" style="display:inline-block">{{$t('validate_google.prve')}}</span>
-        <basic-button :disabled="disabled" class="btn col-xs-12 col-md-2 pull-right btc-marginT15" :text='$t("validate_google.google_verification")' @click.native='gValidate'></basic-button>
+        <basic-button :disabled="disabled" class="btn col-xs-12 col-md-2 pull-right btc-marginT10" :text='$t("validate_google.google_verification")' @click.native='gValidate'></basic-button>
       </div>
     </template>
   </div>

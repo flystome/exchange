@@ -47,7 +47,7 @@ Validator.extend(empty, {
 
 Validator.extend('IdCard', {
   getMessage (field, params, data) {
-    return (data && data.validation) || 'Something went wrong'
+    // return (data && data.validation) || 'Something went wrong'
   },
   validate: value => {
     return /[a-zA-z\d]{5,}/.test(value)
