@@ -339,11 +339,11 @@ const zh = {
     "announcement": "公告",
     "qa": "FAQ",
     "settings": "設置",
-    "member_center": "賬戶中心",
+    "my_account": "賬戶中心",
     "exit": "退出",
     "message": "消息"
   },
-  "member_center": {
+  "my_account": {
     "total_assets": "總資產",
     "change_password": "更改密碼",
     "login_record": "登陸記錄（近五次）",
@@ -420,7 +420,7 @@ const zh = {
     "deposit": "充值",
     "withdraw": "提幣",
     "withdraw_currency_address": "提取貨幣地址",
-    "Amount_to_withdraw": "全部提幣",
+    "Amount_to_withdraw": "提幣數量",
     "google_validate": "Google驗證",
     "withdraw_all": "全部提幣",
     "tariff_description": "資費說明",
@@ -457,7 +457,9 @@ const zh = {
     "almost_done": "完成",
     "done": "完成",
     "failed": "失敗",
-    "node_audited": "節點已審核"
+    "node_audited": "節點已審核",
+    "google": "谷歌",
+    "sms": "手機"
   },
   "deposit_currency": {
     "deposit_address": "地址",
@@ -465,16 +467,16 @@ const zh = {
     "use_wallet_service": "請使用您常用的錢包服務，本地錢包，在線錢包或手機錢包，選擇付款或發送.",
     "font_descripe": "在支付或支付您的錢包時，請複制以下專門為您充值的特殊貨幣地址，在金額中填寫您想要為帳戶充值的金額，並且不要忘記支付一定的礦石費以確保 該交易盡快由全網確認。 您還可以掃描移動終端錢包中的二維碼進行支付。 您可以為特殊貨幣地址和二維碼進行充值.",
     "operation_done": "完成上述操作後，點擊發送付款，交易將被廣播到整個網絡，以便您可以查看交易狀態。 當交易達到整個網絡的1次確認（大約10到60分鐘）時，系統將自動為賬戶充值。 您可以查詢資產的情況.",
-    "deposit_record": "存款記錄",
-    "deposit_date": "存款日期",
+    "deposit_record": "充值記錄",
+    "deposit_date": "充值日期",
     "trading_hash": "充值地址",
     "recharge_amount": "充值金額",
     "confirmation_number": "確認號碼",
     "identifying_code": "驗證碼",
-    "temporarily_unable_deposit": "暫時無法存款"
+    "temporarily_unable_deposit": "暫時無法充值"
   },
   "title": {
-    "member_center": "我的帳戶",
+    "my_account": "我的帳戶",
     "validate_email": "驗證郵件",
     "validate_google": "驗證Google",
     "validate_identity": "驗證身份",
@@ -485,7 +487,7 @@ const zh = {
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",
-    "phone_not_certified": "電話未驗證",
+    "not_certified": "手機或者谷歌沒有驗證",
     "google_not_certified": "Google身份驗證不受限制",
     "not_certified_prompt": "為了不影響你在HOTEX平台上的用戶體驗，請前往驗證",
     "go_validate": "驗證"
@@ -497,14 +499,14 @@ const zh = {
   "validate_google": {
     "download_google_verified_app": "下載Google身份驗證器應用程序",
     "scan_qrcode_and_enter_code": "掃描二維碼並輸入驗證代碼",
-    "download_authenticator_at_store": "在AppStore或Google Play下載Google Authenticator",
-    "next": "Next",
-    "using": "Using",
-    "google_to_verify_app": "Google Authenticator",
+    "download_authenticator_at_store": "在AppStore或Google Play下載谷歌驗證器",
+    "next": "下一步",
+    "using": "使用",
+    "google_to_verify_app": "谷歌驗證器",
     "scan_qrcode": "掃描二維碼",
     "cant_scan_enter_keys": "如果無法掃描，請手動將16個字符的密鑰輸入Google身份驗證器",
     "refresh_qrcode": "刷新",
-    "prve": "Back",
+    "prve": "上一步",
     "login_password": "登錄密碼",
     "google_verification_code": "驗證代碼顯示在Google身份驗證器中",
     "google_verification": "驗證",
@@ -512,7 +514,7 @@ const zh = {
   },
   "hint": {
     "confirm": "OK",
-    "generating_address": "我們正在生成存款地址，請等待幾片刻.",
+    "generating_address": "我們正在生成充值地址，請等待幾片刻.",
     "completion": "完成",
     "server_exception": "服務器異常"
   },
@@ -527,7 +529,7 @@ const zh = {
       "success_200": "照片更新成功",
       "error_1001": "照片更新失敗"
     },
-    "member_center": {
+    "my_account": {
       "success_200": "電子郵件已發送，請檢查它",
       "error_1001": "確認電子郵件已發送到您的郵箱"
     },
@@ -541,8 +543,8 @@ const zh = {
       "Withdraw_canceled_1001": "提幣請求無法取消",
       "create_withdraw_200": "確認電子郵件已發送到您的郵箱",
       "create_withdraw_1001": "請給出一個有效的貨幣地址",
-      "create_withdraw_1002": "身份驗證失敗",
-      "create_withdraw_1003": "提幣請求次數過多，請稍後再試",
+      "create_withdraw_1002": "驗證失敗",
+      "create_withdraw_1003": "提幣請求次數超出",
       "create_withdraw_1004": "提幣金額高於每日限額",
       "create_withdraw_1005": "地址來源無效",
       "create_withdraw_1006": "系統錯誤",

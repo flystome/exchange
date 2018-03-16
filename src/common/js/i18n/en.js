@@ -325,11 +325,11 @@ const en = {
       "announcement": "Announcements",
       "qa": "FAQ",
       "settings": "Settings",
-      "member_center": "My Account",
+      "my_account": "My Account",
       "exit": "Exit",
       "message": "Message"
     },
-    "member_center": {
+    "my_account": {
       "total_assets": "Total Assets",
       "change_password": "Change Password",
       "login_record": "Login Record (Last 5)",
@@ -445,7 +445,9 @@ const en = {
       "almost_done": "Almost Done",
       "done": "Done",
       "failed": "Failed",
-      "node_audited": "Node Audited"
+      "node_audited": "Node Audited",
+      "google": "Google ",
+      "sms": "SMS "
     },
     "deposit_currency": {
       "deposit_address": "Address",
@@ -462,7 +464,7 @@ const en = {
       "temporarily_unable_deposit": "Temporarily unable to deposit"
     },
     "title": {
-      "member_center": "My Account",
+      "my_account": "My Account",
       "validate_email": "Validate Email",
       "validate_google": "Validate Google",
       "validate_identity": "Validate Identity",
@@ -537,7 +539,7 @@ const en = {
         "success_200": "Photo Update Successfully",
         "error_1001": "Photo Update Failure"
       },
-      "member_center": {
+      "my_account": {
         "success_200": "Email has been sent, please check it",
         "error_1001": "An confirm email has been sent to your mailbox"
       },
@@ -551,7 +553,7 @@ const en = {
         "Withdraw_canceled_1001": "Withdraw request can not cancel",
         "create_withdraw_200": "An confirm email has been sent to your mailbox",
         "create_withdraw_1001": "Please give an valid currency param",
-        "create_withdraw_1002": "Two factor authentication failed",
+        "create_withdraw_1002": "Authentication Failed",
         "create_withdraw_1003": "The withdrawal requests can not be more than",
         "create_withdraw_1004": "The withdrawal amount is above the daily limit",
         "create_withdraw_1005": "Invalid fund source",

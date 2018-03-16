@@ -12,9 +12,9 @@
             :class="{
             'btc-tableTextright':index === 0,
             'btc-tableTextleft': index === item.content.length-1,
-            'btc-tablehover':  Object.prototype.toString.call(data) === '[object Object]' ? data.hover : data
+            'btc-tablehover':  Object.prototype.toString.call(data) === '[object Object]' ? data.hover : false
             }">
-            {{ Object.prototype.toString.call(data) !== '[object Object]' ? data : $t(`withdraw_currency.${data.context}`) }}
+            {{ Object.prototype.toString.call(data) !== '[object Object]' ? data : (data.hover ? data.context : $t(`withdraw_currency.${data.context}`)) }}
            <slot v-if="(Object.prototype.toString.call(data) === '[object Object]' && data.type && data.type['aasm_state']) === ('submitting' || 'submitted' || 'accepted') "
            name="cancel"
            :data='data'
@@ -25,7 +25,7 @@
         </tbody>
         <div class="text-center btc-table-record" v-else>
           <div>
-            <div class="btc-marginT15 btc-font12 btc-color999">{{$t('member_center.no_record')}}</div>
+            <div class="btc-marginT15 btc-font12 btc-color999">{{$t('my_account.no_record')}}</div>
           </div>
         </div>
       </table>
@@ -48,6 +48,6 @@ export default {
 }
 </script>
 
-<style scoped>
-  @import './BasicTable.css'
+<style scoped lang='scss'>
+  @import './BasicTable.scss'
 </style>

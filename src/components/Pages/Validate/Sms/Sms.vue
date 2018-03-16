@@ -1,7 +1,7 @@
 <template>
   <div v-if="!loginData.sms_activated && loginData.activated" @keyup.enter='Validate' class="btc-validate-sms btc-container-block" @click="ShowCallingcode(false);prompt = ''">
     <header class="btc-color666">
-      <router-link :to="`${ROUTER_VERSION}/`" class="btc-link">{{$t('title.member_center')}}</router-link> > <span>{{$t('title.validate_sms')}}</span>
+      <router-link :to="`${ROUTER_VERSION}/`" class="btc-link">{{$t('title.my_account')}}</router-link> > <span>{{$t('title.validate_sms')}}</span>
     </header>
     <div class="btc-sms-container">
       <news-prompt :text='prompt'></news-prompt>
@@ -128,7 +128,7 @@ export default {
         }
       }, (d) => {
         if (d.data.success) {
-          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_200'), type: 'success', url: '/member_center'})
+          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_200'), type: 'success', url: '/'})
           this.$store.dispatch('getData')
         } else {
           this.SmsData.verifyCode = ''
