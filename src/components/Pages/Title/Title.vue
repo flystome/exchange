@@ -1,9 +1,21 @@
 <template>
-    <title>{{`${$t(`title.${this.$route.path.slice(1) === '' ? 'member_center' : this.$route.path.slice(1).replace(/\//,'_') }`)} - ${$t('brand')}`}}</title>
+    <title>{{ title }}</title>
 </template>
 
 <script>
 export default {
-  name: 'Title'
+  name: 'Title',
+  data () {
+    return {
+      ROUTER_VERSION: process.env.ROUTER_VERSION
+    }
+  },
+  computed: {
+    title () {
+      var route = this.$route.path
+      if (this.ROUTER_VERSION) route = route.slice(this.ROUTER_VERSION.length)
+      return `${this.$t(`title.${route.slice(1) === '' ? 'my_account' : route.slice(1).replace(/\//g, '_')}`)} - ${this.$t('brand')}`
+    }
+  }
 }
 </script>

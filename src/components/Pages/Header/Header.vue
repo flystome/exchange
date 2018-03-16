@@ -11,6 +11,9 @@
           <a class="navbar-brand" :href="`${HOST_URL}`">
             <img src="~Img/logo.png">
           </a>
+          <div class="btc-header-sideslip" @click="SideSlipMenuDisplay(true)">
+            <img src="~Img/header-more.png">
+          </div>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="z-index:100">
           <ul class="nav navbar-nav">
@@ -35,11 +38,11 @@
               {{ this.loginData.email }} -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <img src="~Img/avatarlog.png" class="btc-header-avatar">
-                {{ this.loginData.email }}
+                {{ this.loginData.show_name }}
                 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                  <!-- <a><a :href="`${HOST_URL}/`">{{$t('nav.settings')}}</a></li> -->
-                <li><a @click="goPath('/member_center')">{{$t('nav.member_center')}}</a></li>
+                <li><a @click="goPath('/my_account')">{{$t('nav.my_account')}}</a></li>
                 <li><a :href="`${HOST_URL}/signout`">{{$t('nav.exit')}}</a></li>
               </ul>
             </li>
@@ -63,15 +66,16 @@
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex'
 export default {
-  created () {
-    this.$store.dispatch('getData')
-  },
+  // created () {
+  //   this.$store.dispatch('getData')
+  // },
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       locale: [{
-        language: 'zh-CN',
-        name: '简体中文'
+        language: 'zh-TW',
+        name: '正體中文'
       },
       {
         language: 'en',
@@ -86,11 +90,12 @@ export default {
     requireImg (img) {
       return require(`../../../../static/img/${img}.png`)
     },
+    ...mapMutations(['PopupBoxDisplay', 'SideSlipMenuDisplay']),
     validateEmail () {
       if (!this.loginData.activated) {
-        this.goPath('/prompt')
+        this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
       } else {
-        this.goPath('/currency/withdraw')
+        this.goPath('/currency/deposit')
       }
     },
     changeLang (str) {
@@ -111,14 +116,14 @@ export default {
         return
       }
       if (href) {
-        location.href = `${this.HOST_URL}${path}`
+        location.href = `${this.HOST_URL}${this.ROUTER_VERSION}${path}`
       }
       this.$router.push({
-        path: path
+        path: `${this.ROUTER_VERSION}${path}`
       })
     },
     goHome () {
-      this.$router.push('/', () => {
+      this.$router.push(`${this.ROUTER_VERSION}/`, () => {
         this.$store.dispatch('getData')
       })
     },

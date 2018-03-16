@@ -21,8 +21,13 @@ export const _post = async ({url, data, headers}, callback) => {
     method: 'post',
     url: requestUrl + url,
     data: data
-  }).catch(err => console.log(err))
-  console.log(ajax)
+  }).catch(error => {
+    if (/member_data/.test(url)) {
+      callback({error: 'login error'})
+      return
+    }
+    console.log(error)
+  })
   if (callback) {
     callback(ajax)
   }

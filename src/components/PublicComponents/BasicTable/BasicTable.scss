@@ -4,6 +4,14 @@
   font-size: 12px;
 }
 
+td[class=btc-tablehover]{
+  display: block;
+  width: 380px!important;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
 .btc-table-container{
   background: #fff;
   margin-top: 10px;
@@ -12,11 +20,12 @@
 
 .btc-table{
   color: #666666;
-  padding: 8px 25px;
+  padding: 8px 15px;
 }
 
 .btc-table table{
   margin-bottom: 0;
+  font-size: 12px;
 }
 
 .btc-table caption{
@@ -47,12 +56,4 @@
   padding-top: 6px;
   margin-top: 6px;
   font-size: 12px;
-}
-
-.btc-tableHover{
-  display: block;
-  width: 380px!important;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
 }

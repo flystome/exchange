@@ -325,11 +325,11 @@ const en = {
       "announcement": "Announcements",
       "qa": "FAQ",
       "settings": "Settings",
-      "member_center": "Dashboard",
+      "my_account": "My Account",
       "exit": "Exit",
       "message": "Message"
     },
-    "member_center": {
+    "my_account": {
       "total_assets": "Total Assets",
       "change_password": "Change Password",
       "login_record": "Login Record (Last 5)",
@@ -355,11 +355,18 @@ const en = {
       "yes": "Yes",
       "no": "No",
       "no_record": "No Record",
+      "tier_1": "Tier 1: Email Verification",
       "korean_user_use_twice_verification": "Tier 2: Cell Phone Verification",
       "completion_of_real_name_authentication": "Tier 3: Real Name Verification",
       "api": "API",
       "email_sent_message": "Mail is sent, please go to your mailbox to activate your account.",
-      "tier_1": "Tier 1"
+      "1001_hint": "Please verify your email",
+      "1002_hint": "Please do Google validation or Cell Phone validation",
+      "1003_hint": "Please real name authentication",
+      "200_hint": "Verify Email Success",
+      "verifying": "verifying",
+      "success_200": "Email has been sent, please check it",
+      "error_1001": "Token errors, please Reconfirm"
     },
     "validate_identity": {
       "real_name_authentication": "Real Name Verification",
@@ -375,15 +382,18 @@ const en = {
       "using_true_identity": "Verify using your real identity, and your personal information won't be disclosed to others.",
       "held_id_card": "Upload a photo with your face and your ID card inside. Only JPG format accepted.",
       "example": "Example",
-      "click_upload": "Click upload",
+      "click_upload": "Click To Upload",
       "information_upload_success": "Real-name authentication information upload success",
-      "please_upload_file": "Please upload the file"
+      "please_upload_file": "Please upload the file",
+      "img_to_big": "Upload pictures are not allowed to exceed"
     },
     "validate_sms": {
       "binding_cell_phone_authentication": "Verify Your Cell Phone",
       "send_identify_code": "Send Code",
       "confirm": "Submit",
-      "verification_code": "Verification Code"
+      "verification_code": "Verification Code",
+      "use_right_code": "Please use the correct national area code",
+      "google_verification_code": "Google Verification Code"
     },
     "browser": {
       "chrome": "Chrome",
@@ -404,17 +414,17 @@ const en = {
       "withdraw_all": "Withdraw All",
       "tariff_description": "Tariff description",
       "reminder": "Reminder",
-      "min_currency": "Minimum amount of currency：0.001。",
-      "confirm_apply_for_success": "After the request is successful, please go to the mailbox to click the link to confirm the request, and you can track the status of the Recharge and historical records page.",
-      "make_sure_safe": "Be sure to make sure that computers and browsers are safe to prevent information from being tampered or leaked.",
+      "min_currency": "Minimum withdral amount 0.001",
+      "confirm_apply_for_success": "After the withdrawal request is successful, please go to the email and click the link to confirm the withdrawal request. You can track the status on the withdrawal history page.",
+      "make_sure_safe": "Make sure your computer and browser is secure, to prevent information from being tampered with or leaked.",
       "withdraw_currency_record": "Withdraw Currency Record",
       "number": "Number",
       "withdraw_time": "Withdraw Time",
       "withdraw_address": "Withdraw Address",
-      "actual_account": "Actual Account",
-      "absenteeism_expenses": "Absenteeism expenses",
-      "statu_and_operation": "statu / operation",
-      "available_balance": "Available balance",
+      "actual_account": "Actual Amount",
+      "absenteeism_expenses": "Fee",
+      "statu_and_operation": "Status / Operation",
+      "available_balance": "Available Balance",
       "remaining_withdraw": "Remaining withdraw amount of money",
       "minimum_withdraw_amount_of_money": "Minimum withdraw amount of money",
       "remark_label": "Remark",
@@ -425,7 +435,20 @@ const en = {
       "delete": "Delete",
       "cancel": "Cancel",
       "resend": "Resend",
-      "temporarily_can_not_withdraw": "temporarily Can Not Withdraw"
+      "temporarily_can_not_withdraw": "temporarily Can Not Withdraw",
+      "canceled": "Canceled",
+      "submitting": "Submitting",
+      "submitted": "Submitted",
+      "accepted": "Accepted",
+      "suspect": "Suspect",
+      "rejected": "Rejected",
+      "processing": "Processing",
+      "almost_done": "Almost Done",
+      "done": "Done",
+      "failed": "Failed",
+      "node_audited": "Node Audited",
+      "google": "Google ",
+      "sms": "SMS "
     },
     "deposit_currency": {
       "deposit_address": "Address",
@@ -438,20 +461,22 @@ const en = {
       "trading_hash": "Trading Hash",
       "recharge_amount": "Recharge Amount",
       "confirmation_number": "Confirmation Number",
-      "identifying_code": "Identifying Code",
+      "identifying_code": "Verify Code",
       "temporarily_unable_deposit": "Temporarily unable to deposit"
     },
     "title": {
-      "member_center": "Member Center",
+      "my_account": "My Account",
       "validate_email": "Validate Email",
       "validate_google": "Validate Google",
       "validate_identity": "Validate Identity",
-      "validate_sms": "Validate Sms",
-      "currency_withdraw": "Currency withdraw"
+      "validate_sms": "Validate SMS",
+      "currency_withdraw": "Withdraw Currency",
+      "currency_deposit": "Deposit Currency",
+      "404": "404 Not Found"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
-      "phone_not_certified": "Phone is unverified",
+      "not_certified": "Phone or Google is unverified",
       "google_not_certified": "Google Auth not bound",
       "not_certified_prompt": "Help us keeping bad guys out of your account by using both your phone",
       "go_validate": "Do Validation"
@@ -474,53 +499,108 @@ const en = {
       "login_password": "Login Password",
       "google_verification_code": "Code Displayed in Google Authenticator",
       "google_verification": "Verify",
-      "app_already_installed": "APP already installed"
+      "app_already_installed": "APP already installed",
+    },
+    "markets":{
+      "volume": "Volume",
+      "coinAndVolumn": "币种/成交量",
+      "newPrice": "Price",
+      "change": "涨跌幅",
+      "quotes": "Quotes",
+      "trade": "Trade",
+      "currency": "Open Orders",
+      "favorite": "Favorite",
+      "volume24": "Vol",
+      "high": "High",
+      "low": "Low",
+      "candle": "Candle",
+      "depth": "Depth",
+      "history": "Trade history",
+      "price": "Price",
+      "volume": "Volume",
+      "amount": "Amount",
+      "time": "Time",
+      "buy": "Buy",
+      "sell": "Sell",
+      "extra": "Available",
+      "maxAmount": "Max Amount",
+      "total": "Total",
+      "trade_success": "Success",
+      "trade_fail": "Fail"
     },
     "hint": {
       "confirm": "OK",
-      "generating_address": "Generating Deposit Address",
+      "generating_address": "We are generating deposit address, please wait a few seconds.",
       "completion": "Completion",
       "server_exception": "Server Exception"
     },
     "api_server": {
       "validate_google": {
-        "error_1002": "Password incorrect",
-        "error_1001": "google authentication code incorrect",
+        "error_1002": "Password incorrect, please check it",
+        "error_1001": "The google authentication code you enter are incorrect, please check it",
+        "error_1003": "Sms code incorrect, please check it",
         "success_200": "Google Authentication Success"
       },
       "validate_identity": {
         "success_200": "Photo Update Successfully",
         "error_1001": "Photo Update Failure"
       },
-      "member_center": {
+      "my_account": {
         "success_200": "Email has been sent, please check it",
-        "error_1001": "Token errors, please Reconfirm"
+        "error_1001": "An confirm email has been sent to your mailbox",
+        "error_1002": "Already Activated"
       },
-      "currency_withdraw": {
+      "withdraw_currency": {
         "set_fund_source_200": "The fund source is set as default",
         "set_fund_source_1001" : "The fund source is set default failed",
         "delete_fund_source_200": "Fund source deleted",
         "delete_fund_source_1001": "Fund source delete failed",
         "send_phone_error_1001": "Send too fast, please wait for one minute",
         "Withdraw_canceled_200": "Withdraw request canceled",
-        "Withdraw_canceled_1001": "Withdraw request can not cancel"
+        "Withdraw_canceled_1001": "Withdraw request can not cancel",
+        "create_withdraw_200": "An confirm email has been sent to your mailbox",
+        "create_withdraw_1001": "Please give an valid currency param",
+        "create_withdraw_1002": "Authentication Failed",
+        "create_withdraw_1003": "The withdrawal requests can not be more than",
+        "create_withdraw_1004": "The withdrawal amount is above the daily limit",
+        "create_withdraw_1005": "Invalid fund source",
+        "create_withdraw_1006": "System error",
+        "create_withdraw_1007": "Account balance is insufficient",
+        "create_withdraw_1008": "Amount Can not be empty",
+        "create_withdraw_1009": "Verification code error",
+        "create_withdraw_1010": "Assets account not created"
       },
+      "validate_sms": {
+        "send_code_1002": "Phone number is invalid",
+        "send_code_1001": "Send too fast, please wait for one minute",
+        "auth_sms_200": "Verify Code Success",
+        "auth_sms_1001": "Verify Failed",
+        "auth_sms_1002": "The google authentication code incorrect",
+      }
     },
     "footer": {
       "introduction": "Authoritative and transparent digital asset trading platform",
-      "copyright": "©2014-2018 hotex.com copyright",
+      "copyright": "©2017-2018 hotex.com Copyright",
       "support": "Support",
       "api": "API",
       "help": "Help",
       "announcements": "Announcements",
       "service": "Service",
-      "application": "Apply for money",
-      "rate_details": "Rate details",
+      "application": "Apply To List",
+      "rate_details": "Fees",
       "about": "About",
-      "about_us": "About us",
+      "about_us": "About Us",
       "user_agreement": "User Agreement",
       "privacy_policy": "Privacy Policy",
-      "contact_us": "Contact us"
+      "contact_us": "Contact Us"
+    },
+    "side_slip_menu": {
+      "consulting_center": "Consulting Center",
+      "asset_management": "Asset Management",
+      "announcement": "Announcement",
+      "news": "News",
+      "my_account": "My Account",
+      "language": "Language"
     }
   }
 }

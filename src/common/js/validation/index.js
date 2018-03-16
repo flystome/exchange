@@ -1,13 +1,11 @@
-import zh from 'vee-validate/dist/locale/zh_CN'
+import zh_TW from 'vee-validate/dist/locale/zh_TW'
 import en from 'vee-validate/dist/locale/en'
 import { Validator } from 'vee-validate'
 
 const dictionary = {
-  'zh-CN': zh,
+  'zh-TW': zh_TW,
   en
 }
-
-var empty = ['CellPhone', 'first_name', 'verify code', 'password', 'last_name']
 
 Validator.extend = function extend (name, validator, options) {
   if ( options === void 0 ) options = {}
@@ -27,6 +25,17 @@ Validator._merge(name, validator)
   }
 }
 
+var empty = ['First Name', 'verify code', 'password', 'Last Name', 'IdCard', 'CellPhone']
+
+// Validator.extend('CellPhone', {
+//   getMessage: (field, params, data) => {
+//     return (data && data.validation) || 'Something went wrong'
+//   },
+//   validate: value => {
+//     return /\d+/.test(value)
+//   }
+// })
+
 Validator.extend(empty, {
   getMessage: (field, params, data) => {
     return (data && data.validation) || 'Something went wrong'
@@ -36,13 +45,13 @@ Validator.extend(empty, {
   }
 })
 
-Validator.extend('IdCard', {
-  getMessage (field, params, data) {
-    return (data && data.validation) || 'Something went wrong'
-  },
-  validate: value => {
-    return /[a-zA-z\d]{5,}/.test(value)
-  }
-})
+// Validator.extend('IdCard', {
+//   getMessage (field, params, data) {
+//     // return (data && data.validation) || 'Something went wrong'
+//   },
+//   validate: value => {
+//     return /[a-zA-z\d]{5,}/.test(value)
+//   }
+// })
 
 export default dictionary

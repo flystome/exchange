@@ -1,18 +1,16 @@
 <template>
-  <div class="btc-validate-sms btc-container-block">
+  <div v-if="!loginData.sms_activated && loginData.activated" @keyup.enter='Validate' class="btc-validate-sms btc-container-block" @click="ShowCallingcode(false);prompt = ''">
     <header class="btc-color666">
-      <router-link to='/' class="btc-link">{{$t('title.member_center')}}</router-link> > <span>{{$t('title.validate_sms')}}</span>
+      <router-link :to="`${ROUTER_VERSION}/`" class="btc-link">{{$t('title.my_account')}}</router-link> > <span>{{$t('title.validate_sms')}}</span>
     </header>
     <div class="btc-sms-container">
       <news-prompt :text='prompt'></news-prompt>
       <div class="btc-sms-phone">
-        <!-- <basic-select v-model="phoneNumber" :data='phoneData'></basic-select> -->
         <div class="btc-sms-choice btc-b-def">
           <span>+</span>
-          <div class="" contenteditable="true" >
-            {{ SmsData.CellPhonecode }}
-          </div>
-          <img @click="ShowCallingcode" src="~Img/triangle.png" >
+          <div-contenteditable v-model="SmsData.CellPhonecode">
+          </div-contenteditable>
+          <img @click.stop="ShowCallingcode(true)" src="~Img/triangle.png" >
         </div>
       <div class="btc-code-list btc-b-def" v-if="callDisplay">
         <ul>
@@ -30,11 +28,15 @@
       <div class="btc-sms-code">
         <basic-input :validate='"verify code"' ref="verifiycode" :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
         </basic-input>
-        <button class="btc-white-btn" @click="SendSms">
+        <button :disabled="disabled" class="btc-white-btn" @click="SendSms">
           {{ timer }}
         </button>
       </div>
-      <basic-button @click.native="Validate" style='width:100%' :text='$t("validate_sms.confirm")'>
+      <div class="btc-sms-google btc-marginB30" v-if="loginData.app_activated">
+        <basic-input :placeholder='$t("validate_sms.google_verification_code")' :validate='"verify code"' ref="googlecode" v-model="SmsData.googlecode">
+        </basic-input>
+      </div>
+      <basic-button @click.native.stop="Validate" style='width:100%' :text='$t("validate_sms.confirm")'>
       </basic-button>
     </div>
   </div>
@@ -42,25 +44,39 @@
 
 <script>
 import { callingdata } from '@/common/js/countries'
+import { mapMutations, mapState } from 'vuex'
+const _debounce = require('lodash/fp/debounce.js')
+console.log(_debounce)
 export default {
   name: 'ValidateSms',
+  // updated () {
+  //   if (this.redirectLock) return
+  //   if (this.$store.state.loginData) {
+  //     this.redirectLock = true
+  //     this.$store.dispatch('redirect')
+  //   }
+  // },
   data () {
     return {
-      HOST_URL: process.env.HOST_URL,
       prompt: '',
+      redirectLock: false,
+      disabled: false,
+      HOST_URL: process.env.HOST_URL,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       callDisplay: false,
       callingdata: callingdata,
       callingcode: '',
       second: -1,
       resend: false,
+      isLocked: false,
       SmsData: {
         CellPhone: '',
         CellPhonecode: '86',
         CountryName: 'CN',
         verifyCode: '',
-        Time: ''
-      },
-      phoneData: Array(7).fill('+86')
+        Time: '',
+        googlecode: ''
+      }
     }
   },
   methods: {
@@ -69,7 +85,7 @@ export default {
       if (!cellphone) {
         return
       }
-      this.CountDown()
+      this.disabled = true
       this._post({
         url: `/verify/send_code.json`,
         data: {
@@ -77,25 +93,49 @@ export default {
           country: this.SmsData.CountryName
         }
       }, (d) => {
-        console.log(d.data)
+        this.disabled = false
+        if (d.data.success) {
+          if (this.second < 0) {
+            this.CountDown()
+          }
+        } else {
+          this.PopupBoxDisplay({message: this.$t(`api_server.validate_sms.send_code_${d.data.error.code}`), type: 'error'})
+        }
       })
     },
     async Validate () {
-      console.log(2)
+      if (this.SmsData.CountryName === '') {
+        this.prompt = this.$t('validate_sms.use_right_code')
+      }
       const cellphone = await this.$refs['cellphone'].$validator.validateAll()
       const verifiycode = await this.$refs['verifiycode'].$validator.validateAll()
-      if (!cellphone || !verifiycode) {
-        return
+      if (!this.$refs['googlecode']) {
+        if (!cellphone || !verifiycode || this.SmsData.CountryName === '') {
+          return
+        }
+      } else {
+        const googlecode = await this.$refs['googlecode'].$validator.validateAll()
+        if (!cellphone || !verifiycode || !googlecode || this.SmsData.CountryName === '') {
+          return
+        }
       }
       this._post({
         url: `/verify/auth_sms.json`,
         data: {
           'country': this.SmsData.CountryName,
           'phone_number': `${this.SmsData.CellPhone}`,
-          'otp': this.SmsData.verifyCode
+          'otp': this.SmsData.verifyCode,
+          'google_code': this.SmsData.googlecode
         }
       }, (d) => {
-        console.log(d.data)
+        if (d.data.success) {
+          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_200'), type: 'success', url: '/'})
+          this.$store.dispatch('getData')
+        } else {
+          this.SmsData.verifyCode = ''
+          this.SmsData.googlecode = ''
+          this.PopupBoxDisplay({message: this.$t(`api_server.validate_sms.auth_sms_${d.data.error.code}`), type: 'error'})
+        }
       })
     },
     PutCode (number, name, alpha) {
@@ -115,19 +155,41 @@ export default {
           clearInterval(timer)
         }
       }, 1000)
-    }
+    },
+    ...mapMutations(['PopupBoxDisplay', 'ChangePopupBox'])
   },
   computed: {
     timer () {
       return this.resend ? (this.second < 0
         ? this.$t('withdraw_currency.resend')
         : `${this.$t('withdraw_currency.resend')} ${this.second}s`) : this.$t('auth.send_code')
-    }
+    },
+    ...mapState(['loginData'])
   },
   filters: {
     maxlen (str) {
       return str.match(/.{8}/)
     }
+  },
+  watch: {
+    'SmsData.CellPhonecode': _debounce(500, function () {
+      var lock = false
+      callingdata.forEach((d) => {
+        if (d.number.slice(1) === this.SmsData.CellPhonecode) {
+          this.SmsData.CountryName = d.alpha
+          lock = true
+        }
+      })
+      if (!lock) {
+        this.SmsData.CountryName = ''
+      }
+    })
+    // $route (to) {
+    //   this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
+    //   if (this.route === 'sms') {
+    //     this.$store.dispatch('redirect')
+    //   }
+    // }
   }
 }
 </script>

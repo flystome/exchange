@@ -1,0 +1,180 @@
+
+#app{
+  height: 100%;
+  position: relative;
+}
+
+.btc-main{
+  min-height: 100%;
+  padding-bottom: 217px;
+}
+
+.input.is-danger, .textarea.is-danger {
+    border-color: #ff3860;
+    background: white;
+}
+
+.help {
+    display: block;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.help.is-danger {
+    color: #ff3860;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+html, body {
+  height: 100%;
+}
+
+body{
+  font-family: '微软雅黑';
+}
+
+@media (max-width: 992px) {
+  html, body {
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .btc-main{
+    padding-bottom: 0;
+  }
+  .btc-container {
+    padding: 0;
+  }
+}
+
+.btc-white-btn{
+  border: 1px solid #4382f7;
+  color: #4382f7;
+  background: white;
+}
+
+.btc-container{
+  background: #f2f2f2;
+  padding-bottom: 13px;
+  min-height: 70vh;
+}
+
+.btc-container-block{
+  background: white;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.btn{
+  border-radius: 0
+}
+
+.btn:active{
+ box-shadow: none;
+}
+
+.btn:hover{
+  color: white
+}
+
+.btc-link{
+  color: #4382f7!important;
+  cursor: pointer;
+}
+
+.btc-link:hover{
+  text-decoration: none!important;
+  color: #4382f7!important;
+}
+
+.btc-white-btn:hover,.btc-white-btn:focus{
+  color: #4382f7;
+}
+
+.btc-basic-button:hover,.btc-basic-button:focus{
+  color: white;
+}
+
+#app .btn[disabled=true]{
+  cursor: not-allowed
+}
+
+.btc-poniter{
+  cursor: pointer;
+}
+
+.btc-pointer{
+  cursor: pointer;
+}
+
+.btc-b-def{
+  border: 1px solid #dfe0e1;
+}
+
+.btc-b{
+  border: 1px solid #f2f2f2;
+}
+
+.btc-b-r{
+  border-right:1px solid #f2f2f2;
+}
+
+.btc-b-l{
+  border-left:1px solid #f2f2f2;
+}
+
+.btc-b-t{
+  border-top:1px solid #f2f2f2;
+}
+
+.btc-b-b{
+  border-bottom:1px solid #f2f2f2;
+}
+
+.btc-fr{
+  float: right;
+}
+
+.btc-fl{
+  float: left;
+}
+
+.btc-font12{
+  font-size: 12px;
+}
+
+.btc-color333{
+  color: #333333;
+}
+
+.btc-color666{
+  color: #666666;
+}
+
+.btc-color999{
+  color: #999999;
+}
+
+ul,li {
+  list-style: none;
+}
+.clearfix:after{
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0;
+}
+.clearfix{
+    zoom:1;
+}
+
+
+/* -----------------------------------animation-------------------------- */
+.SideSlipMenu-enter, .SideSlipMenu-leave-to {
+  transform: translateX(73.4%);
+}

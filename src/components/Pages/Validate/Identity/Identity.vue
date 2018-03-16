@@ -1,8 +1,8 @@
 <template>
-  <div class="btc-container-block btc-validateIdentity">
+  <div v-if="!(loginData.id_document && loginData.id_document.aasm_state !=='unverified') && (loginData.sms_activated || loginData.app_activated) &&  loginData.activated" class="btc-container-block btc-validateIdentity">
     <header class="title">
-        <router-link to='/' class="btc-link">
-          {{$t('title.member_center')}}
+        <router-link :to="`${ROUTER_VERSION}/`" class="btc-link">
+          {{$t('title.my_account')}}
         </router-link>
         >
         <span>
@@ -32,12 +32,12 @@
         </div>
         <div class="btc-marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
-            <basic-input ref='first_name' :placeholder='$t("validate_identity.surname")' :validate='"first_name"' v-model="user.first_name"></basic-input>
+            <basic-input ref='first_name' :placeholder='$t("validate_identity.surname")' :validate='"First Name"' v-model="user.first_name"></basic-input>
           <!--<div class=" btc-marginT20">-->
             <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
             <!--<basic-input  v-model="user.name"></basic-input>-->
           <!--</div>-->
-            <basic-input ref='last_name' :placeholder='$t("validate_identity.name")' :validate='"last_name"'  v-model="user.last_name"></basic-input>
+            <basic-input ref='last_name' :placeholder='$t("validate_identity.name")' :validate='"Last Name"'  v-model="user.last_name"></basic-input>
             <basic-input ref="IdCard"  :placeholder='$t("validate_identity.valid_id_card")' :validate='"IdCard"'  v-model="user.IdCard"></basic-input>
         </div>
       </div>
@@ -83,7 +83,7 @@
       ></upload-img>
     </div>
     <footer class="btc-b-t btc-marginT25">
-      <basic-button @click.native="uploadImg" class="btc-fr col-xs-12 col-md-1 pull-right" :disabled="disabled" :text='$t("validate_identity.submissions")'>
+      <basic-button id="myButton" data-loading-text="Loading..." autocomplete="off" @click.native="uploadImg" class="btn btc-fr col-xs-12 col-md-1 pull-right" :disabled="disabled" :text='$t("validate_identity.submissions")'>
       </basic-button>
     </footer>
   </div>
@@ -91,9 +91,16 @@
 
 <script>
 import { countries } from '@/common/js/countries'
-import {mapMutations} from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'ValidateIdentity',
+  // updated () {
+  //   if (this.redirectLock) return
+  //   if (this.$store.state.loginData) {
+  //     this.redirectLock = true
+  //     this.$store.dispatch('redirect')
+  //   }
+  // },
   data () {
     return {
       prompt: {
@@ -101,6 +108,7 @@ export default {
         text: '密码错误'
       },
       disabled: false,
+      redirectLock: false,
       img: false,
       user: {
         surname: '',
@@ -116,6 +124,7 @@ export default {
         indentity4: ''
       },
       countries: countries,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       selectedCountry: 'South Korea',
       identity_hint: this.$t('validate_identity.information_upload_success')
     }
@@ -201,16 +210,33 @@ export default {
         }
       }, d => {
         if (d.data.success) {
-          this.PopupBoxDisplay({message: this.$t('api_server.validate_identity.success_200'), url: '/member_center', type: 'success'})
+          this.disabled = false
+          this.PopupBoxDisplay({message: this.$t('api_server.validate_identity.success_200'), url: '/', type: 'success'})
+          this.$store.dispatch('getData')
         } else {
           this.PopupBoxDisplay({message: this.$t('api_server.validate_identity.error_1001'), type: 'error'})
         }
       })
     }
+  },
+  computed: {
+    ...mapGetters(['loginData'])
+  },
+  filters: {
+    maxlen (str) {
+      return str.match(/.{8}/)
+    }
+  },
+  watch: {
+    // $route (to) {
+    //   if (/identity/.test(this.$route.path)) {
+    //      this.$store.dispatch('redirect')
+    //   }
+    // }
   }
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 @import './Identity.scss'
 </style>

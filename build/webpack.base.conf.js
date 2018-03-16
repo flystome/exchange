@@ -19,6 +19,8 @@ const createLintingRule = () => ({
   }
 })
 
+console.log(process.env.NODE_ENV)
+
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
@@ -41,6 +43,7 @@ module.exports = {
       'Img': resolve('static/img'),
     }
   },
+  externals: process.env.NODE_ENV === 'production' ? config.build.externals : '',
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),

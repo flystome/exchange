@@ -4,10 +4,9 @@
 
 .btc-footer {
   color: #777777;
-  box-sizing: border-box;
   background-color: #2e3136;
   width: 100%;
-  min-height: 300px;
+  margin-top: -215px;
 }
 
 .btc-footer ul {
@@ -28,7 +27,7 @@ a{
     margin-left: 32px;
     color: #728eaa;
     >img{
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
   }
   .btc-info{
@@ -42,24 +41,20 @@ a{
       }
       &:first-child{
         font-size: 14px;
-        margin-bottom: 30px;
+        margin-bottom: 28px;
         >a{
 
         }
       }
     }
   }
-  .btc-footer-us{
-    >li{
-      font-size: 12px;
-      >a{
-        color: #728eaa
-      }
-    }
-  }
 }
 
-
+@media (max-width: 768px) {
+  .btc-footer{
+    margin-top: 0;
+  }
+}
 
 @media (min-width: 750px) {
   .btc-footer {
@@ -71,7 +66,6 @@ a{
   }
 }
 @media (max-width: 750px) {
-
   .btc-footer > .container {
     padding: 10px 0;
   }

@@ -11,8 +11,8 @@
          {{this.PopupBox.message}}
        </div>
        <div class="btc-paddingB30">
-        <a @click.stop="gopath">
-          <basic-button class="btc-marginT50" :text='buttonText' :class="{'btc-hint-hidden': !this.PopupBox.buttondisplay}">
+        <a @click.stop="gopath" :disabled="disabled">
+          <basic-button class="btc-marginT50"  :text='buttonText' :class="{'btc-hint-hidden': !this.PopupBox.buttondisplay}">
           </basic-button>
         </a>
        </div>
@@ -25,12 +25,22 @@
 import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'Hint',
+  data () {
+    return {
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
+      disabled: false
+    }
+  },
   methods: {
     gopath () {
+      this.disabled = true
       if (this.PopupBox.url) {
-        this.$router.push(this.PopupBox.url, () => { this.$store.dispatch('getData') })
+        this.$router.push(`${this.ROUTER_VERSION}${this.PopupBox.url}`)
       }
       this.PopupBoxDisplay()
+      setTimeout(() => {
+        this.disabled = false
+      }, 1000)
     },
     ...mapMutations(['PopupBoxDisplay'])
   },
