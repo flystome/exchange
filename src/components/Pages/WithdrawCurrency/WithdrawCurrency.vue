@@ -511,7 +511,7 @@ export default {
         this.PopupBoxDisplay({message: this.$t('withdraw_currency.temporarily_can_not_withdraw'), type: 'error'})
         return
       }
-      var validate = this.validate === this.$t('withdraw_currency.google_validate') ? {
+      var validate = this.validate !== 'sms' ? {
         type: 'app',
         otp: this.WithdrawData.otp
       } : {
@@ -559,7 +559,7 @@ export default {
             this.WithdrawData.rucaptcha = ''
           }
           if (d.data.error.code === 1003) {
-            this.PopupBoxDisplay({message: `${this.$t('api_server.withdraw_currency.create_withdraw_1003')} ${d.data.error.c}`, type: 'error'})
+            this.PopupBoxDisplay({message: `${this.$t('api_server.withdraw_currency.create_withdraw_1003')} ${d.data.c}`, type: 'error'})
             return
           }
           this.Rucaptcha = this.Rucaptcha ? `${this.Rucaptcha}?${Math.random()}` : this.Rucaptcha
