@@ -1,8 +1,10 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 // css dependencies
+import '@/common/css/bootstrap.css'
+import '@/common/css/style.css'
+
 // import 'bootstrap/dist/css/bootstrap.min.css'
-import '../static/style/common.css'
 // template dependencies
 import BasicButton from 'Components/BasicButton/BasicButton'
 import BasicInput from 'Components/BasicInput/BasicInput'
@@ -30,9 +32,6 @@ import 'bootstrap/js/dropdown.js'
 import 'bootstrap/js/collapse.js'
 import Pusher from 'pusher-js'
 import 'bootstrap/js/carousel.js'
-// css dependencies
-import '@/common/css/bootstrap.css'
-import '@/common/css/reset.css'
 
 Vue.use(VeeValidate, {
   i18n,
