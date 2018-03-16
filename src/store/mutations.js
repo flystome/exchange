@@ -10,24 +10,24 @@ const redirect = (state, action, type) => {
   switch (route) {
     case 'ValidateGoogle':
       if (!state.loginData.activated) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1001_hint'), type: 'warn', url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/'})
       } else if (state.loginData.app_activated) {
         router.push({path: `${ROUTER_VERSION}/`})
       }
       break
     case 'ValidateSms':
       if (!state.loginData.activated) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1001_hint'), type: 'warn', url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/'})
       } else if (state.loginData.sms_activated) {
         router.push({path: `${ROUTER_VERSION}/`})
       }
       break
     case 'ValidateIdentity':
       if (!state.loginData.activated) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1001_hint'), type: 'warn', url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/'})
         return
       } else if (!(state.loginData.sms_activated || state.loginData.app_activated)) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1002_hint'), type: 'warn', url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1002_hint'), type: 'warn', url: '/'})
       } else if (state.loginData.id_document.aasm_state !== 'unverified') {
         router.push({path: `${ROUTER_VERSION}/`})
       }
@@ -41,11 +41,11 @@ const redirect = (state, action, type) => {
         code = 1002
       }
       if (code) {
-        action.commit('PopupBoxDisplay', {message: i18n.t(`member_center.${code}_hint`) , type: 'warn' ,url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t(`my_account.${code}_hint`) , type: 'warn' ,url: '/'})
       }
     } else if (/deposit/.test(state.route.path)) {
       if (!state.loginData.activated) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('member_center.1001_hint') , type: 'warn' ,url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint') , type: 'warn' ,url: '/'})
         return
       }
     }

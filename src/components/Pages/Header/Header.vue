@@ -39,7 +39,7 @@
                 <span class="caret"></span></a>
               <ul class="dropdown-menu">
                  <!-- <a><a :href="`${HOST_URL}/`">{{$t('nav.settings')}}</a></li> -->
-                <li><a @click="goPath('/member_center')">{{$t('nav.member_center')}}</a></li>
+                <li><a @click="goPath('/my_account')">{{$t('nav.my_account')}}</a></li>
                 <li><a :href="`${HOST_URL}/signout`">{{$t('nav.exit')}}</a></li>
               </ul>
             </li>

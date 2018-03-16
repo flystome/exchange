@@ -339,11 +339,11 @@ const zh = {
     "announcement": "公告",
     "qa": "FAQ",
     "settings": "設置",
-    "member_center": "賬戶中心",
+    "my_account": "賬戶中心",
     "exit": "退出",
     "message": "消息"
   },
-  "member_center": {
+  "my_account": {
     "total_assets": "總資產",
     "change_password": "更改密碼",
     "login_record": "登陸記錄（近五次）",
@@ -476,7 +476,7 @@ const zh = {
     "temporarily_unable_deposit": "暫時無法存款"
   },
   "title": {
-    "member_center": "我的帳戶",
+    "my_account": "我的帳戶",
     "validate_email": "驗證郵件",
     "validate_google": "驗證Google",
     "validate_identity": "驗證身份",
@@ -529,7 +529,7 @@ const zh = {
       "success_200": "照片更新成功",
       "error_1001": "照片更新失敗"
     },
-    "member_center": {
+    "my_account": {
       "success_200": "電子郵件已發送，請檢查它",
       "error_1001": "確認電子郵件已發送到您的郵箱"
     },
@@ -543,7 +543,7 @@ const zh = {
       "Withdraw_canceled_1001": "提幣請求無法取消",
       "create_withdraw_200": "確認電子郵件已發送到您的郵箱",
       "create_withdraw_1001": "請給出一個有效的貨幣地址",
-      "create_withdraw_1002": "身份驗證失敗",
+      "create_withdraw_1002": "驗證失敗",
       "create_withdraw_1003": "提幣請求次數過多，請稍後再試",
       "create_withdraw_1004": "提幣金額高於每日限額",
       "create_withdraw_1005": "地址來源無效",
