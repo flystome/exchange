@@ -12,9 +12,9 @@
             :class="{
             'btc-tableTextright':index === 0,
             'btc-tableTextleft': index === item.content.length-1,
-            'btc-tablehover':  Object.prototype.toString.call(data) === '[object Object]' ? data.hover : data
+            'btc-tablehover':  Object.prototype.toString.call(data) === '[object Object]' ? data.hover : false
             }">
-            {{ Object.prototype.toString.call(data) !== '[object Object]' ? data : $t(`withdraw_currency.${data.context}`) }}
+            {{ Object.prototype.toString.call(data) !== '[object Object]' ? data : (data.hover ? data.context : $t(`withdraw_currency.${data.context}`)) }}
            <slot v-if="(Object.prototype.toString.call(data) === '[object Object]' && data.type && data.type['aasm_state']) === ('submitting' || 'submitted' || 'accepted') "
            name="cancel"
            :data='data'
@@ -48,6 +48,6 @@ export default {
 }
 </script>
 
-<style scoped>
-  @import './BasicTable.css'
+<style scoped lang='scss'>
+  @import './BasicTable.scss'
 </style>

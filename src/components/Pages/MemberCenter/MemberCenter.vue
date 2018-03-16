@@ -119,7 +119,7 @@
         </div>
         <div class="text-center btc-table-record" v-if="this.tickets.length === 0">
           <div>
-              <div class="btc-marginT15 btc-font12 btc-color999">{{$t('member_center.no_record')}}</div>
+              <div class="btc-marginT70 btc-marginB70 btc-font12 btc-color999">{{$t('member_center.no_record')}}</div>
           </div>
           <div class="text-center btc-table-more btc-b-t" style="margin-bottom:0px;">
             <a :href="`${HOST_URL}/tickets/new`" class="btc-link ">{{$t('member_center.new_questions')}}</a>

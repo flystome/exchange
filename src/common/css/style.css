@@ -2,6 +2,7 @@
 #app{
   height: 100%;
 }
+
 .btc-main{
   min-height: 100%;
   padding-bottom: 217px;
@@ -166,19 +167,4 @@ ul,li {
 }
 .clearfix{
     zoom:1;
-}
-
-@media (max-width: 992px){
-  #app {
-    height: 100%;
-  }
-  .btc-main {
-    padding-bottom: 0;
-    height: 100%;
-    width: 100%;
-  }
-  .btc-container {
-    padding: 0;
-    width: 100%;
-  }
 }

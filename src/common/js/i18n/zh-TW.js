@@ -420,7 +420,7 @@ const zh = {
     "deposit": "充值",
     "withdraw": "提幣",
     "withdraw_currency_address": "提取貨幣地址",
-    "Amount_to_withdraw": "全部提幣",
+    "Amount_to_withdraw": "提幣數量",
     "google_validate": "Google驗證",
     "withdraw_all": "全部提幣",
     "tariff_description": "資費說明",
@@ -457,7 +457,9 @@ const zh = {
     "almost_done": "完成",
     "done": "完成",
     "failed": "失敗",
-    "node_audited": "節點已審核"
+    "node_audited": "節點已審核",
+    "google": "谷歌",
+    "sms": "手機"
   },
   "deposit_currency": {
     "deposit_address": "地址",
