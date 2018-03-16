@@ -71,7 +71,7 @@ export default {
       HOST_URL: process.env.HOST_URL,
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       locale: [{
-        language: 'zh_TW',
+        language: 'zh-TW',
         name: '正體中文'
       },
       {
