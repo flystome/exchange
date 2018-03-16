@@ -41,7 +41,7 @@ module.exports = {
       'Img': resolve('static/img'),
     }
   },
-  externals: {
+  externals: process.env.NODE_ENV === 'development' ? {} : {
     'vue': 'Vue',
     'axios': 'axios',
     'vuex': 'Vuex',

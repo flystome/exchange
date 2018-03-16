@@ -3,7 +3,7 @@ import en from 'vee-validate/dist/locale/en'
 import { Validator } from 'vee-validate'
 
 const dictionary = {
-  'zh_TW': zh_TW,
+  'zh-TW': zh_TW,
   en
 }
 
@@ -38,7 +38,6 @@ Validator.extend('CellPhone', {
 
 Validator.extend(empty, {
   getMessage: (field, params, data) => {
-    console.log(data)
     return (data && data.validation) || 'Something went wrong'
   },
   validate: value => {

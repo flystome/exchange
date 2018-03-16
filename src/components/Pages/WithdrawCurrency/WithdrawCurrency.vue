@@ -378,6 +378,9 @@ export default {
               })
               setTimeout(() => {
                 this.PopupBoxDisplay()
+                this.ChangePopupBox({
+                  buttondisplay: true
+                })
               }, 1000)
             }, 10000)
           }
@@ -653,6 +656,7 @@ export default {
           message: this.$t('hint.completion')
         })
         setTimeout(() => {
+          console.log(1)
           this.PopupBoxDisplay()
           this.ChangePopupBox({
             buttondisplay: true
