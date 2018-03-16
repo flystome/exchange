@@ -14,7 +14,7 @@
         <p class="">{{ $t("prompt.google_not_certified") }}</p>
         <p class="btc-marginB50">{{ $t("prompt.not_certified_prompt") }}</p>
       </div>
-      <basic-button @click.native="goPath('/member_center')" style="width:26%" class="btc-button" :text='$t("prompt.go_validate")'></basic-button>
+      <basic-button @click.native="goPath('/my_account')" style="width:26%" class="btc-button" :text='$t("prompt.go_validate")'></basic-button>
     </div>
   </div>
 </template>

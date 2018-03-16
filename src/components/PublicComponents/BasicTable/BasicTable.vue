@@ -25,7 +25,7 @@
         </tbody>
         <div class="text-center btc-table-record" v-else>
           <div>
-            <div class="btc-marginT15 btc-font12 btc-color999">{{$t('member_center.no_record')}}</div>
+            <div class="btc-marginT15 btc-font12 btc-color999">{{$t('my_account.no_record')}}</div>
           </div>
         </div>
       </table>

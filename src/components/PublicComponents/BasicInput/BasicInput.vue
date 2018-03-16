@@ -1,5 +1,5 @@
 <template>
-  <div v-if="validate" style="min-height: 66px;">
+  <div v-if="!hidden" style="min-height: 66px;">
     <input v-validate="`required|${validate}`" class="btc-basicInput btc-b"
     :class="{'input': true, 'is-danger': errors.has(validate) }"
     :name="validate"
@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  props: ['placeholder', 'validate', 'value', 'type'],
+  props: ['placeholder', 'validate', 'value', 'type', 'hidden'],
   name: 'BasicInput'
 }
 </script>

@@ -77,16 +77,15 @@
           </div>
           <div v-show='!choice'>
             <div class="btc-marginT15 btc-withdraw-add" style="display: flex" v-if="withdrawAddress">
-              <basic-input class="btc-withdraw-all" v-model="WithdrawData.remark" :placeholder='$t("withdraw_currency.remark_label")'>
+              <basic-input class="btc-withdraw-all" v-model="WithdrawData.remark" :hidden='"withdraw remark"' :placeholder='$t("withdraw_currency.remark_label")'>
               </basic-input>
-              <basic-input class="btc-withdraw-all" v-model="WithdrawData.newAddress" :placeholder='$t("withdraw_currency.withdraw_currency_address")'>
+              <basic-input class="btc-withdraw-all" v-model="WithdrawData.newAddress" :hidden='"withdraw address"' :placeholder='$t("withdraw_currency.withdraw_currency_address")'>
               </basic-input>
             </div>
             <div class="btc-withdraw-explain">
               <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance | toFixed }} {{ CurrencyType | toUpperCase }} <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain | toFixed }} {{ CurrencyType | toUpperCase }}<span v-if="equivalence" style="color:black">≈{{ equivalence | toFixed }} BTC</span>
-
             </div>
-              <basic-input ref='WithdrawAll' v-model="WithdrawData.amount" class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
+              <basic-input ref='WithdrawAll' v-model="WithdrawData.amount" class="btc-withdraw-all" style="display: flex;" :hidden='"withdraw amount"' :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
                 <basic-button :disabled='disabled' @click.native="WithdrawAll" class="btc-link btn" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
               </basic-input>
             <div class="btc-withdraw-explain"><span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }}</span> 0.001
@@ -95,16 +94,17 @@
             </span> -->
               </div>
             <div class="btc-choice-validate">
-              <basic-select :disabled="disabled" key="'choice_verfiy'" :data="[this.$t('withdraw_currency.google_validate'),this.$t('withdraw_currency.sms')]"
+              <basic-select ref='select' :disabled="disabled" key="'choice_verfiy'" :data="[this.$t('withdraw_currency.google_validate'),this.$t('withdraw_currency.sms')]"
               :value="validate"
-              v-on:selected="validate = arguments[0]">>
+              :lang="['google', 'sms']"
+              v-on:selected="validate = arguments[0]">
               </basic-select>
-              <basic-input v-model="WithdrawData.otp" :key="validate" class="btc-marginB10">
+              <basic-input v-model="WithdrawData.otp"  :key="validate" :hidden='"verify code"' class="btc-marginB10">
               </basic-input>
-              <button :disabled='disabled' @click="SendSms" v-if="validate === 'SMS'" class="btc-white-btn btn">{{ timer }}</button>
+              <button :disabled='disabled' @click="SendSms" v-if="validate === 'sms'" class="btc-white-btn btn">{{ timer }}</button>
             </div>
             <div v-if="Rucaptcha">
-              <basic-input :placeholder="$t('deposit_currency.identifying_code')" v-model="WithdrawData.rucaptcha"  class="btc-marginT10">
+              <basic-input :placeholder="$t('deposit_currency.identifying_code')" :hidden='"withdraw amount"' v-model="WithdrawData.rucaptcha"  class="btc-marginT10">
               </basic-input>
               <img @click="ChangeRucaptcha" class="btc-pointer btc-marginB10" :key="'rucaptcha'" :src="`${HOST_URL}${Rucaptcha}`">
             </div>
@@ -166,12 +166,12 @@
       </a>
       </template>
       <div slot="more" class="text-center btc-b-t btc-table-more">
-        <a class="btc-link ">{{$t('member_center.show_more')}}</a>
+        <a class="btc-link ">{{$t('my_account.show_more')}}</a>
       </div>
     </basic-table>
     <basic-table :captionTitle='depositRecord.captionTitle' :item='getDepositRecord' v-else>
       <div slot="more" class="text-center btc-b-t btc-table-more">
-        <a class="btc-link ">{{$t('member_center.show_more')}}</a>
+        <a class="btc-link ">{{$t('my_account.show_more')}}</a>
       </div>
     </basic-table>
   </div>
@@ -511,7 +511,7 @@ export default {
         this.PopupBoxDisplay({message: this.$t('withdraw_currency.temporarily_can_not_withdraw'), type: 'error'})
         return
       }
-      var validate = this.validate === this.$t('withdraw_currency.google_validate') ? {
+      var validate = this.validate !== 'sms' ? {
         type: 'app',
         otp: this.WithdrawData.otp
       } : {
@@ -547,20 +547,22 @@ export default {
           this.Rucaptcha = false
           this.WithdrawData.amount = ''
           this.WithdrawData.otp = ''
+          this.WithdrawData.remark = ''
+          this.WithdrawData.newAddress = ''
         } else {
           if (d.data.error.code === 1002) {
             this.Rucaptcha = d.data.error.rucaptcha
-            this.PopupBoxDisplay({message: `${this.$t(`withdraw_currency.${this.validate.match(/\w+/g)[0].toLowerCase()}`)}${this.$t('api_server.withdraw_currency.create_withdraw_1002')}`, type: 'error'})
+            this.PopupBoxDisplay({message: `${this.$t(`withdraw_currency.${this.$refs['select'].$el.value.match(/\w+/g)[0].toLowerCase()}`)}${this.$t('api_server.withdraw_currency.create_withdraw_1002')}`, type: 'error'})
             return
           }
           if (d.data.error.code === 1009) {
-            this.Rucaptcha = `${this.Rucaptcha}?${Math.random()}`
             this.WithdrawData.rucaptcha = ''
           }
           if (d.data.error.code === 1003) {
-            this.PopupBoxDisplay({message: `${this.$t('api_server.withdraw_currency.create_withdraw_1003')} ${d.data.error.c}`, type: 'error'})
+            this.PopupBoxDisplay({message: `${this.$t('api_server.withdraw_currency.create_withdraw_1003')} ${d.data.c}`, type: 'error'})
             return
           }
+          this.Rucaptcha = this.Rucaptcha ? `${this.Rucaptcha}?${Math.random()}` : this.Rucaptcha
           this.PopupBoxDisplay({message: this.$t(`api_server.withdraw_currency.create_withdraw_${d.data.error.code}`), type: 'error'})
         }
       })

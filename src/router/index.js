@@ -41,8 +41,8 @@ const router = new Router({
       component: Prompt
     },
     {
-      path: `${version}/member_center`,
-      name: 'member_center',
+      path: `${version}/my_account`,
+      name: 'my_account',
       component: MemberCenter
     },
     {

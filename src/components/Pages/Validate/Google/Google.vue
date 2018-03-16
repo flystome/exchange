@@ -3,7 +3,7 @@
     <div class="row btc-color666">
       <span class="btc-color333">
         <router-link :to="`${ROUTER_VERSION}/`" class="btc-link">
-          {{$t('title.member_center')}}
+          {{$t('title.my_account')}}
         </router-link>
         >
         <span>
@@ -163,7 +163,7 @@ export default {
       }, d => {
         this.disabled = false
         this.loginData.google_otp_secret = d.data.google_otp_secret
-        this.loginData.google_uri = d.data.google_otp_secret
+        this.loginData.google_uri = d.data.google_uri
       })
     },
     qrcode (str) {
@@ -225,7 +225,7 @@ export default {
         if (d.data.error) {
           this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.error_${d.data.error.code}`), type: 'error'})
         } else {
-          this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.success_200`), type: 'success', url: '/member_center'})
+          this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.success_200`), type: 'success', url: '/'})
           this.$store.dispatch('getData')
         }
       })
