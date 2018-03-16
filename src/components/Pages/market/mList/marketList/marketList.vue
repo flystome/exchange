@@ -10,11 +10,11 @@
       <li class="list" v-for="item in oldData" :key="item.quote_currency">
         <div class="list-coin">
           <div class="coin">{{item.quote_currency | upper}}<span>/{{item.base_currency | upper}}</span></div>
-          <div class="vol"><span>{{$t('markets.volume')}}</span>{{item.volume | fixed3}}</div>
+          <div class="vol"><span>{{$t('markets.volume')}}</span>{{item.volume | fixed4}}</div>
         </div>
         <div class="list-price">
-          <div class="price">{{item.last | fixed3}}</div>
-          <div class="val">${{item.legal_worth}}</div>
+          <div class="price">{{item.last | fixed4}}</div>
+          <div class="val">${{item.legal_worth | fixed4}}</div>
         </div>
         <div class="list-btn">
           <div :class="{'text-up': item.percent > 0, 'text-down': item.percent < 0}">{{item.percent | fixed2}}%</div>
@@ -47,7 +47,7 @@ export default {
     upper: function (params) {
       return params.toUpperCase()
     },
-    fixed3: function (params) {
+    fixed4: function (params) {
       if (+params === 0) return 0
       var len = +params.toString().split('.')[0].length
       if (len > 1) {
@@ -64,6 +64,7 @@ export default {
       } else {
         this.oldData = JSON.parse(JSON.stringify(val))
       }
+      this.times = 0
     }
   },
   methods: {

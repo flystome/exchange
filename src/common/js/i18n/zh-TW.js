@@ -323,7 +323,7 @@ const zh = {
     "depth": "深度图",
     "history": "最新成交",
     "price": "成交价",
-    "number": "数量",
+    "amount": "数量",
     "time": "时间",
     "buy": "买入",
     "sell": "卖出"
