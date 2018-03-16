@@ -94,14 +94,14 @@
             </span> -->
               </div>
             <div class="btc-choice-validate">
-              <basic-select :disabled="disabled" key="'choice_verfiy'" :data="[this.$t('withdraw_currency.google_validate'),this.$t('withdraw_currency.sms')]"
+              <basic-select ref='select' :disabled="disabled" key="'choice_verfiy'" :data="[this.$t('withdraw_currency.google_validate'),this.$t('withdraw_currency.sms')]"
               :value="validate"
               :lang="['google', 'sms']"
               v-on:selected="validate = arguments[0]">
               </basic-select>
               <basic-input v-model="WithdrawData.otp"  :key="validate" :hidden='"verify code"' class="btc-marginB10">
               </basic-input>
-              <button :disabled='disabled' @click="SendSms" v-if="validate === 'SMS'" class="btc-white-btn btn">{{ timer }}</button>
+              <button :disabled='disabled' @click="SendSms" v-if="validate === 'sms'" class="btc-white-btn btn">{{ timer }}</button>
             </div>
             <div v-if="Rucaptcha">
               <basic-input :placeholder="$t('deposit_currency.identifying_code')" :hidden='"withdraw amount"' v-model="WithdrawData.rucaptcha"  class="btc-marginT10">
@@ -547,20 +547,22 @@ export default {
           this.Rucaptcha = false
           this.WithdrawData.amount = ''
           this.WithdrawData.otp = ''
+          this.WithdrawData.remark = ''
+          this.WithdrawData.newAddress = ''
         } else {
           if (d.data.error.code === 1002) {
             this.Rucaptcha = d.data.error.rucaptcha
-            this.PopupBoxDisplay({message: `${this.$t(`withdraw_currency.${this.validate.match(/\w+/g)[0].toLowerCase()}`)}${this.$t('api_server.withdraw_currency.create_withdraw_1002')}`, type: 'error'})
+            this.PopupBoxDisplay({message: `${this.$t(`withdraw_currency.${this.$refs['select'].$el.value.match(/\w+/g)[0].toLowerCase()}`)}${this.$t('api_server.withdraw_currency.create_withdraw_1002')}`, type: 'error'})
             return
           }
           if (d.data.error.code === 1009) {
-            this.Rucaptcha = `${this.Rucaptcha}?${Math.random()}`
             this.WithdrawData.rucaptcha = ''
           }
           if (d.data.error.code === 1003) {
             this.PopupBoxDisplay({message: `${this.$t('api_server.withdraw_currency.create_withdraw_1003')} ${d.data.error.c}`, type: 'error'})
             return
           }
+          this.Rucaptcha = this.Rucaptcha ? `${this.Rucaptcha}?${Math.random()}` : this.Rucaptcha
           this.PopupBoxDisplay({message: this.$t(`api_server.withdraw_currency.create_withdraw_${d.data.error.code}`), type: 'error'})
         }
       })
