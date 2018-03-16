@@ -95,7 +95,7 @@
             </span> -->
               </div>
             <div class="btc-choice-validate">
-              <basic-select key="'choice_verfiy'" :data="[this.$t('withdraw_currency.google_validate'),this.$t('withdraw_currency.sms')]"
+              <basic-select :disabled="disabled" key="'choice_verfiy'" :data="[this.$t('withdraw_currency.google_validate'),this.$t('withdraw_currency.sms')]"
               :value="validate"
               v-on:selected="validate = arguments[0]">>
               </basic-select>
@@ -550,11 +550,14 @@ export default {
         } else {
           if (d.data.error.code === 1002) {
             this.Rucaptcha = d.data.error.rucaptcha
-            this.PopupBoxDisplay({message: `${this.$t(`withdraw_currency.${this.validate.match(/\w+/g)[0].toLowerCase()}`)} ${this.$t('api_server.withdraw_currency.create_withdraw_1002')}`, type: 'error'})
+            this.PopupBoxDisplay({message: `${this.$t(`withdraw_currency.${this.validate.match(/\w+/g)[0].toLowerCase()}`)}${this.$t('api_server.withdraw_currency.create_withdraw_1002')}`, type: 'error'})
             return
           }
+          if (d.data.error.code === 1009) {
+            this.Rucaptcha = `${this.Rucaptcha}?${Math.random()}`
+            this.WithdrawData.rucaptcha = ''
+          }
           if (d.data.error.code === 1003) {
-            this.Rucaptcha = d.data.error.rucaptcha
             this.PopupBoxDisplay({message: `${this.$t('api_server.withdraw_currency.create_withdraw_1003')} ${d.data.error.c}`, type: 'error'})
             return
           }

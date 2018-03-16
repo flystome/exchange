@@ -445,7 +445,9 @@ const en = {
       "almost_done": "Almost Done",
       "done": "Done",
       "failed": "Failed",
-      "node_audited": "Node Audited"
+      "node_audited": "Node Audited",
+      "google": "Google",
+      "sms": "SMS"
     },
     "deposit_currency": {
       "deposit_address": "Address",
