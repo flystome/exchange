@@ -4,7 +4,6 @@
 import '@/common/css/bootstrap.css'
 import '@/common/css/style.css'
 
-// import 'bootstrap/dist/css/bootstrap.min.css'
 // template dependencies
 import BasicButton from 'Components/BasicButton/BasicButton'
 import BasicInput from 'Components/BasicInput/BasicInput'
