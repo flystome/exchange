@@ -467,13 +467,13 @@ const zh = {
     "use_wallet_service": "請使用您常用的錢包服務，本地錢包，在線錢包或手機錢包，選擇付款或發送.",
     "font_descripe": "在支付或支付您的錢包時，請複制以下專門為您充值的特殊貨幣地址，在金額中填寫您想要為帳戶充值的金額，並且不要忘記支付一定的礦石費以確保 該交易盡快由全網確認。 您還可以掃描移動終端錢包中的二維碼進行支付。 您可以為特殊貨幣地址和二維碼進行充值.",
     "operation_done": "完成上述操作後，點擊發送付款，交易將被廣播到整個網絡，以便您可以查看交易狀態。 當交易達到整個網絡的1次確認（大約10到60分鐘）時，系統將自動為賬戶充值。 您可以查詢資產的情況.",
-    "deposit_record": "存款記錄",
-    "deposit_date": "存款日期",
+    "deposit_record": "充值記錄",
+    "deposit_date": "充值日期",
     "trading_hash": "充值地址",
     "recharge_amount": "充值金額",
     "confirmation_number": "確認號碼",
     "identifying_code": "驗證碼",
-    "temporarily_unable_deposit": "暫時無法存款"
+    "temporarily_unable_deposit": "暫時無法充值"
   },
   "title": {
     "my_account": "我的帳戶",
@@ -499,14 +499,14 @@ const zh = {
   "validate_google": {
     "download_google_verified_app": "下載Google身份驗證器應用程序",
     "scan_qrcode_and_enter_code": "掃描二維碼並輸入驗證代碼",
-    "download_authenticator_at_store": "在AppStore或Google Play下載Google Authenticator",
-    "next": "Next",
-    "using": "Using",
-    "google_to_verify_app": "Google Authenticator",
+    "download_authenticator_at_store": "在AppStore或Google Play下載谷歌驗證器",
+    "next": "下一步",
+    "using": "使用",
+    "google_to_verify_app": "谷歌驗證器",
     "scan_qrcode": "掃描二維碼",
     "cant_scan_enter_keys": "如果無法掃描，請手動將16個字符的密鑰輸入Google身份驗證器",
     "refresh_qrcode": "刷新",
-    "prve": "Back",
+    "prve": "上一步",
     "login_password": "登錄密碼",
     "google_verification_code": "驗證代碼顯示在Google身份驗證器中",
     "google_verification": "驗證",
@@ -514,7 +514,7 @@ const zh = {
   },
   "hint": {
     "confirm": "OK",
-    "generating_address": "我們正在生成存款地址，請等待幾片刻.",
+    "generating_address": "我們正在生成充值地址，請等待幾片刻.",
     "completion": "完成",
     "server_exception": "服務器異常"
   },
