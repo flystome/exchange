@@ -5,7 +5,7 @@ import zh_TW from './zh-TW'
 
 Vue.use(VueI18n)
 const messages = {
-  'zh_TW': zh_TW,
+  'zh-TW': zh_TW,
   en: en.en
 }
 
