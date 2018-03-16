@@ -163,7 +163,7 @@ export default {
       }, d => {
         this.disabled = false
         this.loginData.google_otp_secret = d.data.google_otp_secret
-        this.loginData.google_uri = d.data.google_otp_secret
+        this.loginData.google_uri = d.data.google_uri
       })
     },
     qrcode (str) {
