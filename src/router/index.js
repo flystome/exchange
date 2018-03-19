@@ -14,6 +14,11 @@ const HomePage = () => import('Pages/HomePage/HomePage')
 const Prompt = () => import('Pages/Prompt/Prompt')
 const Page404 = () => import('Pages/Page404/Page404')
 
+const AboutUs = () => import('Pages/Instructions/AboutUs/AboutUs')
+const Instructions = () => import('Pages/Instructions')
+const Fee = () => import('Pages/Instructions/Fee/Fee')
+const Help = () => import('Pages/Instructions/Help/Help')
+
 Vue.use(Router)
 
 const version = process.env.ROUTER_VERSION
@@ -81,6 +86,33 @@ const router = new Router({
       path: `${version}/404`,
       name: 'notFound',
       component: Page404
+    },
+    {
+      path: `${version}/instructions`,
+      name: 'Instructions',
+      component: Instructions,
+      children: [
+        {
+          path: ``,
+          name: 'defalut',
+          component: AboutUs
+        },
+        {
+          path: `aboutus`,
+          name: 'AboutUs',
+          component: AboutUs
+        },
+        {
+          path: `fee`,
+          name: 'Fee',
+          component: Fee
+        },
+        {
+          path: `help`,
+          name: 'Help',
+          component: Help
+        }
+      ]
     },
     {
       path: '/:version',

@@ -76,17 +76,17 @@
       <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
         <li class="">{{ $t("footer.support") }}</li>
         <li><a :href="`${HOST_URL}/documents/api_v2`">{{ $t("footer.api") }}</a></li>
-        <li><a>{{ $t("footer.help") }}</a></li>
+        <li><a @click="goPath('/instructions/help')">{{ $t("footer.help") }}</a></li>
         <li><a>{{ $t("footer.announcements") }}</a></li>
       </ul>
       <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
         <li class="">{{ $t("footer.service") }}</li>
         <li><a>{{ $t("footer.application") }}</a></li>
-        <li><a>{{ $t("footer.rate_details") }}</a></li>
+        <li><a @click="goPath('/instructions/fee')">{{ $t("footer.rate_details") }}</a></li>
       </ul>
       <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
         <li class="">{{ $t("footer.about") }}</li>
-        <li><a>{{ $t("footer.about_us") }}</a></li>
+        <li><a @click="goPath('/instructions/aboutus')">{{ $t("footer.about_us") }}</a></li>
         <li><a>{{ $t("footer.user_agreement") }}</a></li>
         <li><a>{{ $t("footer.privacy_policy") }}</a></li>
       </ul>
@@ -116,6 +116,7 @@ export default {
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       locale: [{
         language: 'zh-TW',
         name: '正體中文'
@@ -141,6 +142,17 @@ export default {
         data: {
           'content_language': str
         }
+      })
+    },
+    goPath (path, status, href) {
+      if (status) {
+        return
+      }
+      if (href) {
+        location.href = `${this.HOST_URL}${this.ROUTER_VERSION}${path}`
+      }
+      this.$router.push({
+        path: `${this.ROUTER_VERSION}${path}`
       })
     },
     ...mapMutations(['ChangeLanguage'])

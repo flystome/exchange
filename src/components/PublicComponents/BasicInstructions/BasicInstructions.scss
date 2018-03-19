@@ -1,0 +1,54 @@
+.btc-listfooter{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  min-height: 200px;
+  background:linear-gradient(to bottom, #ffa200, #ffd36b);
+  .btc-bg{
+    width: 100%;
+    min-height: 200px;
+    background: url("~Img/listheader.png") no-repeat center;
+    .btc-title{
+      h2{
+        line-height: 200px;
+        font-size: 32px;
+        color: #fff9b6;
+        margin: 0;
+      }
+    }
+    .btc-search{
+      h2{
+        margin: 0;
+        font-size: 32px;
+        color: #fff9b6;
+      }
+      .input-group{
+        margin: auto;
+        margin-top: 22px;
+        height: 40px;
+        .form-control{
+          height: 100%;
+          border: none;
+          border-radius: 0;
+          background:#fff url("~Img/btc-search.png") no-repeat 15px center;
+          padding-left: 45px;
+          &:focus{
+            outline: none;
+            border: none;
+          }
+        }
+        >span{
+          background-color: #fff;
+          padding-right: 6px;
+          >button{
+            height: 28px;
+            width: 72px;
+            background-color: #3e81ff;
+            border: none;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
