@@ -82,6 +82,15 @@ const router = new Router({
       component: MemberCenter
     },
     {
+      path: `${version}/mobile`,
+      name: 'mobile',
+      children: [
+        {
+          path: 'profile'
+        }
+      ]
+    },
+    {
       path: '*',
       name: '*',
       redirect: `${version}/404`
@@ -90,12 +99,10 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path !== process.env.ROUTER_VERSION + '/') {
-    if (store.state.loginData === 'none') {
-      store.dispatch('getData')
-    } else {
-      store.commit('redirect', 1)
-    }
+  if (store.state.loginData === 'none') {
+    store.dispatch('getData')
+  } else {
+    store.commit('redirect', 1)
   }
   next()
 })

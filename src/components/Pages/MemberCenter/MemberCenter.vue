@@ -228,7 +228,7 @@ export default {
           if (d.data.success) {
             this.PopupBoxDisplay({message: this.$t('api_server.my_account.success_200'), type: 'success'})
           } else {
-            this.PopupBoxDisplay({message: this.$t('api_server.my_account.error_1001'), type: 'error'})
+            this.PopupBoxDisplay({message: this.$t(`api_server.my_account.error_${d.data.error.code}`), type: 'warn'})
           }
         })
       }

@@ -540,7 +540,8 @@ const en = {
       },
       "my_account": {
         "success_200": "Email has been sent, please check it",
-        "error_1001": "An confirm email has been sent to your mailbox"
+        "error_1001": "An confirm email has been sent to your mailbox",
+        "error_1002": "Already Activated"
       },
       "withdraw_currency": {
         "set_fund_source_200": "The fund source is set as default",

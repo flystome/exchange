@@ -75,7 +75,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       jQuery: "jquery"
     }),
     new BundleAnalyzerPlugin({
-      openAnalyzer: false
+      openAnalyzer: false,
+      analyzerHost: '0.0.0.0',
+      analyzerPort: 8888
     })
   ]
 })

@@ -4,7 +4,7 @@
       <header is='Header' />
       <div class="btc-container container" v-cloak>
         <keep-alive>
-          <router-view/>
+          <router-view></router-view>
         </keep-alive>
       </div>
     </section>

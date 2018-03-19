@@ -531,7 +531,8 @@ const zh = {
     },
     "my_account": {
       "success_200": "電子郵件已發送，請檢查它",
-      "error_1001": "確認電子郵件已發送到您的郵箱"
+      "error_1001": "確認電子郵件已發送到您的郵箱",
+      "error_1002": "已激活"
     },
     "withdraw_currency": {
       "set_fund_source_200": "提幣地址被設置為默認值",

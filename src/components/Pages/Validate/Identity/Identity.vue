@@ -109,7 +109,6 @@ export default {
       },
       disabled: false,
       redirectLock: false,
-
       img: false,
       user: {
         surname: '',

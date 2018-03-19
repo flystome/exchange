@@ -14,12 +14,15 @@
             'btc-tableTextleft': index === item.content.length-1,
             'btc-tablehover':  Object.prototype.toString.call(data) === '[object Object]' ? data.hover : false
             }">
-            {{ Object.prototype.toString.call(data) !== '[object Object]' ? data : (data.hover ? data.context : $t(`withdraw_currency.${data.context}`)) }}
-           <slot v-if="(Object.prototype.toString.call(data) === '[object Object]' && data.type && data.type['aasm_state']) === ('submitting' || 'submitted' || 'accepted') "
-           name="cancel"
-           :data='data'
-           :id='data.id'>
-           </slot>
+            {{ Object.prototype.toString.call(data) !== '[object Object]' ? data : (data.hover ? '' : $t(`withdraw_currency.${data.context}`)) }}
+            <slot v-if='data.hover' name="href"
+            :data='data'>
+            </slot>
+            <slot v-if="(Object.prototype.toString.call(data) === '[object Object]' && data.type && data.type['aasm_state']) === ('submitting' || 'submitted' || 'accepted') "
+            name="cancel"
+            :data='data'
+            :id='data.id'>
+            </slot>
             </td>
           </tr>
         </tbody>

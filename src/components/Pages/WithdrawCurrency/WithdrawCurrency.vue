@@ -161,15 +161,21 @@
     <basic-table :captionTitle='WithdrawRecord.captionTitle' :item='getWithdrawRecord' v-if="route === 'withdraw'">
       <template slot="cancel"
       slot-scope="props">
-      <a>
-        / <span :disabled='disabled' @click="cancelWithdraw(props.id, props.data)" class="btc-link btn">{{$t(`withdraw_currency.canceled`)}}</span>
-      </a>
+        <a>
+          / <span :disabled='disabled' @click="cancelWithdraw(props.id, props.data)" class="btc-link btn">{{$t(`withdraw_currency.canceled`)}}</span>
+        </a>
       </template>
       <div slot="more" class="text-center btc-b-t btc-table-more">
         <a class="btc-link ">{{$t('my_account.show_more')}}</a>
       </div>
     </basic-table>
     <basic-table :captionTitle='depositRecord.captionTitle' :item='getDepositRecord' v-else>
+      <template slot="href"
+      slot-scope="props">
+        <span class="btc-pointer" @click="OpenWindow(props.data.url)">
+          {{ props.data.context }}
+        </span>
+      </template>
       <div slot="more" class="text-center btc-b-t btc-table-more">
         <a class="btc-link ">{{$t('my_account.show_more')}}</a>
       </div>
@@ -323,6 +329,9 @@ export default {
     }
   },
   methods: {
+    OpenWindow (url) {
+      window.open(url)
+    },
     ChangeRucaptcha () {
       this.Rucaptcha += `?${Math.random()}`
     },
@@ -419,7 +428,7 @@ export default {
             return {
               content: [
                 this.$moment(d.created_at).format('L H:mm:ss'),
-                {hover: true, context: d.txid},
+                {hover: true, context: d.txid, url: d.blockchain_url},
                 d.amount,
                 d.confirmations,
                 this.$t(`withdraw_currency.${d.aasm_state}`)
@@ -644,7 +653,7 @@ export default {
         this.$store.commit('redirect')
       } else if (/deposit/.test(to.path)) {
         this.route = 'deposit'
-        this.$store.commit('redirect', 1)
+        this.$store.commit('redirect')
       }
       // if (/WithdrawCurrency/.test(to.name)) {
       //   this.
