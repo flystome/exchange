@@ -8,6 +8,7 @@ const ValidateIdentity = () => import('Pages/Validate/Identity/Identity')
 const WithdrawCurrency = () => import('Pages/WithdrawCurrency/WithdrawCurrency')
 const ValidateSms = () => import('Pages/Validate/Sms/Sms')
 const Markets = () => import('Pages/market/mList/mlist')
+const MarketDetail = () => import('Pages/market/mList/marketDetail/market')
 // import MarketList from './components/Pages/market/mList'
 const HomePage = () => import('Pages/HomePage/HomePage')
 const Prompt = () => import('Pages/Prompt/Prompt')
@@ -29,6 +30,11 @@ const router = new Router({
       path: `/markets`,
       name: 'Markets',
       component: Markets
+    },
+    {
+      path: `/markets/:id`,
+      name: 'MarketDetail',
+      component: MarketDetail
     },
     {
       path: `${version}/homepage`,

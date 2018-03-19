@@ -517,6 +517,7 @@ const en = {
       "history": "Trade history",
       "price": "Price",
       "volume": "Volume",
+      "amount": "Amount",
       "time": "Time",
       "buy": "Buy",
       "sell": "Sell"

@@ -41,9 +41,12 @@ body{
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .btc-main{
     padding-bottom: 0;
+  }
+  .btc-container {
+    padding: 0;
   }
 }
 
@@ -156,7 +159,7 @@ body{
 }
 
 ul,li {
-  list-style:  none;
+  list-style: none;
 }
 .clearfix:after{
     display: block;
