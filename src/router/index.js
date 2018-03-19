@@ -14,6 +14,10 @@ const HomePage = () => import('Pages/HomePage/HomePage')
 const Prompt = () => import('Pages/Prompt/Prompt')
 const Page404 = () => import('Pages/Page404/Page404')
 
+// Mobile pages
+const Mobile = () => import('Pages/Mobile')
+const MobilePersonal = () => import('Pages/Mobile/Personal/Personal.vue')
+
 Vue.use(Router)
 
 const version = process.env.ROUTER_VERSION
@@ -90,9 +94,12 @@ const router = new Router({
     {
       path: `${version}/mobile`,
       name: 'mobile',
+      component: Mobile,
       children: [
         {
-          path: 'profile'
+          path: 'personal',
+          name: 'MobilePersonal',
+          component: MobilePersonal
         }
       ]
     },
