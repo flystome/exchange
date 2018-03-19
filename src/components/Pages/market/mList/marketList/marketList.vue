@@ -7,7 +7,7 @@
       </li>
     </ul>
     <ul class="bd">
-      <li class="list" v-for="item in oldData" :key="item.quote_currency">
+      <li class="list" v-for="item in oldData" :key="item.quote_currency" @click="goPath(item.quote_currency,item.base_currency)">
         <div class="list-coin">
           <div class="coin">{{item.quote_currency | upper}}<span>/{{item.base_currency | upper}}</span></div>
           <div class="vol"><span>{{$t('markets.volume')}}</span>{{item.volume | fixed4}}</div>
@@ -30,6 +30,8 @@ export default {
   props: ['curData'],
   data () {
     return {
+      HOST_URL: process.env.HOST_URL,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       heads: [this.$t('markets.coinAndVolumn'), this.$t('markets.newPrice'), this.$t('markets.change')],
       coins: ['quote_currency', 'last', 'percent'],
       times: 0,
@@ -48,7 +50,7 @@ export default {
       return params.toUpperCase()
     },
     fixed4: function (params) {
-      if (+params === 0) return 0
+      if (+params === 0 || !params) return 0
       var len = +params.toString().split('.')[0].length
       if (len > 1) {
         return (+params).toFixed(2)
@@ -71,6 +73,9 @@ export default {
     initData: function () {
       if (!this.curData) return ''
       this.oldData = JSON.parse(JSON.stringify(this.curData))
+    },
+    goPath: function (quote, base) {
+      location.href = '/v2/markets/' + quote + base
     },
     sortList: function (index) {
       var order = this.coins[index]

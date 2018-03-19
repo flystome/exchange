@@ -6,6 +6,9 @@
     margin: 0;
     padding: 0;
   }
+  a:hover, a:active {
+    text-decoration: none;
+  }
   .text-down {
     color: #29c1a6;
   }
@@ -43,13 +46,16 @@
     .detail_top {
       height: 50px;
       .coin_detail {
-        width: 66%;
+        width: 70%;
         .cur_market {
           display: block;
           font-size: 18px;
           color: #ffffff;
           &:hover {
             text-decoration: none;
+          }
+          span {
+            display: inline-block;
           }
           .caret {
             margin-left: 5px;
@@ -79,9 +85,17 @@
         border-radius: 2px;
         a {
           font-size: 14px;
-          color: #4382f7;
+          color: #728eaa;
+          padding: 0 3px;
           i {
-            color: #fc4a4a;
+            color: #728eaa;
+            margin-right: 5px;
+          }
+          &.favorited {
+            color: #4382f7;
+            i {
+              color: #fc4a4a;
+            }
           }
         }
       }

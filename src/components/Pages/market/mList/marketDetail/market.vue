@@ -7,7 +7,7 @@
     <div class="detail">
       <div class="detail_top">
         <div class="add_favorite">
-          <a class="favorite" :click="addFavorite()">
+          <a class="favorite" :class = "{'favorited': favorite === true}" @click="addFavorite()">
             <i class="fa fa-star"></i>
             {{$t("markets.favorite")}}
           </a>
@@ -54,7 +54,7 @@
         <li v-for="head in heads" :key="head">{{head}}</li>
       </ul>
       <ul class="order_list">
-        <li v-for="item in trades" :key="item">
+        <li v-for="item in trades" :key="item.tid">
           <div class="order_price" :class="{'text-up': item.type === 'buy', 'text-down': item.type === 'sell'}">{{item.price | fixed4}}</div>
           <div class="order_amount">{{item.amount}}</div>
           <div class="order_time">{{+item.date*1000 | time}}</div>
@@ -63,10 +63,10 @@
     </div>
     <div class="trade">
       <div class="btn">
-        <a class="bid">{{$t("markets.buy")}}</a>
+        <router-link class="bid" :to="{path: ROUTER_VERSION + '/markets/' + curmarket + '/trades#buy', }">{{$t("markets.buy")}}</router-link>
       </div>
       <div class="btn">
-        <a class="ask">{{$t("markets.sell")}}</a>
+        <router-link class="ask" :to="{path: ROUTER_VERSION + '/markets/' + curmarket + '/trades#sell', }">{{$t("markets.sell")}}</router-link>
       </div>
     </div>
   </div>
@@ -78,14 +78,16 @@ export default {
   name: 'market-detail',
   data () {
     return {
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       currencyindex: 0,
       hds: [this.$t('markets.quotes'), this.$t('markets.trade'), this.$t('markets.currency')],
       heads: [this.$t('markets.newPrice'), this.$t('markets.amount'), this.$t('markets.time')],
       curmarket: ' ',
-      market: null,
-      ticker: null,
+      market: {},
+      ticker: {},
       trades: [],
-      logined: false
+      logined: false,
+      favorite: false
     }
   },
   mounted: function () {
@@ -117,13 +119,15 @@ export default {
   },
   filters: {
     fixed2: function (params) {
+      if (!params) return 0
       return (+params).toFixed(2)
     },
     upper: function (params) {
+      if (!params || params === '/' || params === 'undefined/undefined') return '--'
       return params.toUpperCase()
     },
     fixed4: function (params) {
-      if (+params === 0) return 0
+      if (+params === 0 || !params) return 0
       var len = +params.toString().split('.')[0].length
       if (len > 1) {
         return (+params).toFixed(2)
@@ -152,15 +156,38 @@ export default {
       })
     },
     addFavorite: function () {
+      var self = this
       if (this.logined) {
-        this._get({
-          url: '/portfolios/' + this.curmarket + '.json',
-          data: {},
-          method: 'delete'
-        })
+        if (this.favorite) {
+          this._delete({
+            url: '/portfolios/' + self.curmarket,
+            data: {}
+          }, function (xhr) {
+            if (xhr.status === 200) {
+              self.favorite = false
+            }
+          })
+        } else {
+          this._post({
+            url: '/portfolios/',
+            data: {
+              market: self.curmarket
+            }
+          }, function (xhr) {
+            if (xhr.status === 200) {
+              self.favorite = true
+            }
+          })
+        }
       } else {
-        var localList = localStorage.getItem('markets')
-        localList.split(',').push(this.curmarket)
+        var localList = localStorage.getItem('markets').split(',')
+        var i = ('' + this.market).indexOf(localList)
+        if (i !== -1) {
+          localList.push(this.curmarket)
+        } else {
+          localList.splice(i, 1)
+        }
+        localStorage.setItem('markets', localList)
       }
     }
   }

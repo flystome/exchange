@@ -9,6 +9,7 @@ const WithdrawCurrency = () => import('Pages/WithdrawCurrency/WithdrawCurrency')
 const ValidateSms = () => import('Pages/Validate/Sms/Sms')
 const Markets = () => import('Pages/market/mList/mlist')
 const MarketDetail = () => import('Pages/market/mList/marketDetail/market')
+const Trades = () => import('Pages/market/mList/trades/trades')
 // import MarketList from './components/Pages/market/mList'
 const HomePage = () => import('Pages/HomePage/HomePage')
 const Prompt = () => import('Pages/Prompt/Prompt')
@@ -27,14 +28,19 @@ const router = new Router({
       component: MemberCenter
     },
     {
-      path: `/markets`,
+      path: `${version}/markets`,
       name: 'Markets',
       component: Markets
     },
     {
-      path: `/markets/:id`,
+      path: `${version}/markets/:id`,
       name: 'MarketDetail',
       component: MarketDetail
+    },
+    {
+      path: `${version}/markets/:id/trades`,
+      name: 'Trades',
+      component: Trades
     },
     {
       path: `${version}/homepage`,

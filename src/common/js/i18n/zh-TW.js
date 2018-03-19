@@ -326,7 +326,10 @@ const zh = {
     "amount": "数量",
     "time": "时间",
     "buy": "买入",
-    "sell": "卖出"
+    "sell": "卖出",
+    "extra": "可用余额",
+    "maxAmount": "最大数量",
+    "total": "金额"
   },
   "nav": {
     "home": "首页",

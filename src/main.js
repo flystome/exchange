@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 // css dependencies
 import '@/common/css/bootstrap.css'
+import 'font-awesome/css/font-awesome.min.css'
 import '@/common/css/style.css'
 
 // template dependencies

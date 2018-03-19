@@ -1,0 +1,228 @@
+#trade {
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  background: #181f28;
+  ul, li {
+    margin: 0;
+    padding: 0;
+  }
+  a:hover, a:active {
+    text-decoration: none;
+  }
+  .trade_hd {
+    padding-left: 0;
+    margin: 0;
+    height: 42px;
+    background: #273442;
+    li {
+      display: inline-block;
+      float: left;
+      width: 33.3%;
+      height: 42px;
+      line-height: 44px;
+      color: #fff;
+      font-size: 14px;
+      text-align: center;
+      list-style: none;
+      text-transform: uppercase;
+      padding: 0;
+      margin: 0;
+      &.check {
+        color: #4382f7;
+        border-bottom: 2px solid #4382f7;
+      }
+    }
+  }
+
+  .trades_main {
+    padding: 0 8px;
+    .trades_lt {
+      display: inline-block;
+      float: left;
+      width: 53%;
+      &>a {
+        font-size: 18px;
+        color: #ffffff;
+        height: 50px;
+        line-height: 50px;
+        i {
+          margin-left: 5px;
+          vertical-align: 6px;
+        }
+      }
+      .order_type {
+        width: 100%;
+        height: 32px;
+        border: 1px solid #4382f7;
+        a {
+          color: #ffffff;
+          background: #181f28;
+          display: inline-block;
+          width: 50%;
+          height: 30px;
+          float: left;
+          text-align: center;
+          line-height: 30px;
+          &.active {
+            height: 31px;
+            background: #4382f7;
+          }
+        }
+      }
+      .extra {
+        height: 64px;
+        padding: 14px 0;
+        p {
+          font-size: 12px;
+          color: #728eaa;
+          margin-bottom: 0;
+          line-height: 18px;
+          &.num {
+            color: #fff;
+            span.base {
+              margin-left: 5px;
+            }
+          }
+        }
+      }
+      .inputs {
+        height: 32px;
+        width: 100%;
+        background: #38475a;
+        margin-bottom: 12px;
+      }
+      .private {
+        height: 22px;
+        color: #728eaa;
+        font-size: 12px;
+        line-height: 22px;
+        .nums {
+          color: #fff;
+        }
+      }
+      .percent {
+        width: 100%;
+        height: 20px;
+        margin: 10px 0;
+        font-size: 12px;
+        span {
+          display: inline-block;
+          float: left;
+          width: 23.5%;
+          margin-right: 2%;
+          color: #728eaa;
+          line-height: 20px;
+          text-align: center;
+          background: #344151;
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+      button {
+        display: block;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        font-size: 16px;
+        border: 0;
+        margin-top: 30px;
+        &.buy {
+          background: #24d0b2;
+        }
+        &.sell {
+          background: #fc4a4a;
+        }
+      }
+    }
+
+    .trades_rt {
+      float: right;
+      width: 42%;
+      .currency_price {
+        height: 50px;
+        padding: 9px 0;
+        line-height: 32px;
+        .back {
+          display: inline-block;
+          float: right;
+          background: #273442;
+          width: 34px;
+          height: 32px;
+          padding: 8px 9px;
+          line-height: 16px;
+          img {
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            vertical-align: top;
+          }
+        }
+        span {
+          display: inline-block;
+          color: #ffffff;
+          font-size: 16px;
+          vertical-align: -4px
+        }
+      }
+      .trade_lt {
+        display: inline-block;
+        float: left;
+        width: 54%;
+      }
+      .trade_rt {
+        display: inline-block;
+        float: left;
+        width: 46%;
+        text-align: right;
+      }
+      .head {
+        margin-top: 4px;
+        height: 24px;
+        line-height: 24px;
+        color: #ffffff;
+        font-size: 12px;
+      }
+      .trade_list {
+        color: #fff;
+        font-size: 12px;
+
+        &.sell_list {
+          margin-bottom: 15px;
+          .trade_lt {
+            color: #fc4a4a;
+          }
+          li:before {
+            background: #152b2f
+          }
+        }
+        &.buy_list {
+          .trade_lt {
+            color: #24d0b2
+          }
+          li:before {
+            background: #312428
+          }
+        }
+        li {
+          height: 20px;
+          line-height: 20px;
+          margin-bottom: 1px;
+          position: relative;
+          li:before {
+            content: "";
+            display: block;
+            position: absolute;
+            height: 20px;
+            width: 50%;
+            right: 0;
+            top: 0;
+            background: #ff0;
+          }
+        }
+      }
+    }
+  }
+}

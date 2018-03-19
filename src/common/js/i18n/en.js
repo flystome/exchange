@@ -520,7 +520,10 @@ const en = {
       "amount": "Amount",
       "time": "Time",
       "buy": "Buy",
-      "sell": "Sell"
+      "sell": "Sell",
+      "extra": "Available",
+      "maxAmount": "Max Amount",
+      "total": "Total"
     },
     "hint": {
       "confirm": "OK",
