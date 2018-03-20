@@ -1,7 +1,7 @@
 <template>
   <div class="market_detail">
     <ul class="market_hd clearfix">
-      <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}"
+      <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}" @click="goPath(index)"
       >{{hd}}</li>
     </ul>
     <div class="detail">
@@ -154,6 +154,15 @@ export default {
         self.logined = !!initdata.current_user
         console.log(initdata)
       })
+    },
+    goPath: function (index) {
+      if (index === 0) {
+        return ''
+      } else if (index === 1) {
+        this.$router.push({path: `${this.ROUTER_VERSION}/markets/${this.curmarket}/trades`})
+      } else if (index === 2) {
+        this.$router.push({path: 'orders'})
+      }
     },
     addFavorite: function () {
       var self = this

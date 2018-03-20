@@ -90,6 +90,25 @@
         width: 100%;
         background: #38475a;
         margin-bottom: 12px;
+        color: #85a7c8;
+        font-size: 12px;
+        input {
+          outline: none;
+          border: 0;
+          height: 32px;
+          background: none;
+          padding-left: 8px;
+          color: #fff;
+          &::-webkit-input-placeholder {
+            color: #85a7c8;
+          }
+        }
+        span {
+          display: inline-block;
+          float: right;
+          line-height: 32px;
+          margin-right: 8px;
+        }
       }
       .private {
         height: 22px;
@@ -98,6 +117,8 @@
         line-height: 22px;
         .nums {
           color: #fff;
+          margin: 0;
+          float: right;
         }
       }
       .percent {
@@ -119,6 +140,22 @@
           }
         }
       }
+      .tips {
+        height: 24px;
+        line-height: 24px;
+        text-align: left;
+        font-size: 12px;
+        .success {
+          color: #5cb85c;
+        }
+        .fail {
+          color: #d9534f;
+        }
+        i {
+          display: inline-block;
+          margin-right: 3px;
+        }
+      }
       button {
         display: block;
         width: 100%;
@@ -128,7 +165,10 @@
         color: #fff;
         font-size: 16px;
         border: 0;
-        margin-top: 30px;
+        margin-top: 6px;
+        &:focus {
+          outline: none;
+        }
         &.buy {
           background: #24d0b2;
         }
@@ -188,9 +228,14 @@
       .trade_list {
         color: #fff;
         font-size: 12px;
-
-        &.sell_list {
+        height: 168px;
+        position: relative;
+        &>.sell_list {
           margin-bottom: 15px;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
           .trade_lt {
             color: #fc4a4a;
           }
@@ -198,7 +243,7 @@
             background: #152b2f
           }
         }
-        &.buy_list {
+        &>.buy_list {
           .trade_lt {
             color: #24d0b2
           }
@@ -211,16 +256,17 @@
           line-height: 20px;
           margin-bottom: 1px;
           position: relative;
-          li:before {
-            content: "";
-            display: block;
-            position: absolute;
-            height: 20px;
-            width: 50%;
-            right: 0;
-            top: 0;
-            background: #ff0;
-          }
+          // &::before {
+          //   content: " ";
+          //   display: block;
+          //   position: absolute;
+          //   height: 20px;
+          //   width: 50%;
+          //   right: 0;
+          //   top: 0;
+          //   background: #ff0;
+          //   z-index: 0;
+          // }
         }
       }
     }

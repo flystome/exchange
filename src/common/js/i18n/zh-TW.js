@@ -329,7 +329,9 @@ const zh = {
     "sell": "卖出",
     "extra": "可用余额",
     "maxAmount": "最大数量",
-    "total": "金额"
+    "total": "金额",
+    "trade_success": "下单成功",
+    "trade_fail": "下单失败"
   },
   "nav": {
     "home": "首页",
