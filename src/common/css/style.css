@@ -1,6 +1,7 @@
 
 #app{
   height: 100%;
+  position: relative;
 }
 
 .btc-main{
@@ -170,4 +171,10 @@ ul,li {
 }
 .clearfix{
     zoom:1;
+}
+
+
+/* -----------------------------------animation-------------------------- */
+.SideSlipMenu-enter, .SideSlipMenu-leave-to {
+  transform: translateX(73.4%);
 }

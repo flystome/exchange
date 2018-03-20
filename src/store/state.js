@@ -11,7 +11,8 @@ const state = {
   },
   language: 'en',
   DepositAddress: {
-  }
+  },
+  SideSlipMenu: false
 }
 
 export default state
