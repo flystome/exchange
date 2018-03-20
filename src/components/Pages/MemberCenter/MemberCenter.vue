@@ -50,7 +50,7 @@
         <div class="media">
           <div>
             <div class="media-left">
-              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-google.png" data-holder-rendered="true">
+              <img class="media-object img-padding" data-src="holder.js/64x64" alt="64x64" src="~Img/member-google.png" data-holder-rendered="true">
             </div>
             <div class="media-body">
               <h5 class="media-heading">{{$t("my_account.korean_user_use_twice_verification")}}</h5>
@@ -228,7 +228,7 @@ export default {
           if (d.data.success) {
             this.PopupBoxDisplay({message: this.$t('api_server.my_account.success_200'), type: 'success'})
           } else {
-            this.PopupBoxDisplay({message: this.$t('api_server.my_account.error_1001'), type: 'error'})
+            this.PopupBoxDisplay({message: this.$t(`api_server.my_account.error_${d.data.error.code}`), type: 'warn'})
           }
         })
       }

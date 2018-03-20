@@ -384,7 +384,8 @@ const en = {
       "example": "Example",
       "click_upload": "Click To Upload",
       "information_upload_success": "Real-name authentication information upload success",
-      "please_upload_file": "Please upload the file"
+      "please_upload_file": "Please upload the file",
+      "img_to_big": "Upload pictures are not allowed to exceed"
     },
     "validate_sms": {
       "binding_cell_phone_authentication": "Verify Your Cell Phone",
@@ -546,7 +547,8 @@ const en = {
       },
       "my_account": {
         "success_200": "Email has been sent, please check it",
-        "error_1001": "An confirm email has been sent to your mailbox"
+        "error_1001": "An confirm email has been sent to your mailbox",
+        "error_1002": "Already Activated"
       },
       "withdraw_currency": {
         "set_fund_source_200": "The fund source is set as default",
@@ -591,6 +593,14 @@ const en = {
       "user_agreement": "User Agreement",
       "privacy_policy": "Privacy Policy",
       "contact_us": "Contact Us"
+    },
+    "side_slip_menu": {
+      "consulting_center": "Consulting Center",
+      "asset_management": "Asset Management",
+      "announcement": "Announcement",
+      "news": "News",
+      "my_account": "My Account",
+      "language": "Language"
     }
   }
 }

@@ -16,6 +16,7 @@ import NewsPrompt from 'Components/NewsPrompt/NewsPrompt'
 import DivContenteditable from 'Components/DivContenteditable/DivContenteditable'
 import Title from 'Pages/Title/Title'
 import App from './App'
+import BasicInstructions from 'Components/BasicInstructions/BasicInstructions'
 
 // js dependencies
 import Vue from 'vue'
@@ -56,7 +57,8 @@ const components = [
   QrCode,
   UploadImg,
   NewsPrompt,
-  DivContenteditable
+  DivContenteditable,
+  BasicInstructions
 ]
 components.forEach(component => {
   Vue.component(component.name, component)

@@ -15,6 +15,14 @@ const HomePage = () => import('Pages/HomePage/HomePage')
 const Prompt = () => import('Pages/Prompt/Prompt')
 const Page404 = () => import('Pages/Page404/Page404')
 
+// Mobile pages
+const Mobile = () => import('Pages/Mobile')
+const MobilePersonal = () => import('Pages/Mobile/Personal/Personal.vue')
+const AboutUs = () => import('Pages/Instructions/AboutUs/AboutUs')
+const Instructions = () => import('Pages/Instructions')
+const Fee = () => import('Pages/Instructions/Fee/Fee')
+const Help = () => import('Pages/Instructions/Help/Help')
+
 Vue.use(Router)
 
 const version = process.env.ROUTER_VERSION
@@ -89,9 +97,48 @@ const router = new Router({
       component: Page404
     },
     {
+      path: `${version}/instructions`,
+      name: 'Instructions',
+      component: Instructions,
+      children: [
+        {
+          path: ``,
+          name: 'defalut',
+          component: AboutUs
+        },
+        {
+          path: `aboutus`,
+          name: 'AboutUs',
+          component: AboutUs
+        },
+        {
+          path: `fee`,
+          name: 'Fee',
+          component: Fee
+        },
+        {
+          path: `help`,
+          name: 'Help',
+          component: Help
+        }
+      ]
+    },
+    {
       path: '/:version',
       name: '/:version',
       component: MemberCenter
+    },
+    {
+      path: `${version}/mobile`,
+      name: 'mobile',
+      component: Mobile,
+      children: [
+        {
+          path: 'personal',
+          name: 'MobilePersonal',
+          component: MobilePersonal
+        }
+      ]
     },
     {
       path: '*',
@@ -102,12 +149,10 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.path !== process.env.ROUTER_VERSION + '/') {
-    if (store.state.loginData === 'none') {
-      store.dispatch('getData')
-    } else {
-      store.commit('redirect', 1)
-    }
+  if (store.state.loginData === 'none') {
+    store.dispatch('getData')
+  } else {
+    store.commit('redirect', 1)
   }
   next()
 })

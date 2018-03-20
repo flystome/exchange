@@ -1,0 +1,55 @@
+table{
+  >thead{
+    >tr{
+      color: #fff;
+      background-color: #232731;
+      >th{
+        padding: 12px;
+        padding-left: 16px;
+        border: none;
+        font-weight: normal;
+        cursor: pointer;
+      }
+      .upordpwn{
+        >div{
+          display: inline-block;
+          >img{
+            display: block;
+            &:nth-child(1){
+              margin-bottom: 2px;
+            }
+          }
+        }
+      }
+    }
+  }
+  >tbody{
+    >tr{
+      >td{
+        padding: 16px;
+        border: none;
+        border-bottom: 1px solid #f2f2f2;
+        .btc-percent{
+          color:#999999;
+          .text-up{
+            color:#fd4041
+          }
+          .text-down{
+            color:#00c4a2
+          }
+        }
+        >a{
+          &:hover{
+            text-decoration: none;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+.btc-homepage-currency{
+  >div{
+    display: inline-block;
+  }
+}

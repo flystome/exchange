@@ -8,3 +8,4 @@
 /src/components/Pages/WithdrawCurrency/WithdrawCurrency.vue
 /src/components/Pages/validate/Identity/Identity.vue
 /src/store/mutations.js
+./index.html

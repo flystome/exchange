@@ -401,7 +401,8 @@ const zh = {
     "example": "例如",
     "click_upload": "點擊上傳",
     "information_upload_success": "實名認證信息上傳成功",
-    "please_upload_file": "請上傳文件"
+    "please_upload_file": "請上傳文件",
+    "img_to_big": "上载图片不得超过"
   },
   "validate_sms": {
     "binding_cell_phone_authentication": "驗證您的手機號碼",
@@ -536,7 +537,8 @@ const zh = {
     },
     "my_account": {
       "success_200": "電子郵件已發送，請檢查它",
-      "error_1001": "確認電子郵件已發送到您的郵箱"
+      "error_1001": "確認電子郵件已發送到您的郵箱",
+      "error_1002": "已激活"
     },
     "withdraw_currency": {
       "set_fund_source_200": "提幣地址被設置為默認值",
@@ -581,6 +583,14 @@ const zh = {
     "user_agreement": "用戶協議",
     "privacy_policy": "隱私政策",
     "contact_us": "聯繫我們"
+  },
+  "side_slip_menu": {
+    "consulting_center": "",
+    "asset_management": "",
+    "announcement": "",
+    "news": "",
+    "my_account": "",
+    "language": ""
   }
 }
 

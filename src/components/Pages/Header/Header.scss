@@ -157,6 +157,18 @@
     padding-left: 0;
     padding-right: 0;
   }
+  .btc-header-sideslip{
+    float: right;
+    display: none;
+    img {
+      width: 38px;
+      margin-right: 14px;
+      margin-top: 12px;
+      cursor: pointer;
+      position: absolute;
+      right: -2px;
+    }
+  }
 }
 
 @media(max-width: 992px){
@@ -189,6 +201,16 @@
     margin-left: 15px;
     margin-right: 15px;
   }
+}
+
+@media(max-width: 992px){
+  .btc-header-sideslip{
+    display: block!important;
+  }
+}
+
+.collapsed{
+  display: none
 }
 
 @media (min-width: 1000px){

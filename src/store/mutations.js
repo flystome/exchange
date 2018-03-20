@@ -101,7 +101,10 @@ const mutations = {
       message: obj.message ? obj.message : state.PopupBox.message,
       buttondisplay: Object.keys(obj).includes('buttondisplay') ? obj.buttondisplay : state.PopupBox.buttondisplay
     })
-  }
+  },
+  SideSlipMenuDisplay (state, type) {
+    state.SideSlipMenu = type
+  },
 }
 
 export default mutations
