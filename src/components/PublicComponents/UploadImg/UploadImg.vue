@@ -48,8 +48,8 @@ export default {
     },
     ShowImg (el) {
       this.$emit('prompt')
-      if (el.target.files[0].size > 2 * 1024 * 1024) {
-        this.prompt = '图片不允许超过2m'
+      if (el.target.files[0].size > 0.7 * 1024 * 1024) {
+        this.prompt = `${this.$t('validate_identity.img_to_big')}700k`
       } else {
         var FileRead = new FileReader()
         FileRead.readAsDataURL(el.target.files[0])

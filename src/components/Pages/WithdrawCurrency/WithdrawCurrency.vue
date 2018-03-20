@@ -172,7 +172,7 @@
     <basic-table :captionTitle='depositRecord.captionTitle' :item='getDepositRecord' v-else>
       <template slot="href"
       slot-scope="props">
-        <span class="btc-pointer" @click="OpenWindow(props.data.url)">
+        <span class="btc-pointer btc-link" @click="OpenWindow(props.data.url)">
           {{ props.data.context }}
         </span>
       </template>

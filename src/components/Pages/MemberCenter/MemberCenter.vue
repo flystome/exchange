@@ -50,7 +50,7 @@
         <div class="media">
           <div>
             <div class="media-left">
-              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-google.png" data-holder-rendered="true">
+              <img class="media-object img-padding" data-src="holder.js/64x64" alt="64x64" src="~Img/member-google.png" data-holder-rendered="true">
             </div>
             <div class="media-body">
               <h5 class="media-heading">{{$t("my_account.korean_user_use_twice_verification")}}</h5>

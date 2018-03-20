@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <section class="btc-main">
-      <header is='Header' />
-      <div class="btc-container container" v-cloak>
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
-      </div>
-    </section>
+    <transition name='SideSlipMenu'>
+      <section class="btc-main">
+        <header is='Header' />
+        <div class="btc-container container" v-cloak>
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
+        </div>
+      </section>
+    </transition>
     <footer is='Footer' />
     <wrapper></wrapper>
     <popup-box></popup-box>
+    <side-slip-menu></side-slip-menu>
   </div>
 </template>
 
@@ -18,6 +21,7 @@
 import { mapGetters } from 'vuex'
 import Header from '@/components/Pages/Header/Header'
 import Footer from '@/components/Pages/Footer/Footer'
+import SideSlipMenu from '@/components/Pages/SideSlipMenu/SideSlipMenu'
 import Wrapper from '@/components/PublicComponents/Wrapper/Wrapper'
 import PopupBox from '@/components/PublicComponents/PopupBox/PopupBox'
 
@@ -26,6 +30,7 @@ export default {
   components: {
     Header,
     Footer,
+    SideSlipMenu,
     Wrapper,
     PopupBox
   },

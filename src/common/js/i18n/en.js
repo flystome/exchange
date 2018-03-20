@@ -384,7 +384,8 @@ const en = {
       "example": "Example",
       "click_upload": "Click To Upload",
       "information_upload_success": "Real-name authentication information upload success",
-      "please_upload_file": "Please upload the file"
+      "please_upload_file": "Please upload the file",
+      "img_to_big": "Upload pictures are not allowed to exceed"
     },
     "validate_sms": {
       "binding_cell_phone_authentication": "Verify Your Cell Phone",
@@ -587,6 +588,14 @@ const en = {
       "user_agreement": "User Agreement",
       "privacy_policy": "Privacy Policy",
       "contact_us": "Contact Us"
+    },
+    "side_slip_menu": {
+      "consulting_center": "Consulting Center",
+      "asset_management": "Asset Management",
+      "announcement": "Announcement",
+      "news": "News",
+      "my_account": "My Account",
+      "language": "Language"
     }
   }
 }

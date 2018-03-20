@@ -11,6 +11,9 @@
           <a class="navbar-brand" :href="`${HOST_URL}`">
             <img src="~Img/logo.png">
           </a>
+          <div class="btc-header-sideslip" @click="SideSlipMenuDisplay(true)">
+            <img src="~Img/header-more.png">
+          </div>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="z-index:100">
           <ul class="nav navbar-nav">
@@ -87,7 +90,7 @@ export default {
     requireImg (img) {
       return require(`../../../../static/img/${img}.png`)
     },
-    ...mapMutations(['PopupBoxDisplay']),
+    ...mapMutations(['PopupBoxDisplay', 'SideSlipMenuDisplay']),
     validateEmail () {
       if (!this.loginData.activated) {
         this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
