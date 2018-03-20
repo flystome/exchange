@@ -34,8 +34,9 @@
               </li>
             </ul>
           </li>
-          <li>
-            <img src='~Img/sideslip-myaccount.png'> {{ $t('side_slip_menu.my_account') }}
+          <li @click="goPath(`/`)">
+            <img src='~Img/sideslip-myaccount.png'>
+            {{ $t('side_slip_menu.my_account') }}
           </li>
           <li>
             <div @click="Lang = !Lang">

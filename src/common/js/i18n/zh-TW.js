@@ -326,16 +326,12 @@ const zh = {
     "amount": "数量",
     "time": "时间",
     "buy": "买入",
-<<<<<<< HEAD
-    "sell": "卖出"
-=======
     "sell": "卖出",
     "extra": "可用余额",
     "maxAmount": "最大数量",
     "total": "金额",
     "trade_success": "下单成功",
     "trade_fail": "下单失败"
->>>>>>> origin/master
   },
   "nav": {
     "home": "首页",

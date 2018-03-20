@@ -46,7 +46,6 @@
 import { callingdata } from '@/common/js/countries'
 import { mapMutations, mapState } from 'vuex'
 const _debounce = require('lodash/fp/debounce.js')
-console.log(_debounce)
 export default {
   name: 'ValidateSms',
   // updated () {

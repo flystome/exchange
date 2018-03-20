@@ -121,7 +121,6 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery"
-
     })
   ]
 })

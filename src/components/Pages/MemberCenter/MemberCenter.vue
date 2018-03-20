@@ -162,6 +162,7 @@ export default {
   name: 'MemberCenter',
   created () {
     var code = Cookies.get('code')
+    this.$i18n.locale = Cookies.get('locale')
     if (code) {
       if (code.match(/\d+/g)[0] === '200') {
         this.PopupBoxDisplay({message: this.$t(`my_account.200_hint`), type: 'success'})

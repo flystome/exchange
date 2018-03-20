@@ -55,7 +55,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: 'https://hotex-a0db.kxcdn.com',
+    assetsPublicPath: '/',
 
     /**
      * Source Maps
