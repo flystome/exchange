@@ -72,96 +72,56 @@
       }
     }
   }
-  .btc-homepage-markets{
-    height: 400px;
-    .btc-button{
-      padding: 15px 12px 12px 12px;
-    }
-    .btc-search{
-      >input{
-        background: url("~Img/search.png") no-repeat right;
+  .btc-homepage-main{
+    background-color: #fff;
+    .btc-homepage-markets{
+      height: 400px;
+      .btc-button{
+        padding: 15px 12px 12px 12px;
       }
-    }
-    .btc-active{
-      background-color: #fff;
-      color: #333333;
-    }
-    >table{
-      >thead{
-        >tr{
-          color: #fff;
-          background-color: #232731;
-          >th{
-            padding: 12px;
-            padding-left: 16px;
-            border: none;
-            font-weight: normal;
-          }
-          .upordpwn{
-            >div{
-              display: inline-block;
-              >img{
-                display: block;
-                &:nth-child(1){
-                  margin-bottom: 2px;
-                }
-              }
-            }
-          }
+      .btc-search{
+        min-height: 0 !important;
+        >input{
+          background: url("~Img/search.png") no-repeat right;
         }
       }
-      >tbody{
-        >tr{
-          >td{
-            padding: 16px;
-            border: none;
-            border-bottom: 1px solid #f2f2f2;
-            >a{
-              &:hover{
-                text-decoration: none;
-                cursor: pointer;
-              }
-            }
-          }
-        }
+      .btc-active{
+        background-color: #fff;
+        color: #333333;
       }
     }
-    .btc-homepage-currency{
-      >div{
-        display: inline-block;
-      }
+    .btc-homepage-logo{
+      margin-top: 125px;
     }
-  }
-  .btc-homepage-logo{
-    margin-top: 125px;
-  }
-  .btc-homepage-intr{
-    >span{
-      display: block;
-      border: 1px solid #f2f2f2;
-    }
-    >div{
+    .btc-homepage-intr{
       >span{
         display: block;
+        border: 1px solid #f2f2f2;
+      }
+      >div{
+        >span{
+          display: block;
+          color: #999999;
+        }
+      }
+    }
+    .btc-homepage-info{
+      .col-md-offset-1{
+      }
+      >a{
+        >span{
+          display: block;
+          color: #333333
+        }
+      }
+    }
+    .btc-homepage-prompt{
+      padding-bottom: 300px;
+      >div{
+        line-height: 24px;
         color: #999999;
       }
     }
   }
-  .btc-homepage-info{
-    .col-md-offset-1{
-    }
-    >a{
-      >span{
-        display: block;
-        color: #333333
-      }
-    }
-  }
-  .btc-homepage-prompt{
-    padding-bottom: 300px;
-    >div{
-      line-height: 24px;
-      color: #999999;
-    }
-  }
+
 }
