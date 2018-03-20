@@ -154,7 +154,6 @@ export default {
       this.curData.push(this.getItem(data['usdt']))
       this.curData.push(this.getItem(data['btc']))
       this.curData.push(this.getItem(data['eth']))
-      console.log(this.curData)
     },
     getItem: function (data) {
       var arr = []

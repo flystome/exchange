@@ -3,11 +3,12 @@
   position: absolute;
   left: 0;
   min-height: 200px;
-  background:linear-gradient(to bottom, #ffa200, #ffd36b);
+  background:#2686ff url("~Img/listheader.png") no-repeat center;
   .btc-bg{
     width: 100%;
     min-height: 200px;
-    background: url("~Img/listheader.png") no-repeat center;
+    background: url("~Img/point.svg") no-repeat 60% 100%;
+    background-size: 800px 100px;
     .btc-title{
       h2{
         line-height: 200px;

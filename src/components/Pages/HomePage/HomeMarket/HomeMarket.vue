@@ -41,11 +41,10 @@ export default {
   data () {
     return {
       oldData: null,
-      heads: ['价格USDT', '交易量(USDT)', '总市值(USDT)', '日涨跌'],
-      coins: ['last', 'volume', 'volume', 'percent'],
+      heads: ['价格', '交易量(USDT)', '总市值(USDT)', '日涨跌'],
+      coins: ['last', 'volume', 'total', 'percent'],
       times: 0,
-      currencyIndex: 0,
-      hide: true
+      currencyIndex: 0
     }
   },
   mounted: function () {
@@ -67,7 +66,6 @@ export default {
       this.oldData = JSON.parse(JSON.stringify(this.curData))
     },
     sortList: function (index) {
-      this.hide = false
       var order = this.coins[index]
       if (this.currencyIndex !== index) {
         this.currencyIndex = index
@@ -75,6 +73,9 @@ export default {
       }
       if (this.times === 0) {
         this.oldData.sort(function (a, b) {
+          if (index === 2) {
+            return a['last'] * a['volume'] - b['last'] * b['volume']
+          }
           if (index === 3) {
             return a[order] - b[order]
           } else {
@@ -84,6 +85,9 @@ export default {
         this.times = 1
       } else if (this.times === 1) {
         this.oldData.sort(function (a, b) {
+          if (index === 2) {
+            return b['last'] * b['volume'] - a['last'] * a['volume']
+          }
           if (index === 3) {
             return b[order] - a[order]
           } else {

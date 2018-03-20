@@ -80,6 +80,7 @@
         padding: 15px 12px 12px 12px;
       }
       .btc-search{
+        min-height: 0 !important;
         >input{
           background: url("~Img/search.png") no-repeat right;
         }
