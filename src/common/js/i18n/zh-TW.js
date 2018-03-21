@@ -333,6 +333,15 @@ const zh = {
     "trade_success": "下单成功",
     "trade_fail": "下单失败"
   },
+  'orders': {
+    "all": "全部",
+    "buy": "买入",
+    "sell": "卖出",
+    "cancel_all": "全部取消",
+    "price": "委托价格",
+    "volume": "委托数量",
+    "ordered": "已成交"
+  },
   "nav": {
     "home": "首页",
     "transaction": "市場",

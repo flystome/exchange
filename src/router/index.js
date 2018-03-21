@@ -10,7 +10,8 @@ const ValidateSms = () => import('Pages/Validate/Sms/Sms')
 const Markets = () => import('Pages/market/mList/mlist')
 const MarketDetail = () => import('Pages/market/mList/marketDetail/market')
 const Trades = () => import('Pages/market/mList/trades/trades')
-// import MarketList from './components/Pages/market/mList'
+const Orders = () => import('Pages/market/mList/orders/orders')
+
 const HomePage = () => import('Pages/HomePage/HomePage')
 const Prompt = () => import('Pages/Prompt/Prompt')
 const Page404 = () => import('Pages/Page404/Page404')
@@ -49,6 +50,11 @@ const router = new Router({
       path: `${version}/markets/:id/trades`,
       name: 'Trades',
       component: Trades
+    },
+    {
+      path: `${version}/orders`,
+      name: 'Orders',
+      component: Orders
     },
     {
       path: `${version}/homepage`,
