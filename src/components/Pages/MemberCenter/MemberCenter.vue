@@ -191,7 +191,8 @@ export default {
         captionTitle: this.$t('my_account.recommended_users'),
         Item: []
       },
-      httplock: false
+      httplock: false,
+      ReferralsData: {}
     }
   },
   methods: {
