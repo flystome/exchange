@@ -154,7 +154,6 @@ export default {
     this.order_type = this.$route.hash.substr(1) || 'buy'
     this.curMarket = this.$route.params.id
     this.fetchData(this.curMarket)
-    console.log(this.sn, this.sellList, 1)
 
     var marketPush = pusher.subscribe('market-' + this.curMarket + '-global')
     marketPush.bind('update', (data) => {
@@ -175,6 +174,10 @@ export default {
           }
         }
       }
+    })
+    var privateAccount = pusher.subscribe('private-' + this.sn)
+    privateAccount.bind('account', (data) => {
+      console.log(data)
     })
   },
   computed: {
@@ -241,26 +244,13 @@ export default {
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
         self.ticker = initdata.ticker
-        self.sellList = initdata.asks.slice(-8, 8).reverse()
+        self.sellList = initdata.asks.slice(-8, 8)
         self.buyList = initdata.bids.slice(0, 8)
         self.market = initdata.market
         self.extra_base = initdata.accounts[self.market.base_currency].balance
         self.extra_quote = initdata.accounts[self.market.quote_currency].balance
         self.sellList = self.sellList.reverse()
         self.sn = initdata.current_user.sn
-        self.handleAccount(self.sn)
-        console.log(initdata)
-      })
-    },
-    handleAccount: function (sn) {
-      var self = this
-      var privateAccount = pusher.subscribe('private-' + sn)
-      privateAccount.bind('account', (data) => {
-        if (data.currency === self.market.base_currency) {
-          self.extra_base = data.balance
-        } else if (data.currency === self.market.quote_currency) {
-          self.extra_quote = data.balance
-        }
       })
     },
     orderType: function (type) {
@@ -304,14 +294,14 @@ export default {
           }
         }
       }, function (data) {
-        if (!data || data.status !== 200) {
-          self.isDisabled = false
-          self.status = 'fail'
-        } else if (data.status === 200) {
+        if (data.status === 200) {
           self.isDisabled = false
           self.price = ''
           self.amount_buy = ''
           self.status = 'success'
+        } else {
+          self.isDisabled = false
+          self.status = 'fail'
         }
       })
     },
@@ -324,21 +314,21 @@ export default {
       this._post({
         url: '/markets/' + this.curMarket + '/order_asks',
         data: {
-          order_ask: {
+          order_bid: {
             ord_type: 'limit',
             price: self.price,
             origin_volume: self.amount_sell
           }
         }
       }, function (data) {
-        if (!data || data.status !== 200) {
-          self.isDisabled = false
-          self.status = 'fail'
-        } else if (data.status === 200) {
+        if (data.status === 200) {
           self.isDisabled = false
           self.price = ''
           self.amount_buy = ''
           self.status = 'success'
+        } else {
+          self.isDisabled = false
+          self.status = 'fail'
         }
       })
     },

@@ -183,7 +183,15 @@ export default {
       tickets: [],
       step: 1,
       disabled: false,
-      ReferralsData: {},
+      getRecommendCount: {
+        captionTitle: this.$t('my_account.recommended_statistics'),
+        Item: []
+      },
+      getRecommendUser: {
+        captionTitle: this.$t('my_account.recommended_users'),
+        Item: []
+      },
+      httplock: false
     }
   },
   methods: {
@@ -191,16 +199,63 @@ export default {
       this.step = 1
     },
     async referrals () {
+      this.step = 2
+      if (this.httplock) return
       this._get({
         url: '/settings/referrals.json'
       }, (d) => {
-        var d = d.data
-        this.ReferralsData.referral_datas = d.referral_datas
-        this.ReferralsData.referrals = d.referrals
-        this.ReferralsData.referrals_account_name = d.referrals_account_name
+        this.httplock = true
+        var data = d.data
+
+        var obj = {
+          captionTitle: this.$t('my_account.recommended_statistics'),
+          Item: ''
+        }
+        if (data.referral_datas) {
+          data.referral_datas.sort((a, b) => {
+            return new Date(b.date).getTime() - new Date(a.date).getTime()
+          })
+          data.referral_datas.length === 0 ? obj.Item = '' : obj.Item = [{content: [this.$t('my_account.date'), this.$t('my_account.number_of_users'), this.$t('my_account.new_user'), this.$t('my_account.page_browsing'), this.$t('my_account.bounce_rate')]}].concat(data.referral_datas.map(d => {
+            return {
+              content: [
+                this.$moment(d.date).format('L'),
+                d.users,
+                d.new_users,
+                d.page_views,
+                Number(d.bounce_rate).toFixed(1) + '%'
+              ]
+            }
+          }))
+        }
+        this.getRecommendCount = obj
+
+        var obj1 = {
+          captionTitle: this.$t('my_account.recommended_users'),
+          Item: ''
+        }
+        if (data.referral_datas) {
+          data.referral_signup_history.sort((a, b) => {
+            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          })
+          data.referrals.sort((a, b) => {
+            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          })
+          data.referral_signup_history.length === 0 ? obj1.Item = '' : obj1.Item = [{content: [this.$t('my_account.account'), this.$t('my_account.ip_adress'), this.$t('my_account.login_location'), this.$t('my_account.browser'), this.$t('my_account.login_time'), this.$t('my_account.activated')]}].concat(data.referral_signup_history.map((_, index) => {
+            console.log(data.recent_signin_histories[index])
+            return {
+              content: [
+                data.referrals_account_name[index],
+                data.referral_signup_history[index].ip,
+                data.referral_signup_history[index].location ? data.referral_signup_history[index].location : '占无',
+                this.bser(data.recent_signin_histories[index].ua),
+                this.$moment(data.referrals[index].created_at).format('L H:mm:ss'),
+                data.referrals[index].activated ? this.$t('my_account.yes') : this.$t('my_account.no')
+              ]
+            }
+          }))
+        }
+        this.getRecommendUser = obj1
       })
-      await this.$nextTick()
-      this.step = 2
     },
     ...mapMutations(['PopupBoxDisplay']),
     bser (explorer) {
@@ -310,60 +365,59 @@ export default {
         }))
       }
       return obj
-    },
-    getRecommendCount () {
-      var data = this.ReferralsData
-      var obj = {
-        captionTitle: this.$t('my_account.recommended_statistics'),
-        Item: ''
-      }
-      if (data.referral_datas) {
-        console.log(55555555555555)
-        data.sort((a, b) => {
-          return new Date(b.date).getTime() - new Date(a.date).getTime()
-        })
-        data.length === 0 ? obj.Item = '' : obj.Item = [{content: [this.$t('my_account.date'), this.$t('my_account.number_of_users'), this.$t('my_account.new_user'), this.$t('my_account.page_browsing'), this.$t('my_account.bounce_rate')]}].concat(data.map(d => {
-          return {
-            content: [
-              this.$moment(d.date).format('L'),
-              d.users,
-              d.new_users,
-              d.page_views,
-              Number(d.bounce_rate).toFixed(1) + '%'
-            ]
-          }
-        }))
-      }
-      return obj
-    },
-    getRecommendUser () {
-      var data = this.ReferralsData
-      var obj = {
-        captionTitle: this.$t('my_account.recommended_users'),
-        Item: ''
-      }
-      if (data.referral_datas) {
-        data.referral_signup_history.sort((a, b) => {
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        })
-        data.referrals.sort((a, b) => {
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        })
-        data.referral_signup_history.length === 0 ? obj.Item = '' : obj.Item = [{content: [this.$t('my_account.account'), this.$t('my_account.ip_adress'), this.$t('my_account.login_location'), this.$t('my_account.browser'), this.$t('my_account.login_time'), this.$t('my_account.activated')]}].concat(this.ReferralsData.referral_signup_history.map((_, index) => {
-          return {
-            content: [
-              this.ReferralsData.referrals[index].referrals_account_name,
-              this.ReferralsData.referral_signup_history[index].ip,
-              this.ReferralsData.referral_signup_history[index].location ? this.ReferralsData.referral_signup_history[index].location : '占无',
-              this.bser(this.ReferralsData.recent_signin_histories[index].ua),
-              this.$moment(this.ReferralsData.referrals[index].created_at).format('L H:mm:ss'),
-              this.ReferralsData.referrals[index].activated ? this.$t('my_account.yes') : this.$t('my_account.no')
-            ]
-          }
-        }))
-      }
-      return obj
     }
+    // getRecommendCount () {
+    //   var data = this.ReferralsData
+    //   var obj = {
+    //     captionTitle: this.$t('my_account.recommended_statistics'),
+    //     Item: ''
+    //   }
+    //   if (data.referral_datas) {
+    //     data.sort((a, b) => {
+    //       return new Date(b.date).getTime() - new Date(a.date).getTime()
+    //     })
+    //     data.length === 0 ? obj.Item = '' : obj.Item = [{content: [this.$t('my_account.date'), this.$t('my_account.number_of_users'), this.$t('my_account.new_user'), this.$t('my_account.page_browsing'), this.$t('my_account.bounce_rate')]}].concat(data.map(d => {
+    //       return {
+    //         content: [
+    //           this.$moment(d.date).format('L'),
+    //           d.users,
+    //           d.new_users,
+    //           d.page_views,
+    //           Number(d.bounce_rate).toFixed(1) + '%'
+    //         ]
+    //       }
+    //     }))
+    //   }
+    //   return obj
+    // },
+    // getRecommendUser () {
+    //   var data = this.ReferralsData
+    //   var obj = {
+    //     captionTitle: this.$t('my_account.recommended_users'),
+    //     Item: ''
+    //   }
+    //   if (data.referral_datas) {
+    //     data.referral_signup_history.sort((a, b) => {
+    //       return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    //     })
+    //     data.referrals.sort((a, b) => {
+    //       return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    //     })
+    //     data.referral_signup_history.length === 0 ? obj.Item = '' : obj.Item = [{content: [this.$t('my_account.account'), this.$t('my_account.ip_adress'), this.$t('my_account.login_location'), this.$t('my_account.browser'), this.$t('my_account.login_time'), this.$t('my_account.activated')]}].concat(this.ReferralsData.referral_signup_history.map((_, index) => {
+    //       return {
+    //         content: [
+    //           this.ReferralsData.referrals[index].referrals_account_name,
+    //           this.ReferralsData.referral_signup_history[index].ip,
+    //           this.ReferralsData.referral_signup_history[index].location ? this.ReferralsData.referral_signup_history[index].location : '占无',
+    //           this.bser(this.ReferralsData.recent_signin_histories[index].ua),
+    //           this.$moment(this.ReferralsData.referrals[index].created_at).format('L H:mm:ss'),
+    //           this.ReferralsData.referrals[index].activated ? this.$t('my_account.yes') : this.$t('my_account.no')
+    //         ]
+    //       }
+    //     }))
+    //   }
+    //   return obj
+    // }
   },
   filters: {
     moment (date) {
@@ -373,6 +427,9 @@ export default {
   watch: {
     loginData () {
       this.getTicket()
+    },
+    ReferralsData () {
+
     }
   }
 }

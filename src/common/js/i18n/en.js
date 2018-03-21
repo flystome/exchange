@@ -528,15 +528,6 @@ const en = {
       "trade_success": "Success",
       "trade_fail": "Fail"
     },
-    'orders': {
-      "all": "All",
-      "buy": "Buy",
-      "sell": "Sell",
-      "cancel_all": "Cancel All",
-      "price": "Price",
-      "volume": "Volume",
-      "ordered": "Filled"
-    },
     "hint": {
       "confirm": "OK",
       "generating_address": "We are generating deposit address, please wait a few seconds.",

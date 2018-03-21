@@ -333,15 +333,6 @@ const zh = {
     "trade_success": "下单成功",
     "trade_fail": "下单失败"
   },
-  'orders': {
-    "all": "全部",
-    "buy": "买入",
-    "sell": "卖出",
-    "cancel_all": "全部取消",
-    "price": "委托价格",
-    "volume": "委托数量",
-    "ordered": "已成交"
-  },
   "nav": {
     "home": "首页",
     "transaction": "市場",
@@ -440,7 +431,7 @@ const zh = {
     "withdraw_all": "全部提幣",
     "tariff_description": "資費說明",
     "reminder": "提醒",
-    "min_currency": "最小量為0.001",
+    "min_currency": "最低提幣金額為0.001",
     "confirm_apply_for_success": "提幣請求成功後，請轉至電子郵件並點擊鏈接以確認取款請求。 您可以跟踪退款歷史記錄頁面上的狀態.",
     "make_sure_safe": "確保您的電腦和瀏覽器是安全的，以防止信息被篡改或洩漏.",
     "withdraw_currency_record": "取消提幣记录",
@@ -451,7 +442,7 @@ const zh = {
     "absenteeism_expenses": "費用",
     "statu_and_operation": "狀態/操作",
     "available_balance": "可用餘額",
-    "remaining_withdraw": "剩餘提幣金額",
+    "remaining_withdraw": "今日剩餘提幣金額",
     "minimum_withdraw_amount_of_money": "最低提幣金額",
     "remark_label": "備註",
     "use_a_new_address": "使用新地址",
