@@ -477,7 +477,7 @@ const zh = {
     "deposit_date": "充值日期",
     "trading_hash": "充值地址",
     "recharge_amount": "充值金額",
-    "confirmation_number": "確認號碼",
+    "confirmation_number": "確認次数",
     "identifying_code": "驗證碼",
     "temporarily_unable_deposit": "暫時無法充值"
   },

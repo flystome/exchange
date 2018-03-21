@@ -2,7 +2,7 @@
   <div>
     <BasicInstructions :title='"交易费率"'></BasicInstructions>
     <div class="btc-marginT60 btc-fee-table">
-      <p><strong>交易费率：</strong>0.1% 交易手续费。（扣除收取到的资产）;<strong> 充值费率：</strong>免费 ;<strong> 提现费率：</strong>提现手续费将会根据区块实际情况定期调整。</p>
+      <p><strong>交易费率：</strong>0.1% 交易手续费。（扣除收取到的资产）;</p><p><strong>充值费率：</strong>免费 ;</p><p><strong>提现费率：</strong>提现手续费将会根据区块实际情况定期调整。</p>
       <table class="table table-bordered text-center">
         <thead>
           <tr>

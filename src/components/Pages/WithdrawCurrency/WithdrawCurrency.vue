@@ -1,5 +1,5 @@
 <template>
-  <div class="btc-member-center" @click="ChoiceStatus(false)">
+  <div class="btc-member-center" @click="ChoiceStatus(false)" @keyup.enter="Withdraw">
     <div class="btc-container-block">
       <div class="btc-currency-withdraw">
           <div class="btc-fl">
@@ -186,10 +186,6 @@
 import { mapGetters, mapMutations } from 'vuex'
 import Clipboard from 'clipboard'
 import pusher from '@/common/js/pusher'
-// var channel = pusher.subscribe(`private-${d.data.sn}`)
-//   channel.bind('deposit_address', (data) => {
-//   console.log(data)
-// })
 var QRCode = require('qrcode')
 export default {
   name: 'withdrawCurrency',
@@ -242,6 +238,32 @@ export default {
         this.equivalence = data.today_withdraw_remain_btc === data.today_withdraw_remain ? '' : data.today_withdraw_remain_btc
         this.Balance = data.balance
       })
+      channel.bind('deposits', (data) => {
+        var d = data.attributes
+        if (this.depositId.includes(d.id)) {
+          this.$set(this.depositRecord.item, 0, 0)
+          this.depositRecord.item[this.depositId.indexOf(d.id)] = {
+            content: [
+              this.$moment(d.created_at).format('L H:mm:ss'),
+              {hover: true, context: d.txid, url: d.blockchain_url},
+              d.amount,
+              d.confirmations,
+              this.$t(`withdraw_currency.${d.aasm_state}`)
+            ]
+          }
+        } else {
+        this.depositId.unshift(d.id)
+        this.depositRecord.item.unshift({
+            content: [
+              this.$moment(d.created_at).format('L H:mm:ss'),
+              {hover: true, context: d.txid, url: d.blockchain_url},
+              d.amount,
+              d.confirmations,
+              this.$t(`withdraw_currency.${d.aasm_state}`)
+            ]
+          })
+        }
+      })
       this.TotalAssets = Number(d.total_assets.btc_worth).toFixed(3)
       this.Locked = Number(d.total_assets.locked_btc_worth).toFixed(3)
       if (d.notice) {
@@ -287,6 +309,7 @@ export default {
       deposit_address_display: false,
       deposit_address: this.$t('deposit_currency.deposit_address'),
       choice: false,
+      depositId: [],
       second: -1,
       equivalence: '',
       resend: false,
@@ -374,10 +397,10 @@ export default {
           this.disabled = false
           var d = d.data.success
           if (d.code === 201) {
-            this.PopupBoxDisplay({message: '', type: 'warn'})
+            this.PopupBoxDisplay({message: '', type: 'loading'})
             this.ChangePopupBox({
               buttondisplay: false,
-              type: 'warn',
+              type: 'loading',
               message: this.$t('hint.generating_address')
             })
             this.Time = setTimeout(() => {
@@ -423,8 +446,9 @@ export default {
               ]
             }
           }))
-
+          this.depositId = []
           deposits.length === 0 ? objd.item = [] : objd.item = objd.item.concat(deposits.map(d => {
+            this.depositId.push(d.id)
             return {
               content: [
                 this.$moment(d.created_at).format('L H:mm:ss'),

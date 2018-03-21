@@ -50,6 +50,7 @@ export default {
       this.$emit('prompt')
       if (el.target.files[0].size > 0.7 * 1024 * 1024) {
         this.prompt = `${this.$t('validate_identity.img_to_big')}700k`
+        this.UploadImg = ''
       } else {
         var FileRead = new FileReader()
         FileRead.readAsDataURL(el.target.files[0])

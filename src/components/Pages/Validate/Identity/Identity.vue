@@ -1,5 +1,8 @@
 <template>
-  <div v-if="!(loginData.id_document && loginData.id_document.aasm_state !=='unverified') && (loginData.sms_activated || loginData.app_activated) &&  loginData.activated" class="btc-container-block btc-validateIdentity">
+  <div
+  v-if="!(loginData.id_document && loginData.id_document.aasm_state !=='unverified') && (loginData.sms_activated || loginData.app_activated) &&  loginData.activated"
+  class="btc-container-block btc-validateIdentity"
+  @keyup.enter="uploadImg">
     <header class="title">
         <router-link :to="`${ROUTER_VERSION}/`" class="btc-link">
           {{$t('title.my_account')}}
@@ -83,7 +86,7 @@
       ></upload-img>
     </div>
     <footer class="btc-b-t btc-marginT25">
-      <basic-button id="myButton" data-loading-text="Loading..." autocomplete="off" @click.native="uploadImg" class="btn btc-fr col-xs-12 col-md-1 pull-right" :disabled="disabled" :text='$t("validate_identity.submissions")'>
+      <basic-button id="myButton" data-loading-text="Loading..." autocomplete="off" @click.native.enter="uploadImg" class="btn btc-fr col-xs-12 col-md-1 pull-right" :disabled="disabled" :text='$t("validate_identity.submissions")'>
       </basic-button>
     </footer>
   </div>

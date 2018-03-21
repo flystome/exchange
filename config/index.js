@@ -80,10 +80,10 @@ module.exports = {
 
     //externals frame
     externals: {
-      'vue': 'Vue',
+      // 'vue': 'Vue',
+      // 'vuex': 'Vuex',
+      // 'vue-router': 'VueRouter',
       'axios': 'axios',
-      'vuex': 'Vuex',
-      'vue-router': 'VueRouter',
       'jquery': 'jQuery',
       'moment': 'moment'
     }

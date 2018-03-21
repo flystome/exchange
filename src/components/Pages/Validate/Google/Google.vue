@@ -44,7 +44,7 @@
       </div>
     </template>
     <template v-if="step === 2">
-      <div class="row btc-validate-gpt">
+      <div class="row btc-validate-gpt" @keyup.enter='gValidate'>
         <div class="col-md-6">
           <div class="col-md-6 text-center">
             <div class='row'>
@@ -100,7 +100,7 @@
       </div>
       <div class="text-right btc-marginT65 minusStep">
         <span @click="minusStep" class="col-xs-12 col-md-1 btc-link btc-fl btc-marginT10 btc-poniter" style="display:inline-block">{{$t('validate_google.prve')}}</span>
-        <basic-button :disabled="disabled" class="btn col-xs-12 col-md-2 pull-right btc-marginT10" :text='$t("validate_google.google_verification")' @click.native='gValidate'></basic-button>
+        <basic-button  @click.native='gValidate' :disabled="disabled" class="btn col-xs-12 col-md-2 pull-right btc-marginT10" :text='$t("validate_google.google_verification")'></basic-button>
       </div>
     </template>
   </div>
@@ -223,6 +223,8 @@ export default {
       }, (d) => {
         this.disabled = false
         if (d.data.error) {
+          this.password = ''
+          this.otp = ''
           this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.error_${d.data.error.code}`), type: 'error'})
         } else {
           this.PopupBoxDisplay({message: this.$t(`api_server.validate_google.success_200`), type: 'success', url: '/'})

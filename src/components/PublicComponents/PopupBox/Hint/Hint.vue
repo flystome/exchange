@@ -2,9 +2,16 @@
   <div>
     <div class="btc-hint">
       <div class="text-center btc-hint-middle btc-paddingR30 btc-paddingL30">
-       <div>
+       <div style="magin:auto 0">
           <img v-if="PopupBox.type === 'success' " src="~Img/Hint-success.png" class="btc-marginT55 btc-marginB35">
           <img v-else-if="PopupBox.type === 'warn'" src="~Img/Hint-warn.png" class="btc-marginT55 btc-marginB35">
+          <self-building-square-spinner
+          v-else-if="PopupBox.type === 'loading'"
+          class="btc-marginT55 btc-marginB35 btc-hint-loading"
+          :animation-duration="6000"
+          :size="65"
+          color="#3e81ff"
+          />
           <img v-else src="~Img/Hint-error.png" class="btc-marginT55 btc-marginB35">
        </div>
        <div>
@@ -22,6 +29,7 @@
 </template>
 
 <script>
+import { SelfBuildingSquareSpinner } from 'epic-spinners'
 import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'Hint',
@@ -49,6 +57,9 @@ export default {
       return this.PopupBox.buttonText ? this.PopupBox.buttonText : this.$t('hint.confirm')
     },
     ...mapState(['PopupBox'])
+  },
+  components: {
+    SelfBuildingSquareSpinner
   }
 }
 </script>
@@ -70,6 +81,12 @@ export default {
   }
   button{
     width: 100%;
+  }
+  .btc-hint-loading{
+    margin: 0 auto;
+    margin-bottom: 78px;
+    top: 40px!important;
+    position: relative;
   }
 }
 </style>

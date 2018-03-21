@@ -36,7 +36,7 @@
         <basic-input :placeholder='$t("validate_sms.google_verification_code")' :validate='"verify code"' ref="googlecode" v-model="SmsData.googlecode">
         </basic-input>
       </div>
-      <basic-button @click.native.stop="Validate" style='width:100%' :text='$t("validate_sms.confirm")'>
+      <basic-button @click.native.enter.stop="Validate" style='width:100%' :text='$t("validate_sms.confirm")'>
       </basic-button>
     </div>
   </div>
