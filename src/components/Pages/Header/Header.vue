@@ -102,7 +102,7 @@ export default {
       this.ChangeLanguage(str)
       this.$i18n.locale = str
       this._post({
-        url: '/settings/get_language.json',
+        url: '/settings/language.json',
         headers: {
           'DataType': 'application/json;charset=utf-8'
         },

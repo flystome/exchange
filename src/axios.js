@@ -21,12 +21,6 @@ export const _post = async ({url, data, headers}, callback) => {
     method: 'post',
     url: requestUrl + url,
     data: data
-  }).catch(error => {
-    if (/member_data/.test(url)) {
-      callback({error: 'login error'})
-      return
-    }
-    console.log(error)
   })
   if (callback) {
     callback(ajax)
@@ -38,6 +32,11 @@ export const _get = async ({url, data, headers}, callback) => {
     method: 'get',
     url: requestUrl + url,
     data: data
+  }).catch(error => {
+    if (/settings\/member/.test(url)) {
+      callback({error: 'login error'})
+      return
+    }
   })
   if (callback) {
     callback(ajax)

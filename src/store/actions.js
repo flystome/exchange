@@ -1,10 +1,10 @@
-import { _post } from '../axios'
+import { _get } from '../axios'
 import Cookies from 'js-cookie'
 
 const actions = {
   getData ({ commit, state }) {
-    _post({
-      url: '/settings/member_data.json',
+    _get({
+      url: '/settings/member.json',
       headers: {
         'DataType': 'application/json;charset=utf-8'
       }

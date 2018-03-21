@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie'
+
 const state = {
   loginData: 'none',
   Wrapper: false,
@@ -9,7 +11,7 @@ const state = {
     buttonText: '',
     buttondisplay: true
   },
-  language: 'en',
+  language: Cookies.get('locale') ? Cookies.get('locale') : 'en',
   DepositAddress: {
   },
   SideSlipMenu: false

@@ -65,9 +65,9 @@ const mutations = {
     } else {
       Cookies.set('locale', 'en')
     }
-    data.data.referrals.map((d, index) => {
-      d['referrals_account_name'] = data.data.referrals_account_name[index]
-    })
+    // data.data.referrals.map((d, index) => {
+    //   d['referrals_account_name'] = data.data.referrals_account_name[index]
+    // })
     state.loginData = data.data
   },
   AddAddress (state, data) {
