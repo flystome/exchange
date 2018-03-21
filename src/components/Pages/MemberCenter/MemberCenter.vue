@@ -241,13 +241,12 @@ export default {
             return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
           })
           data.referral_signup_history.length === 0 ? obj1.Item = '' : obj1.Item = [{content: [this.$t('my_account.account'), this.$t('my_account.ip_adress'), this.$t('my_account.login_location'), this.$t('my_account.browser'), this.$t('my_account.login_time'), this.$t('my_account.activated')]}].concat(data.referral_signup_history.map((_, index) => {
-            console.log(data.recent_signin_histories[index])
             return {
               content: [
                 data.referrals_account_name[index],
                 data.referral_signup_history[index].ip,
                 data.referral_signup_history[index].location ? data.referral_signup_history[index].location : '占无',
-                this.bser(data.recent_signin_histories[index].ua),
+                this.bser(data.referral_signup_history[index].ua),
                 this.$moment(data.referrals[index].created_at).format('L H:mm:ss'),
                 data.referrals[index].activated ? this.$t('my_account.yes') : this.$t('my_account.no')
               ]
