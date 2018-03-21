@@ -161,6 +161,10 @@ export default {
       const first = await this.$refs['first_name'].$validator.validateAll()
       const last = await this.$refs['last_name'].$validator.validateAll()
       const IdCard = await this.$refs['IdCard'].$validator.validateAll()
+      if (!first || !last || !IdCard) {
+        this.$refs['first_name'].$el.scrollIntoView(true)
+        return
+      }
       const billFile = this.$refs['id_bill_file_attributes'].$refs['input'].files[0]
       const holdingFile = this.$refs['id_document_selfie_holding_file_attributes'].$refs['input'].files[0]
       const backF = this.$refs['id_document_back_file_attributes'].$refs['input'].files[0]
