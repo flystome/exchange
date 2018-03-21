@@ -321,6 +321,7 @@ export default {
       Address: this.$t('withdraw_currency.withdraw_currency_address'),
       Rucaptcha: false,
       Time: '',
+      GeneratAddress: '',
       WithdrAwable: false,
       newaa: [],
       WithdrawData: {
@@ -388,97 +389,105 @@ export default {
       this.Address = this.FundSources[this.CurrencyType][index].uid
       this.ChoiceStatus(false)
     },
+    Generating () {
+      this.deposit_address_display = false
+      this.deposit_address = ''
+      this.PopupBoxDisplay({message: '', type: 'loading'})
+      this.ChangePopupBox({
+        buttondisplay: false,
+        type: 'loading',
+        message: this.$t('hint.generating_address')
+      })
+      this.Time = setTimeout(() => {
+        this.ChangePopupBox({
+          message: this.$t('hint.server_exception'),
+          type: 'error'
+        })
+        setTimeout(() => {
+          this.PopupBoxDisplay()
+          this.ChangePopupBox({
+            buttondisplay: true
+          })
+        }, 1000)
+      }, 10000)
+    },
     GetCoin (c, funds, sn) {
       this.disabled = true
-      this.$nextTick(() => {
         this._get({
           url: `/funds/${c || 'btc'}/account_info.json`
         }, (d) => {
-          this.disabled = false
-          var d = d.data.success
-          if (d.code === 201) {
-            this.PopupBoxDisplay({message: '', type: 'loading'})
-            this.ChangePopupBox({
-              buttondisplay: false,
-              type: 'loading',
-              message: this.$t('hint.generating_address')
-            })
-            this.Time = setTimeout(() => {
-              this.ChangePopupBox({
-                message: this.$t('hint.server_exception'),
-                type: 'error'
-              })
-              setTimeout(() => {
-                this.PopupBoxDisplay()
-                this.ChangePopupBox({
-                  buttondisplay: true
-                })
-              }, 1000)
-            }, 10000)
+        this.GeneratAddress = false
+        this.disabled = false
+        var d = d.data.success
+        if (d.code === 201) {
+          console.log(1)
+          this.GeneratAddress = true
+          if (/deposit/.test(this.$route.path)) {
+            this.Generating()
           }
-          this.equivalence = d.today_withdraw_remain_btc === d.today_withdraw_remain ? '' : d.today_withdraw_remain_btc
-          this.WithdrAwable = d.withdrawable
-          this.Remain = d.today_withdraw_remain
-          var obj = this.WithdrawRecord
-          var objd = this.depositRecord
-          var withdraws = d.withdraws
-          var deposits = d.deposits
-          if (d.address) {
-            this.deposit_address_display = true
-            this.deposit_address = d.address
-          } else {
-            this.deposit_address_display = false
-            this.deposit_address = ''
+        }
+        this.equivalence = d.today_withdraw_remain_btc === d.today_withdraw_remain ? '' : d.today_withdraw_remain_btc
+        this.WithdrAwable = d.withdrawable
+        this.Remain = d.today_withdraw_remain
+        var obj = this.WithdrawRecord
+        var objd = this.depositRecord
+        var withdraws = d.withdraws
+        var deposits = d.deposits
+        if (d.address) {
+          this.deposit_address_display = true
+          this.deposit_address = d.address
+        } else {
+          this.deposit_address_display = false
+          this.deposit_address = ''
+        }
+        d.account && (this.Balance = d.account.balance)
+        obj.item = []
+        objd.item = []
+        withdraws.length === 0 ? obj.item = [] : obj.item = obj.item.concat(withdraws.map(d => {
+          var id = d.id
+          return {
+            content: [
+              id,
+              this.$moment(d.created_at).format('L H:mm:ss'),
+              d.fund_uid,
+              d.amount,
+              d.fee,
+              { type: d, context: d.aasm_state, id: id }
+            ]
           }
-          d.account && (this.Balance = d.account.balance)
-          obj.item = []
-          objd.item = []
-          withdraws.length === 0 ? obj.item = [] : obj.item = obj.item.concat(withdraws.map(d => {
-            var id = d.id
-            return {
-              content: [
-                id,
-                this.$moment(d.created_at).format('L H:mm:ss'),
-                d.fund_uid,
-                d.amount,
-                d.fee,
-                { type: d, context: d.aasm_state, id: id }
-              ]
-            }
-          }))
-          this.depositId = []
-          deposits.length === 0 ? objd.item = [] : objd.item = objd.item.concat(deposits.map(d => {
-            this.depositId.push(d.id)
-            return {
-              content: [
-                this.$moment(d.created_at).format('L H:mm:ss'),
-                {hover: true, context: d.txid, url: d.blockchain_url},
-                d.amount,
-                d.confirmations,
-                this.$t(`withdraw_currency.${d.aasm_state}`)
-              ]
-            }
-          }))
-          obj.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('withdraw_currency.withdraw_currency_record')}`
-          objd.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('deposit_currency.deposit_record')}`
+        }))
+        this.depositId = []
+        deposits.length === 0 ? objd.item = [] : objd.item = objd.item.concat(deposits.map(d => {
+          this.depositId.push(d.id)
+          return {
+            content: [
+              this.$moment(d.created_at).format('L H:mm:ss'),
+              {hover: true, context: d.txid, url: d.blockchain_url},
+              d.amount,
+              d.confirmations,
+              this.$t(`withdraw_currency.${d.aasm_state}`)
+            ]
+          }
+        }))
+        obj.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('withdraw_currency.withdraw_currency_record')}`
+        objd.captionTitle = `${(c || 'btc').toUpperCase()} ${this.$t('deposit_currency.deposit_record')}`
 
-          if (funds && Object.keys(funds).length > 0) {
-            funds['btc'].forEach((d) => {
-              if (d.is_default) {
-                this.Address = d.uid
-                this.WithdrawData.Address_id = d.id
-              }
-            })
-          } else {
-            if (!this.FundSources[c]) return
-            this.FundSources[c].forEach((d) => {
-              if (d.is_default) {
-                this.Address = d.uid
-                this.WithdrawData.Address_id = d.id
-              }
-            })
-          }
-        })
+        if (funds && Object.keys(funds).length > 0) {
+          funds['btc'].forEach((d) => {
+            if (d.is_default) {
+              this.Address = d.uid
+              this.WithdrawData.Address_id = d.id
+            }
+          })
+        } else {
+          if (!this.FundSources[c]) return
+          this.FundSources[c].forEach((d) => {
+            if (d.is_default) {
+              this.Address = d.uid
+              this.WithdrawData.Address_id = d.id
+            }
+          })
+        }
       })
     },
     DeleteFunds (id, funds, index) {
@@ -678,10 +687,10 @@ export default {
       } else if (/deposit/.test(to.path)) {
         this.route = 'deposit'
         this.$store.commit('redirect')
+        if (this.GeneratAddress !== '') {
+          this.GeneratAddress && this.Generating()
+        }
       }
-      // if (/WithdrawCurrency/.test(to.name)) {
-      //   this.
-      // }
     },
     DepositAddress (to, from) {
       if (Object.keys(to).length > Object.keys(from).length) {
@@ -694,7 +703,6 @@ export default {
           message: this.$t('hint.completion')
         })
         setTimeout(() => {
-          console.log(1)
           this.PopupBoxDisplay()
           this.ChangePopupBox({
             buttondisplay: true

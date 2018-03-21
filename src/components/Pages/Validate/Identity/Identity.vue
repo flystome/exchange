@@ -156,7 +156,7 @@ export default {
       }
       return fd
     },
-    ...mapMutations(['PopupBoxDisplay']),
+    ...mapMutations(['PopupBoxDisplay', 'ChangePopupBox']),
     async uploadImg () {
       const first = await this.$refs['first_name'].$validator.validateAll()
       const last = await this.$refs['last_name'].$validator.validateAll()
@@ -190,6 +190,13 @@ export default {
         return
       }
       this.disabled = true
+
+      var timer = ''
+      this.PopupBoxDisplay({type: 'loading', message: this.$t('validate_identity.uploading_photos')})
+       this.ChangePopupBox({buttondisplay: false})
+      timer = setTimeout(() => {
+
+      }, 1000)
       var formData = new FormData()
       var z = this.objectToFormData({
         first_name: this.user.first_name,
@@ -218,10 +225,10 @@ export default {
       }, d => {
         if (d.data.success) {
           this.disabled = false
-          this.PopupBoxDisplay({message: this.$t('api_server.validate_identity.success_200'), url: '/', type: 'success'})
+          this.ChangePopupBox({message: this.$t('api_server.validate_identity.success_200'), url: '/', type: 'success', buttondisplay: true})
           this.$store.dispatch('getData')
         } else {
-          this.PopupBoxDisplay({message: this.$t('api_server.validate_identity.error_1001'), type: 'error'})
+          this.ChangePopupBox({message: this.$t('api_server.validate_identity.error_1001'), type: 'error', buttondisplay: true})
         }
       })
     }

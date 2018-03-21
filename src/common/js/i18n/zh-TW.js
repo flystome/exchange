@@ -386,6 +386,7 @@ const zh = {
     "verifying": "驗證中"
   },
   "validate_identity": {
+    "uploading_photos": "上傳照片中",
     "real_name_authentication": "實名認證",
     "surname": "名",
     "name": "姓",
@@ -442,7 +443,7 @@ const zh = {
     "absenteeism_expenses": "費用",
     "statu_and_operation": "狀態/操作",
     "available_balance": "可用餘額",
-    "remaining_withdraw": "今日剩餘提幣金額",
+    "remaining_withdraw": "今日剩餘提幣限額",
     "minimum_withdraw_amount_of_money": "最低提幣金額",
     "remark_label": "備註",
     "use_a_new_address": "使用新地址",
@@ -475,7 +476,7 @@ const zh = {
     "operation_done": "完成上述操作後，點擊發送付款，交易將被廣播到整個網絡，以便您可以查看交易狀態。 當交易達到整個網絡的1次確認（大約10到60分鐘）時，系統將自動為賬戶充值。 您可以查詢資產的情況.",
     "deposit_record": "充值記錄",
     "deposit_date": "充值日期",
-    "trading_hash": "充值地址",
+    "trading_hash": "转账 ID",
     "recharge_amount": "充值金額",
     "confirmation_number": "確認次数",
     "identifying_code": "驗證碼",

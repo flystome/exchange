@@ -9,7 +9,7 @@
           v-else-if="PopupBox.type === 'loading'"
           class="btc-marginT55 btc-marginB35 btc-hint-loading"
           :animation-duration="6000"
-          :size="65"
+          :size="45"
           color="#3e81ff"
           />
           <img v-else src="~Img/Hint-error.png" class="btc-marginT55 btc-marginB35">
@@ -18,8 +18,8 @@
          {{this.PopupBox.message}}
        </div>
        <div class="btc-paddingB30">
-        <a @click.stop="gopath" :disabled="disabled">
-          <basic-button class="btc-marginT50"  :text='buttonText' :class="{'btc-hint-hidden': !this.PopupBox.buttondisplay}">
+        <a>
+          <basic-button @click.native.stop="gopath"  class="btn btc-marginT50"  :text='buttonText' :class="{'btc-hint-hidden': !this.PopupBox.buttondisplay}">
           </basic-button>
         </a>
        </div>
@@ -35,22 +35,19 @@ export default {
   name: 'Hint',
   data () {
     return {
-      ROUTER_VERSION: process.env.ROUTER_VERSION,
-      disabled: false
+      ROUTER_VERSION: process.env.ROUTER_VERSION
     }
   },
   methods: {
     gopath () {
-      this.disabled = true
       if (this.PopupBox.url) {
         this.$router.push(`${this.ROUTER_VERSION}${this.PopupBox.url}`)
       }
-      this.PopupBoxDisplay()
-      setTimeout(() => {
-        this.disabled = false
-      }, 1000)
+      this.ChangePopupBox({
+        status: false
+      })
     },
-    ...mapMutations(['PopupBoxDisplay'])
+    ...mapMutations(['PopupBoxDisplay', 'ChangePopupBox'])
   },
   computed: {
     buttonText () {
@@ -85,7 +82,7 @@ export default {
   .btc-hint-loading{
     margin: 0 auto;
     margin-bottom: 78px;
-    top: 40px!important;
+    top: 45px!important;
     position: relative;
   }
 }

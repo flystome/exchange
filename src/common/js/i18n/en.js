@@ -369,6 +369,7 @@ const en = {
       "error_1001": "Token errors, please Reconfirm"
     },
     "validate_identity": {
+      "uploading_photos": "Uploading Photos",
       "real_name_authentication": "Real Name Verification",
       "surname": "Surname/Given Name",
       "name": "Family Name",
@@ -458,7 +459,7 @@ const en = {
       "operation_done": "After the above operation is done, click send payment, the transaction will be broadcast to the whole network, so you can see the status of the transaction. When the transaction reaches the 1 confirmation of the whole network (about 10 to 60 minutes), the system will automatically recharge to the account. You can inquire in the disclosure of the assets.",
       "deposit_record": "Deposit Record",
       "deposit_date": "Deposit Date",
-      "trading_hash": "Trading Hash",
+      "trading_hash": "Tx ID",
       "recharge_amount": "Recharge Amount",
       "confirmation_number": "Confirmation Number",
       "identifying_code": "Verify Code",

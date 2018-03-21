@@ -94,10 +94,14 @@ const mutations = {
   ChangePopupBox (state, obj) {
     ({
       type: state.PopupBox.type,
+      status: state.PopupBox.status,
       message: state.PopupBox.message,
-      buttondisplay: state.PopupBox.buttondisplay
+      buttondisplay: state.PopupBox.buttondisplay,
+      url: state.PopupBox.url
     } = {
       type: obj.type ? obj.type : state.PopupBox.type,
+      url: obj.url ? obj.url : state.PopupBox.url,
+      status: obj.hasOwnProperty('status') ? obj.status : state.PopupBox.status,
       message: obj.message ? obj.message : state.PopupBox.message,
       buttondisplay: Object.keys(obj).includes('buttondisplay') ? obj.buttondisplay : state.PopupBox.buttondisplay
     })
