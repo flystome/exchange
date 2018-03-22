@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <transition name='SideSlipMenu'>
-      <section class="btc-main">
+      <section class="btc-main" :class="{'btc-background-white': this.$route.name === 'HomePage'}">
         <header is='Header' />
         <div class="btc-container container" v-cloak>
           <keep-alive>
@@ -39,6 +39,18 @@ export default {
   }
 }
 </script>
+
+<style scoped lang='scss'>
+.btc-main{
+  background:#f2f2f2;
+}
+.btc-background-white{
+  background: white;
+  .btc-container{
+  background: white;
+  }
+}
+</style>
 
 <style lang="scss">
 @for $len from 0 through 100 {

@@ -10,8 +10,8 @@
             <div class="item active" :style="{background:`url('${requireImg('silde1')}') 50% 50% no-repeat`}">
               <div class="container">
                 <div class="btc-slide-info">
-                  <p class="btc-marginB40" style="font-size: 36px">Online quality block chain project</p>
-                  <p style="font-size: 24px">To provide the best investment channel</p>
+                  <p class="btc-marginB40" style="font-size: 36px">{{ $t('homepage.banner_describe1') }}</p>
+                  <p style="font-size: 24px">{{ $t('homepage.banner_describe2') }}</p>
                 </div>
               </div>
             </div>
@@ -26,35 +26,35 @@
           <div class="btc-nologin" v-if="loginData === 'none' || loginData.errors">
           <!-- <div class="btc-nologin"> -->
             <form>
-              <span>登录HOTEX</span>
-              <basic-input :validate='"email"' placeholder="输入邮箱" class="btc-input"></basic-input>
-              <basic-input type="password" placeholder="输入密码" class="btc-input"></basic-input>
-              <basic-button class="btc-button" :text='"登录"'></basic-button>
+              <span>{{ $t('homepage.login') }}HotEx</span>
+              <basic-input :validate='"email"' :placeholder="this.$t('homepage.enter_the_mailbox')" class="btc-input"></basic-input>
+              <basic-input type="password" :placeholder="this.$t('homepage.enter_the_password')" class="btc-input"></basic-input>
+              <basic-button class="btc-button" :text="this.$t('homepage.login')"></basic-button>
               <div>
-                <a :href="`${HOST_URL}/signup`">免费注册</a>
-                <a target="_blank" class="pull-right">忘记密码</a>
+                <a :href="`${HOST_URL}/signup`">{{ $t('homepage.free_registration') }}</a>
+                <a target="_blank" class="pull-right">{{ $t('homepage.forget_the_password') }}</a>
               </div>
             </form>
           </div>
           <div class="btc-logining" v-else>
-            <span>欢迎使用HotEx</span>
+            <span>{{ $t('homepage.welcome_to_use') }}HotEx</span>
             <div class="btc-discount">
-              <span style="color:#999999">交易费折扣</span>
-              <span>9折</span>
+              <span style="color:#999999">{{ $t('homepage.discounts_of_transaction_costs') }}</span>
+              <span>9{{ $t('homepage.discount') }}</span>
             </div>
             <div class="btc-marginT20">
-              <span style="color:#999999">资产总估</span>
+              <span style="color:#999999">{{ $t('homepage.total_asset_estimation') }}</span>
               <span v-if="open">BTC=4.7361
-                <img class="pull-right" src="~Img/open.png" @click="displaystate" alt="" >
+                <img class="pull-right" src="~Img/open.png" @click="displaystate">
               </span>
               <span v-else>
                 *******
-                <img class="pull-right" @click="displaystate" src="~Img/hide.png" alt="" >
+                <img class="pull-right" @click="displaystate" src="~Img/hide.png">
               </span>
             </div>
             <div class="btc-marginT25">
-              <basic-button class="btc-button" :text='"充值"'></basic-button>
-              <basic-button class="btc-button pull-right" :text='"提币"'></basic-button>
+              <basic-button class="btc-button" :text="$t('homepage.deposit')"></basic-button>
+              <basic-button class="btc-button pull-right" :text="$t('homepage.withdraw')"></basic-button>
             </div>
           </div>
         </div>
@@ -63,9 +63,9 @@
     <div class="container btc-homepage-main">
       <div class="btc-homepage-markets btc-marginT30">
         <basic-button v-for="(item,index) in currency" :data-id="item" :key="item" class="btc-button pull-left" :class="{'btc-active':!(currencyindex == index)}"
-        @click.native="changemarket(index,item)" :text='item.toUpperCase()+"交易区"'></basic-button>
+        @click.native="changemarket(index,item)" :text="`${item.toUpperCase()} ${$t('homepage.trading_area')}`"></basic-button>
         <div class="btc-homepage-search btc-fr btc-b">
-          <input v-model="search" class="btc-search" placeholder='搜索' />
+          <input v-model="search" class="btc-search" :placeholder='$t("homepage.search")' />
           <img src="~Img/search.png" alt="">
         </div>
         <HomeMarket :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]"></HomeMarket>
@@ -76,14 +76,14 @@
       <div class="btc-homepage-intr btc-marginT15 btc-marginB100">
         <span class="col-xs-4 btc-marginT10"></span>
         <div class="col-xs-4 text-center">
-          <span>权威化透明化的数字资产交易平台</span>
+          <span>{{ $t('homepage.trading_platform') }}</span>
         </div>
         <span class="col-xs-4 pull-right btc-marginT10"></span>
       </div>
       <div class="btc-homepage-info btc-marginT25 text-center">
         <a class="col-xs-2 col-xs-offset-1">
           <img src="~Img/homepage-us.png" alt="">
-          <span class="btc-marginT15">联系我们</span>
+          <span class="btc-marginT15">{{ $t('homepage.contact_us') }}</span>
         </a>
         <a class="col-xs-2">
           <img src="~Img/homepage-api.png" alt="">
@@ -91,20 +91,20 @@
         </a>
         <a class="col-xs-2">
           <img src="~Img/homepage-rate.png" alt="">
-          <span class="btc-marginT15">汇率详情</span>
+          <span class="btc-marginT15">{{ $t('homepage.exchange_rate_details') }}</span>
         </a>
         <a class="col-xs-2">
           <img src="~Img/homepage-apply.png" alt="">
-          <span class="btc-marginT15">上币申请</span>
+          <span class="btc-marginT15">{{ $t('homepage.apply_to_list') }}</span>
         </a>
         <a class="col-xs-2">
           <img src="~Img/homepage-clause.png" alt="">
-          <span class="btc-marginT15">隐私条款</span>
+          <span class="btc-marginT15">{{ $t('homepage.privacy_clause') }}</span>
         </a>
       </div>
       <div class="btc-homepage-prompt text-left">
         <div class="col-xs-8 col-xs-offset-2 btc-paddingT80">
-          数字密码币的交易存在风险，在全球范围内一周7天，一天24小时，一年365天无休止交易，没有每日涨停跌停限制， 价格受各国政策，市场，等都在因素影响。我们强烈建议您事先调查了解在自身所能承受的风险范围内参与交易
+          {{ $t('homepage.transaction_describe') }}
         </div>
       </div>
     </div>

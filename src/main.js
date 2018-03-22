@@ -17,6 +17,7 @@ import DivContenteditable from 'Components/DivContenteditable/DivContenteditable
 import Title from 'Pages/Title/Title'
 import App from './App'
 import BasicInstructions from 'Components/BasicInstructions/BasicInstructions'
+import Trend from 'vuetrend'
 
 // js dependencies
 import Vue from 'vue'
@@ -40,6 +41,8 @@ Vue.use(VeeValidate, {
   dictionary: dictionary
 })
 Validator.localize(dictionary)
+
+Vue.use(Trend)
 
 moment.locale('zh-cn')
 Vue.config.productionTip = false

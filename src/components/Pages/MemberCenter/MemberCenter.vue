@@ -21,7 +21,7 @@
           </span>
           <span>|</span>
           <span>
-            <a target="_blank" style="color:#fff" :href="`${HOST_URL}/api_tokens`">{{$t("my_account.api")}}</a>
+            <a style="color:#fff" :href="`${HOST_URL}/api_tokens`">{{$t("my_account.api")}}</a>
           </span>
         </div>
       </div>

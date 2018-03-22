@@ -464,7 +464,11 @@ const en = {
       "confirmation_number": "Confirmation Number",
       "identifying_code": "Verify Code",
       "temporarily_unable_deposit": "Temporarily unable to deposit",
-      "warn": "The BTC address is forbidden to be recharged to the assets except BTC, and any non - BTC assets charged to the BTC address will not be retrieved.",
+      "warn1": "The ",
+      "warn2": " address is forbidden to be recharged to the assets except ",
+      "warn3": ", and any non - ",
+      "warn4": " assets charged to the ",
+      "warn5": " address will not be retrieved.",
       "copy_success": "Copy Success"
     },
     "title": {
@@ -617,6 +621,36 @@ const en = {
       "news": "News",
       "my_account": "My Account",
       "language": "Language"
+    },
+    "homepage": {
+      "banner_describe1": "Online quality block chain project",
+      "banner_describe2": "To provide the best investment channel",
+      "login": "Login",
+      "free_registration": "Free Registration",
+      "enter_the_mailbox": "Enter The Mailbox",
+      "enter_the_password": "Enter The Password",
+      "forget_the_password": "Forget The Password",
+      "welcome_to_use": "Welcome to use ",
+      "discount": " Discount",
+      "discounts_of_transaction_costs": "Discounts of transaction costs",
+      "total_asset_estimation": "Total Asset Estimation",
+      "withdraw": "Withdraw",
+      "deposit": "Deposit",
+      "trading_area": "Trading Area",
+      "search": "Search",
+      "trading_platform": "Authoritative and transparent digital asset trading platform",
+      "contact_us": "Contact Us",
+      "exchange_rate_details": "Exchange Rate Details",
+      "apply_to_list": "Apply To List",
+      "privacy_clause": "Privacy Clause",
+      "transaction_describe": "There are risks in the transaction of digital ciphers. In the world, there are 7 days a day, 24 hours a day, 365 days a year, and there is no limit to daily limit. The price is affected by various policies, markets and so on. We strongly recommend that you investigate in advance to participate in the transaction within the scope of the risk that you can bear.",
+      "currency": "Currency",
+      "price_trend": "Price Trend",
+      "no_matching_currency": "No Matching Currency",
+      "price": "Price",
+      "volume": "Volume",
+      "turnover": "Turnover",
+      "day_highs_and_lows": "Day Highs And Lows"
     }
   }
 }

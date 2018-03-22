@@ -3,14 +3,14 @@
     <table class="table">
       <thead>
         <tr>
-          <th>币种对</th>
+          <th>{{ $t('homepage.currency') }}</th>
           <th v-for="(item, index) in heads" :key="item" @click="sortList(index)">
-            {{item}}
+            {{$t(`homepage.${item}`)}}{{index === 1 || index === 2 ? `(${currency})` : "" | toUpperCase}}
             <img v-if="times == 0 && currencyIndex == index" src="~Img/both.png" alt="">
             <img v-else-if="times == 1 && currencyIndex == index" src="~Img/up.png" alt="">
             <img v-else-if="times == 2 && currencyIndex == index" src="~Img/down.png" alt="">
           </th>
-          <th>价格趋势</th>
+          <th>{{ $t('homepage.price_trend') }}</th>
         </tr>
       </thead>
       <tbody ref="a">
@@ -25,16 +25,25 @@
           </td>
           <td>{{ item.volume }}</td>
           <td>{{ (item.volume * item.last).toFixed(2) }}</td>
-          <td class="btc-percent">
-            <div style="color:#fd4041" v-if="item.percent>0">+{{ item.percent.toFixed(2) }}%</div>
-            <div style="color:#00c4a2" v-else-if="item.percent<0">{{ item.percent.toFixed(2) }}%</div>
-            <div style="color:#999999" v-else>+{{ item.percent.toFixed(2) }}</div>
+          <td class="btc-percent" style="color:#fff">
+            <div v-if="item.percent>0"><span style="background:#fd4041">+{{ item.percent.toFixed(2) }}%</span></div>
+            <div v-else-if="item.percent<0"><span style="background:#00c4a2">{{ item.percent.toFixed(2) }}%</span></div>
+            <div v-else><span style="background:#999999">+{{ item.percent.toFixed(2) }}</span></div>
+          </td>
+          <td style="max-width: 165px;">
+            <trend
+              viewBox="0 0 420 75"
+              :data="[0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0]"
+              :gradient="['black']"
+              auto-draw
+              smooth>
+            </trend>
           </td>
         </tr>
       </tbody>
     </table>
     <div class="btc-currency-none text-center btc-marginT150" v-if="itemLength === 0">
-      没有匹配币种
+      {{ $t('homepage.no_matching_currency') }}
     </div>
   </div>
 </template>
@@ -46,7 +55,7 @@ export default {
   data () {
     return {
       oldData: null,
-      heads: ['价格', `成交量(GAGAGAGAG})`, '成交额(USDT)', '日涨跌'],
+      heads: ['price', `volume`, 'turnover', 'day_highs_and_lows'],
       coins: ['last', 'volume', 'total', 'percent'],
       times: 0,
       currencyIndex: 0,
@@ -72,6 +81,11 @@ export default {
     async oldData () {
       await this.$nextTick()
       this.itemLength = this.$refs['a'].children.length
+    }
+  },
+  filters: {
+    toUpperCase (str) {
+      return str.toUpperCase()
     }
   },
   methods: {

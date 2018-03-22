@@ -26,7 +26,7 @@ table{
   >tbody{
     >tr{
       >td{
-        padding: 16px;
+        padding: 16px 16px;
         border: none;
         border-bottom: 1px solid #f2f2f2;
         .btc-percent{
@@ -44,10 +44,22 @@ table{
             cursor: pointer;
           }
         }
+        svg{
+          stroke-width: 2px;
+        }
       }
     }
   }
 }
+
+.btc-percent span{
+  width: 80px;
+  height: 25px;
+  display: inline-block;
+  text-align: center;
+  line-height: 25px;
+}
+
 
 th{
   img{

@@ -493,7 +493,11 @@ const zh = {
     "confirmation_number": "確認次数",
     "identifying_code": "驗證碼",
     "temporarily_unable_deposit": "暫時無法充值",
-    "warn": "禁止向BTC地址充值除BTC之外的資產，任何充入BTC地址的非BTC資產將不可找回。",
+    "warn1": "禁止向",
+    "warn2": "地址充值除",
+    "warn3": "之外的資產，任何充入",
+    "warn4": "地址的非",
+    "warn5": "資產將不可找回。",
     "copy_success": "複製成功"
   },
   "title": {
@@ -607,6 +611,36 @@ const zh = {
     "news": "信息",
     "my_account": "我的帳戶",
     "language": "語言"
+  },
+  "homepage": {
+    "banner_describe1": "",
+    "banner_describe2": "",
+    "login": "",
+    "free_registration": "",
+    "enter_the_mailbox": "",
+    "enter_the_password": "",
+    "forget_the_password": "",
+    "welcome_to_use": "",
+    "discount": "",
+    "discounts_of_transaction_costs": "",
+    "total_asset_estimation": "",
+    "withdraw": "",
+    "deposit": "",
+    "trading_area": "",
+    "search": "",
+    "trading_platform": "",
+    "contact_us": "",
+    "exchange_rate_details": "",
+    "apply_to_list": "",
+    "privacy_clause": "",
+    "transaction_describe": "",
+    "currency": "",
+    "price_trend": "",
+    "no_matching_currency": "",
+    "price": "",
+    "volume": "",
+    "turnover": "",
+    "day_highs_and_lows": ""
   }
 }
 
