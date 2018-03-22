@@ -5,7 +5,7 @@
         <tr>
           <th>{{ $t('homepage.currency') }}</th>
           <th v-for="(item, index) in heads" :key="item" @click="sortList(index)">
-            {{$t(`homepage.${item}`)}}{{index === 1 || index === 2 ? `(${currency})` : "" | toUpperCase}}
+            {{$t(`homepage.${item}`)}}{{index !==3 ? `(${currency})` : "" | toUpperCase}}
             <img v-if="times == 0 && currencyIndex == index" src="~Img/both.png" alt="">
             <img v-else-if="times == 1 && currencyIndex == index" src="~Img/up.png" alt="">
             <img v-else-if="times == 2 && currencyIndex == index" src="~Img/down.png" alt="">
@@ -13,7 +13,7 @@
           <th>{{ $t('homepage.price_trend') }}</th>
         </tr>
       </thead>
-      <tbody ref="a">
+      <tbody ref="itemlength">
         <tr v-for='(item , index) in oldData' :key='index' v-if="matchName(item.name, index)">
           <td>
             <a class="btc-homepage-currency" style="color: #333333;">
@@ -33,7 +33,7 @@
           <td style="max-width: 165px;">
             <trend
               viewBox="0 0 420 75"
-              :data="[0, 2, 5, 9, 5, 10, 3, 5, 0, 0, 1, 8, 2, 9, 0]"
+              :data="[0,0]"
               :gradient="['black']"
               auto-draw
               smooth>
@@ -76,11 +76,11 @@ export default {
     },
     async search () {
       await this.$nextTick()
-      this.itemLength = this.$refs['a'].children.length
+      this.itemLength = this.$refs['itemlength'].children.length
     },
     async oldData () {
       await this.$nextTick()
-      this.itemLength = this.$refs['a'].children.length
+      this.itemLength = this.$refs['itemlength'].children.length
     }
   },
   filters: {

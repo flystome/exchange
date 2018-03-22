@@ -40,11 +40,11 @@
             <span>{{ $t('homepage.welcome_to_use') }}HotEx</span>
             <div class="btc-discount">
               <span style="color:#999999">{{ $t('homepage.discounts_of_transaction_costs') }}</span>
-              <span>9{{ $t('homepage.discount') }}</span>
+              <span>{{ factor }}{{ $t('homepage.discount') }}</span>
             </div>
             <div class="btc-marginT20">
               <span style="color:#999999">{{ $t('homepage.total_asset_estimation') }}</span>
-              <span v-if="open">BTC=4.7361
+              <span v-if="open">BTC={{ btc_worth }}
                 <img class="pull-right" src="~Img/open.png" @click="displaystate">
               </span>
               <span v-else>
@@ -66,12 +66,12 @@
         @click.native="changemarket(index,item)" :text="`${item.toUpperCase()} ${$t('homepage.trading_area')}`"></basic-button>
         <div class="btc-homepage-search btc-fr btc-b">
           <input v-model="search" class="btc-search" :placeholder='$t("homepage.search")' />
-          <img src="~Img/search.png" alt="">
+          <img src="~Img/search.png" >
         </div>
         <HomeMarket :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]"></HomeMarket>
       </div>
       <div class="btc-homepage-logo text-center">
-        <img src="~Img/logo.png" alt="">
+        <img src="~Img/logo.png" >
       </div>
       <div class="btc-homepage-intr btc-marginT15 btc-marginB100">
         <span class="col-xs-4 btc-marginT10"></span>
@@ -82,23 +82,23 @@
       </div>
       <div class="btc-homepage-info btc-marginT25 text-center">
         <a class="col-xs-2 col-xs-offset-1">
-          <img src="~Img/homepage-us.png" alt="">
+          <img src="~Img/homepage-us.png" >
           <span class="btc-marginT15">{{ $t('homepage.contact_us') }}</span>
         </a>
         <a class="col-xs-2">
-          <img src="~Img/homepage-api.png" alt="">
+          <img src="~Img/homepage-api.png" >
           <span class="btc-marginT15">API</span>
         </a>
         <a class="col-xs-2">
-          <img src="~Img/homepage-rate.png" alt="">
+          <img src="~Img/homepage-rate.png" >
           <span class="btc-marginT15">{{ $t('homepage.exchange_rate_details') }}</span>
         </a>
         <a class="col-xs-2">
-          <img src="~Img/homepage-apply.png" alt="">
+          <img src="~Img/homepage-apply.png" width="56" height="56">
           <span class="btc-marginT15">{{ $t('homepage.apply_to_list') }}</span>
         </a>
         <a class="col-xs-2">
-          <img src="~Img/homepage-clause.png" alt="">
+          <img src="~Img/homepage-clause.png" >
           <span class="btc-marginT15">{{ $t('homepage.privacy_clause') }}</span>
         </a>
       </div>
@@ -115,9 +115,26 @@ import { mapGetters } from 'vuex'
 import HomeMarket from './HomeMarket/HomeMarket'
 export default {
   name: 'homepage',
+  created () {
+    this._get({
+      url: '/home/funds.json'
+    }, (d) => {
+      d = d.data.success
+      this.factor = d.commission_level.factor * 10
+      this.btc_worth = Number(d.total_assets.btc_worth).toFixed(2)
+    })
+    this._get({
+      url: '/k/trends/trends.json'
+    }, (d) => {
+      this.trend = d.data.success
+    })
+  },
   data () {
     return {
+      trend: [],
       HOST_URL: process.env.HOST_URL,
+      btc_worth: '',
+      factor: '',
       currencyindex: 0,
       search: '',
       open: true,
