@@ -95,14 +95,6 @@ export default {
     fetchData: function () {
       var self = this
       this._get({
-<<<<<<< HEAD
-        url: '/home.json',
-        data: {}
-      }, function (data) {
-        var getdata = JSON.parse(data.request.response)
-        self.getCurData(getdata.success)
-        self.marketData = getdata.success
-=======
         url: '/markets/pending_orders.json',
         data: {}
       }, function (data) {
@@ -111,7 +103,6 @@ export default {
         self.curData = initdata.success.orders
         // self.getCurData(initdata.success)
         // self.marketData = initdata.success
->>>>>>> get data
       })
     },
     getCurData: function (data) {

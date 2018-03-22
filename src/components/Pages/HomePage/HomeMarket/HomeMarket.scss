@@ -48,8 +48,21 @@ table{
     }
   }
 }
+
+th{
+  img{
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 4px;
+  }
+}
+
 .btc-homepage-currency{
   >div{
     display: inline-block;
   }
+}
+
+.btc-currency-none{
+  margin-top: 150px
 }

@@ -1,50 +1,56 @@
 <template>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>币种对</th>
-        <th v-for="(item, index) in heads" :key="item" @click="sortList(index)">{{item}}
-          <img v-if="times == 0 && currencyIndex == index" src="~Img/both.png" alt="">
-          <img v-else-if="times == 1 && currencyIndex == index" src="~Img/up.png" alt="">
-          <img v-else-if="times == 2 && currencyIndex == index" src="~Img/down.png" alt="">
-        </th>
-        <th>价格趋势</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for='(item , index) in oldData' :key='index'>
-        <td>
-          <a class="btc-homepage-currency" style="color: #333333;">
-              {{ item.name }}
-          </a>
-        </td>
-        <td>
-          <span>{{ item.last }}<span style="color:#999">/${{ item.legal_worth }}</span></span>
-        </td>
-        <td>{{ item.volume }}</td>
-        <td>{{ (item.volume * item.last).toFixed(2) }}</td>
-        <td class="btc-percent">
-          <div style="color:#fd4041" v-if="item.percent>0">+{{ item.percent.toFixed(2) }}%</div>
-          <div style="color:#00c4a2" v-else-if="item.percent<0">{{ item.percent.toFixed(2) }}%</div>
-          <div style="color:#999999" v-else>+{{ item.percent.toFixed(2) }}</div>
-        </td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>币种对</th>
+          <th v-for="(item, index) in heads" :key="item" @click="sortList(index)">
+            {{item}}
+            <img v-if="times == 0 && currencyIndex == index" src="~Img/both.png" alt="">
+            <img v-else-if="times == 1 && currencyIndex == index" src="~Img/up.png" alt="">
+            <img v-else-if="times == 2 && currencyIndex == index" src="~Img/down.png" alt="">
+          </th>
+          <th>价格趋势</th>
+        </tr>
+      </thead>
+      <tbody ref="a">
+        <tr v-for='(item , index) in oldData' :key='index' v-if="matchName(item.name, index)">
+          <td>
+            <a class="btc-homepage-currency" style="color: #333333;">
+                {{ item.name }}
+            </a>
+          </td>
+          <td>
+            <span>{{ item.last }}<span style="color:#999">/${{ item.legal_worth }}</span></span>
+          </td>
+          <td>{{ item.volume }}</td>
+          <td>{{ (item.volume * item.last).toFixed(2) }}</td>
+          <td class="btc-percent">
+            <div style="color:#fd4041" v-if="item.percent>0">+{{ item.percent.toFixed(2) }}%</div>
+            <div style="color:#00c4a2" v-else-if="item.percent<0">{{ item.percent.toFixed(2) }}%</div>
+            <div style="color:#999999" v-else>+{{ item.percent.toFixed(2) }}</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="btc-currency-none text-center btc-marginT150" v-if="itemLength === 0">
+      没有匹配币种
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'home-market',
-  props: ['curData'],
+  props: ['curData', 'currency', 'search'],
   data () {
     return {
       oldData: null,
-      heads: ['价格', '交易量(USDT)', '总市值(USDT)', '日涨跌'],
+      heads: ['价格', `成交量(GAGAGAGAG})`, '成交额(USDT)', '日涨跌'],
       coins: ['last', 'volume', 'total', 'percent'],
       times: 0,
-      currencyIndex: 0
+      currencyIndex: 0,
+      itemLength: false
     }
   },
   mounted: function () {
@@ -58,9 +64,21 @@ export default {
         this.oldData = JSON.parse(JSON.stringify(val))
       }
       this.times = 0
+    },
+    async search () {
+      await this.$nextTick()
+      this.itemLength = this.$refs['a'].children.length
+    },
+    async oldData () {
+      await this.$nextTick()
+      this.itemLength = this.$refs['a'].children.length
     }
   },
   methods: {
+    matchName (name, index) {
+      var reg = new RegExp(`${this.search}`, 'i')
+      return reg.test(name.match(/[A-Z]+/ig)[0])
+    },
     initData: function () {
       if (!this.curData) return ''
       this.oldData = JSON.parse(JSON.stringify(this.curData))

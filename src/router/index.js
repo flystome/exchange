@@ -98,7 +98,6 @@ const router = new Router({
     },
     {
       path: `${version}/instructions`,
-      name: 'Instructions',
       component: Instructions,
       children: [
         {

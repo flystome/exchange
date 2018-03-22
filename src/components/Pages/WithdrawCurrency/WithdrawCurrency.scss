@@ -95,6 +95,20 @@
 }
 
 .btc-member-center {
+  .btc-address-div{
+    #copy{
+      padding: 10px;
+      height: 97px;
+      word-wrap: break-word;
+      overflow: auto;
+      font-weight: 700;
+    }
+    .btc-address-warn {
+      font-size: 12px;
+      color: #ff7f18;
+      word-wrap: break-word;
+    }
+  }
     .btc-container-block {
         padding: 20px 30px;
         a {

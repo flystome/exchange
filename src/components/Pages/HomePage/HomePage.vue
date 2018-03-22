@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="btc-homepage-header">
-      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="1000">
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3500">
           <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
             <li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -23,7 +23,7 @@
         </div>
       <div class="container">
         <div class="btc-homepage-login">
-          <div class="btc-nologin" v-if="loginData === '' || loginData.errors">
+          <div class="btc-nologin" v-if="loginData === 'none' || loginData.errors">
           <!-- <div class="btc-nologin"> -->
             <form>
               <span>登录HOTEX</span>
@@ -63,11 +63,12 @@
     <div class="container btc-homepage-main">
       <div class="btc-homepage-markets btc-marginT30">
         <basic-button v-for="(item,index) in currency" :data-id="item" :key="item" class="btc-button pull-left" :class="{'btc-active':!(currencyindex == index)}"
-        @click.native="changemarket(index,item)" :text='item+"交易区"'></basic-button>
-        <basic-input class="pull-right btc-search" placeholder='搜索'>
+        @click.native="changemarket(index,item)" :text='item.toUpperCase()+"交易区"'></basic-button>
+        <div class="btc-homepage-search btc-fr btc-b">
+          <input v-model="search" class="btc-search" placeholder='搜索' />
           <img src="~Img/search.png" alt="">
-        </basic-input>
-        <HomeMarket :curData = "curData[currencyindex]"></HomeMarket>
+        </div>
+        <HomeMarket :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]"></HomeMarket>
       </div>
       <div class="btc-homepage-logo text-center">
         <img src="~Img/logo.png" alt="">
@@ -118,6 +119,7 @@ export default {
     return {
       HOST_URL: process.env.HOST_URL,
       currencyindex: 0,
+      search: '',
       open: true,
       currency: ['usdt', 'btc', 'eth'],
       getetc: '',
@@ -129,7 +131,6 @@ export default {
     HomeMarket
   },
   mounted: function () {
-    // var self = this
     this.getdata()
   },
   methods: {

@@ -133,12 +133,15 @@
             <qr-code :length='"230"' :dateUrl="qrcode(deposit_address)"></qr-code>
           </div>
           <div class="btc-deposit-address col-md-5">
-            <div>
-              <div id="copy">
+            <div class="btc-address-div">
+              <div id="copy" class="btc-b btc-color666">
                 {{ deposit_address }}
               </div>
+              <div class="btc-address-warn btc-marginT10">
+                {{ $t('deposit_currency.warn') }}
+              </div>
             </div>
-            <basic-button :disabled='disabled' data-clipboard-target="#copy" class="btc-marginT30 btn-copy btn" :text='$t("deposit_currency.copy_address")'></basic-button>
+            <basic-button :disabled='disabled' data-clipboard-target="#copy" class="btc-marginT10 btn-copy btn" :text='$t("deposit_currency.copy_address")'></basic-button>
           </div>
         </template>
         <div v-else class='text-center'>
@@ -420,7 +423,6 @@ export default {
         this.disabled = false
         var d = d.data.success
         if (d.code === 201) {
-          console.log(1)
           this.GeneratAddress = true
           if (/deposit/.test(this.$route.path)) {
             this.Generating()

@@ -1,4 +1,5 @@
 import axios from 'axios'
+const unLogin = ['homepage']
 // import qs from 'qs'
 const requestUrl = process.env.HOST_URL
 axios.defaults.withCredentials = true

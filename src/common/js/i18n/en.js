@@ -463,7 +463,8 @@ const en = {
       "recharge_amount": "Recharge Amount",
       "confirmation_number": "Confirmation Number",
       "identifying_code": "Verify Code",
-      "temporarily_unable_deposit": "Temporarily unable to deposit"
+      "temporarily_unable_deposit": "Temporarily unable to deposit",
+      "warn": "The BTC address is forbidden to be recharged to the assets except BTC, and any non - BTC assets charged to the BTC address will not be retrieved."
     },
     "title": {
       "my_account": "My Account",
@@ -473,6 +474,7 @@ const en = {
       "validate_sms": "Validate SMS",
       "currency_withdraw": "Withdraw Currency",
       "currency_deposit": "Deposit Currency",
+      "homepage": "Homepage",
       "404": "404 Not Found"
     },
     "prompt": {
