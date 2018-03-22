@@ -493,7 +493,8 @@ const zh = {
     "confirmation_number": "確認次数",
     "identifying_code": "驗證碼",
     "temporarily_unable_deposit": "暫時無法充值",
-    "warn": "禁止向BTC地址充值除BTC之外的資產，任何充入BTC地址的非BTC資產將不可找回。"
+    "warn": "禁止向BTC地址充值除BTC之外的資產，任何充入BTC地址的非BTC資產將不可找回。",
+    "copy_success": "複製成功"
   },
   "title": {
     "my_account": "我的帳戶",

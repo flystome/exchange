@@ -464,7 +464,8 @@ const en = {
       "confirmation_number": "Confirmation Number",
       "identifying_code": "Verify Code",
       "temporarily_unable_deposit": "Temporarily unable to deposit",
-      "warn": "The BTC address is forbidden to be recharged to the assets except BTC, and any non - BTC assets charged to the BTC address will not be retrieved."
+      "warn": "The BTC address is forbidden to be recharged to the assets except BTC, and any non - BTC assets charged to the BTC address will not be retrieved.",
+      "copy_success": "Copy Success"
     },
     "title": {
       "my_account": "My Account",

@@ -142,6 +142,7 @@
               </div>
             </div>
             <basic-button :disabled='disabled' data-clipboard-target="#copy" class="btc-marginT10 btn-copy btn" :text='$t("deposit_currency.copy_address")'></basic-button>
+            <news-prompt :text='prompt'></news-prompt>
           </div>
         </template>
         <div v-else class='text-center'>
@@ -188,6 +189,7 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import Clipboard from 'clipboard'
+const _debounce = require('lodash/fp/debounce.js')
 import pusher from '@/common/js/pusher'
 var QRCode = require('qrcode')
 export default {
@@ -303,6 +305,7 @@ export default {
         type: 'success',
         point: '.'
       },
+      prompt:'',
       usdt_worth: '',
       length: 0,
       DepositAddress: '',
@@ -679,7 +682,21 @@ export default {
   },
   mounted () {
     /* eslint-disable no-new */
-    new Clipboard('.btn-copy')
+    var clipboard = new Clipboard('.btn-copy')
+    var time = () => {
+      setTimeout(() => {
+        this.prompt = ''
+      }, 1500)
+    }
+
+
+    clipboard.on('success', () => {
+      clearTimeout(time)
+      this.prompt = this.$t('deposit_currency.copy_success')
+    })
+
+    clipboard.on('success', _debounce(500, time))
+
   },
   watch: {
     $route (to) {
