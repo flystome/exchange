@@ -1,8 +1,7 @@
 <template>
   <div class="market_detail">
     <ul class="market_hd clearfix">
-      <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}" @click="goPath(index)"
-      >{{hd}}</li>
+      <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}" @click="goPath(index)">{{hd}}</li>
     </ul>
     <div class="detail">
       <div class="detail_top">
@@ -82,7 +81,7 @@ export default {
       currencyindex: 0,
       hds: [this.$t('markets.quotes'), this.$t('markets.trade'), this.$t('markets.currency')],
       heads: [this.$t('markets.newPrice'), this.$t('markets.amount'), this.$t('markets.time')],
-      curmarket: ' ',
+      curmarket: '',
       market: {},
       ticker: {},
       trades: [],
@@ -161,7 +160,7 @@ export default {
       } else if (index === 1) {
         this.$router.push({path: `${this.ROUTER_VERSION}/markets/${this.curmarket}/trades`})
       } else if (index === 2) {
-        this.$router.push({path: 'orders'})
+        this.$router.push({path: `${this.ROUTER_VERSION}/orders`})
       }
     },
     addFavorite: function () {

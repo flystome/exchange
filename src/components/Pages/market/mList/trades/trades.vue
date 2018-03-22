@@ -23,7 +23,7 @@
                 <p class="num"><span>{{extra_base}}</span><span class="base">{{market.base_currency | upper}}</span></p>
               </div>
               <div class="price inputs">
-                <input type="number" v-model="price" :placeholder="$t('markets.price')">
+                <input type="number" step="0.00000001" v-model="price" :placeholder="$t('markets.price')">
                 <span class="base">{{market.base_currency | upper}}</span>
               </div>
               <div class="price inputs">
@@ -338,7 +338,7 @@ export default {
       } else if (index === 1) {
         return ''
       } else if (index === 2) {
-        this.$router.push({path: 'orders'})
+        this.$router.push({path: `${this.ROUTER_VERSION}/orders`})
       }
     }
   }

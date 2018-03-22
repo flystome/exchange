@@ -540,7 +540,8 @@ const en = {
       "volume": "Volume",
       "ordered": "Filled",
       "bid": "Buy",
-      "ask": "Sell"
+      "ask": "Sell",
+      "cancel": "Cancel"
     },
     "hint": {
       "confirm": "OK",

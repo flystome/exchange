@@ -1,26 +1,28 @@
 <template>
   <div id="orders">
-    <ul class="marketsHd clearfix">
+    <ul class="order_hd clearfix">
       <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}"
-      @click="changemarket(index,hd)">{{hd}}</li>
+       @click="goPath(index)">{{hd}}</li>
     </ul>
     <div class="orderBd">
       <div class="operate">
-        <div class="cancel_all">{{$t("orders.cancel_all")}}</div>
+        <div class="cancel_all" @click="cancelAll()">{{$t("orders.cancel_all")}}</div>
         <div class="choose">
-          <div class="all selected"><i class="fa fa-check-circle-o"></i>{{$t("orders.all")}}</div>
-          <div class="buy"><i class="fa fa-circle-thin"></i>{{$t("orders.buy")}}</div>
-          <div class="sell"><i class="fa fa-circle-thin"></i>{{$t("orders.sell")}}</div>
+          <div :class="{'selected': index === curfilter}"  v-for="(item, index) in filterButtons" :key="item" @click="fiterList(index)">
+            <i class="fa fa-check-circle-o"></i>
+            <i class="fa fa-circle-thin"></i>
+            {{item}}
+          </div>
         </div>
       </div>
       <ul class="order_list">
-        <li class="list" v-for="item in curData" :key="item.id" @click="goPath(item.quote_currency,item.base_currency)">
+        <li class="list" v-for="item in curListData" :key="item.id">
           <div class="list_top">
-            <div class="cancel">{{$t('cancel')}}</div>
+            <div class="cancel" :click="cancel()">{{$t('cancel')}}</div>
             <div class="list_lt">
-              <div class="list_type" :class="{'sell': item.kind === 'ask', 'buy': item.kind === 'bid'}">{{$t('orders.'+item.kind)}}</div>
+              <div class="list_type" :class="{'sell': item.kind === 'ask', 'buy': item.kind === 'bid'}"><span>{{$t('orders.'+item.kind)}}</span></div>
               <div class="market">{{item.quote_currency | upper}}/{{item.base_currency | upper}}</div>
-              <div class="time">201-03-08 12:34:26</div>
+              <div class="time">{{item.at | time}}</div>
             </div>
           </div>
           <div class="list_bottom">
@@ -43,53 +45,61 @@
   </div>
 </template>
 <script>
-// import { mapGetters, mapMutations } from 'vuex'
-
-
 export default {
-  name: 'markets',
+  name: 'Orders',
   data () {
     return {
-      hds: [this.$t('markets.favorite'), 'btc', 'usdt'],
-      currencyindex: 0,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
+      hds: [this.$t('markets.quotes'), this.$t('markets.trade'), this.$t('markets.currency')],
+      filterButtons: [this.$t('orders.all'), this.$t('orders.buy'), this.$t('orders.sell')],
+      currencyindex: 2,
       marketData: null,
-      curData: []
+      curMarket: '',
+      curData: [],
+      curListData: [],
+      curfilter: 0
     }
-  },
-  components: {
-    marketList
   },
   mounted: function () {
     var self = this
     this.fetchData()
-    var channel = pusher.subscribe('market-global')
-    channel.bind('tickers', (data) => {
-      if (JSON.stringify(data) !== '{}') {
-        for (var i in data) {
-          var key = data[i]['base_currency']
-          var Arr = self.marketData[key]
-          var len = Arr.length
-          var target = null
-          for (var j = 0; j < len; j++) {
-            var arrKey = Object.keys(Arr[j])
-            if (arrKey[0] === i) {
-              target = Arr[j]
-              target[arrKey].last = data[i]['last']
-              target[arrKey].percent = data[i]['percent']
-              target[arrKey].volume = data[i]['volume']
-              target[arrKey].legal_worth = data[i]['legal_worth']
-            }
-          }
-          this.getCurData(self.marketData)
-        }
-      }
-    })
+    // var channel = pusher.subscribe('market-global')
+    // channel.bind('tickers', (data) => {
+    //   if (JSON.stringify(data) !== '{}') {
+    //     for (var i in data) {
+    //       var key = data[i]['base_currency']
+    //       var Arr = self.marketData[key]
+    //       var len = Arr.length
+    //       var target = null
+    //       for (var j = 0; j < len; j++) {
+    //         var arrKey = Object.keys(Arr[j])
+    //         if (arrKey[0] === i) {
+    //           target = Arr[j]
+    //           target[arrKey].last = data[i]['last']
+    //           target[arrKey].percent = data[i]['percent']
+    //           target[arrKey].volume = data[i]['volume']
+    //           target[arrKey].legal_worth = data[i]['legal_worth']
+    //         }
+    //       }
+    //     }
+    //   }
+    // })
   },
   filters: {
     upper: function (params) {
       if (!params || params === '/' || params === 'undefined/undefined') return '--'
       return params.toUpperCase()
     },
+    time: function (params) {
+      var d = new Date(params * 1000)
+      var y = d.getFullYear()
+      var m = d.getMonth() > 10 ? d.getMonth() : '0' + d.getMonth()
+      var day = d.getDate() > 10 ? d.getDate() : '0' + d.getDate()
+      var h = d.getHours() > 10 ? d.getHours() : '0' + d.getHours()
+      var m = d.getMinutes() > 10 ? d.getMinutes() : '0' + d.getMinutes()
+      var s = d.getSeconds() > 10 ? d.getSeconds() : '0' + d.getSeconds()
+      return y + '-' + m + '-' + day + ' ' + h + ':' + m + ':' + s
+    }
   },
   methods: {
     fetchData: function () {
@@ -101,78 +111,46 @@ export default {
         var initdata = JSON.parse(data.request.response)
         console.log(initdata.success.orders)
         self.curData = initdata.success.orders
-        // self.getCurData(initdata.success)
+        self.curListData = self.curData
+        self.curMarket = initdata.success.orders[0].quote_currency + initdata.success.orders[0].base_currency
+        console.log(self.curMarket)
         // self.marketData = initdata.success
       })
     },
-    getCurData: function (data) {
-      this.curData = []
-      this.curData.push(this.initDate(data))
-      this.curData.push(this.getItem(data['btc']))
-      this.curData.push(this.getItem(data['usdt']))
-    },
-    changemarket: function (index, item) {
-      this.currencyindex = index
-    },
-    initDate: function (data) {
-      var arr = []
-      if (data.current_user) {
-        arr = this.getFavorite(data)
-      } else {
-        arr = this.getLocal(data)
-      }
-      return arr
-    },
-    getItem: function (data) {
-      var arr = []
-      for (var i in data) {
-        for (var item in data[i]) {
-          arr.push(data[i][item])
-        }
-      }
-      return arr
-    },
-    getFavorite: function (data) {
-      var arr = []
-      for (var key in data) {
-        if (key !== 'current_user' && key !== 'code') {
-          var list = data[key]
-          var len = list.length
-          for (var i = 0; i < len; i++) {
-            for (var item in list[i]) {
-              if (list[i][item]['is_portfolios'] === true) {
-                arr.push(list[i][item])
-              }
-            }
-          }
-        }
-      }
-      return arr
-    },
-    getLocal: function (data) {
-      var localList = localStorage.getItem('markets')
-      if (localList.length === 0) {
+    goPath: function (index) {
+      if (index === 0) {
+        console.log(`${this.ROUTER_VERSION}/markets/${this.curMarket}`)
+        this.$router.push({path: `${this.ROUTER_VERSION}/markets/${this.curMarket}`})
+      } else if (index === 1) {
+        this.$router.push({path: `${this.ROUTER_VERSION}/markets/${this.curMarket}/trades`})
+      } else if (index === 2) {
         return ''
       }
-      var arr = []
-      for (var key in data) {
-        if (key !== 'current_user') {
-          var list = data[key]
-          var len = list.length
-          for (var i = 0; i < len; i++) {
-            for (var item in list[i]) {
-              if (localList.indexOf(item) !== -1) {
-                arr.push(list[i][item])
-              }
-            }
-          }
-        }
+    },
+    fiterList: function (index) {
+      console.log(this.curData)
+      this.curfilter = index
+      if (index === 1) {
+        this.curListData = this.curData.filter((value, index) => {
+          return value.kind === 'bid'
+        })
+      } else if (index === 2) {
+        this.curListData = this.curData.filter((value, index) => {
+          return value.kind === 'ask'
+        })
+      } else {
+        this.curListData = this.curData
       }
-      return arr
+    },
+    cancel: function () {
+
+    },
+    cancelAll: function () {
+
     }
   }
 }
 </script>
 <style scoped lang="scss">
-  @import './mlist.scss'
+  @import './orders.scss'
 </style>
