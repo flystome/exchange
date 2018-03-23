@@ -42,11 +42,6 @@ const router = new Router({
       component: Markets
     },
     {
-      path: `${version}/orders`,
-      name: 'Orders',
-      component: Orders
-    },
-    {
       path: `${version}/markets/:id`,
       name: 'MarketDetail',
       component: MarketDetail
@@ -55,6 +50,11 @@ const router = new Router({
       path: `${version}/markets/:id/trades`,
       name: 'Trades',
       component: Trades
+    },
+    {
+      path: `${version}/markets/:id/orders`,
+      name: 'Orders',
+      component: Orders
     },
     {
       path: `${version}/homepage`,

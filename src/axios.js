@@ -47,7 +47,8 @@ export const _get = async ({url, data, headers}, callback) => {
 export const _delete = async ({url, data}, callback) => {
   const ajax = await axios({
     method: 'delete',
-    url: requestUrl + url
+    url: requestUrl + url,
+    data: data
   })
   if (callback) {
     callback(ajax)

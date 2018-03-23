@@ -49,7 +49,7 @@
                   <i class="fa fa-times"> {{$t('markets.trade_fail')}}</i>
                 </p>
               </div>
-              <button class="buy" :disabled="isDisabled" @click="orderBid()">{{$t("markets.buy")}}</button>
+              <button class="buy" :disabled="isDisabled" @click.prevent="orderBid()">{{$t("markets.buy")}}</button>
             </div>
           </form>
           <form action="#">
@@ -59,7 +59,7 @@
                 <p class="num"><span>{{extra_quote}}</span><span class="base">{{market.quote_currency | upper}}</span></p>
               </div>
               <div class="price inputs">
-                <input type="number" v-model="price" :placeholder="$t('markets.price')">
+                <input type="number" step="0.00000001" v-model="price" :placeholder="$t('markets.price')">
                 <span class="base">{{market.base_currency | upper}}</span>
               </div>
               <div class="price inputs">
@@ -85,7 +85,7 @@
                   <i class="fa fa-times"> {{$t('markets.trade_fail')}}</i>
                 </p>
               </div>
-              <button class="sell" :disabled="isDisabled" @click="orderAsk()">{{$t("markets.sell")}}</button>
+              <button class="sell" :disabled="isDisabled" @click.prevent="orderAsk()">{{$t("markets.sell")}}</button>
             </div>
           </form>
         </div>
@@ -190,6 +190,10 @@ export default {
     }
   },
   watch: {
+    loginData (val) {
+      this.getRefresh(val.sn)
+      return val
+    },
     amount_buy: function (val, oldValue) {
       if (this.price && this.price !== 0) {
         if (this.extra_base < val * this.price || this.amount_buy.length > 16) {
@@ -338,7 +342,7 @@ export default {
       } else if (index === 1) {
         return ''
       } else if (index === 2) {
-        this.$router.push({path: `${this.ROUTER_VERSION}/orders`})
+        this.$router.push({path: `${this.ROUTER_VERSION}/markets/${this.curMarket}/orders`})
       }
     }
   }

@@ -18,7 +18,7 @@
       <ul class="order_list">
         <li class="list" v-for="item in curListData" :key="item.id">
           <div class="list_top">
-            <div class="cancel" :click="cancel()">{{$t('cancel')}}</div>
+            <div class="cancel" @click="cancel(item.id)">{{$t('cancel')}}</div>
             <div class="list_lt">
               <div class="list_type" :class="{'sell': item.kind === 'ask', 'buy': item.kind === 'bid'}"><span>{{$t('orders.'+item.kind)}}</span></div>
               <div class="market">{{item.quote_currency | upper}}/{{item.base_currency | upper}}</div>
@@ -45,7 +45,9 @@
   </div>
 </template>
 <script>
+import {mapState} from 'vuex'
 import pusher from '@/common/js/pusher'
+
 export default {
   name: 'Orders',
   data () {
@@ -62,29 +64,19 @@ export default {
     }
   },
   mounted: function () {
-    var self = this
     this.fetchData()
-    // var channel = pusher.subscribe('market-global')
-    // channel.bind('tickers', (data) => {
-    //   if (JSON.stringify(data) !== '{}') {
-    //     for (var i in data) {
-    //       var key = data[i]['base_currency']
-    //       var Arr = self.marketData[key]
-    //       var len = Arr.length
-    //       var target = null
-    //       for (var j = 0; j < len; j++) {
-    //         var arrKey = Object.keys(Arr[j])
-    //         if (arrKey[0] === i) {
-    //           target = Arr[j]
-    //           target[arrKey].last = data[i]['last']
-    //           target[arrKey].percent = data[i]['percent']
-    //           target[arrKey].volume = data[i]['volume']
-    //           target[arrKey].legal_worth = data[i]['legal_worth']
-    //         }
-    //       }
-    //     }
-    //   }
-    // })
+    this.curMarket = this.$route.params.id
+  },
+  computed: {
+    ...mapState([
+      'loginData'
+    ])
+  },
+  watch: {
+    loginData (val) {
+      this.getRefresh(val.sn)
+      return val
+    }
   },
   filters: {
     upper: function (params) {
@@ -110,12 +102,24 @@ export default {
         data: {}
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
-        console.log(initdata.success.orders)
         self.curData = initdata.success.orders
         self.curListData = self.curData
-        self.curMarket = initdata.success.orders[0].quote_currency + initdata.success.orders[0].base_currency
-        console.log(self.curMarket)
-        // self.marketData = initdata.success
+      })
+    },
+    getRefresh: function (sn) {
+      var privateAccount = pusher.subscribe('private-' + sn)
+      var self = this
+      privateAccount.bind('order', (data) => {
+        if (data.state === 'wait') {
+          self.curData.unshift(data)
+        } else if (data.state === 'cancel' || data.state === 'done') {
+          for (var i in this.curData) {
+            if (self.curData[i].id === data.id) {
+              self.curData.splice(i, 1)
+            }
+          }
+        }
+        self.fiterList(self.curfilter)
       })
     },
     goPath: function (index) {
@@ -129,7 +133,6 @@ export default {
       }
     },
     fiterList: function (index) {
-      console.log(this.curData)
       this.curfilter = index
       if (index === 1) {
         this.curListData = this.curData.filter((value, index) => {
@@ -143,11 +146,21 @@ export default {
         this.curListData = this.curData
       }
     },
-    cancel: function () {
-
+    cancel: function (id) {
+      this._delete({
+        url: '/markets/' + this.curMarket + '/orders/' + id
+      })
     },
     cancelAll: function () {
-
+      if (this.curData.length === 0) {
+        return ''
+      }
+      this._delete({
+        url: '/markets/' + this.curMarket + '/orders/' + 0,
+        data: {
+          cancel_all: 'TRUE'
+        }
+      })
     }
   }
 }
