@@ -112,7 +112,6 @@ export default {
         data: {}
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
-        console.log(initdata)
         self.curData = initdata.success.orders
         self.curListData = self.curData
       })
