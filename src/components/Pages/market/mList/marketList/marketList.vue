@@ -10,11 +10,11 @@
       <li class="list" v-for="item in oldData" :key="item.quote_currency" @click="goPath(item.quote_currency,item.base_currency)">
         <div class="list-coin">
           <div class="coin">{{item.quote_currency | upper}}<span>/{{item.base_currency | upper}}</span></div>
-          <div class="vol"><span>{{$t('markets.volume')}}</span>{{item.volume | fixed4}}</div>
+          <div class="vol"><span>{{$t('markets.volume')}}</span>{{item.volume | fixedNum(item.volume_fixed)}}</div>
         </div>
         <div class="list-price">
-          <div class="price">{{item.last | fixed4}}</div>
-          <div class="val">${{item.legal_worth | fixed4}}</div>
+          <div class="price">{{item.last | fixedNum(item.price_fixed)}}</div>
+          <div class="val">${{item.legal_worth | fixedNum(item.price_fixed)}}</div>
         </div>
         <div class="list-btn">
           <div :class="{'text-up': item.percent > 0, 'text-down': item.percent < 0}">{{item.percent | fixed2}}%</div>
@@ -57,6 +57,16 @@ export default {
       } else {
         return (+params).toPrecision(4)
       }
+    },
+    fixedNum: function (params, num, num2) {
+      if (+params <= 0 || !params) return 0
+      if (!num) num = 6
+      if (num2) {
+        num = num > num2 ? num : num2
+      }
+      var value = (+Math.floor(params * Math.pow(10, num)) / Math.pow(10, num)).toFixed(num)
+      if (value.length >= 14) value = (+value).toFixed(num - 2)
+      return value
     }
   },
   watch: {

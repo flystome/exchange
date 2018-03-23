@@ -27,11 +27,11 @@
           </div>
           <div class="list_bottom">
             <div class="list-price">
-              <div class="num">{{item.price}}</div>
+              <div class="num">{{item.price | fixedNum(item.price_fixed)}}</div>
               <div class="des">{{$t("orders.price")}}</div>
             </div>
             <div class="list-volume">
-              <div class="num">{{item.volume}}</div>
+              <div class="num">{{item.volume | fixedNum(item.volume_fixed)}}</div>
               <div class="des">{{$t("orders.volume")}}</div>
             </div>
             <div class="list-percent">
@@ -92,6 +92,16 @@ export default {
       var min = d.getMinutes() > 10 ? d.getMinutes() : '0' + d.getMinutes()
       var s = d.getSeconds() > 10 ? d.getSeconds() : '0' + d.getSeconds()
       return y + '-' + m + '-' + day + ' ' + h + ':' + min + ':' + s
+    },
+    fixedNum: function (params, num, num2) {
+      if (+params <= 0 || !params) return 0
+      if (!num) num = 6
+      if (num2) {
+        num = num > num2 ? num : num2
+      }
+      var value = (+Math.floor(params * Math.pow(10, num)) / Math.pow(10, num)).toFixed(num)
+      if (value.length >= 14) value = (+value).toFixed(num - 2)
+      return value
     }
   },
   methods: {
@@ -102,6 +112,7 @@ export default {
         data: {}
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
+        console.log(initdata)
         self.curData = initdata.success.orders
         self.curListData = self.curData
       })

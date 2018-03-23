@@ -17,15 +17,15 @@
             <i class="caret"></i>
           </router-link>
           <div>
-            <span class="price">{{ticker.last | fixed4}}</span>
-            <span class="vol">${{ticker.legal_worth | fixed2}}</span>
+            <span class="price">{{ticker.last | fixedNum(market.price_fixed)}}</span>
+            <span class="vol">${{ticker.legal_worth | fixedNum(market.price_fixed)}}</span>
           </div>
         </div>
       </div>
       <div class="detail_bottom clearfix">
         <div class="detail_lt">
           <p>
-            <span class="change">{{ticker.last - ticker.open | fixed4}}</span>
+            <span class="change">{{ticker.last - ticker.open | fixedNum(market.price_fixed)}}</span>
             <span class="percent">{{ticker.percent | fixed2}}%</span>
           </p>
           <p>
@@ -36,11 +36,11 @@
         <div class="detail_rt">
           <p>
             <span class="name">{{$t("markets.low")}}</span>
-            <span class="volume">{{ticker.low | fixed2}}</span>
+            <span class="volume">{{ticker.low | fixedNum(market.price_fixed)}}</span>
           </p>
           <p>
             <span class="name">{{$t("markets.high")}}</span>
-            <span class="volume">{{ticker.high | fixed2}}</span>
+            <span class="volume">{{ticker.high | fixedNum(market.price_fixed)}}</span>
           </p>
         </div>
       </div>
@@ -57,8 +57,8 @@
       </ul>
       <ul class="order_list">
         <li v-for="item in trades" :key="item.tid">
-          <div class="order_price" :class="{'text-up': item.type === 'buy', 'text-down': item.type === 'sell'}">{{item.price | fixed4}}</div>
-          <div class="order_amount">{{item.amount}}</div>
+          <div class="order_price" :class="{'text-up': item.type === 'buy', 'text-down': item.type === 'sell'}">{{item.price | fixedNum(market.price_fixed)}}</div>
+          <div class="order_amount">{{item.amount | fixedNum(market.volume_fixed)}}</div>
           <div class="order_time">{{+item.date*1000 | time}}</div>
         </li>
       </ul>
@@ -136,6 +136,16 @@ export default {
       } else {
         return (+params).toPrecision(4)
       }
+    },
+    fixedNum: function (params, num, num2) {
+      if (+params <= 0 || !params) return 0
+      if (!num) num = 6
+      if (num2) {
+        num = num > num2 ? num : num2
+      }
+      var value = (+Math.floor(params * Math.pow(10, num)) / Math.pow(10, num)).toFixed(num)
+      if (value.length >= 14) value = (+value).toFixed(num - 2)
+      return value
     },
     time: function (date) {
       var d = new Date(date).toString()

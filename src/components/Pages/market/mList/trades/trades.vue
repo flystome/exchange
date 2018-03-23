@@ -20,7 +20,7 @@
             <div class="order order_buy" v-if="order_type==='buy'">
               <div class="extra">
                 <p>{{$t("markets.extra")}}</p>
-                <p class="num"><span>{{extra_base}}</span><span class="base">{{market.base_currency | upper}}</span></p>
+                <p class="num"><span>{{extra_base | fixedNum(market.price_fixed, market.volume_fixed)}}</span><span class="base">{{market.base_currency | upper}}</span></p>
               </div>
               <div class="price inputs">
                 <input type="number" step="0.00000001" v-model="price" :placeholder="$t('markets.price')">
@@ -31,14 +31,14 @@
                 <span class="quote">{{market.quote_currency | upper}}</span>
               </div>
               <div class="total private">
-                <span class="nums">{{price * amount_buy | fixed8}} {{market.base_currency | upper}}</span>
+                <span class="nums">{{price * amount_buy | fixedNum(market.price_fixed, market.volume_fixed)}} {{market.base_currency | upper}}</span>
                 <span class="des">{{$t("markets.total")}}</span>
               </div>
               <div class="percent">
                 <span v-for="per in percents" :key="per" @click="setTrade(per)">{{per}}%</span>
               </div>
               <div class="maxNum private">
-                <span class="nums">{{maxAmount | fixed8}} {{market.quote_currency | upper}}</span>
+                <span class="nums">{{maxAmount | fixedNum(market.price_fixed, market.volume_fixed)}} {{market.quote_currency | upper}}</span>
                 <span class="des">{{$t("markets.maxAmount")}}</span>
               </div>
               <div class="tips">
@@ -56,7 +56,7 @@
             <div class="order order_sell" v-if="order_type==='sell'">
               <div class="extra">
                 <p>{{$t("markets.extra")}}</p>
-                <p class="num"><span>{{extra_quote}}</span><span class="base">{{market.quote_currency | upper}}</span></p>
+                <p class="num"><span>{{extra_quote | fixedNum(market.price_fixed, market.volume_fixed)}}</span><span class="base">{{market.quote_currency | upper}}</span></p>
               </div>
               <div class="price inputs">
                 <input type="number" step="0.00000001" v-model="price" :placeholder="$t('markets.price')">
@@ -67,14 +67,14 @@
                 <span class="quote">{{market.quote_currency | upper}}</span>
               </div>
               <div class="total private">
-                <span class="nums">{{price * amount_sell | fixed8}} {{market.base_currency | upper}}</span>
+                <span class="nums">{{price * amount_sell | fixedNum(market.price_fixed, market.volume_fixed)}} {{market.base_currency | upper}}</span>
                 <span class="des">{{$t("markets.total")}}</span>
               </div>
               <div class="percent">
                 <span v-for="per in percents" :key="per" @click="setTrade(per)">{{per}}%</span>
               </div>
               <div class="maxNum private">
-                <span class="nums">{{extra_quote}} {{market.quote_currency | upper}}</span>
+                <span class="nums">{{extra_quote | fixedNum(market.price_fixed, market.volume_fixed)}} {{market.quote_currency | upper}}</span>
                 <span class="des">{{$t("markets.maxAmount")}}</span>
               </div>
               <div class="tips">
@@ -93,7 +93,7 @@
       <div class="trades_rt">
         <div class="currency_price">
           <router-link class="back" :to="{path: ROUTER_VERSION + '/markets/' + curMarket}"><img src="~Img/candle.jpg"></router-link>
-          <span>{{ticker.last | fixed8}}</span>
+          <span>{{ticker.last | fixedNum(market.price_fixed)}}</span>
         </div>
         <div class="trades_list">
           <div class="head clearfix">
@@ -103,16 +103,16 @@
           <div class=" trade_list">
             <ul class="sell_list clearfix">
               <li v-for="item in sellList" :key="item[0]">
-                <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixed8}}</div>
-                <div class="trade_num trade_rt">{{item[1]}}</div>
+                <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixedNum(market.price_fixed)}}</div>
+                <div class="trade_num trade_rt">{{item[1] | fixedNum(market.volume_fixed)}}</div>
               </li>
             </ul>
           </div>
           <div class=" trade_list">
             <ul class="buy_list clearfix">
               <li v-for="item in buyList" :key="item[0]">
-                <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixed8}}</div>
-                <div class="trade_num trade_rt">{{item[1]}}</div>
+                <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixedNum(market.price_fixed)}}</div>
+                <div class="trade_num trade_rt">{{item[1] | fixedNum(market.volume_fixed)}}</div>
               </li>
             </ul>
           </div>
@@ -207,33 +207,19 @@ export default {
     }
   },
   filters: {
-    fixed2: function (params) {
-      if (!params) return 0
-      return (+params).toFixed(2)
-    },
     upper: function (params) {
       if (!params || params === '/' || params === 'undefined/undefined') return '--'
       return params.toUpperCase()
     },
-    fixed4: function (params) {
-      if (+params === 0 || !params) return 0
-      var len = +params.toString().split('.')[0].length
-      if (len > 1) {
-        return (+params).toFixed(2)
-      } else {
-        return (+params).toPrecision(4)
-      }
-    },
-    fixed8: function (params) {
+    fixedNum: function (params, num, num2) {
       if (+params <= 0 || !params) return 0
-      var len = +params.toString().split('.')[0].length
-      if (len >= 5) {
-        return (+params).toFixed(4)
-      } else if (len > 1) {
-        return (+params).toFixed(6)
-      } else {
-        return (+params).toPrecision(8)
+      if (!num) num = 6
+      if (num2) {
+        num = num > num2 ? num : num2
       }
+      var value = (+Math.floor(params * Math.pow(10, num)) / Math.pow(10, num)).toFixed(num)
+      if (value.length >= 14) value = (+value).toFixed(num - 2)
+      return value
     }
   },
   methods: {
@@ -251,13 +237,18 @@ export default {
         self.extra_base = initdata.accounts[self.market.base_currency].balance
         self.extra_quote = initdata.accounts[self.market.quote_currency].balance
         self.sellList = self.sellList.reverse()
-        self.sn = initdata.current_user.sn
+        console.log(initdata)
       })
     },
     getRefresh: function (sn) {
+      var self = this
       var privateAccount = pusher.subscribe('private-' + sn)
       privateAccount.bind('account', (data) => {
-        console.log(data)
+        if (data.currency === self.market.base_currency) {
+          self.extra_base = data.balance
+        } else if (data.currency === self.market.quote_currency) {
+          self.extra_quote = data.balance
+        }
       })
     },
     orderType: function (type) {
