@@ -12,7 +12,10 @@
           </a>
         </div>
         <div class="coin_detail">
-          <a class="cur_market" href="/markets"><span>{{(market.quote_currency+'/'+market.base_currency) | upper}}</span><i class="caret"></i></a>
+          <router-link class="cur_market" :to="{path: ROUTER_VERSION + '/markets'}">
+            <span>{{(market.quote_currency+'/'+market.base_currency) | upper}}</span>
+            <i class="caret"></i>
+          </router-link>
           <div>
             <span class="price">{{ticker.last | fixed4}}</span>
             <span class="vol">${{ticker.legal_worth | fixed2}}</span>

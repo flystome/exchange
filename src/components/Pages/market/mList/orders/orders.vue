@@ -45,6 +45,7 @@
   </div>
 </template>
 <script>
+import pusher from '@/common/js/pusher'
 export default {
   name: 'Orders',
   data () {
@@ -96,9 +97,9 @@ export default {
       var m = d.getMonth() > 10 ? d.getMonth() : '0' + d.getMonth()
       var day = d.getDate() > 10 ? d.getDate() : '0' + d.getDate()
       var h = d.getHours() > 10 ? d.getHours() : '0' + d.getHours()
-      var m = d.getMinutes() > 10 ? d.getMinutes() : '0' + d.getMinutes()
+      var min = d.getMinutes() > 10 ? d.getMinutes() : '0' + d.getMinutes()
       var s = d.getSeconds() > 10 ? d.getSeconds() : '0' + d.getSeconds()
-      return y + '-' + m + '-' + day + ' ' + h + ':' + m + ':' + s
+      return y + '-' + m + '-' + day + ' ' + h + ':' + min + ':' + s
     }
   },
   methods: {
