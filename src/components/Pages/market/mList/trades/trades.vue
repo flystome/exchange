@@ -1,5 +1,8 @@
 <template>
   <div class="trade" id="trade">
+    <div class="dialog">
+      <div class="mask"></div>
+    </div>
     <ul class="trade_hd clearfix">
       <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}" @click="goPath(index)"
       >{{hd}}</li>
