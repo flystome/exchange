@@ -122,6 +122,7 @@
   </div>
 </template>
 <script>
+import {mapState} from 'vuex'
 import pusher from '@/common/js/pusher'
 
 export default {
@@ -159,7 +160,6 @@ export default {
     marketPush.bind('update', (data) => {
       if (data.asks.length !== 0) {
         self.sellList = data.asks.slice(-8, 8).reverse()
-        // self.sellList = self.sellList.reverse()
       }
       if (data.bids.length !== 0) {
         self.buyList = data.bids.slice(0, 8)
@@ -175,10 +175,6 @@ export default {
         }
       }
     })
-    var privateAccount = pusher.subscribe('private-' + this.sn)
-    privateAccount.bind('account', (data) => {
-      console.log(data)
-    })
   },
   computed: {
     maxAmount: function () {
@@ -187,7 +183,8 @@ export default {
       } else {
         return 0
       }
-    }
+    },
+    ...mapState(['loginData'])
   },
   watch: {
     loginData (val) {
@@ -257,6 +254,12 @@ export default {
         self.sn = initdata.current_user.sn
       })
     },
+    getRefresh: function (sn) {
+      var privateAccount = pusher.subscribe('private-' + sn)
+      privateAccount.bind('account', (data) => {
+        console.log(data)
+      })
+    },
     orderType: function (type) {
       this.order_type = type
       this.price = ''
@@ -318,7 +321,7 @@ export default {
       this._post({
         url: '/markets/' + this.curMarket + '/order_asks',
         data: {
-          order_bid: {
+          order_ask: {
             ord_type: 'limit',
             price: self.price,
             origin_volume: self.amount_sell
