@@ -1,5 +1,17 @@
 <template>
   <div id="orders">
+    <div class="dialog" v-show='showDialog'>
+      <div class="mask"></div>
+      <div class="dia_content">
+        <div class="text">
+          <h4></h4>
+        </div>
+        <div class="confirm_box">
+          <span class="confirm" @click="confirmOrder(true)">{{$t('markets.confirm')}}</span>
+          <span class="cancel" @click="confirmOrder(false)">{{$t('markets.cancel')}}</span>
+        </div>
+      </div>
+    </div>
     <ul class="order_hd clearfix">
       <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}"
        @click="goPath(index)">{{hd}}</li>
@@ -155,6 +167,9 @@ export default {
       } else {
         this.curListData = this.curData
       }
+    },
+    confirmOrder: function (bool) {
+
     },
     cancel: function (id) {
       this._delete({

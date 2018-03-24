@@ -1,7 +1,22 @@
 <template>
   <div class="trade" id="trade">
-    <div class="dialog">
+    <div class="dialog" v-show='showDialog'>
       <div class="mask"></div>
+      <div class="dia_content">
+        <div class="text">
+          <h4>{{$t('markets.dialog.' + order_type)}}{{$t('markets.cancel')}}</h4>
+          <ul>
+            <li><div class="value"><span>{{market.quote_currency | upper}}</span></div>{{$t('markets.coin')}}</li>
+            <li><div class="value">{{price | fixedNum(market.price_fixed)}}<span>{{market.base_currency | upper}}</span></div>{{$t('markets.price')}}</li>
+            <li v-if="order_type === 'buy'"><div class="value">{{amount_buy | fixedNum(market.price_amount)}}<span>{{market.quote_currency | upper}}</span></div>{{$t('markets.volume')}}</li>
+            <li v-if="order_type === 'sell'"><div class="value">{{amount_sell | fixedNum(market.price_amount)}}<span>{{market.quote_currency}}</span></div>{{$t('markets.volume')}}</li>
+          </ul>
+        </div>
+        <div class="confirm_box">
+          <span class="confirm" @click="confirmTrade(true)">{{$t('markets.confirm')}}</span>
+          <span class="cancel" @click="confirmTrade(false)">{{$t('markets.cancel')}}</span>
+        </div>
+      </div>
     </div>
     <ul class="trade_hd clearfix">
       <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}" @click="goPath(index)"
@@ -145,12 +160,14 @@ export default {
       isDisabled: false,
       status: false,
       sn: '',
+      showDialog: false,
 
       extra_base: 0,
       extra_quote: 0,
       price: '',
       amount_buy: '',
-      amount_sell: ''
+      amount_sell: '',
+      amount: ''
     }
   },
   mounted: function () {
@@ -279,59 +296,64 @@ export default {
         }
       }
     },
-    orderBid: function () {
-      if (!this.price || this.price === 0) return ''
-      if (!this.amount_buy || this.amount_buy === 0) return ''
-      var self = this
-
-      this.isDisabled = true
+    confirmTrade: function (bool) {
+      this.showDialog = false
+      if (bool) {
+        if (this.order_type === 'buy') {
+          this.confirmBuy()
+        } else if (this.order_type === 'sell') {
+          this.confirmSell()
+        }
+      } else {
+        this.isDisabled = false
+      }
+    },
+    confirmBuy: function (bool) {
       this._post({
         url: '/markets/' + this.curMarket + '/order_bids',
         data: {
           order_bid: {
             ord_type: 'limit',
-            price: self.price,
-            origin_volume: self.amount_buy
+            price: this.price,
+            origin_volume: this.amount_buy
           }
         }
-      }, function (data) {
-        if (data.status === 200) {
-          self.isDisabled = false
-          self.price = ''
-          self.amount_buy = ''
-          self.status = 'success'
-        } else {
-          self.isDisabled = false
-          self.status = 'fail'
-        }
-      })
+      }, this.orderCallback)
     },
-    orderAsk: function () {
-      if (!this.price || this.price === 0) return ''
-      if (!this.amount_sell || this.amount_sell === 0) return ''
-      var self = this
-
-      this.isDisabled = false
+    confirmSell: function (bool) {
       this._post({
         url: '/markets/' + this.curMarket + '/order_asks',
         data: {
           order_ask: {
             ord_type: 'limit',
-            price: self.price,
-            origin_volume: self.amount_sell
+            price: this.price,
+            origin_volume: this.amount_sell
           }
         }
-      }, function (data) {
-        if (data.status === 200) {
-          self.isDisabled = false
-          self.price = ''
-          self.amount_buy = ''
-          self.status = 'success'
-        } else {
-          self.isDisabled = false
-          self.status = 'fail'
-        }
-      })
+      }, this.orderCallback)
+    },
+    orderCallback: function (data) {
+      if (data.status === 200) {
+        this.isDisabled = false
+        this.price = ''
+        this['amount_' + this.order_type] = ''
+        this.status = 'success'
+      } else {
+        this.isDisabled = false
+        this.status = 'fail'
+      }
+    },
+    orderBid: function () {
+      if (!this.price || this.price === 0) return ''
+      if (!this.amount_buy || this.amount_buy === 0) return ''
+      this.showDialog = true
+      this.isDisabled = true
+    },
+    orderAsk: function () {
+      if (!this.price || this.price === 0) return ''
+      if (!this.amount_sell || this.amount_sell === 0) return ''
+      this.showDialog = true
+      this.isDisabled = false
     },
     goPath: function (index) {
       if (index === 0) {
