@@ -164,7 +164,7 @@ export default {
         self.trades = initdata.trades.slice(0, 10)
         self.market = initdata.market
         self.logined = !!initdata.current_user
-        console.log(initdata)
+        self.favorite = initdata.market[is_portfolios]
       })
     },
     goPath: function (index) {
@@ -181,8 +181,7 @@ export default {
       if (this.logined) {
         if (this.favorite) {
           this._delete({
-            url: '/portfolios/' + self.curmarket,
-            data: {}
+            url: '/portfolios/' + self.curmarket + '.json',
           }, function (xhr) {
             if (xhr.status === 200) {
               self.favorite = false
@@ -190,7 +189,7 @@ export default {
           })
         } else {
           this._post({
-            url: '/portfolios/',
+            url: '/portfolios.json',
             data: {
               market: self.curmarket
             }
@@ -202,6 +201,8 @@ export default {
         }
       } else {
         var localList = localStorage.getItem('markets').split(',')
+        console.log(localList)
+        if (localList.length === 0) return ''
         var i = ('' + this.market).indexOf(localList)
         if (i !== -1) {
           localList.push(this.curmarket)

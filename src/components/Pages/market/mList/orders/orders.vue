@@ -4,7 +4,8 @@
       <div class="mask"></div>
       <div class="dia_content">
         <div class="text">
-          <h4></h4>
+          <p class="cancel_one" v-if="cancelNum === 'one'">{{$t('orders.dialog.cancel')}}</p>
+          <p class="cancel_all" v-if="cancelNum === 'all'">{{$t('orders.dialog.cancel_all')}}</p>
         </div>
         <div class="confirm_box">
           <span class="confirm" @click="confirmOrder(true)">{{$t('markets.confirm')}}</span>
@@ -72,7 +73,10 @@ export default {
       curMarket: '',
       curData: [],
       curListData: [],
-      curfilter: 0
+      showDialog: false,
+      curfilter: 0,
+      cancelNum: 'one',
+      id: 0
     }
   },
   mounted: function () {
@@ -169,23 +173,33 @@ export default {
       }
     },
     confirmOrder: function (bool) {
-
+      this.showDialog = false
+      if (bool) {
+        if (this.cancelNum === 'one') {
+          this._delete({
+            url: '/markets/' + this.curMarket + '/orders/' + this.id
+          })
+        } else if (this.cancelNum === 'all') {
+          this._delete({
+            url: '/markets/' + this.curMarket + '/orders/' + 0,
+            data: {
+              cancel_all: 'TRUE'
+            }
+          })
+        }
+      }
     },
     cancel: function (id) {
-      this._delete({
-        url: '/markets/' + this.curMarket + '/orders/' + id
-      })
+      this.cancelNum = 'one'
+      this.showDialog = true
+      this.id = id
     },
     cancelAll: function () {
       if (this.curData.length === 0) {
         return ''
       }
-      this._delete({
-        url: '/markets/' + this.curMarket + '/orders/' + 0,
-        data: {
-          cancel_all: 'TRUE'
-        }
-      })
+      this.cancelNum = 'all'
+      this.showDialog = true
     }
   }
 }

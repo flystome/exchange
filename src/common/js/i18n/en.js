@@ -553,6 +553,10 @@ const en = {
       "ordered": "Filled",
       "bid": "Buy",
       "ask": "Sell",
+      'dialog': {
+        'cancel': "Are you sure to cancel this order？",
+        'cancel_all': "Are you sure to cancel ALL orders？"
+      }
     },
     "hint": {
       "confirm": "OK",
