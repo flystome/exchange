@@ -53,7 +53,7 @@
                 <span class="des">{{$t("markets.total")}}</span>
               </div>
               <div class="percent">
-                <span v-for="per in percents" :key="per" @click="setTrade(per)">{{per}}%</span>
+                <span v-for="per in percents" :key="per[1]" @click="setTrade(per[1])">{{per[0]}}</span>
               </div>
               <div class="maxNum private">
                 <span class="nums">{{maxAmount | fixedNum(market.price_fixed, market.volume_fixed)}} {{market.quote_currency | upper}}</span>
@@ -89,7 +89,7 @@
                 <span class="des">{{$t("markets.total")}}</span>
               </div>
               <div class="percent">
-                <span v-for="per in percents" :key="per" @click="setTrade(per)">{{per}}%</span>
+                <span v-for="per in percents" :key="per[1]" @click="setTrade(per[1])">{{per[0]}}</span>
               </div>
               <div class="maxNum private">
                 <span class="nums">{{extra_quote | fixedNum(market.price_fixed, market.volume_fixed)}} {{market.quote_currency | upper}}</span>
@@ -149,7 +149,7 @@ export default {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       hds: [this.$t('markets.quotes'), this.$t('markets.trade'), this.$t('markets.currency')],
-      percents: [25, 50, 75, 100],
+      percents: [['1/4', 25], ['1/3', 33.3], ['1/2', 50], ['All', 100]],
       currencyindex: 1,
       order_type: 'buy',
       curMarket: '',
@@ -252,8 +252,12 @@ export default {
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
         self.ticker = initdata.ticker
-        self.sellList = initdata.asks.slice(-8, 8).reverse()
-        self.buyList = initdata.bids.slice(0, 8)
+        if (initdata.asks) {
+          self.sellList = initdata.asks.slice(-8, 0).reverse()
+        }
+        if (initdata.bids) {
+          self.buyList = initdata.bids.slice(0, 8)
+        }
         self.market = initdata.market
         if (initdata.accounts) {
           self.extra_base = initdata.accounts[self.market.base_currency].balance
@@ -265,7 +269,6 @@ export default {
           self.sn = initdata.current_user.sn
         }
         self.isDisabled = false
-        console.log(initdata)
       })
     },
     getRefresh: function (sn) {

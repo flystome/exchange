@@ -513,9 +513,9 @@ const en = {
     },
     "markets":{
       "volume": "Volume",
-      "coinAndVolumn": "币种/成交量",
+      "coinAndVolumn": "Pair/Vol",
       "newPrice": "Price",
-      "change": "涨跌幅",
+      "change": "Change",
       "quotes": "Quotes",
       "trade": "Trade",
       "currency": "Open Orders",
