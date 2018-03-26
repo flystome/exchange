@@ -157,7 +157,7 @@ export default {
       market: {},
       sellList: [],
       buyList: [],
-      isDisabled: false,
+      isDisabled: true,
       status: false,
       sn: '',
       showDialog: false,
@@ -259,7 +259,13 @@ export default {
           self.extra_base = initdata.accounts[self.market.base_currency].balance
           self.extra_quote = initdata.accounts[self.market.quote_currency].balance
         }
-        console.log(self.ticker)
+        if (!initdata.current_user) {
+          self.sn = 'unlogin'
+        } else {
+          self.sn = initdata.current_user.sn
+        }
+        self.isDisabled = false
+        console.log(initdata)
       })
     },
     getRefresh: function (sn) {
@@ -349,7 +355,8 @@ export default {
       }
     },
     loginCheck: function () {
-      if (!this.sn) {
+      if (this.sn === 'unlogin') {
+        console.log(111)
         location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
       }
     },
@@ -361,6 +368,7 @@ export default {
       this.isDisabled = true
     },
     orderAsk: function () {
+      this.loginCheck()
       if (!this.price || this.price === 0) return ''
       if (!this.amount_sell || this.amount_sell === 0) return ''
       this.showDialog = true

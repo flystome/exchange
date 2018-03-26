@@ -19,7 +19,7 @@ export default {
   data () {
     return {
       hds: [this.$t('markets.favorite'), 'btc', 'usdt'],
-      currencyindex: 0,
+      currencyindex: 1,
       marketData: null,
       curData: []
     }
