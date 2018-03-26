@@ -113,7 +113,7 @@ export default {
     },
     getLocal: function (data) {
       var localList = localStorage.getItem('markets')
-      if (localList.length === 0) {
+      if (!localList || localList.length === 0) {
         return ''
       }
       var arr = []

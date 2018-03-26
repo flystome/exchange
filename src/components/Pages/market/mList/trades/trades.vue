@@ -111,7 +111,7 @@
       <div class="trades_rt">
         <div class="currency_price">
           <router-link class="back" :to="{path: ROUTER_VERSION + '/markets/' + curMarket}"><img src="~Img/candle.jpg"></router-link>
-          <span>{{ticker.last | fixedNum(market.price_fixed)}}</span>
+          <span :class="{'text-up': ticker.last > ticker.open, 'text-down': ticker.last< ticker.open}">{{ticker.last | fixedNum(market.price_fixed)}}</span>
         </div>
         <div class="trades_list">
           <div class="head clearfix">
@@ -213,14 +213,15 @@ export default {
     },
     amount_buy: function (val, oldValue) {
       if (this.price && this.price !== 0) {
-        if (this.extra_base < val * this.price || this.amount_buy.length > 16) {
+        var len = (this.amount_buy).toString().split('.')[1]
+        if (this.extra_base < val * this.price || (len && len.length > 8)) {
           val = this.extra_base / this.price
           this.amount_buy = Math.floor(Math.pow(10, 8) * val) / Math.pow(10, 8)
         }
       }
     },
     amount_sell: function (val, oldValue) {
-      if (+val > this.extra_quote || this.amount_sell.length > 16) {
+      if (+val > this.extra_quote || (this.amount_sell).toString().split('.')[1].length > 8) {
         val = this.extra_quote
         this.amount_sell = val
       }
@@ -251,13 +252,14 @@ export default {
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
         self.ticker = initdata.ticker
-        self.sellList = initdata.asks.slice(-8, 8)
+        self.sellList = initdata.asks.slice(-8, 8).reverse()
         self.buyList = initdata.bids.slice(0, 8)
         self.market = initdata.market
-        self.extra_base = initdata.accounts[self.market.base_currency].balance
-        self.extra_quote = initdata.accounts[self.market.quote_currency].balance
-        self.sellList = self.sellList.reverse()
-        console.log(initdata)
+        if (initdata.accounts) {
+          self.extra_base = initdata.accounts[self.market.base_currency].balance
+          self.extra_quote = initdata.accounts[self.market.quote_currency].balance
+        }
+        console.log(self.ticker)
       })
     },
     getRefresh: function (sn) {
@@ -289,7 +291,10 @@ export default {
     setTrade: function (per) {
       if (this.price && this.price !== 0) {
         if (this.order_type === 'buy') {
-          this.amount_buy = this.extra_base * per / (this.price * 100)
+          var vaule = this.extra_base * per / (this.price * 100)
+          if (vaule.toString().split('.')[1] > 8) {
+            this.amount_buy = Math.floor(vaule * Math.pow(10, 8)) / Math.pow(10, 8)
+          }
         }
         if (this.order_type === 'sell') {
           this.amount_sell = this.extra_base * per / 100
@@ -343,7 +348,13 @@ export default {
         this.status = 'fail'
       }
     },
+    loginCheck: function () {
+      if (!this.sn) {
+        location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
+      }
+    },
     orderBid: function () {
+      this.loginCheck()
       if (!this.price || this.price === 0) return ''
       if (!this.amount_buy || this.amount_buy === 0) return ''
       this.showDialog = true

@@ -1,6 +1,6 @@
 import { _get } from '../axios'
 import Cookies from 'js-cookie'
-const unLogin = ['HomePage']
+const unLogin = ['HomePage', 'Markets', 'MarketDetail', 'Trades']
 
 const actions = {
   getData ({ commit, state }) {
@@ -11,7 +11,7 @@ const actions = {
       }
     }, (d) => {
       if (unLogin.includes(state.route.name)) {
-        if (!d.error) commit('getData', d)
+        if (d && !d.error) commit('getData', d)
         return
       }
       if (d.error) {

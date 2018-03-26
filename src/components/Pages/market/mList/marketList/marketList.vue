@@ -13,7 +13,7 @@
           <div class="vol"><span>{{$t('markets.volume')}}</span>{{item.volume | fixedNum(item.volume_fixed)}}</div>
         </div>
         <div class="list-price">
-          <div class="price">{{item.last | fixedNum(item.price_fixed)}}</div>
+          <div class="price" :class="{'up': item.trend == 'up' , 'down': item.trend == 'down'}">{{item.last | fixedNum(item.price_fixed)}}</div>
           <div class="val">${{item.legal_worth | fixedNum(item.price_fixed)}}</div>
         </div>
         <div class="list-btn">
@@ -44,19 +44,12 @@ export default {
   },
   filters: {
     fixed2: function (params) {
-      return params.toFixed(2)
+      if (+params <= 0 || !params) return 0
+      return (+params).toFixed(2)
     },
     upper: function (params) {
+      if (!params) return '--'
       return params.toUpperCase()
-    },
-    fixed4: function (params) {
-      if (+params === 0 || !params) return 0
-      var len = +params.toString().split('.')[0].length
-      if (len > 1) {
-        return (+params).toFixed(2)
-      } else {
-        return (+params).toPrecision(4)
-      }
     },
     fixedNum: function (params, num, num2) {
       if (+params <= 0 || !params) return 0
@@ -74,6 +67,23 @@ export default {
       if (!val) {
         this.oldData = []
       } else {
+        console.log(val, this.oldData)
+        for (var i in val) {
+          for (var j in oldVal) {
+            if (val[i]['name'] === this.oldData[j]['name']) {
+              if (+val[i]['last'] > +this.oldData[j]['last']) {
+                console.log(1)
+                val[i]['trend'] = 'up'
+              } else if (+val[i]['last'] < +this.oldData[j]['last']) {
+                val[i]['trend'] = 'down'
+                console.log(2)
+              } else {
+                val[i]['trend'] = ''
+                console.log(3)
+              }
+            }
+          }
+        }
         this.oldData = JSON.parse(JSON.stringify(val))
       }
       this.times = 0
