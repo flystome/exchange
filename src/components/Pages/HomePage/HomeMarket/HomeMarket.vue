@@ -6,9 +6,9 @@
           <th>{{ $t('homepage.currency') }}</th>
           <th v-for="(item, index) in heads" :key="item" @click="sortList(index)">
             {{$t(`homepage.${item}`)}}{{index !==3 ? `(${currency})` : "" | toUpperCase}}
-            <img v-if="times == 0 && currencyIndex == index" src="~Img/both.png" alt="">
-            <img v-else-if="times == 1 && currencyIndex == index" src="~Img/up.png" alt="">
-            <img v-else-if="times == 2 && currencyIndex == index" src="~Img/down.png" alt="">
+            <img v-if="times == 0 && currencyIndex == index" src="~Img/both.png">
+            <img v-else-if="times == 1 && currencyIndex == index" src="~Img/up.png">
+            <img v-else-if="times == 2 && currencyIndex == index" src="~Img/down.png">
           </th>
           <th>{{ $t('homepage.price_trend') }}</th>
         </tr>
@@ -24,19 +24,18 @@
             <span>{{ item.last }}<span style="color:#999">/${{ item.legal_worth }}</span></span>
           </td>
           <td>{{ item.volume }}</td>
-          <td>{{ (item.volume * item.last).toFixed(2) }}</td>
+          <td>{{ (Number(item.volume) * Number(item.last)).toFixed(2) }}</td>
           <td class="btc-percent" style="color:#fff">
-            <div v-if="item.percent>0"><span style="background:#fd4041">+{{ item.percent.toFixed(2) }}%</span></div>
-            <div v-else-if="item.percent<0"><span style="background:#00c4a2">{{ item.percent.toFixed(2) }}%</span></div>
-            <div v-else><span style="background:#999999">+{{ item.percent.toFixed(2) }}</span></div>
+            <div v-if="Number(item.percent) > 0"><span style="background:#fd4041">+{{ Number(item.percent).toFixed(2) }}%</span></div>
+            <div v-else-if="Number(item.percent) < 0"><span style="background:#00c4a2">{{ Number(item.percent).toFixed(2) }}%</span></div>
+            <div v-else><span style="background:#999999">+{{ Number(item.percent).toFixed(2) }}</span></div>
           </td>
           <td style="max-width: 165px;">
             <trend
-              viewBox="0 0 420 75"
-              :data="[0,0]"
+              viewBox="40 0 420 75"
+              :data="trend[`${item.quote_currency}${item.base_currency}`]"
               :gradient="['black']"
-              auto-draw
-              smooth>
+              >
             </trend>
           </td>
         </tr>
@@ -51,7 +50,7 @@
 <script>
 export default {
   name: 'home-market',
-  props: ['curData', 'currency', 'search'],
+  props: ['curData', 'currency', 'search', 'trend'],
   data () {
     return {
       oldData: null,

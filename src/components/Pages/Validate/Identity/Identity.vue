@@ -35,13 +35,13 @@
         </div>
         <div class="btc-marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
-            <basic-input ref='first_name' :placeholder='$t("validate_identity.surname")' :validate='"First Name"' v-model="user.first_name"></basic-input>
+            <basic-input style="min-height:66px"  ref='first_name' :placeholder='$t("validate_identity.surname")' :validate='"First Name"' v-model="user.first_name"></basic-input>
           <!--<div class=" btc-marginT20">-->
             <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
             <!--<basic-input  v-model="user.name"></basic-input>-->
           <!--</div>-->
-            <basic-input ref='last_name' :placeholder='$t("validate_identity.name")' :validate='"Last Name"'  v-model="user.last_name"></basic-input>
-            <basic-input ref="IdCard"  :placeholder='$t("validate_identity.valid_id_card")' :validate='"IdCard"'  v-model="user.IdCard"></basic-input>
+            <basic-input style="min-height:66px"  ref='last_name' :placeholder='$t("validate_identity.name")' :validate='"Last Name"'  v-model="user.last_name"></basic-input>
+            <basic-input style="min-height:66px"  ref="IdCard"  :placeholder='$t("validate_identity.valid_id_card")' :validate='"IdCard"'  v-model="user.IdCard"></basic-input>
         </div>
       </div>
     </div>
@@ -193,10 +193,19 @@ export default {
 
       var timer = ''
       this.PopupBoxDisplay({type: 'loading', message: this.$t('validate_identity.uploading_photos')})
-       this.ChangePopupBox({buttondisplay: false})
+      this.ChangePopupBox({buttondisplay: false})
       timer = setTimeout(() => {
-
-      }, 1000)
+        this.ChangePopupBox({
+          message: this.$t('hint.server_exception'),
+          type: 'error'
+        })
+        setTimeout(() => {
+          this.PopupBoxDisplay()
+          this.ChangePopupBox({
+            buttondisplay: true
+          })
+        }, 1000)
+      }, 10000)
       var formData = new FormData()
       var z = this.objectToFormData({
         first_name: this.user.first_name,
@@ -225,9 +234,11 @@ export default {
       }, d => {
         if (d.data.success) {
           this.disabled = false
+          clearTimeout(timer)
           this.ChangePopupBox({message: this.$t('api_server.validate_identity.success_200'), url: '/', type: 'success', buttondisplay: true})
           this.$store.dispatch('getData')
         } else {
+          clearTimeout(timer)
           this.ChangePopupBox({message: this.$t('api_server.validate_identity.error_1001'), type: 'error', buttondisplay: true})
         }
       })

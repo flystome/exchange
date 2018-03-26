@@ -1,48 +1,40 @@
 import zh_TW from 'vee-validate/dist/locale/zh_TW'
 import en from 'vee-validate/dist/locale/en'
 import { Validator } from 'vee-validate'
+import i18n from '@/common/js/i18n/i18n.js'
 
 const dictionary = {
   'zh-TW': zh_TW,
-  en
+  en: en
 }
+Validator.localize(dictionary)
 
-Validator.extend = function extend (name, validator, options) {
-  if ( options === void 0 ) options = {}
-  if (Object.prototype.toString.call(name) === '[object Array]') {
-    name.forEach((d) => {
-      Validator._guardExtend(d, validator)
-      Validator._merge(d, validator)
-      if (options && options.hasTarget) {
-        TARGET_RULES.push(d)
-      }
-    })
-  }
-Validator._guardExtend(name, validator)
-Validator._merge(name, validator)
-  if (options && options.hasTarget) {
-    TARGET_RULES.push(name)
-  }
-}
+var empty = ['First Name', 'verify_code', 'password', 'Last Name', 'IdCard', 'CellPhone', 'google_verify_code']
 
-var empty = ['First Name', 'verify code', 'password', 'Last Name', 'IdCard', 'CellPhone']
+empty.forEach(d => {
+  Validator.extend(d, {
+    getMessage: (field, params, data) => {
+      return (data && data.validation) || 'Something went wrong'
+    },
+    validate: value => {
+      return /\S+/.test(value)
+    }
+  })
+})
 
-// Validator.extend('CellPhone', {
-//   getMessage: (field, params, data) => {
-//     return (data && data.validation) || 'Something went wrong'
-//   },
-//   validate: value => {
-//     return /\d+/.test(value)
-//   }
-// })
-
-Validator.extend(empty, {
+Validator.extend('aa', {
   getMessage: (field, params, data) => {
     return (data && data.validation) || 'Something went wrong'
   },
-  validate: value => {
-    return /\S+/.test(value)
-  }
+  validate: value => false
+})
+
+
+Validator.extend('bb', {
+  getMessage: (field, params, data) => {
+    return (data && data.validation) || 'Something went wrong'
+  },
+  validate: value => false
 })
 
 // Validator.extend('IdCard', {

@@ -159,6 +159,9 @@ router.beforeEach((to, from, next) => {
   } else {
     store.commit('redirect', 1)
   }
+  if (store.state.marketData === '') {
+    store.dispatch('GetMarketData')
+  }
   next()
 })
 

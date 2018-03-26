@@ -196,6 +196,24 @@
   }
 }
 
+.btc-market{
+  top: 0!important;
+  ul{
+    width: 314px!important;
+    cursor: initial;
+    li{
+      display: block;
+      padding: 4px;
+      width: 100px;
+      float: left;
+      cursor: pointer;
+      &:hover{
+        color: #417dee;
+      }
+    }
+  }
+}
+
 @media(max-width: 764px){
   .navbar-header{
     margin-left: 15px;

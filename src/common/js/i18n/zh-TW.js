@@ -304,9 +304,6 @@ const zh = {
     'code': `代碼`,
     'turnover': `成交額`
   },
-  'validation': {
-    "mobile": '阿'
-  },
   "markets":{
     "volume": "成交量",
     "coinAndVolumn": "币种/成交量",
@@ -467,7 +464,8 @@ const zh = {
     "resend": "重發",
     "temporarily_can_not_withdraw": "暫時不能提取",
     "canceled": "已取消",
-    "submitting": "提交中",
+    "email_expired": "郵件過期",
+    "submitting": "待確認",
     "submitted": "已提交",
     "accepted": "已接受",
     "suspect": "資產異常",
@@ -478,7 +476,8 @@ const zh = {
     "failed": "失敗",
     "node_audited": "節點已審核",
     "google": "谷歌",
-    "sms": "手機"
+    "sms": "手機",
+    "poundage": "手續費"
   },
   "deposit_currency": {
     "deposit_address": "地址",
@@ -578,7 +577,8 @@ const zh = {
       "create_withdraw_1007": "帳戶餘額不足",
       "create_withdraw_1008": "金額不能為空",
       "create_withdraw_1009": "驗證碼錯誤",
-      "create_withdraw_1010": "未創建資產帳戶"
+      "create_withdraw_1010": "未創建資產帳戶",
+      "create_withdraw_1011": "金額不够支付費用"
     },
     "validate_sms": {
       "send_code_1002": "電話號碼無效",
@@ -613,34 +613,38 @@ const zh = {
     "language": "語言"
   },
   "homepage": {
-    "banner_describe1": "",
-    "banner_describe2": "",
-    "login": "",
-    "free_registration": "",
-    "enter_the_mailbox": "",
-    "enter_the_password": "",
-    "forget_the_password": "",
-    "welcome_to_use": "",
-    "discount": "",
-    "discounts_of_transaction_costs": "",
-    "total_asset_estimation": "",
-    "withdraw": "",
-    "deposit": "",
-    "trading_area": "",
-    "search": "",
-    "trading_platform": "",
-    "contact_us": "",
-    "exchange_rate_details": "",
-    "apply_to_list": "",
-    "privacy_clause": "",
-    "transaction_describe": "",
-    "currency": "",
-    "price_trend": "",
-    "no_matching_currency": "",
-    "price": "",
-    "volume": "",
-    "turnover": "",
-    "day_highs_and_lows": ""
+    "banner_describe1": "權威透明的數字資產交易平台",
+    "banner_describe2": "提供最佳的投資渠道",
+    "login": "登陸",
+    "free_registration": "免費註冊",
+    "enter_the_mailbox": "輸入登陸賬號",
+    "enter_the_password": "輸入登陸密碼",
+    "forget_the_password": "忘記密碼",
+    "welcome_to_use": "歡迎使用",
+    "discount": "折",
+    "discounts_of_transaction_costs": "交易费折扣",
+    "total_asset_estimation": "資產總估",
+    "withdraw": "提幣",
+    "deposit": "充值",
+    "trading_area": "貿易區",
+    "search": "搜索",
+    "trading_platform": "權威化透明化的數位資產交易平臺",
+    "contact_us": "聯繫我們",
+    "exchange_rate_details": "匯率詳情",
+    "apply_to_list": "上幣申請",
+    "privacy_clause": "隱私條款",
+    "transaction_describe": "數字密碼幣的交易存在風險。在全球範圍內一周7天，一天24小時，一年365天無休止交易，沒有每日漲停跌停限制。價格受各國政策，市場等因素影響。我們強烈建議您事先進行調查，以便在您再自身所能承擔的風險範圍內參與交易。",
+    "currency": "幣種",
+    "price_trend": "價格趨勢",
+    "no_matching_currency": "無貨幣匹配",
+    "price": "價格",
+    "volume": "交易量",
+    "turnover": "總市值",
+    "day_highs_and_lows": "日跌漲",
+    "my_optional": "我的自選"
+  },
+  "aaaa": {
+    "verify_code": '驗證碼'
   }
 }
 

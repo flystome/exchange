@@ -28,11 +28,11 @@
             <form>
               <span>{{ $t('homepage.login') }}HotEx</span>
               <basic-input :validate='"email"' :placeholder="this.$t('homepage.enter_the_mailbox')" class="btc-input"></basic-input>
-              <basic-input type="password" :placeholder="this.$t('homepage.enter_the_password')" class="btc-input"></basic-input>
+              <basic-input :validate='"password"' :placeholder="this.$t('homepage.enter_the_mailbox')" class="btc-input"></basic-input>
               <basic-button class="btc-button" :text="this.$t('homepage.login')"></basic-button>
               <div>
                 <a :href="`${HOST_URL}/signup`">{{ $t('homepage.free_registration') }}</a>
-                <a target="_blank" class="pull-right">{{ $t('homepage.forget_the_password') }}</a>
+                <a :class='{"pull-right": language !=="en", "btc-homepage-block": language!=="zh-TW"}' class="btc-pointer">{{ $t('homepage.forget_the_password') }}</a>
               </div>
             </form>
           </div>
@@ -63,12 +63,12 @@
     <div class="container btc-homepage-main">
       <div class="btc-homepage-markets btc-marginT30">
         <basic-button v-for="(item,index) in currency" :data-id="item" :key="item" class="btc-button pull-left" :class="{'btc-active':!(currencyindex == index)}"
-        @click.native="changemarket(index,item)" :text="`${item.toUpperCase()} ${$t('homepage.trading_area')}`"></basic-button>
+        @click.native="changemarket(index,item)" :text="item === 'my_optional' ? $t('homepage.my_optional') : `${item.toUpperCase()} ${$t('homepage.trading_area')}`"></basic-button>
         <div class="btc-homepage-search btc-fr btc-b">
           <input v-model="search" class="btc-search" :placeholder='$t("homepage.search")' />
           <img src="~Img/search.png" >
         </div>
-        <HomeMarket :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]"></HomeMarket>
+        <HomeMarket :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]"></HomeMarket>
       </div>
       <div class="btc-homepage-logo text-center">
         <img src="~Img/logo.png" >
@@ -111,7 +111,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import HomeMarket from './HomeMarket/HomeMarket'
 export default {
   name: 'homepage',
@@ -120,13 +120,14 @@ export default {
       url: '/home/funds.json'
     }, (d) => {
       d = d.data.success
+      if (!d.commission_level) return
       this.factor = d.commission_level.factor * 10
       this.btc_worth = Number(d.total_assets.btc_worth).toFixed(2)
     })
     this._get({
       url: '/k/trends/trends.json'
     }, (d) => {
-      this.trend = d.data.success
+      this.trend = d.data
     })
   },
   data () {
@@ -138,7 +139,7 @@ export default {
       currencyindex: 0,
       search: '',
       open: true,
-      currency: ['usdt', 'btc', 'eth'],
+      currency: ['usdt', 'btc', 'eth', 'my_optional'],
       getetc: '',
       change: 'no',
       curData: []
@@ -147,31 +148,12 @@ export default {
   components: {
     HomeMarket
   },
-  mounted: function () {
-    this.getdata()
-  },
   methods: {
     displaystate () {
       this.open = !this.open
     },
     requireImg (img) {
       return require(`../../../../static/img/${img}.png`)
-    },
-    getdata (type) {
-      var self = this
-      this._get({ url: '/home.json',
-        headers: {
-          'DataType': 'application/json;charset=utf-8'
-        }}, (data) => {
-        var getdata = JSON.parse(data.request.response)
-        self.getCurData(getdata.success)
-      })
-    },
-    getCurData: function (data) {
-      this.curData = []
-      this.curData.push(this.getItem(data['usdt']))
-      this.curData.push(this.getItem(data['btc']))
-      this.curData.push(this.getItem(data['eth']))
     },
     getItem: function (data) {
       var arr = []
@@ -197,8 +179,20 @@ export default {
       }
     }
   },
+  watch: {
+    marketData () {
+      if (this.marketData) {
+        this.curData = []
+        this.curData.push(this.getItem(this.marketData['usdt']))
+        this.curData.push(this.getItem(this.marketData['btc']))
+        this.curData.push(this.getItem(this.marketData['eth']))
+        console.log(this.marketData)
+      }
+    }
+  },
   computed: {
-    ...mapGetters(['loginData'])
+    ...mapGetters(['loginData']),
+    ...mapState(['marketData', 'language'])
   }
 }
 </script>

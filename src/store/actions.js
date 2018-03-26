@@ -12,6 +12,7 @@ const actions = {
     }, (d) => {
       if (unLogin.includes(state.route.name)) {
         if (!d.error) commit('getData', d)
+        commit('redirect')
         return
       }
       if (d.error) {
@@ -24,6 +25,13 @@ const actions = {
   },
   redirect ({ commit, state }) {
     commit('redirect')
+  },
+  GetMarketData ({ commit, state }) {
+    _get({
+      url: '/home.json'
+    }, (d) => {
+      commit('GetMarketData', d.data.success)
+    })
   }
 }
 

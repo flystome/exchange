@@ -22,21 +22,21 @@
           </li>
         </ul>
       </div>
-        <basic-input :validate='"CellPhone"' ref="cellphone" :placeholder='$t("placeholder.cell_phone_number")' v-model="SmsData.CellPhone">
+        <basic-input style="min-height:66px" :validate='"CellPhone"' ref="cellphone" :placeholder='$t("placeholder.cell_phone_number")' v-model="SmsData.CellPhone">
         </basic-input>
       </div>
       <div class="btc-sms-code">
-        <basic-input :validate='"verify code"' ref="verifiycode" :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
+        <basic-input  style="min-height:66px" :validate='"verify_code"' ref="verifiycode" :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
         </basic-input>
         <button :disabled="disabled" class="btc-white-btn" @click="SendSms">
           {{ timer }}
         </button>
       </div>
       <div class="btc-sms-google btc-marginB30" v-if="loginData.app_activated">
-        <basic-input :placeholder='$t("validate_sms.google_verification_code")' :validate='"verify code"' ref="googlecode" v-model="SmsData.googlecode">
+        <basic-input  style="min-height:66px"  :placeholder='$t("validate_sms.google_verification_code")' :validate='"google_verify_code"' ref="googlecode" v-model="SmsData.googlecode">
         </basic-input>
       </div>
-      <basic-button @click.native.enter.stop="Validate" style='width:100%' :text='$t("validate_sms.confirm")'>
+      <basic-button  @click.native.enter.stop="Validate" style='width:100%' :text='$t("validate_sms.confirm")'>
       </basic-button>
     </div>
   </div>

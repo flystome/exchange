@@ -19,8 +19,6 @@ const createLintingRule = () => ({
   }
 })
 
-console.log(process.env.NODE_ENV)
-
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {

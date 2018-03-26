@@ -184,11 +184,11 @@ export default {
       step: 1,
       disabled: false,
       getRecommendCount: {
-        captionTitle: this.$t('my_account.recommended_statistics'),
+        captionTitle: 'my_account.recommended_statistics',
         Item: []
       },
       getRecommendUser: {
-        captionTitle: this.$t('my_account.recommended_users'),
+        captionTitle: 'my_account.recommended_users',
         Item: []
       },
       httplock: false
@@ -208,7 +208,7 @@ export default {
         var data = d.data
 
         var obj = {
-          captionTitle: this.$t('my_account.recommended_statistics'),
+          captionTitle: 'my_account.recommended_statistics',
           Item: ''
         }
         if (data.referral_datas) {
@@ -230,7 +230,7 @@ export default {
         this.getRecommendCount = obj
 
         var obj1 = {
-          captionTitle: this.$t('my_account.recommended_users'),
+          captionTitle: 'my_account.recommended_users',
           Item: ''
         }
         if (data.referral_datas) {
@@ -346,7 +346,7 @@ export default {
     getLoginRecord () {
       var data = this.loginData.recent_signin_histories
       var obj = {
-        captionTitle: this.$t('my_account.login_record'),
+        captionTitle: 'my_account.login_record',
         Item: ''
       }
       if (data) {

@@ -48,7 +48,7 @@
         <div class="col-md-6">
           <div class="col-md-6 text-center">
             <div class='row'>
-              <qr-code :length='"120px"' :dateUrl="qrcode(loginData.google_uri)"></qr-code>
+              <qr-code :length='"160px"' :dateUrl="qrcode(loginData.google_uri)"></qr-code>
             </div>
             <div class="row btc-marginT15 btc-margin-left useGoogle">
               {{$t('validate_google.using')}}
@@ -81,14 +81,14 @@
               <news-prompt :text='prompt'></news-prompt>
             </div>
             <div class='row'>
-              <basic-input @focus.native="promptEmpty()" type='password' ref="password" :validate="'password'" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
+              <basic-input style="min-height:66px"  @focus.native="promptEmpty()" type='password' ref="password" :validate="'password'" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
             </div>
             <div class="row">
-              <basic-input  @focus.native="promptEmpty()" ref="verfiycode" :validate='"verify code"' class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
+              <basic-input style="min-height:66px"  @focus.native="promptEmpty()" ref="verfiycode" :validate='"verify code"' class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
             </div>
             <div class="row" v-if="loginData.sms_activated">
               <div class="col-md-offset-2 col-md-9 col-xs-12">
-                <basic-input class="col-md-9 col-xs-9 btc-paddingL0" @focus.native="promptEmpty()" ref="smscode" :validate='"verify code"' :placeholder='$t("validate_sms.verification_code")' v-model="sms_code">
+                <basic-input  style="min-height:66px" class="col-md-9 col-xs-9 btc-paddingL0" @focus.native="promptEmpty()" ref="smscode" :validate='"verify code"' :placeholder='$t("validate_sms.verification_code")' v-model="sms_code">
                 </basic-input>
                 <button class="btc-white-btn col-md-3 col-xs-3" :disabled="disabled" @click.prevent="SendSms">
                   {{ timer }}

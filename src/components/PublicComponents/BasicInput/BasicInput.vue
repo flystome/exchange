@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!hidden" style="min-height: 66px;">
+  <!-- <div v-if="!hidden" style="min-height: 66px;">
     <input v-validate="`required|${validate}`" class="btc-basicInput btc-b"
     :class="{'input': true, 'is-danger': errors.has(validate) }"
     :name="validate"
@@ -15,6 +15,18 @@
     :value='value'
      @input="$emit('input', $event.target.value)">
      <slot name='button'></slot>
+  </div> -->
+  <div>
+    <input v-validate="validate ? `required|${validate}` : ''"
+    :class="{'input': true, 'is-danger':
+    errors.has(`${validate}`) }"
+    :value='value'
+    :type="type ? type : 'text'"
+    :name="`${validate}`"
+    class="btc-basicInput btc-b"
+    :placeholder='placeholder'
+    @input="$emit('input', $event.target.value)">
+    <span v-show="errors.has(`${validate}`)" class="help is-danger">{{ errors.first(`${validate}`) }}</span>
   </div>
 </template>
 

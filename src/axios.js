@@ -29,6 +29,7 @@ export const _post = async ({url, data, headers}, callback) => {
 }
 
 export const _get = async ({url, data, headers}, callback) => {
+  var lock = false
   const ajax = await axios({
     method: 'get',
     url: requestUrl + url,
@@ -36,9 +37,10 @@ export const _get = async ({url, data, headers}, callback) => {
   }).catch(error => {
     if (/settings\/member/.test(url)) {
       callback({error: 'login error'})
-      return
     }
+    lock = true
   })
+  if (lock) return
   if (callback) {
     callback(ajax)
   }

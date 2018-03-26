@@ -2,7 +2,7 @@
   <div class="btc-table-container">
     <div class="bs-example btc-table" data-example-id="simple-table">
       <table class="table table-condensed">
-        <caption class="font-w"><strong>{{captionTitle}}</strong>
+        <caption class="font-w"><strong>{{ perfix ? perfix : '' }} {{$t(captionTitle)}}</strong>
           <slot name='remark'></slot>
         </caption>
         <tbody v-if="item.length > 1">
@@ -18,7 +18,7 @@
             <slot v-if='data.hover' name="href"
             :data='data'>
             </slot>
-            <slot v-if="(Object.prototype.toString.call(data) === '[object Object]' && data.type && data.type['aasm_state']) === ('submitting' || 'submitted' || 'accepted') "
+            <slot v-if="(Object.prototype.toString.call(data) === '[object Object]' && data.type && data.type['aasm_state']) === ('submitting' || 'submitted' || 'accepted' || 'email_expired') "
             name="cancel"
             :data='data'
             :id='data.id'>
@@ -40,7 +40,7 @@
 <script>
 export default {
   name: 'BasicTable',
-  props: ['captionTitle', 'item'],
+  props: ['captionTitle', 'item', 'perfix'],
   methods: {
     toPercent () {
       var str = Number(1 / this.item[0].content.length * 100)

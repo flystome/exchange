@@ -10,9 +10,10 @@
  & > div {
     background: #12171e;
     color: white;
-    position: absolute;
+    position: fixed;
     height: 100%;
     width: 73.4%;
+    overflow: auto;
     z-index: 100;
     font-size: 15px;
     padding-top: 2.7%;

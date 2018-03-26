@@ -12,6 +12,22 @@
               {{ $t('side_slip_menu.asset_management') }}
             </span>
           </li>
+          <li>
+            <div @click="market = !market">
+              <img src='~Img/sideslip-market.png'> {{$t('nav.transaction')}}
+              <span class="btc-fr btc-marginR20">
+                <img v-if="market" src="~Img/triangle-down.png">
+                <img v-else src="~Img/triangle-up.png">
+              </span>
+            </div>
+            <ul v-if="market" class="btc-marginT60 btc-marginL30">
+               <li v-for="d in marketData" :key="Object.keys(d)[0]">
+                  <a :href="`${HOST_URL}/markets/${Object.keys(d)[0]}`">
+                    {{ d[Object.keys(d)[0]].name }}
+                  </a>
+                </li>
+            </ul>
+          </li>
           <li class='btc-paddingB0'>
             <div @click="Consulting = !Consulting">
               <img src='~Img/sideslip-consulting.png'> {{ $t('side_slip_menu.consulting_center') }}
@@ -61,7 +77,8 @@
 <script>
 import {
   mapState,
-  mapMutations
+  mapMutations,
+  mapGetters
 } from 'vuex'
 export default {
   name: 'SideSlipMenu',
@@ -71,6 +88,8 @@ export default {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       Consulting: false,
       Lang: false,
+      market: false,
+      markList: [],
       locale: [{
         language: 'zh-TW',
         name: '正體中文'
@@ -110,7 +129,10 @@ export default {
     },
     ...mapMutations(['SideSlipMenuDisplay', 'ChangeLanguage'])
   },
-  computed: mapState(['SideSlipMenu', 'loginData'])
+  computed: {
+    ...mapState(['SideSlipMenu', 'loginData']),
+    ...mapGetters(['marketData'])
+  }
 }
 </script>
 <style lang='scss' scoped>

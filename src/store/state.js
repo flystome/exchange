@@ -14,7 +14,8 @@ const state = {
   language: Cookies.get('locale') ? Cookies.get('locale') : 'en',
   DepositAddress: {
   },
-  SideSlipMenu: false
+  SideSlipMenu: false,
+  marketData: ''
 }
 
 export default state

@@ -26,7 +26,7 @@ import store from './store'
 import router from './router'
 import moment from 'moment'
 import dictionary from '@/common/js/validation'
-import VeeValidate, { Validator } from 'vee-validate'
+import VeeValidate from 'vee-validate'
 import i18n from '@/common/js/i18n/i18n.js'
 import axios from 'axios'
 import { _post, _get, _delete } from './axios'
@@ -40,7 +40,6 @@ Vue.use(VeeValidate, {
   i18nRootKey: 'validation',
   dictionary: dictionary
 })
-Validator.localize(dictionary)
 
 Vue.use(Trend)
 

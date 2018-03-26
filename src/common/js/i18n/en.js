@@ -202,7 +202,7 @@ const en = {
         "rejected": "Rejected",
         "checked": "Checked",
         "warning": "Warning",
-        "suspect": "Suspect"
+        "suspect": "Suspect",
       },
       "withdraw_cny": {
         "title": "Chinese Yuan Withdraw",
@@ -447,9 +447,11 @@ const en = {
       "almost_done": "Almost Done",
       "done": "Done",
       "failed": "Failed",
+      "email_expired": "Email Expired",
       "node_audited": "Node Audited",
       "google": "Google ",
-      "sms": "SMS "
+      "sms": "SMS ",
+      "poundage": "Poundage"
     },
     "deposit_currency": {
       "deposit_address": "Address",
@@ -588,7 +590,8 @@ const en = {
         "create_withdraw_1007": "Account balance is insufficient",
         "create_withdraw_1008": "Amount Can not be empty",
         "create_withdraw_1009": "Verification code error",
-        "create_withdraw_1010": "Assets account not created"
+        "create_withdraw_1010": "Assets account not created",
+        "create_withdraw_1011": "Amount not enough to pay fee"
       },
       "validate_sms": {
         "send_code_1002": "Phone number is invalid",
@@ -620,7 +623,7 @@ const en = {
       "announcement": "Announcement",
       "news": "News",
       "my_account": "My Account",
-      "language": "Language"
+      "language": "Language",
     },
     "homepage": {
       "banner_describe1": "Online quality block chain project",
@@ -650,7 +653,11 @@ const en = {
       "price": "Price",
       "volume": "Volume",
       "turnover": "Turnover",
-      "day_highs_and_lows": "Day Highs And Lows"
+      "day_highs_and_lows": "Day Highs And Lows",
+      "my_optional": "My Optional",
+    },
+    "validation": {
+      "verify_code": 'verify code'
     }
   }
 }

@@ -16,9 +16,9 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  create () {
-    this.$store.dispatch('getData')
-  },
+  // create () {
+  //   this.$store.dispatch('getData')
+  // },
   data () {
     return {
       error: '',

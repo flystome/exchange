@@ -109,6 +109,11 @@ const mutations = {
   SideSlipMenuDisplay (state, type) {
     state.SideSlipMenu = type
   },
+  GetMarketData (state, data) {
+    delete data.current_user
+    delete data.code
+    state.marketData = data
+  } 
 }
 
 export default mutations

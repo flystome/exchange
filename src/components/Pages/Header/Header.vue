@@ -18,7 +18,22 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="z-index:100">
           <ul class="nav navbar-nav">
             <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.home')}} <span class="sr-only">(current)</span></a></li>
-            <li class="btc-link"><a :href="`${HOST_URL}/markets/ethbtc`">{{$t('nav.transaction')}}</a></li>
+            <li role="presentation" class="dropdown btc-country btc-market btc-img-position">
+              <a class="dropdown-toggle btc-paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <span>{{$t('nav.transaction')}}</span><span class="caret">
+                </span>
+              </a>
+              <ul class="dropdown-menu text-center">
+                <!-- <li>123</li>
+                <li>123</li>
+                <li>123</li> -->
+                <li v-for="d in markList" :key="Object.keys(d)[0]">
+                  <a :href="`${HOST_URL}/markets/${Object.keys(d)[0]}`">
+                    {{ d[Object.keys(d)[0]].name }}
+                  </a>
+                </li>
+              </ul>
+            </li>
             <li class="btc-link"><a @click="validateEmail">{{$t('nav.wallet')}}</a></li>
             <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.announcement')}}</a></li>
             <li class="btc-link"><a :href="`${HOST_URL}/`">{{$t('nav.qa')}}</a></li>
@@ -46,7 +61,7 @@
                 <li><a :href="`${HOST_URL}/signout`">{{$t('nav.exit')}}</a></li>
               </ul>
             </li>
-            <li role="presentation" class="dropdown btc-country btc-img-position">
+            <!-- <li role="presentation" class="dropdown btc-country btc-img-position">
               <a class="dropdown-toggle btc-paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <span>{{getLanguage.name}}</span><span class="caret">
                 </span>
@@ -56,7 +71,7 @@
                   <a @click="changeLang(locale.language, index + 1)">{{locale.name}}</a>
                 </li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </div>
     </nav>
@@ -80,7 +95,8 @@ export default {
       {
         language: 'en',
         name: 'English'
-      }]
+      }],
+      markList: []
     }
   },
   methods: {
@@ -129,6 +145,13 @@ export default {
     },
     ...mapMutations(['ChangeLanguage'])
   },
+  watch: {
+    marketData () {
+      if (this.marketData) {
+        this.markList = this.marketData
+      }
+    }
+  },
   computed: {
     getLanguage () {
       this.localed()
@@ -140,7 +163,7 @@ export default {
       })
       return lang
     },
-    ...mapGetters(['loginData']),
+    ...mapGetters(['loginData', 'marketData']),
     ...mapState(['language'])
   }
 }
