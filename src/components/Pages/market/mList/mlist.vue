@@ -19,7 +19,7 @@ export default {
   data () {
     return {
       hds: [this.$t('markets.favorite'), 'btc', 'usdt'],
-      currencyindex: 0,
+      currencyindex: 1,
       marketData: null,
       curData: []
     }
@@ -94,6 +94,7 @@ export default {
       return arr
     },
     getFavorite: function (data) {
+      console.log(data)
       var arr = []
       for (var key in data) {
         if (key !== 'current_user' && key !== 'code') {
@@ -112,7 +113,7 @@ export default {
     },
     getLocal: function (data) {
       var localList = localStorage.getItem('markets')
-      if (localList.length === 0) {
+      if (!localList || localList.length === 0) {
         return ''
       }
       var arr = []

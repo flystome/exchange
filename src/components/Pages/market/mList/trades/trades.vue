@@ -1,7 +1,22 @@
 <template>
   <div class="trade" id="trade">
-    <div class="dialog">
+    <div class="dialog" v-show='showDialog'>
       <div class="mask"></div>
+      <div class="dia_content">
+        <div class="text">
+          <h4>{{$t('markets.dialog.' + order_type)}}{{$t('markets.cancel')}}</h4>
+          <ul>
+            <li><div class="value"><span>{{market.quote_currency | upper}}</span></div>{{$t('markets.coin')}}</li>
+            <li><div class="value">{{price | fixedNum(market.price_fixed)}}<span>{{market.base_currency | upper}}</span></div>{{$t('markets.price')}}</li>
+            <li v-if="order_type === 'buy'"><div class="value">{{amount_buy | fixedNum(market.price_amount)}}<span>{{market.quote_currency | upper}}</span></div>{{$t('markets.volume')}}</li>
+            <li v-if="order_type === 'sell'"><div class="value">{{amount_sell | fixedNum(market.price_amount)}}<span>{{market.quote_currency}}</span></div>{{$t('markets.volume')}}</li>
+          </ul>
+        </div>
+        <div class="confirm_box">
+          <span class="confirm" @click="confirmTrade(true)">{{$t('markets.confirm')}}</span>
+          <span class="cancel" @click="confirmTrade(false)">{{$t('markets.cancel')}}</span>
+        </div>
+      </div>
     </div>
     <ul class="trade_hd clearfix">
       <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}" @click="goPath(index)"
@@ -96,7 +111,7 @@
       <div class="trades_rt">
         <div class="currency_price">
           <router-link class="back" :to="{path: ROUTER_VERSION + '/markets/' + curMarket}"><img src="~Img/candle.jpg"></router-link>
-          <span>{{ticker.last | fixedNum(market.price_fixed)}}</span>
+          <span :class="{'text-up': ticker.last > ticker.open, 'text-down': ticker.last< ticker.open}">{{ticker.last | fixedNum(market.price_fixed)}}</span>
         </div>
         <div class="trades_list">
           <div class="head clearfix">
@@ -142,15 +157,17 @@ export default {
       market: {},
       sellList: [],
       buyList: [],
-      isDisabled: false,
+      isDisabled: true,
       status: false,
       sn: '',
+      showDialog: false,
 
       extra_base: 0,
       extra_quote: 0,
       price: '',
       amount_buy: '',
-      amount_sell: ''
+      amount_sell: '',
+      amount: ''
     }
   },
   mounted: function () {
@@ -196,14 +213,15 @@ export default {
     },
     amount_buy: function (val, oldValue) {
       if (this.price && this.price !== 0) {
-        if (this.extra_base < val * this.price || this.amount_buy.length > 16) {
+        var len = (this.amount_buy).toString().split('.')[1]
+        if (this.extra_base < val * this.price || (len && len.length > 8)) {
           val = this.extra_base / this.price
           this.amount_buy = Math.floor(Math.pow(10, 8) * val) / Math.pow(10, 8)
         }
       }
     },
     amount_sell: function (val, oldValue) {
-      if (+val > this.extra_quote || this.amount_sell.length > 16) {
+      if (+val > this.extra_quote || (this.amount_sell).toString().split('.')[1].length > 8) {
         val = this.extra_quote
         this.amount_sell = val
       }
@@ -234,12 +252,19 @@ export default {
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
         self.ticker = initdata.ticker
-        self.sellList = initdata.asks.slice(-8, 8)
+        self.sellList = initdata.asks.slice(-8, 8).reverse()
         self.buyList = initdata.bids.slice(0, 8)
         self.market = initdata.market
-        self.extra_base = initdata.accounts[self.market.base_currency].balance
-        self.extra_quote = initdata.accounts[self.market.quote_currency].balance
-        self.sellList = self.sellList.reverse()
+        if (initdata.accounts) {
+          self.extra_base = initdata.accounts[self.market.base_currency].balance
+          self.extra_quote = initdata.accounts[self.market.quote_currency].balance
+        }
+        if (!initdata.current_user) {
+          self.sn = 'unlogin'
+        } else {
+          self.sn = initdata.current_user.sn
+        }
+        self.isDisabled = false
         console.log(initdata)
       })
     },
@@ -272,66 +297,82 @@ export default {
     setTrade: function (per) {
       if (this.price && this.price !== 0) {
         if (this.order_type === 'buy') {
-          this.amount_buy = this.extra_base * per / (this.price * 100)
+          var vaule = this.extra_base * per / (this.price * 100)
+          if (vaule.toString().split('.')[1] > 8) {
+            this.amount_buy = Math.floor(vaule * Math.pow(10, 8)) / Math.pow(10, 8)
+          }
         }
         if (this.order_type === 'sell') {
           this.amount_sell = this.extra_base * per / 100
         }
       }
     },
-    orderBid: function () {
-      if (!this.price || this.price === 0) return ''
-      if (!this.amount_buy || this.amount_buy === 0) return ''
-      var self = this
-
-      this.isDisabled = true
+    confirmTrade: function (bool) {
+      this.showDialog = false
+      if (bool) {
+        if (this.order_type === 'buy') {
+          this.confirmBuy()
+        } else if (this.order_type === 'sell') {
+          this.confirmSell()
+        }
+      } else {
+        this.isDisabled = false
+      }
+    },
+    confirmBuy: function (bool) {
       this._post({
         url: '/markets/' + this.curMarket + '/order_bids',
         data: {
           order_bid: {
             ord_type: 'limit',
-            price: self.price,
-            origin_volume: self.amount_buy
+            price: this.price,
+            origin_volume: this.amount_buy
           }
         }
-      }, function (data) {
-        if (data.status === 200) {
-          self.isDisabled = false
-          self.price = ''
-          self.amount_buy = ''
-          self.status = 'success'
-        } else {
-          self.isDisabled = false
-          self.status = 'fail'
-        }
-      })
+      }, this.orderCallback)
     },
-    orderAsk: function () {
-      if (!this.price || this.price === 0) return ''
-      if (!this.amount_sell || this.amount_sell === 0) return ''
-      var self = this
-
-      this.isDisabled = false
+    confirmSell: function (bool) {
       this._post({
         url: '/markets/' + this.curMarket + '/order_asks',
         data: {
           order_ask: {
             ord_type: 'limit',
-            price: self.price,
-            origin_volume: self.amount_sell
+            price: this.price,
+            origin_volume: this.amount_sell
           }
         }
-      }, function (data) {
-        if (data.status === 200) {
-          self.isDisabled = false
-          self.price = ''
-          self.amount_buy = ''
-          self.status = 'success'
-        } else {
-          self.isDisabled = false
-          self.status = 'fail'
-        }
-      })
+      }, this.orderCallback)
+    },
+    orderCallback: function (data) {
+      if (data.status === 200) {
+        this.isDisabled = false
+        this.price = ''
+        this['amount_' + this.order_type] = ''
+        this.status = 'success'
+      } else {
+        this.isDisabled = false
+        this.status = 'fail'
+      }
+    },
+    loginCheck: function () {
+      if (this.sn === 'unlogin') {
+        console.log(111)
+        location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
+      }
+    },
+    orderBid: function () {
+      this.loginCheck()
+      if (!this.price || this.price === 0) return ''
+      if (!this.amount_buy || this.amount_buy === 0) return ''
+      this.showDialog = true
+      this.isDisabled = true
+    },
+    orderAsk: function () {
+      this.loginCheck()
+      if (!this.price || this.price === 0) return ''
+      if (!this.amount_sell || this.amount_sell === 0) return ''
+      this.showDialog = true
+      this.isDisabled = false
     },
     goPath: function (index) {
       if (index === 0) {

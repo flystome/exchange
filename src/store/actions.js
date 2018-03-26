@@ -1,6 +1,6 @@
 import { _get } from '../axios'
 import Cookies from 'js-cookie'
-const unLogin = ['HomePage']
+const unLogin = ['HomePage', 'Markets', 'MarketDetail', 'Trades']
 
 const actions = {
   getData ({ commit, state }) {

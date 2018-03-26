@@ -91,6 +91,12 @@
       height: 26px;
       line-height: 26px;
       text-align: left;
+      &.done {
+        color: #29c1a6;
+      }
+      &.up {
+        color: #fc4a4a;
+      }
     }
     .val {
       font-size: 14px;

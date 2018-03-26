@@ -1,5 +1,18 @@
 <template>
   <div id="orders">
+    <div class="dialog" v-show='showDialog'>
+      <div class="mask"></div>
+      <div class="dia_content">
+        <div class="text">
+          <p class="cancel_one" v-if="cancelNum === 'one'">{{$t('orders.dialog.cancel')}}</p>
+          <p class="cancel_all" v-if="cancelNum === 'all'">{{$t('orders.dialog.cancel_all')}}</p>
+        </div>
+        <div class="confirm_box">
+          <span class="confirm" @click="confirmOrder(true)">{{$t('markets.confirm')}}</span>
+          <span class="cancel" @click="confirmOrder(false)">{{$t('markets.cancel')}}</span>
+        </div>
+      </div>
+    </div>
     <ul class="order_hd clearfix">
       <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}"
        @click="goPath(index)">{{hd}}</li>
@@ -60,7 +73,10 @@ export default {
       curMarket: '',
       curData: [],
       curListData: [],
-      curfilter: 0
+      showDialog: false,
+      curfilter: 0,
+      cancelNum: 'one',
+      id: 0
     }
   },
   mounted: function () {
@@ -156,21 +172,34 @@ export default {
         this.curListData = this.curData
       }
     },
+    confirmOrder: function (bool) {
+      this.showDialog = false
+      if (bool) {
+        if (this.cancelNum === 'one') {
+          this._delete({
+            url: '/markets/' + this.curMarket + '/orders/' + this.id
+          })
+        } else if (this.cancelNum === 'all') {
+          this._delete({
+            url: '/markets/' + this.curMarket + '/orders/' + 0,
+            data: {
+              cancel_all: 'TRUE'
+            }
+          })
+        }
+      }
+    },
     cancel: function (id) {
-      this._delete({
-        url: '/markets/' + this.curMarket + '/orders/' + id
-      })
+      this.cancelNum = 'one'
+      this.showDialog = true
+      this.id = id
     },
     cancelAll: function () {
       if (this.curData.length === 0) {
         return ''
       }
-      this._delete({
-        url: '/markets/' + this.curMarket + '/orders/' + 0,
-        data: {
-          cancel_all: 'TRUE'
-        }
-      })
+      this.cancelNum = 'all'
+      this.showDialog = true
     }
   }
 }

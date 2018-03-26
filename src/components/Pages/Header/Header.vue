@@ -9,7 +9,7 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" :href="`${HOST_URL}`">
-            <img src="~Img/logo.png">
+            <img src="~Img/logo.svg">
           </a>
           <div class="btc-header-sideslip" @click="SideSlipMenuDisplay(true)">
             <img src="~Img/header-more.png">

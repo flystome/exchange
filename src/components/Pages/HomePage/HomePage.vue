@@ -71,7 +71,7 @@
         <HomeMarket :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]"></HomeMarket>
       </div>
       <div class="btc-homepage-logo text-center">
-        <img src="~Img/logo.png" >
+        <img src="~Img/logo.svg" >
       </div>
       <div class="btc-homepage-intr btc-marginT15 btc-marginB100">
         <span class="col-xs-4 btc-marginT10"></span>

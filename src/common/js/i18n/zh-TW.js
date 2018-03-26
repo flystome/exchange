@@ -328,7 +328,14 @@ const zh = {
     "maxAmount": "最大数量",
     "total": "金额",
     "trade_success": "下单成功",
-    "trade_fail": "下单失败"
+    "trade_fail": "下单失败",
+    "coin": "Pair",
+    "cancel": "撤銷",
+    "confirm": "確認",
+    "dialog": {
+        "buy": "买入",
+        "sell": "卖出"
+      }
   },
   'orders': {
     "all": "全部",
@@ -340,7 +347,11 @@ const zh = {
     "ordered": "成交",
     "bid": "买",
     "ask": "卖",
-    "cancel": "撤销"
+    "cancel": "撤銷",
+    'dialog': {
+      'cancel': "確認撤銷此單嗎？",
+      'cancel_all': "確認撤銷全部訂單嗎？"
+    }
   },
   "nav": {
     "home": "首页",

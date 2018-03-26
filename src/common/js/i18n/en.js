@@ -536,7 +536,14 @@ const en = {
       "maxAmount": "Max Amount",
       "total": "Total",
       "trade_success": "Success",
-      "trade_fail": "Fail"
+      "trade_fail": "Fail",
+      "coin": "Pair",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "dialog": {
+        "buy": "Bid ",
+        "sell": "Ask "
+      }
     },
     'orders': {
       "all": "All",
@@ -548,7 +555,10 @@ const en = {
       "ordered": "Filled",
       "bid": "Buy",
       "ask": "Sell",
-      "cancel": "Cancel"
+      'dialog': {
+        'cancel': "Are you sure to cancel this order？",
+        'cancel_all': "Are you sure to cancel ALL orders？"
+      }
     },
     "hint": {
       "confirm": "OK",

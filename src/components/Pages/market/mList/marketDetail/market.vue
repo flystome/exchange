@@ -30,7 +30,7 @@
           </p>
           <p>
             <span class="name">{{$t("markets.volume24")}}</span>
-            <span class="volume">{{ticker.volume | fixed4}} {{market.base_currency | upper}}</span>
+            <span class="volume">{{ticker.volume | fixedNum(market.volume_fixed)}} {{market.base_currency | upper}}</span>
           </p>
         </div>
         <div class="detail_rt">
@@ -128,15 +128,6 @@ export default {
       if (!params || params === '/' || params === 'undefined/undefined') return '--'
       return params.toUpperCase()
     },
-    fixed4: function (params) {
-      if (+params === 0 || !params) return 0
-      var len = +params.toString().split('.')[0].length
-      if (len > 1) {
-        return (+params).toFixed(2)
-      } else {
-        return (+params).toPrecision(4)
-      }
-    },
     fixedNum: function (params, num, num2) {
       if (+params <= 0 || !params) return 0
       if (!num) num = 6
@@ -164,6 +155,7 @@ export default {
         self.trades = initdata.trades.slice(0, 10)
         self.market = initdata.market
         self.logined = !!initdata.current_user
+        self.favorite = initdata.market['is_portfolios']
         console.log(initdata)
       })
     },
@@ -181,8 +173,7 @@ export default {
       if (this.logined) {
         if (this.favorite) {
           this._delete({
-            url: '/portfolios/' + self.curmarket,
-            data: {}
+            url: '/portfolios/' + self.curmarket + '.json'
           }, function (xhr) {
             if (xhr.status === 200) {
               self.favorite = false
@@ -190,7 +181,7 @@ export default {
           })
         } else {
           this._post({
-            url: '/portfolios/',
+            url: '/portfolios.json',
             data: {
               market: self.curmarket
             }
@@ -202,6 +193,8 @@ export default {
         }
       } else {
         var localList = localStorage.getItem('markets').split(',')
+        console.log(localList)
+        if (localList.length === 0) return ''
         var i = ('' + this.market).indexOf(localList)
         if (i !== -1) {
           localList.push(this.curmarket)

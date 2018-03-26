@@ -46,8 +46,11 @@
 
 .navbar-Home{
   .navbar-brand{
-    padding: 12px 0px;
+    padding: 10px 0px 12px;
     padding-right: 25px;
+    img {
+      width: 88px;
+    }
   }
   .btc-ifo{
     a{
