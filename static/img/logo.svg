@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 439 118" style="enable-background:new 0 0 439 118;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#Oval_1_);}
+	.st1{fill:url(#Oval-2_1_);}
+	.st2{fill:url(#Combined-Shape_3_);}
+	.st3{fill:#8DC0FF;}
+</style>
+<linearGradient id="Oval_1_" gradientUnits="userSpaceOnUse" x1="0" y1="-34" x2="80" y2="-34" gradientTransform="matrix(1 0 0 1 0 94)">
+	<stop  offset="0" style="stop-color:#45BDFF"/>
+	<stop  offset="1" style="stop-color:#176CFF"/>
+</linearGradient>
+<path id="Oval" class="st0" d="M80,64v54H60V66c0-11-9-20-20-20s-20,9-20,20v52H0V2h20v35.2c6.4-5.7,14.8-9.2,24-9.2
+	C63.9,28,80,44.1,80,64z"/>
+<linearGradient id="Oval-2_1_" gradientUnits="userSpaceOnUse" x1="96.0476" y1="-26.0569" x2="187.9866" y2="-26.0569" gradientTransform="matrix(1 0 0 1 0 94)">
+	<stop  offset="0" style="stop-color:#45BDFF"/>
+	<stop  offset="1" style="stop-color:#176CFF"/>
+</linearGradient>
+<path id="Oval-2" class="st1" d="M153.9,116.4c-24.5,6.6-49.8-8-56.3-32.6s8-49.8,32.5-56.4c16.7-4.5,31.1-7.6,43-9.5
+	c4.4,11.3,8.8,25.3,13.3,42C193,84.6,178.4,109.8,153.9,116.4z M127.3,60.4c-12.4,7.2-16.7,23.1-9.5,35.6
+	c7.2,12.4,23.1,16.7,35.5,9.5s16.7-23.1,9.5-35.6c-4.7-8.1-9.1-15.3-13.2-21.7C142.8,51.6,135.4,55.7,127.3,60.4z"/>
+<linearGradient id="Combined-Shape_3_" gradientUnits="userSpaceOnUse" x1="201" y1="-30" x2="251" y2="-30" gradientTransform="matrix(1 0 0 1 0 94)">
+	<stop  offset="0" style="stop-color:#45BDFF"/>
+	<stop  offset="1" style="stop-color:#176CFF"/>
+</linearGradient>
+<path id="Combined-Shape" class="st2" d="M211,50h-10V30h10V10h20v20h20v20h-20v44c0,2.2,1.8,4,4,4h16v20h-16c-13.3,0-24-10.7-24-24
+	V50z"/>
+<path id="Combined-Shape_1_" class="st3" d="M347.9,79h-67.7c1.5,11.8,11.6,21,23.8,21h2c8.9,0,16.6-4.8,20.8-12h19.5
+	c-5.2,17.3-21.2,30-40.3,30h-2c-23.2,0-42-18.8-42-42v-8c0-23.2,18.8-42,42-42h2c23.2,0,42,18.8,42,42v8C348,77,348,78,347.9,79z
+	 M329.2,62c-2.7-10.4-12.1-18-23.2-18h-2c-11.2,0-20.6,7.6-23.2,18H329.2z"/>
+<polygon id="Combined-Shape_2_" class="st3" points="406.5,74 439,118 416,118 395,89.6 374,118 351,118 383.5,74 351,30 374,30 
+	395,58.4 416,30 439,30 "/>
+</svg>
