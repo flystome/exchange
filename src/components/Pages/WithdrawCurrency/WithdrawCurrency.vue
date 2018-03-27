@@ -126,7 +126,7 @@
               {{ $t('withdraw_currency.make_sure_safe') }}
             </li>
             <li>
-              {{ $t('withdraw_currency.withdraw') }}
+              {{ $t('withdraw_currency.do_not_response') }}
             </li>
           </ul>
         </div>

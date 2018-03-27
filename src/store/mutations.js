@@ -58,6 +58,9 @@ const mutations = {
   redirect (state, type) {
     redirect(state, this, type)
   },
+  // changeMarket (state, { index, currency }) {
+  //   state.
+  // },
   getData (state, data) {
     var lang = Cookies.get('locale')
     if (lang) {
@@ -113,7 +116,7 @@ const mutations = {
     delete data.current_user
     delete data.code
     state.marketData = data
-  } 
+  }
 }
 
 export default mutations

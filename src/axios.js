@@ -21,7 +21,8 @@ export const _post = async ({url, data, headers}, callback) => {
   const ajax = await axios({
     method: 'post',
     url: requestUrl + url,
-    data: data
+    data: data,
+    dataType: 'json',
   })
   if (callback) {
     callback(ajax)

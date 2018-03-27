@@ -5,7 +5,7 @@
         <tr>
           <th>{{ $t('homepage.currency') }}</th>
           <th v-for="(item, index) in heads" :key="item" @click="sortList(index)">
-            {{$t(`homepage.${item}`)}}{{index !==3 ? `(${currency})` : "" | toUpperCase}}
+            {{$t(`homepage.${item}`)}}{{ currency === 'my_optional' ? "" : index !==3 ? `(${currency})` : "" | toUpperCase }}
             <img v-if="times == 0 && currencyIndex == index" src="~Img/both.png">
             <img v-else-if="times == 1 && currencyIndex == index" src="~Img/up.png">
             <img v-else-if="times == 2 && currencyIndex == index" src="~Img/down.png">
@@ -14,10 +14,11 @@
         </tr>
       </thead>
       <tbody ref="itemlength">
-        <tr v-for='(item , index) in oldData' :key='index' v-if="matchName(item.name, index)">
+        <tr v-for='(item , index) in oldData' :key='item.name' v-if="matchName(item.name, index)">
           <td>
             <a class="btc-homepage-currency" style="color: #333333;">
-                {{ item.name }}
+              <span>{{ item.name }}</span>
+              <i :disabled="disabled" @click="portfolios(item, index)" class="far fa fa-star mylove" :class="{'is-star': item.is_portfolios}"></i>
             </a>
           </td>
           <td>
@@ -33,7 +34,7 @@
           <td style="max-width: 165px;">
             <trend
               viewBox="40 0 420 75"
-              :data="trend[`${item.quote_currency}${item.base_currency}`]"
+              :data="trend ? trend[`${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`] : [0,0]"
               :gradient="['black']"
               >
             </trend>
@@ -48,6 +49,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'home-market',
   props: ['curData', 'currency', 'search', 'trend'],
@@ -58,7 +60,8 @@ export default {
       coins: ['last', 'volume', 'total', 'percent'],
       times: 0,
       currencyIndex: 0,
-      itemLength: false
+      itemLength: false,
+      disabled: false
     }
   },
   mounted: function () {
@@ -110,7 +113,7 @@ export default {
           if (index === 3) {
             return a[order] - b[order]
           } else {
-            return a[order].localeCompare(b[order])
+            return String(a[order]).localeCompare(String(b[order]))
           }
         })
         this.times = 1
@@ -122,7 +125,7 @@ export default {
           if (index === 3) {
             return b[order] - a[order]
           } else {
-            return b[order].localeCompare(a[order])
+            return String(b[order]).localeCompare(String(a[order]))
           }
         })
         this.times = 2
@@ -130,7 +133,54 @@ export default {
         this.times = 0
         this.oldData = JSON.parse(JSON.stringify(this.curData))
       }
+    },
+    portfolios (data, index) {
+      if (this.disabled) return
+      var currency = `${data.quote_currency.toLowerCase()}${data.base_currency.toLowerCase()}`
+      if (this.curData[index].is_portfolios) {
+        if (this.loginData === 'none') {
+          this.curData[index].is_portfolios = false
+          this.$emit('marketChange', { index: index, type: 'delete', status: false })
+          this.curData.reverse().reverse()
+          return
+        }
+        this.disabled = true
+        this._delete({
+          url: `/portfolios/${currency}.json`
+        }, (d) => {
+          if (d.data.success) {
+            this.curData[index].is_portfolios = false
+            this.$emit('marketChange', { index: index, type: 'delete' })
+            this.curData.reverse().reverse()
+            this.disabled = false
+          }
+        })
+      } else {
+        if (this.loginData === 'none') {
+          this.curData[index].is_portfolios = true
+          this.$emit('marketChange', { index: index, type: 'add', status: true })
+          this.curData.reverse().reverse()
+          return
+        }
+        this.disabled = true
+        this._post({
+          url: '/portfolios.json',
+          data: {
+            market: currency
+          }
+        }, (d) => {
+          if (d.data.success) {
+            this.$emit('marketChange', { index: index, type: 'add' })
+            this.curData[index].is_portfolios = true
+            this.curData.reverse().reverse()
+            this.disabled = false
+          }
+        })
+      }
     }
+  },
+  computed: {
+    ...mapGetters(['loginData'])
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @keyup.enter="login">
     <div class="btc-homepage-header">
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3500">
           <ol class="carousel-indicators">
@@ -25,16 +25,16 @@
         <div class="btc-homepage-login">
           <div class="btc-nologin" v-if="loginData === 'none' || loginData.errors">
           <!-- <div class="btc-nologin"> -->
-            <form>
+            <div class="form">
               <span>{{ $t('homepage.login') }}HotEx</span>
-              <basic-input :validate='"email"' :placeholder="this.$t('homepage.enter_the_mailbox')" class="btc-input"></basic-input>
-              <basic-input :validate='"password"' :placeholder="this.$t('homepage.enter_the_mailbox')" class="btc-input"></basic-input>
-              <basic-button class="btc-button" :text="this.$t('homepage.login')"></basic-button>
+              <basic-input ref="email" :validate='"email"' v-model="email" :placeholder="this.$t('homepage.enter_the_mailbox')" class="btc-input"></basic-input>
+              <basic-input ref="password" :validate='"password"' v-model="password" :placeholder="this.$t('homepage.enter_the_password')" class="btc-input"></basic-input>
+              <basic-button :disabled='disabled' @click.native="login" class="btc-button" :text="this.$t('homepage.login')"></basic-button>
               <div>
                 <a :href="`${HOST_URL}/signup`">{{ $t('homepage.free_registration') }}</a>
                 <a :class='{"pull-right": language !=="en", "btc-homepage-block": language!=="zh-TW"}' class="btc-pointer">{{ $t('homepage.forget_the_password') }}</a>
               </div>
-            </form>
+            </div>
           </div>
           <div class="btc-logining" v-else>
             <span>{{ $t('homepage.welcome_to_use') }}HotEx</span>
@@ -45,11 +45,11 @@
             <div class="btc-marginT20">
               <span style="color:#999999">{{ $t('homepage.total_asset_estimation') }}</span>
               <span v-if="open">BTC={{ btc_worth }}
-                <img class="pull-right" src="~Img/open.png" @click="displaystate">
+                <img class="pull-right btc-pointer" src="~Img/open.png" @click="displaystate">
               </span>
               <span v-else>
                 *******
-                <img class="pull-right" @click="displaystate" src="~Img/hide.png">
+                <img class="pull-right btc-pointer" @click="displaystate" src="~Img/hide.png">
               </span>
             </div>
             <div class="btc-marginT25">
@@ -68,10 +68,10 @@
           <input v-model="search" class="btc-search" :placeholder='$t("homepage.search")' />
           <img src="~Img/search.png" >
         </div>
-        <HomeMarket :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]"></HomeMarket>
+        <HomeMarket v-on:marketChange="marketChange" :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]"></HomeMarket>
       </div>
       <div class="btc-homepage-logo text-center">
-        <img src="~Img/logo.svg" >
+        <img src="~Img/logo.png" >
       </div>
       <div class="btc-homepage-intr btc-marginT15 btc-marginB100">
         <span class="col-xs-4 btc-marginT10"></span>
@@ -132,6 +132,8 @@ export default {
   },
   data () {
     return {
+      email: '',
+      password: '',
       trend: [],
       HOST_URL: process.env.HOST_URL,
       btc_worth: '',
@@ -142,13 +144,50 @@ export default {
       currency: ['usdt', 'btc', 'eth', 'my_optional'],
       getetc: '',
       change: 'no',
-      curData: []
+      curData: [],
+      disabled: false
     }
   },
   components: {
     HomeMarket
   },
   methods: {
+    async login () {
+      const email = await this.$refs['email'].$validator.validateAll()
+      const password = await this.$refs['password'].$validator.validateAll()
+      if (!email || !password) {
+        return
+      }
+      this.disabled = true
+      this._post({
+        url: '/auth/identity/callback?format=json',
+        data: {
+          'auth_key': this.email,
+          'password': this.password
+        }
+      }, (d) => {
+        this.disabled = false
+        console.log(d)
+      })
+    },
+    marketChange ({ index, type, status }) {
+      if (type === 'delete') {
+        this.curData[this.curData.length - 1].forEach((d, index) => {
+          if (!d.is_portfolios) {
+            this.curData[this.curData.length - 1].splice(index, 1)
+          }
+        })
+      } else {
+        this.curData[this.curData.length - 1].push(this.curData[`${this.currencyindex}`][index])
+      }
+      if (this.loginData === 'none') {
+        var markData = JSON.parse(JSON.stringify(this.marketData))
+        console.log(status)
+        markData[this.currency[this.currencyindex]][index][Object.keys(markData[this.currency[this.currencyindex]][index])[0]].is_portfolios = status
+        console.log(markData[this.currency[this.currencyindex]][index][Object.keys(markData[this.currency[this.currencyindex]][index])[0]], markData)
+        localStorage.setItem('marketData', JSON.stringify(markData))
+      }
+    },
     displaystate () {
       this.open = !this.open
     },
@@ -186,7 +225,13 @@ export default {
         this.curData.push(this.getItem(this.marketData['usdt']))
         this.curData.push(this.getItem(this.marketData['btc']))
         this.curData.push(this.getItem(this.marketData['eth']))
-        console.log(this.marketData)
+        this.curData.push(this.getItem(Object.keys(this.marketData).map((d) => {
+          return this.marketData[d].map((data) => {
+            return data[Object.keys(data)[0]]
+          }).filter((d) => {
+            return d.is_portfolios
+          })
+        })))
       }
     }
   },

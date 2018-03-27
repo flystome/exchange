@@ -18,7 +18,7 @@
             <slot v-if='data.hover' name="href"
             :data='data'>
             </slot>
-            <slot v-if="(Object.prototype.toString.call(data) === '[object Object]' && data.type && data.type['aasm_state']) === ('submitting' || 'submitted' || 'accepted' || 'email_expired') "
+            <slot v-if="(Object.prototype.toString.call(data) === '[object Object]' && data.type && data.type['aasm_state'] && ((data.type['aasm_state'] === 'submitting') || (data.type['aasm_state'] === 'submitted') || (data.type['aasm_state'] === 'accepted') || (data.type['aasm_state'] === 'email_expired') )) "
             name="cancel"
             :data='data'
             :id='data.id'>

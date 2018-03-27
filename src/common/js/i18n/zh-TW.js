@@ -452,9 +452,10 @@ const zh = {
     "withdraw_all": "全部提幣",
     "tariff_description": "資費說明",
     "reminder": "提醒",
-    "min_currency": "最低提幣金額為0.001",
+    "min_currency": "請勿告訴其他人你的手機驗證碼或者谷歌驗證碼請",
     "confirm_apply_for_success": "提幣請求成功後，請轉至電子郵件並點擊鏈接以確認取款請求。 您可以跟踪退款歷史記錄頁面上的狀態.",
     "make_sure_safe": "確保您的電腦和瀏覽器是安全的，以防止信息被篡改或洩漏.",
+    "do_not_response": "請確保您要提幣的地址無誤，如若輸錯提幣地址，且交易完成，由您自行承擔損失，HotEx不做賠償",
     "withdraw_currency_record": "取消提幣记录",
     "number": "數量",
     "withdraw_time": "提幣時間",
@@ -566,8 +567,8 @@ const zh = {
       "error_1001": "照片更新失敗"
     },
     "my_account": {
-      "success_200": "電子郵件已發送，請檢查它",
-      "error_1001": "確認電子郵件已發送到您的郵箱",
+      "success_200": "激活郵件已發送，請檢查您的郵箱完成郵箱驗證",
+      "error_1001": "請勿操作頻繁，如若未在收件箱看到郵件，請查看垃圾箱",
       "error_1002": "已激活"
     },
     "withdraw_currency": {

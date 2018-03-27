@@ -28,6 +28,9 @@ table{
       >td{
         padding: 16px 16px;
         border: none;
+        line-height: 40px;
+        padding-top: 12px;
+        padding-bottom: 0;
         border-bottom: 1px solid #f2f2f2;
         .btc-percent{
           color:#999999;
@@ -41,11 +44,16 @@ table{
         >a{
           &:hover{
             text-decoration: none;
-            cursor: pointer;
           }
         }
         svg{
           stroke-width: 3px;
+        }
+      }
+      &:hover{
+        background: #f2f2f2;
+        .fa-star{
+          display: inline-block;
         }
       }
     }
@@ -58,6 +66,7 @@ table{
   display: inline-block;
   text-align: center;
   line-height: 25px;
+  margin-top: 8px;
 }
 
 
@@ -70,9 +79,34 @@ th{
 }
 
 .btc-homepage-currency{
+  position: relative;
   >div{
     display: inline-block;
   }
+  span{
+    min-width: 58px;
+    text-align: center;
+    display: inline-block;
+    margin-right: 3px;
+  }
+}
+
+.fa-star{
+  color: #728eaa;
+  font-size: 12px;
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  top: 3px;
+}
+
+.is-star{
+  color: red;
+  display: inline-block;
+}
+
+i[disabled='disabled']{
+  cursor: not-allowed
 }
 
 .btc-currency-none{

@@ -33,17 +33,17 @@
       position: relative;
       .btc-homepage-login{
         width: 260px;
-        height: 260px;
         background-color: #fff;
         position: absolute;
         right: 0;
         top: 30px;
         padding: 25px 20px 0 20px;
+        padding-bottom: 10px;
         .btc-nologin{
-          >form{
+          >.form{
             >span{
               display: block;
-              margin-bottom: 30px;
+              margin-bottom: 21px;
             }
             .btc-input{
               min-height: 50px !important;
@@ -75,7 +75,7 @@
   .btc-homepage-main{
     background-color: #fff;
     .btc-homepage-markets{
-      height: 400px;
+      min-height: 400px;
       .btc-button{
         padding: 15px 12px 12px 12px;
       }
