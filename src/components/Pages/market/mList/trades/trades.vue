@@ -364,21 +364,21 @@ export default {
     },
     loginCheck: function () {
       if (this.sn === 'unlogin') {
-        console.log(111)
         location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
       }
     },
     orderBid: function () {
       this.loginCheck()
-      if (!this.price || this.price === 0) return ''
-      if (!this.amount_buy || this.amount_buy === 0) return ''
+      console.log(this.amount_buy)
+      if (!this.price || this.price === 0 || this.price === '') return ''
+      if (!this.amount_buy || this.amount_buy === 0 || this.amount_sell === '') return ''
       this.showDialog = true
       this.isDisabled = true
     },
     orderAsk: function () {
       this.loginCheck()
-      if (!this.price || this.price === 0) return ''
-      if (!this.amount_sell || this.amount_sell === 0) return ''
+      if (!this.price || this.price === 0 || this.price === '') return ''
+      if (!this.amount_sell || this.amount_sell === 0 || this.amount_sell === '') return ''
       this.showDialog = true
       this.isDisabled = false
     },
