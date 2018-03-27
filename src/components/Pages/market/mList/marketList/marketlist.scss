@@ -4,14 +4,17 @@
     line-height: 36px;
     background: #1f2a36;
     padding-left: 0;
-    display: -webkit-flex;
-    display: flex;
-    flex-wrap: nowrap;
+    margin-bottom: 0;
+    // display: -webkit-flex;
+    // display: flex;
+    // flex-wrap: nowrap;
     li {
       width: 35%;
       color: #42637d;
       font-size: 14px;
       cursor: pointer;
+      display: inline-block;
+      float: left;
       &.up {
         .caret {
           opacity: 1;
@@ -41,18 +44,20 @@
   }
   .bd {
     padding-left: 0;
+    margin-bottom: 0;
   }
   .list {
     height: 66px;
     width: 100%;
     border-bottom: 1px solid #1f2a36;
     background: #181f28;
-    display: -webkit-flex;
-    display: flex;
-    flex-wrap: nowrap;
+    // display: -webkit-flex;
+    // display: flex;
+    // flex-wrap: nowrap;
     &>div {
       display: inline-block;
       padding-top: 10px;
+      float: left;
     }
   }
   .list-coin {

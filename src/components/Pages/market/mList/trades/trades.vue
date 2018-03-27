@@ -53,7 +53,7 @@
                 <span class="des">{{$t("markets.total")}}</span>
               </div>
               <div class="percent">
-                <span v-for="per in percents" :key="per" @click="setTrade(per)">{{per}}%</span>
+                <span v-for="per in percents" :key="per[1]" @click="setTrade(per[1])">{{per[0]}}</span>
               </div>
               <div class="maxNum private">
                 <span class="nums">{{maxAmount | fixedNum(market.price_fixed, market.volume_fixed)}} {{market.quote_currency | upper}}</span>
@@ -89,7 +89,7 @@
                 <span class="des">{{$t("markets.total")}}</span>
               </div>
               <div class="percent">
-                <span v-for="per in percents" :key="per" @click="setTrade(per)">{{per}}%</span>
+                <span v-for="per in percents" :key="per[1]" @click="setTrade(per[1])">{{per[0]}}</span>
               </div>
               <div class="maxNum private">
                 <span class="nums">{{extra_quote | fixedNum(market.price_fixed, market.volume_fixed)}} {{market.quote_currency | upper}}</span>
@@ -149,7 +149,7 @@ export default {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       hds: [this.$t('markets.quotes'), this.$t('markets.trade'), this.$t('markets.currency')],
-      percents: [25, 50, 75, 100],
+      percents: [['1/4', 25], ['1/3', 33.3], ['1/2', 50], ['All', 100]],
       currencyindex: 1,
       order_type: 'buy',
       curMarket: '',
@@ -178,10 +178,10 @@ export default {
 
     var marketPush = pusher.subscribe('market-' + this.curMarket + '-global')
     marketPush.bind('update', (data) => {
-      if (data.asks.length !== 0) {
+      if (data.asks || data.asks.length !== 0) {
         self.sellList = data.asks.slice(-8, 8).reverse()
       }
-      if (data.bids.length !== 0) {
+      if (data.bids || data.bids.length !== 0) {
         self.buyList = data.bids.slice(0, 8)
       }
     })
@@ -195,6 +195,11 @@ export default {
         }
       }
     })
+    window.onpageshow = function (e) {
+      if (e.persisted) {
+        window.location.reload()
+      }
+    }
   },
   computed: {
     maxAmount: function () {
@@ -252,12 +257,16 @@ export default {
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
         self.ticker = initdata.ticker
-        self.sellList = initdata.asks.slice(-8, 8).reverse()
-        self.buyList = initdata.bids.slice(0, 8)
+        if (initdata.asks) {
+          self.sellList = initdata.asks.slice(-8, 0).reverse()
+        }
+        if (initdata.bids) {
+          self.buyList = initdata.bids.slice(0, 8)
+        }
         self.market = initdata.market
         if (initdata.accounts) {
-          self.extra_base = initdata.accounts[self.market.base_currency].balance
-          self.extra_quote = initdata.accounts[self.market.quote_currency].balance
+          self.extra_base = initdata.accounts[self.market.base_currency] && initdata.accounts[self.market.base_currency].balance
+          self.extra_quote = initdata.accounts[self.market.quote_currency] && initdata.accounts[self.market.quote_currency].balance
         }
         if (!initdata.current_user) {
           self.sn = 'unlogin'
@@ -265,7 +274,6 @@ export default {
           self.sn = initdata.current_user.sn
         }
         self.isDisabled = false
-        console.log(initdata)
       })
     },
     getRefresh: function (sn) {
@@ -356,21 +364,20 @@ export default {
     },
     loginCheck: function () {
       if (this.sn === 'unlogin') {
-        console.log(111)
         location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
       }
     },
     orderBid: function () {
       this.loginCheck()
-      if (!this.price || this.price === 0) return ''
-      if (!this.amount_buy || this.amount_buy === 0) return ''
+      if (!this.price || this.price === 0 || this.price === '') return ''
+      if (!this.amount_buy || this.amount_buy === 0 || this.amount_sell === '') return ''
       this.showDialog = true
       this.isDisabled = true
     },
     orderAsk: function () {
       this.loginCheck()
-      if (!this.price || this.price === 0) return ''
-      if (!this.amount_sell || this.amount_sell === 0) return ''
+      if (!this.price || this.price === 0 || this.price === '') return ''
+      if (!this.amount_sell || this.amount_sell === 0 || this.amount_sell === '') return ''
       this.showDialog = true
       this.isDisabled = false
     },

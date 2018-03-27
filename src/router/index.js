@@ -154,6 +154,13 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  var user = navigator.userAgent
+  var mobile = user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
+  if (to.path === '/') {
+    if (mobile) {
+      next(`${version}/markets`)
+    }
+  }
   if (store.state.loginData === 'none') {
     store.dispatch('getData')
   } else {

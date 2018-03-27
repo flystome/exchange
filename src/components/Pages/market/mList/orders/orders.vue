@@ -82,6 +82,11 @@ export default {
   mounted: function () {
     this.fetchData()
     this.curMarket = this.$route.params.id
+    window.onpageshow = function (e) {
+      if (e.persisted) {
+        window.location.reload()
+      }
+    }
   },
   computed: {
     ...mapState([
@@ -150,7 +155,6 @@ export default {
     },
     goPath: function (index) {
       if (index === 0) {
-        console.log(`${this.ROUTER_VERSION}/markets/${this.curMarket}`)
         this.$router.push({path: `${this.ROUTER_VERSION}/markets/${this.curMarket}`})
       } else if (index === 1) {
         this.$router.push({path: `${this.ROUTER_VERSION}/markets/${this.curMarket}/trades`})

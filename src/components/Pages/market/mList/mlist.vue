@@ -4,9 +4,9 @@
       <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}"
       @click="changemarket(index,hd)">{{hd}}</li>
     </ul>
-    <ul class="marketBd">
+    <div class="marketBd">
       <marketList :curData = "curData[currencyindex]"></marketList>
-    </ul>
+    </div>
   </div>
 </template>
 <script>
@@ -20,7 +20,7 @@ export default {
     return {
       hds: [this.$t('markets.favorite'), 'btc', 'usdt'],
       currencyindex: 1,
-      marketData: null,
+      marketData: {},
       curData: []
     }
   },
@@ -36,6 +36,7 @@ export default {
         for (var i in data) {
           var key = data[i]['base_currency']
           var Arr = self.marketData[key]
+          if (!Arr) return
           var len = Arr.length
           var target = null
           for (var j = 0; j < len; j++) {
@@ -52,6 +53,11 @@ export default {
         }
       }
     })
+    window.onpageshow = function (e) {
+      if (e.persisted) {
+        window.location.reload()
+      }
+    }
   },
   methods: {
     fetchData: function () {
@@ -63,7 +69,6 @@ export default {
         var getdata = JSON.parse(data.request.response)
         self.getCurData(getdata.success)
         self.marketData = getdata.success
-        console.log(getdata)
       })
     },
     getCurData: function (data) {
@@ -94,7 +99,6 @@ export default {
       return arr
     },
     getFavorite: function (data) {
-      console.log(data)
       var arr = []
       for (var key in data) {
         if (key !== 'current_user' && key !== 'code') {

@@ -483,6 +483,7 @@ const en = {
       "currency_withdraw": "Withdraw Currency",
       "currency_deposit": "Deposit Currency",
       "homepage": "Homepage",
+      "markets": "Markets",
       "404": "404 Not Found"
     },
     "prompt": {
@@ -514,9 +515,9 @@ const en = {
     },
     "markets":{
       "volume": "Volume",
-      "coinAndVolumn": "币种/成交量",
+      "coinAndVolumn": "Pair/Vol",
       "newPrice": "Price",
-      "change": "涨跌幅",
+      "change": "Change",
       "quotes": "Quotes",
       "trade": "Trade",
       "currency": "Open Orders",

@@ -76,17 +76,21 @@
       }
       .add_favorite {
         float: right;
+        display: inline-block;
         margin-top: 10px;
         padding: 0 6px;
+        cursor: pointer;
         height: 24px;
         line-height: 22px;
         border: 1px solid #273442;
         text-align: center;
         border-radius: 2px;
-        a {
+        .favorite {
+          display: inline-block;
           font-size: 14px;
           color: #728eaa;
           padding: 0 3px;
+          cursor: pointer;
           i {
             color: #728eaa;
             margin-right: 5px;
@@ -141,6 +145,7 @@
   }
 
   .graph {
+    display: none;
     height: 280px;
   }
   .new_order {

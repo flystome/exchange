@@ -67,19 +67,15 @@ export default {
       if (!val) {
         this.oldData = []
       } else {
-        console.log(val, this.oldData)
         for (var i in val) {
           for (var j in oldVal) {
             if (val[i]['name'] === this.oldData[j]['name']) {
               if (+val[i]['last'] > +this.oldData[j]['last']) {
-                console.log(1)
                 val[i]['trend'] = 'up'
               } else if (+val[i]['last'] < +this.oldData[j]['last']) {
                 val[i]['trend'] = 'down'
-                console.log(2)
               } else {
                 val[i]['trend'] = ''
-                console.log(3)
               }
             }
           }
@@ -91,11 +87,14 @@ export default {
   },
   methods: {
     initData: function () {
-      if (!this.curData) return ''
-      this.oldData = JSON.parse(JSON.stringify(this.curData))
+      if (!this.curData) {
+        this.oldData = []
+      } else {
+        this.oldData = JSON.parse(JSON.stringify(this.curData))
+      }
     },
     goPath: function (quote, base) {
-      location.href = '/v2/markets/' + quote + base
+      location.href = '/v2/markets/' + quote.toLowerCase() + base.toLowerCase()
     },
     sortList: function (index) {
       var order = this.coins[index]
