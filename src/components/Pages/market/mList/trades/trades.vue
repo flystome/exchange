@@ -178,10 +178,10 @@ export default {
 
     var marketPush = pusher.subscribe('market-' + this.curMarket + '-global')
     marketPush.bind('update', (data) => {
-      if (data.asks.length !== 0) {
+      if (data.asks || data.asks.length !== 0) {
         self.sellList = data.asks.slice(-8, 8).reverse()
       }
-      if (data.bids.length !== 0) {
+      if (data.bids || data.bids.length !== 0) {
         self.buyList = data.bids.slice(0, 8)
       }
     })
@@ -265,8 +265,8 @@ export default {
         }
         self.market = initdata.market
         if (initdata.accounts) {
-          self.extra_base = initdata.accounts[self.market.base_currency].balance
-          self.extra_quote = initdata.accounts[self.market.quote_currency].balance
+          self.extra_base = initdata.accounts[self.market.base_currency] && initdata.accounts[self.market.base_currency].balance
+          self.extra_quote = initdata.accounts[self.market.quote_currency] && initdata.accounts[self.market.quote_currency].balance
         }
         if (!initdata.current_user) {
           self.sn = 'unlogin'
