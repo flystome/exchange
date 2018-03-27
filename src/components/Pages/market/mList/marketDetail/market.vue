@@ -6,10 +6,10 @@
     <div class="detail">
       <div class="detail_top">
         <div class="add_favorite">
-          <a class="favorite" :class = "{'favorited': favorite === true}" @click="addFavorite()">
+          <div class="favorite" :class = "{'favorited': favorite == true}" @click='addFavorite()'>
             <i class="fa fa-star"></i>
             {{$t("markets.favorite")}}
-          </a>
+          </div>
         </div>
         <div class="coin_detail">
           <router-link class="cur_market" :to="{path: ROUTER_VERSION + '/markets'}">
@@ -96,6 +96,13 @@ export default {
     var self = this
     this.curmarket = this.$route.params.id
     this.fetchData(this.$route.params.id)
+    var localList = localStorage.getItem('markets')
+    if (localList) {
+      if (('' + this.curmarket).indexOf(localList.split(',')) !== -1) {
+        this.favorite = true
+      }
+    }
+
     var market = pusher.subscribe('market-' + this.curmarket + '-global')
     market.bind('trades', (data) => {
       console.log(data, this.trades)
@@ -156,12 +163,14 @@ export default {
         data: {}
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
+        console.log(initdata)
         self.ticker = initdata.ticker
         self.trades = initdata.trades.slice(0, 10)
         self.market = initdata.market
         self.logined = !!initdata.current_user
-        self.favorite = initdata.market['is_portfolios']
-        console.log(initdata)
+        if (self.logined) {
+          self.favorite = initdata.market['is_portfolios']
+        }
       })
     },
     goPath: function (index) {
@@ -174,10 +183,12 @@ export default {
       }
     },
     addFavorite: function () {
+      // location.href = '/'
+      this.favorite = true
       var self = this
       if (this.logined) {
         if (this.favorite) {
-          this._delete({
+          self._delete({
             url: '/portfolios/' + self.curmarket + '.json'
           }, function (xhr) {
             if (xhr.status === 200) {
@@ -197,16 +208,23 @@ export default {
           })
         }
       } else {
-        var localList = localStorage.getItem('markets').split(',')
-        console.log(localList)
-        if (localList.length === 0) return ''
-        var i = ('' + this.market).indexOf(localList)
-        if (i !== -1) {
-          localList.push(this.curmarket)
+        var localList = localStorage.getItem('markets')
+        var arr = []
+        if (!localList) {
+          arr.push(this.curmarket)
+          this.favorite = true
         } else {
-          localList.splice(i, 1)
+          arr = localList.split(',')
+          var i = ('' + this.curmarket).indexOf(arr)
+          if (i !== -1) {
+            arr.splice(i, 1)
+            this.favorite = false
+          } else {
+            arr.push(this.curmarket)
+            this.favorite = true
+          }
         }
-        localStorage.setItem('markets', localList)
+        localStorage.setItem('markets', arr)
       }
     }
   }

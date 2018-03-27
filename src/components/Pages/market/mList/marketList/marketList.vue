@@ -94,7 +94,7 @@ export default {
       }
     },
     goPath: function (quote, base) {
-      location.href = '/v2/markets/' + quote + base
+      location.href = '/v2/markets/' + quote.toLowerCase() + base.toLowerCase()
     },
     sortList: function (index) {
       var order = this.coins[index]
