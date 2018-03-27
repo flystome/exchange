@@ -105,7 +105,6 @@ export default {
 
     var market = pusher.subscribe('market-' + this.curmarket + '-global')
     market.bind('trades', (data) => {
-      console.log(data, this.trades)
       self.trades.pop()
       self.trades.unshift(data['trades'][0])
     })
@@ -114,7 +113,6 @@ export default {
       if (JSON.stringify(data) !== '{}') {
         for (var key in data) {
           if (key === self.curmarket) {
-            console.log(self.ticker, data)
             self.ticker.last = data[key].last
             self.ticker.legal_worth = data[key].legal_worth
             self.ticker.percent = data[key].percent
@@ -163,7 +161,6 @@ export default {
         data: {}
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
-        console.log(initdata)
         self.ticker = initdata.ticker
         self.trades = initdata.trades.slice(0, 10)
         self.market = initdata.market

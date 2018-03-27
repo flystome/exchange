@@ -482,6 +482,7 @@ const en = {
       "currency_withdraw": "Withdraw Currency",
       "currency_deposit": "Deposit Currency",
       "homepage": "Homepage",
+      "markets": "Markets",
       "404": "404 Not Found"
     },
     "prompt": {

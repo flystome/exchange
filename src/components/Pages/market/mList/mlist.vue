@@ -69,7 +69,6 @@ export default {
         var getdata = JSON.parse(data.request.response)
         self.getCurData(getdata.success)
         self.marketData = getdata.success
-        console.log(getdata)
       })
     },
     getCurData: function (data) {

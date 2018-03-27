@@ -369,7 +369,6 @@ export default {
     },
     orderBid: function () {
       this.loginCheck()
-      console.log(this.amount_buy)
       if (!this.price || this.price === 0 || this.price === '') return ''
       if (!this.amount_buy || this.amount_buy === 0 || this.amount_sell === '') return ''
       this.showDialog = true

@@ -519,6 +519,7 @@ const zh = {
     "currency_withdraw": "提幣",
     "currency_deposit": "充值",
     "homepage": "首頁",
+    "markets": "Markets",
     "404": "404 頁面",
   },
   "prompt": {
