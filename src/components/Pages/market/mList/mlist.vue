@@ -94,7 +94,6 @@ export default {
       return arr
     },
     getFavorite: function (data) {
-      console.log(data)
       var arr = []
       for (var key in data) {
         if (key !== 'current_user' && key !== 'code') {
