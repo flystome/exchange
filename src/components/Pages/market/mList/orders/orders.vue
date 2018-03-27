@@ -82,6 +82,11 @@ export default {
   mounted: function () {
     this.fetchData()
     this.curMarket = this.$route.params.id
+    window.onpageshow = function (e) {
+      if (e.persisted) {
+        window.location.reload()
+      }
+    }
   },
   computed: {
     ...mapState([

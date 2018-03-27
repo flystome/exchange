@@ -118,6 +118,11 @@ export default {
         }
       }
     })
+    window.onpageshow = function (e) {
+      if (e.persisted) {
+        window.location.reload()
+      }
+    }
   },
   filters: {
     fixed2: function (params) {
