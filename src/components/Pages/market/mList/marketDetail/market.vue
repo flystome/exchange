@@ -176,7 +176,7 @@ export default {
       } else if (index === 1) {
         this.$router.push({path: `${this.ROUTER_VERSION}/markets/${this.curmarket}/trades`})
       } else if (index === 2) {
-        this.$router.push({path: `${this.ROUTER_VERSION}/markets/${this.curMarket}/orders`})
+        this.$router.push({path: `${this.ROUTER_VERSION}/markets/${this.curmarket}/orders`})
       }
     },
     addFavorite: function () {
