@@ -611,6 +611,9 @@ const en = {
         "auth_sms_200": "Verify Code Success",
         "auth_sms_1001": "Verify Failed",
         "auth_sms_1002": "The google authentication code incorrect",
+      },
+      "homepage": {
+        "error_1001":  "Wrong account or password, please try again."
       }
     },
     "footer": {

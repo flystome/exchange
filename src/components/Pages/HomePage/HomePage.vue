@@ -29,7 +29,7 @@
               <span>{{ $t('homepage.login') }}HotEx</span>
               <basic-input ref="email" :validate='"email"' v-model="email" :placeholder="this.$t('homepage.enter_the_mailbox')" class="btc-input"></basic-input>
               <basic-input ref="password" :validate='"password"' v-model="password" :placeholder="this.$t('homepage.enter_the_password')" class="btc-input"></basic-input>
-              <basic-button :disabled='disabled' @click.native="login" class="btc-button" :text="this.$t('homepage.login')"></basic-button>
+              <basic-button :disabled='disabled' @click.native="login" class="btn btc-button" :text="this.$t('homepage.login')"></basic-button>
               <div>
                 <a :href="`${HOST_URL}/signup`">{{ $t('homepage.free_registration') }}</a>
                 <a :class='{"pull-right": language !=="en", "btc-homepage-block": language!=="zh-TW"}' class="btc-pointer">{{ $t('homepage.forget_the_password') }}</a>
@@ -60,7 +60,7 @@
         </div>
       </div>
     </div>
-    <div class="container btc-homepage-main">
+    <div class="btc-homepage-main">
       <div class="btc-homepage-markets btc-marginT30">
         <basic-button v-for="(item,index) in currency" :data-id="item" :key="item" class="btc-button pull-left" :class="{'btc-active':!(currencyindex == index)}"
         @click.native="changemarket(index,item)" :text="item === 'my_optional' ? $t('homepage.my_optional') : `${item.toUpperCase()} ${$t('homepage.trading_area')}`"></basic-button>
@@ -111,7 +111,8 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapState, mapMutations } from 'vuex'
+import Cookies from 'js-cookie'
 import HomeMarket from './HomeMarket/HomeMarket'
 export default {
   name: 'homepage',
@@ -160,14 +161,23 @@ export default {
       }
       this.disabled = true
       this._post({
-        url: '/auth/identity/callback?format=json',
+        url: '/sessions/log_in.json',
         data: {
           'auth_key': this.email,
           'password': this.password
         }
       }, (d) => {
         this.disabled = false
-        console.log(d)
+        if (d.data.success) {
+          location.href = location.href
+        } else {
+          if (d.data.error.code === 1002) {
+            location.href = `${this.HOST_URL}/signin`
+            Cookies.set('status', 'captcha_error')
+          } else {
+            this.PopupBoxDisplay({type: 'error', message: this.$t('api_server.homepage.error_1001')})
+          }
+        }
       })
     },
     marketChange ({ index, type, status }) {
@@ -182,9 +192,7 @@ export default {
       }
       if (this.loginData === 'none') {
         var markData = JSON.parse(JSON.stringify(this.marketData))
-        console.log(status)
         markData[this.currency[this.currencyindex]][index][Object.keys(markData[this.currency[this.currencyindex]][index])[0]].is_portfolios = status
-        console.log(markData[this.currency[this.currencyindex]][index][Object.keys(markData[this.currency[this.currencyindex]][index])[0]], markData)
         localStorage.setItem('marketData', JSON.stringify(markData))
       }
     },
@@ -216,7 +224,8 @@ export default {
           return q[Object.keys(q)].percent - a[Object.keys(a)].percent
         })
       }
-    }
+    },
+    ...mapMutations(['PopupBoxDisplay'])
   },
   watch: {
     marketData () {

@@ -10,6 +10,7 @@ const actions = {
         'DataType': 'application/json;charset=utf-8'
       }
     }, (d) => {
+      console.log(state.route)
       if (state.marketData === '') {
         if (d.data.error) {
           if (!localStorage.getItem('marketData')) {
@@ -28,7 +29,7 @@ const actions = {
       }
       if (d.data.error) {
         Cookies.set('status', 'nologin')
-        // location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
+        location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
       }
       commit('getData', d)
       commit('redirect')

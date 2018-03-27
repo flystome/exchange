@@ -3,7 +3,7 @@
 // css dependencies
 import '@/common/css/bootstrap.css'
 import 'font-awesome/css/font-awesome.min.css'
-import '@/common/css/style.css'
+import '@/common/css/style.scss'
 
 // template dependencies
 import BasicButton from 'Components/BasicButton/BasicButton'
@@ -81,7 +81,6 @@ sync(store, router)
 new Vue({
   router,
   i18n,
-  store,
   template: `<Title></Title>`,
   components: { Title }
 }).$mount('#title')
