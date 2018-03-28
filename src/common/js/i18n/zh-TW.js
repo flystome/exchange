@@ -496,7 +496,8 @@ const zh = {
     "transferred": "已接受",
     "google": "谷歌",
     "sms": "手機",
-    "poundage": "手續費"
+    "poundage": "手續費",
+    "withdraw_confirm_completed": "提現確認完成"
   },
   "deposit_currency": {
     "deposit_address": "地址",

@@ -325,16 +325,26 @@ a{
   .btc-referral-data{
     margin-left: 50px;
     margin-top: 23px;
+    margin-bottom: 40px;
+    width: 61%;
   }
   span{
-    width: 465px;
+    width: 67%;
+    white-space: nowrap;
     border-color: #dfe0e1;
     padding: 5px;
   }
   .btc-referrals-address{
     display: flex;
     margin-top: 12px;
-    margin-bottom: 18px;
+    margin-bottom: 27px;
+    button{
+      white-space: nowrap;
+    }
+  }
+  .btc-newsPrompt{
+    margin-left: 7px;
+    line-height: 15px;
   }
 }
 
@@ -349,9 +359,23 @@ a{
       }
     }
   }
+  .btc-referral .btc-referral-data{
+    width: 50%;
+  }
 }
 
 @media (max-width: 992px) {
+  .btc-referral .btc-referral-data{
+    width: 70%;
+    margin-left: 132px;
+  }
+  .btc-referral .btc-qrcode{
+    text-align: center;
+    margin-left: 0;
+  }
+  .btc-referral-qrcode{
+    float: none;
+  }
   .btc-member-vc{
     padding: 0
   }
@@ -378,6 +402,17 @@ a{
 }
 
 @media(max-width: 766px){
+  .btc-referral .btc-referral-data{
+    margin-left: 4%;
+    width: 82%;
+  }
+  .btc-referral .btc-qrcode{
+    text-align: center;
+    margin-left: 0;
+  }
+  .btc-referral-qrcode{
+    float: none;
+  }
   .btc-membercenter-header{
     padding-bottom: 88px !important;
   }

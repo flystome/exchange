@@ -276,7 +276,7 @@ export default {
       this.TotalAssets = Number(d.total_assets.btc_worth).toFixed(3)
       this.Locked = Number(d.total_assets.locked_btc_worth).toFixed(3)
       if (d.notice) {
-        this.PopupBoxDisplay({message: d.notice.message, type: d.notice.type})
+        this.PopupBoxDisplay({message: this.$t('withdraw_currency.withdraw_confirm_completed'), type: d.notice.type})
       }
       d.rucaptcha && (this.Rucaptcha = d.rucaptcha)
       d.currencies.forEach((a) => {
@@ -699,9 +699,7 @@ export default {
       clearTimeout(time)
       this.prompt = this.$t('deposit_currency.copy_success')
     })
-
     clipboard.on('success', _debounce(500, time))
-
   },
   watch: {
     $route (to) {

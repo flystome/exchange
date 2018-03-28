@@ -144,21 +144,24 @@
           </div>
           <div class="btc-referral-container">
             <div class="btc-referral-qrcode btc-fl">
-              <qr-code :length='"200px"' :dateUrl="qrcode('123456')"></qr-code>
+              <qr-code v-if="loginData !== 'none'" :length='"200px"' :dateUrl="qrcode(`${HOST_URL}?r=${loginData.promotion_id}`)"></qr-code>
             </div>
             <div class="btc-fl btc-referral-data">
-              <div><strong>{{ $t('my_account.recommended_links') }}</strong></div>
+              <div>
+                <strong>{{ $t('my_account.recommended_links') }}</strong>
+                <news-prompt :text='prompt'></news-prompt>
+              </div>
               <div class="btc-referrals-address">
-                <span class="btc-b">
-                   123456
+                <span v-if="loginData !== 'none'" id="copy1" class="btc-b">
+                   {{ `${HOST_URL}?r=${loginData.promotion_id}` }}
                 </span>
-                <basic-button :text="$t('deposit_currency.copy_address')"></basic-button>
+                <basic-button class='btn-copy1' data-clipboard-target="#copy1" :text="$t('deposit_currency.copy_address')"></basic-button>
+              </div>
+              <div class="btc-marginB20 btc-bottom">
+                {{ $t('my_account.effective_recommended') }}: <strong>{{ loginData.promotion_amount }}</strong>
               </div>
               <div>
-                {{ $t('my_account.effective_recommended') }}: <strong>15</strong>
-              </div>
-              <div>
-                {{ $t('my_account.my_trade_discount') }}: <strong>15</strong>
+                {{ $t('my_account.my_trade_discount') }}: <strong>{{ `${loginData.commission_level * 10}%` }}</strong>
               </div>
             </div>
           </div>
@@ -181,6 +184,8 @@
 import { mapGetters, mapMutations } from 'vuex'
 import moment from 'moment'
 import Cookies from 'js-cookie'
+import Clipboard from 'clipboard'
+const _debounce = require('lodash/fp/debounce.js')
 moment.locale('zh-cn')
 var QRCode = require('qrcode')
 
@@ -206,8 +211,24 @@ export default {
       Cookies.remove('code')
     }
   },
+  mounted () {
+    /* eslint-disable no-new */
+    var clipboard = new Clipboard('.btn-copy1')
+    var time = () => {
+      setTimeout(() => {
+        this.prompt = ''
+      }, 1500)
+    }
+
+    clipboard.on('success', () => {
+      clearTimeout(time)
+      this.prompt = this.$t('deposit_currency.copy_success')
+    })
+    clipboard.on('success', _debounce(500, time))
+  },
   data () {
     return {
+      prompt: '',
       HOST_URL: process.env.HOST_URL,
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       name_activated: false,

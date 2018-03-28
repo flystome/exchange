@@ -457,7 +457,8 @@ const en = {
       "transferred": "Accepted",
       "google": "Google ",
       "sms": "SMS ",
-      "poundage": "Poundage"
+      "poundage": "Poundage",
+      "withdraw_confirm_completed": "Withdraw confirm is completed"
     },
     "deposit_currency": {
       "deposit_address": "Address",

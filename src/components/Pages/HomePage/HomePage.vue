@@ -75,7 +75,7 @@
           <img class="btc-pointer" v-else @click="search = ''" src="~Img/search-delete.png" >
         </div>
         <keep-alive>
-        <HomeMarket v-on:marketChange="marketChange" :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]"></HomeMarket>
+          <HomeMarket v-on:marketChange="marketChange" :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]"></HomeMarket>
         </keep-alive>
       </div>
       <div class="btc-homepage-logo text-center">

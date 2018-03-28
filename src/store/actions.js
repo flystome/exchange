@@ -10,6 +10,7 @@ const actions = {
         'DataType': 'application/json;charset=utf-8'
       }
     }, (d) => {
+      console.log(location.href)
       var lang = Cookies.get('locale')
       if (lang) {
         this.commit('ChangeLanguage', lang)
