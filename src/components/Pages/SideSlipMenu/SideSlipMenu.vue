@@ -22,7 +22,7 @@
             </div>
             <ul v-if="market" class="btc-marginT60 btc-marginL30">
                <li v-for="d in marketData" :key="Object.keys(d)[0]">
-                  <a :href="`${HOST_URL}/markets/${Object.keys(d)[0]}`">
+                  <a @click="gomarket(`/markets/${Object.keys(d)[0]}`)">
                     {{ d[Object.keys(d)[0]].name }}
                   </a>
                 </li>
@@ -68,6 +68,9 @@
               </li>
             </ul>
           </li>
+          <li>
+
+          </li>
         </ul>
       </div>
     </div>
@@ -101,8 +104,14 @@ export default {
     }
   },
   methods: {
+    gomarket (route) {
+      this.SideSlipMenuDisplay(false)
+      this.market = false
+      this.goPath(route)
+    },
     changeLang (str) {
       this.SideSlipMenuDisplay(false)
+      this.Lang = !this.Lang
       this.ChangeLanguage(str)
       this.$i18n.locale = str
       this._post({

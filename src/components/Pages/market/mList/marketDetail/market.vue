@@ -45,11 +45,8 @@
         </div>
       </div>
     </div>
-
     <div class="graph">
-
     </div>
-
     <div class="new_order">
       <h2>{{$t("markets.history")}}</h2>
       <ul class="order_hd">
