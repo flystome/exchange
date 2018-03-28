@@ -530,7 +530,8 @@ const zh = {
     "not_certified": "手機或者谷歌沒有驗證",
     "google_not_certified": "Google身份驗證不受限制",
     "not_certified_prompt": "為了不影響你在HOTEX平台上的用戶體驗，請前往驗證",
-    "go_validate": "驗證"
+    "go_validate": "驗證",
+    "log_and_operate": "請登入後再操作"
   },
   "placeholder": {
     "cell_phone_number": "手機號碼",

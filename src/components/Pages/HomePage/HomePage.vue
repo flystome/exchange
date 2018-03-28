@@ -32,7 +32,7 @@
               <basic-button :disabled='disabled' @click.native="login" class="btn btc-button" :text="this.$t('homepage.login')"></basic-button>
               <div>
                 <a :href="`${HOST_URL}/signup`">{{ $t('homepage.free_registration') }}</a>
-                <a :class='{"pull-right": language !=="en", "btc-homepage-block": language!=="zh-TW"}' class="btc-pointer">{{ $t('homepage.forget_the_password') }}</a>
+                <a :href="`${HOST_URL}/reset_passwords/new`" :class='{"pull-right": language !=="en", "btc-homepage-block": language!=="zh-TW"}' class="btc-pointer">{{ $t('homepage.forget_the_password') }}</a>
               </div>
             </div>
           </div>
@@ -69,9 +69,10 @@
       <div class="btc-homepage-markets btc-marginT30">
         <basic-button v-for="(item,index) in currency" :data-id="item" :key="item" class="btc-button pull-left" :class="{'btc-active':!(currencyindex == index)}"
         @click.native="changemarket(index,item)" :text="item === 'my_optional' ? $t('homepage.my_optional') : `${item.toUpperCase()} ${$t('homepage.trading_area')}`"></basic-button>
-        <div class="btc-homepage-search btc-fr btc-b">
+        <div @keyup.esc="search = ''" class="btc-homepage-search btc-fr btc-b">
           <input v-model="search" class="btc-search" :placeholder='$t("homepage.search")' />
-          <img src="~Img/search.png" >
+          <img v-if='!search' src="~Img/search.png" >
+          <img class="btc-pointer" v-else @click="search = ''" src="~Img/search-delete.png" >
         </div>
         <HomeMarket v-on:marketChange="marketChange" :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]"></HomeMarket>
       </div>
