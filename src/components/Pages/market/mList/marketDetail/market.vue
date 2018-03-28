@@ -1,7 +1,8 @@
 <template>
   <div class="market_detail">
     <ul class="market_hd clearfix">
-      <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}" @click="goPath(index)">{{hd}}</li>
+<!--       <li v-for="(hd,index) in hds" :class="{'check': currencyindex == index}" @click="goPath(index)">{{hd}}</li> -->
+      <li v-for="(hd,index) in hds" :key='hd' :class="{'check': currencyindex == index}" @click="goPath(index)">{{$t(hd)}}</li>
     </ul>
     <div class="detail">
       <div class="detail_top">
@@ -53,7 +54,7 @@
     <div class="new_order">
       <h2>{{$t("markets.history")}}</h2>
       <ul class="order_hd">
-        <li v-for="head in heads" :key="head">{{head}}</li>
+        <li v-for="head in heads" :key="head">{{$t(head)}}</li>
       </ul>
       <ul class="order_list">
         <li v-for="item in trades" :key="item.tid">
@@ -65,10 +66,10 @@
     </div>
     <div class="trade">
       <div class="btn">
-        <router-link class="bid" :to="{path: ROUTER_VERSION + '/markets/' + curmarket + '/trades#buy', }">{{$t("markets.buy")}}</router-link>
+        <router-link class="bid" :to="{path: ROUTER_VERSION + '/markets/' + curmarket + '/trades#buy'}">{{$t("markets.buy")}}</router-link>
       </div>
       <div class="btn">
-        <router-link class="ask" :to="{path: ROUTER_VERSION + '/markets/' + curmarket + '/trades#sell', }">{{$t("markets.sell")}}</router-link>
+        <router-link class="ask" :to="{path: ROUTER_VERSION + '/markets/' + curmarket + '/trades#sell'}">{{$t("markets.sell")}}</router-link>
       </div>
     </div>
   </div>
@@ -82,8 +83,8 @@ export default {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       currencyindex: 0,
-      hds: [this.$t('markets.quotes'), this.$t('markets.trade'), this.$t('markets.currency')],
-      heads: [this.$t('markets.newPrice'), this.$t('markets.amount'), this.$t('markets.time')],
+      hds: ['markets.quotes', 'markets.trade', 'markets.currency'],
+      heads: ['markets.newPrice', 'markets.amount', 'markets.time'],
       curmarket: '',
       market: {},
       ticker: {},

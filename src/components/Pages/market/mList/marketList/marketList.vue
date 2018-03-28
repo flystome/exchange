@@ -1,7 +1,7 @@
 <template>
   <div class="market">
     <ul class="hd clearfix">
-      <li class="text-center" :class="{'up': times == 1 && currencyIndex == index , 'down': times == 2 && currencyIndex == index}"  v-for="(head, index) in heads" :key="head" :data-time = '0'  @click="sortList(index)">
+      <li class="text-center" :class="{'up': times == 1 && currencyIndex == index , 'down': times == 2 && currencyIndex == index}"  v-for="(head, index) in heads" :key="head" @click="sortList(index)">
         <span>{{head}}</span>
         <i class="caret"></i>
       </li>
@@ -94,7 +94,7 @@ export default {
       }
     },
     goPath: function (quote, base) {
-      location.href = '/v2/markets/' + quote.toLowerCase() + base.toLowerCase()
+      this.$router.push({path: `${this.ROUTER_VERSION}/markets/${quote.toLowerCase()}${base.toLowerCase()}`})
     },
     sortList: function (index) {
       var order = this.coins[index]

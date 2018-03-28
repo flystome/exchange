@@ -2,7 +2,7 @@
   <div id="markets">
     <ul class="marketsHd clearfix">
       <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}"
-      @click="changemarket(index,hd)">{{hd}}</li>
+      @click="changemarket(index,hd)">{{$t(hd)}}</li>
     </ul>
     <div class="marketBd">
       <marketList :curData = "curData[currencyindex]"></marketList>
@@ -18,7 +18,7 @@ export default {
   name: 'markets',
   data () {
     return {
-      hds: [this.$t('markets.favorite'), 'btc', 'usdt'],
+      hds: ['markets.favorite', 'btc', 'usdt'],
       currencyindex: 1,
       marketData: {},
       curData: []
