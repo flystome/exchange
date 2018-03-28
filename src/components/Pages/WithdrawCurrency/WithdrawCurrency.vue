@@ -146,7 +146,7 @@
                 <!-- {{ $t('deposit_currency.warn1') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn2') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn3') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn4') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn5') }} -->
               </div>
             </div>
-            <basic-button :disabled='disabled' data-clipboard-target="#copy" class="btc-marginT10 btn-copy btn" :text='$t("deposit_currency.copy_address")'></basic-button>
+            <basic-button style="margin-top: 8px;" :disabled='disabled' data-clipboard-target="#copy" class="btn-copy btn" :text='$t("deposit_currency.copy_address")'></basic-button>
             <news-prompt :text='prompt'></news-prompt>
           </div>
         </template>
