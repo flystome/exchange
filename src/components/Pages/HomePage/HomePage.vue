@@ -92,7 +92,11 @@
           <img class="btc-pointer" v-else @click="search = ''" src="~Img/search-delete.png" >
         </div>
         <keep-alive>
-          <HomeMarket v-on:marketChange="marketChange" :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]"></HomeMarket>
+          <HomeMarket v-if="curData" v-on:marketChange="marketChange" :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]">
+          </HomeMarket>
+          <div v-else style="position: absolute;top: 40%;left: 48%;">
+            <vue-simple-spinner size="88"></vue-simple-spinner>
+          </div>
         </keep-alive>
       </div>
       <div class="btc-homepage-logo text-center">
@@ -214,7 +218,7 @@ export default {
       currency: ['usdt', 'btc', 'eth', 'my_optional'],
       getetc: '',
       change: 'no',
-      curData: [],
+      curData: '',
       disabled: false
     }
   },

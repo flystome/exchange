@@ -3,14 +3,14 @@
     <transition name='SideSlipMenu'>
       <section class="btc-main" :class="{'btc-background-white': this.$route.name === 'HomePage' ||  this.$route.name === 'home'}">
         <header is='Header' />
-        <div class="btc-container container" v-cloak>
+        <div v-if="loading" class="btc-container container" v-cloak>
           <keep-alive>
             <router-view></router-view>
           </keep-alive>
         </div>
-      <!-- <div v-else>
+      <div style="margin-top: 20%;margin-bottom: 20%;" v-else>
         <vue-simple-spinner size="88"></vue-simple-spinner>
-      </div> -->
+      </div>
       </section>
     </transition>
     <footer is='Footer' />
@@ -30,6 +30,11 @@ import PopupBox from '@/components/PublicComponents/PopupBox/PopupBox'
 
 export default {
   name: 'App',
+  data () {
+    return {
+      unLogin: ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home']
+    }
+  },
   components: {
     Header,
     Footer,
@@ -38,6 +43,16 @@ export default {
     PopupBox
   },
   computed: {
+    loading () {
+      if (this.unLogin.includes(this.$route.name)) {
+        return true
+      } else {
+        if (this.loginData !== 'none') {
+          return true
+        }
+      }
+      return false
+    },
     ...mapGetters(['loginData'])
   }
 }
