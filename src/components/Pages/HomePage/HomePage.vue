@@ -21,7 +21,7 @@
             </div>
           </div>
         </div>
-      <div class="container">
+      <div class="from-container">
         <div class="btc-homepage-login">
           <div class="btc-nologin" v-if="loginData === 'none' || loginData.errors">
           <!-- <div class="btc-nologin"> -->
@@ -53,8 +53,13 @@
               </span>
             </div>
             <div class="btc-marginT25">
-              <basic-button class="btc-button" :text="$t('homepage.deposit')"></basic-button>
-              <basic-button class="btc-button pull-right" :text="$t('homepage.withdraw')"></basic-button>
+              <router-link :to="`${ROUTER_VERSION}/currency/deposit`">
+                <basic-button class="btc-button" :text="$t('homepage.deposit')">
+                </basic-button>
+              </router-link>
+              <router-link :to="`${ROUTER_VERSION}/currency/withdraw`">
+                <basic-button class="btc-button pull-right" :text="$t('homepage.withdraw')"></basic-button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -135,7 +140,8 @@ export default {
     return {
       email: '',
       password: '',
-      trend: [],
+      trend: [0, 0],
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       HOST_URL: process.env.HOST_URL,
       btc_worth: '',
       factor: '',

@@ -17,7 +17,7 @@
         <tr v-for='(item , index) in oldData' :key='item.name' v-if="matchName(item.name, index)">
           <td>
             <a class="btc-homepage-currency" style="color: #333333;">
-              <span>{{ item.name }}</span>
+              <span><a class="btc-homepage-market" :href="`${HOST_URL}/markets/${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`">{{ item.name }}</a></span>
               <i :disabled="disabled" @click="portfolios(item, index)" class="far fa fa-star mylove" :class="{'is-star': item.is_portfolios}"></i>
             </a>
           </td>
@@ -31,11 +31,12 @@
             <div v-else-if="Number(item.percent) < 0"><span style="background:#00c4a2">{{ Number(item.percent).toFixed(2) }}%</span></div>
             <div v-else><span style="background:#999999">+{{ Number(item.percent).toFixed(2) }}</span></div>
           </td>
-          <td style="max-width: 165px;">
+          <td style="max-width: 155px;padding-right: 25px;width:220px">
             <trend
-              viewBox="40 0 420 75"
-              :data="trend ? trend[`${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`] : [0,0]"
+              viewBox="40 0 500 75"
+              :data="trend && trend[`${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`]"
               :gradient="['black']"
+              :padding="'0'"
               >
             </trend>
           </td>
@@ -56,6 +57,7 @@ export default {
   data () {
     return {
       oldData: null,
+      HOST_URL: process.env.HOST_URL,
       heads: ['price', `volume`, 'turnover', 'day_highs_and_lows'],
       coins: ['last', 'volume', 'total', 'percent'],
       times: 0,

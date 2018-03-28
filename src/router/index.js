@@ -34,7 +34,7 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: MemberCenter
+      component: HomePage
     },
     {
       path: `${version}/markets`,
@@ -57,7 +57,7 @@ const router = new Router({
       component: Orders
     },
     {
-      path: `${version}/homepage`,
+      path: `${version}/`,
       name: 'HomePage',
       component: HomePage
     },
@@ -156,7 +156,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   var user = navigator.userAgent
   var mobile = user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
-  if (to.path === '/') {
+  if (to.path === '/' || to.path === `${version}` || to.path === `${version}/`) {
     if (mobile) {
       next(`${version}/markets`)
     }

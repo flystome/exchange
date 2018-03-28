@@ -41,7 +41,7 @@ export default {
   methods: {
     gopath () {
       if (this.PopupBox.url) {
-        this.$router.push(`${this.ROUTER_VERSION}${this.PopupBox.url}`)
+        this.$router.replace(`${this.ROUTER_VERSION}${this.PopupBox.url}`)
       }
       this.ChangePopupBox({
         status: false

@@ -12,14 +12,14 @@ const redirect = (state, action, type) => {
       if (!state.loginData.activated) {
         action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/'})
       } else if (state.loginData.app_activated) {
-        router.push({path: `${ROUTER_VERSION}/`})
+        router.replace(`${ROUTER_VERSION}/`)
       }
       break
     case 'ValidateSms':
       if (!state.loginData.activated) {
         action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/'})
       } else if (state.loginData.sms_activated) {
-        router.push({path: `${ROUTER_VERSION}/`})
+        router.replace({path: `${ROUTER_VERSION}/`})
       }
       break
     case 'ValidateIdentity':
@@ -29,7 +29,7 @@ const redirect = (state, action, type) => {
       } else if (!(state.loginData.sms_activated || state.loginData.app_activated)) {
         action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1002_hint'), type: 'warn', url: '/'})
       } else if (state.loginData.id_document.aasm_state !== 'unverified') {
-        router.push({path: `${ROUTER_VERSION}/`})
+        router.replace({path: `${ROUTER_VERSION}/`})
       }
       break
     case 'WithdrawCurrency':

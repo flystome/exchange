@@ -2,10 +2,6 @@
   <div @click="promptEmpty" class="btc-UploadImg">
     <div class="btc-Upload-block">
       <div>
-        <!-- <basic-button :text='"点击上传"'>
-
-        </basic-button> -->
-
       </div>
       <div class="btc-UploadExplain btc-marginR20 btc-marginT25">
         <strong>{{ Upload.UploadExplain }}</strong>
@@ -50,6 +46,7 @@ export default {
       this.$emit('prompt')
       if (el.target.files[0].size > 0.7 * 1024 * 1024) {
         this.prompt = `${this.$t('validate_identity.img_to_big')}700k`
+        this.$refs.input.value = ''
         this.UploadImg = ''
       } else {
         var FileRead = new FileReader()

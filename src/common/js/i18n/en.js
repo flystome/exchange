@@ -576,8 +576,8 @@ const en = {
         "success_200": "Google Authentication Success"
       },
       "validate_identity": {
-        "success_200": "Photo Update Successfully",
-        "error_1001": "Photo Update Failure"
+        "success_200": "Photo Upload Successfully",
+        "error_1001": "Photo Upload Failure"
       },
       "my_account": {
         "success_200": "Email has been sent, please check it",

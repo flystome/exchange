@@ -1,13 +1,16 @@
 <template>
   <div id="app">
     <transition name='SideSlipMenu'>
-      <section class="btc-main" :class="{'btc-background-white': this.$route.name === 'HomePage'}">
+      <section class="btc-main" :class="{'btc-background-white': this.$route.name === 'HomePage' ||  this.$route.name === 'home'}">
         <header is='Header' />
         <div class="btc-container container" v-cloak>
           <keep-alive>
             <router-view></router-view>
           </keep-alive>
         </div>
+      <!-- <div v-else>
+        <vue-simple-spinner size="88"></vue-simple-spinner>
+      </div> -->
       </section>
     </transition>
     <footer is='Footer' />

@@ -17,7 +17,8 @@ import DivContenteditable from 'Components/DivContenteditable/DivContenteditable
 import Title from 'Pages/Title/Title'
 import App from './App'
 import BasicInstructions from 'Components/BasicInstructions/BasicInstructions'
-import Trend from 'vuetrend'
+import Trend from '@/common/js/trend/vue-trend.esm.js'
+import Spinner from 'vue-simple-spinner'
 
 // js dependencies
 import Vue from 'vue'
@@ -60,11 +61,14 @@ const components = [
   UploadImg,
   NewsPrompt,
   DivContenteditable,
-  BasicInstructions
+  BasicInstructions,
+  Spinner
 ]
 components.forEach(component => {
   Vue.component(component.name, component)
 })
+
+sync(store, router)
 
 /* eslint-disable no-new */
 new Vue({
@@ -75,8 +79,6 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
-
-sync(store, router)
 
 new Vue({
   router,

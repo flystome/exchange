@@ -29,7 +29,7 @@
         }
       }
     }
-    .container{
+    .from-container{
       position: relative;
       .btc-homepage-login{
         width: 260px;
@@ -63,8 +63,10 @@
             >span{
               display: block;
             }
-            >button{
-              min-width: 102px;
+            >a{
+              button{
+                min-width: 102px;
+              }
             }
           }
 
@@ -143,4 +145,9 @@
   }
 }
 
+.btc-homepage-info{
+  span{
+    cursor: pointer
+  }
+}
 

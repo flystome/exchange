@@ -8,16 +8,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" :href="`${HOST_URL}`">
+          <router-link class="navbar-brand" to="/">
             <img src="~Img/logo.svg">
-          </a>
+          </router-link>
           <div class="btc-header-sideslip" @click="SideSlipMenuDisplay(true)">
             <img src="~Img/header-more.png">
           </div>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="z-index:100">
           <ul class="nav navbar-nav">
-            <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.home')}} <span class="sr-only">(current)</span></a></li>
+            <li class="btc-link">
+                <router-link to="/">
+                  {{$t('nav.home')}}
+                  <span class="sr-only">(current)</span>
+                </router-link>
+            </li>
             <li role="presentation" class="dropdown btc-country btc-market btc-img-position">
               <a class="dropdown-toggle btc-paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <span>{{$t('nav.transaction')}}</span><span class="caret">
@@ -136,11 +141,6 @@ export default {
       }
       this.$router.push({
         path: `${this.ROUTER_VERSION}${path}`
-      })
-    },
-    goHome () {
-      this.$router.push(`${this.ROUTER_VERSION}/`, () => {
-        this.$store.dispatch('getData')
       })
     },
     ...mapMutations(['ChangeLanguage'])

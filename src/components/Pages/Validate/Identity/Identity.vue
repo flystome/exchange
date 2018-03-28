@@ -161,14 +161,22 @@ export default {
       const first = await this.$refs['first_name'].$validator.validateAll()
       const last = await this.$refs['last_name'].$validator.validateAll()
       const IdCard = await this.$refs['IdCard'].$validator.validateAll()
-      if (!first || !last || !IdCard) {
+       if (!first || !last || !IdCard) {
         this.$refs['first_name'].$el.scrollIntoView(true)
         return
       }
-      const billFile = this.$refs['id_bill_file_attributes'].$refs['input'].files[0]
-      const holdingFile = this.$refs['id_document_selfie_holding_file_attributes'].$refs['input'].files[0]
-      const backF = this.$refs['id_document_back_file_attributes'].$refs['input'].files[0]
-      const frontF = this.$refs['id_document_front_file_attributes'].$refs['input'].files[0]
+      const bill = this.$refs['id_bill_file_attributes']
+      const billFile = bill.$refs['input'].files[0]
+      const holding = this.$refs['id_document_selfie_holding_file_attributes']
+      const holdingFile = holding.$refs['input'].files[0]
+      const back = this.$refs['id_document_back_file_attributes']
+      const backF = back.$refs['input'].files[0]
+      const front = this.$refs['id_document_front_file_attributes']
+      const frontF = front.$refs['input'].files[0]
+      bill.promptEmpty()
+      holding.promptEmpty()
+      back.promptEmpty()
+      front.promptEmpty()
       if (!billFile) {
         document.getElementById('indentity4').scrollIntoView(true)
         this.verifymsg.indentity4 = this.$t('validate_identity.please_upload_file')
@@ -205,6 +213,7 @@ export default {
             buttondisplay: true
           })
         }, 1000)
+        this.disabled = false
       }, 10000)
       var formData = new FormData()
       var z = this.objectToFormData({
@@ -232,8 +241,8 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }, d => {
+        this.disabled = false
         if (d.data.success) {
-          this.disabled = false
           clearTimeout(timer)
           this.ChangePopupBox({message: this.$t('api_server.validate_identity.success_200'), url: '/', type: 'success', buttondisplay: true})
           this.$store.dispatch('getData')

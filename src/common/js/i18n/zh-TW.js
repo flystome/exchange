@@ -564,8 +564,8 @@ const zh = {
       "success_200": "Google身份驗證成功"
     },
     "validate_identity": {
-      "success_200": "照片更新成功",
-      "error_1001": "照片更新失敗"
+      "success_200": "照片上傳成功",
+      "error_1001": "照片上傳失敗"
     },
     "my_account": {
       "success_200": "激活郵件已發送，請檢查您的郵箱完成郵箱驗證",
