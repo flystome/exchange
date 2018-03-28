@@ -138,6 +138,31 @@
     </template>
     <template v-if="step === 2">
       <div class="container">
+        <div class="btc-container-block btc-member-handleRecord btc-referral">
+          <div class="btc-member-blockHeader">
+            <strong>{{ $t('my_account.referrals_title') }}</strong>
+          </div>
+          <div class="btc-referral-container">
+            <div class="btc-referral-qrcode btc-fl">
+              <qr-code :length='"200px"' :dateUrl="qrcode('123456')"></qr-code>
+            </div>
+            <div class="btc-fl btc-referral-data">
+              <div><strong>{{ $t('my_account.recommended_links') }}</strong></div>
+              <div class="btc-referrals-address">
+                <span class="btc-b">
+                   123456
+                </span>
+                <basic-button :text="$t('deposit_currency.copy_address')"></basic-button>
+              </div>
+              <div>
+                {{ $t('my_account.effective_recommended') }}: <strong>15</strong>
+              </div>
+              <div>
+                {{ $t('my_account.my_trade_discount') }}: <strong>15</strong>
+              </div>
+            </div>
+          </div>
+        </div>
       <basic-table :captionTitle='getRecommendCount.captionTitle' :item='getRecommendCount.Item'>
       <div slot="more" class="text-center btc-b-t btc-table-more">
         <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('my_account.show_more')}}</a>
@@ -157,10 +182,18 @@ import { mapGetters, mapMutations } from 'vuex'
 import moment from 'moment'
 import Cookies from 'js-cookie'
 moment.locale('zh-cn')
+var QRCode = require('qrcode')
 
 export default {
   name: 'MemberCenter',
   created () {
+    var to = this.$route
+    if (/my_account/.test(to.path)) {
+      this.step = 1
+    }
+    if (/referral/.test(to.path)) {
+      this.step = 2
+    }
     var code = Cookies.get('code')
     this.$i18n.locale = Cookies.get('locale')
     if (code) {
@@ -195,11 +228,19 @@ export default {
     }
   },
   methods: {
+    qrcode (str) {
+      var dateUrl = ''
+      QRCode.toDataURL(str, {widht: 150, height: 150}, (err, string) => {
+        if (err) console.log(err)
+        dateUrl = string
+      })
+      return dateUrl
+    },
     account () {
-      this.step = 1
+      this.$router.push(`${this.ROUTER_VERSION}/my_account`)
     },
     async referrals () {
-      this.step = 2
+      this.$router.push(`${this.ROUTER_VERSION}/referral`)
       if (this.httplock) return
       this._get({
         url: '/settings/referrals.json'
@@ -375,8 +416,13 @@ export default {
     loginData () {
       this.getTicket()
     },
-    ReferralsData () {
-
+    $route (to) {
+      if (/my_account/.test(to.path)) {
+        this.step = 1
+      }
+      if (/referral/.test(to.path)) {
+        this.step = 2
+      }
     }
   }
 }

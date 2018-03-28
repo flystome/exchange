@@ -366,7 +366,11 @@ const en = {
       "200_hint": "Verify Email Success",
       "verifying": "verifying",
       "success_200": "Email has been sent, please check it",
-      "error_1001": "Token errors, please Reconfirm"
+      "error_1001": "Token errors, please Reconfirm",
+      "referrals_title": "Invite friends to register and trade through your exclusive two-dimensional code or link",
+      "recommended_links": "Recommended links",
+      "effective_recommended": "My effective recommended number of users",
+      "my_trade_discount": "My trade discount",
     },
     "validate_identity": {
       "uploading_photos": "Uploading Photos",
@@ -484,6 +488,7 @@ const en = {
       "currency_withdraw": "Withdraw Currency",
       "currency_deposit": "Deposit Currency",
       "homepage": "Homepage",
+      "referral": "Referral",
       "markets": "Markets",
       "404": "404 Not Found"
     },

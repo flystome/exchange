@@ -74,7 +74,9 @@
           <img v-if='!search' src="~Img/search.png" >
           <img class="btc-pointer" v-else @click="search = ''" src="~Img/search-delete.png" >
         </div>
+        <keep-alive>
         <HomeMarket v-on:marketChange="marketChange" :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]"></HomeMarket>
+        </keep-alive>
       </div>
       <div class="btc-homepage-logo text-center">
         <img src="~Img/logo.png" >
@@ -132,7 +134,7 @@ export default {
       this.btc_worth = Number(d.total_assets.btc_worth).toFixed(2)
     })
     this._get({
-      url: '/k/trends/trends.json'
+      url: '/k/trends.json'
     }, (d) => {
       this.trend = d.data
     })

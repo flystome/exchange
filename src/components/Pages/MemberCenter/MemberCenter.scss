@@ -139,6 +139,7 @@ a{
   border-bottom: 1px solid #f2f2f2;
   padding-bottom: 8px;
   margin: 0 9px;
+  font-size: 12px;
 }
 
 .btc-member-handleServer{
@@ -314,6 +315,28 @@ a{
   border: none;
 }
 
+.btc-referral{
+  >div{
+    border: none
+  }
+  .btc-qrcode{
+    margin-left: 183px;
+  }
+  .btc-referral-data{
+    margin-left: 50px;
+    margin-top: 23px;
+  }
+  span{
+    width: 465px;
+    border-color: #dfe0e1;
+    padding: 5px;
+  }
+  .btc-referrals-address{
+    display: flex;
+    margin-top: 12px;
+    margin-bottom: 18px;
+  }
+}
 
 @media(max-width: 1200px){
   .btc-member-ver{

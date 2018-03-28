@@ -77,7 +77,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new BundleAnalyzerPlugin({
       openAnalyzer: false,
       analyzerHost: '0.0.0.0',
-      analyzerPort: 8888
+      analyzerPort: process.env.analyzerPort
     })
   ]
 })

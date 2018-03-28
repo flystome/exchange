@@ -405,7 +405,11 @@ const zh = {
     "1002_hint": "請進行Google驗證或手機驗證",
     "1003_hint": "請實名認證",
     "200_hint": "驗證電子郵件成功",
-    "verifying": "驗證中"
+    "verifying": "驗證中",
+    "referrals_title": "邀請好友通過你的專屬二維碼或連結注册並交易",
+    "recommended_links": "推荐链接",
+    "effective_recommended": "我的有效推薦用戶個數",
+    "my_trade_discount": "我的交易折扣"
   },
   "validate_identity": {
     "uploading_photos": "上傳照片中",
@@ -523,7 +527,8 @@ const zh = {
     "currency_withdraw": "提幣",
     "currency_deposit": "充值",
     "homepage": "首頁",
-    "markets": "Markets",
+    "referral": "推薦用戶",
+    "markets": "市場",
     "404": "404 頁面",
   },
   "prompt": {

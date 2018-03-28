@@ -69,6 +69,7 @@ const router = new Router({
     {
       path: `${version}/my_account`,
       name: 'my_account',
+      alias: `${version}/referral`,
       component: MemberCenter
     },
     {
