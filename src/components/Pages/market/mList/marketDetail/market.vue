@@ -1,7 +1,6 @@
 <template>
   <div class="market_detail">
     <ul class="market_hd clearfix">
-<!--       <li v-for="(hd,index) in hds" :class="{'check': currencyindex == index}" @click="goPath(index)">{{hd}}</li> -->
       <li v-for="(hd,index) in hds" :key='hd' :class="{'check': currencyindex == index}" @click="goPath(index)">{{$t(hd)}}</li>
     </ul>
     <div class="detail">
