@@ -80,7 +80,6 @@ export default {
     }
   },
   mounted: function () {
-    this.fetchData()
     this.curMarket = this.$route.params.id
     window.onpageshow = function (e) {
       if (e.persisted) {
@@ -96,6 +95,7 @@ export default {
   watch: {
     loginData (val) {
       this.getRefresh(val.sn)
+      this.fetchData()
       return val
     }
   },
@@ -133,6 +133,7 @@ export default {
         data: {}
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
+        console.log(initdata)
         if (!initdata.success) {
           self.curData = []
         } else {

@@ -142,7 +142,8 @@
                 {{ deposit_address }}
               </div>
               <div class="btc-address-warn btc-marginT10">
-                {{ $t('deposit_currency.warn1') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn2') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn3') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn4') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn5') }}
+                {{ ReplaceCurrency }}
+                <!-- {{ $t('deposit_currency.warn1') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn2') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn3') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn4') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn5') }} -->
               </div>
             </div>
             <basic-button :disabled='disabled' data-clipboard-target="#copy" class="btc-marginT10 btn-copy btn" :text='$t("deposit_currency.copy_address")'></basic-button>
@@ -662,6 +663,9 @@ export default {
       return this.resend ? (this.second < 0
         ? this.$t('withdraw_currency.resend')
         : `${this.$t('withdraw_currency.resend')} ${this.second}s`) : this.$t('withdraw_currency.send_identify_code')
+    },
+    ReplaceCurrency () {
+      return this.$t('deposit_currency.warn1').replace(/COIN/gi, this.CurrencyType.toUpperCase())
     },
     getWithdrawRecord () {
       return [{content: [

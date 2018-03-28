@@ -512,11 +512,7 @@ const zh = {
     "confirmation_number": "確認次数",
     "identifying_code": "驗證碼",
     "temporarily_unable_deposit": "暫時無法充值",
-    "warn1": "禁止向",
-    "warn2": "地址充值除",
-    "warn3": "之外的資產，任何充入",
-    "warn4": "地址的非",
-    "warn5": "資產將不可找回。",
+    "warn1": "禁止向COIN地址充值除COIN之外的資產，任何充入COIN地址的非COIN資產將不可找回。",
     "copy_success": "複製成功"
   },
   "title": {
