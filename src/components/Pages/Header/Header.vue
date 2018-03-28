@@ -25,7 +25,7 @@
             </li>
             <li role="presentation" class="dropdown btc-country btc-market btc-img-position">
               <a class="dropdown-toggle btc-paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <span>{{$t('nav.transaction')}}</span><span class="caret">
+                <span style="font-size: 14px;">{{$t('nav.transaction')}}</span><span class="caret">
                 </span>
               </a>
               <ul class="dropdown-menu text-center">
@@ -113,6 +113,10 @@ export default {
     },
     ...mapMutations(['PopupBoxDisplay', 'SideSlipMenuDisplay']),
     validateEmail () {
+      if ((this.$route.name === 'HomePage' || this.$route.name === 'home') && this.loginData === 'none') {
+        this.PopupBoxDisplay({message: this.$t('prompt.log_and_operate')})
+        return
+      }
       if (!this.loginData.activated) {
         this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
       } else {

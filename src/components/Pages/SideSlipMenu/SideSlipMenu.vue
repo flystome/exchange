@@ -7,7 +7,7 @@
             {{ loginData.show_name }}
           </li>
           <li>
-            <span @click="goPath(`/currency/deposit`)">
+            <span @click="validateEmail">
               <img src='~Img/sideslip-assets.png'>
               {{ $t('side_slip_menu.asset_management') }}
             </span>
@@ -50,7 +50,7 @@
               </li>
             </ul>
           </li>
-          <li @click="goPath(`/`)">
+          <li @click="validate()">
             <img src='~Img/sideslip-myaccount.png'>
             {{ $t('side_slip_menu.my_account') }}
           </li>
@@ -115,6 +115,24 @@ export default {
         }
       })
     },
+    validate () {
+      if ((this.$route.name === 'HomePage' || this.$route.name === 'home') && this.loginData === 'none') {
+        this.PopupBoxDisplay({message: this.$t('prompt.log_and_operate')})
+      } else {
+        this.goPath('/my_account')
+      }
+    },
+    validateEmail () {
+      if ((this.$route.name === 'HomePage' || this.$route.name === 'home') && this.loginData === 'none') {
+        this.PopupBoxDisplay({message: this.$t('prompt.log_and_operate')})
+        return
+      }
+      if (!this.loginData.activated) {
+        this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
+      } else {
+        this.goPath('/currency/deposit')
+      }
+    },
     goPath (path, status, href) {
       this.SideSlipMenuDisplay(false)
       if (status) {
@@ -127,7 +145,7 @@ export default {
         path: `${this.ROUTER_VERSION}${path}`
       })
     },
-    ...mapMutations(['SideSlipMenuDisplay', 'ChangeLanguage'])
+    ...mapMutations(['SideSlipMenuDisplay', 'ChangeLanguage', 'PopupBoxDisplay'])
   },
   computed: {
     ...mapState(['SideSlipMenu', 'loginData']),
