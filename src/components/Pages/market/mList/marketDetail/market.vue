@@ -177,8 +177,6 @@ export default {
       }
     },
     addFavorite: function () {
-      // location.href = '/'
-      this.favorite = true
       var self = this
       if (this.logined) {
         if (this.favorite) {
@@ -209,7 +207,7 @@ export default {
           this.favorite = true
         } else {
           arr = localList.split(',')
-          var i = ('' + this.curmarket).indexOf(arr)
+          var i = (this.curmarket).indexOf(arr)
           if (i !== -1) {
             arr.splice(i, 1)
             this.favorite = false
