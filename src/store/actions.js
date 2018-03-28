@@ -1,6 +1,6 @@
 import { _get } from '../axios'
 import Cookies from 'js-cookie'
-const unLogin = ['HomePage', 'Markets', 'MarketDetail', 'Trades']
+const unLogin = ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home']
 
 const actions = {
   getData ({ commit, state }) {
@@ -10,7 +10,12 @@ const actions = {
         'DataType': 'application/json;charset=utf-8'
       }
     }, (d) => {
-      console.log(state.route)
+      var lang = Cookies.get('locale')
+      if (lang) {
+        this.commit('ChangeLanguage', lang)
+      } else {
+        Cookies.set('locale', 'en')
+      } // setCookie
       if (state.marketData === '') {
         if (d.data.error) {
           if (!localStorage.getItem('marketData')) {
@@ -21,12 +26,12 @@ const actions = {
         } else {
           this.dispatch('GetMarketData')
         }
-      }
+      } // getMaretData
       if (unLogin.includes(state.route.name)) {
         if (!d.data.error) commit('getData', d)
         commit('redirect')
         return
-      }
+      } // unredirct pages
       if (d.data.error) {
         Cookies.set('status', 'nologin')
         location.href = `${process.env.HOST_URL}/signin?from=${location.href}`

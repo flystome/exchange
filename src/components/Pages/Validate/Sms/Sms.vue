@@ -128,7 +128,7 @@ export default {
         }
       }, (d) => {
         if (d.data.success) {
-          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_200'), type: 'success', url: '/'})
+          this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_200'), type: 'success', url: '/my_account'})
           this.$store.dispatch('getData')
         } else {
           this.SmsData.verifyCode = ''

@@ -6,28 +6,28 @@ const ROUTER_VERSION = process.env.ROUTER_VERSION
 const redirect = (state, action, type) => {
   var route = type ? state.route.from.name : state.route.name
   var path = type ? state.route.from.path : state.route.path
-  i18n.locale = Cookies.get('locale')
+  i18n.locale = Cookies.get('locale') ? Cookies.get('locale') : 'en'
   switch (route) {
     case 'ValidateGoogle':
       if (!state.loginData.activated) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/my_account'})
       } else if (state.loginData.app_activated) {
         router.replace(`${ROUTER_VERSION}/`)
       }
       break
     case 'ValidateSms':
       if (!state.loginData.activated) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/my_account'})
       } else if (state.loginData.sms_activated) {
         router.replace({path: `${ROUTER_VERSION}/`})
       }
       break
     case 'ValidateIdentity':
       if (!state.loginData.activated) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/my_account'})
         return
       } else if (!(state.loginData.sms_activated || state.loginData.app_activated)) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1002_hint'), type: 'warn', url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1002_hint'), type: 'warn', url: '/my_account'})
       } else if (state.loginData.id_document.aasm_state !== 'unverified') {
         router.replace({path: `${ROUTER_VERSION}/`})
       }
@@ -41,18 +41,17 @@ const redirect = (state, action, type) => {
         code = 1002
       }
       if (code) {
-        action.commit('PopupBoxDisplay', {message: i18n.t(`my_account.${code}_hint`) , type: 'warn' ,url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t(`my_account.${code}_hint`) , type: 'warn' ,url: '/my_account'})
       }
     } else if (/deposit/.test(state.route.path)) {
       if (!state.loginData.activated) {
-        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint') , type: 'warn' ,url: '/'})
+        action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint') , type: 'warn' ,url: '/my_account'})
         return
       }
     }
     break
   }
 }
-
 
 const mutations = {
   redirect (state, type) {
@@ -62,12 +61,6 @@ const mutations = {
   //   state.
   // },
   getData (state, data) {
-    var lang = Cookies.get('locale')
-    if (lang) {
-      this.commit('ChangeLanguage', lang)
-    } else {
-      Cookies.set('locale', 'en')
-    }
     // data.data.referrals.map((d, index) => {
     //   d['referrals_account_name'] = data.data.referrals_account_name[index]
     // })

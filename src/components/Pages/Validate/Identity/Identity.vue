@@ -244,7 +244,7 @@ export default {
         this.disabled = false
         if (d.data.success) {
           clearTimeout(timer)
-          this.ChangePopupBox({message: this.$t('api_server.validate_identity.success_200'), url: '/', type: 'success', buttondisplay: true})
+          this.ChangePopupBox({message: this.$t('api_server.validate_identity.success_200'), url: '/my_account', type: 'success', buttondisplay: true})
           this.$store.dispatch('getData')
         } else {
           clearTimeout(timer)
