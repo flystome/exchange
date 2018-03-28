@@ -28,7 +28,7 @@
             <div class="form">
               <span>{{ $t('homepage.login') }}HotEx</span>
               <basic-input ref="email" :validate='"email"' v-model="email" :placeholder="this.$t('homepage.enter_the_mailbox')" class="btc-input"></basic-input>
-              <basic-input ref="password" :validate='"password"' v-model="password" :placeholder="this.$t('homepage.enter_the_password')" class="btc-input"></basic-input>
+              <basic-input ref="password" type='password' :validate='"password"' v-model="password" :placeholder="this.$t('homepage.enter_the_password')" class="btc-input"></basic-input>
               <basic-button :disabled='disabled' @click.native="login" class="btn btc-button" :text="this.$t('homepage.login')"></basic-button>
               <div>
                 <a :href="`${HOST_URL}/signup`">{{ $t('homepage.free_registration') }}</a>

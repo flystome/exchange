@@ -84,7 +84,7 @@
               <basic-input style="min-height:66px"  @focus.native="promptEmpty()" type='password' ref="password" :validate="'password'" class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.login_password")' v-model="password"></basic-input>
             </div>
             <div class="row">
-              <basic-input style="min-height:66px"  @focus.native="promptEmpty()" ref="verfiycode" :validate='"verify code"' class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
+              <basic-input style="min-height:66px"  @focus.native="promptEmpty()" ref="verfiycode" :validate='"verify_code"' class="col-md-offset-2 col-md-9 col-xs-12" :placeholder='$t("validate_google.google_verification_code")' v-model="otp"></basic-input>
             </div>
             <div class="row" v-if="loginData.sms_activated">
               <div class="col-md-offset-2 col-md-9 col-xs-12">
