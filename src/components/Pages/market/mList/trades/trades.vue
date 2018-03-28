@@ -178,7 +178,7 @@ export default {
     var marketPush = pusher.subscribe('market-' + this.curMarket + '-global')
     marketPush.bind('update', (data) => {
       if (data.asks || data.asks.length !== 0) {
-        self.sellList = data.asks.slice(-8, 8).reverse()
+        self.sellList = data.asks.slice(-8, -1).reverse()
       }
       if (data.bids || data.bids.length !== 0) {
         self.buyList = data.bids.slice(0, 8)
