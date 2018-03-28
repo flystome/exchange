@@ -37,10 +37,20 @@
             </div>
           </div>
           <div class="btc-logining" v-else>
-            <span>{{ $t('homepage.welcome_to_use') }}HotEx</span>
+            <span>{{ $t('homepage.welcome_to_use') }}
+              <span>
+              <router-link class="btc-link" :to="`${ROUTER_VERSION}/my_account`">
+                {{loginData.show_name}}
+              </router-link>
+              </span>
+            </span>
             <div class="btc-discount">
               <span style="color:#999999">{{ $t('homepage.discounts_of_transaction_costs') }}</span>
-              <span>{{ factor }}{{ $t('homepage.discount') }}</span>
+              <span>
+                <router-link class="btc-link" :to="`${ROUTER_VERSION}/referral`">
+                  {{ `${factor}%` }}{{ $t('homepage.off') }}
+                </router-link>
+              </span>
             </div>
             <div class="btc-marginT20">
               <span style="color:#999999">{{ $t('homepage.total_asset_estimation') }}</span>
@@ -64,6 +74,13 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="btc-homepage-notice">
+      <ul>
+        <li v-for="data in new_coin" :key='data.id'>
+
+        </li>
+      </ul>
     </div>
     <div class="btc-homepage-main">
       <div class="btc-homepage-markets btc-marginT30">
@@ -91,23 +108,43 @@
       <div class="btc-homepage-info btc-marginT25 text-center">
         <a class="col-xs-2 col-xs-offset-1">
           <img src="~Img/homepage-us.png" >
-          <span class="btc-marginT15">{{ $t('homepage.contact_us') }}</span>
+          <span class="btc-marginT15">
+            <a>
+              {{ $t('homepage.contact_us') }}
+            </a>
+          </span>
         </a>
         <a class="col-xs-2">
           <img src="~Img/homepage-api.png" >
-          <span class="btc-marginT15">API</span>
+          <span class="btc-marginT15">
+            <a :href="`${HOST_URL}/api_tokens`">
+              {{$t("my_account.api")}}
+            </a>
+          </span>
         </a>
         <a class="col-xs-2">
           <img src="~Img/homepage-rate.png" >
-          <span class="btc-marginT15">{{ $t('homepage.exchange_rate_details') }}</span>
+          <span class="btc-marginT15">
+            <a :href="`${CmsUrl.rate_details}`">
+              {{ $t('homepage.exchange_rate_details') }}
+            </a>
+          </span>
         </a>
         <a class="col-xs-2">
           <img src="~Img/homepage-apply.png" width="56" height="56">
-          <span class="btc-marginT15">{{ $t('homepage.apply_to_list') }}</span>
+          <span class="btc-marginT15">
+            <a :href="CmsUrl.application">
+              {{ $t('homepage.apply_to_list') }}
+            </a>
+          </span>
         </a>
         <a class="col-xs-2">
           <img src="~Img/homepage-clause.png" >
-          <span class="btc-marginT15">{{ $t('homepage.privacy_clause') }}</span>
+          <span class="btc-marginT15">
+            <a :href="CmsUrl.privacy_policy">
+              {{ $t('homepage.privacy_clause') }}
+            </a>
+          </span>
         </a>
       </div>
       <div class="btc-homepage-prompt text-left">
@@ -125,12 +162,24 @@ import HomeMarket from './HomeMarket/HomeMarket'
 export default {
   name: 'homepage',
   created () {
+    var code = Cookies.get('code')
+    this.$i18n.locale = Cookies.get('locale')
+    if (code) {
+      if (code.match(/\d+/g)[0] === '200') {
+        this.PopupBoxDisplay({message: this.$t(`my_account.200_hint`), type: 'success'})
+        Cookies.remove('code')
+        return
+      }
+      this.PopupBoxDisplay({message: this.$t(`my_account.${code.match(/\d+/g)[0]}_hint`), type: 'warn'})
+      Cookies.remove('code')
+    }
+    var self = this
     this._get({
       url: '/home/funds.json'
     }, (d) => {
       d = d.data.success
       if (!d.commission_level) return
-      this.factor = d.commission_level.factor * 10
+      this.factor = (1 - d.commission_level.factor) * 10
       this.btc_worth = Number(d.total_assets.btc_worth).toFixed(2)
     })
     this._get({
@@ -138,9 +187,20 @@ export default {
     }, (d) => {
       this.trend = d.data
     })
+    this.$http.get(`${this.HOST_URL}/cms/api/announcements.json`, {
+      params: {
+        category: 'new-coin',
+        locale: 'zh-TW',
+        per_page: '8'
+      }
+    }).then(d => {
+      self.new_coin = d.data
+    })
+    if (!this.markData) this.GetmarketData()
   },
   data () {
     return {
+      new_coin: '',
       email: '',
       password: '',
       trend: [0, 0],
@@ -150,7 +210,7 @@ export default {
       factor: '',
       currencyindex: 0,
       search: '',
-      open: true,
+      open: !Cookies.get('total_hide'),
       currency: ['usdt', 'btc', 'eth', 'my_optional'],
       getetc: '',
       change: 'no',
@@ -207,6 +267,11 @@ export default {
     },
     displaystate () {
       this.open = !this.open
+      if (!this.open) {
+        Cookies.set('total_hide', 'true')
+      } else {
+        Cookies.remove('total_hide')
+      }
     },
     requireImg (img) {
       return require(`../../../../static/img/${img}.png`)
@@ -234,10 +299,7 @@ export default {
         })
       }
     },
-    ...mapMutations(['PopupBoxDisplay'])
-  },
-  watch: {
-    marketData () {
+    GetmarketData () {
       if (this.marketData) {
         this.curData = []
         this.curData.push(this.getItem(this.marketData['usdt']))
@@ -251,11 +313,20 @@ export default {
           })
         })))
       }
+    },
+    ...mapMutations(['PopupBoxDisplay'])
+  },
+  watch: {
+    marketData () {
+      this.GetmarketData()
+    },
+    $route () {
+      this.GetmarketData()
     }
   },
   computed: {
     ...mapGetters(['loginData']),
-    ...mapState(['marketData', 'language'])
+    ...mapState(['marketData', 'language', 'CmsUrl'])
   }
 }
 </script>

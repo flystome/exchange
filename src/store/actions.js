@@ -10,7 +10,6 @@ const actions = {
         'DataType': 'application/json;charset=utf-8'
       }
     }, (d) => {
-      console.log(location.href)
       var lang = Cookies.get('locale')
       if (lang) {
         this.commit('ChangeLanguage', lang)
@@ -31,12 +30,14 @@ const actions = {
       if (unLogin.includes(state.route.name)) {
         if (!d.data.error) commit('getData', d)
         commit('redirect')
+        commit('GetCmsUrl')
         return
       } // unredirct pages
       if (d.data.error) {
         Cookies.set('status', 'nologin')
         location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
       }
+      commit('GetCmsUrl')
       commit('getData', d)
       commit('redirect')
     })

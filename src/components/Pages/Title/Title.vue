@@ -18,7 +18,7 @@ export default {
         return id.toUpperCase()
       }
       if (this.ROUTER_VERSION) route = route.slice(this.ROUTER_VERSION.length)
-      return `${this.$t(`title.${route.slice(1) === '' ? 'my_account' : route.slice(1).replace(/\//g, '_')}`)} - ${this.$t('brand')}`
+      return `${this.$t(`title.${route.slice(1) === '' ? 'homepage' : route.slice(1).replace(/\//g, '_')}`)} - ${this.$t('brand')}`
     }
   }
 }

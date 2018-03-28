@@ -161,7 +161,7 @@
                 {{ $t('my_account.effective_recommended') }}: <strong>{{ loginData.promotion_amount }}</strong>
               </div>
               <div>
-                {{ $t('my_account.my_trade_discount') }}: <strong>{{ `${loginData.commission_level * 10}%` }}</strong>
+                {{ $t('my_account.my_trade_discount') }}: <strong>{{ `${(1 - loginData.commission_level) * 10}%` }}{{$t('homepage.off')}}</strong>
               </div>
             </div>
           </div>

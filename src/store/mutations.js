@@ -1,7 +1,9 @@
 import router from '@/router'
+import axios from 'axios'
 import i18n from '@/common/js/i18n/i18n.js'
 import Cookies from 'js-cookie'
 const ROUTER_VERSION = process.env.ROUTER_VERSION
+const HOST_URL = process.env.HOST_URL
 
 const redirect = (state, action, type) => {
   var route = type ? state.route.from.name : state.route.name
@@ -109,6 +111,11 @@ const mutations = {
     delete data.current_user
     delete data.code
     state.marketData = data
+  },
+  GetCmsUrl (state) {
+    axios.get(`${HOST_URL}/cms/api/url_mapping`).then(d => {
+      state.CmsUrl = d.data
+    })
   }
 }
 

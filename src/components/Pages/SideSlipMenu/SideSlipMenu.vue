@@ -68,8 +68,16 @@
               </li>
             </ul>
           </li>
-          <li>
-
+          <li class="text-center" style="margin-top: 80%;margin-bottom: 38px;">
+            <div v-if="loginData !== 'none'"><a :href="`${HOST_URL}/signout`">{{ $t('nav.exit') }}</a></div>
+            <div v-else>
+              <span style="margin-right: 73px;">
+                <a :href="`${HOST_URL}/signin`">{{ $t('nav.login') }}</a>
+              </span>
+              <span>
+                <a :href="`${HOST_URL}/signup`">{{ $t('nav.register') }}</a>
+              </span>
+            </div>
           </li>
         </ul>
       </div>

@@ -658,7 +658,7 @@ const en = {
       "enter_the_mailbox": "Enter The Mailbox",
       "enter_the_password": "Enter The Password",
       "forget_the_password": "Forget The Password",
-      "welcome_to_use": "Welcome to use ",
+      "welcome_to_use": "Welcome",
       "discount": " Discount",
       "discounts_of_transaction_costs": "Discounts of transaction costs",
       "total_asset_estimation": "Total Asset Estimation",
@@ -680,6 +680,7 @@ const en = {
       "turnover": "Turnover",
       "day_highs_and_lows": "Day Highs And Lows",
       "my_optional": "My Optional",
+      "off": "off"
     },
     "validation": {
       "verify_code": 'verify code'

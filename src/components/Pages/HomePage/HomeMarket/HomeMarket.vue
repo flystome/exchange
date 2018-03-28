@@ -5,7 +5,7 @@
         <tr>
           <th>{{ $t('homepage.currency') }}</th>
           <th v-for="(item, index) in heads" :key="item" @click="sortList(index)">
-            {{$t(`homepage.${item}`)}}{{ currency === 'my_optional' ? "" : index !==3 ? `(${currency})` : "" | toUpperCase }}
+            {{$t(`homepage.${item}`)}}{{ currency === 'my_optional' ? "" : index !==3 && index !==1 ? `(${currency})` : "" | toUpperCase }}
             <img v-if="times == 0 && currencyIndex == index" src="~Img/both.png">
             <img v-else-if="times == 1 && currencyIndex == index" src="~Img/up.png">
             <img v-else-if="times == 2 && currencyIndex == index" src="~Img/down.png">
@@ -17,7 +17,11 @@
         <tr v-for='(item , index) in oldData' :key='item.name' v-if="matchName(item.name, index)">
           <td>
             <a class="btc-homepage-currency" style="color: #333333;">
-              <span><a class="btc-homepage-market" :href="`${HOST_URL}/markets/${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`">{{ item.name }}</a></span>
+              <span>
+                <a class="btc-homepage-market" :href="`${HOST_URL}/markets/${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`">
+                  {{item.quote_currency}}<span style="color:#999;min-width: initial;">/{{ item.base_currency }}</span>
+                </a>
+              </span>
               <i :disabled="disabled" @click="portfolios(item, index)" class="far fa fa-star mylove" :class="{'is-star': item.is_portfolios}"></i>
             </a>
           </td>

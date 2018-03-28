@@ -8,23 +8,33 @@
       </div>
       <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
         <li class="">{{ $t("footer.support") }}</li>
-        <li><a :href="`${HOST_URL}/documents/api_v2`">{{ $t("footer.api") }}</a></li>
-        <li><a @click="goPath('/instructions/help')">{{ $t("footer.help") }}</a></li>
+        <li>
+          <a :href="`${HOST_URL}/documents/api_v2`">{{ $t("footer.api") }}</a>
+        </li>
+        <li>
+          <a :href="CmsUrl.helper_center">{{ $t("footer.help") }}</a>
+        </li>
         <li><a>{{ $t("footer.announcements") }}</a></li>
       </ul>
       <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
         <li class="">{{ $t("footer.service") }}</li>
-        <li><a>{{ $t("footer.application") }}</a></li>
+        <li>
+          <a :href="CmsUrl.application">{{ $t("footer.application") }}</a>
+        </li>
         <li><a @click="goPath('/instructions/fee')">{{ $t("footer.rate_details") }}</a></li>
       </ul>
       <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
         <li class="">{{ $t("footer.about") }}</li>
-        <li><a @click="goPath('/instructions/aboutus')">{{ $t("footer.about_us") }}</a></li>
-        <li><a>{{ $t("footer.user_agreement") }}</a></li>
-        <li><a>{{ $t("footer.privacy_policy") }}</a></li>
+        <li><a :href="`${CmsUrl.about_us}`">{{ $t("footer.about_us") }}</a></li>
+        <li><a :href="`${CmsUrl.user_agreement}`">{{ $t("footer.user_agreement") }}</a></li>
+        <li><a :href="CmsUrl.privacy_policy">{{ $t("footer.privacy_policy") }}</a></li>
       </ul>
       <ul class="btc-info pull-right btc-marginT30 btc-marginR30 dropup">
-        <li class="btc-marginB30">{{ $t("footer.contact_us") }}</li>
+        <li class="btc-marginB30">
+         <a>
+            {{ $t('homepage.contact_us') }}
+        </a>
+        </li>
         <li class="btc-marginB15"><a href="mailto:support@hotex.com">support@hotex.com</a></li>
         <li role="presentation" class="dropdown btc-country btc-img-position">
           <a class="dropdown-toggle btc-paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -38,7 +48,6 @@
           </ul>
         </li>
       </ul>
-
     </nav>
   </footer>
 </template>
@@ -101,7 +110,7 @@ export default {
       })
       return lang
     },
-    ...mapState(['language'])
+    ...mapState(['language', 'CmsUrl'])
   }
 }
 </script>

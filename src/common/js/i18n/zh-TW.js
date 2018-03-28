@@ -646,7 +646,7 @@ const zh = {
     "enter_the_mailbox": "輸入登陸賬號",
     "enter_the_password": "輸入登陸密碼",
     "forget_the_password": "忘記密碼",
-    "welcome_to_use": "歡迎使用",
+    "welcome_to_use": "歡迎",
     "discount": "折",
     "discounts_of_transaction_costs": "交易费折扣",
     "total_asset_estimation": "資產總估",
@@ -664,10 +664,11 @@ const zh = {
     "price_trend": "價格趨勢",
     "no_matching_currency": "無貨幣匹配",
     "price": "價格",
-    "volume": "交易量",
-    "turnover": "總市值",
+    "volume": "成交量",
+    "turnover": "成交額",
     "day_highs_and_lows": "日跌漲",
-    "my_optional": "我的自選"
+    "my_optional": "我的自選",
+    "off": "折扣率"
   },
   "aaaa": {
     "verify_code": '驗證碼'

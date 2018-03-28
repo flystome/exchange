@@ -15,7 +15,8 @@ const state = {
   DepositAddress: {
   },
   SideSlipMenu: false,
-  marketData: ''
+  marketData: '',
+  CmsUrl: ''
 }
 
 export default state
