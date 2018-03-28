@@ -19,8 +19,7 @@
       </div>
     </div>
     <ul class="trade_hd clearfix">
-      <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}" @click="goPath(index)"
-      >{{hd}}</li>
+      <li v-for="(hd,index) in hds" :key='hd' :class="{'check': currencyindex == index}" @click="goPath(index)">{{$t(hd)}}</li>
     </ul>
 
     <div class="trades_main">
@@ -148,7 +147,7 @@ export default {
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
-      hds: [this.$t('markets.quotes'), this.$t('markets.trade'), this.$t('markets.currency')],
+      hds: ['markets.quotes', 'markets.trade', 'markets.currency'],
       percents: [['1/4', 25], ['1/3', 33.3], ['1/2', 50], ['All', 100]],
       currencyindex: 1,
       order_type: 'buy',

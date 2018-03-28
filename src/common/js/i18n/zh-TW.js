@@ -310,6 +310,8 @@ const zh = {
     "newPrice": "最新价",
     "change": "涨跌幅",
     "favorite": "自选",
+    "btc": "BTC",
+    "usdt": "USDT",
     "quotes": "行情",
     "trade": "交易",
     "currency": "当前委托",

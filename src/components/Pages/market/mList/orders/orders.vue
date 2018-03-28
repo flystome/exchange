@@ -15,16 +15,16 @@
     </div>
     <ul class="order_hd clearfix">
       <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}"
-       @click="goPath(index)">{{hd}}</li>
+       @click="goPath(index)">{{$t(hd)}}</li>
     </ul>
     <div class="orderBd">
       <div class="operate">
         <div class="cancel_all" @click="cancelAll()">{{$t("orders.cancel_all")}}</div>
         <div class="choose">
-          <div :class="{'selected': index === curfilter}"  v-for="(item, index) in filterButtons" :key="item" @click="fiterList(index)">
+          <div :class="{'selected': index === curfilter}" v-for="(item, index) in filterButtons" :key="item" @click="fiterList(index)">
             <i class="fa fa-check-circle-o"></i>
             <i class="fa fa-circle-thin"></i>
-            {{item}}
+            {{$t(item)}}
           </div>
         </div>
       </div>
@@ -66,8 +66,8 @@ export default {
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
-      hds: [this.$t('markets.quotes'), this.$t('markets.trade'), this.$t('markets.currency')],
-      filterButtons: [this.$t('orders.all'), this.$t('orders.buy'), this.$t('orders.sell')],
+      hds: ['markets.quotes', 'markets.trade', 'markets.currency'],
+      filterButtons: ['orders.all', 'orders.buy', 'orders.sell'],
       currencyindex: 2,
       marketData: null,
       curMarket: '',
@@ -133,7 +133,11 @@ export default {
         data: {}
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
-        self.curData = initdata.success.orders
+        if (!initdata.success) {
+          self.curData = []
+        } else {
+          self.curData = initdata.success.orders
+        }
         self.curListData = self.curData
       })
     },
