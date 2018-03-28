@@ -489,6 +489,7 @@ const zh = {
     "done": "完成",
     "failed": "失敗",
     "node_audited": "節點已審核",
+    "transferred": "已接受",
     "google": "谷歌",
     "sms": "手機",
     "poundage": "手續費"

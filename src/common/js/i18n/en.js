@@ -450,6 +450,7 @@ const en = {
       "failed": "Failed",
       "email_expired": "Email Expired",
       "node_audited": "Node Audited",
+      "transferred": "Accepted",
       "google": "Google ",
       "sms": "SMS ",
       "poundage": "Poundage"
