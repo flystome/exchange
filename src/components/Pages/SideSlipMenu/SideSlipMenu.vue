@@ -12,7 +12,7 @@
               {{ $t('side_slip_menu.asset_management') }}
             </span>
           </li>
-          <li>
+          <li class="marketlist">
             <div @click="market = !market">
               <img src='~Img/sideslip-market.png'> {{$t('nav.transaction')}}
               <span class="btc-fr btc-marginR20">

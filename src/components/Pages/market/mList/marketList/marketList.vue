@@ -7,18 +7,21 @@
       </li>
     </ul>
     <ul class="bd">
-      <li class="list" v-for="item in oldData" :key="item.quote_currency" @click="goPath(item.quote_currency,item.base_currency)">
-        <div class="list-coin">
-          <div class="coin">{{item.quote_currency | upper}}<span>/{{item.base_currency | upper}}</span></div>
-          <div class="vol"><span>{{$t('markets.volume')}}</span>{{item.volume | fixedNum(item.volume_fixed)}}</div>
-        </div>
-        <div class="list-price">
-          <div class="price" :class="{'up': item.trend == 'up' , 'down': item.trend == 'down'}">{{item.last | fixedNum(item.price_fixed)}}</div>
-          <div class="val">${{item.legal_worth | fixedNum(item.price_fixed)}}</div>
-        </div>
-        <div class="list-btn">
-          <div :class="{'text-up': item.percent > 0, 'text-down': item.percent < 0}">{{item.percent | fixed2}}%</div>
-        </div>
+      <li class="list" v-for="item in oldData" :key="item.quote_currency">
+        <router-link :to="{path: `${ROUTER_VERSION}/markets/${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`}">
+          <div class="list-coin">
+            <div class="coin">{{item.quote_currency | upper}}<span>/{{item.base_currency | upper}}</span></div>
+            <div class="vol"><span>{{$t('markets.volume')}}</span>{{item.volume | fixedNum(item.volume_fixed)}}</div>
+          </div>
+          <div class="list-price">
+            <div class="price" :class="{'up': item.trend == 'up' , 'down': item.trend == 'down'}">{{item.last | fixedNum(item.price_fixed)}}</div>
+            <div class="val">${{item.legal_worth | fixedNum(item.price_fixed)}}</div>
+          </div>
+          <div class="list-btn">
+            <div :class="{'text-up': item.percent > 0, 'text-down': item.percent < 0}">{{item.percent | fixed2}}%</div>
+          </div>
+        </router-link>
+
       </li>
     </ul>
   </div>
@@ -94,7 +97,9 @@ export default {
       }
     },
     goPath: function (quote, base) {
-      this.$router.push({path: `${this.ROUTER_VERSION}/markets/${quote.toLowerCase()}${base.toLowerCase()}`})
+      var quotes = quote.toLowerCase()
+      var bases = base.toLowerCase()
+      this.$router.push({path: `${this.ROUTER_VERSION}/markets/${quotes}${bases}`})
     },
     sortList: function (index) {
       var order = this.coins[index]
@@ -104,19 +109,19 @@ export default {
       }
       if (this.times === 0) {
         this.oldData.sort(function (a, b) {
-          if (index === 2) {
-            return a[order] - b[order]
-          } else {
+          if (index === 0) {
             return a[order].localeCompare(b[order])
+          } else {
+            return a[order] - b[order]
           }
         })
         this.times = 1
       } else if (this.times === 1) {
         this.oldData.sort(function (a, b) {
-          if (index === 2) {
-            return b[order] - a[order]
-          } else {
+          if (index === 0) {
             return b[order].localeCompare(a[order])
+          } else {
+            return b[order] - a[order]
           }
         })
         this.times = 2

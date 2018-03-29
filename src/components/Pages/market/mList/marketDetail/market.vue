@@ -86,45 +86,12 @@ export default {
       ticker: {},
       trades: [],
       logined: false,
-      favorite: false
+      favorite: false,
+      localList: []
     }
   },
   mounted: function () {
-    var self = this
-    this.curmarket = this.$route.params.id
-    this.fetchData(this.$route.params.id)
-    var localList = localStorage.getItem('markets')
-    if (localList) {
-      if (('' + this.curmarket).indexOf(localList.split(',')) !== -1) {
-        this.favorite = true
-      }
-    }
-
-    var market = pusher.subscribe('market-' + this.curmarket + '-global')
-    market.bind('trades', (data) => {
-      self.trades.pop()
-      self.trades.unshift(data['trades'][0])
-    })
-    var channel = pusher.subscribe('market-global')
-    channel.bind('tickers', (data) => {
-      if (JSON.stringify(data) !== '{}') {
-        for (var key in data) {
-          if (key === self.curmarket) {
-            self.ticker.last = data[key].last
-            self.ticker.legal_worth = data[key].legal_worth
-            self.ticker.percent = data[key].percent
-            self.ticker.volume = data[key].volume
-            self.ticker.low = data[key].low
-            self.ticker.high = data[key].high
-          }
-        }
-      }
-    })
-    window.onpageshow = function (e) {
-      if (e.persisted) {
-        window.location.reload()
-      }
-    }
+    this.init()
   },
   filters: {
     fixed2: function (params) {
@@ -150,7 +117,56 @@ export default {
       return d.split(' ')[4]
     }
   },
+  watch: {
+    '$route' (to, from) {
+      if (to.path !== '/markets') {
+        this.init()
+      }
+    }
+  },
   methods: {
+    init: function () {
+      this.curmarket = this.$route.params.id
+      this.fetchData(this.curmarket)
+      this.localList = localStorage.getItem('markets')
+      if (this.localList.length !== 0) {
+        if (this.localList.split(',').indexOf(this.curmarket) !== -1) {
+          this.favorite = true
+        }
+      }
+      this.getPusher()
+      this.reload()
+    },
+    getPusher: function () {
+      var self = this
+      var market = pusher.subscribe('market-' + this.curmarket + '-global')
+      market.bind('trades', (data) => {
+        self.trades.pop()
+        self.trades.unshift(data['trades'][0])
+      })
+      var channel = pusher.subscribe('market-global')
+      channel.bind('tickers', (data) => {
+        if (JSON.stringify(data) !== '{}') {
+          for (var key in data) {
+            if (key === self.curmarket) {
+              self.ticker.last = data[key].last
+              self.ticker.legal_worth = data[key].legal_worth
+              self.ticker.percent = data[key].percent
+              self.ticker.volume = data[key].volume
+              self.ticker.low = data[key].low
+              self.ticker.high = data[key].high
+            }
+          }
+        }
+      })
+    },
+    reload: function () {
+      window.onpageshow = function (e) {
+        if (e.persisted) {
+          window.location.reload()
+        }
+      }
+    },
     fetchData: function (market) {
       var self = this
       this._get({
@@ -200,14 +216,12 @@ export default {
           })
         }
       } else {
-        var localList = localStorage.getItem('markets')
-        var arr = []
-        if (!localList) {
+        var arr = this.localList.split(',')
+        var i = arr.indexOf(this.curmarket)
+        if (arr.length === 0) {
           arr.push(this.curmarket)
           this.favorite = true
         } else {
-          arr = localList.split(',')
-          var i = (this.curmarket).indexOf(arr)
           if (i !== -1) {
             arr.splice(i, 1)
             this.favorite = false
@@ -217,6 +231,7 @@ export default {
           }
         }
         localStorage.setItem('markets', arr)
+        this.localList = localStorage.getItem('markets')
       }
     }
   }
