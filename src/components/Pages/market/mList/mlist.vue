@@ -18,7 +18,7 @@ export default {
   name: 'markets',
   data () {
     return {
-      hds: ['markets.favorite', 'btc', 'usdt'],
+      hds: ['markets.favorite', 'markets.btc', 'markets.usdt'],
       currencyindex: 1,
       marketData: {},
       curData: []
@@ -33,6 +33,7 @@ export default {
     var channel = pusher.subscribe('market-global')
     channel.bind('tickers', (data) => {
       if (JSON.stringify(data) !== '{}') {
+        console.log(data)
         for (var i in data) {
           var key = data[i]['base_currency']
           var Arr = self.marketData[key]

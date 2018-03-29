@@ -9,6 +9,12 @@
   a:hover, a:active {
     text-decoration: none;
   }
+  .text-down {
+    color: #29c1a6;
+  }
+  .text-up {
+    color: #fc4a4a;
+  }
   .dialog {
     position: fixed;
     left: 0;
@@ -349,6 +355,58 @@
           //   background: #ff0;
           //   z-index: 0;
           // }
+        }
+      }
+    }
+  }
+  .new_order {
+    padding: 10px 15px;
+    h2 {
+      height: 30px;
+      line-height: 30px;
+      font-size: 16px;
+      color: #ffffff;
+    }
+  }
+  .order_hd {
+    height: 30px;
+    line-height: 30px;
+    li {
+      display: inline-block;
+      width: 28%;
+      float: left;
+      text-align: right;
+      font-size: 14px;
+      color: #42637d;
+      &:first-child {
+        text-align: left;
+      }
+      &:last-child {
+        width: 44%;
+      }
+    }
+  }
+  .order_list {
+    color: #ffffff;
+    li {
+      height: 24px;
+      line-height: 24px;
+      &>div {
+        display: inline-block;
+        float: left;
+        width: 28%;
+        font-size: 12px;
+        &.order_price {
+          text-align: left;
+        }
+        &.order_amount {
+          color: #ffffff;
+          text-align: right;
+        }
+        &.order_time {
+          color: #728eaa;
+          text-align: right;
+          width: 44%;
         }
       }
     }

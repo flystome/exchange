@@ -22,7 +22,7 @@
       <li v-for="(hd,index) in hds" :key='hd' :class="{'check': currencyindex == index}" @click="goPath(index)">{{$t(hd)}}</li>
     </ul>
 
-    <div class="trades_main">
+    <div class="trades_main clearfix">
       <div class="trades_lt">
         <router-link class="cur_market" :to="{path: ROUTER_VERSION + '/markets'}">
           <span>{{(market.quote_currency+'/'+market.base_currency) | upper}}</span>
@@ -135,6 +135,19 @@
         </div>
       </div>
     </div>
+    <div class="new_order" v-if='tradeShow'>
+      <h2>{{$t("markets.history")}}</h2>
+      <ul class="order_hd">
+        <li v-for="head in heads" :key="head">{{$t(head)}}</li>
+      </ul>
+      <ul class="order_list">
+        <li v-for="item in trades" :key="item.tid">
+          <div class="order_price" :class="{'text-up': item.kind === 'bid', 'text-down': item.kind === 'ask'}">{{item.price | fixedNum(market.price_fixed)}}</div>
+          <div class="order_amount">{{item.origin_volume - item.volume | fixedNum(market.volume_fixed)}}</div>
+          <div class="order_time">{{+item.at*1000 | time}}</div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
@@ -147,6 +160,7 @@ export default {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       hds: ['markets.quotes', 'markets.trade', 'markets.currency'],
+      heads: ['markets.newPrice', 'markets.amount', 'markets.time'],
       percents: [['1/4', 25], ['1/3', 33.3], ['1/2', 50], ['All', 100]],
       currencyindex: 1,
       order_type: 'buy',
@@ -159,6 +173,8 @@ export default {
       status: false,
       sn: '',
       showDialog: false,
+      trades: [],
+      tradeShow: false,
 
       extra_base: 0,
       extra_quote: 0,
@@ -170,6 +186,12 @@ export default {
   },
   mounted: function () {
     this.init()
+    console.log(this.loginData)
+    if (this.loginData) {
+      this.sn = this.loginData.sn
+      this.tradeShow= true
+      this.fetchTrades(this.curMarket)
+    }
   },
   computed: {
     maxAmount: function () {
@@ -182,8 +204,11 @@ export default {
     ...mapState(['loginData'])
   },
   watch: {
-    loginData (val) {
+    loginData (val, oldValue) {
       this.getRefresh(val.sn)
+      this.tradeShow = true
+      var m = this.$route.params.id
+      this.fetchTrades(m)
       return val
     },
     '$route' (to, from) {
@@ -225,6 +250,14 @@ export default {
       var value = (+Math.floor(params * Math.pow(10, num)) / Math.pow(10, num)).toFixed(num)
       if (value.length >= 14) value = (+value).toFixed(num - 2)
       return value
+    },
+    time: function (date) {
+      var d = new Date(date)
+      var y = d.getFullYear()
+      var m = d.getMonth() + 1
+      var day = d.getDate()
+      var time = d.toString().split(' ')[4]
+      return y + '-' + (m > 9 ? m : '0' + m) + '-' + (day > 9 ? day : '0' + day) + ' ' + time
     }
   },
   methods: {
@@ -234,6 +267,7 @@ export default {
       this.fetchData(this.curMarket)
       this.getPusher(this.curMarket)
       this.reload()
+      console.log(this.sn)
     },
     getPusher: function (market) {
       var self = this
@@ -292,6 +326,21 @@ export default {
         document.title = `${self.market.quote_currency.toUpperCase()}/${self.market.base_currency.toUpperCase()}-${self.$t('brand')}`
       })
     },
+    fetchTrades: function (market) {
+      var self = this
+      var d = new Date()
+      var time = d.getTime() / 1000 - 24 * 3600
+      this._get({
+        url: '/history/all_trades.json',
+        data: {
+          since_date: time,
+          market: this.curMarket
+        }
+      }, function (data) {
+        console.log(data)
+        self.trades = data.data.trades
+      })
+    },
     getRefresh: function (sn) {
       var self = this
       var privateAccount = pusher.subscribe('private-' + sn)
@@ -300,6 +349,11 @@ export default {
           self.extra_base = data.balance
         } else if (data.currency === self.market.quote_currency) {
           self.extra_quote = data.balance
+        }
+      })
+      privateAccount.bind('order', (data) => {
+        if (data.state === 'done') {
+          this.trades.unshift(data)
         }
       })
     },
