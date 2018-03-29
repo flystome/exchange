@@ -26,7 +26,7 @@
           <div class="btc-nologin" v-if="loginData === 'none' || loginData.errors">
           <!-- <div class="btc-nologin"> -->
             <div class="form">
-              <span>{{ $t('homepage.login') }}HotEx</span>
+              <span>{{ $t('homepage.login') }}</span>
               <basic-input ref="email" :validate='"email"' v-model="email" :placeholder="this.$t('homepage.enter_the_mailbox')" class="btc-input"></basic-input>
               <basic-input ref="password" type='password' :validate='"password"' v-model="password" :placeholder="this.$t('homepage.enter_the_password')" class="btc-input"></basic-input>
               <basic-button :disabled='disabled' @click.native="login" class="btn btc-button" :text="this.$t('homepage.login')"></basic-button>
@@ -44,7 +44,7 @@
             </div>
             <div class="btc-marginT20">
               <span style="color:#999999">{{ $t('homepage.total_asset_estimation') }}</span>
-              <span v-if="open">BTC={{ btc_worth }}
+              <span v-if="open"><i class="fa fa-btc"/> {{ btc_worth }}
                 <img class="pull-right btc-pointer" src="~Img/open.png" @click="displaystate">
               </span>
               <span v-else>
