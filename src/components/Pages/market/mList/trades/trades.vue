@@ -289,6 +289,7 @@ export default {
           self.sn = initdata.current_user.sn
         }
         self.isDisabled = false
+        document.title = `${self.market.quote_currency.toUpperCase()}/${self.market.base_currency.toUpperCase()}-${self.$t('brand')}`
       })
     },
     getRefresh: function (sn) {

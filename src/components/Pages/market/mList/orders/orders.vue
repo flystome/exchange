@@ -133,13 +133,13 @@ export default {
         data: {}
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
-        console.log(initdata)
         if (!initdata.success) {
           self.curData = []
         } else {
           self.curData = initdata.success.orders
         }
         self.curListData = self.curData
+        document.title = `Markets-${self.$t('brand')}`
       })
     },
     getRefresh: function (sn) {
