@@ -48,13 +48,13 @@
               <span style="color:#999999">{{ $t('homepage.discounts_of_transaction_costs') }}</span>
               <span>
                 <router-link class="btc-link" :to="`${ROUTER_VERSION}/referral`">
-                  {{ `${factor}%` }}{{ $t('homepage.off') }}
+                  {{ `${factor}%` }} {{ $t('homepage.off') }}
                 </router-link>
               </span>
             </div>
             <div class="btc-marginT20">
               <span style="color:#999999">{{ $t('homepage.total_asset_estimation') }}</span>
-              <span v-if="open"><i class="fa fa-btc"/>{{ btc_worth }}
+              <span v-if="open"><i class="fa fa-btc"/> {{ btc_worth }}
                 <img class="pull-right btc-pointer" src="~Img/open.png" @click="displaystate">
               </span>
               <span v-else>

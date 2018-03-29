@@ -665,7 +665,7 @@ export default {
         : `${this.$t('withdraw_currency.resend')} ${this.second}s`) : this.$t('withdraw_currency.send_identify_code')
     },
     ReplaceCurrency () {
-      return this.$t('deposit_currency.warn1').replace(/COIN/gi, this.CurrencyType.toUpperCase())
+      return this.$t('deposit_currency.warn1').replace(/COIN/g, this.CurrencyType.toUpperCase())
     },
     getWithdrawRecord () {
       return [{content: [
