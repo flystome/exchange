@@ -309,6 +309,9 @@
         font-size: 12px;
         height: 168px;
         position: relative;
+        &.trade_top {
+          height: 183px;
+        }
         &>.sell_list {
           margin-bottom: 15px;
           position: absolute;

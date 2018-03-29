@@ -109,7 +109,6 @@
       </div>
       <div class="trades_rt">
         <div class="currency_price">
-          <router-link class="back" :to="{path: ROUTER_VERSION + '/markets/' + curMarket}"><img src="~Img/candle.jpg"></router-link>
           <span :class="{'text-up': ticker.last > ticker.open, 'text-down': ticker.last< ticker.open}">{{ticker.last | fixedNum(market.price_fixed)}}</span>
         </div>
         <div class="trades_list">
@@ -117,9 +116,9 @@
             <div class="trade_price trade_lt">{{$t("markets.price")}}</div>
             <div class="trade_num trade_rt">{{$t("markets.amount")}}</div>
           </div>
-          <div class=" trade_list">
+          <div class=" trade_list trade_top">
             <ul class="sell_list clearfix">
-              <li v-for="item in sellList" :key="item[0]">
+              <li v-for="item in sellList">
                 <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixedNum(market.price_fixed)}}</div>
                 <div class="trade_num trade_rt">{{item[1] | fixedNum(market.volume_fixed)}}</div>
               </li>
@@ -127,7 +126,7 @@
           </div>
           <div class=" trade_list">
             <ul class="buy_list clearfix">
-              <li v-for="item in buyList" :key="item[0]">
+              <li v-for="item in buyList">
                 <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixedNum(market.price_fixed)}}</div>
                 <div class="trade_num trade_rt">{{item[1] | fixedNum(market.volume_fixed)}}</div>
               </li>
@@ -170,35 +169,7 @@ export default {
     }
   },
   mounted: function () {
-    var self = this
-    this.order_type = this.$route.hash.substr(1) || 'buy'
-    this.curMarket = this.$route.params.id
-    this.fetchData(this.curMarket)
-
-    var marketPush = pusher.subscribe('market-' + this.curMarket + '-global')
-    marketPush.bind('update', (data) => {
-      if (data.asks || data.asks.length !== 0) {
-        self.sellList = data.asks.slice(-8, -1).reverse()
-      }
-      if (data.bids || data.bids.length !== 0) {
-        self.buyList = data.bids.slice(0, 8)
-      }
-    })
-    var channel = pusher.subscribe('market-global')
-    channel.bind('tickers', (data) => {
-      if (JSON.stringify(data) !== '{}') {
-        for (var key in data) {
-          if (key === self.curMarket) {
-            self.ticker.last = data[key].last
-          }
-        }
-      }
-    })
-    window.onpageshow = function (e) {
-      if (e.persisted) {
-        window.location.reload()
-      }
-    }
+    this.init()
   },
   computed: {
     maxAmount: function () {
@@ -215,6 +186,12 @@ export default {
       this.getRefresh(val.sn)
       return val
     },
+    '$route' (to, from) {
+      if (!this.curMarket) return
+      if (this.curMarket !== to.params.id) {
+        window.location.reload()
+      }
+    },
     amount_buy: function (val, oldValue) {
       if (this.price && this.price !== 0) {
         var len = (this.amount_buy).toString().split('.')[1]
@@ -225,9 +202,12 @@ export default {
       }
     },
     amount_sell: function (val, oldValue) {
-      if (+val > this.extra_quote || (this.amount_sell).toString().split('.')[1].length > 8) {
-        val = this.extra_quote
-        this.amount_sell = val
+      if (this.price && this.price !== 0) {
+        var len = (this.amount_sell).toString().split('.')[1]
+        if (+val > this.extra_quote || (len && len.length > 8)) {
+          val = this.extra_quote
+          this.amount_sell = val
+        }
       }
     }
   },
@@ -248,6 +228,42 @@ export default {
     }
   },
   methods: {
+    init: function () {
+      this.order_type = this.$route.hash.substr(1) || 'buy'
+      this.curMarket = this.$route.params.id
+      this.fetchData(this.curMarket)
+      this.getPusher(this.curMarket)
+      this.reload()
+    },
+    getPusher: function (market) {
+      var self = this
+      var marketPush = pusher.subscribe('market-' + market + '-global')
+      marketPush.bind('update', (data) => {
+        if (data.asks || data.asks.length !== 0) {
+          self.sellList = data.asks.slice(0, 8).reverse()
+        }
+        if (data.bids || data.bids.length !== 0) {
+          self.buyList = data.bids.slice(0, 8)
+        }
+      })
+      var channel = pusher.subscribe('market-global')
+      channel.bind('tickers', (data) => {
+        if (JSON.stringify(data) !== '{}') {
+          for (var key in data) {
+            if (key === market) {
+              self.ticker.last = data[key].last
+            }
+          }
+        }
+      })
+    },
+    reload: function () {
+      window.onpageshow = function (e) {
+        if (e.persisted) {
+          window.location.reload()
+        }
+      }
+    },
     fetchData: function (market) {
       var self = this
       this._get({
@@ -368,15 +384,17 @@ export default {
     },
     orderBid: function () {
       this.loginCheck()
-      if (!this.price || this.price === 0 || this.price === '') return ''
-      if (!this.amount_buy || this.amount_buy === 0 || this.amount_sell === '') return ''
+      if (!this.price || !this.amount_buy) {
+        return
+      }
       this.showDialog = true
       this.isDisabled = true
     },
     orderAsk: function () {
       this.loginCheck()
-      if (!this.price || this.price === 0 || this.price === '') return ''
-      if (!this.amount_sell || this.amount_sell === 0 || this.amount_sell === '') return ''
+      if (!this.price || !this.amount_sell) {
+        return
+      }
       this.showDialog = true
       this.isDisabled = false
     },

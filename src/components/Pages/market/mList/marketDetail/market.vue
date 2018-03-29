@@ -119,9 +119,10 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      if (to.path !== '/markets') {
-        this.init()
+      if (to.path === '/markets') {
+        return
       }
+      this.init()
     }
   },
   methods: {
