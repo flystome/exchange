@@ -274,6 +274,9 @@ const zh = {
     "bid": "買",
     "ask": "賣",
     "cancel": "撤銷",
+    "tip": "请登录或注册后再操作",
+    "login": "登录",
+    "register": "注册",
     'dialog': {
       'cancel': "確認撤銷此單嗎？",
       'cancel_all': "確認撤銷全部訂單嗎？"

@@ -17,8 +17,15 @@
       <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}"
        @click="goPath(index)">{{$t(hd)}}</li>
     </ul>
+    <div class="tip_box" v-if="!sn">
+      <p class="tip">{{$t('orders.tip')}}</p>
+      <div class="loginBox">
+        <a class="signin" :href="`${HOST_URL}/signin`">{{$t('orders.login')}}</a>
+        <a class="signup" :href="`${HOST_URL}/signup`">{{$t('orders.register')}}</a>
+      </div>
+    </div>
     <vue-simple-spinner v-if='!curListData' size="66" class="loading"></vue-simple-spinner>
-    <div class="orderBd">
+    <div class="orderBd" v-if="sn">
       <div class="operate">
         <div class="cancel_all" @click="cancelAll()">{{$t("orders.cancel_all")}}</div>
         <div class="choose">
@@ -67,6 +74,7 @@ export default {
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
+      HOST_URL: process.env.HOST_URL,
       hds: ['markets.quotes', 'markets.trade', 'markets.pending'],
       filterButtons: ['orders.all', 'orders.buy', 'orders.sell'],
       currencyindex: 2,
@@ -77,7 +85,8 @@ export default {
       showDialog: false,
       curfilter: 0,
       cancelNum: 'one',
-      id: 0
+      id: 0,
+      sn: ''
     }
   },
   mounted: function () {
@@ -101,6 +110,7 @@ export default {
   watch: {
     loginData (val) {
       this.getRefresh(val.sn)
+      this.sn = val.sn
       this.fetchData()
       return val
     }
