@@ -10,7 +10,7 @@ const state = {
     url: '',
     buttonText: '',
     buttondisplay: true,
-    confirm: false,
+    confirm: false
   },
   language: Cookies.get('locale') ? Cookies.get('locale') : 'en',
   DepositAddress: {

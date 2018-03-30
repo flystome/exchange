@@ -46,7 +46,7 @@ export default {
       if (this.PopupBox.confirm && href === true) location.href = `${this.HOST_URL}/tickets`
       this.ChangePopupBox({
         confirm: false,
-        buttonText: '',
+        buttonText: ''
       })
       if (this.PopupBox.url) {
         this.$router.replace(`${this.ROUTER_VERSION}${this.PopupBox.url}`)
