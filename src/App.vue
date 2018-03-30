@@ -8,7 +8,7 @@
             <router-view></router-view>
           </keep-alive>
         </div>
-      <div style="margin-top: 20%;margin-bottom: 20%;" v-else>
+      <div style="margin-top: 15%;margin-bottom: 15%;" v-else>
         <vue-simple-spinner size="88"></vue-simple-spinner>
       </div>
       </section>

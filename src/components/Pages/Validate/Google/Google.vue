@@ -49,6 +49,7 @@
           <div class="col-md-6 text-center">
             <div class='row'>
               <qr-code :length='"160px"' :dateUrl="qrcode(loginData.google_uri)"></qr-code>
+              <vue-simple-spinner size="160"></vue-simple-spinner>
             </div>
             <div class="row btc-marginT15 btc-margin-left useGoogle">
               {{$t('validate_google.using')}}
@@ -133,6 +134,7 @@ export default {
       second: -1,
       resend: false,
       isLocked: false,
+      loding: false,
       SmsData: {
         verifyCode: '',
         Time: ''
@@ -151,6 +153,7 @@ export default {
       if (this.disabled) {
         return
       }
+      this.loding = true
       this.disabled = true
       this._post({
         url: '/verify/refresh_auth.json',
@@ -161,6 +164,7 @@ export default {
           'DataType': 'application/json;charset=utf-8'
         }
       }, d => {
+        this.loding = false
         this.disabled = false
         this.loginData.google_otp_secret = d.data.google_otp_secret
         this.loginData.google_uri = d.data.google_uri
