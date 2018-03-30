@@ -22,7 +22,7 @@
             </div>
             <ul v-if="market" class="btc-marginT60 btc-marginL30">
                <li v-for="d in marketData" :key="Object.keys(d)[0]">
-                  <a @click="gomarket(`/markets/${Object.keys(d)[0]}`)">
+                  <a :href="`${HOST_URL}/markets/${Object.keys(d)[0]}`">
                     {{ d[Object.keys(d)[0]].name }}
                   </a>
                 </li>
@@ -68,7 +68,12 @@
               </li>
             </ul>
           </li>
-          <li class="text-center" style="margin-top: 80%;margin-bottom: 38px;">
+          <li class="btc-marginL30">
+              <span @click="goPc">
+                {{$t('side_slip_menu.desktop_end')}}
+              </span>
+          </li>
+          <li class="text-center" style="margin-top: 80%;margin-bottom: 38px;margin-right: 40px;">
             <div v-if="loginData !== 'none'"><a :href="`${HOST_URL}/signout`">{{ $t('nav.exit') }}</a></div>
             <div v-else>
               <span style="margin-right: 73px;">
@@ -99,6 +104,7 @@ export default {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       Consulting: false,
       Lang: false,
+      unLogin: ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home', 'notFound'],
       market: false,
       markList: [],
       locale: [{
@@ -132,15 +138,20 @@ export default {
         }
       })
     },
+    goPc () {
+      this.SideSlipMenuDisplay(false)
+      this.gotoPc()
+      this.$router.push('/')
+    },
     validate () {
-      if ((this.$route.name === 'HomePage' || this.$route.name === 'home') && this.loginData === 'none') {
+      if (this.unLogin.includes(this.$route.name) && this.loginData === 'none') {
         this.PopupBoxDisplay({message: this.$t('prompt.log_and_operate')})
       } else {
         this.goPath('/my_account')
       }
     },
     validateEmail () {
-      if ((this.$route.name === 'HomePage' || this.$route.name === 'home') && this.loginData === 'none') {
+      if (this.unLogin.includes(this.$route.name) && this.loginData === 'none') {
         this.PopupBoxDisplay({message: this.$t('prompt.log_and_operate')})
         return
       }
@@ -162,7 +173,7 @@ export default {
         path: `${this.ROUTER_VERSION}${path}`
       })
     },
-    ...mapMutations(['SideSlipMenuDisplay', 'ChangeLanguage', 'PopupBoxDisplay'])
+    ...mapMutations(['SideSlipMenuDisplay', 'ChangeLanguage', 'PopupBoxDisplay', 'gotoPc'])
   },
   computed: {
     ...mapState(['SideSlipMenu', 'loginData', 'CmsUrl']),

@@ -24,8 +24,6 @@ const Instructions = () => import('Pages/Instructions')
 const Fee = () => import('Pages/Instructions/Fee/Fee')
 const Help = () => import('Pages/Instructions/Help/Help')
 
-const unLogin = ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home']
-
 Vue.use(Router)
 
 const version = process.env.ROUTER_VERSION
@@ -152,8 +150,9 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  var mobile = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
-  if (to.path === '/' || to.path === `${version}` || to.path === `${version}/`) {
+  var user = navigator.userAgent
+  var mobile = user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
+  if ((to.path === '/' || to.path === `${version}` || to.path === `${version}/`) && !store.state.Pc) {
     if (mobile) {
       next(`${version}/markets`)
       return
@@ -162,7 +161,7 @@ router.beforeEach((to, from, next) => {
   if (store.state.loginData === 'none') {
     store.dispatch('getData', to)
   } else {
-    store.commit('redirect', 1)
+    store.commit('redirect', to)
   }
   next()
 })

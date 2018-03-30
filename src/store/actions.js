@@ -45,8 +45,8 @@ const actions = {
       commit('redirect', route)
     })
   },
-  redirect ({ commit, state }) {
-    commit('redirect')
+  redirect ({ commit, state }, route) {
+    commit('redirect', route)
   },
   GetMarketData ({ commit, state }, type) {
     _get({

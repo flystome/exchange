@@ -358,7 +358,8 @@ const zh = {
     "announcement": "公告",
     "news": "信息",
     "my_account": "我的帳戶",
-    "language": "語言"
+    "language": "語言",
+    "desktop_end": "案頭端"
   },
   "homepage": {
     "banner_describe1": "權威透明的數字資產交易平台",

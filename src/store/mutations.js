@@ -59,6 +59,9 @@ const mutations = {
   redirect (state, route) {
     redirect(state, this, route)
   },
+  gotoPc (state) {
+    state.Pc = true
+  },
   // changeMarket (state, { index, currency }) {
   //   state.
   // },

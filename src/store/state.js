@@ -17,7 +17,8 @@ const state = {
   },
   SideSlipMenu: false,
   marketData: '',
-  CmsUrl: ''
+  CmsUrl: '',
+  Pc: false
 }
 
 export default state

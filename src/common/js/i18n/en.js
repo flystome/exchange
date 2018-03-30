@@ -360,6 +360,7 @@ const en = {
       "news": "News",
       "my_account": "My Account",
       "language": "Language",
+      "desktop_end": "Desktop End"
     },
     "homepage": {
       "banner_describe1": "High Quality Block Chain Assets",
