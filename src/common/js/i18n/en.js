@@ -244,7 +244,7 @@ const en = {
       "low": "Low",
       "candle": "Candle",
       "depth": "Depth",
-      "history": "Trade history",
+      "history": "Trade History",
       "price": "Price",
       "volume": "Vol",
       "amount": "Amount",
