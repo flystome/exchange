@@ -328,7 +328,7 @@
         font-size: 12px;
         height: 168px;
         position: relative;
-        .trade_price.checked {
+        .trade_price:hover {
           background: #38475a;
         }
         &.trade_top {

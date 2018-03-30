@@ -120,7 +120,7 @@
           <div class=" trade_list trade_top">
             <ul class="sell_list clearfix">
               <li v-for="(item,index) in sellList" :key="'sell'+index">
-                <div class="trade_price trade_lt" :class="{'checked': (index == check_index && check_type == 'sell')}" @click='addPrice(item[0],"sell",index)'>{{item[0] | fixedNum(market.price_fixed)}}</div>
+                <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixedNum(market.price_fixed)}}</div>
                 <div class="trade_num trade_rt">{{item[1] | fixedNum(market.volume_fixed)}}</div>
               </li>
             </ul>
@@ -128,7 +128,7 @@
           <div class=" trade_list">
             <ul class="buy_list clearfix">
               <li v-for="(item,index) in buyList" :key="'buy'+index">
-                <div class="trade_price trade_lt" :class="{'checked': index == check_index && check_type == 'buy'}" @click='addPrice(item[0],"buy",index)'>{{item[0] | fixedNum(market.price_fixed)}}</div>
+                <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixedNum(market.price_fixed)}}</div>
                 <div class="trade_num trade_rt">{{item[1] | fixedNum(market.volume_fixed)}}</div>
               </li>
             </ul>
@@ -168,8 +168,6 @@ export default {
       currencyindex: 1,
       order_type: 'buy',
       check_type: '',
-      check_index: 0,
-      curMarket: '',
       ticker: {},
       market: {},
       sellList: [],
@@ -371,8 +369,6 @@ export default {
     },
     addPrice: function (price, type, index) {
       this.price = price
-      this.check_type = type
-      this.check_index = index
       if (this.order_type === 'buy') {
         if (this.price * this.amount_buy > this.extra_base) {
           this.amount_buy = this.extra_base / this.price

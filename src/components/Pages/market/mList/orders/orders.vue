@@ -18,7 +18,6 @@
        @click="goPath(index)">{{$t(hd)}}</li>
     </ul>
     <div class="tip_box" v-if="!sn">
-      <p class="tip">{{$t('orders.tip')}}</p>
       <div class="loginBox">
         <a class="signin" :href="`${HOST_URL}/signin`">{{$t('orders.login')}}</a>
         <a class="signup" :href="`${HOST_URL}/signup`">{{$t('orders.register')}}</a>
