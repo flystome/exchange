@@ -81,6 +81,11 @@ export default {
   },
   mounted: function () {
     this.curMarket = this.$route.params.id
+    if (this.loginData) {
+      this.sn = this.loginData.sn
+      this.getRefresh(this.sn)
+      this.fetchData()
+    }
     window.onpageshow = function (e) {
       if (e.persisted) {
         window.location.reload()
@@ -133,7 +138,6 @@ export default {
         data: {}
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
-        console.log(initdata)
         if (!initdata.success) {
           self.curData = []
         } else {

@@ -4,12 +4,12 @@
       <div class="mask"></div>
       <div class="dia_content">
         <div class="text">
-          <h4>{{$t('markets.dialog.' + order_type)}}{{$t('markets.cancel')}}</h4>
+          <h4>{{$t('markets.dialog.' + order_type)}}{{$t('markets.confirm')}}</h4>
           <ul>
             <li><div class="value"><span>{{market.quote_currency | upper}}</span></div>{{$t('markets.coin')}}</li>
             <li><div class="value">{{price | fixedNum(market.price_fixed)}}<span>{{market.base_currency | upper}}</span></div>{{$t('markets.price')}}</li>
             <li v-if="order_type === 'buy'"><div class="value">{{amount_buy | fixedNum(market.price_amount)}}<span>{{market.quote_currency | upper}}</span></div>{{$t('markets.volume')}}</li>
-            <li v-if="order_type === 'sell'"><div class="value">{{amount_sell | fixedNum(market.price_amount)}}<span>{{market.quote_currency}}</span></div>{{$t('markets.volume')}}</li>
+            <li v-if="order_type === 'sell'"><div class="value">{{amount_sell | fixedNum(market.price_amount)}}<span>{{market.quote_currency | upper}}</span></div>{{$t('markets.volume')}}</li>
           </ul>
         </div>
         <div class="confirm_box">
