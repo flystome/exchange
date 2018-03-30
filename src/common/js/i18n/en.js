@@ -275,15 +275,18 @@ const en = {
       "bid": "Buy",
       "ask": "Sell",
       "cancel": "Cancel",
+      "tip": "Please login to proceed.",
+      "login": "Login",
+      "register": "Register",
       'dialog': {
-        'cancel': "Are you sure to cancel this order？",
-        'cancel_all': "Are you sure to cancel ALL orders？"
+        'cancel': "Do you want to cancel this order?",
+        'cancel_all': "Do you want to cancel ALL orders?"
       }
     },
     "hint": {
       "confirm": "OK",
       "no": "No",
-      "go_tickets": "Do you want to tell us",
+      "go_tickets": "Server error occurred. Do you want to tell us?",
       "yes": "Yes",
       "generating_address": "We are generating deposit address, please wait a few seconds.",
       "completion": "Completion",

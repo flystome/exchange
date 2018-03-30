@@ -21,19 +21,13 @@
   .tip_box {
     position: relative;
     height: calc(100vh - 102px);
-    p {
-      position: absolute;
-      top: 40%;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      color: #728eaa;
-    }
     .loginBox {
       position: absolute;
-      bottom: 0px;
+      top: 50%;
       width: 80%;
       left: 10%;
+      height: 110px;
+      margin-top: -52px;
       a {
         display: block;
         width: 100%;

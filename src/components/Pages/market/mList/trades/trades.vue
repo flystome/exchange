@@ -167,7 +167,7 @@ export default {
       percents: [['1/4', 25], ['1/3', 33.3], ['1/2', 50], ['All', 100]],
       currencyindex: 1,
       order_type: 'buy',
-      curMarket: '',
+      check_type: '',
       ticker: {},
       market: {},
       sellList: [],
@@ -367,7 +367,7 @@ export default {
       this.amount_sell = ''
       this.status = false
     },
-    addPrice: function (price) {
+    addPrice: function (price, type, index) {
       this.price = price
       if (this.order_type === 'buy') {
         if (this.price * this.amount_buy > this.extra_base) {
