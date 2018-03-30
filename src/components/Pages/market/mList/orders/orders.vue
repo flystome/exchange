@@ -17,6 +17,7 @@
       <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyindex == index}"
        @click="goPath(index)">{{$t(hd)}}</li>
     </ul>
+    <vue-simple-spinner v-if='!curListData' size="66" class="loading"></vue-simple-spinner>
     <div class="orderBd">
       <div class="operate">
         <div class="cancel_all" @click="cancelAll()">{{$t("orders.cancel_all")}}</div>
