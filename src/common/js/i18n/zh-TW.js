@@ -234,7 +234,7 @@ const zh = {
     "change": "漲跌幅",
     "quotes": "行情",
     "trade": "交易",
-    "currency": "當前委託",
+    "pending": "當前委託",
     "favorite": "自選",
     "btc": "BTC",
     "usdt": "USDT",
