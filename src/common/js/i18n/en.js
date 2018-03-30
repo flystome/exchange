@@ -260,8 +260,8 @@ const en = {
       "cancel": "Cancel",
       "confirm": "Confirm",
       "dialog": {
-        "buy": "Bid ",
-        "sell": "Ask "
+        "buy": " to Bid",
+        "sell": " to Ask"
       }
     },
     'orders': {

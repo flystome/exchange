@@ -24,6 +24,8 @@ const Instructions = () => import('Pages/Instructions')
 const Fee = () => import('Pages/Instructions/Fee/Fee')
 const Help = () => import('Pages/Instructions/Help/Help')
 
+const unLogin = ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home']
+
 Vue.use(Router)
 
 const version = process.env.ROUTER_VERSION
@@ -155,8 +157,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  var user = navigator.userAgent
-  var mobile = user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
+  var mobile = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
   if (to.path === '/' || to.path === `${version}` || to.path === `${version}/`) {
     if (mobile) {
       next(`${version}/markets`)

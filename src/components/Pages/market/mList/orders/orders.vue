@@ -145,7 +145,7 @@ export default {
           self.curData = initdata.success.orders
         }
         self.curListData = self.curData
-        document.title = `Markets-${self.$t('brand')}`
+        document.title = `Markets - ${self.$t('brand')}`
       })
     },
     getRefresh: function (sn) {
