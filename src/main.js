@@ -80,6 +80,10 @@ new Vue({
   components: { App }
 })
 
+// setTimeout({
+
+// }).
+
 new Vue({
   router,
   i18n,

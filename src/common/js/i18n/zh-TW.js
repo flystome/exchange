@@ -281,6 +281,9 @@ const zh = {
   },
   "hint": {
     "confirm": "OK",
+    "no": "No",
+    "go_tickets": "跳服务单",
+    "yes": "Yes",
     "generating_address": "我們正在生成充值地址，請等待幾片刻.",
     "completion": "完成",
     "server_exception": "服務器異常"

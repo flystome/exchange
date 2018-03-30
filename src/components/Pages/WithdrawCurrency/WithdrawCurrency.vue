@@ -411,16 +411,13 @@ export default {
         message: this.$t('hint.generating_address')
       })
       this.Time = setTimeout(() => {
-        this.ChangePopupBox({
-          message: this.$t('hint.server_exception'),
-          type: 'error'
+         this.ChangePopupBox({
+          message: this.$t('hint.go_tickets'),
+          type: 'error',
+          confirm: true,
+          buttonText: this.$t('hint.no'),
+          buttondisplay: true
         })
-        setTimeout(() => {
-          this.PopupBoxDisplay()
-          this.ChangePopupBox({
-            buttondisplay: true
-          })
-        }, 1000)
       }, 10000)
     },
     GetCoin (c, funds, sn) {
@@ -711,10 +708,10 @@ export default {
     $route (to) {
       if (/withdraw/.test(to.path)) {
         this.route = 'withdraw'
-        this.$store.commit('redirect')
+        this.$store.commit('redirect', to)
       } else if (/deposit/.test(to.path)) {
         this.route = 'deposit'
-        this.$store.commit('redirect')
+        this.$store.commit('redirect', to)
         if (this.GeneratAddress !== '') {
           this.GeneratAddress && this.Generating()
         }

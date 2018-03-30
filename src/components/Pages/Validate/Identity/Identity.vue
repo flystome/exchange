@@ -204,15 +204,18 @@ export default {
       this.ChangePopupBox({buttondisplay: false})
       timer = setTimeout(() => {
         this.ChangePopupBox({
-          message: this.$t('hint.server_exception'),
-          type: 'error'
+          message: this.$t('hint.go_tickets'),
+          type: 'error',
+          confirm: true,
+          buttonText: this.$t('hint.no'),
+          buttondisplay: true
         })
-        setTimeout(() => {
-          this.PopupBoxDisplay()
-          this.ChangePopupBox({
-            buttondisplay: true
-          })
-        }, 1000)
+        // setTimeout(() => {
+        //   this.PopupBoxDisplay()
+        //   this.ChangePopupBox({
+        //     buttondisplay: true
+        //   })
+        // }, 1000)
         this.disabled = false
       }, 10000)
       var formData = new FormData()

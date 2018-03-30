@@ -32,7 +32,7 @@ export default {
   name: 'App',
   data () {
     return {
-      unLogin: ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home'],
+      unLogin: ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home', 'notFound'],
       noMobile: true
     }
   },

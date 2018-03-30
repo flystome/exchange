@@ -130,11 +130,6 @@ const router = new Router({
       ]
     },
     {
-      path: '/:version',
-      name: '/:version',
-      component: MemberCenter
-    },
-    {
       path: `${version}/mobile`,
       name: 'mobile',
       component: Mobile,
@@ -164,7 +159,7 @@ router.beforeEach((to, from, next) => {
     }
   }
   if (store.state.loginData === 'none') {
-    store.dispatch('getData')
+    store.dispatch('getData', to)
   } else {
     store.commit('redirect', 1)
   }

@@ -18,10 +18,12 @@
          {{this.PopupBox.message}}
        </div>
        <div class="btc-paddingB30">
-        <a>
+        <span style="display:flex">
+          <basic-button @click.native.stop="gopath(true)" style="margin-right: 28px;" v-if='PopupBox.confirm'  class="btn btc-marginT50"  :text='$t(`hint.yes`)' :class="{'btc-hint-hidden': !this.PopupBox.buttondisplay}">
+          </basic-button>
           <basic-button @click.native.stop="gopath"  class="btn btc-marginT50"  :text='buttonText' :class="{'btc-hint-hidden': !this.PopupBox.buttondisplay}">
           </basic-button>
-        </a>
+        </span>
        </div>
       </div>
     </div>
@@ -35,11 +37,17 @@ export default {
   name: 'Hint',
   data () {
     return {
-      ROUTER_VERSION: process.env.ROUTER_VERSION
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
+      HOST_URL: process.env.HOST_URL
     }
   },
   methods: {
-    gopath () {
+    gopath (href) {
+      if (this.PopupBox.confirm && href === true) location.href = `${this.HOST_URL}/tickets`
+      this.ChangePopupBox({
+        confirm: false,
+        buttonText: '',
+      })
       if (this.PopupBox.url) {
         this.$router.replace(`${this.ROUTER_VERSION}${this.PopupBox.url}`)
       }

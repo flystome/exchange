@@ -282,6 +282,9 @@ const en = {
     },
     "hint": {
       "confirm": "OK",
+      "no": "No",
+      "go_tickets": "Do you want to tell us",
+      "yes": "Yes",
       "generating_address": "We are generating deposit address, please wait a few seconds.",
       "completion": "Completion",
       "server_exception": "Server Exception"

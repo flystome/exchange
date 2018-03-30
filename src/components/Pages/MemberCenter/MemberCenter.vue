@@ -161,7 +161,7 @@
                 {{ $t('my_account.effective_recommended') }}: <strong>{{ loginData.promotion_amount }}</strong>
               </div>
               <div>
-                {{ $t('my_account.my_trade_discount') }}: <strong>{{ `${(10 - Number(loginData.commission_level)) * 10}%` }}{{$t('homepage.off')}}</strong>
+                {{ $t('my_account.my_trade_discount') }}: <strong>{{ `${(10 - Number(loginData.commission_factor * 10)) * 10}%` }}{{$t('homepage.off')}}</strong>
               </div>
             </div>
           </div>
@@ -198,6 +198,7 @@ export default {
     }
     if (/referral/.test(to.path)) {
       this.step = 2
+      this.referrals()
     }
     var code = Cookies.get('code')
     this.$i18n.locale = Cookies.get('locale')

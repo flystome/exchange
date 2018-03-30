@@ -1,9 +1,11 @@
 import { _get } from '../axios'
 import Cookies from 'js-cookie'
-const unLogin = ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home']
+const unLogin = ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home', 'notFound']
+
+// const unLogin1 = ['/', 'markets', 'markets.+']
 
 const actions = {
-  getData ({ commit, state }) {
+  getData ({ commit, state }, route) {
     Cookies.get('validate_token') && Cookies.set('php_session', Cookies.get('validate_token'))
     _get({
       url: '/settings/member.json',
@@ -12,7 +14,6 @@ const actions = {
       }
     }, (d) => {
       var lang = Cookies.get('locale')
-      console.log(lang)
       if (lang) {
         this.commit('ChangeLanguage', lang)
       } else {
@@ -29,9 +30,9 @@ const actions = {
           this.dispatch('GetMarketData')
         }
       } // getMaretData
-      if (unLogin.includes(state.route.name)) {
+      if (unLogin.includes(route.name)) {
         if (!d.data.error) commit('getData', d)
-        commit('redirect')
+        commit('redirect', route)
         commit('GetCmsUrl')
         return
       } // unredirct pages
@@ -41,7 +42,7 @@ const actions = {
       }
       commit('GetCmsUrl')
       commit('getData', d)
-      commit('redirect')
+      commit('redirect', route)
     })
   },
   redirect ({ commit, state }) {

@@ -6,7 +6,7 @@
           <slot name='remark'></slot>
         </caption>
         <tbody v-if="item.length > 1">
-          <tr v-for="(item, length) in item" :key='length' v-if="length < 100">
+          <tr v-for="(item, length) in item" :key='length' v-if="length < 6">
             <td v-for="(data, index) in item.content"
             :key="index" :style="{width: toPercent()}"
             :class="{

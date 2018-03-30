@@ -5,12 +5,11 @@ import Cookies from 'js-cookie'
 const ROUTER_VERSION = process.env.ROUTER_VERSION
 const HOST_URL = process.env.HOST_URL
 
-const redirect = (state, action, type) => {
-  console.log(state.route.name)
-  var route = type ? state.route.from.name : state.route.name
-  var path = type ? state.route.from.path : state.route.path
+const redirect = (state, action, route) => {
+  // var route = type ? state.route.from.name : state.route.name
+  // var path = type ? state.route.from.path : state.route.path
   i18n.locale = Cookies.get('locale') ? Cookies.get('locale') : 'en'
-  switch (route) {
+  switch (route.name) {
     case 'ValidateGoogle':
       if (!state.loginData.activated) {
         action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/my_account'})
@@ -36,7 +35,7 @@ const redirect = (state, action, type) => {
       }
       break
     case 'WithdrawCurrency':
-    if (/withdraw/.test(state.route.path)) {
+    if (/withdraw/.test(route.path)) {
       var code = ''
       if (!state.loginData.activated) {
         code = 1001
@@ -46,7 +45,7 @@ const redirect = (state, action, type) => {
       if (code) {
         action.commit('PopupBoxDisplay', {message: i18n.t(`my_account.${code}_hint`) , type: 'warn' ,url: '/my_account'})
       }
-    } else if (/deposit/.test(state.route.path)) {
+    } else if (/deposit/.test(route.path)) {
       if (!state.loginData.activated) {
         action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint') , type: 'warn' ,url: '/my_account'})
         return
@@ -57,8 +56,8 @@ const redirect = (state, action, type) => {
 }
 
 const mutations = {
-  redirect (state, type) {
-    redirect(state, this, type)
+  redirect (state, route) {
+    redirect(state, this, route)
   },
   // changeMarket (state, { index, currency }) {
   //   state.
@@ -96,12 +95,16 @@ const mutations = {
       status: state.PopupBox.status,
       message: state.PopupBox.message,
       buttondisplay: state.PopupBox.buttondisplay,
-      url: state.PopupBox.url
+      buttonText: state.PopupBox.buttonText,
+      url: state.PopupBox.url,
+      confirm: state.PopupBox.confirm
     } = {
       type: obj.type ? obj.type : state.PopupBox.type,
       url: obj.url ? obj.url : state.PopupBox.url,
       status: obj.hasOwnProperty('status') ? obj.status : state.PopupBox.status,
       message: obj.message ? obj.message : state.PopupBox.message,
+      buttonText: obj.buttonText ? obj.buttonText : state.PopupBox.buttonText,
+      confirm: obj.hasOwnProperty('confirm') ? obj.confirm : state.PopupBox.confirm,
       buttondisplay: Object.keys(obj).includes('buttondisplay') ? obj.buttondisplay : state.PopupBox.buttondisplay
     })
   },

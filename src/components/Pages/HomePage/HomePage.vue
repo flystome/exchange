@@ -183,8 +183,8 @@ export default {
       url: '/home/funds.json'
     }, (d) => {
       d = d.data.success
-      if (!d.commission_level) return
-      this.factor = (1 - d.commission_level.factor) * 100
+      if (!d.commission_factor) return
+      this.factor = (10 - d.commission_factor * 10) * 10
       this.btc_worth = Number(d.total_assets.btc_worth).toFixed(2)
     })
     this._get({
