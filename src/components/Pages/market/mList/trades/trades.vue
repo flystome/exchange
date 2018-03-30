@@ -4,12 +4,12 @@
       <div class="mask"></div>
       <div class="dia_content">
         <div class="text">
-          <h4>{{$t('markets.dialog.' + order_type)}}{{$t('markets.cancel')}}</h4>
+          <h4>{{$t('markets.dialog.' + order_type)}}{{$t('markets.confirm')}}</h4>
           <ul>
             <li><div class="value"><span>{{market.quote_currency | upper}}</span></div>{{$t('markets.coin')}}</li>
             <li><div class="value">{{price | fixedNum(market.price_fixed)}}<span>{{market.base_currency | upper}}</span></div>{{$t('markets.price')}}</li>
             <li v-if="order_type === 'buy'"><div class="value">{{amount_buy | fixedNum(market.price_amount)}}<span>{{market.quote_currency | upper}}</span></div>{{$t('markets.volume')}}</li>
-            <li v-if="order_type === 'sell'"><div class="value">{{amount_sell | fixedNum(market.price_amount)}}<span>{{market.quote_currency}}</span></div>{{$t('markets.volume')}}</li>
+            <li v-if="order_type === 'sell'"><div class="value">{{amount_sell | fixedNum(market.price_amount)}}<span>{{market.quote_currency | upper}}</span></div>{{$t('markets.volume')}}</li>
           </ul>
         </div>
         <div class="confirm_box">
@@ -186,11 +186,11 @@ export default {
   },
   mounted: function () {
     this.init()
-    console.log(this.loginData)
     if (this.loginData) {
       this.sn = this.loginData.sn
-      this.tradeShow= true
+      this.tradeShow = true
       this.fetchTrades(this.curMarket)
+      this.getRefresh(this.sn)
     }
   },
   computed: {
@@ -267,7 +267,6 @@ export default {
       this.fetchData(this.curMarket)
       this.getPusher(this.curMarket)
       this.reload()
-      console.log(this.sn)
     },
     getPusher: function (market) {
       var self = this
@@ -337,7 +336,6 @@ export default {
           market: this.curMarket
         }
       }, function (data) {
-        console.log(data)
         self.trades = data.data.trades
       })
     },

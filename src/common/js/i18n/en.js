@@ -252,7 +252,7 @@ const en = {
       "buy": "Buy",
       "sell": "Sell",
       "extra": "Available",
-      "maxAmount": "Max Amount",
+      "maxAmount": "Max",
       "total": "Total",
       "trade_success": "Success",
       "trade_fail": "Fail",

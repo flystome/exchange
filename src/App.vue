@@ -13,7 +13,7 @@
       </div>
       </section>
     </transition>
-    <footer v-if='mobile' is='Footer' />
+    <footer v-if='noMobile' is='Footer' />
     <wrapper></wrapper>
     <popup-box></popup-box>
     <side-slip-menu></side-slip-menu>
@@ -33,7 +33,7 @@ export default {
   data () {
     return {
       unLogin: ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home'],
-      mobile: false
+      noMobile: true
     }
   },
   components: {
@@ -44,7 +44,7 @@ export default {
     PopupBox
   },
   mounted: function () {
-    this.mobile = !/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
+    this.noMobile = !/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
   },
   computed: {
     loading () {

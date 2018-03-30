@@ -245,7 +245,7 @@ const zh = {
     "depth": "深度图",
     "history": "最新成交",
     "price": "成交价",
-      "volume": "Vol",
+    "volume": "数量",
     "amount": "数量",
     "time": "时间",
     "buy": "买入",
@@ -255,7 +255,7 @@ const zh = {
     "total": "金额",
     "trade_success": "下单成功",
     "trade_fail": "下单失败",
-    "coin": "Pair",
+    "coin": "币种",
     "cancel": "撤銷",
     "confirm": "確認",
     "dialog": {
