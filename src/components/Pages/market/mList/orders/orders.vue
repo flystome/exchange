@@ -107,7 +107,7 @@ export default {
     time: function (params) {
       var d = new Date(params * 1000)
       var y = d.getFullYear()
-      var m = d.getMonth() > 10 ? d.getMonth() : '0' + d.getMonth()
+      var m = d.getMonth() + 1 > 10 ? d.getMonth() + 1 : '0' + (d.getMonth() + 1)
       var day = d.getDate() > 10 ? d.getDate() : '0' + d.getDate()
       var h = d.getHours() > 10 ? d.getHours() : '0' + d.getHours()
       var min = d.getMinutes() > 10 ? d.getMinutes() : '0' + d.getMinutes()
@@ -140,6 +140,7 @@ export default {
           self.curData = initdata.success.orders
         }
         self.curListData = self.curData
+        document.title = `Markets-${self.$t('brand')}`
       })
     },
     getRefresh: function (sn) {

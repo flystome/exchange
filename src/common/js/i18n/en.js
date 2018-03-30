@@ -17,15 +17,13 @@ const en = {
       "sms": "SMS Verification Messages",
       "send_code": "Send Code",
       "send_code_alt": "Resend in COUNT seconds",
+      "bank_account": "Bank Account Authentication",
+      "double_channel": "Double Channel Authentication",
+      "phone_ps": "Use your ID-identified mobile phone for authentication",
       "hints": {
         "app": "Google Authenticator will re-generate a new password every thirty seconds, please input timely.",
         "sms": "Well send a text message to you phone with verify code."
       },
-      "bank_account": "Bank Account Authentication",
-      "double_channel": "Double Channel Authentication",
-      "phone_ps": "Use your ID-identified mobile phone for authentication",
-      "bank_account_ps": "KRW withdrawal bank account authentication",
-      "double_channel_ps": "Use Kakaopay authentication for safe transaction"
     },
     "nav": {
       "home": "Home",
@@ -131,12 +129,12 @@ const en = {
       "google_validate": "Google Validate",
       "withdraw_all": "Withdraw All",
       "tariff_description": "Tariff description",
-      "reminder": "Reminder",
+      "reminder": "Guide",
       "min_currency": "Do not tell other people your mobile phone verification code or Google verification code",
       "confirm_apply_for_success": "After the withdrawal request is successful, please go to the email and click the link to confirm the withdrawal request. You can track the status on the withdrawal history page.",
       "make_sure_safe": "Make sure your computer and browser is secure, to prevent information from being tampered with or leaked.",
       "withdraw_currency_record": "Withdraw Currency Record",
-      "do_not_response": "Please make sure that the address of the coin is unmistakable. If you lose the address of the coin, and the transaction is completed, you take the loss on your own, and HotEx does not compensate for it.",
+      "do_not_response": "Please double check that the address is correct. If you the address is incorrect, or you lose the control of the target wallet, when the transaction is finished, you take the loss on your own, and we do not compensate for it.",
       "number": "Number",
       "withdraw_time": "Withdraw Time",
       "withdraw_address": "Withdraw Address",
@@ -144,8 +142,8 @@ const en = {
       "absenteeism_expenses": "Fee",
       "statu_and_operation": "Status / Operation",
       "available_balance": "Available Balance",
-      "remaining_withdraw": "Remaining withdraw amount of money",
-      "minimum_withdraw_amount_of_money": "Minimum withdraw amount of money",
+      "remaining_withdraw": "Remaining Quota Of Daily Withdraw",
+      "minimum_withdraw_amount_of_money": "Minimum Withdraw Amount",
       "remark_label": "Remark",
       "use_a_new_address": "Use a new address",
       "sms": "SMS",
@@ -176,17 +174,17 @@ const en = {
     "deposit_currency": {
       "deposit_address": "Address",
       "copy_address": "Copy Address",
-      "use_wallet_service": "Please use your commonly used wallet service, local purse, online wallet, or mobile wallet, choose to pay or send.",
-      "font_descripe": "In the payment or payment of your wallet, copy the following special currency address which is specially recharged for you, fill in the amount you want to recharge to the account in the amount, and don't forget to pay a certain ore fee to ensure that the transaction is confirmed by the whole network as soon as possible. You can also scan the two-dimensional code in the mobile end purse to pay. You can recharge the special currency address and the two-dimensional code.",
-      "operation_done": "After the above operation is done, click send payment, the transaction will be broadcast to the whole network, so you can see the status of the transaction. When the transaction reaches the 1 confirmation of the whole network (about 10 to 60 minutes), the system will automatically recharge to the account. You can inquire in the disclosure of the assets.",
+      "use_wallet_service": "In your frequently used wallet (online wallet or mobile wallet), choose to pay or send.",
+      "font_descripe": "In the payment of your wallet, copy the above address, which is only for you, fill in the amount you want to deposit to the account in the amount field, and don't forget to pay a certain fee to ensure that the transaction will be confirmed by the whole network as soon as possible. You can also scan the QR code in the mobile wallet to pay. You can deposit with either the special address or the QR code.",
+      "operation_done": "After the above operation is done, click \"Send Payment\", the transaction will be broadcast to the whole network, so you can see the status of the transaction. When the transaction reaches the 1 confirmation of the whole network (about 10 to 60 minutes), the amount will automatically credit to your account.",
       "deposit_record": "Deposit Record",
       "deposit_date": "Deposit Date",
       "trading_hash": "Tx ID",
-      "recharge_amount": "Recharge Amount",
+      "recharge_amount": "Deposit Amount",
       "confirmation_number": "Confirmation Number",
       "identifying_code": "Verify Code",
       "temporarily_unable_deposit": "Temporarily unable to deposit",
-      "warn1": "The COIN address is forbidden to be recharged to the assets except BTC, and any non - BTC assets charged to the BTC address will not be retrieved.",
+      "warn1": "Warning! Only transfer COIN to this address. Transfer other coins to this address will result in lost of your coins.",
       "copy_success": "Copied!"
     },
     "title": {
@@ -276,6 +274,7 @@ const en = {
       "ordered": "Filled",
       "bid": "Buy",
       "ask": "Sell",
+      "cancel": "Cancel",
       'dialog': {
         'cancel': "Are you sure to cancel this order？",
         'cancel_all': "Are you sure to cancel ALL orders？"
@@ -336,7 +335,7 @@ const en = {
       }
     },
     "footer": {
-      "introduction": "Authoritative and transparent digital asset trading platform",
+      "introduction": "Authoritative And Transparent Digital Asset Trading Platform",
       "copyright": "©2017-2018 hotex.com",
       "support": "Support",
       "api": "API",
@@ -389,7 +388,7 @@ const en = {
       "turnover": "Turnover",
       "day_highs_and_lows": "24h Change %",
       "my_optional": "Favorite",
-      "off": "off"
+      "off": "Off"
     },
     "validation": {
       "verify_code": 'verify code'

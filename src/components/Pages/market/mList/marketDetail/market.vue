@@ -182,6 +182,7 @@ export default {
         if (self.logined) {
           self.favorite = initdata.market['is_portfolios']
         }
+        document.title = `${self.market.quote_currency.toUpperCase()}/${self.market.base_currency.toUpperCase()}-${self.$t('brand')}`
       })
     },
     goPath: function (index) {
