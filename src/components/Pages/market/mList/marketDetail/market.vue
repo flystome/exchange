@@ -80,7 +80,7 @@ export default {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       currencyindex: 0,
-      hds: ['markets.quotes', 'markets.trade', 'markets.currency'],
+      hds: ['markets.quotes', 'markets.trade', 'markets.pending'],
       heads: ['markets.price', 'markets.amount', 'markets.time'],
       curmarket: '',
       market: {},

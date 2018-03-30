@@ -67,7 +67,7 @@ export default {
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
-      hds: ['markets.quotes', 'markets.trade', 'markets.currency'],
+      hds: ['markets.quotes', 'markets.trade', 'markets.pending'],
       filterButtons: ['orders.all', 'orders.buy', 'orders.sell'],
       currencyindex: 2,
       marketData: null,

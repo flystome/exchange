@@ -45,7 +45,7 @@
                 <span class="base">{{market.base_currency | upper}}</span>
               </div>
               <div class="price inputs">
-                <input type="number" step="0.00000001" v-model="amount_buy" :placeholder="$t('markets.amount')">
+                <input type="number" step="0.00000001" v-model="amount_buy" :placeholder="$t('markets.volume')">
                 <span class="quote">{{market.quote_currency | upper}}</span>
               </div>
               <div class="total private">
@@ -81,7 +81,7 @@
                 <span class="base">{{market.base_currency | upper}}</span>
               </div>
               <div class="price inputs">
-                <input type="number" step="0.00000001" v-model="amount_sell" :placeholder="$t('markets.amount')">
+                <input type="number" step="0.00000001" v-model="amount_sell" :placeholder="$t('markets.volume')">
                 <span class="quote">{{market.quote_currency | upper}}</span>
               </div>
               <div class="total private">
@@ -115,11 +115,11 @@
         <div class="trades_list">
           <div class="head clearfix">
             <div class="trade_price trade_lt">{{$t("markets.price")}}</div>
-            <div class="trade_num trade_rt">{{$t("markets.amount")}}</div>
+            <div class="trade_num trade_rt">{{$t("markets.volume")}}</div>
           </div>
           <div class=" trade_list trade_top">
             <ul class="sell_list clearfix">
-              <li v-for="item in sellList">
+              <li v-for="(item,index) in sellList" :key="'sell'+index">
                 <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixedNum(market.price_fixed)}}</div>
                 <div class="trade_num trade_rt">{{item[1] | fixedNum(market.volume_fixed)}}</div>
               </li>
@@ -127,7 +127,7 @@
           </div>
           <div class=" trade_list">
             <ul class="buy_list clearfix">
-              <li v-for="item in buyList">
+              <li v-for="(item,index) in buyList" :key="'buy'+index">
                 <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixedNum(market.price_fixed)}}</div>
                 <div class="trade_num trade_rt">{{item[1] | fixedNum(market.volume_fixed)}}</div>
               </li>
@@ -142,11 +142,13 @@
         <li v-for="head in heads" :key="head">{{$t(head)}}</li>
       </ul>
       <ul class="order_list">
-        <li v-for="item in trades" :key="item.tid">
-          <div class="order_price" :class="{'text-up': item.kind === 'bid', 'text-down': item.kind === 'ask'}">{{item.price | fixedNum(market.price_fixed)}}</div>
-          <div class="order_amount">{{item.origin_volume - item.volume | fixedNum(market.volume_fixed)}}</div>
-          <div class="order_time">{{+item.at*1000 | time}}</div>
-        </li>
+        <transition-group name="slide-fade">
+          <li v-for="item in trades" :key="'id'+item.id" >
+            <div class="order_price" :class="{'text-up': item.kind === 'bid', 'text-down': item.kind === 'ask'}">{{item.price | fixedNum(market.price_fixed)}}</div>
+            <div class="order_amount">{{item.origin_volume - item.volume | fixedNum(market.volume_fixed)}}</div>
+            <div class="order_time">{{+item.at*1000 | time}}</div>
+          </li>
+        </transition-group>
       </ul>
     </div>
   </div>
@@ -160,8 +162,8 @@ export default {
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
-      hds: ['markets.quotes', 'markets.trade', 'markets.currency'],
-      heads: ['markets.price', 'markets.amount', 'markets.time'],
+      hds: ['markets.quotes', 'markets.trade', 'markets.pending'],
+      heads: ['markets.price', 'markets.volume', 'markets.time'],
       percents: [['1/4', 25], ['1/3', 33.3], ['1/2', 50], ['All', 100]],
       currencyindex: 1,
       order_type: 'buy',
