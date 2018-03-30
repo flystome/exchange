@@ -3,6 +3,7 @@
     <ul class="market_hd clearfix">
       <li v-for="(hd,index) in hds" :key='hd' :class="{'check': currencyindex == index}" @click="goPath(index)">{{$t(hd)}}</li>
     </ul>
+    <vue-simple-spinner v-if='trades.length === 0' size="66" class="loading"></vue-simple-spinner>
     <div class="detail">
       <div class="detail_top">
         <div class="add_favorite">

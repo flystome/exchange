@@ -10,6 +10,14 @@
   a:hover, a:active {
     text-decoration: none;
   }
+  .loading {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -33px;
+    margin-top: -33px;
+    z-index: 10
+  }
   .dialog {
     position: fixed;
     left: 0;

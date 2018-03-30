@@ -28,3 +28,11 @@
 .marketBd {
   padding-left: 0;
 }
+.loading {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-left: -33px;
+  margin-top: -33px;
+  z-index: 10
+}
