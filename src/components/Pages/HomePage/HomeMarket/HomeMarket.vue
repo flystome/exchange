@@ -5,7 +5,7 @@
         <tr>
           <th>{{ $t('homepage.currency') }}</th>
           <th v-for="(item, index) in heads" :key="item" @click="sortList(index)">
-            {{$t(`homepage.${item}`)}}{{ currency === 'my_optional' ? "" : index !==3 && index !==1 ? `(${currency})` : "" | toUpperCase }}
+            {{$t(`homepage.${item}`)}} {{ currency === 'my_optional' ? "" : index !==3 && index !==1 ? `(${currency})` : "" | toUpperCase }}
             <img v-if="times == 0 && currencyIndex == index" src="~Img/both.png">
             <img v-else-if="times == 1 && currencyIndex == index" src="~Img/up.png">
             <img v-else-if="times == 2 && currencyIndex == index" src="~Img/down.png">

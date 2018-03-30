@@ -1,7 +1,7 @@
 <template>
   <div v-if="!loginData.sms_activated && loginData.activated" @keyup.enter='Validate' class="btc-validate-sms btc-container-block" @click="ShowCallingcode(false);prompt = ''">
     <header class="btc-color666">
-      <router-link :to="`${ROUTER_VERSION}/`" class="btc-link">{{$t('title.my_account')}}</router-link> > <span>{{$t('title.validate_sms')}}</span>
+      <router-link :to="`${ROUTER_VERSION}/my_account`" class="btc-link">{{$t('title.my_account')}}</router-link> > <span>{{$t('title.validate_sms')}}</span>
     </header>
     <div class="btc-sms-container">
       <news-prompt :text='prompt'></news-prompt>

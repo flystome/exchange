@@ -44,7 +44,7 @@ export default {
     PopupBox
   },
   mounted: function () {
-    this.mobile = /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
+    this.mobile = !/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
   },
   computed: {
     loading () {

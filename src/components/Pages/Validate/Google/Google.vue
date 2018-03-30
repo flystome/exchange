@@ -2,7 +2,7 @@
   <div v-if="!loginData.app_activated && loginData.activated" class="btc-validateGoogle  btc-container-block">
     <div class="row btc-color666">
       <span class="btc-color333">
-        <router-link :to="`${ROUTER_VERSION}/`" class="btc-link">
+        <router-link :to="`${ROUTER_VERSION}/my_account`" class="btc-link">
           {{$t('title.my_account')}}
         </router-link>
         >
@@ -48,8 +48,8 @@
         <div class="col-md-6">
           <div class="col-md-6 text-center">
             <div class='row'>
-              <qr-code :length='"160px"' :dateUrl="qrcode(loginData.google_uri)"></qr-code>
-              <vue-simple-spinner size="160"></vue-simple-spinner>
+              <qr-code v-if="!loading" :length='"160px"' :dateUrl="qrcode(loginData.google_uri)"></qr-code>
+              <vue-simple-spinner v-else style="margin-bottom:25px" size="135"></vue-simple-spinner>
             </div>
             <div class="row btc-marginT15 btc-margin-left useGoogle">
               {{$t('validate_google.using')}}
@@ -60,8 +60,8 @@
             </div>
           </div>
           <div class="col-md-6 btc-validate-textCenter btc-validate-googlekey">
-              <div class="row btc-marginT10">
-                <strong class="btc-link ">
+              <div class="row btc-marginT10" style="height:20px">
+                <strong v-if="!loading" class="btc-link ">
                   {{ loginData.google_otp_secret }}
                 </strong>
               </div>
@@ -134,7 +134,7 @@ export default {
       second: -1,
       resend: false,
       isLocked: false,
-      loding: false,
+      loading: false,
       SmsData: {
         verifyCode: '',
         Time: ''
@@ -153,7 +153,7 @@ export default {
       if (this.disabled) {
         return
       }
-      this.loding = true
+      this.loading = true
       this.disabled = true
       this._post({
         url: '/verify/refresh_auth.json',
@@ -164,7 +164,7 @@ export default {
           'DataType': 'application/json;charset=utf-8'
         }
       }, d => {
-        this.loding = false
+        this.loading = false
         this.disabled = false
         this.loginData.google_otp_secret = d.data.google_otp_secret
         this.loginData.google_uri = d.data.google_uri

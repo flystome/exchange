@@ -11,6 +11,7 @@ const actions = {
       }
     }, (d) => {
       var lang = Cookies.get('locale')
+      console.log(lang)
       if (lang) {
         this.commit('ChangeLanguage', lang)
       } else {

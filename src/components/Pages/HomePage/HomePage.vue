@@ -194,7 +194,7 @@ export default {
     this.$http.get(`${this.HOST_URL}/cms/api/announcements.json`, {
       params: {
         category: 'new-coin',
-        locale: 'zh-TW',
+        locale: self.language,
         per_page: '8'
       }
     }).then(d => {

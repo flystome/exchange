@@ -4,7 +4,7 @@
   class="btc-container-block btc-validateIdentity"
   @keyup.enter="uploadImg">
     <header class="title">
-        <router-link :to="`${ROUTER_VERSION}/`" class="btc-link">
+        <router-link :to="`${ROUTER_VERSION}/my_account`" class="btc-link">
           {{$t('title.my_account')}}
         </router-link>
         >
