@@ -255,7 +255,7 @@ const zh = {
     "total": "金額",
     "trade_success": "下单成功",
     "trade_fail": "下单失败",
-    "coin": "幣種",
+    "pair": "幣種對",
     "cancel": "撤銷",
     "confirm": "確認",
     "dialog": {

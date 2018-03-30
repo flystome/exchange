@@ -256,7 +256,7 @@ const en = {
       "total": "Total",
       "trade_success": "Success",
       "trade_fail": "Fail",
-      "coin": "Pair",
+      "pair": "Pair",
       "cancel": "Cancel",
       "confirm": "Confirm",
       "dialog": {
