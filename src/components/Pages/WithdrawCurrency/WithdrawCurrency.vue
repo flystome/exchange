@@ -469,14 +469,16 @@ export default {
           }
         }))
         this.depositId = []
+        console.log(deposits)
         deposits.length === 0 ? objd.item = [] : objd.item = objd.item.concat(deposits.map(d => {
           this.depositId.push(d.id)
+          console.log(555)
           return {
             content: [
               this.$moment(d.created_at).format('L H:mm:ss'),
-              {hover: true, context: d.txid, url: d.blockchain_url},
+              {hover: 'true', context: d.txid, url: d.blockchain_url},
               d.amount,
-              d.confirmations,
+              d.confirmations === null ? '0' : d.confirmations,
               this.$t(`withdraw_currency.${d.aasm_state}`)
             ]
           }

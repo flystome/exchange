@@ -76,10 +76,11 @@
       </div>
     </div>
     <div class="btc-homepage-notice">
-      <ul>
+      <ul class="btc-homepage-newCoin">
         <li v-for="data in new_coin" :key='data.id'>
           <a :href="data.url">{{ data.the_title }}</a>
         </li>
+
       </ul>
     </div>
     <div class="btc-homepage-main">
