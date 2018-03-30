@@ -163,6 +163,7 @@
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex'
 import Cookies from 'js-cookie'
+import pusher from '@/common/js/pusher'
 import HomeMarket from './HomeMarket/HomeMarket'
 export default {
   name: 'homepage',
@@ -177,7 +178,8 @@ export default {
       }
       this.PopupBoxDisplay({message: this.$t(`my_account.${code.match(/\d+/g)[0]}_hint`), type: 'warn'})
       Cookies.remove('code')
-    }
+    } // rails flash
+
     var self = this
     this._get({
       url: '/home/funds.json'
@@ -186,12 +188,14 @@ export default {
       if (!d.commission_factor) return
       this.factor = (10 - d.commission_factor * 10) * 10
       this.btc_worth = Number(d.total_assets.btc_worth).toFixed(2)
-    })
+    }) // markets
+
     this._get({
       url: '/k/trends.json'
     }, (d) => {
       this.trend = d.data
-    })
+    }) // trend
+
     this.$http.get(`${this.HOST_URL}/cms/api/announcements.json`, {
       params: {
         category: 'new-coin',
@@ -200,7 +204,13 @@ export default {
       }
     }).then(d => {
       self.new_coin = d.data
-    })
+    }) // new_coin
+
+    var channel = pusher.subscribe('market-global')
+    channel.bind('tickers', (data) => {
+      console.log(data)
+    }) // pusher
+
     if (!this.markData) this.GetmarketData()
   },
   data () {
@@ -249,6 +259,7 @@ export default {
             location.href = `${this.HOST_URL}/signin`
             Cookies.set('status', 'captcha_error')
           } else {
+            this.password = ''
             this.PopupBoxDisplay({type: 'error', message: this.$t('api_server.homepage.error_1001')})
           }
         }

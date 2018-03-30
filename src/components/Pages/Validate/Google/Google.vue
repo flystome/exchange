@@ -12,7 +12,7 @@
       </span>
     </div>
     <template v-if="step === 1">
-      <div class="row btc-validate-gpt btc-marginB60" style="margin-bottom: 140px;">
+      <div class="row btc-validate-gpt btc-marginB60" style="margin-bottom: 150px;">
         <div class="col-md-4 col-xs-12 col-md-offset-2 text-center btc-b-r  btc-validate-googleApp">
             <img src="~Img/google-authentication.png">
           <div class="row btc-f btc-marginT10">

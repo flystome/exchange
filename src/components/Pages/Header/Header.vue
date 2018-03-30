@@ -41,7 +41,7 @@
             </li>
             <li class="btc-link"><a @click="validateEmail">{{$t('nav.wallet')}}</a></li>
             <li class="btc-link"><a :href="CmsUrl.announcement">{{$t('nav.announcement')}}</a></li>
-            <li class="btc-link"><a :href="`${HOST_URL}/`">{{$t('nav.qa')}}</a></li>
+            <li class="btc-link"><a :href="CmsUrl.helper_center">{{$t('nav.qa')}}</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right btc-header-signin btc-marginT15" v-if="loginData === 'none' || loginData.errors">
             {{$t('nav.please')}}<a :href="`${HOST_URL}/signin`">{{$t('nav.login')}}</a>{{$t('nav.or')}}<a :href="`${HOST_URL}/signup`">{{$t('nav.register')}}</a>

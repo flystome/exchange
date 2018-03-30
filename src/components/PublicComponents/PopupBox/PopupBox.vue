@@ -1,6 +1,6 @@
 <template>
     <transition name="PopupBox">
-      <component class="btc-popupBox" v-if="PopupBox.status" :is="component"></component>
+      <component :key="'hint'" class="btc-popupBox" v-if="PopupBox.status" :is="component"></component>
     </transition>
 </template>
 
@@ -36,5 +36,11 @@ export default {
   }
   .PopupBox-enter, .PopupBox-leave-to {
     opacity: 0;
+    .bb{
+      color: red;
+    }
+  }
+  .bb {
+    transition: all 0.5s;
   }
 </style>

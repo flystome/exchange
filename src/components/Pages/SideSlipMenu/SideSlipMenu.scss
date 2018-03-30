@@ -21,7 +21,8 @@
     padding-left: 41px;
   }
   ul {
-    padding: 0
+    padding: 0;
+    height: calc(100% - 80px);
   }
   li {
     margin-bottom: 60px;
@@ -38,6 +39,19 @@
     &:hover{
       text-decoration: none
     }
+  }
+  .text-center{
+    // width: 74%;
+    // margin-left: 2%;
+    // position: relative;
+    // bottom: 0px;
+    // margin-bottom: 5%;
+    margin-top: 70%;
+    margin-bottom: 38px;
+    margin-right: 40px;
+  }
+  .btc-sideslip-marignB0{
+    margin-bottom: 0;
   }
 }
 

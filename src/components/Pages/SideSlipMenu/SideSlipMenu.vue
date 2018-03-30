@@ -28,7 +28,7 @@
                 </li>
             </ul>
           </li>
-          <li class='btc-paddingB0'>
+          <li class='btc-paddingB0' :class="{'btc-sideslip-marignB0': Consulting}">
             <div @click="Consulting = !Consulting">
               <img src='~Img/sideslip-consulting.png'> {{ $t('side_slip_menu.consulting_center') }}
               <span class="btc-fr btc-marginR20">
@@ -43,9 +43,9 @@
                 </a>
               </li>
               <li class='btc-marginL30'>
-                <a :href="`${HOST_URL}/`">FAQ</a>
+                <a :href="CmsUrl.helper_center">FAQ</a>
               </li>
-              <li class='btc-marginL30'>
+              <li class='btc-marginL30 btc-marginB0'>
                 <a :href="`${HOST_URL}/conversations`">{{ $t('side_slip_menu.news') }}</a>
               </li>
             </ul>
@@ -54,7 +54,7 @@
             <img src='~Img/sideslip-myaccount.png'>
             {{ $t('side_slip_menu.my_account') }}
           </li>
-          <li>
+          <li :class="{'btc-sideslip-marignB0': Lang}">
             <div @click="Lang = !Lang">
               <img src='~Img/sideslip-lang.png'> {{ $t('side_slip_menu.language') }}
               <span class="btc-fr btc-marginR20">
@@ -68,15 +68,15 @@
               </li>
             </ul>
           </li>
-          <li class="btc-marginL30">
+          <li class="">
               <span @click="goPc">
                 {{$t('side_slip_menu.desktop_end')}}
               </span>
           </li>
-          <li class="text-center" style="margin-top: 80%;margin-bottom: 38px;margin-right: 40px;">
+          <li class="text-center">
             <div v-if="loginData !== 'none'"><a :href="`${HOST_URL}/signout`">{{ $t('nav.exit') }}</a></div>
             <div v-else>
-              <span style="margin-right: 73px;">
+              <span style="margin-right: 44%;">
                 <a :href="`${HOST_URL}/signin`">{{ $t('nav.login') }}</a>
               </span>
               <span>
