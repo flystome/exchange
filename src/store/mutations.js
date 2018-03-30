@@ -6,6 +6,7 @@ const ROUTER_VERSION = process.env.ROUTER_VERSION
 const HOST_URL = process.env.HOST_URL
 
 const redirect = (state, action, type) => {
+  console.log(state.route.name)
   var route = type ? state.route.from.name : state.route.name
   var path = type ? state.route.from.path : state.route.path
   i18n.locale = Cookies.get('locale') ? Cookies.get('locale') : 'en'

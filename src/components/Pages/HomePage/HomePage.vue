@@ -78,7 +78,7 @@
     <div class="btc-homepage-notice">
       <ul>
         <li v-for="data in new_coin" :key='data.id'>
-
+          <a :href="data.url">{{ data.the_title }}</a>
         </li>
       </ul>
     </div>
@@ -103,17 +103,17 @@
         <img src="~Img/logo.png" >
       </div>
       <div class="btc-homepage-intr btc-marginT15 btc-marginB100">
-        <span class="col-xs-4 btc-marginT10"></span>
-        <div class="col-xs-4 text-center">
+        <span class="col-xs-3 btc-marginT10"></span>
+        <div class="col-xs-6 text-center">
           <span>{{ $t('homepage.trading_platform') }}</span>
         </div>
-        <span class="col-xs-4 pull-right btc-marginT10"></span>
+        <span class="col-xs-3 pull-right btc-marginT10"></span>
       </div>
       <div class="btc-homepage-info btc-marginT25 text-center">
         <a class="col-xs-2 col-xs-offset-1">
           <img src="~Img/homepage-us.png" >
           <span class="btc-marginT15">
-            <a>
+            <a href="mailto:support@hotex.com">
               {{ $t('homepage.contact_us') }}
             </a>
           </span>
@@ -183,7 +183,7 @@ export default {
     }, (d) => {
       d = d.data.success
       if (!d.commission_level) return
-      this.factor = (1 - d.commission_level.factor) * 10
+      this.factor = (1 - d.commission_level.factor) * 100
       this.btc_worth = Number(d.total_assets.btc_worth).toFixed(2)
     })
     this._get({

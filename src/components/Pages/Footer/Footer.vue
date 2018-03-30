@@ -14,14 +14,16 @@
         <li>
           <a :href="CmsUrl.helper_center">{{ $t("footer.help") }}</a>
         </li>
-        <li><a>{{ $t("footer.announcements") }}</a></li>
+        <li>
+           <a :href="CmsUrl.announcement">{{ $t("footer.announcements") }}</a>
+        </li>
       </ul>
       <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
         <li class="">{{ $t("footer.service") }}</li>
         <li>
           <a :href="CmsUrl.application">{{ $t("footer.application") }}</a>
         </li>
-        <li><a @click="goPath('/instructions/fee')">{{ $t("footer.rate_details") }}</a></li>
+        <li><a :href="CmsUrl.rate_details">{{ $t("footer.rate_details") }}</a></li>
       </ul>
       <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
         <li class="">{{ $t("footer.about") }}</li>
@@ -31,7 +33,7 @@
       </ul>
       <ul class="btc-info pull-right btc-marginT30 btc-marginR30 dropup">
         <li class="btc-marginB30">
-         <a>
+         <a style="cursor:initial">
             {{ $t('homepage.contact_us') }}
         </a>
         </li>

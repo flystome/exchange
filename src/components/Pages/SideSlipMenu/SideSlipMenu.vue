@@ -38,7 +38,7 @@
             </div>
             <ul v-if="Consulting">
               <li class='btc-paddingT60 btc-marginL30'>
-                <a :href="`${HOST_URL}/xchg`">
+                <a :href="CmsUrl.announcement">
                   {{ $t('side_slip_menu.announcement') }}
                 </a>
               </li>
@@ -165,7 +165,7 @@ export default {
     ...mapMutations(['SideSlipMenuDisplay', 'ChangeLanguage', 'PopupBoxDisplay'])
   },
   computed: {
-    ...mapState(['SideSlipMenu', 'loginData']),
+    ...mapState(['SideSlipMenu', 'loginData', 'CmsUrl']),
     ...mapGetters(['marketData'])
   }
 }

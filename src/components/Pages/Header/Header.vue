@@ -40,7 +40,7 @@
               </ul>
             </li>
             <li class="btc-link"><a @click="validateEmail">{{$t('nav.wallet')}}</a></li>
-            <li class="btc-link"><a :href="`${HOST_URL}/xchg`">{{$t('nav.announcement')}}</a></li>
+            <li class="btc-link"><a :href="CmsUrl.announcement">{{$t('nav.announcement')}}</a></li>
             <li class="btc-link"><a :href="`${HOST_URL}/`">{{$t('nav.qa')}}</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right btc-header-signin btc-marginT15" v-if="loginData === 'none' || loginData.errors">
@@ -168,7 +168,7 @@ export default {
       return lang
     },
     ...mapGetters(['loginData', 'marketData']),
-    ...mapState(['language'])
+    ...mapState(['language', 'CmsUrl'])
   }
 }
 </script>

@@ -161,7 +161,7 @@
                 {{ $t('my_account.effective_recommended') }}: <strong>{{ loginData.promotion_amount }}</strong>
               </div>
               <div>
-                {{ $t('my_account.my_trade_discount') }}: <strong>{{ `${(1 - loginData.commission_level) * 10}%` }}{{$t('homepage.off')}}</strong>
+                {{ $t('my_account.my_trade_discount') }}: <strong>{{ `${(10 - Number(loginData.commission_level)) * 10}%` }}{{$t('homepage.off')}}</strong>
               </div>
             </div>
           </div>
@@ -425,6 +425,7 @@ export default {
           }
         }))
       }
+      this.getTicket()
       return obj
     }
   },
@@ -434,9 +435,6 @@ export default {
     }
   },
   watch: {
-    loginData () {
-      this.getTicket()
-    },
     $route (to) {
       if (/my_account/.test(to.path)) {
         this.step = 1

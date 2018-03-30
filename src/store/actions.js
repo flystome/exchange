@@ -4,6 +4,7 @@ const unLogin = ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home']
 
 const actions = {
   getData ({ commit, state }) {
+    Cookies.get('validate_token') && Cookies.set('php_session', Cookies.get('validate_token'))
     _get({
       url: '/settings/member.json',
       headers: {
