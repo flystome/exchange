@@ -4,9 +4,9 @@
       <div class="mask"></div>
       <div class="dia_content">
         <div class="text">
-          <h4>{{$t('markets.dialog.' + order_type)}}{{$t('markets.confirm')}}</h4>
+          <h4>{{$t('markets.confirm')}}{{$t('markets.dialog.' + order_type)}}</h4>
           <ul>
-            <li><div class="value"><span>{{market.quote_currency | upper}}</span></div>{{$t('markets.coin')}}</li>
+            <li><div class="value pair"><span>{{(market.quote_currency+'/'+market.base_currency)  | upper}}</span></div>{{$t('markets.pair')}}</li>
             <li><div class="value">{{price | fixedNum(market.price_fixed)}}<span>{{market.base_currency | upper}}</span></div>{{$t('markets.price')}}</li>
             <li v-if="order_type === 'buy'"><div class="value">{{amount_buy | fixedNum(market.price_amount)}}<span>{{market.quote_currency | upper}}</span></div>{{$t('markets.volume')}}</li>
             <li v-if="order_type === 'sell'"><div class="value">{{amount_sell | fixedNum(market.price_amount)}}<span>{{market.quote_currency | upper}}</span></div>{{$t('markets.volume')}}</li>
@@ -327,7 +327,7 @@ export default {
           self.sn = initdata.current_user.sn
         }
         self.isDisabled = false
-        document.title = `${self.market.quote_currency.toUpperCase()}/${self.market.base_currency.toUpperCase()}-${self.$t('brand')}`
+        document.title = `${self.market.quote_currency.toUpperCase()}/${self.market.base_currency.toUpperCase()} - ${self.$t('brand')}`
       })
     },
     fetchTrades: function (market) {

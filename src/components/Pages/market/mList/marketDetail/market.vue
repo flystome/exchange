@@ -189,7 +189,7 @@ export default {
         } else {
           self.getLocal()
         }
-        document.title = `${self.market.quote_currency.toUpperCase()}/${self.market.base_currency.toUpperCase()}-${self.$t('brand')}`
+        document.title = `${self.market.quote_currency.toUpperCase()}/${self.market.base_currency.toUpperCase()} - ${self.$t('brand')}`
       })
     },
     goPath: function (index) {
