@@ -186,11 +186,11 @@ export default {
   },
   mounted: function () {
     this.init()
-    console.log(this.loginData)
     if (this.loginData) {
       this.sn = this.loginData.sn
-      this.tradeShow= true
+      this.tradeShow = true
       this.fetchTrades(this.curMarket)
+      this.getRefresh(this.sn)
     }
   },
   computed: {
@@ -267,7 +267,6 @@ export default {
       this.fetchData(this.curMarket)
       this.getPusher(this.curMarket)
       this.reload()
-      console.log(this.sn)
     },
     getPusher: function (market) {
       var self = this
@@ -337,7 +336,6 @@ export default {
           market: this.curMarket
         }
       }, function (data) {
-        console.log(data)
         self.trades = data.data.trades
       })
     },

@@ -21,7 +21,6 @@
             <div :class="{'text-up': item.percent > 0, 'text-down': item.percent < 0}">{{item.percent | fixed2}}%</div>
           </div>
         </router-link>
-
       </li>
     </ul>
   </div>
@@ -47,7 +46,7 @@ export default {
   },
   filters: {
     fixed2: function (params) {
-      if (+params <= 0 || !params) return 0
+      if (!params) return 0
       return (+params).toFixed(2)
     },
     upper: function (params) {

@@ -28,32 +28,7 @@ export default {
     marketList
   },
   mounted: function () {
-    var self = this
-    this.fetchData()
-    var channel = pusher.subscribe('market-global')
-    channel.bind('tickers', (data) => {
-      if (JSON.stringify(data) !== '{}') {
-        console.log(data)
-        for (var i in data) {
-          var key = data[i]['base_currency']
-          var Arr = self.marketData[key]
-          if (!Arr) return
-          var len = Arr.length
-          var target = null
-          for (var j = 0; j < len; j++) {
-            var arrKey = Object.keys(Arr[j])
-            if (arrKey[0] === i) {
-              target = Arr[j]
-              target[arrKey].last = data[i]['last']
-              target[arrKey].percent = data[i]['percent']
-              target[arrKey].volume = data[i]['volume']
-              target[arrKey].legal_worth = data[i]['legal_worth']
-            }
-          }
-          this.getCurData(self.marketData)
-        }
-      }
-    })
+    this.init()
     window.onpageshow = function (e) {
       if (e.persisted) {
         window.location.reload()
@@ -61,6 +36,38 @@ export default {
     }
   },
   methods: {
+    init: function () {
+      this.getRefresh()
+      this.fetchData()
+    },
+    getRefresh: function () {
+      var self = this
+      var channel = pusher.subscribe('market-global')
+      channel.bind('tickers', (data) => {
+        if (JSON.stringify(data) !== '{}') {
+          var i
+          for (i in data) {
+            var obj = data[i]
+            var key = obj.base_currency
+            var Arr = self.marketData[key]
+            if (!Arr) return
+            var len = Arr.length
+            var target = null
+            for (var j = 0; j < len; j++) {
+              var arrKey = Object.keys(Arr[j])
+              if (arrKey[0] === i) {
+                target = Arr[j]
+                target[arrKey].last = data[i]['last']
+                target[arrKey].percent = data[i]['percent']
+                target[arrKey].volume = data[i]['volume']
+                target[arrKey].legal_worth = data[i]['legal_worth']
+              }
+            }
+            this.getCurData(self.marketData)
+          }
+        }
+      })
+    },
     fetchData: function () {
       var self = this
       this._get({
