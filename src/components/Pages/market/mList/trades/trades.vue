@@ -161,7 +161,7 @@ export default {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       hds: ['markets.quotes', 'markets.trade', 'markets.currency'],
-      heads: ['markets.newPrice', 'markets.amount', 'markets.time'],
+      heads: ['markets.price', 'markets.amount', 'markets.time'],
       percents: [['1/4', 25], ['1/3', 33.3], ['1/2', 50], ['All', 100]],
       currencyindex: 1,
       order_type: 'buy',
@@ -187,7 +187,8 @@ export default {
   },
   mounted: function () {
     this.init()
-    if (this.loginData) {
+    this.tradeShow = false
+    if (this.loginData && this.loginData !== 'none') {
       this.sn = this.loginData.sn
       this.tradeShow = true
       this.fetchTrades(this.curMarket)
@@ -206,6 +207,7 @@ export default {
   },
   watch: {
     loginData (val, oldValue) {
+      console.log(val)
       this.getRefresh(val.sn)
       this.tradeShow = true
       var m = this.$route.params.id

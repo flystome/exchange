@@ -81,7 +81,7 @@ export default {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       currencyindex: 0,
       hds: ['markets.quotes', 'markets.trade', 'markets.currency'],
-      heads: ['markets.newPrice', 'markets.amount', 'markets.time'],
+      heads: ['markets.price', 'markets.amount', 'markets.time'],
       curmarket: '',
       market: {},
       ticker: {},
@@ -130,14 +130,16 @@ export default {
     init: function () {
       this.curmarket = this.$route.params.id
       this.fetchData(this.curmarket)
+      this.getPusher()
+      this.reload()
+    },
+    getLocal: function () {
       this.localList = localStorage.getItem('markets')
-      if (this.localList.length !== 0) {
+      if (this.localList && this.localList.length !== 0) {
         if (this.localList.split(',').indexOf(this.curmarket) !== -1) {
           this.favorite = true
         }
       }
-      this.getPusher()
-      this.reload()
     },
     getPusher: function () {
       var self = this
@@ -177,11 +179,15 @@ export default {
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
         self.ticker = initdata.ticker
-        self.trades = initdata.trades.slice(0, 10)
         self.market = initdata.market
         self.logined = !!initdata.current_user
+        if (initdata.trades && initdata.trades.length !== 0) {
+          self.trades = initdata.trades.slice(0, 10)
+        }
         if (self.logined) {
           self.favorite = initdata.market['is_portfolios']
+        } else {
+          self.getLocal()
         }
         document.title = `${self.market.quote_currency.toUpperCase()}/${self.market.base_currency.toUpperCase()}-${self.$t('brand')}`
       })
