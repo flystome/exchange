@@ -328,6 +328,9 @@
         font-size: 12px;
         height: 168px;
         position: relative;
+        .trade_price.checked {
+          background: #38475a;
+        }
         &.trade_top {
           height: 183px;
         }
