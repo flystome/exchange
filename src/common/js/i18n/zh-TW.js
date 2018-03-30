@@ -274,6 +274,9 @@ const zh = {
     "bid": "買",
     "ask": "賣",
     "cancel": "撤銷",
+    "tip": "请登录或注册后再操作",
+    "login": "登录",
+    "register": "注册",
     'dialog': {
       'cancel': "確認撤銷此單嗎？",
       'cancel_all': "確認撤銷全部訂單嗎？"
@@ -359,7 +362,7 @@ const zh = {
     "news": "信息",
     "my_account": "我的帳戶",
     "language": "語言",
-    "desktop_end": "案頭端"
+    "desktop_end": "切換到PC首頁"
   },
   "homepage": {
     "banner_describe1": "權威透明的數字資產交易平台",
