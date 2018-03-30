@@ -206,7 +206,7 @@ const en = {
       "google_not_certified": "Google Auth not bound",
       "not_certified_prompt": "Help us keeping bad guys out of your account by using both your phone",
       "go_validate": "Do Validation",
-      "log_and_operate": "Please log in and operate"
+      "log_and_operate": "Please login first!"
     },
     "placeholder": {
       "cell_phone_number": "Cell Phone Number",
@@ -360,7 +360,7 @@ const en = {
       "news": "News",
       "my_account": "My Account",
       "language": "Language",
-      "desktop_end": "Desktop End"
+      "desktop_end": "Switch To PC"
     },
     "homepage": {
       "banner_describe1": "High Quality Block Chain Assets",
