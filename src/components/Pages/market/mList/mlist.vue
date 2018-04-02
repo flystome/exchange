@@ -36,6 +36,13 @@ export default {
       }
     }
   },
+  watch: {
+    '$route' (to, from) {
+      if (to.path === '/markets') {
+        this.init()
+      }
+    }
+  },
   methods: {
     init: function () {
       this.getRefresh()
