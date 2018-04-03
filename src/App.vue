@@ -2,18 +2,18 @@
   <div id="app">
     <transition name='SideSlipMenu'>
       <section class="btc-main" :class="{'btc-background-white': this.$route.name === 'HomePage' ||  this.$route.name === 'home'}">
-        <header is='Header' />
+        <header v-if="!fromApp" is='Header' />
         <div v-if="loading" class="btc-container container" v-cloak>
           <keep-alive>
             <router-view></router-view>
           </keep-alive>
         </div>
-      <div style="margin-top: 15%;margin-bottom: 15%;" v-else>
+      <div class="btc-global-loading" v-else>
         <vue-simple-spinner size="88"></vue-simple-spinner>
       </div>
       </section>
     </transition>
-    <footer v-if='noMobile' is='Footer' />
+    <footer v-if='!fromApp && noMobile' is='Footer' />
     <wrapper></wrapper>
     <popup-box></popup-box>
     <side-slip-menu></side-slip-menu>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import Header from '@/components/Pages/Header/Header'
 import Footer from '@/components/Pages/Footer/Footer'
 import SideSlipMenu from '@/components/Pages/SideSlipMenu/SideSlipMenu'
@@ -57,6 +57,7 @@ export default {
       }
       return false
     },
+    ...mapState(['fromApp']),
     ...mapGetters(['loginData'])
   }
 }

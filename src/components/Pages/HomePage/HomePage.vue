@@ -93,7 +93,7 @@
           <img class="btc-pointer" v-else @click="search = ''" src="~Img/search-delete.png" >
         </div>
         <keep-alive>
-          <HomeMarket v-if="curData" v-on:marketChange="marketChange" :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]">
+          <HomeMarket ref="market" v-if="curData" v-on:marketChange="marketChange" :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]">
           </HomeMarket>
           <div v-else style="position: absolute;top: 40%;left: 48%;">
             <vue-simple-spinner size="88"></vue-simple-spinner>
@@ -208,7 +208,20 @@ export default {
 
     var channel = pusher.subscribe('market-global')
     channel.bind('tickers', (data) => {
-      console.log(data)
+      // console.log(data)
+      // var obj  = Object[Object.keys(data)[0]]
+      // [this.currency.indexOf(obj.base_currency)]
+      Object.keys(data).forEach((key) => {
+        this.curData[this.currency.indexOf(data[key].base_currency.toLowerCase())].forEach(d => {
+          if (key === d.name.toLowerCase().replace('/', '')) {
+            d.last = data[key].last
+            d.legal_worth = data[key].legal_worth
+            d.volume = data[key].volume
+            d.percent = data[key].percent
+          }
+        })
+      })
+      this.$refs['market'].$emit('market')
     }) // pusher
 
     if (!this.markData) this.GetmarketData()

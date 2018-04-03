@@ -40,6 +40,7 @@ const zh = {
     "message": "消息"
   },
   "my_account": {
+    "copy": "複製",
     "total_assets": "總資產",
     "change_password": "更改密碼",
     "login_record": "登錄記錄（近五次）",

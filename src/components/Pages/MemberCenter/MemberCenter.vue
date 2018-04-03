@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="btc-member-center container">
-      <div class="btc-container-block btc-membercenter-header">
+      <div class="btc-container-block btc-membercenter-header" :class="{'btc-member-padding' : step === 2}">
         <div class="col-md-6">
           <div class="btc-member-info">
             <span class="btc-member-infoEmail">{{ loginData.show_name }}</span>
@@ -25,7 +25,7 @@
           </span>
         </div>
       </div>
-      <div class="btc-member-ver">
+      <div class="btc-member-ver" v-if="step === 1">
         <div class="media">
           <div>
             <div class="media-left">
@@ -155,7 +155,7 @@
                 <span v-if="loginData !== 'none'" id="copy1" class="btc-b">
                    {{ `${HOST_URL}?r=${loginData.promotion_id}` }}
                 </span>
-                <basic-button class='btn-copy1' data-clipboard-target="#copy1" :text="$t('deposit_currency.copy_address')"></basic-button>
+                <basic-button class='btn-copy1' data-clipboard-target="#copy1" :text="$t('my_account.copy')"></basic-button>
               </div>
               <div class="btc-marginB20 btc-bottom">
                 {{ $t('my_account.effective_recommended') }}: <strong>{{ loginData.promotion_amount }}</strong>

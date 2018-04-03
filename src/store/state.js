@@ -13,6 +13,7 @@ const state = {
     confirm: false,
     b: ''
   },
+  fromApp: false,
   language: Cookies.get('locale') ? Cookies.get('locale') : 'en',
   DepositAddress: {
   },

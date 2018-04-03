@@ -58,6 +58,11 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'home-market',
   props: ['curData', 'currency', 'search', 'trend'],
+  created () {
+    this.$on('market', () => {
+      this.curData.splice()
+    })
+  },
   data () {
     return {
       oldData: null,
@@ -147,25 +152,25 @@ export default {
         if (this.loginData === 'none') {
           this.curData[index].is_portfolios = false
           this.$emit('marketChange', { index: index, type: 'delete', status: false })
-          this.curData.reverse().reverse()
+          this.curData.splice()
           return
         }
         this.disabled = true
         this._delete({
           url: `/portfolios/${currency}.json`
         }, (d) => {
+          this.disabled = false
           if (d.data.success) {
             this.curData[index].is_portfolios = false
             this.$emit('marketChange', { index: index, type: 'delete' })
-            this.curData.reverse().reverse()
-            this.disabled = false
+            this.curData.splice()
           }
         })
       } else {
         if (this.loginData === 'none') {
           this.curData[index].is_portfolios = true
           this.$emit('marketChange', { index: index, type: 'add', status: true })
-          this.curData.reverse().reverse()
+          this.curData.splice()
           return
         }
         this.disabled = true
@@ -175,10 +180,11 @@ export default {
             market: currency
           }
         }, (d) => {
+          this.disabled = false
           if (d.data.success) {
             this.$emit('marketChange', { index: index, type: 'add' })
             this.curData[index].is_portfolios = true
-            this.curData.reverse().reverse()
+            this.curData.splice()
             this.disabled = false
           }
         })

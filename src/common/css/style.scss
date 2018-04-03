@@ -158,6 +158,12 @@ ul,li {
     zoom:1;
 }
 
+.btc-global-loading{
+  >div{
+    margin-top: 16%;
+  }
+}
+
 @media (max-width: 992px) {
   html, body {
     height: auto;
@@ -174,6 +180,12 @@ ul,li {
   .btc-background-white{
     .container{
       width: 750px
+    }
+  }
+  .btc-global-loading{
+    min-height: calc(100vh - 52px);
+    >div{
+      margin-top: 55%;
     }
   }
 }

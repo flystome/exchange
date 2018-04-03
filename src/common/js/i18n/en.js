@@ -41,6 +41,7 @@ const en = {
       "message": "Message"
     },
     "my_account": {
+      "copy": "copy",
       "total_assets": "Total Assets",
       "change_password": "Change Password",
       "login_record": "Login Record (Last 5)",

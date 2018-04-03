@@ -21,11 +21,6 @@ a{
     padding: 12px 30px 112px 25px;
     background: url("~Img/membercenter.png") no-repeat center;
   }
-  .btc-membercenter-header{
-    .btc-member-choose{
-
-    }
-  }
   .btc-member-ver{
     // background-color: #fff;
     // max-width: 1080px;
@@ -53,7 +48,9 @@ a{
 
     }
   }
-
+  .btc-member-padding{
+    padding-bottom: 23px!important;
+  }
   .btc-member-ver{
     max-width: 1200px;
     width: 100%;
@@ -422,6 +419,12 @@ a{
   }
   .img-padding{
     padding-right: 8px;
+  }
+  .btc-referrals-address{
+    display: block!important;
+  }
+  .btn-copy1{
+    margin-top: 15px;
   }
 }
 
