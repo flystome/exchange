@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <transition name='SideSlipMenu'>
-      <section class="btc-main" :class="{'btc-background-white': this.$route.name === 'HomePage' ||  this.$route.name === 'home'}">
-        <header v-if="!fromApp" is='Header' />
+      <section class="btc-main" :class="{'btc-background-white': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange'}">
+        <header v-if="!fromApp && exChange" is='Header' />
         <div v-if="loading" class="btc-container container" v-cloak>
           <keep-alive>
             <router-view></router-view>
@@ -13,7 +13,7 @@
       </div>
       </section>
     </transition>
-    <footer v-if='!fromApp && noMobile' is='Footer' />
+    <footer v-if='!fromApp && noMobile && exChange' is='Footer' />
     <wrapper></wrapper>
     <popup-box></popup-box>
     <side-slip-menu></side-slip-menu>
@@ -33,7 +33,9 @@ export default {
   data () {
     return {
       unLogin: ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home', 'Orders', 'notFound'],
-      noMobile: true
+      version: process.env.ROUTER_VERSION,
+      noMobile: true,
+      exChange: false
     }
   },
   components: {
@@ -45,6 +47,15 @@ export default {
   },
   mounted: function () {
     this.noMobile = !/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
+  },
+  watch: {
+    '$route' (to, from) {
+      console.log(11)
+      if (to.path === `${version}/exchange`) {
+        this.exChange = true
+        console.log(12)
+      }
+    }
   },
   computed: {
     loading () {
@@ -71,6 +82,14 @@ export default {
   background: white;
   .btc-container{
   background: white;
+  }
+}
+.exchange {
+  background: #1b242e;
+  width: 100%;
+  min-width: 1200px;
+  .btc-container {
+    background: none;
   }
 }
 </style>
