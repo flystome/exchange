@@ -6,7 +6,7 @@
           <slot name='remark'></slot>
         </caption>
         <tbody v-if="item.length > 1">
-          <tr v-for="(item, length) in item" :key='length' v-if="length < 6">
+          <tr v-for="(item, length) in item" :key='length' v-if="length < len">
             <td v-for="(data, index) in item.content"
             :key="index" :style="{width: toPercent()}"
             :class="{
@@ -40,7 +40,23 @@
 <script>
 export default {
   name: 'BasicTable',
-  props: ['captionTitle', 'item', 'perfix'],
+  props: {
+    captionTitle: {
+      type: String
+    },
+    item: {
+      type: Array
+    },
+    perfix: {
+      type: String
+    },
+    len: {
+      type: Number,
+      default: () => {
+        return 6
+      }
+    }
+  },
   methods: {
     toPercent () {
       var str = Number(1 / this.item[0].content.length * 100)

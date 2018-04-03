@@ -149,7 +149,7 @@
               </div>
               <div class="btc-referrals-address">
                 <span v-if="loginData !== 'none'" id="copy1" class="btc-b">
-                   {{ `${HOST_URL}?r=${loginData.promotion_id}` }}
+                   {{ `${HOST_URL}/signup?r=${loginData.promotion_id}` }}
                 </span>
                 <basic-button class='btn-copy1' data-clipboard-target="#copy1" :text="$t('my_account.copy')"></basic-button>
               </div>
@@ -269,13 +269,13 @@ export default {
 
         var obj = {
           captionTitle: 'my_account.recommended_statistics',
-          Item: ''
+          Item: []
         }
         if (data.referral_datas) {
           data.referral_datas.sort((a, b) => {
             return new Date(b.date).getTime() - new Date(a.date).getTime()
           })
-          data.referral_datas.length === 0 ? obj.Item = '' : obj.Item = [{content: [this.$t('my_account.date'), this.$t('my_account.number_of_users'), this.$t('my_account.new_user'), this.$t('my_account.page_browsing'), this.$t('my_account.bounce_rate')]}].concat(data.referral_datas.map(d => {
+          data.referral_datas.length === 0 ? obj.Item = [] : obj.Item = [{content: [this.$t('my_account.date'), this.$t('my_account.number_of_users'), this.$t('my_account.new_user'), this.$t('my_account.page_browsing'), this.$t('my_account.bounce_rate')]}].concat(data.referral_datas.map(d => {
             return {
               content: [
                 this.$moment(d.date).format('L'),
@@ -291,16 +291,16 @@ export default {
 
         var obj1 = {
           captionTitle: 'my_account.recommended_users',
-          Item: ''
+          Item: []
         }
         if (data.referral_datas) {
           data.referral_signup_history.sort((a, b) => {
             return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-          })
+          }).reverse()
           data.referrals.sort((a, b) => {
             return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-          })
-          data.referral_signup_history.length === 0 ? obj1.Item = '' : obj1.Item = [{content: [this.$t('my_account.account'), this.$t('my_account.ip_adress'), this.$t('my_account.login_location'), this.$t('my_account.browser'), this.$t('my_account.login_time'), this.$t('my_account.activated')]}].concat(data.referral_signup_history.map((_, index) => {
+          }).reverse()
+          data.referral_signup_history.length === 0 ? obj1.Item = [] : obj1.Item = [{content: [this.$t('my_account.account'), this.$t('my_account.ip_adress'), this.$t('my_account.login_location'), this.$t('my_account.browser'), this.$t('my_account.login_time'), this.$t('my_account.activated')]}].concat(data.referral_signup_history.map((_, index) => {
             return {
               content: [
                 data.referrals_account_name[index],

@@ -199,6 +199,7 @@ const zh = {
     "referral": "推薦用戶",
     "markets": "市場",
     "404": "404 頁面",
+    "form_order": "下單記錄"
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",
@@ -396,6 +397,23 @@ const zh = {
     "day_highs_and_lows": "日跌漲",
     "my_optional": "我的自選",
     "off": "折扣率"
+  },
+  "form": {
+    "order": {
+      "order_record": "下單記錄",
+      "type": "類型",
+      "monetary_pair": "貨幣對",
+      "state": "狀態",
+      "entrustment_price": "委託價",
+      "entrustment_number": "委託數量",
+      "average_transaction_price": "平均成交價",
+      "number_of_transactions": "成交數量",
+      "entrustment_time": "委託時間",
+      "sell": "賣出",
+      "buy": "買入",
+      "success": "已成功",
+      "cancel": "已取消",
+    }
   },
     "validation": {
     "verify_code": '驗證碼'

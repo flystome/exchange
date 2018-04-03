@@ -23,15 +23,18 @@
         </div> -->
       <swiper class="carousel" :options="swiperOption">
         <swiper-slide v-for="data in Notice" :key="data.id">
-          <div :style="{'background': 'url('+ data.thumb + ') 50% 50%'}" class="img-container">
+          <div :style="{'background': 'url('+ data.thumb + ') 50% 50%', 'background-repeat': 'no-repeat'}" class="btc-pointer img-container">
             <div class="container btc-notice">
-              <div>
-                <p>{{ data.the_title }}</p>
-                <span>{{ data.the_content }}</span>
-              </div>
+              <a :href="data.url" target='_blank'>
+                <div>
+                  <p>{{ data.the_title }}</p>
+                  <span>{{ data.the_content }}</span>
+                </div>
+              </a>
             </div>
           </div>
         </swiper-slide>
+        <vue-simple-spinner class="btc-notice-loading" v-if="Notice.length === 0" size="150"></vue-simple-spinner>
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
@@ -255,10 +258,10 @@ export default {
       swiperOption: {
         spaceBetween: 30,
         centeredSlides: true,
-        // autoplay: {
-        //   delay: 3000,
-        //   disableOnInteraction: false
-        // },
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
+        },
         pagination: {
           el: '.swiper-pagination',
           clickable: true
@@ -369,6 +372,7 @@ export default {
     },
     GetNewCoin () {
       var self = this
+      this.new_coin = ''
       this.$http.get(`${this.HOST_URL}/cms/api/announcements.json`, {
         params: {
           category: 'new-coin',
@@ -378,7 +382,7 @@ export default {
       }).then(d => {
         self.new_coin = d.data
       }) // new_coin
-
+      this.Notice = []
       this.$http.get(`${this.HOST_URL}/cms/api/announcements.json`, {
         params: {
           category: 'official-announcement',

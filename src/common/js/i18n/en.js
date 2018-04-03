@@ -199,7 +199,8 @@ const en = {
       "homepage": "Homepage",
       "referral": "Referral",
       "markets": "Markets",
-      "404": "404 Not Found"
+      "404": "404 Not Found",
+      "form_order": "Order Record"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
@@ -397,6 +398,23 @@ const en = {
       "day_highs_and_lows": "24h Change %",
       "my_optional": "Favorite",
       "off": "Off"
+    },
+    "form": {
+      "order": {
+        "order_record": "Order Record",
+        "type": "Type",
+        "monetary_pair": "Monetary Pair",
+        "state": "State",
+        "entrustment_price": "Entrustment Price",
+        "entrustment_number": "Entrustment Number",
+        "average_transaction_price": "Average Transaction Price",
+        "number_of_transactions": "Number Of Transactions",
+        "entrustment_time": "Entrustment Time",
+        "sell": "Sell",
+        "buy": "Buy",
+        "success": "Success",
+        "cancel": "Cancel",
+      }
     },
     "validation": {
       "verify_code": 'verify code'
