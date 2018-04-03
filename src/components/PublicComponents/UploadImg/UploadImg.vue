@@ -43,7 +43,6 @@ export default {
       this.prompt = ''
     },
     ShowImg (el) {
-      console.log(el)
       this.$emit('prompt')
       if (el.target.files.length === 0) {
         this.UploadImg = ''

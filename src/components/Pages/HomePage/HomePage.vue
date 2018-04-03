@@ -345,6 +345,16 @@ export default {
       }).then(d => {
         self.new_coin = d.data
       }) // new_coin
+
+      this.$http.get(`${this.HOST_URL}/cms/api/announcements.json`, {
+        params: {
+          category: 'official-announcement',
+          locale: self.language,
+          per_page: '8'
+        }
+      }).then(d => {
+        console.log(d)
+      }) // new_coin
     },
     ...mapMutations(['PopupBoxDisplay'])
   },
