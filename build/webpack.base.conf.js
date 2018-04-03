@@ -39,7 +39,8 @@ module.exports = {
       'Pages': resolve('src/components/Pages'),
       'Components': resolve('src/components/PublicComponents'),
       'Img': resolve('static/img'),
-    }
+    },
+    modules: ["node_modules", "spritesmith-generated"]
   },
   externals: process.env.NODE_ENV === 'production' ? config.build.externals : '',
   module: {

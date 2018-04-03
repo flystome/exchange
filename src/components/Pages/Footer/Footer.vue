@@ -2,7 +2,7 @@
   <footer class="btc-footer hidden-xs">
     <nav class="container">
       <div class="btc-footer-logo col-md-5">
-        <img src="~Img/logo.svg" alt="">
+        <img src="@/common/svg/logo.svg" alt="">
         <p class="btc-marginB15">{{ $t("footer.introduction") }}</p>
         <p>{{ $t("footer.copyright") }}</p>
       </div>

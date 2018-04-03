@@ -5,11 +5,11 @@
           <div class="btc-fl">
             <span>
               <img src="~Img/asset-total.png">
-              {{$t('withdraw_currency.total_assets')}} <span>{{ TotalAssets }}</span> BTC
+              {{$t('withdraw_currency.total_assets')}} <span>{{ TotalAssets | toLocaleString }}</span> BTC
             </span>
             <img class="btc-marginL45 btc-marginR5" src="~Img/asset-freeze.png">
             <a class='btc-color999'>
-              {{$t('withdraw_currency.frozen_assets')}} {{ Locked }} BTC
+              {{$t('withdraw_currency.frozen_assets')}} {{ Locked | toLocaleString }} BTC
             </a>
           </div>
           <div class="btc-fr">
@@ -132,14 +132,15 @@
         </div>
       </div>
       <div v-else class="btc-deposit-currency btc-paddingT40 btc-b">
-        <template v-if='deposit_address'>
-          <div v-if="deposit_address_display" class="text-right btc-deposit-qrcode col-md-5 btc-marginT5">
-            <qr-code :length='"230"' :dateUrl="qrcode(deposit_address)"></qr-code>
+        <template v-if="deposit_address !== ''">
+          <div class="text-right btc-deposit-qrcode col-md-5 btc-marginT5">
+            <qr-code v-if="deposit_address_display" :length='"230"' :dateUrl="qrcode(deposit_address)"></qr-code>
+            <vue-simple-spinner class="btc-withdraw-loading" v-else size="185"></vue-simple-spinner>
           </div>
           <div class="btc-deposit-address col-md-5">
             <div class="btc-address-div">
               <div id="copy" class="btc-b btc-color666">
-                {{ deposit_address }}
+                {{ deposit_address === false ? '' : deposit_address  }}
               </div>
               <div class="btc-address-warn btc-marginT10">
                 {{ ReplaceCurrency }}
@@ -335,6 +336,7 @@ export default {
       Time: '',
       GeneratAddress: '',
       WithdrAwable: false,
+      loading: false,
       newaa: [],
       WithdrawData: {
         Address_id: '',
@@ -362,6 +364,9 @@ export default {
     },
     toFixed (str) {
       return Number(str).toFixed(3)
+    },
+    toLocaleString (str) {
+      return Number(str).toLocaleString('en')
     }
   },
   methods: {
@@ -418,16 +423,21 @@ export default {
           buttonText: this.$t('hint.no'),
           buttondisplay: true
         })
+        this.Time = false
       }, 10000)
     },
     GetCoin (c, funds, sn) {
       this.disabled = true
+      this.deposit_address = false
+      this.deposit_address_display = false
+      this.loading = true
         this._get({
           url: `/funds/${c || 'btc'}/account_info.json`
         }, (d) => {
         this.GeneratAddress = false
         this.disabled = false
         var d = d.data.success
+        this.loading = false
         if (d.code === 201) {
           this.GeneratAddress = true
           if (/deposit/.test(this.$route.path)) {
@@ -466,10 +476,8 @@ export default {
           }
         }))
         this.depositId = []
-        console.log(deposits)
         deposits.length === 0 ? objd.item = [] : objd.item = objd.item.concat(deposits.map(d => {
           this.depositId.push(d.id)
-          console.log(555)
           return {
             content: [
               this.$moment(d.created_at).format('L H:mm:ss'),
@@ -723,6 +731,7 @@ export default {
         this.deposit_address_display = true
         delete this.DepositAddress[Object.keys(to)]
         clearTimeout(this.Time)
+        if (this.Time === false) return
         this.ChangePopupBox({
           type: 'success',
           message: this.$t('hint.completion')

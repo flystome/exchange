@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     gopath (href) {
-      if (this.PopupBox.confirm && href === true) location.href = `${this.HOST_URL}/tickets`
+      if (this.PopupBox.confirm && href === true) location.href = `${this.HOST_URL}/tickets/new`
       this.b = false
       setTimeout(() => {
         this.ChangePopupBox({

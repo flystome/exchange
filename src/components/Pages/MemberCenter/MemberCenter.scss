@@ -401,7 +401,7 @@ a{
 @media(max-width: 766px){
   .btc-referral .btc-referral-data{
     margin-left: 4%;
-    width: 82%;
+    width: 93%;
   }
   .btc-referral .btc-qrcode{
     text-align: center;
@@ -426,15 +426,31 @@ a{
   .btn-copy1{
     margin-top: 15px;
   }
-}
-
-
-@media (max-width: 492px) {
+  #copy1{
+    display: block;
+    width: 100%;
+    overflow: hidden;
+  }
+  .btc-member-info{
+    display: block;
+    float: none;
+  }
   .btc-member-bt{
     float: left;
     margin-left: 15px;
     margin-top: 5px;
   }
+  .btc-member-center .btc-membercenter-header{
+    padding: 12px 5px 112px 5px;
+  }
+  .btc-tableRemark{
+    display: block;
+    float: none !important;
+  }
+}
+
+
+@media (max-width: 492px) {
   .btc-member-handleNew{
     float: initial;
     display: block;

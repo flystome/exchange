@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+var SpritesmithPlugin = require('webpack-spritesmith')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -78,7 +79,20 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       openAnalyzer: false,
       analyzerHost: '0.0.0.0',
       analyzerPort: process.env.analyzerPort
-    })
+    }),
+    new SpritesmithPlugin({
+      src: {
+          cwd: path.resolve(__dirname, '../static/img'),
+          glob: '*.png'
+      },
+      target: {
+          image: path.resolve(__dirname, '../src/common/img/sprite.png'),
+          css: path.resolve(__dirname, '../src/common/css/sprite.scss')
+      },
+      apiOptions: {
+          cssImageRef: "../img/sprite.png"
+      }
+  })
   ]
 })
 

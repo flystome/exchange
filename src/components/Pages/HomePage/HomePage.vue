@@ -180,7 +180,6 @@ export default {
       Cookies.remove('code')
     } // rails flash
 
-    var self = this
     this._get({
       url: '/home/funds.json'
     }, (d) => {
@@ -196,15 +195,7 @@ export default {
       this.trend = d.data
     }) // trend
 
-    this.$http.get(`${this.HOST_URL}/cms/api/announcements.json`, {
-      params: {
-        category: 'new-coin',
-        locale: self.language,
-        per_page: '8'
-      }
-    }).then(d => {
-      self.new_coin = d.data
-    }) // new_coin
+    this.GetNewCoin()
 
     var channel = pusher.subscribe('market-global')
     channel.bind('tickers', (data) => {
@@ -303,7 +294,7 @@ export default {
       }
     },
     requireImg (img) {
-      return require(`../../../../static/img/${img}.png`)
+      return require(`../../../../static/${img}.png`)
     },
     getItem: function (data) {
       var arr = []
@@ -343,6 +334,18 @@ export default {
         })))
       }
     },
+    GetNewCoin () {
+      var self = this
+      this.$http.get(`${this.HOST_URL}/cms/api/announcements.json`, {
+        params: {
+          category: 'new-coin',
+          locale: self.language,
+          per_page: '3'
+        }
+      }).then(d => {
+        self.new_coin = d.data
+      }) // new_coin
+    },
     ...mapMutations(['PopupBoxDisplay'])
   },
   watch: {
@@ -351,6 +354,9 @@ export default {
     },
     $route () {
       this.GetmarketData()
+    },
+    language () {
+      this.GetNewCoin()
     }
   },
   computed: {

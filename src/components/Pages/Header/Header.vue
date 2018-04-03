@@ -9,7 +9,7 @@
             <span class="icon-bar"></span>
           </button>
           <router-link class="navbar-brand" to="/">
-            <img src="~Img/logo.svg">
+            <img src="@/common/svg/logo.svg">
           </router-link>
           <div class="btc-header-sideslip" @click="SideSlipMenuDisplay(true)">
             <img src="~Img/header-more.png">
@@ -63,6 +63,7 @@
               <ul class="dropdown-menu">
                  <!-- <a><a :href="`${HOST_URL}/`">{{$t('nav.settings')}}</a></li> -->
                 <li><a @click="goPath('/my_account')">{{$t('nav.my_account')}}</a></li>
+                <li><a :href="`${HOST_URL}/api_tokens`">{{$t("my_account.api")}}</a></li>
                 <li><a :href="`${HOST_URL}/signout`">{{$t('nav.exit')}}</a></li>
               </ul>
             </li>

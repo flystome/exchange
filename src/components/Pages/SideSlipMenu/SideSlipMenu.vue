@@ -12,7 +12,7 @@
               {{ $t('side_slip_menu.asset_management') }}
             </span>
           </li>
-          <li class="marketlist">
+          <li class="marketlist" :class="{'btc-sideslip-marignB0': market}">
             <div @click="market = !market">
               <img src='~Img/sideslip-market.png'> {{$t('nav.transaction')}}
               <span class="btc-fr btc-marginR20">
@@ -76,7 +76,7 @@
           <li class="text-center">
             <div v-if="loginData !== 'none'"><a :href="`${HOST_URL}/signout`">{{ $t('nav.exit') }}</a></div>
             <div v-else>
-              <span style="margin-right: 44%;">
+              <span style="margin-right: 23%;">
                 <a :href="`${HOST_URL}/signin`">{{ $t('nav.login') }}</a>
               </span>
               <span>

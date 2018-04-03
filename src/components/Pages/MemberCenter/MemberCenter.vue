@@ -19,10 +19,6 @@
           <span @click="referrals" :class="{'btc-link': step === 2 }">
             {{$t('my_account.recommended_statistics')}}
           </span>
-          <span>|</span>
-          <span>
-            <a style="color:#fff" :href="`${HOST_URL}/api_tokens`">{{$t("my_account.api")}}</a>
-          </span>
         </div>
       </div>
       <div class="btc-member-ver" v-if="step === 1">
@@ -421,7 +417,7 @@ export default {
             content: [
               this.$moment(d.created_at).format('L H:mm:ss'),
               d.ip,
-              d.location === null ? 'Null' : d.location
+              d.location === null ? 'N/A' : d.location
             ]
           }
         }))

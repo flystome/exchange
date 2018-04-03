@@ -43,7 +43,12 @@ export default {
       this.prompt = ''
     },
     ShowImg (el) {
+      console.log(el)
       this.$emit('prompt')
+      if (el.target.files.length === 0) {
+        this.UploadImg = ''
+        return
+      }
       if (el.target.files[0].size > 0.7 * 1024 * 1024) {
         this.prompt = `${this.$t('validate_identity.img_to_big')}700k`
         this.$refs.input.value = ''
