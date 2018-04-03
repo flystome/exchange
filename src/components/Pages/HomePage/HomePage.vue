@@ -1,7 +1,7 @@
 <template>
   <div @keyup.enter="login">
     <div class="btc-homepage-header">
-      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3500">
+      <!-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3500">
           <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
             <li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -20,7 +20,22 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
+      <swiper class="carousel" :options="swiperOption">
+        <swiper-slide v-for="data in Notice" :key="data.id">
+          <div :style="{'background': 'url('+ data.thumb + ') 50% 50%'}" class="img-container">
+            <div class="container btc-notice">
+              <div>
+                <p>{{ data.the_title }}</p>
+                <span>{{ data.the_content }}</span>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+        <div class="swiper-button-prev" slot="button-prev"></div>
+        <div class="swiper-button-next" slot="button-next"></div>
+      </swiper>
       <div class="from-container">
         <div class="btc-homepage-login">
           <div class="btc-nologin" v-if="loginData === 'none' || loginData.errors">
@@ -77,10 +92,11 @@
     </div>
     <div class="btc-homepage-notice">
       <ul class="btc-homepage-newCoin">
-        <li v-for="data in new_coin" :key='data.id'>
-          <a :href="data.url">{{ data.the_title }}</a>
-        </li>
-
+        <div class="container">
+          <li v-for="data in new_coin" :key='data.id'>
+            <a :href="data.url">{{ data.the_title }}</a>
+          </li>
+        </div>
       </ul>
     </div>
     <div class="btc-homepage-main">
@@ -234,7 +250,24 @@ export default {
       getetc: '',
       change: 'no',
       curData: '',
-      disabled: false
+      disabled: false,
+      Notice: [],
+      swiperOption: {
+        spaceBetween: 30,
+        centeredSlides: true,
+        // autoplay: {
+        //   delay: 3000,
+        //   disableOnInteraction: false
+        // },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
+      }
     }
   },
   components: {
@@ -353,7 +386,7 @@ export default {
           per_page: '8'
         }
       }).then(d => {
-        console.log(d)
+        self.Notice = d.data
       }) // new_coin
     },
     ...mapMutations(['PopupBoxDisplay'])

@@ -243,8 +243,8 @@ export default {
         }
       })
       channel.bind('account', (data) => {
-        this.Locked = Number(data.total_assets.locked_btc_worth).toFixed(3)
-        this.TotalAssets = Number(data.total_assets.btc_worth).toFixed(3)
+        this.Locked = Number(data.total_assets.locked_btc_worth).toFixed(8)
+        this.TotalAssets = Number(data.total_assets.btc_worth).toFixed(8)
         this.Remain = data.today_withdraw_remain
         this.equivalence = data.today_withdraw_remain_btc === data.today_withdraw_remain ? '' : data.today_withdraw_remain_btc
         this.Balance = data.balance
@@ -275,8 +275,8 @@ export default {
           })
         }
       })
-      this.TotalAssets = Number(d.total_assets.btc_worth).toFixed(3)
-      this.Locked = Number(d.total_assets.locked_btc_worth).toFixed(3)
+      this.TotalAssets = Number(d.total_assets.btc_worth).toFixed(8)
+      this.Locked = Number(d.total_assets.locked_btc_worth).toFixed(8)
       if (d.notice) {
         this.PopupBoxDisplay({message: this.$t('withdraw_currency.withdraw_confirm_completed'), type: d.notice.type})
       }
@@ -363,10 +363,12 @@ export default {
       return str.toUpperCase()
     },
     toFixed (str) {
-      return Number(str).toFixed(3)
+      return Number(str).toFixed(8)
     },
-    toLocaleString (str) {
-      return Number(str).toLocaleString('en')
+    toLocaleString (n) {
+  　　var re=/\d{1,3}(?=(\d{3})+$)/g;
+  　　var n1=n.replace(/^(\d+)((\.\d+)?)$/,function(s,s1,s2){return s1.replace(re,"$&,")+s2;});
+  　　return n1;
     }
   },
   methods: {
@@ -377,7 +379,7 @@ export default {
       this.Rucaptcha += `?${Math.random()}`
     },
     WithdrawAll () {
-      this.WithdrawData.amount = Math.min(Number(this.Remain), Number(this.Balance)).toFixed(3)
+      this.WithdrawData.amount = Math.min(Number(this.Remain), Number(this.Balance)).toFixed(8)
     },
     AddAddress () {
       this.withdrawAddress = true

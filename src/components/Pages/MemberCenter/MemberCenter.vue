@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="btc-member-center container">
-      <div class="btc-container-block btc-membercenter-header" :class="{'btc-member-padding' : step === 2}">
+      <div v-if="!(step === 2 && fromApp) " class="btc-container-block btc-membercenter-header" :class="{'btc-member-padding' : step === 2}">
         <div class="col-md-6">
           <div class="btc-member-info">
             <span class="btc-member-infoEmail">{{ loginData.show_name }}</span>
@@ -177,7 +177,7 @@
     </div>
 </template>
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapState } from 'vuex'
 import moment from 'moment'
 import Cookies from 'js-cookie'
 import Clipboard from 'clipboard'
@@ -242,6 +242,7 @@ export default {
         captionTitle: 'my_account.recommended_users',
         Item: []
       },
+      headerStatus: true,
       httplock: false
     }
   },
@@ -402,6 +403,7 @@ export default {
   },
   computed: {
     ...mapGetters(['loginData']),
+    ...mapState(['fromApp']),
     getLoginRecord () {
       var data = this.loginData.recent_signin_histories
       var obj = {
@@ -434,9 +436,15 @@ export default {
   watch: {
     $route (to) {
       if (/my_account/.test(to.path)) {
+        this.headerStatus = true
         this.step = 1
       }
       if (/referral/.test(to.path)) {
+        if (this.Pc) {
+          this.headerStatus = false
+        } else {
+          this.headerStatus = true
+        }
         this.step = 2
       }
     }

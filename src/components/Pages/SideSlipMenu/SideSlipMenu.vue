@@ -16,7 +16,7 @@
             <div @click="market = !market">
               <img src='~Img/sideslip-market.png'> {{$t('nav.transaction')}}
               <span class="btc-fr btc-marginR20">
-                <img v-if="market" src="~Img/triangle-down.png">
+                <img v-if="!market" src="~Img/triangle-down.png">
                 <img v-else src="~Img/triangle-up.png">
               </span>
             </div>
@@ -32,7 +32,7 @@
             <div @click="Consulting = !Consulting">
               <img src='~Img/sideslip-consulting.png'> {{ $t('side_slip_menu.consulting_center') }}
               <span class="btc-fr btc-marginR20">
-                <img v-if="Consulting" src="~Img/triangle-down.png">
+                <img v-if="!Consulting" src="~Img/triangle-down.png">
                 <img v-else src="~Img/triangle-up.png">
               </span>
             </div>
@@ -58,7 +58,7 @@
             <div @click="Lang = !Lang">
               <img src='~Img/sideslip-lang.png'> {{ $t('side_slip_menu.language') }}
               <span class="btc-fr btc-marginR20">
-                <img v-if="Lang" src="~Img/triangle-down.png">
+                <img v-if="!Lang" src="~Img/triangle-down.png">
                 <img v-else src="~Img/triangle-up.png">
               </span>
             </div>
@@ -69,9 +69,10 @@
             </ul>
           </li>
           <li class="">
-              <span @click="goPc">
-                {{$t('side_slip_menu.desktop_end')}}
-              </span>
+            <img src='~Img/sideslip-pc.png'>
+            <span @click="goPc">
+              {{$t('side_slip_menu.desktop_end')}}
+            </span>
           </li>
           <li class="text-center">
             <div v-if="loginData !== 'none'"><a :href="`${HOST_URL}/signout`">{{ $t('nav.exit') }}</a></div>

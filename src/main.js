@@ -35,7 +35,12 @@ import 'bootstrap/js/dropdown.js'
 import 'bootstrap/js/collapse.js'
 import Pusher from 'pusher-js'
 import 'bootstrap/js/carousel.js'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 
+// require styles
+import 'swiper/dist/css/swiper.css'
+
+Vue.use(VueAwesomeSwiper, /* { default global options } */)
 Vue.use(VeeValidate, {
   i18n,
   i18nRootKey: 'validation',

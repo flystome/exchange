@@ -26,7 +26,7 @@
             </a>
           </td>
           <td>
-            <span>{{ item.last }}<span style="color:#999">/${{ item.legal_worth }}</span></span>
+            <span>{{ item.last }}<span style="color:#999"> / ${{ item.legal_worth }}</span></span>
           </td>
           <td>{{ item.volume }}</td>
           <td>{{ (Number(item.volume) * Number(item.last)).toFixed(2) }}</td>
