@@ -88,7 +88,7 @@ export default {
       trades: [],
       logined: false,
       favorite: false,
-      localList: []
+      localList: null
     }
   },
   mounted: function () {
@@ -138,6 +138,8 @@ export default {
       if (this.localList && this.localList.length !== 0) {
         if (this.localList.split(',').indexOf(this.curmarket) !== -1) {
           this.favorite = true
+        } else {
+          this.favorite = false
         }
       }
     },
@@ -178,6 +180,7 @@ export default {
         data: {}
       }, function (data) {
         var initdata = JSON.parse(data.request.response)
+        console.log(initdata)
         self.ticker = initdata.ticker
         self.market = initdata.market
         self.logined = !!initdata.current_user
@@ -225,12 +228,14 @@ export default {
           })
         }
       } else {
-        var arr = this.localList.split(',')
-        var i = arr.indexOf(this.curmarket)
-        if (arr.length === 0) {
+        var arr = []
+        var i = 0
+        if (!this.localList) {
           arr.push(this.curmarket)
           this.favorite = true
         } else {
+          arr = this.localList.split(',')
+          i = arr.indexOf(this.curmarket)
           if (i !== -1) {
             arr.splice(i, 1)
             this.favorite = false
