@@ -286,7 +286,7 @@ const zh = {
   "hint": {
     "confirm": "OK",
     "no": "No",
-    "go_tickets": "跳服务单",
+    "go_tickets": "服務器異常，請告訴我們以便我們修復。",
     "yes": "Yes",
     "generating_address": "我們正在生成充值地址，請等待幾片刻.",
     "completion": "完成",
