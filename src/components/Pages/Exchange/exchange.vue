@@ -3,7 +3,7 @@
     <header>
       <img src="">
       <lastPrice></lastPrice>
-      <account></account>
+      <!-- <account></account> -->
     </header>
 
     <section class="content">
@@ -67,6 +67,23 @@ export default {
     order,
     allOrder
   },
+  created () {
+    this.init()
+  },
+  methods: {
+    init () {
+      this.initData()
+    },
+    initData () {
+      this._get({
+        url: '/home.json',
+        data: {}
+      }, function (data) {
+        var res = JSON.parse(data.request.response)
+        console.log(res)
+      })
+    }
+  }
 }
 </script>
 <style lang="scss">

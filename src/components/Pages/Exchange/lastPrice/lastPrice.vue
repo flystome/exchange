@@ -10,11 +10,10 @@ export default {
     return {
 
     }
-  },
+  }
 }
 </script>
 
 <style lang="scss">
   @import './lastPrice.scss'
 </style>
-

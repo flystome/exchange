@@ -2,7 +2,7 @@
   <div id="app">
     <transition name='SideSlipMenu'>
       <section class="btc-main" :class="{'btc-background-white': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange'}">
-        <header v-if="!fromApp && exChange" is='Header' />
+        <header v-if="!fromApp && !exChange" is='Header' />
         <div v-if="loading" class="btc-container container" v-cloak>
           <keep-alive>
             <router-view></router-view>
@@ -13,7 +13,7 @@
       </div>
       </section>
     </transition>
-    <footer v-if='!fromApp && noMobile && exChange' is='Footer' />
+    <footer v-if='!fromApp && noMobile && !exChange' is='Footer' />
     <wrapper></wrapper>
     <popup-box></popup-box>
     <side-slip-menu></side-slip-menu>
@@ -50,10 +50,8 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      console.log(11)
-      if (to.path === `${version}/exchange`) {
+      if (to.path === `${this.version}/exchange`) {
         this.exChange = true
-        console.log(12)
       }
     }
   },
