@@ -42,7 +42,7 @@ const router = new Router({
       component: HomePage
     },
     {
-      path: `${version}/exchange`,
+      path: `${version}/exchange/:id`,
       name: 'Exchange',
       component: Exchanage
     },
