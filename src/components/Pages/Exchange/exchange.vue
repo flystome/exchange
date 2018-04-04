@@ -43,14 +43,31 @@
 </template>
 
 <script>
-  export default {
-    name: 'ExChange',
-    data () {
-      return {
+import lastPrice from './lastPrice/lastPrice'
+import marketList from './marketList/marketList'
+import chart from './chart/chart'
+import orderBook from './orderBook/orderBook'
+import trades from './trades/trades'
+import order from './order/order'
+import allOrder from './allOrder/allOrder'
 
-      }
+export default {
+  name: 'ExChange',
+  data () {
+    return {
+
     }
-  }
+  },
+  components: {
+    lastPrice,
+    marketList,
+    chart,
+    orderBook,
+    trades,
+    order,
+    allOrder
+  },
+}
 </script>
 <style lang="scss">
   @import './exchange.scss'

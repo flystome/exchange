@@ -11,6 +11,7 @@ const Markets = () => import('Pages/market/mList/mlist')
 const MarketDetail = () => import('Pages/market/mList/marketDetail/market')
 const Trades = () => import('Pages/market/mList/trades/trades')
 const Orders = () => import('Pages/market/mList/orders/orders')
+const Exchanage = () => import('Pages/Exchange/exchange')
 // import MarketList from './components/Pages/market/mList'
 const HomePage = () => import('Pages/HomePage/HomePage')
 const Prompt = () => import('Pages/Prompt/Prompt')
@@ -35,6 +36,11 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: HomePage
+    },
+    {
+      path: `${version}/exchange`,
+      name: 'Exchange',
+      component: Exchanage
     },
     {
       path: `${version}/markets`,
