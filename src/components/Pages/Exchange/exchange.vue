@@ -33,11 +33,15 @@
     </section>
     <section class="list">
       <div class="list_lt w240">
-        <div class="list_box"></div>
-        <div class="order "></div>
+        <div class="list_box trades">
+
+        </div>
+        <div class="order buy"></div>
       </div>
       <div class="list_rt w240">
-        <div class="list_box buy"></div>
+        <div class="list_box history">
+          <allOrder :tradesData="tradesData"></allOrder>
+        </div>
         <div class="order sell"></div>
       </div>
     </section>
@@ -100,7 +104,7 @@ export default {
         // ticker: this.lastPriceData,
         trades: this.tradesData,
         market: this.market,
-        markets: this.markets
+        markets: this.markets,
       } = res.data)
     }
   }

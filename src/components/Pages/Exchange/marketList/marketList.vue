@@ -1,11 +1,17 @@
 <template>
   <section id="marketList">
     <ul class="marketsHd clearfix">
-      <li v-for="(hd,index) in hds" :key="hd" :class="{'check': currencyIndex == index}"
+      <li v-for="(hd,index) in hds" :key="'market'+hd" :class="{'check': currencyIndex == index}"
       @click="changeMarket(index,hd)">{{$t(hd)}}</li>
     </ul>
     <div class="search_box">
-
+      <span>{{$t('exchange.find')}}</span>
+      <div class="search">
+        <input id="serach_market">
+        <a class="search_del">
+          <i class="fa fa-times-circle"></i>
+        </a>
+      </div>
     </div>
     <div class="marketBd">
       <marketItem :curData = "curData[currencyIndex]"></marketItem>

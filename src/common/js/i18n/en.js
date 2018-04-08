@@ -291,6 +291,12 @@ const en = {
         'change_24': 'Change 24h',
         'high_price': 'High(24h)',
         'low_price': 'Low(24h)'
+      },
+      'find': 'Find',
+      'trades': {
+        'time': 'Time',
+        'price': 'Price',
+        'volume': 'Volume'
       }
     },
     "hint": {

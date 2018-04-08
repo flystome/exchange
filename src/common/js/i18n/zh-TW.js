@@ -290,6 +290,12 @@ const zh = {
       'change_24': '24小時漲跌',
       'high_price': '24小时最高',
       'low_price': '24小时最低'
+    },
+    'find': '搜索幣種',
+    'trades': {
+      'time': '成交時間',
+      'price': '成交價',
+      'volume': '成交量'
     }
   },
   "hint": {
