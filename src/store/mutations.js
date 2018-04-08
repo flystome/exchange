@@ -36,21 +36,21 @@ const redirect = (state, action, route) => {
       break
     case 'WithdrawCurrency':
     if (/withdraw/.test(route.path)) {
-      if (typeof(hotex_android) != 'undefined') {
-        router.replace(`${ROUTER_VERSION}/currency/deposit`)
-        hotex_android.toRedirect('/my_account')
-        return
-      } else if (window.webkit) {
-        window.webkit.messageHandlers.nativeToHome.postMessage({
-          href: '/my_account',
-          event: 'redirect'
-        })
-        return
-      }
       var code = ''
       if (!state.loginData.activated) {
         code = 1001
       } else if (!(state.loginData.app_activated || state.loginData.sms_activated))  {
+        if (typeof(hotex_android) != 'undefined') {
+          router.replace(`${ROUTER_VERSION}/currency/deposit`)
+          hotex_android.toRedirect('/my_account')
+          return
+        } else if (window.webkit) {
+          window.webkit.messageHandlers.nativeToHome.postMessage({
+            href: '/my_account',
+            event: 'redirect'
+          })
+          return
+        }
         code = 1002
       }
       if (code) {
