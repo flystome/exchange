@@ -104,7 +104,7 @@ export default {
         // ticker: this.lastPriceData,
         trades: this.tradesData,
         market: this.market,
-        markets: this.markets,
+        markets: this.markets
       } = res.data)
     }
   }

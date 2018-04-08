@@ -65,6 +65,12 @@
       .my_fav {
         width: 8%;
         text-align: center;
+        &.favorite {
+          color: #fc4a4a;
+        }
+        i {
+          cursor: pointer;
+        }
       }
       .list-coin {
         width: 28%;

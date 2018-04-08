@@ -7,7 +7,7 @@
     <div class="search_box">
       <span>{{$t('exchange.find')}}</span>
       <div class="search">
-        <input id="serach_market">
+        <input id="serach_market" v-model="">
         <a class="search_del">
           <i class="fa fa-times-circle"></i>
         </a>
