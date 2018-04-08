@@ -1,3 +1,24 @@
 #lastPrice {
-
+  display: inline-block;
+  vertical-align: middle;
+  ul {
+    display: inline-block;
+    margin-bottom: 0;
+    li {
+      display: inline-block;
+      float: left;
+      margin-left: 40px;
+      font-size: 12px;
+      text-align: left;
+      .name {
+        color: #728eaa;
+        font-size: 12px;
+        display: block;
+        margin-bottom: 4px;
+      }
+      .value {
+        color: #fff;
+      }
+    }
+  }
 }
