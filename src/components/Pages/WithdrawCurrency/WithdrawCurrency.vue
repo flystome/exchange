@@ -368,7 +368,7 @@ export default {
     toLocaleString (n) {
       if (!n) return
   　　var re=/\d{1,3}(?=(\d{3})+$)/g;
-  　　var n1=n.replace(/^(\d+)((\.\d+)?)$/,function(s,s1,s2){return s1.replace(re,"$&,")+s2;});
+  　　var n1=String(n).replace(/^(\d+)((\.\d+)?)$/,function(s,s1,s2){return s1.replace(re,"$&,")+s2;});
   　　return n1;
     }
   },
@@ -716,18 +716,19 @@ export default {
     clipboard.on('success', _debounce(500, time))
   },
   watch: {
-    $route (to) {
-      if (/withdraw/.test(to.path)) {
-        this.route = 'withdraw'
-        this.$store.commit('redirect', to)
-      } else if (/deposit/.test(to.path)) {
-        this.route = 'deposit'
-        this.$store.commit('redirect', to)
-        if (this.GeneratAddress !== '') {
-          this.GeneratAddress && this.Generating()
-        }
-      }
-    },
+    // $route (to) {
+    //   console.log(to)
+    //   if (/withdraw/.test(to.path)) {
+    //     this.route = 'withdraw'
+    //     this.$store.commit('redirect', to)
+    //   } else if (/deposit/.test(to.path)) {
+    //     this.route = 'deposit'
+    //     this.$store.commit('redirect', to)
+    //     if (this.GeneratAddress !== '') {
+    //       this.GeneratAddress && this.Generating()
+    //     }
+    //   }
+    // },
     DepositAddress (to, from) {
       if (Object.keys(to).length > Object.keys(from).length) {
         this.deposit_address = to[Object.keys(to)]

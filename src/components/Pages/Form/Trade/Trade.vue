@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'FormOrder',
+  name: 'FormTrade',
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
@@ -17,7 +17,7 @@ export default {
   },
   created () {
     this._get({
-      url: `/history/all_orders.json`
+      url: `/history/all_trades.json`
     }, (d) => {
       var d = d.data
       this.xhrData = d.orders
@@ -42,9 +42,9 @@ export default {
             data.kind === 'ask' ? this.$t('form.order.buy') : this.$t('form.order.sell'),
             data.market_name,
             data.state === 'done' ? this.$t('form.order.success') : this.$t('form.order.cancel'),
-            Number(data.price).toFixed(Math.min(String(data.price).split('.')[1].length, 8)),
+            Number(data.price).toFixed(Math.min(String(data.price).split('.')[1].length,8)),
             data.origin_volume,
-            Number(data.avg_price).toFixed(Math.min(String(data.avg_price).split('.')[1].length, 8)),
+            Number(data.avg_price).toFixed(Math.min(String(data.avg_price).split('.')[1].length,8)),
             Number(data.volume) === 0 ? data.origin_volume : (data.origin_volume * (Math.max(String(data.origin_volume).split('.')[1].length, String(data.volume).split('.')[1].length)) - data.volume * (Math.max(String(data.origin_volume).split('.')[1].length, String(data.volume).split('.')[1].length))) / (Math.max(String(data.origin_volume).split('.')[1].length, String(data.volume).split('.')[1].length)),
             this.$moment(data.at).format('L H:mm:ss'),
           ]

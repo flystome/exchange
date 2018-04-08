@@ -114,7 +114,7 @@
         <keep-alive>
           <HomeMarket ref="market" v-if="curData" v-on:marketChange="marketChange" :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]">
           </HomeMarket>
-          <div v-else style="position: absolute;top: 40%;left: 48%;">
+          <div v-else style="position: absolute;top: 40%;left: 50%;margin-left: -44px">
             <vue-simple-spinner size="88"></vue-simple-spinner>
           </div>
         </keep-alive>

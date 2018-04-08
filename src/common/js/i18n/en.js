@@ -414,6 +414,15 @@ const en = {
         "buy": "Buy",
         "success": "Success",
         "cancel": "Cancel",
+      },
+      "trade": {
+        "record_of_transaction": "Record Of Transaction",
+        "benchmark_currency": "Benchmark Currency",
+        "amount": "Amount",
+        "transaction_price": "Transaction Price",
+        "quoted_currency": "Quoted Currency",
+        "amount": "Amount",
+        "poundage": "Poundage",
       }
     },
     "validation": {
