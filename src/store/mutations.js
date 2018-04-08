@@ -37,6 +37,7 @@ const redirect = (state, action, route) => {
     case 'WithdrawCurrency':
     if (/withdraw/.test(route.path)) {
       if (typeof(hotex_android) != 'undefined') {
+        router.replace(`${this.ROUTER_VERSION}/currency/deposit`)
         hotex_android.toRedirect('/my_account')
         return
       } else if (window.webkit) {
