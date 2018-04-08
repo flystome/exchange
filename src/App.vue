@@ -50,7 +50,7 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      if (to.path === `${this.version}/exchange`) {
+      if (to.name === 'Exchange') {
         this.exChange = true
       }
     }
@@ -86,8 +86,12 @@ export default {
   background: #1b242e;
   width: 100%;
   min-width: 1200px;
+  height: 100%;
   .btc-container {
+    width: 100%;
+    height: 100%;
     background: none;
+    padding: 0;
   }
 }
 </style>

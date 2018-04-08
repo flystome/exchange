@@ -209,7 +209,6 @@ export default {
   },
   watch: {
     loginData (val, oldValue) {
-      console.log(val)
       this.getRefresh(val.sn)
       this.tradeShow = true
       var m = this.$route.params.id
