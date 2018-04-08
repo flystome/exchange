@@ -716,19 +716,18 @@ export default {
     clipboard.on('success', _debounce(500, time))
   },
   watch: {
-    // $route (to) {
-    //   console.log(to)
-    //   if (/withdraw/.test(to.path)) {
-    //     this.route = 'withdraw'
-    //     this.$store.commit('redirect', to)
-    //   } else if (/deposit/.test(to.path)) {
-    //     this.route = 'deposit'
-    //     this.$store.commit('redirect', to)
-    //     if (this.GeneratAddress !== '') {
-    //       this.GeneratAddress && this.Generating()
-    //     }
-    //   }
-    // },
+    $route (to) {
+      if (/withdraw/.test(to.path)) {
+        this.route = 'withdraw'
+        // this.$store.commit('redirect', to)
+      } else if (/deposit/.test(to.path)) {
+        this.route = 'deposit'
+        // this.$store.commit('redirect', to)
+        if (this.GeneratAddress !== '') {
+          this.GeneratAddress && this.Generating()
+        }
+      }
+    },
     DepositAddress (to, from) {
       if (Object.keys(to).length > Object.keys(from).length) {
         this.deposit_address = to[Object.keys(to)]

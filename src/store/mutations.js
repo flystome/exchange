@@ -42,9 +42,7 @@ const redirect = (state, action, route) => {
       } else if (!(state.loginData.app_activated || state.loginData.sms_activated))  {
         code = 1002
       }
-      console.log(code)
       if (code) {
-        console.log(456)
         action.commit('PopupBoxDisplay', {message: i18n.t(`my_account.${code}_hint`) , type: 'warn' ,url: '/my_account'})
       }
     } else if (/deposit/.test(route.path)) {
