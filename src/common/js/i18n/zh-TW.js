@@ -238,14 +238,13 @@ const zh = {
     "trade": "交易",
     "pending": "當前委託",
     "favorite": "自選",
-    "btc": "BTC",
-    "usdt": "USDT",
     "volume24": "24h成交量",
     "high": "24h最高價",
     "low": "24h最低價",
     "candle": "K线圖",
     "depth": "深度圖",
     "history": "最新成交",
+    "myHistory": "我的最新成交",
     "price": "價格",
     "volume": "成交量",
     "amount": "金額",
@@ -282,6 +281,14 @@ const zh = {
     'dialog': {
       'cancel': "確認撤銷此單嗎？",
       'cancel_all': "確認撤銷全部訂單嗎？"
+    }
+  },
+  'exchange': {
+    'header': {
+      'last_price': '最新價',
+      'change_24': '24小時漲跌',
+      'high_price': '24小时最高',
+      'low_price': '24小时最低'
     }
   },
   "hint": {

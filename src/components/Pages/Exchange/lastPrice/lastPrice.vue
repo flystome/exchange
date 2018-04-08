@@ -2,20 +2,20 @@
   <section id="lastPrice">
     <ul>
       <li>
-        <span class="name">{{$t('exchange.lastPrice')}}</span>
-        <span class="value">{{lastPriceData.last}}</span>
+        <span class="name">{{$t('exchange.header.last_price')}}</span>
+        <span class="value">{{market.last}} {{market.base_currency}}</span>
       </li>
       <li>
-        <span class="name">{{$t('exchange.change_24')}}</span>
-        <span class="value">{{lastPriceData.last - lastPriceData.open}}</span>
+        <span class="name">{{$t('exchange.header.change_24')}}</span>
+        <span class="value">{{market.last - market.open}} {{market.base_currency}}</span>
       </li>
       <li>
-        <span class="name">{{$t('exchange.high_price')}}</span>
-        <span class="value">{{lastPriceData.high}}</span>
+        <span class="name">{{$t('exchange.header.high_price')}}</span>
+        <span class="value">{{market.high}} {{market.base_currency}}</span>
       </li>
       <li>
-        <span class="name">{{$t('exchange.low_price')}}</span>
-        <span class="value">{{lastPriceData.low}}</span>
+        <span class="name">{{$t('exchange.header.low_price')}}</span>
+        <span class="value">{{market.low}} {{market.base_currency}}</span>
       </li>
     </ul>
   </section>
@@ -24,7 +24,7 @@
 <script>
 export default {
   name: 'lastPrice',
-  props: ['lastPriceData'],
+  props: ['market'],
   data () {
     return {
 

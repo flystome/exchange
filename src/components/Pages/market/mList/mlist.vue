@@ -19,7 +19,7 @@ export default {
   name: 'markets',
   data () {
     return {
-      hds: ['markets.favorite', 'markets.btc', 'markets.usdt'],
+      hds: ['markets.favorite', 'BTC', 'USDT'],
       currencyindex: 1,
       marketData: {},
       curData: []

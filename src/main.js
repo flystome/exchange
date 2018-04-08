@@ -36,6 +36,7 @@ import 'bootstrap/js/collapse.js'
 import Pusher from 'pusher-js'
 import 'bootstrap/js/carousel.js'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import Filters from '@/common/filters/filters.js'
 
 // require styles
 import 'swiper/dist/css/swiper.css'
@@ -88,6 +89,7 @@ new Vue({
 new Vue({
   router,
   i18n,
+  filetrs: Filters,
   template: `<Title></Title>`,
   components: { Title }
 }).$mount('#title')

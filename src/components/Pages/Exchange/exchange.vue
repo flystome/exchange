@@ -4,14 +4,14 @@
       <router-link class="logo" to="/">
         <img src="@/common/svg/logo.svg">
       </router-link>
-      <lastPrice :lastPriceData="lastPriceData"></lastPrice>
+      <lastPrice :market="market"></lastPrice>
       <!-- <account></account> -->
     </header>
 
     <section class="content">
       <div class="top_content clearfix">
         <div class="market w240">
-          <marketList></marketList>
+          <marketList :markets="markets"></marketList>
         </div>
         <div class="chart">
           <ul class="chart_hd">
@@ -59,7 +59,9 @@ export default {
     return {
       curMarket: '',
       lastPriceData: {},
-      tradesData: []
+      tradesData: [],
+      market: {},
+      markets: {}
     }
   },
   components: {
@@ -95,8 +97,10 @@ export default {
     handleGlobal (res) {
       console.log(res.data);
       ({
-        ticker: this.lastPriceData,
-        trades: this.tradesData
+        // ticker: this.lastPriceData,
+        trades: this.tradesData,
+        market: this.market,
+        markets: this.markets
       } = res.data)
     }
   }

@@ -239,14 +239,13 @@ const en = {
       "trade": "Trade",
       "pending": "Pending Orders",
       "favorite": "Favorite",
-      "btc": "BTC",
-      "usdt": "USDT",
       "volume24": "Vol",
       "high": "High",
       "low": "Low",
       "candle": "Candle",
       "depth": "Depth",
       "history": "Trade History",
+      "myHistory": "My Trade History",
       "price": "Price",
       "volume": "Vol",
       "amount": "Amount",
@@ -283,6 +282,14 @@ const en = {
       'dialog': {
         'cancel': "Do you want to cancel this order?",
         'cancel_all': "Do you want to cancel ALL orders?"
+      }
+    },
+    'exchange': {
+      'header': {
+        'last_price': 'Last Price',
+        'change_24': 'Change 24h',
+        'high_price': 'High(24h)',
+        'low_price': 'Low(24h)'
       }
     },
     "hint": {
