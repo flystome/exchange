@@ -137,7 +137,7 @@
       </div>
     </div>
     <div class="new_order" v-if='tradeShow'>
-      <h2>{{$t("markets.history")}}</h2>
+      <h2>{{$t("markets.myHistory")}}</h2>
       <ul class="order_hd">
         <li v-for="head in heads" :key="head">{{$t(head)}}</li>
       </ul>

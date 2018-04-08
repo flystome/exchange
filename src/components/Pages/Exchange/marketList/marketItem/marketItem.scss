@@ -1,0 +1,71 @@
+.marketItem {
+  ul, li {
+    padding: 0;
+    margin: 0;
+  }
+  .hd {
+    height: 36px;
+    line-height: 36px;
+    padding-left: 0;
+    margin-bottom: 0;
+    li {
+      width: 35%;
+      color: #42637d;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-block;
+      float: left;
+      &.up {
+        .caret {
+          opacity: 1;
+          border-color: transparent transparent #728eaa transparent;
+          border-bottom: 4px solid #4382f7;
+        }
+      }
+      &.down {
+        .caret {
+          opacity: 1;
+          color: #4382f7
+        }
+      }
+      .caret {
+        opacity: 0;
+        margin-left: 5px;
+        vertical-align: 3px;
+        border-top: 4px dashed;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+      }
+
+      &:last-child {
+        width: 30%;
+      }
+    }
+  }
+  .bd {
+    width: 100%;
+    li {
+      width: 100%;
+      color: #fff;
+      float: none;
+      font-size: 12px;
+      div {
+        display: inline-block;
+        float: left;
+      }
+      .my_fav {
+        width: 10%;
+      }
+      .list-coin {
+        width: 28%;
+      }
+      .list-price {
+        width: 32%;
+      }
+      .list-btn {
+        width: 30%;
+      }
+    }
+
+  }
+}
