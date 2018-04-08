@@ -421,7 +421,7 @@ const en = {
         "amount": "Amount",
         "transaction_price": "Transaction Price",
         "quoted_currency": "Quoted Currency",
-        "amount": "Amount",
+        "money": "Money",
         "poundage": "Poundage",
       }
     },

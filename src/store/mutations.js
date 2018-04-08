@@ -5,6 +5,17 @@ import Cookies from 'js-cookie'
 const ROUTER_VERSION = process.env.ROUTER_VERSION
 const HOST_URL = process.env.HOST_URL
 
+const nativeEvent = () => {
+  if (typeof(hotex_android) != 'undefined') {
+    hotex_android.toRedirect(location.href)
+  } else if (window.webkit) {
+    window.webkit.messageHandlers.nativeToHome.postMessage({
+      href: location.href,
+      event: 'redirect'
+    });
+  }
+}
+
 const redirect = (state, action, route) => {
   // var route = type ? state.route.from.name : state.route.name
   // var path = type ? state.route.from.path : state.route.path
@@ -36,6 +47,7 @@ const redirect = (state, action, route) => {
       break
     case 'WithdrawCurrency':
     if (/withdraw/.test(route.path)) {
+      nativeEvent()
       var code = ''
       if (!state.loginData.activated) {
         code = 1001

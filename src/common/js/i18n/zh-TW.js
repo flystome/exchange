@@ -413,6 +413,15 @@ const zh = {
       "buy": "買入",
       "success": "已成功",
       "cancel": "已取消",
+    },
+    "trade": {
+      "record_of_transaction": "成交記錄",
+      "benchmark_currency": "基準貨幣",
+      "amount": "數量",
+      "transaction_price": "成交價",
+      "quoted_currency": "報價貨幣",
+      "money": "金额",
+      "poundage": "手续费",
     }
   },
     "validation": {
