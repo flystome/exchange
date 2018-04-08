@@ -200,7 +200,8 @@ const en = {
       "referral": "Referral",
       "markets": "Markets",
       "404": "404 Not Found",
-      "form_order": "Order Record"
+      "form_order": "Order Record",
+      "form_trade": "Record Of Transaction"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",

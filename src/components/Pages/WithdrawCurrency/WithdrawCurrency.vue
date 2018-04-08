@@ -237,7 +237,7 @@ export default {
                 "fee": d.fee,
                 "aasm_state": d.aasm_state,
                 "fund_uid": d.fund_uid
-              }, context: d.aasm_state, id: d.id }
+              }, context: `withdraw_currency.${d.aasm_state}`, id: d.id }
             ]
           })
         }
@@ -474,7 +474,7 @@ export default {
               d.fund_uid,
               d.amount,
               d.fee,
-              { type: d, context: d.aasm_state, id: id }
+              { type: d, context: `withdraw_currency.${d.aasm_state}`, id: id }
             ]
           }
         }))
@@ -641,7 +641,7 @@ export default {
           this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.Withdraw_canceled_200'), type: 'success'})
           var type = data.type
           type.aasm_state_title = 'canceled'
-          data.context = 'canceled'
+          data.context = 'withdraw_currency.canceled'
           type.aasm_state = 'canceled'
         } else {
           this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.Withdraw_canceled_1001'), type: 'error'})

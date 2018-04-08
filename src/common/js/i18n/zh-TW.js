@@ -199,7 +199,8 @@ const zh = {
     "referral": "推薦用戶",
     "markets": "市場",
     "404": "404 頁面",
-    "form_order": "下單記錄"
+    "form_order": "下單記錄",
+    "form_trade": "成交記錄"
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",

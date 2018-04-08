@@ -41,7 +41,7 @@ const redirect = (state, action, route) => {
         code = 1001
       } else if (!(state.loginData.app_activated || state.loginData.sms_activated))  {
         if (typeof(hotex_android) != 'undefined') {
-          router.replace(`${ROUTER_VERSION}/currency/deposit`)
+          router.push(`${ROUTER_VERSION}/currency/deposit`)
           hotex_android.toRedirect('/my_account')
           return
         } else if (window.webkit) {

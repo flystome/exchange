@@ -8,13 +8,14 @@
         <tbody v-if="item.length > 1">
           <tr v-for="(item, length) in item" :key='length' v-if="length < len">
             <td v-for="(data, index) in item.content"
-            :key="index" :style="{width: toPercent()}"
+            :key="index"
+            :style="{width: toPercent(), color: data.color}"
             :class="{
             'btc-tableTextright':index === 0,
             'btc-tableTextleft': index === item.content.length-1,
             'btc-tablehover':  Object.prototype.toString.call(data) === '[object Object]' ? data.hover : false
             }">
-            {{ Object.prototype.toString.call(data) !== '[object Object]' ? data : (data.hover ? '' : $t(`withdraw_currency.${data.context}`)) }}
+            {{ Object.prototype.toString.call(data) !== '[object Object]' ? data : (data.hover ? '' : $t(`${data.context}`)) }}
             <slot v-if='data.hover' name="href"
             :data='data'>
             </slot>
