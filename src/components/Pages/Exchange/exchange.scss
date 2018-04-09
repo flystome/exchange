@@ -1,7 +1,6 @@
 #exchange {
   width: 100%;
   height: 100%;
-  background: #aa0;
   header {
     height: 60px;
     width: 100%;
@@ -17,6 +16,9 @@
         width: 100%;
       }
     }
+    .header_rt {
+      float: right;
+    }
   }
   .w240 {
     display: inline-block;
@@ -31,7 +33,6 @@
     height: calc(100% - 62px);
     width: calc(100% - 488px);
     margin: 2px 2px 0;
-    background: #aa0;
     .top_content {
       width: 100%;
       height: calc(100% - 218px);
@@ -60,11 +61,27 @@
     height: calc(100% - 62px);
     margin-top: 2px;
     margin-right: 2px;
+    &>div {
+      background: none;
+    }
+    .list_box {
+      height: calc(100% - 267px);
+      overflow-y:hidden;
+      background: #232e3a;
+    }
+    .order {
+      background: #232e3a;
+      height: 265px;
+      margin-top: 2px;
+    }
     .list_lt {
 
     }
     .list_rt {
       float: right;
+      .history {
+
+      }
     }
   }
 }

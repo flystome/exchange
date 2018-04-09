@@ -41,7 +41,7 @@ const en = {
       "message": "Message"
     },
     "my_account": {
-      "copy": "copy",
+      "copy": "Copy",
       "total_assets": "Total Assets",
       "change_password": "Change Password",
       "login_record": "Login Record (Last 5)",
@@ -79,7 +79,7 @@ const en = {
       "verifying": "verifying",
       "success_200": "Email has been sent, please check it",
       "error_1001": "Token errors, please Reconfirm",
-      "referrals_title": "Invite new users with your QR code or link to get commission discounts",
+      "referrals_title": "Inviting new users with your QR code or link to get commission discounts",
       "recommended_links": "Referral Link",
       "effective_recommended": "My Valid Referrals",
       "my_trade_discount": "My Commission Discount",
@@ -233,7 +233,7 @@ const en = {
     },
     "markets":{
       "volume": "Volume",
-      "coinAndVolumn": "Pair/Vol",
+      "coinAndVolume": "Pair/Vol",
       "newPrice": "Price",
       "change": "Change",
       "quotes": "Quotes",
@@ -291,7 +291,20 @@ const en = {
         'change_24': 'Change 24h',
         'high_price': 'High(24h)',
         'low_price': 'Low(24h)'
-      }
+      },
+      'find': 'Find',
+      'trades': {
+        'time': 'Time',
+        'price': 'Price',
+        'volume': 'Volume'
+      },
+      'setting': 'Profile',
+      'history': 'History',
+      'signout': 'Sign Out',
+      'coin': 'Coin',
+      'total': 'Amount',
+      'freeze': 'Freezon',
+      'allAccount': 'View All'
     },
     "hint": {
       "confirm": "OK",

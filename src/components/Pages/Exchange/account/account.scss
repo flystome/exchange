@@ -1,0 +1,57 @@
+.account {
+  display: inline-block;
+  height: 40px;
+  padding: 0 15px;
+  position: relative;
+  .account_btn {
+    display: inline-block;
+    line-height: 40px;
+    font-size: 12px;
+    color: #728eaa;
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+    span {
+      display: inline-block;
+    }
+  }
+  .dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 48px;
+    background: #38475a;
+    width: 320px;
+    padding: 1px 15px;
+    background: #38475a;
+    color: #728eaa;
+    font-size: 14px;
+    font-weight: normal;
+    margin-top: 0;
+    th {
+      height: 36px;
+      line-height: 36px;
+      color: #728eaa;
+      font-weight: normal;
+      &:last-child {
+        text-align: right;
+      }
+    }
+    td {
+      height: 36px;
+      border-top: 1px solid #3a4a5e;
+      &:last-child {
+        text-align: right;
+        border-bottom: 1px solid #3a4a5e;
+      }
+    }
+    .viewAll {
+      display: block;
+      text-decoration: none;
+      text-align: center;
+      height: 30px;
+      line-height: 30px;
+      color: #4382f7;
+    }
+  }
+}

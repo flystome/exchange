@@ -232,7 +232,7 @@ const zh = {
   },
   "markets":{
     "volume": "成交量",
-    "coinAndVolumn": "幣種/成交量",
+    "coinAndVolume": "幣種/成交量",
     "newPrice": "最新價",
     "change": "漲跌幅",
     "quotes": "行情",
@@ -290,7 +290,20 @@ const zh = {
       'change_24': '24小時漲跌',
       'high_price': '24小时最高',
       'low_price': '24小时最低'
-    }
+    },
+    'find': '搜索幣種',
+    'trades': {
+      'time': '成交時間',
+      'price': '成交價',
+      'volume': '成交量'
+    },
+    'setting': '賬戶設置',
+    'history': '歷史記錄',
+    'signout': '安全退出',
+    'coin': '幣種',
+    'total': '總計',
+    'freeze': '凍結',
+    'allAccount': '查看全部賬戶'
   },
   "hint": {
     "confirm": "OK",

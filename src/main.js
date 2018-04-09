@@ -37,7 +37,7 @@ import 'bootstrap/js/collapse.js'
 import Pusher from 'pusher-js'
 import 'bootstrap/js/carousel.js'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-import Filters from '@/common/filters/filters.js'
+import * as Filters from '@/common/filters/filters.js'
 
 // require styles
 import 'swiper/dist/css/swiper.css'
@@ -93,10 +93,14 @@ new Vue({
 new Vue({
   router,
   i18n,
-  filetrs: Filters,
+  // filetrs: Filters,
   template: `<Title></Title>`,
   components: { Title }
 }).$mount('#title')
+
+Object.keys(Filters).forEach(key => {
+  Vue.filter(key, Filters[key])
+})
 
 Pusher.Runtime.createXHR = function () {
   var xhr = new XMLHttpRequest()

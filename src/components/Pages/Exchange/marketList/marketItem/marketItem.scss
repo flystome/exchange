@@ -1,4 +1,6 @@
 .marketItem {
+  padding: 0 5px;
+  font-size: 12px;
   ul, li {
     padding: 0;
     margin: 0;
@@ -9,12 +11,13 @@
     padding-left: 0;
     margin-bottom: 0;
     li {
-      width: 35%;
+      width: 34%;
       color: #42637d;
-      font-size: 14px;
+      font-size: 12px;
       cursor: pointer;
       display: inline-block;
       float: left;
+      text-align: right;
       &.up {
         .caret {
           opacity: 1;
@@ -25,20 +28,25 @@
       &.down {
         .caret {
           opacity: 1;
-          color: #4382f7
+          color: #4382f7;
         }
       }
       .caret {
         opacity: 0;
-        margin-left: 5px;
+        margin-left: -1px;
         vertical-align: 3px;
         border-top: 4px dashed;
         border-right: 4px solid transparent;
         border-left: 4px solid transparent;
       }
-
+      &:first-child {
+        width: 36%;
+        text-align: left;
+        text-indent: 15px;
+      }
       &:last-child {
         width: 30%;
+        text-align: right;
       }
     }
   }
@@ -49,21 +57,51 @@
       color: #fff;
       float: none;
       font-size: 12px;
+      height: 20px;
+      line-height: 20px;
       div {
         display: inline-block;
         float: left;
       }
       .my_fav {
-        width: 10%;
+        width: 8%;
+        text-align: center;
+        &.favorite {
+          color: #fc4a4a;
+        }
+        i {
+          cursor: pointer;
+        }
       }
       .list-coin {
         width: 28%;
+        text-align: left;
+        a {
+          color: #fff;
+          &:hover {
+            color: #4682b4;
+          }
+        }
       }
       .list-price {
-        width: 32%;
+        width: 34%;
+        text-align: right;
+        &.done {
+          color: #29c1a6;
+        }
+        &.up {
+          color: #fc4a4a;
+        }
       }
       .list-btn {
         width: 30%;
+        text-align: right;
+        &.text-up {
+          color: #fc4a4a;
+        }
+        &.text-down {
+          color: #29c1a6;
+        }
       }
     }
 

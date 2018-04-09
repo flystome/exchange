@@ -1,3 +1,48 @@
 #allOrder {
-
+  height: 100%;
+  .hd {
+    width: 100%;
+    padding: 0 5px;
+    height: 30px;
+    padding: 8px;
+    li {
+      display: inline-block;
+      width: 33.3%;
+      float: left;
+      text-align: right;
+      color: #49627b;
+      &:first-child {
+        text-align: left;
+      }
+    }
+  }
+  .bd {
+    padding: 0 5px;
+    color: #ffffff;
+    font-size: 12px;
+    li {
+      height: 18px;
+      line-height: 18px;
+      div {
+        display: inline-block;
+        float: left;
+        width: 33.3%;
+        &.time {
+          width: 25%;
+          text-align: left;
+          color: #728eaa;
+        }
+        &.my {
+          width: 8.3%;
+          text-align: center;
+        }
+        &.price {
+          text-align: right;
+        }
+        &.volume {
+          text-align: right;
+        }
+      }
+    }
+  }
 }

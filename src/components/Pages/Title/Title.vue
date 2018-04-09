@@ -3,6 +3,7 @@
 </template>
 
 <script>
+console.log(process.env.ROUTER_VERSION)
 export default {
   name: 'Title',
   data () {
@@ -10,6 +11,7 @@ export default {
       ROUTER_VERSION: process.env.ROUTER_VERSION
     }
   },
+
   computed: {
     title () {
       var route = this.$route.path
