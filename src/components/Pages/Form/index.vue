@@ -21,4 +21,16 @@ export default {
     margin-bottom: 0;
   }
 }
+
+.btc-no-record{
+  min-height: 61vh;
+  background: white;
+  span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -21px;
+    margin-top: -10px;
+  }
+}
 </style>

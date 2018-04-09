@@ -23,17 +23,16 @@
 <script>
 export default {
   name: 'FormOrder',
+  created () {
+    this.paging(1)
+  },
   data () {
     return {
-      HOST_URL: process.env.HOST_URL,
       captionTitle: 'form.order.order_record',
       xhrData: [],
       pagination: 0,
       disabled: false
     }
-  },
-  created () {
-    this.paging(1)
   },
   methods: {
     paging (num) {

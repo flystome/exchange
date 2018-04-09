@@ -45,7 +45,7 @@ const en = {
       "total_assets": "Total Assets",
       "change_password": "Change Password",
       "login_record": "Login Record (Last 5)",
-      "login_time": "Login Time",
+      "login_time": "Register Time",
       "ip_adress": "IP Address",
       "login_location": "Login Location",
       "have_questions_to_contact_us": "If any suspicious login show up, please contact us immediately.",
@@ -201,7 +201,8 @@ const en = {
       "markets": "Markets",
       "404": "404 Not Found",
       "form_order": "Order Record",
-      "form_trade": "Record Of Transaction"
+      "form_trade": "Record Of Transaction",
+      "form_news": "My News"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
@@ -446,6 +447,12 @@ const en = {
         "quoted_currency": "Quoted Currency",
         "money": "Money",
         "poundage": "Poundage",
+      },
+      "news": {
+        "select_none": "Select None",
+        "select_all": "Select All",
+        "clear": "Clear",
+        "confirm": "Are you sure you want to delete this record?"
       }
     },
     "validation": {

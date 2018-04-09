@@ -44,7 +44,7 @@ const zh = {
     "total_assets": "總資產",
     "change_password": "更改密碼",
     "login_record": "登錄記錄（近五次）",
-    "login_time": "登錄時間",
+    "login_time": "註冊時間",
     "ip_adress": "IP 地址",
     "login_location": "登錄地址",
     "have_questions_to_contact_us": "如果有可疑的登錄信息，請立即與我們聯繫.",
@@ -200,7 +200,8 @@ const zh = {
     "markets": "市場",
     "404": "404 頁面",
     "form_order": "下單記錄",
-    "form_trade": "成交記錄"
+    "form_trade": "成交記錄",
+    "form_news": "我的消息",
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",
@@ -445,6 +446,12 @@ const zh = {
       "quoted_currency": "報價貨幣",
       "money": "金额",
       "poundage": "手续费",
+    },
+    "news": {
+      "select_none": "全不選",
+      "select_all": "全選",
+      "clear": "清理",
+      "confirm": "您確定要刪除此記錄嗎?",
     }
   },
     "validation": {

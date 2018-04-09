@@ -296,10 +296,10 @@ export default {
         if (data.referral_datas) {
           data.referral_signup_history.sort((a, b) => {
             return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-          }).reverse()
+          })
           data.referrals.sort((a, b) => {
             return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-          }).reverse()
+          })
           data.referral_signup_history.length === 0 ? obj1.Item = [] : obj1.Item = [{content: [this.$t('my_account.account'), this.$t('my_account.ip_adress'), this.$t('my_account.login_location'), this.$t('my_account.browser'), this.$t('my_account.login_time'), this.$t('my_account.activated')]}].concat(data.referral_signup_history.map((_, index) => {
             return {
               content: [

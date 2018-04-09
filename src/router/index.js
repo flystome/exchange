@@ -28,6 +28,7 @@ const MobilePersonal = () => import('Pages/Mobile/Personal/Personal.vue')
 // Form
 const Form = () => import('Pages/Form')
 const FormOrder = () => import('Pages/Form/Order/Order.vue')
+const FormNews = () => import('Pages/Form/News/News.vue')
 const FormTrade = () => import('Pages/Form/Trade/Trade.vue')
 
 Vue.use(Router)
@@ -157,6 +158,11 @@ const router = new Router({
           path: 'trade',
           name: 'FormTrade',
           component: FormTrade
+        },
+        {
+          path: 'news',
+          name: 'FormNews',
+          component: FormNews
         }
       ]
     },

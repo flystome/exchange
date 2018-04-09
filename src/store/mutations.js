@@ -94,6 +94,7 @@ const mutations = {
         message: ''
       }
     }
+    state.PopupBox.confirm = obj.confirm
     state.PopupBox.type = obj.type
     state.PopupBox.status = !state.PopupBox.status
     state.PopupBox.message = obj && obj.message

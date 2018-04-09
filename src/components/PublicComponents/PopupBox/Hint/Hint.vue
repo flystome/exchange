@@ -21,7 +21,7 @@
           </div>
           <div class="btc-paddingB30">
             <span style="display:flex">
-              <basic-button @click.native.stop="gopath(true)" style="margin-right: 28px;" v-if='PopupBox.confirm'  class="btn btc-marginT50"  :text='$t(`hint.yes`)' :class="{'btc-hint-hidden': !this.PopupBox.buttondisplay}">
+              <basic-button @click.native.stop="confirm" style="margin-right: 28px;" v-if='PopupBox.confirm'  class="btn btc-marginT50"  :text='$t(`hint.yes`)' :class="{'btc-hint-hidden': !this.PopupBox.buttondisplay}">
               </basic-button>
               <basic-button @click.native.stop="gopath"  class="btn btc-marginT50"  :text='buttonText' :class="{'btc-hint-hidden': !this.PopupBox.buttondisplay}">
               </basic-button>
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { bus } from '@/common/js/bus'
 import { SelfBuildingSquareSpinner } from 'epic-spinners'
 import { mapState, mapMutations } from 'vuex'
 export default {
@@ -52,8 +53,19 @@ export default {
     }
   },
   methods: {
+    confirm () {
+      if (this.PopupBox.href) {
+        location.href = `${this.HOST_URL}/tickets/new`
+      } else {
+        bus.$emit('Popbox-confirm')
+        this.ChangePopupBox({
+          status: false,
+          confirm: false,
+          buttonText: ''
+        })
+      }
+    },
     gopath (href) {
-      if (this.PopupBox.confirm && href === true) location.href = `${this.HOST_URL}/tickets/new`
       this.b = false
       setTimeout(() => {
         this.ChangePopupBox({

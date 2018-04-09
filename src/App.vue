@@ -32,7 +32,7 @@ export default {
   name: 'App',
   data () {
     return {
-      unLogin: ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home', 'Orders', 'notFound'],
+      unLoading: ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home', 'Orders', 'notFound'],
       version: process.env.ROUTER_VERSION,
       noMobile: true,
       exChange: false
@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     loading () {
-      if (this.unLogin.includes(this.$route.name)) {
+      if (this.unLoading.includes(this.$route.name)) {
         return true
       } else {
         if (this.loginData !== 'none') {
