@@ -408,6 +408,8 @@ const en = {
       "off": "Off"
     },
     "form": {
+      "previous": "Previous",
+      "next": "Next",
       "order": {
         "order_record": "Order Record",
         "type": "Type",

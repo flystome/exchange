@@ -9,7 +9,7 @@ const dictionary = {
 }
 Validator.localize(dictionary)
 
-var empty = ['First Name', 'verify_code', 'password', 'Last Name', 'IdCard', 'CellPhone', 'google_verify_code']
+var empty = ['First Name', 'Verify Code', 'password', 'Last Name', 'IdCard', 'CellPhone', 'Google Verify Code']
 
 empty.forEach(d => {
   Validator.extend(d, {
@@ -20,21 +20,6 @@ empty.forEach(d => {
       return /\S+/.test(value)
     }
   })
-})
-
-Validator.extend('aa', {
-  getMessage: (field, params, data) => {
-    return (data && data.validation) || 'Something went wrong'
-  },
-  validate: value => false
-})
-
-
-Validator.extend('bb', {
-  getMessage: (field, params, data) => {
-    return (data && data.validation) || 'Something went wrong'
-  },
-  validate: value => false
 })
 
 // Validator.extend('IdCard', {

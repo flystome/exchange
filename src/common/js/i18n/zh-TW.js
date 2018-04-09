@@ -407,6 +407,8 @@ const zh = {
     "off": "折扣率"
   },
   "form": {
+    "previous": "上一頁",
+    "next": "下一頁",
     "order": {
       "order_record": "下單記錄",
       "type": "類型",

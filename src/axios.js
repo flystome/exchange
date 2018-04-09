@@ -33,7 +33,7 @@ export const _get = async ({url, data, headers}, callback) => {
   const ajax = await axios({
     method: 'get',
     url: requestUrl + url,
-    data: data
+    params: data
   }).catch(error => {
     if (/settings\/member/.test(url)) {
       callback({error: 'login error'})

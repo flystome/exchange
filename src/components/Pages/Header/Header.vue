@@ -64,6 +64,7 @@
                  <!-- <a><a :href="`${HOST_URL}/`">{{$t('nav.settings')}}</a></li> -->
                 <li><a @click="goPath('/my_account')">{{$t('nav.my_account')}}</a></li>
                 <li><a :href="`${HOST_URL}/api_tokens`">{{$t("my_account.api")}}</a></li>
+                <li class="divider" role="separator"></li>
                 <li><a :href="`${HOST_URL}/signout`">{{$t('nav.exit')}}</a></li>
               </ul>
             </li>

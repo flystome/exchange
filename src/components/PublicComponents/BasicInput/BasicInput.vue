@@ -26,14 +26,19 @@
     class="btc-basicInput btc-b"
     :placeholder='placeholder'
     @input="$emit('input', $event.target.value)">
-    <span v-show="errors.has(`${validate}`)" class="help is-danger">{{ errors.first(`${validate}`) }}</span>
+    <span v-show="errors.has(`${validate}`)" class="help is-danger">{{ errors.first(`${validate}`) | toUpperCase }}</span>
   </div>
 </template>
 
 <script>
 export default {
   props: ['placeholder', 'validate', 'value', 'type', 'hidden'],
-  name: 'BasicInput'
+  name: 'BasicInput',
+  filters: {
+    toUpperCase (str) {
+      return str && `${str.slice(0, 1).toUpperCase()}${str.slice(1)}`
+    }
+  }
 }
 </script>
 

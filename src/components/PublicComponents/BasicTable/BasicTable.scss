@@ -37,7 +37,8 @@ td[class=btc-tablehover]{
 
 .btc-table tbody tr td{
     text-align: center;
-    border: none
+    border: none;
+    white-space: nowrap;
 }
 
 .btc-tableTextright{

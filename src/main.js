@@ -18,6 +18,7 @@ import Title from 'Pages/Title/Title'
 import App from './App'
 import BasicInstructions from 'Components/BasicInstructions/BasicInstructions'
 import Trend from '@/common/js/trend/vue-trend.esm.js'
+import Paginate from 'Components/Paginate'
 import Spinner from 'vue-simple-spinner'
 
 // js dependencies
@@ -58,6 +59,8 @@ Vue.prototype._delete = _delete
 Vue.prototype.$http = axios
 Vue.prototype.$moment = moment
 
+Paginate.name = 'Paginate'
+
 const components = [
   BasicButton,
   BasicInput,
@@ -68,7 +71,8 @@ const components = [
   NewsPrompt,
   DivContenteditable,
   BasicInstructions,
-  Spinner
+  Spinner,
+  Paginate
 ]
 components.forEach(component => {
   Vue.component(component.name, component)

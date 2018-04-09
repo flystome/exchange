@@ -1,7 +1,22 @@
 <template>
-  <div class="btc-container-block">
-    <basic-table style="margin-top:0px" :len='xhrData.length' :captionTitle='captionTitle' :item='getRecord'>
-    </basic-table>
+  <div class="btc-form">
+    <div class="btc-container-block">
+      <basic-table style="margin-top:0px" :len='xhrData.length' :captionTitle='captionTitle' :item='getRecord'>
+      </basic-table>
+    </div>
+    <paginate
+      class="btc-fr"
+      :disabled="disabled"
+      v-if="pagination !== 0"
+      :page-count="pagination"
+      :page-range="3"
+      :margin-pages="1"
+      :click-handler="paging"
+      :disabled-class='"disabled"'
+      :prev-text="`${$t('form.previous')}`"
+      :next-text="`${$t('form.next')}`"
+      :page-class="'page-item'">
+    </paginate>
   </div>
 </template>
 
@@ -12,15 +27,32 @@ export default {
     return {
       HOST_URL: process.env.HOST_URL,
       captionTitle: 'form.trade.record_of_transaction',
-      xhrData: []
+      xhrData: [],
+      pagination: 0,
+      disabled: false
     }
   },
   created () {
-    this._get({
-      url: `/history/all_trades.json`
-    }, (d) => {
-      this.xhrData = d.data.trades
-    })
+    this.paging(1)
+  },
+  methods: {
+    paging (num) {
+      if (this.disabled) return
+      this.GetList(num)
+    },
+    GetList (num) {
+      this.disabled = true
+      this._get({
+        url: `/history/all_trades.json`,
+        data: {
+          page: num
+        }
+      }, (d) => {
+        this.disabled = false
+        this.xhrData = d.data.trades
+        this.pagination = d.data.total_pages
+      })
+    }
   },
   computed: {
     getRecord () {
@@ -36,8 +68,8 @@ export default {
       ]}].concat(this.xhrData.map(data => {
         return {
           content: [
-            {color: data.kind === 'ask' ? '#fd4041' : '#29c1a6', context: data.kind === 'ask' ? 'form.order.buy' : 'form.order.sell'},
-            this.$moment(data.at).format('L H:mm:ss'),
+            {style: data.kind === 'ask' ? { color: '#fd4041' } : { color: '#29c1a6' }, context: data.kind === 'ask' ? this.$t('form.order.buy') : this.$t('form.order.sell')},
+            { style: { 'white-space': 'nowrap' }, context: this.$moment(data.at).format('L H:mm:ss') },
             data.base_currency.toUpperCase(),
             Number(data.origin_volume).toFixed(Math.min(String(data.origin_volume).split('.')[1].length, 8)),
             Number(data.price).toFixed(Math.min(String(data.price).split('.')[1].length, 8)),

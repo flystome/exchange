@@ -2,6 +2,7 @@ import VueI18n from 'vue-i18n'
 import Vue from 'vue'
 import en from './en'
 import zh_TW from './zh-TW'
+import Cookies from 'js-cookie'
 
 Vue.use(VueI18n)
 const messages = {
@@ -10,7 +11,7 @@ const messages = {
 }
 
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: Cookies.get('locale') ? Cookies.get('locale') : 'en',
   messages
 })
 

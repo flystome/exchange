@@ -172,7 +172,7 @@
       <template slot="cancel"
       slot-scope="props">
         <a>
-          / <span :disabled='disabled' @click="cancelWithdraw(props.id, props.data)" class="btc-link btn">{{$t(`withdraw_currency.canceled`)}}</span>
+          / <span :disabled='disabled' @click="cancelWithdraw(props.id, props.data)" class="btc-link btn">{{$t(`withdraw_currency.cancel`)}}</span>
         </a>
       </template>
       <!-- <div slot="more" class="text-center btc-b-t btc-table-more">
@@ -237,7 +237,7 @@ export default {
                 "fee": d.fee,
                 "aasm_state": d.aasm_state,
                 "fund_uid": d.fund_uid
-              }, context: `withdraw_currency.${d.aasm_state}`, id: d.id }
+              }, context: this.$t(`withdraw_currency.${d.aasm_state}`), id: d.id }
             ]
           })
         }
@@ -474,7 +474,7 @@ export default {
               d.fund_uid,
               d.amount,
               d.fee,
-              { type: d, context: `withdraw_currency.${d.aasm_state}`, id: id }
+              { type: d, context: this.$t(`withdraw_currency.${d.aasm_state}`), id: id }
             ]
           }
         }))
@@ -641,7 +641,7 @@ export default {
           this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.Withdraw_canceled_200'), type: 'success'})
           var type = data.type
           type.aasm_state_title = 'canceled'
-          data.context = 'withdraw_currency.canceled'
+          data.context = this.$t('withdraw_currency.canceled')
           type.aasm_state = 'canceled'
         } else {
           this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.Withdraw_canceled_1001'), type: 'error'})

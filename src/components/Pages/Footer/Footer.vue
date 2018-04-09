@@ -75,7 +75,8 @@ export default {
     localed () {
       // this.$i18n.locale = this.language
     },
-    changeLang (str) {
+    changeLang (str, index) {
+      if (this.$i18n.locale === str) return
       this.ChangeLanguage(str)
       this.$i18n.locale = str
       this._post({

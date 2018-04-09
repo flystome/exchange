@@ -7,6 +7,7 @@
 /src/common/js/validation
 /src/components/Pages/WithdrawCurrency/WithdrawCurrency.vue
 /src/components/Pages/validate/Identity/Identity.vue
+/src/components/PublicComponents/Paginate
 /src/store/mutations.js
 /src/common/js/trend
 ./index.html
