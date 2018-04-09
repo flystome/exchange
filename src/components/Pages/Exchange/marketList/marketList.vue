@@ -7,7 +7,7 @@
     <div class="search_box">
       <span>{{$t('exchange.find')}}</span>
       <div class="search">
-        <input id="serach_market" v-model="">
+        <input id="serach_market" v-model.lazy="getMarket">
         <a class="search_del">
           <i class="fa fa-times-circle"></i>
         </a>
@@ -29,7 +29,8 @@ export default {
     return {
       hds: ['BTC', 'ETH', 'USDT', 'markets.favorite'],
       currencyIndex: 0,
-      curData: []
+      curData: [],
+      getMarket: ''
     }
   },
   components: {
