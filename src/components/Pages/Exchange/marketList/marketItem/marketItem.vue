@@ -33,7 +33,7 @@ export default {
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
-      heads: ['markets.coin', 'markets.newPrice', 'markets.change'],
+      heads: ['exchange.coin', 'markets.newPrice', 'markets.change'],
       coins: ['quote_currency', 'last', 'percent'],
       times: 0,
       currencyIndex: 0,

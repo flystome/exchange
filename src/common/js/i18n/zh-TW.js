@@ -232,7 +232,7 @@ const zh = {
   },
   "markets":{
     "volume": "成交量",
-    "coin": "幣種",
+    "coinAndVolume": "幣種/成交量",
     "newPrice": "最新價",
     "change": "漲跌幅",
     "quotes": "行情",

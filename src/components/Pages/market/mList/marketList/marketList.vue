@@ -34,7 +34,7 @@ export default {
     return {
       HOST_URL: process.env.HOST_URL,
       ROUTER_VERSION: process.env.ROUTER_VERSION,
-      heads: ['markets.coinAndVolumn', 'markets.newPrice', 'markets.change'],
+      heads: ['markets.coinAndVolume', 'markets.newPrice', 'markets.change'],
       coins: ['quote_currency', 'last', 'percent'],
       times: 0,
       currencyIndex: 0,

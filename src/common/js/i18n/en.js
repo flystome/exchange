@@ -233,7 +233,7 @@ const en = {
     },
     "markets":{
       "volume": "Volume",
-      "coin": "Pair",
+      "coinAndVolume": "Pair/Vol",
       "newPrice": "Price",
       "change": "Change",
       "quotes": "Quotes",

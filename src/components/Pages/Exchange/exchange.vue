@@ -40,13 +40,17 @@
         <div class="list_box trades">
 
         </div>
-        <div class="order buy"></div>
+        <div class="order buy">
+          <order></order>
+        </div>
       </div>
       <div class="list_rt w240">
         <div class="list_box history">
           <allOrder :tradesData="tradesData"></allOrder>
         </div>
-        <div class="order sell"></div>
+        <div class="order sell">
+          <order></order>
+        </div>
       </div>
     </section>
   </section>
