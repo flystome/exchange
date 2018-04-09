@@ -1,0 +1,48 @@
+.setting {
+  display: inline-block;
+  height: 40px;
+  padding: 0 15px;
+  position: relative;
+  .setting_btn {
+    font-size: 12px;
+    line-height: 40px;
+    color: #728eaa;
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+    span {
+      display: inline-block;
+      &:first-child {
+        margin-right: 5px;
+      }
+    }
+  }
+  .dropdown-menu {
+    position: absolute;
+    right: 15px;
+    left: auto;
+    top: 48px;
+    background: #38475a;
+    width: 100px;
+    min-width: 80px;
+    padding: 1px 10px;
+    li {
+      height: 30px;
+      line-height: 30px;
+      color: #728eaa;
+      font-size: 12px;
+    }
+    li:nth-child(n+2) {
+      height: 30px;
+      line-height: 30px;
+      span {
+        display: inline-block;
+        margin-right: 5px;
+        font-size: 12px;
+        width: 16px;
+        text-align: center;
+      }
+    }
+  }
+}

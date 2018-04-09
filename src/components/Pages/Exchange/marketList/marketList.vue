@@ -7,8 +7,8 @@
     <div class="search_box">
       <span>{{$t('exchange.find')}}</span>
       <div class="search">
-        <input id="serach_market" v-model.lazy="getMarket">
-        <a class="search_del">
+        <input id="serach_market" v-model="getMarket">
+        <a class="search_del" v-show='searchDel' @click='delAllInput'>
           <i class="fa fa-times-circle"></i>
         </a>
       </div>
@@ -30,7 +30,9 @@ export default {
       hds: ['BTC', 'ETH', 'USDT', 'markets.favorite'],
       currencyIndex: 0,
       curData: [],
-      getMarket: ''
+      pipeData: [],
+      getMarket: '',
+      searchDel: false
     }
   },
   components: {
@@ -38,23 +40,36 @@ export default {
   },
   watch: {
     markets (val, oldVal) {
+      this.pipeData = val
       this.getData()
+    },
+    getMarket (val, oldVal) {
+      if (!val) {
+        this.searchDel = false
+        this.getData()
+      } else {
+        this.searchDel = true
+        var reg = new RegExp(`${val}`, 'i')
+        this.curData[this.currencyIndex] = this.curData[this.currencyIndex].filter(ele => {
+          var key = '' + ele['quote_currency'] + ele['base_currency']
+          return reg.test(key)
+        })
+      }
     }
   },
   methods: {
     changeMarket: function (index, item) {
       this.currencyIndex = index
     },
-    getData (data) {
+    getData () {
       this.curData = []
       this.curData[0] = this.singleData('btc')
       this.curData[1] = this.singleData('eth')
       this.curData[2] = this.singleData('usdt')
       this.curData[3] = this.getFavorite()
-      console.log(this.singleData('btc'), this.markets)
     },
     singleData (type) {
-      var data = this.markets
+      var data = this.pipeData
       var reg = new RegExp(`${type}$`, 'i')
       var arr = []
       for (var key in data) {
@@ -65,7 +80,7 @@ export default {
       return arr
     },
     getFavorite () {
-      var data = this.markets
+      var data = this.pipeData
       var arr = []
       var key = ''
       for (key in data) {
@@ -74,6 +89,10 @@ export default {
         }
       }
       return arr
+    },
+    delAllInput () {
+      this.getMarket = ''
+      this.searchDel = false
     }
   }
 }

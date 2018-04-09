@@ -12,7 +12,12 @@
           <i class="fa fa-star"></i>
         </div>
         <div class="list-coin">
-          <router-link :to="{path: `${ROUTER_VERSION}/markets/${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`}">{{item.quote_currency | upper}}<span>/{{item.base_currency | upper}}</span></router-link>
+          <router-link :to="{path: `${ROUTER_VERSION}/exchange/${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`}">
+            <span>{{item.quote_currency | upper}}/</span><span>{{item.base_currency | upper}}</span>
+          </router-link>
+          <!-- <a href="###" @click='refreshPage(item.quote_currency, item.base_currency)'>
+            <span>{{item.quote_currency | upper}}</span>/<span>{{item.base_currency | upper}}</span>
+          </a> -->
         </div>
         <div class="list-price" :class="{'up': item.trend == 'up' , 'down': item.trend == 'down'}">{{item.last | fixedNum(item.price_fixed)}}</div>
         <div class="list-btn" :class="{'text-up': item.percent > 0, 'text-down': item.percent < 0}">{{item.percent | fixed2}}%</div>
@@ -28,7 +33,7 @@ export default {
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
-      heads: ['markets.coinAndVolumn', 'markets.newPrice', 'markets.change'],
+      heads: ['markets.coin', 'markets.newPrice', 'markets.change'],
       coins: ['quote_currency', 'last', 'percent'],
       times: 0,
       currencyIndex: 0,

@@ -5,7 +5,11 @@
         <img src="@/common/svg/logo.svg">
       </router-link>
       <lastPrice :market="market"></lastPrice>
-      <!-- <account></account> -->
+      <div class="header_rt">
+        <account :totalAssets='total_assets' :accounts='accounts'></account>
+        <setting :loginData='loginData'></setting>
+        <language></language>
+      </div>
     </header>
 
     <section class="content">
@@ -49,7 +53,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import lastPrice from './lastPrice/lastPrice'
+import language from './language/language'
+import setting from './setting/setting'
+import account from './account/account'
 import marketList from './marketList/marketList'
 import chart from './chart/chart'
 import orderBook from './orderBook/orderBook'
@@ -65,11 +74,17 @@ export default {
       lastPriceData: {},
       tradesData: [],
       market: {},
-      markets: {}
+      markets: {},
+      loginName: '',
+      accounts: {},
+      total_assets: {}
     }
   },
   components: {
     lastPrice,
+    language,
+    setting,
+    account,
     marketList,
     chart,
     orderBook,
@@ -85,7 +100,13 @@ export default {
     '$route' (to, from) {
       this.curMarket = to.params.id
       this.init()
+    },
+    loginData (val) {
+      this.loginName = val.show_name
     }
+  },
+  computed: {
+    ...mapGetters(['loginData'])
   },
   methods: {
     init () {
@@ -104,7 +125,9 @@ export default {
         // ticker: this.lastPriceData,
         trades: this.tradesData,
         market: this.market,
-        markets: this.markets
+        markets: this.markets,
+        accounts: this.accounts,
+        total_assets: this.total_assets
       } = res.data)
     }
   }
