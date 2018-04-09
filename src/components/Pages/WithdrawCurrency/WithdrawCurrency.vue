@@ -35,7 +35,7 @@
         @click='ChoiceCoin(index, coin.node_enabled)'
         class="btc-b btn"
         :key="coin.code">
-          <img :src="requireImg(`market-${coin.code}`)">
+          <img v-if="requireImg(`market-${coin.code}`)" :src="requireImg(`market-${coin.code}`)">
           <span>
             {{ coin.code | toUpperCase }}
           </span>
@@ -168,7 +168,7 @@
           </ul>
       </div>
     </div>
-    <basic-table :captionTitle='WithdrawRecord.captionTitle' :item='getWithdrawRecord' :perfix='CurrencyType.toUpperCase()' v-if="route === 'withdraw'">
+    <basic-table :loading='withdraw_loading' :captionTitle='WithdrawRecord.captionTitle' :item='getWithdrawRecord' :perfix='CurrencyType.toUpperCase()' v-if="route === 'withdraw'">
       <template slot="cancel"
       slot-scope="props">
         <a>
@@ -179,7 +179,7 @@
         <a class="btc-link ">{{$t('my_account.show_more')}}</a>
       </div> -->
     </basic-table>
-    <basic-table :captionTitle='depositRecord.captionTitle' :perfix='CurrencyType.toUpperCase()' :item='getDepositRecord' v-else>
+    <basic-table :loading='deposit_loading' :captionTitle='depositRecord.captionTitle' :perfix='CurrencyType.toUpperCase()' :item='getDepositRecord' v-else>
       <template slot="href"
       slot-scope="props">
         <span class="btc-pointer btc-link" @click="OpenWindow(props.data.url)">
@@ -338,6 +338,8 @@ export default {
       WithdrAwable: false,
       loading: false,
       newaa: [],
+      deposit_loading: true,
+      withdraw_loading: true,
       WithdrawData: {
         Address_id: '',
         otp: '',
@@ -389,7 +391,11 @@ export default {
       this.WithdrawData.Address_id = ''
     },
     requireImg (img) {
-      return require(`../../../../static/img/${img}.png`)
+      try {
+        return require(`../../../../static/img/${img}.png`)
+      } catch (error) {
+        return false
+      }
     },
     ChoiceCoin (index, type) {
       if (!type) return
@@ -430,6 +436,12 @@ export default {
       }, 10000)
     },
     GetCoin (c, funds, sn) {
+      var obj = this.WithdrawRecord
+      var objd = this.depositRecord
+      this.deposit_loading = true
+      this.withdraw_loading = true
+      obj.item = []
+      objd.item = []
       this.disabled = true
       this.deposit_address = false
       this.deposit_address_display = false
@@ -451,8 +463,6 @@ export default {
         this.equivalence = d.today_withdraw_remain_btc === d.today_withdraw_remain ? '' : d.today_withdraw_remain_btc
         this.WithdrAwable = d.withdrawable
         this.Remain = d.today_withdraw_remain
-        var obj = this.WithdrawRecord
-        var objd = this.depositRecord
         var withdraws = d.withdraws
         var deposits = d.deposits
         if (d.address) {
@@ -493,6 +503,11 @@ export default {
         }))
         obj.captionTitle = 'withdraw_currency.withdraw_currency_record'
         objd.captionTitle = 'deposit_currency.deposit_record'
+
+        this.$nextTick(() => {
+          this.deposit_loading = false
+          this.withdraw_loading = false
+        })
 
         if (funds && Object.keys(funds).length > 0) {
           funds['btc'].forEach((d) => {

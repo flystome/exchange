@@ -162,12 +162,12 @@
             </div>
           </div>
         </div>
-      <basic-table :captionTitle='getRecommendCount.captionTitle' :item='getRecommendCount.Item'>
+      <basic-table :loading='referral_loading' :captionTitle='getRecommendCount.captionTitle' :item='getRecommendCount.Item'>
       <div slot="more" class="text-center btc-b-t btc-table-more">
         <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('my_account.show_more')}}</a>
       </div>
       </basic-table>
-      <basic-table :captionTitle='getRecommendUser.captionTitle' :item='getRecommendUser.Item'>
+      <basic-table :loading='referral_loading' :captionTitle='getRecommendUser.captionTitle' :item='getRecommendUser.Item'>
          <div slot="more" class="text-center btc-b-t btc-table-more">
           <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('my_account.show_more')}}</a>
         </div>
@@ -233,6 +233,7 @@ export default {
       email_sent_message: this.$t('my_account.email_sent_message'),
       tickets: [],
       step: 1,
+      referral_loading: true,
       disabled: false,
       getRecommendCount: {
         captionTitle: 'my_account.recommended_statistics',
@@ -264,6 +265,7 @@ export default {
       this._get({
         url: '/settings/referrals.json'
       }, (d) => {
+        this.referral_loading = false
         this.httplock = true
         var data = d.data
 

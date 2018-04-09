@@ -3,13 +3,13 @@
     <transition name='SideSlipMenu'>
       <section class="btc-main" :class="{'btc-background-white': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange'}">
         <header v-if="!fromApp && !exChange" is='Header' />
-        <div v-if="loading" class="btc-container container" v-cloak>
-          <keep-alive>
-            <router-view></router-view>
-          </keep-alive>
-        </div>
-      <div class="btc-global-loading" v-else>
+      <div class="btc-global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
         <vue-simple-spinner size="88"></vue-simple-spinner>
+      </div>
+      <div v-else class="btc-container container" v-cloak>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
       </div>
       </section>
     </transition>
@@ -32,7 +32,7 @@ export default {
   name: 'App',
   data () {
     return {
-      unLoading: ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home', 'Orders', 'notFound'],
+      unLogin: ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home', 'Orders', 'notFound', 'FormNews'],
       version: process.env.ROUTER_VERSION,
       noMobile: true,
       exChange: false
@@ -57,12 +57,8 @@ export default {
   },
   computed: {
     loading () {
-      if (this.unLoading.includes(this.$route.name)) {
+      if (this.loginData !== 'none') {
         return true
-      } else {
-        if (this.loginData !== 'none') {
-          return true
-        }
       }
       return false
     },

@@ -27,7 +27,9 @@
             </td>
           </tr>
         </tbody>
-        <div class="text-center btc-table-record" v-else>
+        <vue-simple-spinner class="btc-table-spinner" :size="SpinnerSize" v-if="loading" style="margin: 34.5px 0;">
+        </vue-simple-spinner>
+        <div class="text-center btc-table-record" v-if="!loading && !(item.length > 1)">
           <div>
             <div class="btc-marginT15 btc-font12 btc-color999">{{$t('my_account.no_record')}}</div>
           </div>
@@ -50,6 +52,14 @@ export default {
     },
     perfix: {
       type: String
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    SpinnerSize: {
+      type: Number,
+      default: 88
     },
     len: {
       type: Number,

@@ -1,7 +1,7 @@
 <template>
   <div class="btc-form">
     <div class="btc-container-block">
-      <basic-table style="margin-top:0px" :len='xhrData.length' :captionTitle='captionTitle' :item='getRecord'>
+      <basic-table style="margin-top:0px" :SpinnerSize='150' :loading='loading' :len='xhrData.length' :captionTitle='captionTitle' :item='getRecord'>
       </basic-table>
     </div>
     <paginate
@@ -31,7 +31,8 @@ export default {
       captionTitle: 'form.order.order_record',
       xhrData: [],
       pagination: 0,
-      disabled: false
+      disabled: false,
+      loading: true
     }
   },
   methods: {
@@ -47,6 +48,7 @@ export default {
           page: num
         }
       }, (d) => {
+        this.loading = false
         this.disabled = false
         this.xhrData = d.data.orders
         this.pagination = d.data.total_pages
@@ -84,3 +86,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+ @import "./Order.scss"
+</style>

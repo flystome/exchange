@@ -133,7 +133,11 @@ export default {
         })
         this.xhrData = d.data
         this.all = false
-        this.none = true
+        if (d.total_pages === 0) {
+          this.none = false
+        } else {
+          this.none = true
+        }
       })
     },
     selectAll () {

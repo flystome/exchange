@@ -12,6 +12,7 @@ export default {
 .btc-form{
   .btc-container-block .btc-table-container{
     min-height: 70vh;
+    position: relative;
   }
   .pagination > li > a{
     outline: none
@@ -25,6 +26,7 @@ export default {
 .btc-no-record{
   min-height: 61vh;
   background: white;
+  position: relative;
   span{
     position: absolute;
     top: 50%;
