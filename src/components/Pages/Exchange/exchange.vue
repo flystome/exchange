@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="my_order">
-
+        <myOrder :myOrders='my_orders'></myOrder>
       </div>
     </section>
     <section class="list">
@@ -41,7 +41,7 @@
 
         </div>
         <div class="order buy">
-          <order></order>
+          <order :market='market' :type='"buy"'></order>
         </div>
       </div>
       <div class="list_rt w240">
@@ -49,7 +49,7 @@
           <allOrder :tradesData="tradesData"></allOrder>
         </div>
         <div class="order sell">
-          <order></order>
+          <order :market='market' :type='"sell"'></order>
         </div>
       </div>
     </section>
@@ -69,6 +69,7 @@ import orderBook from './orderBook/orderBook'
 import trades from './trades/trades'
 import order from './order/order'
 import allOrder from './allOrder/allOrder'
+import myOrder from './myOrder/myOrder'
 
 export default {
   name: 'ExChange',
@@ -81,7 +82,8 @@ export default {
       markets: {},
       loginName: '',
       accounts: {},
-      total_assets: {}
+      total_assets: {},
+      my_orders: []
     }
   },
   components: {
@@ -94,7 +96,8 @@ export default {
     orderBook,
     trades,
     order,
-    allOrder
+    allOrder,
+    myOrder
   },
   created () {
     this.curMarket = this.$route.params.id
@@ -131,7 +134,8 @@ export default {
         market: this.market,
         markets: this.markets,
         accounts: this.accounts,
-        total_assets: this.total_assets
+        total_assets: this.total_assets,
+        my_orders: this.my_orders
       } = res.data)
     }
   }

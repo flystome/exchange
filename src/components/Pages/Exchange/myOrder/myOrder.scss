@@ -1,0 +1,58 @@
+#myOrder {
+  color: #fff;
+  .head {
+    background: #1b242e;
+    height: 32px;
+    padding-top: 2px;
+    font-size: 12px;
+    .tab_hd {
+      li {
+        display: inline-block;
+        width: 16%;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #49627b;
+        cursor: pointer;
+        &.on {
+          background: #232e3a;
+          color: #4382f7;
+          font-weight: bold;
+        }
+      }
+    }
+    .tab_filter {
+      float: right;
+      margin-top: 4px;
+      li {
+        float: left;
+        display: inline-block;
+        cursor: pointer;
+        height: 20px;
+        line-height: 20px;
+        background: #344151;
+        color: #85a7c8;
+        padding: 0 7px;
+        margin-right: 10px;
+        border-radius: 2px;
+        border: 0;
+      }
+    }
+    .tab_order_filter {
+      li:last-child {
+        height: 20px;
+        border: 1px solid #49627b;
+        background: none;
+      }
+    }
+  }
+  .tab_bd {
+    height: 180px;
+    .noneData {
+      height: 180px;
+      line-height: 180px;
+      text-align: center;
+      color: #555;
+    }
+  }
+}
