@@ -1,40 +1,42 @@
 <template>
   <div class="btc-form-news">
-    <header class="btc-news-radio">
-      <div class="btc-fl">
-        <strong style="color:black">{{$t('title.form_news')}}</strong>
-      </div>
-      <div class="btc-fr">
-        <span :class="{'btc-form-disabled': clearList.length === xhrData.length}" @click="selectAll">
-          <a :class="{'btc-radio': all}">
-          </a>
-          {{ $t('form.news.select_all') }}
-        </span>
-        <span :class="{'btc-form-disabled': clearList.length === 0}" @click="selectNone">
-          <a :class="{'btc-radio': none}">
-          </a>
-          {{ $t('form.news.select_none') }}
-        </span>
-        <span :class="{'btc-form-disabled': clearList.length === 0}" class="btc-marginR0" @click="clearRecord">
-          {{ $t('form.news.clear') }}
-        </span>
-      </div>
-      <div style="clear:both">
-      </div>
-    </header>
-    <div class="btc-news">
-      <div class="btc-news-block" v-for="(d, index) in xhrData" @click="addClearList(d.id, index)" :key="d.id">
-        <section class="btc-fl">
-          <header>
-            <strong>{{d.subject}}</strong>
-            <span>{{ d.created_at }}</span>
-          </header>
-          <article>
-            {{ d.message }}
-          </article>
-        </section>
-        <div v-if="d.choice" class="btc-news-select">
-          <img src="~Img/form-select.png">
+    <div :class="{'btc-news-minheight': !(pagination === 0 && firstLoad)}">
+      <header class="btc-news-radio">
+        <div class="btc-fl">
+          <strong style="color:black">{{$t('title.form_news')}}</strong>
+        </div>
+        <div class="btc-fr">
+          <span :class="{'btc-form-disabled': clearList.length === xhrData.length}" @click="selectAll">
+            <a :class="{'btc-radio': all}">
+            </a>
+            {{ $t('form.news.select_all') }}
+          </span>
+          <span :class="{'btc-form-disabled': clearList.length === 0}" @click="selectNone">
+            <a :class="{'btc-radio': none}">
+            </a>
+            {{ $t('form.news.select_none') }}
+          </span>
+          <span :class="{'btc-form-disabled': clearList.length === 0}" class="btc-marginR0" @click="clearRecord">
+            {{ $t('form.news.clear') }}
+          </span>
+        </div>
+        <div style="clear:both">
+        </div>
+      </header>
+      <div class="btc-news">
+        <div class="btc-news-block" v-for="(d, index) in xhrData" @click="addClearList(d.id, index)" :key="d.id">
+          <section class="btc-fl">
+            <header>
+              <strong>{{d.subject}}</strong>
+              <span>{{ $moment(d.created_at).format('L H:mm:ss') }}</span>
+            </header>
+            <article>
+              {{ d.message }}
+            </article>
+          </section>
+          <div v-if="d.choice" class="btc-news-select">
+            <img src="~Img/form-select.png">
+          </div>
         </div>
       </div>
     </div>

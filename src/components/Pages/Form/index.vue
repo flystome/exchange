@@ -35,4 +35,12 @@ export default {
     margin-top: -10px;
   }
 }
+
+.btc-form .btc-table-spinner{
+  position: absolute;
+  top: 50%;
+  margin-top: -75px!important;
+  left: 50%;
+  margin-left: -75px!important;
+}
 </style>

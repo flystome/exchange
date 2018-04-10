@@ -1,7 +1,7 @@
 <template>
   <div class="btc-form">
     <div class="btc-container-block">
-      <basic-table style="margin-top:0px" :len='xhrData.length' :captionTitle='captionTitle' :item='getRecord'>
+      <basic-table style="margin-top:0px" :loading='loading' :SpinnerSize='150' :len='xhrData.length' :captionTitle='captionTitle' :item='getRecord'>
       </basic-table>
     </div>
     <paginate
@@ -29,7 +29,8 @@ export default {
       captionTitle: 'form.trade.record_of_transaction',
       xhrData: [],
       pagination: 0,
-      disabled: false
+      disabled: false,
+      loading: true
     }
   },
   created () {
@@ -48,6 +49,7 @@ export default {
           page: num
         }
       }, (d) => {
+        this.loading = false
         this.disabled = false
         this.xhrData = d.data.trades
         this.pagination = d.data.total_pages
