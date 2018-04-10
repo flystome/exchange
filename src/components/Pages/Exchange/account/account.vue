@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in accounts">
+          <tr v-for="item in accounts" :key='"coin"+item.currency'>
             <td>{{item.currency}}</td>
             <td>{{item.balance}}</td>
             <td>{{item.locked}}</td>
