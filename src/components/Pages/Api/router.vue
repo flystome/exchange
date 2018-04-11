@@ -1,11 +1,10 @@
 <template>
-  <div>
-    123
-  </div>
+  <router-view>
+  </router-view>
 </template>
 
 <script>
 export default {
-  name: 'ApiIndex'
+  name: 'Api'
 }
 </script>

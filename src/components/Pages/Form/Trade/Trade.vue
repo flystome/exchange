@@ -42,7 +42,9 @@ export default {
       this.GetList(num)
     },
     GetList (num) {
+      this.xhrData = []
       this.disabled = true
+      this.loading = true
       this._get({
         url: `/history/all_trades.json`,
         data: {

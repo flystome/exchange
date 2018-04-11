@@ -169,7 +169,7 @@ const en = {
       "transferred": "Accepted",
       "google": "Google ",
       "sms": "SMS ",
-      "poundage": "Poundage",
+      "poundage": "Fee",
       "withdraw_confirm_completed": "Withdraw confirm is completed"
     },
     "deposit_currency": {
@@ -202,7 +202,8 @@ const en = {
       "404": "404 Not Found",
       "form_order": "Order Record",
       "form_trade": "Record Of Transaction",
-      "form_news": "My News"
+      "form_news": "My News",
+      "form_account": "Transfer History"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
@@ -473,7 +474,7 @@ const en = {
         "transaction_price": "Transaction Price",
         "quoted_currency": "Quoted Currency",
         "money": "Money",
-        "poundage": "Poundage",
+        "poundage": "Fee",
       },
       "news": {
         "select_none": "Select None",
@@ -481,6 +482,36 @@ const en = {
         "clear": "Clear",
         "confirm": "Are you sure you want to delete this record?"
       }
+    },
+    "api": {
+      "api_key": "API key",
+      "Create_New_Key": "Create New Key",
+      "my_api_key": "My API Key",
+      "key_describe": "We provide a fully functional, high-performance automated trading API. Through API, you can get the current market market, establish a purchase order, query your own Commission and transaction records, inquire account.",
+      "mechanism": "Mechanism",
+      "edit": "Edit",
+      "delete": "Delete",
+      "application_binding": "Application Binding",
+      "bind_third_app": "Bound third party applications",
+      "manage_all_app": "Manage all third party applications that you have bound",
+      "application_name": "Application Name",
+      "automatic_expiration_time": "Authorized Automatic Expiration Time",
+      "entrustment_scope": "Entrustment Scope",
+      "label": "Label",
+      "label_describe": "Use labels can help memory key, non mandatory",
+      "google_verification_code": "Google Verification Code",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "secretkey_describe": "Please copy and paste the following Secret Key copy into a safe place. After the page is closed, Secret Key is no longer displayed",
+      "copy": "Copy",
+      "return": "Return",
+      "create_new_key": "Create New key",
+      "ip_white_list": "IP White List",
+      "ip_input": "The IP address is separated by a comma and does not mean that any IP can use the key"
+    },
+    "ticket": {
+      "open_tickets": "Open Tickets",
+      "closed_tickets": "Closed Tickets"
     },
     "validation": {
       "verify_code": 'verify code'

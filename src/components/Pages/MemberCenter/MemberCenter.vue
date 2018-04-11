@@ -8,9 +8,6 @@
             <a :href="`${HOST_URL}/identity/edit`">
               {{$t("my_account.change_password")}}
             </a>
-            <!-- <div class="btc-member-assetCount">
-              {{$t('my_account.total_assets')}} : 0 BTC
-            </div> -->
           </div>
         </div>
         <div class="btc-member-bt">

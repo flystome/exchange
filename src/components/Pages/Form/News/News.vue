@@ -28,7 +28,7 @@
           <section class="btc-fl">
             <header>
               <strong>{{d.subject}}</strong>
-              <span>{{ $moment(d.created_at).format('L H:mm:ss') }}</span>
+              <span class="btc-news-time">{{ $moment(d.created_at).format('L H:mm:ss') }}</span>
             </header>
             <article>
               {{ d.message }}

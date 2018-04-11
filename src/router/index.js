@@ -2,11 +2,13 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store'
 const MemberCenter = () => import('Pages/MemberCenter/MemberCenter')
+// validate
 const ValidateEmail = () => import('Pages/Validate/Email/Email')
 const ValidateGoogle = () => import('Pages/Validate/Google/Google')
 const ValidateIdentity = () => import('Pages/Validate/Identity/Identity')
 const WithdrawCurrency = () => import('Pages/WithdrawCurrency/WithdrawCurrency')
 const ValidateSms = () => import('Pages/Validate/Sms/Sms')
+
 const Markets = () => import('Pages/market/mList/mlist')
 const MarketDetail = () => import('Pages/market/mList/marketDetail/market')
 const Trades = () => import('Pages/market/mList/trades/trades')
@@ -30,6 +32,13 @@ const Form = () => import('Pages/Form')
 const FormOrder = () => import('Pages/Form/Order/Order.vue')
 const FormNews = () => import('Pages/Form/News/News.vue')
 const FormTrade = () => import('Pages/Form/Trade/Trade.vue')
+const FormAccount = () => import('Pages/Form/Account/Account.vue')
+
+// Api
+const Api = () => import('Pages/Api/router')
+const ApiIndex = () => import('Pages/Api')
+const ApiEdit = () => import('Pages/Api/ApiEdit/ApiEdit')
+const ApiNew = () => import('Pages/Api/ApiNew/ApiNew')
 
 Vue.use(Router)
 
@@ -163,6 +172,32 @@ const router = new Router({
           path: 'news',
           name: 'FormNews',
           component: FormNews
+        },
+        {
+          path: 'account',
+          name: 'FormAccount',
+          component: FormAccount
+        }
+      ]
+    },
+    {
+      path: `${version}/api`,
+      component: Api,
+      children: [
+        {
+          path: '',
+          name: 'ApiIndex',
+          component: ApiIndex
+        },
+        {
+          path: 'new',
+          name: 'ApiNew',
+          component: ApiNew
+        },
+        {
+          path: 'edit',
+          name: 'ApiEdit',
+          component: ApiEdit
         }
       ]
     },

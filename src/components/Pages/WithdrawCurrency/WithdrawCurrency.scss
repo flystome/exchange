@@ -104,7 +104,7 @@
     }
   }
   .btc-withdraw-loading{
-    margin-left: 25px!important;
+    margin-left: 0!important;
   }
 }
 
@@ -199,6 +199,7 @@
             flex-direction: row;
             flex-wrap: wrap;
             a {
+                width: 108px;
                 border-radius: 0;
                 padding: 0 30.4px;
                 text-align: center;
@@ -216,6 +217,14 @@
                 display: inline-block;
                 text-indent: 2px;
             }
+            // .btc-indent{
+            //   text-indent: 0;
+            //   width: 106.94px;
+            //   span{
+            //     width: initial;
+            //     text-indent: 0
+            //   }
+            // }
         }
     }
     .btc-tableTextleft span{

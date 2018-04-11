@@ -202,6 +202,7 @@ const zh = {
     "form_order": "下單記錄",
     "form_trade": "成交記錄",
     "form_news": "我的消息",
+    "form_account": "充值提現記錄"
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",
@@ -481,8 +482,38 @@ const zh = {
       "confirm": "您確定要刪除此記錄嗎?",
     }
   },
+  "api": {
+    "api_key": "API 密鑰",
+    "Create_New_Key": "創建新密鑰",
+    "my_api_key": "我的 API 密鑰",
+    "key_describe": "我們提供功能完備，高性能的自動化交易API，通過API您能夠得到當前市場行情，建立買單賣單，查詢自己的委託和成交記錄，查詢賬戶",
+    "mechanism": "機構",
+    "edit": "編輯",
+    "delete": "刪除",
+    "application_binding": "應用綁定",
+    "bind_third_app": "已綁定的第三方應用",
+    "manage_all_app": "管理所有您綁定過的第三方應用",
+    "application_name": "應用名稱",
+    "automatic_expiration_time": "授權自動過期時間",
+    "entrustment_scope": "授權範圍",
+    "label": "標籤",
+    "label_describe": "標籤可以幫助記憶密匙的用途，非必填項",
+    "google_verification_code": "谷歌驗證碼",
+    "confirm": "確認",
+    "cancel": "取消",
+    "secretkey_describe": "请将以下的Secret Key复制粘贴到安全的地方保存。该页面关闭之后Secret Key不再显示",
+    "copy": "複製",
+    "return": "返回",
+    "create_new_key": "創建新密鑰",
+    "ip_white_list": "IP 白名單",
+    "ip_input": "IP 地址以逗號分隔，不填表示任何 IP 都可使用該密匙"
+  },
+  "ticket": {
+    "open_tickets": "Open Tickets",
+    "closed_tickets": "Closed Tickets"
+  },
     "validation": {
-    "verify_code": '驗證碼'
+      "verify_code": '驗證碼'
   }
 }
 

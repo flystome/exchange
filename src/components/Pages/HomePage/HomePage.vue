@@ -131,7 +131,9 @@
       </div>
       <div class="btc-homepage-info btc-marginT25 text-center">
         <a class="col-xs-2 col-xs-offset-1">
-          <img src="~Img/homepage-us.png" >
+          <a href="mailto:support@hotex.com">
+            <img src="~Img/homepage-us.png" >
+          </a>
           <span class="btc-marginT15">
             <a href="mailto:support@hotex.com">
               {{ $t('homepage.contact_us') }}
@@ -139,15 +141,19 @@
           </span>
         </a>
         <a class="col-xs-2">
-          <img src="~Img/homepage-api.png" >
+          <a :href="`${HOST_URL}/documents/api_v2`">
+            <img src="~Img/homepage-api.png" >
+          </a>
           <span class="btc-marginT15">
-            <a :href="`${HOST_URL}/api_tokens`">
+            <a :href="`${HOST_URL}/documents/api_v2`">
               {{$t("my_account.api")}}
             </a>
           </span>
         </a>
         <a class="col-xs-2">
-          <img src="~Img/homepage-rate.png" >
+          <a :href="`${CmsUrl.rate_details}`">
+            <img src="~Img/homepage-rate.png" >
+          </a>
           <span class="btc-marginT15">
             <a :href="`${CmsUrl.rate_details}`">
               {{ $t('homepage.exchange_rate_details') }}
@@ -155,7 +161,9 @@
           </span>
         </a>
         <a class="col-xs-2">
-          <img src="~Img/homepage-apply.png" width="56" height="56">
+          <a :href="CmsUrl.application">
+            <img src="~Img/homepage-apply.png" width="56" height="56">
+          </a>
           <span class="btc-marginT15">
             <a :href="CmsUrl.application">
               {{ $t('homepage.apply_to_list') }}
@@ -163,7 +171,9 @@
           </span>
         </a>
         <a class="col-xs-2">
-          <img src="~Img/homepage-clause.png" >
+          <a :href="CmsUrl.privacy_policy">
+            <img src="~Img/homepage-clause.png" >
+          </a>
           <span class="btc-marginT15">
             <a :href="CmsUrl.privacy_policy">
               {{ $t('homepage.privacy_clause') }}

@@ -31,7 +31,7 @@
       <div class="btc-withdraw-coin">
         <a v-for="(coin,index) in this.currencies"
         :disabled='disabled'
-        :class="{'is-chioce':index === length, 'is-enabled': !coin.node_enabled}"
+        :class="{'is-chioce':index === length, 'is-enabled': !coin.node_enabled, 'btc-indent': !(requireImg(`market-${coin.code}`))}"
         @click='ChoiceCoin(index, coin.node_enabled)'
         class="btc-b btn"
         :key="coin.code">
@@ -399,6 +399,7 @@ export default {
     },
     ChoiceCoin (index, type) {
       if (!type) return
+      if (this.disabled) return
       this.length = index
       this.GetCoin(this.currencies[index].code)
       this.CurrencyType = this.currencies[index].code

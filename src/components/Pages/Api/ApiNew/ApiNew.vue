@@ -1,11 +1,11 @@
 <template>
   <div>
-    123
+    ApiNew
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ApiIndex'
+  name: 'ApiNew'
 }
 </script>
