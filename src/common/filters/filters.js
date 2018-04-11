@@ -1,10 +1,3 @@
-// Vue.filter('upper', function (value) {
-//   if (!value || value === '/' || value === 'undefined/undefined') return '--'
-//   return value.toUpperCase()
-// })
-// filters () {
-
-// }
 let fixed2 = (params) => {
   if (!params) return 0
   return (+params).toFixed(2)
@@ -47,5 +40,3 @@ export {
   time,
   dayTime
 }
-
-// export filters

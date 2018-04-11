@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import tradeBus from '@/common/js/bus/tradeBus'
 export default {
   name: 'order',
   props: ['market', 'type'],
@@ -58,6 +59,14 @@ export default {
       volume: '',
       total: ''
     }
+  },
+  created () {
+    tradeBus.$on('addOrder', function(type, price, val) {
+      console.log(type, price, val)
+    })
+  },
+  methods: {
+
   }
 }
 </script>

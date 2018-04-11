@@ -11,7 +11,7 @@
       </div>
       <div class="sell lists">
         <ul class="listbox">
-          <li v-for="item in sellList">
+          <li v-for="item in sellList" :key='"sell"+item[0]' @click='addOrder("sell", item[0], item[1])'>
             <div class="pirce">{{item[0] | fixedNum(market.price_fixed)}}</div>
             <div class="volume">{{item[1] | fixedNum(market.volume_fixed)}}</div>
             <div class="total">{{item[0] * item[1] | fixedNum(market.price_fixed, market.volume_fixed)}}</div>
@@ -23,7 +23,7 @@
       </div>
       <div class="buy lists">
         <ul class="listbox">
-          <li v-for="item in buyList">
+          <li v-for="item in buyList" :key='"buy"+item[0]' @click='addOrder("sell", item[0], item[1])'>
             <div class="pirce">{{item[0] | fixedNum(market.price_fixed)}}</div>
             <div class="volume">{{item[1] | fixedNum(market.volume_fixed)}}</div>
             <div class="total">{{item[0] * item[1] | fixedNum(market.price_fixed, market.volume_fixed)}}</div>
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import tradeBus from '@/common/js/bus/tradeBus'
 export default {
   name: 'trades',
   props: ['depthData', 'market'],
@@ -43,7 +44,7 @@ export default {
       items: [],
       sellList: [],
       buyList: [],
-      version: 0,
+      version: 0
     }
   },
   watch: {
@@ -54,6 +55,9 @@ export default {
         version: this.version
       } = val)
       this.sellList.reverse()
+    },
+    addOrder (type, price, vol) {
+      tradeBus.$emit('addOrder', type, price, val)
     }
   }
 }

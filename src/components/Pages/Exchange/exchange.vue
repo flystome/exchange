@@ -38,10 +38,10 @@
     <section class="list">
       <div class="list_lt w240">
         <div class="list_box trades">
-          <trades :depthData='depth_data' :market='market'></trades>
+          <trades :depthData='depth_data' :market='market' :tradeBus='tradeBus'></trades>
         </div>
         <div class="order buy">
-          <order :market='market' :type='"buy"'></order>
+          <order :market='market' :type='"buy"' :tradeBus='tradeBus'></order>
         </div>
       </div>
       <div class="list_rt w240">
@@ -49,7 +49,7 @@
           <allOrder :tradesData="tradesData"></allOrder>
         </div>
         <div class="order sell">
-          <order :market='market' :type='"sell"'></order>
+          <order :market='market' :type='"sell"' :tradeBus='tradeBus'></order>
         </div>
       </div>
     </section>
@@ -84,7 +84,7 @@ export default {
       accounts: {},
       total_assets: {},
       my_orders: [],
-      depth_data: []
+      depth_data: [],
     }
   },
   components: {
