@@ -45,7 +45,7 @@
                 <span class="base">{{market.base_currency | upper}}</span>
               </div>
               <div class="price inputs">
-                <input type="number" step="0.00000001" v-model="amount_buy" :placeholder="$t('markets.volume')">
+                <input type="number" step="0.00000001" v-model="amount_buy" :placeholder="$t('exchange.volume')">
                 <span class="quote">{{market.quote_currency | upper}}</span>
               </div>
               <div class="total private">
@@ -81,7 +81,7 @@
                 <span class="base">{{market.base_currency | upper}}</span>
               </div>
               <div class="price inputs">
-                <input type="number" step="0.00000001" v-model="amount_sell" :placeholder="$t('markets.volume')">
+                <input type="number" step="0.00000001" v-model="amount_sell" :placeholder="$t('exchange.volume')">
                 <span class="quote">{{market.quote_currency | upper}}</span>
               </div>
               <div class="total private">

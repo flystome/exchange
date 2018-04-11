@@ -308,6 +308,7 @@ const en = {
       'freeze': 'Freezon',
       'allAccount': 'View All',
       'tradeTitle': 'Order Book',
+      'volume': 'Volume',
       'myorder': {
         'pending': 'Pending Orders',
         'history': 'History Orders',

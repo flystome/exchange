@@ -11,7 +11,7 @@
       </div>
       <div class="sell lists">
         <ul class="listbox">
-          <li v-for="item in sellList" :key='"sell"+item[0]' @click='addOrder("sell", item[0], item[1])'>
+          <li v-for="(item, index) in sellList" :key='"sell"+item[0]' @click='addOrder("sell", item[0], index)'>
             <div class="pirce">{{item[0] | fixedNum(market.price_fixed)}}</div>
             <div class="volume">{{item[1] | fixedNum(market.volume_fixed)}}</div>
             <div class="total">{{item[0] * item[1] | fixedNum(market.price_fixed, market.volume_fixed)}}</div>
@@ -23,7 +23,7 @@
       </div>
       <div class="buy lists">
         <ul class="listbox">
-          <li v-for="item in buyList" :key='"buy"+item[0]' @click='addOrder("sell", item[0], item[1])'>
+          <li v-for="(item,index) in buyList" :key='"buy"+item[0]' @click='addOrder("buy", item[0], index)'>
             <div class="pirce">{{item[0] | fixedNum(market.price_fixed)}}</div>
             <div class="volume">{{item[1] | fixedNum(market.volume_fixed)}}</div>
             <div class="total">{{item[0] * item[1] | fixedNum(market.price_fixed, market.volume_fixed)}}</div>
@@ -35,7 +35,8 @@
 </template>
 
 <script>
-import tradeBus from '@/common/js/bus/tradeBus'
+import { bus } from '@/common/js/bus/index'
+
 export default {
   name: 'trades',
   props: ['depthData', 'market'],
@@ -55,9 +56,24 @@ export default {
         version: this.version
       } = val)
       this.sellList.reverse()
-    },
-    addOrder (type, price, vol) {
-      tradeBus.$emit('addOrder', type, price, val)
+    }
+  },
+  methods: {
+    addOrder (type, price, index) {
+      var result = 0
+      var expand = Math.pow(10, this.market.volume_fixed)
+      if (type === 'sell') {
+        var len = this.sellList.length
+        for (let i = len - 1; i >= index; i--) {
+          result += +this.sellList[i][1]
+        }
+      } else {
+        for (let i = 0; i <= index; i++) {
+          result += +this.buyList[i][1]
+        }
+      }
+      result = Math.floor(expand * result) / expand
+      bus.$emit('addOrder', type, price, result)
     }
   }
 }
