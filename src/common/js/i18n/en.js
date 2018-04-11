@@ -307,6 +307,7 @@ const en = {
       'total': 'Amount',
       'freeze': 'Freezon',
       'allAccount': 'View All',
+      'tradeTitle': '',
       'myorder': {
         'pending': 'Pending Orders',
         'history': 'History Orders',

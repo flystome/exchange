@@ -38,7 +38,7 @@
     <section class="list">
       <div class="list_lt w240">
         <div class="list_box trades">
-
+          <trades :depthData='depth_data' :market='market'></trades>
         </div>
         <div class="order buy">
           <order :market='market' :type='"buy"'></order>
@@ -83,7 +83,8 @@ export default {
       loginName: '',
       accounts: {},
       total_assets: {},
-      my_orders: []
+      my_orders: [],
+      depth_data: []
     }
   },
   components: {
@@ -135,7 +136,8 @@ export default {
         markets: this.markets,
         accounts: this.accounts,
         total_assets: this.total_assets,
-        my_orders: this.my_orders
+        my_orders: this.my_orders,
+        depth_data: this.depth_data
       } = res.data)
     }
   }

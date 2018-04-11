@@ -306,6 +306,7 @@ const zh = {
     'total': '總計',
     'freeze': '凍結',
     'allAccount': '查看全部賬戶',
+    'tradeTitle': '買賣盤',
     'myorder': {
       'pending': '當前委託',
       'history': '歷史委託',
