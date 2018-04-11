@@ -179,7 +179,7 @@ const en = {
       "font_descripe": "In the payment of your wallet, copy the above address, which is only for you, fill in the amount you want to deposit to the account in the amount field, and don't forget to pay a certain fee to ensure that the transaction will be confirmed by the whole network as soon as possible. You can also scan the QR code in the mobile wallet to pay. You can deposit with either the special address or the QR code.",
       "operation_done": "After the above operation is done, click \"Send Payment\", the transaction will be broadcast to the whole network, so you can see the status of the transaction. When the transaction reaches the 1 confirmation of the whole network (about 10 to 60 minutes), the amount will automatically credit to your account.",
       "deposit_record": "Deposit Record",
-      "deposit_date": "Deposit Date",
+      "deposit_date": "Date Time",
       "trading_hash": "Tx ID",
       "recharge_amount": "Deposit Amount",
       "confirmation_number": "Confirmation Number",
