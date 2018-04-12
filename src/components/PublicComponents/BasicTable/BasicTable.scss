@@ -21,6 +21,7 @@ td[class=btc-tablehover]{
 .btc-table{
   color: #666666;
   padding: 8px 15px;
+  overflow: auto;
 }
 
 .btc-table table{
@@ -55,6 +56,7 @@ td[class=btc-tablehover]{
 
 .btc-table-more{
   padding-top: 6px;
+  padding-bottom: 6px;
   margin-top: 6px;
   font-size: 12px;
 }

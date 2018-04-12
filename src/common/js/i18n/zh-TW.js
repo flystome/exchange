@@ -202,7 +202,10 @@ const zh = {
     "form_order": "下單記錄",
     "form_trade": "成交記錄",
     "form_news": "我的消息",
-    "form_account": "充值提現記錄"
+    "form_account": "充值提現記錄",
+    "api": "Api",
+    "api_new": "新建金鑰",
+    "api_edit": "編輯金鑰"
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",

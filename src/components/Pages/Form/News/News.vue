@@ -70,14 +70,16 @@ export default {
   created () {
     this.paging(1)
     bus.$on('Popbox-confirm', () => {
+      var list = [...this.clearList]
+      this.clearList = []
       this._post({
         url: '/conversations/clear.json',
         data: {
-          choices: this.clearList
+          choices: list
         }
       }, (d) => {
         if (d.data.success) {
-          if (this.clearList.length === this.xhrData.length && this.$refs['paginate'].selected !== 0) {
+          if (list.length === this.xhrData.length && this.$refs['paginate'].selected !== 0) {
             if (this.$refs['paginate'].selected + 1 === this.pagination) {
               this.paging(this.$refs['paginate'].selected)
               this.$refs['paginate'].selected = this.$refs['paginate'].selected - 1

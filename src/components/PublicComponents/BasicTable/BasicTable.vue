@@ -35,8 +35,8 @@
           </div>
         </div>
       </table>
-      <slot name='more'></slot>
     </div>
+    <slot name='more'></slot>
   </div>
 </template>
 
@@ -64,7 +64,7 @@ export default {
     len: {
       type: Number,
       default: () => {
-        return 6
+        return 5
       }
     }
   },

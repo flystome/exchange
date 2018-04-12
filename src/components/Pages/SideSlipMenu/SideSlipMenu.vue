@@ -46,7 +46,9 @@
                 <a :href="CmsUrl.helper_center">FAQ</a>
               </li>
               <li class='btc-marginL30 btc-marginB0'>
-                <a :href="`${HOST_URL}/conversations`">{{ $t('side_slip_menu.news') }}</a>
+                <a @click="goPath('/form/news')">
+                  {{ $t('side_slip_menu.news') }}
+                </a>
               </li>
             </ul>
           </li>

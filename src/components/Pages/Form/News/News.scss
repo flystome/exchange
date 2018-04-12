@@ -76,3 +76,17 @@
     margin-left: 12px;
   }
 }
+
+@media (max-width: 766px){
+  .btc-news-radio{
+    >div{
+      float: none;
+    }
+    .btc-fr{
+      span{
+        display: inline-block;
+        margin-top: 15px;
+      }
+    }
+  }
+}

@@ -203,7 +203,10 @@ const en = {
       "form_order": "Order Record",
       "form_trade": "Record Of Transaction",
       "form_news": "My News",
-      "form_account": "Transfer History"
+      "form_account": "Transfer History",
+      "api": "Api",
+      "api_new": "New Key",
+      "api_edit": "Edit Key"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",

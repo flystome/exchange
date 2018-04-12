@@ -175,9 +175,11 @@
           / <span :disabled='disabled' @click="cancelWithdraw(props.id, props.data)" class="btc-link btn">{{$t(`withdraw_currency.cancel`)}}</span>
         </a>
       </template>
-      <!-- <div slot="more" class="text-center btc-b-t btc-table-more">
-        <a class="btc-link ">{{$t('my_account.show_more')}}</a>
-      </div> -->
+      <div slot="more" class="text-center btc-b-t btc-table-more">
+        <router-link class="btc-link" :to="`${ROUTER_VERSION}/form/account`">
+          {{$t('my_account.show_more')}}
+        </router-link>
+      </div>
     </basic-table>
     <basic-table :loading='deposit_loading' :captionTitle='depositRecord.captionTitle' :perfix='CurrencyType.toUpperCase()' :item='getDepositRecord' v-else>
       <template slot="href"
@@ -186,9 +188,11 @@
           {{ props.data.context }}
         </span>
       </template>
-      <!-- <div slot="more" class="text-center btc-b-t btc-table-more">
-        <a class="btc-link ">{{$t('my_account.show_more')}}</a>
-      </div> -->
+      <div slot="more" class="text-center btc-b-t btc-table-more">
+        <router-link class="btc-link" :to="`${ROUTER_VERSION}/form/account`">
+          {{$t('my_account.show_more')}}
+        </router-link>
+      </div>
     </basic-table>
   </div>
 </template>

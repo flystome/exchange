@@ -48,10 +48,10 @@
           </ul>
           <ul class="nav navbar-nav navbar-right" v-else>
             <li class="btc-marginL15">
-              <a :href="`${HOST_URL}/conversations`" class="btc-header-letter">
+              <router-link :to="`${ROUTER_VERSION}/form/news`" class="btc-header-letter">
                 <img src="~Img/letterlog.png">
                 <span class="message">{{ $t("nav.message") }}</span>
-              </a>
+              </router-link>
             </li>
             <li class="btc-img-position dropdown btc-ifo" style="cursor: pointer">
               <!-- <img src="~Img/avatarlog.png" class="btc-header-avatar">
