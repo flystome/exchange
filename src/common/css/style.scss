@@ -181,11 +181,11 @@ ul,li {
   .btc-container {
     padding: 6px;
   }
-  .btc-background-white{
-    .container{
-      width: 750px
-    }
-  }
+  // .btc-background-white{
+  //   .container{
+  //     width: 750px
+  //   }
+  // }
   .btc-global-loading{
     min-height: calc(100vh - 52px);
     >div{
@@ -196,9 +196,9 @@ ul,li {
 
 .btc-background-white{
   min-width: 750px;
-  .btc-container{
-    padding: 0
-  }
+  // .btc-container{
+  //   padding: 0
+  // }
   // >div{
   //   min-width: 1080px!important
   // }

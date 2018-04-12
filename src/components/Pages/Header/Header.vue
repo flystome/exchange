@@ -49,7 +49,9 @@
           <ul class="nav navbar-nav navbar-right" v-else>
             <li class="btc-marginL15">
               <router-link :to="`${ROUTER_VERSION}/form/news`" class="btc-header-letter">
-                <img src="~Img/letterlog.png">
+                <span :class="{'nav-unread': loginData.has_unread_conversations}">
+                  <img src="~Img/letterlog.png">
+                </span>
                 <span class="message">{{ $t("nav.message") }}</span>
               </router-link>
             </li>

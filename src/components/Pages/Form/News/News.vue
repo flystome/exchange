@@ -64,10 +64,11 @@
 
 <script>
 import { bus } from '@/common/js/bus'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 export default {
   name: 'FormNews',
   created () {
+    this.loginData !== 'none' && (this.loginData.has_unread_conversations = false)
     this.paging(1)
     bus.$on('Popbox-confirm', () => {
       var list = [...this.clearList]
@@ -174,6 +175,14 @@ export default {
       })
     },
     ...mapMutations(['PopupBoxDisplay', 'ChangePopupBox'])
+  },
+  computed: {
+    ...mapState(['loginData'])
+  },
+  watch: {
+    loginData () {
+      this.loginData.has_unread_conversations = false
+    }
   }
 }
 </script>

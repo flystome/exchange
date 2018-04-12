@@ -81,7 +81,7 @@ export default {
           content: [
             data.transaction_type,
             this.$moment(data.created_at).format('L H:mm:ss'),
-            data.code_tex,
+            data.code_text,
             Number(data.amount).toFixed(Math.min(String(data.amount).split('.')[1].length, 8)),
             Number(data.fee).toFixed(Math.min(String(data.fee).split('.')[1].length, 8)),
             data.txid === null ? 'N/A' : data.txid,

@@ -490,7 +490,7 @@ const en = {
     },
     "api": {
       "api_key": "API key",
-      "Create_New_Key": "Create New Key",
+      "create_New_Key": "Create New Key",
       "my_api_key": "My API Key",
       "key_describe": "We provide a fully functional, high-performance automated trading API. Through API, you can get the current market market, establish a purchase order, query your own Commission and transaction records, inquire account.",
       "mechanism": "Mechanism",
