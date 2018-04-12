@@ -2,14 +2,12 @@
   <section id="myOrder">
     <div class="head">
       <ul class="tab_filter tab_order_filter" v-show='isOrder'>
-        <!-- <li v-for='item in item1' :key='$t(item)'>{{$t(item)}}</li> -->
         <li @click='getBuy'>{{$t('exchange.myorder.buy')}}</li>
         <li @click='getSell'>{{$t('exchange.myorder.sell')}}</li>
         <li @click='getAll'>{{$t('exchange.myorder.all')}}</li>
         <li @click='cancelAll'>{{$t('exchange.myorder.cancel_all')}}</li>
       </ul>
       <ul class="tab_filter tab_history_filter" v-show='!isOrder'>
-        <!-- <li v-for='item in item2' :key='$t(item)'>{{$t(item)}}</li> -->
         <li>{{$t('exchange.myorder.last3')}}</li>
         <li>{{$t('exchange.myorder.last7')}}</li>
         <li>{{$t('exchange.myorder.more')}}</li>

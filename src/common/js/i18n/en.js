@@ -312,6 +312,8 @@ const en = {
       'allAccount': 'View All',
       'tradeTitle': 'Order Book',
       'volume': 'Volume',
+      'sell': 'Sell ',
+      'buy': 'Buy ',
       'myorder': {
         'pending': 'Pending Orders',
         'history': 'History Orders',

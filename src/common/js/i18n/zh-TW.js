@@ -311,6 +311,8 @@ const zh = {
     'allAccount': '查看全部賬戶',
     'tradeTitle': '買賣盤',
     'volume': '数量',
+    "buy": "買入",
+    "sell": "賣出",
     'myorder': {
       'pending': '當前委託',
       'history': '歷史委託',
