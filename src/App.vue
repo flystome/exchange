@@ -52,7 +52,6 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      console.log(to.name)
       if (to.name === 'Exchange') {
         this.exChange = true
       } else if (this.noPaddingList.indexOf(to.name) !== -1) {

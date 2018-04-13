@@ -25,7 +25,7 @@
         <div class="percent">{{item.close_rate}}</div>
         <div class="traded">{{item.origin_volume - item.volume}}</div>
         <div class="status">{{$t('exchange.myorder.'+item.state)}}</div>
-        <div class="cancel" v-show='cancel && id === item.id' @click="cancelOrder">{{$t('exchange.myorder.cancel_one')}}</div>
+        <div class="cancel" v-show='cancel && id === item.id' @click="cancelOrder(item.id)">{{$t('exchange.myorder.cancel_one')}}</div>
       </li>
     </ul>
   </div>
@@ -52,8 +52,8 @@ export default {
     }
   },
   methods: {
-    cancelOrder () {
-
+    cancelOrder (id) {
+      this.$emit('cancel', id)
     },
     addBg (id) {
       if (this.notPending) {

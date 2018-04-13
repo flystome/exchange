@@ -1,5 +1,18 @@
 <template>
   <section id="myOrder">
+    <div class="dialog" v-show='showDialog'>
+      <div class="mask"></div>
+      <div class="dia_content">
+        <div class="text">
+          <p class="cancel_one" v-if="cancelNum === 'one'">{{$t('orders.dialog.cancel')}}</p>
+          <p class="cancel_all" v-if="cancelNum === 'all'">{{$t('orders.dialog.cancel_all')}}</p>
+        </div>
+        <div class="confirm_box">
+          <span class="confirm" @click="confirmOrder(true)">{{$t('markets.confirm')}}</span>
+          <span class="cancel" @click="confirmOrder(false)">{{$t('markets.cancel')}}</span>
+        </div>
+      </div>
+    </div>
     <div class="head">
       <ul class="tab_filter tab_order_filter" v-show='isOrder'>
         <li @click='getBuy'>{{$t('exchange.myorder.buy')}}</li>
@@ -8,8 +21,8 @@
         <li @click='cancelAll'>{{$t('exchange.myorder.cancel_all')}}</li>
       </ul>
       <ul class="tab_filter tab_history_filter" v-show='!isOrder'>
-        <li>{{$t('exchange.myorder.last3')}}</li>
-        <li>{{$t('exchange.myorder.last7')}}</li>
+        <li @click='get3Day'>{{$t('exchange.myorder.last3')}}</li>
+        <li @click='get7Day'>{{$t('exchange.myorder.last7')}}</li>
         <li>{{$t('exchange.myorder.more')}}</li>
       </ul>
       <ul class="tab_hd">
@@ -17,8 +30,8 @@
       </ul>
     </div>
     <div class="tab_bd">
-      <div class="noneData" v-show="curOrders.length === 0">{{$t('exchange.myorder.noData')}}</div>
-      <orderList :myOrders='curOrders' :notPending='notPending' v-show="curOrders.length !== 0"></orderList>
+      <div class="noneData" v-show="curOrders && curOrders.length === 0">{{$t('exchange.myorder.noData')}}</div>
+      <orderList :myOrders='curOrders' :notPending='notPending' v-show="curOrders.length !== 0" @cancel="cancelOne"></orderList>
     </div>
   </section>
 </template>
@@ -28,7 +41,7 @@ import orderList from './orderList/orderList'
 
 export default {
   name: 'myOrder',
-  props: ['myOrders'],
+  props: ['myOrders', 'market'],
   components: {
     orderList
   },
@@ -40,48 +53,42 @@ export default {
       isOrder: true,
       currencyIndex: 0,
       curOrders: [],
-      hisOrders: [],
-      filling: [],
-      notPending: false
+      hisOrders: false,
+      filling: false,
+      notPending: false,
+      showDialog: false,
+      cancelNum: 'one',
+      id: 0
     }
   },
   watch: {
     myOrders (val) {
-      this.curOrders = val
+      this.curOrders = val[this.currencyIndex]
     }
   },
   methods: {
     changeTab (index) {
-      var self = this
       this.currencyIndex = index
+      this.curOrders = this.myOrders[index]
       if (index === 0) {
         this.isOrder = true
-        this.curOrders = this.myOrders
         this.notPending = false
       } else if (index === 1) {
         this.isOrder = false
         this.notPending = true
-        this._get({
-          url: '/history/all_orders.json'
-        }, function (res) {
-          if (res.status === 200) {
-            console.log(res.data)
-            self.hisOrders = res.data.orders
-            self.curOrders = self.hisOrders
-          }
-        })
+        if (this.hisOrders) {
+          return
+        }
+        this.hisOrders = true
+        this.$emit('getMyOrder', 1)
       } else if (index === 2) {
         this.isOrder = false
         this.notPending = true
-        this._get({
-          url: '/history/all_trades.json'
-        }, function (res) {
-          if (res.status === 200) {
-            console.log(res.data)
-            self.filling = res.data.trades
-            self.curOrders = self.filling
-          }
-        })
+        if (this.filling) {
+          return
+        }
+        this.filling = true
+        this.$emit('getMyOrder', 2)
       }
     },
     getBuy () {
@@ -97,14 +104,40 @@ export default {
     getAll () {
       this.curOrders = this.myOrders
     },
+    confirmOrder: function (bool) {
+      this.showDialog = false
+      if (bool) {
+        if (this.cancelNum === 'one') {
+          this._delete({
+            url: '/markets/' + this.market.code + '/orders/' + this.id
+          })
+        } else if (this.cancelNum === 'all') {
+          this._delete({
+            url: '/markets/' + this.market.code + '/orders/' + 0,
+            data: {
+              cancel_all: 'TRUE'
+            }
+          })
+        }
+      }
+    },
     cancelAll () {
-
+      if (this.myOrders[0] === this.myOrders[0].length === 0) {
+        return ''
+      }
+      this.cancelNum = 'all'
+      this.showDialog = true
+    },
+    cancelOne: function (id) {
+      this.cancelNum = 'one'
+      this.showDialog = true
+      this.id = id
     },
     get3Day () {
-
+      this.$emit('getMyOrder', this.currencyIndex, 3)
     },
     get7Day () {
-
+      this.$emit('getMyOrder', this.currencyIndex, 7)
     }
   }
 }

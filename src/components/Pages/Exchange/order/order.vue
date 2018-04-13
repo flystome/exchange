@@ -144,10 +144,7 @@ export default {
           }
         }
         this[type + 'Volume'] = this.fixNum(value, this.market.volume_fixed)
-        // this.$refs[type + 'Volume'].value = this.fixNum(value, this.market.volume_fixed)
         this[type + 'Total'] = this.fixNum(+this[type + 'Volume'] * +this[type + 'Price'], this.market.volume_fixed, this.market.price_fixed)
-        // this.$refs[type + 'Total'].value = this[type + 'Total']
-        console.log(this[type + 'Volume'], this[type + 'Total'])
       } else {
         this[type + 'Volume'] = this.fixNum(value, this.market.volume_fixed)
       }
