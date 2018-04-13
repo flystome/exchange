@@ -21,6 +21,7 @@
     :class="{'input': true, 'is-danger':
     errors.has(`${validate}`) }"
     :value='value'
+    :readonly='readonly'
     :type="type ? type : 'text'"
     :name="`${validate}`"
     class="btc-basicInput btc-b"
@@ -32,7 +33,7 @@
 
 <script>
 export default {
-  props: ['placeholder', 'validate', 'value', 'type', 'hidden'],
+  props: ['placeholder', 'validate', 'value', 'type', 'hidden', 'readonly'],
   name: 'BasicInput',
   filters: {
     toUpperCase (str) {

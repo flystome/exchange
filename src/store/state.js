@@ -20,7 +20,13 @@ const state = {
   SideSlipMenu: false,
   marketData: '',
   CmsUrl: '',
-  Pc: false
+  Pc: false,
+  api: {
+    apiData: [],
+    editId: '',
+    editKey: '',
+    editIndex: ''
+  }
 }
 
 export default state

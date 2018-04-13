@@ -47,7 +47,7 @@
             name: "withdraw_currency_address",
             value: this.$t("withdraw_currency.withdraw_currency_address")
           }]' v-model="this.withdrawAddress"></basic-option> -->
-          <div @click.stop="ChoiceStatus(!choice)" class="btc-withdraw-address btc-b-l" :style="{background:`url('${requireImg('select')}') 100% 100%`}">
+          <div @click.stop="ChoiceStatus(!choice)" class="btc-withdraw-address btc-b-l" :style="{background:`url('${requireImg('large/select')}') 100% 100%`}">
             {{ Address !== 'withdraw_currency.withdraw_currency_address' ? Address : $t('withdraw_currency.withdraw_currency_address') }}
           </div>
           <div v-show="choice" @click.stop="ChoiceStatus(true)" class='btc-b btc-address-contain'>
@@ -153,6 +153,11 @@
         </template>
         <div v-else class='text-center'>
           {{ $t("deposit_currency.temporarily_unable_deposit") }}
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="col-md-8 btc-deposit-confirNum">
+          {{$t('deposit_currency.confirm_num_descirbe')}}<span style="color: #ff7f18;">{{ ConfirmNum }}</span>{{$t('deposit_currency.about_time')}}<router-link class='btc-link' :to="`${ROUTER_VERSION}/form/account`">{{$t('deposit_currency.form_account')}}</router-link>{{ $t('deposit_currency.in_query') }}
         </div>
         <ul class="btc-marginT80">
             <strong class="btc-withdraw-remind">{{ $t('withdraw_currency.reminder') }}</strong>
@@ -344,6 +349,7 @@ export default {
       newaa: [],
       deposit_loading: true,
       withdraw_loading: true,
+      confirm_num: '',
       WithdrawData: {
         Address_id: '',
         otp: '',
@@ -464,6 +470,7 @@ export default {
             this.Generating()
           }
         }
+        this.confirm_num = d.deposit_max_confirmation
         this.withdraw_fee = d.withdraw_fee
         this.equivalence = d.today_withdraw_remain_btc === d.today_withdraw_remain ? '' : d.today_withdraw_remain_btc
         this.WithdrAwable = d.withdrawable
@@ -696,6 +703,9 @@ export default {
     },
     ReplaceCurrency () {
       return this.$t('deposit_currency.warn1').replace(/COIN/g, this.CurrencyType.toUpperCase())
+    },
+    ConfirmNum () {
+      return this.$t('deposit_currency.confirm_num').replace(/NUM/g, this.confirm_num)
     },
     getWithdrawRecord () {
       return [{content: [

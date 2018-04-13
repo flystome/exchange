@@ -56,3 +56,14 @@ export const _delete = async ({url, data}, callback) => {
     callback(ajax)
   }
 }
+
+export const _put = async ({url, data}, callback) => {
+  const ajax = await axios({
+    method: 'put',
+    url: requestUrl + url,
+    data: data
+  })
+  if (callback) {
+    callback(ajax)
+  }
+}

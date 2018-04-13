@@ -55,7 +55,7 @@ export default {
       this._get({
         url: `/history/account.json`,
         data: {
-          page: 1,
+          page: num,
           currency: currency
         }
       }, (d) => {

@@ -18,7 +18,7 @@
         <div class="btc-marginT15 btc-color999">
           {{ $t('api.key_describe') }}
         </div>
-        <div class="btc-api-index-key btc-marginT30" v-if="apiData.length !== 0">
+        <div class="btc-api-index-key btc-marginT30" v-if="api.apiData.length !== 0">
           <div class="btc-color666 btc-api-accesskey">
             <strong>
               {{ $t('api.mechanism') }}
@@ -27,20 +27,23 @@
               Access Key
             </strong>
           </div>
-          <div class="btc-marginT15 btc-api-accesskey" v-for="data in apiData" :key="data.g">
+          <div class="btc-marginT15 btc-api-accesskey" v-for="(data, index) in api.apiData" :key="data.id">
             <span>
-              {{ data.g }}
+              {{ data.label }}
             </span>
             <span>
-              {{ data.key }}
+              {{ data.access_key }}
             </span>
             <span class="btc-api-opreate">
-              <router-link class="btc-link" :to="`${ROUTER_VERSION}/api/edit`">{{ $t('api.edit') }}</router-link> <span class="btc-link">|</span> <a class="btc-link">{{ $t('api.delete') }}</a>
+             <span class="btc-link" @click="editApi(data.id, data.access_key, index)">{{ $t('api.edit') }}</span> <span class="btc-link">|</span> <a @click="marketIndex(data.id, index)" class="btc-link">{{ $t('api.delete') }}</a>
             </span>
           </div>
         </div>
-        <div v-else class="btc-api-norecord">
+        <div v-if='api.apiData.length === 0 && loading !== true' class="btc-api-norecord">
           {{ $t('my_account.no_record') }}
+        </div>
+        <div class="btc-marginT30" v-if="loading === true">
+          <vue-simple-spinner size="88"></vue-simple-spinner>
         </div>
       </div>
     </div>
@@ -95,34 +98,82 @@
 </template>
 
 <script>
+import { bus } from '@/common/js/bus'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'ApiIndex',
+  created () {
+    this._get({
+      url: '/api_tokens.json'
+    }, (d) => {
+      this.loading = false
+      this.api.apiData = d.data.success.api_tokens
+    })
+    bus.$on('Popbox-confirm', () => {
+      this.deleteApi(this.apiId, this.apiIndex)
+    })
+  },
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
-      apiData: [
-        {
-          g: 'HotEx',
-          key: '1Bv9EYCrCKjtusatU1LiwcAnKRHVSsGjpr1Bv9EYCrCKjtusatU1LiwcAnKRHVS'
-        },
-        {
-          g: 'Weiliang',
-          key: '0x0BC3dD2E1168774D50c74fCa0f0631C52F4Bd91A'
-        }
-      ],
+      apiId: '',
+      apiIndex: '',
+      loading: true,
       apiDataa: [
-        {
-          g: 'HotEx',
-          key: '9999-12-31',
-          c: 'dwdwwddwwdd'
-        },
-        {
-          g: 'Weiliang',
-          key: '0x0BC3dD2E1168774D50c74fCa0f0631C52F4Bd91A',
-          c: 'dwdwwddwwdd'
-        }
+        // {
+        //   g: 'HotEx',
+        //   key: '9999-12-31',
+        //   c: 'dwdwwddwwdd'
+        // },
+        // {
+        //   g: 'Weiliang',
+        //   key: '0x0BC3dD2E1168774D50c74fCa0f0631C52F4Bd91A',
+        //   c: 'dwdwwddwwdd'
+        // }
       ]
     }
+  },
+  methods: {
+    marketIndex (id, index) {
+      this.apiId = id
+      this.apiIndex = index
+      this.PopupBoxDisplay({type: 'warn'})
+      this.ChangePopupBox({
+        message: this.$t('form.news.confirm'),
+        confirm: true,
+        buttonText: this.$t('hint.no'),
+        buttondisplay: true
+      })
+    },
+    editApi (id, key, index) {
+      this.api.editId = id
+      this.api.editKey = key
+      this.api.editIndex = index
+      this.$router.push(`${this.ROUTER_VERSION}/api/edit`)
+    },
+    deleteApi (id, index) {
+      var data = this.api.apiData.slice()
+      this.api.apiData = []
+      this.loading = true
+      this.ChangePopupBox({
+        buttonText: ''
+      })
+      this._delete({
+        url: `/api_tokens/${id}.json`
+      }, (d) => {
+        this.api.apiData = data
+        this.loading = false
+        if (d.data.success) {
+          this.api.apiData.splice(index, 1)
+        } else {
+          this.PopupBoxDisplay({message: this.$t('hint.server_exception'), type: 'error'})
+        }
+      })
+    },
+    ...mapMutations(['PopupBoxDisplay', 'ChangePopupBox'])
+  },
+  computed: {
+    ...mapState(['api'])
   }
 }
 </script>

@@ -134,7 +134,7 @@ const webpackConfig = merge(baseWebpackConfig, {
           css: path.resolve(__dirname, '../src/common/css/sprite.scss')
       },
       apiOptions: {
-          cssImageRef: "../img/sprite.png"
+          cssImageRef: "~@/common/img/sprite.png"
       }
   })
   ]

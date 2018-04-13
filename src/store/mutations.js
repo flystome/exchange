@@ -118,7 +118,7 @@ const mutations = {
       url: obj.url ? obj.url : state.PopupBox.url,
       status: obj.hasOwnProperty('status') ? obj.status : state.PopupBox.status,
       message: obj.message ? obj.message : state.PopupBox.message,
-      buttonText: obj.buttonText ? obj.buttonText : state.PopupBox.buttonText,
+      buttonText: obj.buttonText !== undefined ? obj.buttonText : state.PopupBox.buttonText,
       confirm: obj.hasOwnProperty('confirm') ? obj.confirm : state.PopupBox.confirm,
       buttondisplay: Object.keys(obj).includes('buttondisplay') ? obj.buttondisplay : state.PopupBox.buttondisplay
     })

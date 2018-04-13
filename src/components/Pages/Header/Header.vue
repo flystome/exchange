@@ -12,7 +12,7 @@
             <img src="@/common/svg/logo.svg">
           </router-link>
           <div class="btc-header-sideslip" @click="SideSlipMenuDisplay(true)">
-            <img src="~Img/header-more.png">
+            <a></a>
           </div>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="z-index:100">
@@ -65,7 +65,11 @@
               <ul class="dropdown-menu">
                  <!-- <a><a :href="`${HOST_URL}/`">{{$t('nav.settings')}}</a></li> -->
                 <li><a @click="goPath('/my_account')">{{$t('nav.my_account')}}</a></li>
-                <li><a :href="`${HOST_URL}/api_tokens`">{{$t("my_account.api")}}</a></li>
+                <li><a @click="goPath('/api')">{{$t("my_account.api")}}</a></li>
+                <li class="divider" role="separator"></li>
+                <li><a @click="goPath('/form/order')">{{$t("title.form_order")}}</a></li>
+                <li><a @click="goPath('/form/trade')">{{$t("title.form_trade")}}</a></li>
+                <li><a @click="goPath('/form/account')">{{$t("title.form_account")}}</a></li>
                 <li class="divider" role="separator"></li>
                 <li><a :href="`${HOST_URL}/signout`">{{$t('nav.exit')}}</a></li>
               </ul>

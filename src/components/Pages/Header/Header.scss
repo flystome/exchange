@@ -181,7 +181,7 @@
   .btc-header-sideslip{
     float: right;
     display: none;
-    img {
+    a {
       width: 38px;
       margin-right: 14px;
       margin-top: 12px;
@@ -242,7 +242,7 @@
   }
 }
 
-@media(max-width: 992px){
+@media(max-width: 991px){
   .btc-header-sideslip{
     display: block!important;
   }
@@ -256,4 +256,8 @@
   // .navbar-toggle{
   //   display: none !important;
   // }
+}
+
+.btc-header-sideslip a{
+  @include sprite($header-more)
 }

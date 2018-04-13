@@ -21,7 +21,7 @@
       <div class="btc-member-ver" v-if="step === 1">
         <div class="media">
           <div>
-            <div class="media-left">
+            <div class="media-left sprite-member-email">
               <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-email.png" data-holder-rendered="true">
             </div>
             <div class="media-body">

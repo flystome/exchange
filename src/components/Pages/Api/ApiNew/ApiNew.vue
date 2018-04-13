@@ -1,9 +1,9 @@
 <template>
-  <div class="btc-api-new">
+  <div @keyup.enter="NewKey" class="btc-api-new">
     <div class="btc-container-block">
       <header>
         <strong>
-          {{ $t('api.api_key') }}
+          {{ $t('api.create_New_Key') }}
         </strong>
       </header>
       <div class="btc-api-newContain" v-if="setp === 0">
@@ -12,11 +12,11 @@
         <div class="btc-explain">
           {{ $t('api.label_describe') }}
         </div>
-        <basic-input :placeholder="$t('api.google_verification_code')" v-model="parme.otp">
+        <basic-input ref="gV" :validate='"Google Verify Code"' :placeholder="$t('api.google_verification_code')" v-model="parme.otp">
         </basic-input>
         <div class="btc-marginT30 btc-marginB40">
-          <basic-button @click.native='NewKey' :text='$t("api.confirm")'></basic-button>
-          <router-link :to="`${ROUTER_VERSION}/api`">
+          <basic-button class="btn" :disabled="disabled" @click.native='NewKey' :text='$t("api.confirm")'></basic-button>
+          <router-link :disabled="disabled" :to="`${ROUTER_VERSION}/api`">
             <button class="btc-white-btn">{{ $t("api.cancel") }}</button>
           </router-link>
         </div>
@@ -34,29 +34,30 @@
               </strong>
             </div>
             <span class="btc-marginT10">
-              1Bv9EYCrCKjtusatU1LiwcAnKRHVSsGjpr1Bv9EYCrCKjtusatU1LiwcAnKRHVS
+              {{ access_key }}
             </span>
           </div>
           <div class="btc-marginT20 btc-color666">
             <div class="btc-marginB10">
               <strong>
-                Access Key
+                Secret Key
               </strong>
             </div>
             <span>
-              1Bv9EYCrCKjtusatU1LiwcAnKRHVSsGjpr1Bv9EYCrCKjtusatU1LiwcAnKRHVS
+              {{ secret_key }}
             </span>
           </div>
-          <router-link :to="`${ROUTER_VERSION}/api`">
+          <span @click="goApi">
             <basic-button :text="$t('api.return')">
             </basic-button>
-          </router-link>
+          </span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex'
 export default {
   name: 'ApiNew',
   data () {
@@ -64,16 +65,71 @@ export default {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       parme: {
         label: '',
-        access_key: '',
-        ip: '',
         otp: ''
       },
-      setp: 0
+      access_key: '',
+      secret_key: '',
+      setp: 0,
+      disabled: false
     }
   },
   methods: {
-    NewKey () {
-      this.setp = 1
+    goApi () {
+      this.setp = 0
+      this.$router.push(`${this.ROUTER_VERSION}/api`)
+    },
+    async NewKey () {
+      const gV = await this.$refs['gV'].$validator.validateAll()
+      if (!gV) return
+      this.disabled = true
+      this._post({
+        url: '/api_tokens.json',
+        data: {
+          api_token: {
+            label: this.parme.label
+          },
+          two_factor: {
+            type: 'app',
+            otp: this.parme.otp
+          }
+        }
+      }, (d) => {
+        this.disabled = false
+        if (d.data.success) {
+          d = d.data.success.api_token
+          this.access_key = d.access_key
+          this.secret_key = d.secret_key
+          this.api.apiData.push({
+            access_key: d.access_key,
+            label: this.parme.label,
+            id: d.id
+          })
+          this.setp = 1
+          this.parme.otp = ''
+          this.parme.label = ''
+        } else {
+          this.parme.otp = ''
+          this.PopupBoxDisplay({type: 'error', message: this.$t('api_server.validate_sms.auth_sms_1002')})
+        }
+        this.$refs['gV'].$validator.errors.clear()
+      })
+      // this.setp = 1
+    },
+    ...mapMutations(['PopupBoxDisplay'])
+  },
+  computed: {
+    ...mapState(['api'])
+  },
+  watch: {
+    $route (to) {
+      if (to.name === 'ApiIndex') {
+        if (this.$route.name === to.name) return
+        this.$refs['gV'].$validator.errors.clear()
+        Object.assign(this.parme, {
+          label: '',
+          otp: ''
+        })
+      }
     }
   }
 }
@@ -107,5 +163,11 @@ export default {
     width: 100%;
     margin: 75px 0;
   }
+}
+</style>
+
+<style>
+.btc-api-newContain .help{
+  position: absolute;
 }
 </style>

@@ -186,7 +186,12 @@ const en = {
       "identifying_code": "Verify Code",
       "temporarily_unable_deposit": "Temporarily unable to deposit",
       "warn1": "Warning! Only transfer COIN to this address. Transfer other coins to this address will result in lost of your coins.",
-      "copy_success": "Copied!"
+      "copy_success": "Copied!",
+      "confirm_num_descirbe": "After the completion of the above operation, click send payment, this transaction will be broadcast to the whole network, you can see the state of this transaction, when the transaction reaches ",
+      "confirm_num": "the NUM confirmation of the whole network",
+      "about_time": "(about 10 to 60 minutes), the system will automatically be recharged to the account. You can query it in",
+      "in_query": "",
+      "form_account": " Transfer History"
     },
     "title": {
       "my_account": "My Account",
@@ -512,6 +517,7 @@ const en = {
       "secretkey_describe": "Please copy and paste the following Secret Key copy into a safe place. After the page is closed, Secret Key is no longer displayed",
       "copy": "Copy",
       "return": "Return",
+      "amend_the_success": "Amend The Success",
       "create_new_key": "Create New key",
       "ip_white_list": "IP White List",
       "ip_input": "The IP address is separated by a comma and does not mean that any IP can use the key"

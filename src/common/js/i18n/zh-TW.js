@@ -185,7 +185,12 @@ const zh = {
     "identifying_code": "驗證碼",
     "temporarily_unable_deposit": "暫時無法充值",
     "warn1": "禁止向COIN地址充值除COIN之外的資產，任何充入COIN地址的非COIN資產將不可找回。",
-    "copy_success": "複製成功"
+    "copy_success": "複製成功",
+    "confirm_num_descirbe": "完成以上操作後點擊發送付款，此交易將被廣播到全網，您便可以這查看到此筆交易的狀態，當交易達到",
+    "confirm_num": "全網NUM個確認",
+    "about_time": "(約10至60分鐘)時，系統將自動充值到賬。您可以到",
+    "in_query": "中查詢。",
+    "form_account": "充值提現記錄"
   },
   "title": {
     "my_account": "我的帳戶",
@@ -511,6 +516,7 @@ const zh = {
     "secretkey_describe": "请将以下的Secret Key复制粘贴到安全的地方保存。该页面关闭之后Secret Key不再显示",
     "copy": "複製",
     "return": "返回",
+    "amend_the_success": "修改成功",
     "create_new_key": "創建新密鑰",
     "ip_white_list": "IP 白名單",
     "ip_input": "IP 地址以逗號分隔，不填表示任何 IP 都可使用該密匙"

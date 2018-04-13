@@ -53,9 +53,15 @@
   .btc-sideslip-marignB0{
     margin-bottom: 0;
   }
+  i{
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    margin-right: 3px;
+  }
 }
 
-@media(max-width: 993px){
+@media(max-width: 992px){
   .btc-SideSlipMenu {
     display: block
   }
@@ -63,5 +69,21 @@
 @media(max-width: 768px){
   .marketlist {
     display: none;
+  }
+}
+
+// sprites
+$sprite: (
+  'assets': $sideslip-assets,
+  'market': $sideslip-market,
+  'consulting': $sideslip-consulting,
+  'lang': $sideslip-lang,
+  'myaccount': $sideslip-myaccount,
+  'pc': $sideslip-pc
+);
+
+@each $key, $val in $sprite{
+  .sideslip-#{$key} {
+    @include sprite(map-get($sprite, $key));
   }
 }

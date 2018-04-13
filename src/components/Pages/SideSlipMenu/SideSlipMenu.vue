@@ -8,13 +8,13 @@
           </li>
           <li>
             <span @click="validateEmail">
-              <img src='~Img/sideslip-assets.png'>
+              <i class="sideslip-assets"></i>
               {{ $t('side_slip_menu.asset_management') }}
             </span>
           </li>
           <li class="marketlist" :class="{'btc-sideslip-marignB0': market}">
             <div @click="market = !market">
-              <img src='~Img/sideslip-market.png'> {{$t('nav.transaction')}}
+              <i class="sideslip-market"></i> {{$t('nav.transaction')}}
               <span class="btc-fr btc-marginR20">
                 <img v-if="!market" src="~Img/triangle-down.png">
                 <img v-else src="~Img/triangle-up.png">
@@ -30,7 +30,7 @@
           </li>
           <li class='btc-paddingB0' :class="{'btc-sideslip-marignB0': Consulting}">
             <div @click="Consulting = !Consulting">
-              <img src='~Img/sideslip-consulting.png'> {{ $t('side_slip_menu.consulting_center') }}
+              <i class='sideslip-consulting'/> {{ $t('side_slip_menu.consulting_center') }}
               <span class="btc-fr btc-marginR20">
                 <img v-if="!Consulting" src="~Img/triangle-down.png">
                 <img v-else src="~Img/triangle-up.png">
@@ -53,12 +53,12 @@
             </ul>
           </li>
           <li @click="validate()">
-            <img src='~Img/sideslip-myaccount.png'>
+            <i class='sideslip-myaccount' />
             {{ $t('side_slip_menu.my_account') }}
           </li>
           <li :class="{'btc-sideslip-marignB0': Lang}">
             <div @click="Lang = !Lang">
-              <img src='~Img/sideslip-lang.png'> {{ $t('side_slip_menu.language') }}
+              <i class='sideslip-lang' /> {{ $t('side_slip_menu.language') }}
               <span class="btc-fr btc-marginR20">
                 <img v-if="!Lang" src="~Img/triangle-down.png">
                 <img v-else src="~Img/triangle-up.png">
@@ -71,7 +71,7 @@
             </ul>
           </li>
           <li class="">
-            <img src='~Img/sideslip-pc.png'>
+            <i class='sideslip-pc' />
             <span @click="goPc">
               {{$t('side_slip_menu.desktop_end')}}
             </span>
