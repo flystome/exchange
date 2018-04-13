@@ -6,7 +6,7 @@
       <div class="btc-global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
         <vue-simple-spinner size="88"></vue-simple-spinner>
       </div>
-      <div v-else class="btc-container container" v-cloak>
+      <div v-else class="btc-container container" :class="{'noPadding':noPadding}" v-cloak>
         <keep-alive>
           <router-view></router-view>
         </keep-alive>
@@ -35,7 +35,9 @@ export default {
       unLogin: ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home', 'Orders', 'notFound', 'FormNews', 'Exchanage'],
       version: process.env.ROUTER_VERSION,
       noMobile: true,
-      exChange: false
+      exChange: false,
+      noPaddingList: ['Markets', 'MarketDetail', 'Trades', 'Orders'],
+      noPadding: false
     }
   },
   components: {
@@ -50,8 +52,11 @@ export default {
   },
   watch: {
     '$route' (to, from) {
+      console.log(to.name)
       if (to.name === 'Exchange') {
         this.exChange = true
+      } else if (this.noPaddingList.indexOf(to.name) !== -1) {
+        this.noPadding = true
       }
     }
   },
