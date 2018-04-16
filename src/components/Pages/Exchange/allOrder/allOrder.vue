@@ -6,8 +6,8 @@
     <ul class="bd">
       <li v-for='item in tradesData' :key='"trade"+item.tid'>
         <div class="time">{{item.date * 1000 | dayTime}}</div>
-        <div class="my"><img src=""></div>
-        <div class="price">{{item.price}}</div>
+        <div class="my"><img src="~Img/ok.svg" v-show='item.isMine'></div>
+        <div class="price" :class='{"up": item.type === "buy", "down": item.type === "sell"}'>{{item.price}}</div>
         <div class="volume">{{item.amount}}</div>
       </li>
     </ul>
