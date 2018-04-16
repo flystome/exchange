@@ -1,0 +1,68 @@
+.btc-ticket-header{
+  padding: 20px 30px 0 30px;
+  background: white;
+  margin-top: 8px;
+  .btc-ticket-slide{
+    display: inline-block;
+    position: relative;
+    .btc-ticket-closed{
+      margin-left: 64px;
+    }
+    .btc-ticket-open,.btc-ticket-closed{
+      display: inline-block;
+      cursor: pointer;
+    }
+    span{
+      // background: #4382f7;
+      height: 4px;
+      display: block;
+      width: 100%;
+      margin-top: 16px;
+    }
+  }
+  .btc-basic-button{
+    top: -7px;
+    padding: 6px 9px;
+    min-width: initial;
+  }
+}
+
+.btc-ticket{
+  .btc-ticket-block{
+    margin-top: 8px;
+    background: white;
+    overflow: hidden;
+    position: relative;
+    section{
+      width: 90%;
+      padding: 20px 0;
+      padding-left: 30px;
+    }
+    article{
+      margin-top: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .btc-ticket-select{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -9px;
+    margin-right: 30px;
+  }
+  .btc-ticket-time{
+    font-size: 12px;
+    color: #999999;
+    margin-left: 12px;
+  }
+  strong{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 42%;
+    display: block;
+    float: left;
+  }
+}

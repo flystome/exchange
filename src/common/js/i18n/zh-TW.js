@@ -210,7 +210,8 @@ const zh = {
     "form_account": "充值提現記錄",
     "api": "Api",
     "api_new": "新建金鑰",
-    "api_edit": "編輯金鑰"
+    "api_edit": "編輯金鑰",
+    "ticket": "服務單"
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",
@@ -522,8 +523,18 @@ const zh = {
     "ip_input": "IP 地址以逗號分隔，不填表示任何 IP 都可使用該密匙"
   },
   "ticket": {
-    "open_tickets": "Open Tickets",
-    "closed_tickets": "Closed Tickets"
+    "open_tickets": "未結束服務單",
+    "closed_tickets": "已結束服務單",
+    "new_ticket": "新建服務單",
+    "return": "返回",
+    "reminder": "催單",
+    "close_ticket": "關閉服務單",
+    "tltle": "標題",
+    "choose": "選擇",
+    "upload_attachment": "上傳附件",
+    "detailed_description": "詳細描述",
+    "upload_describe": "不大於1MB的.jpg, .png, .bmp文件",
+    "ticket_describe": "如果您有任何問題，意見或建議需要和我們溝通，請給我們建立一個服務單，我們會盡快回复您。"
   },
     "validation": {
       "verify_code": '驗證碼'

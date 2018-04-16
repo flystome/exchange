@@ -40,6 +40,9 @@ const ApiIndex = () => import('Pages/Api')
 const ApiEdit = () => import('Pages/Api/ApiEdit/ApiEdit')
 const ApiNew = () => import('Pages/Api/ApiNew/ApiNew')
 
+// Ticket
+const Ticket = () => import('Pages/Ticket/Ticket')
+
 Vue.use(Router)
 
 const version = process.env.ROUTER_VERSION
@@ -179,6 +182,11 @@ const router = new Router({
           component: FormAccount
         }
       ]
+    },
+    {
+      path: `${version}/ticket`,
+      name: 'Ticket',
+      component: Ticket
     },
     {
       path: `${version}/api`,

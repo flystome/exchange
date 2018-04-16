@@ -9,6 +9,7 @@ import '@/common/css/style.scss'
 import BasicButton from 'Components/BasicButton/BasicButton'
 import BasicInput from 'Components/BasicInput/BasicInput'
 import BasicTable from 'Components/BasicTable/BasicTable'
+import MenuUnderline from 'Components/MenuUnderline/MenuUnderline'
 import BasicSelect from 'Components/BasicSelect/BasicSelect'
 import UploadImg from 'Components/UploadImg/UploadImg'
 import QrCode from 'Components/QrCode/QrCode'
@@ -73,7 +74,8 @@ const components = [
   DivContenteditable,
   BasicInstructions,
   Spinner,
-  Paginate
+  Paginate,
+  MenuUnderline
 ]
 components.forEach(component => {
   Vue.component(component.name, component)

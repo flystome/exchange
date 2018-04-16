@@ -211,7 +211,8 @@ const en = {
       "form_account": "Transfer History",
       "api": "Api",
       "api_new": "New Key",
-      "api_edit": "Edit Key"
+      "api_edit": "Edit Key",
+      "ticket": "Ticket"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
@@ -524,7 +525,17 @@ const en = {
     },
     "ticket": {
       "open_tickets": "Open Tickets",
-      "closed_tickets": "Closed Tickets"
+      "closed_tickets": "Closed Tickets",
+      "new_ticket": "New Ticket",
+      "return": "Return",
+      "reminder": "Reminder",
+      "close_ticket": "Close Ticket",
+      "title": "Title",
+      "upload_attachment": "Upload Attachment",
+      "choose": "Choose",
+      "detailed_description": "Detailed Description",
+      "upload_describe": ".jpg,.png,.bmp file not more than 1MB",
+      "ticket_describe": "If you have any questions, comments or suggestions need to communicate with us, please create a service list for us, we will reply you as soon as possible."
     },
     "validation": {
       "verify_code": 'verify code'

@@ -23,7 +23,8 @@
         <div style="clear:both">
         </div>
       </header>
-      <div class="btc-news">
+      <vue-simple-spinner class="btc-marginT100" size="88" v-if="loading"></vue-simple-spinner>
+      <div class="btc-news" v-if="!loading">
         <div class="btc-news-block" v-for="(d, index) in xhrData" @click="addClearList(d.id, index)" :key="d.id">
           <section class="btc-fl">
             <header>
@@ -71,6 +72,7 @@ export default {
     this.loginData !== 'none' && (this.loginData.has_unread_conversations = false)
     this.paging(1)
     bus.$on('Popbox-confirm', () => {
+      this.loading = true
       var list = [...this.clearList]
       this.clearList = []
       this._post({
@@ -79,6 +81,7 @@ export default {
           choices: list
         }
       }, (d) => {
+        this.loading = false
         if (d.data.success) {
           if (list.length === this.xhrData.length && this.$refs['paginate'].selected !== 0) {
             if (this.$refs['paginate'].selected + 1 === this.pagination) {
@@ -94,6 +97,7 @@ export default {
   },
   data () {
     return {
+      loading: false,
       firstLoad: false,
       xhrData: [],
       pagination: 0,
@@ -121,6 +125,7 @@ export default {
       }
     },
     GetList (num) {
+      this.loading = true
       this.disabled = true
       this._get({
         url: `/conversations.json`,
@@ -128,6 +133,7 @@ export default {
           page: num
         }
       }, (d) => {
+        this.loading = false
         this.firstLoad = true
         this.clearList = []
         this.disabled = false

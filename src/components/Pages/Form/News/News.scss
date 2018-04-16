@@ -66,14 +66,22 @@
       margin-top: -9px;
       margin-right: 30px;
     }
+    .btc-news-time{
+      font-size: 12px;
+      color: #999999;
+      margin-left: 12px;
+    }
+    strong{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 42%;
+      display: block;
+      float: left;
+    }
   }
   .btc-news-minheight{
     min-height: 70vh;
-  }
-  .btc-news-time{
-    font-size: 12px;
-    color: #999999;
-    margin-left: 12px;
   }
 }
 
