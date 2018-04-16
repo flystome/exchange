@@ -108,16 +108,19 @@
     li {
       display: inline-block;
       float: left;
-      width: 33.3%;
+      width: 32%;
       height: 42px;
       line-height: 44px;
       color: #fff;
       font-size: 14px;
       text-align: center;
       list-style: none;
-      text-transform: uppercase;
+      text-transform: Capitalize;
       padding: 0;
       margin: 0;
+      &:last-child {
+        width: 34%;
+      }
       &.check {
         color: #4382f7;
         border-bottom: 2px solid #4382f7;
