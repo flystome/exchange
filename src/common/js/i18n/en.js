@@ -161,7 +161,7 @@ const en = {
       "submitting": "Submitting",
       "submitted": "Submitted",
       "accepted": "Accepted",
-      "suspect": "Suspect",
+      "suspect": "Suspicious",
       "rejected": "Rejected",
       "processing": "Processing",
       "almost_done": "Almost Done",
@@ -371,11 +371,11 @@ const en = {
         "error_1002": "Password incorrect, please check it",
         "error_1001": "The google authentication code you enter are incorrect, please check it",
         "error_1003": "Sms code incorrect, please check it",
-        "success_200": "Google Authentication Success"
+        "success_200": "Google Authentication bound successfully!"
       },
       "validate_identity": {
-        "success_200": "Photo Upload Successfully",
-        "error_1001": "Photo Upload Failure"
+        "success_200": "Uploading Photo Succeed.",
+        "error_1001": "Uploading Photo Failed."
       },
       "my_account": {
         "success_200": "Email has been sent, please check it",
@@ -383,22 +383,22 @@ const en = {
         "error_1002": "Already Activated"
       },
       "withdraw_currency": {
-        "set_fund_source_200": "The fund source is set as default",
-        "set_fund_source_1001" : "The fund source is set default failed",
-        "delete_fund_source_200": "Fund source deleted",
-        "delete_fund_source_1001": "Fund source delete failed",
+        "set_fund_source_200": "The currency address is set as default.",
+        "set_fund_source_1001" : "Failed to set the currency address as default.",
+        "delete_fund_source_200": "Currency address deleted",
+        "delete_fund_source_1001": "Currency address delete failed",
         "send_phone_error_1001": "Send too fast, please wait for one minute",
-        "Withdraw_canceled_200": "Withdraw request canceled",
-        "Withdraw_canceled_1001": "Withdraw request can not cancel",
-        "create_withdraw_200": "An confirm email has been sent to your mailbox",
-        "create_withdraw_1001": "Please give an valid currency param",
+        "Withdraw_canceled_200": "Withdraw request canceled.",
+        "Withdraw_canceled_1001": "Withdraw request cannot be canceled.",
+        "create_withdraw_200": "An confirmation email has been sent to your mailbox",
+        "create_withdraw_1001": "Please give an valid currency parameter.",
         "create_withdraw_1002": "Authentication Failed",
         "create_withdraw_1003": "The withdrawal requests can not be more than",
-        "create_withdraw_1004": "The withdrawal amount is above the daily limit",
-        "create_withdraw_1005": "Invalid fund source",
+        "create_withdraw_1004": "The withdrawal amount exceeds the daily limit",
+        "create_withdraw_1005": "Invalid Currency Address.",
         "create_withdraw_1006": "System error",
         "create_withdraw_1007": "Account balance is insufficient",
-        "create_withdraw_1008": "Amount Can not be empty",
+        "create_withdraw_1008": "Amount cannot be empty",
         "create_withdraw_1009": "Verification code error",
         "create_withdraw_1010": "Assets account not created",
         "create_withdraw_1011": "Amount not enough to pay fee"
@@ -492,17 +492,17 @@ const en = {
       "trade": {
         "record_of_transaction": "Trading History",
         "benchmark_currency": "Benchmark Currency",
-        "amount": "Amount",
+        "amount": "Volume",
         "transaction_price": "Settle Price",
         "quoted_currency": "Quoted Currency",
-        "money": "Money",
+        "money": "Amount",
         "poundage": "Fee",
       },
       "news": {
         "select_none": "Select None",
         "select_all": "Select All",
         "clear": "Clear",
-        "confirm": "Are you sure you want to delete this record?"
+        "confirm": "Are you sure you want to delete the selected records? This action cannot be reverted."
       }
     },
     "api": {
@@ -510,7 +510,7 @@ const en = {
       "create_New_Key": "Create New Key",
       "my_api_key": "My API Keys",
       "key_describe": "We provide a fully functional, high-performance trading API. With which, you can get the current market data, place orders, query your own commission and transaction records, inquire account.",
-      "mechanism": "Mechanism",
+      "mechanism": "Label",
       "edit": "Edit",
       "delete": "Delete",
       "application_binding": "Application Binding",
@@ -520,17 +520,17 @@ const en = {
       "automatic_expiration_time": "Authorized Automatic Expiration Time",
       "entrustment_scope": "Entrustment Scope",
       "label": "Label",
-      "label_describe": "Labels will help you identify addresses, non mandatory",
+      "label_describe": "Labels will help you identify addresses, not mandatory",
       "google_verification_code": "Google Verification Code",
       "confirm": "Confirm",
       "cancel": "Cancel",
       "secretkey_describe": "Please copy and paste the following Secret Key copy into a safe place. After the page is closed, Secret Key is no longer displayed",
       "copy": "Copy",
       "return": "Return",
-      "amend_the_success": "Amend The Success",
+      "amend_the_success": "Updating succeed.",
       "create_new_key": "Create New key",
       "ip_white_list": "IP White List",
-      "ip_input": "The IP address is separated by a comma and does not mean that any IP can use the key"
+      "ip_input": "The IP addresses are separated by a comma, leaving blank means no restriction."
     },
     "ticket": {
       "open_tickets": "Open Tickets",

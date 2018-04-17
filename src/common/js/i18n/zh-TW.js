@@ -509,7 +509,7 @@ const zh = {
     "create_New_Key": "創建新密鑰",
     "my_api_key": "我的 API 密鑰",
     "key_describe": "我們提供功能完備，高性能的自動化交易API，通過API您能夠得到當前市場行情，建立買單賣單，查詢自己的委託和成交記錄，查詢賬戶",
-    "mechanism": "機構",
+    "mechanism": "標籤",
     "edit": "編輯",
     "delete": "刪除",
     "application_binding": "應用綁定",
