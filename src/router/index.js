@@ -35,13 +35,15 @@ const FormTrade = () => import('Pages/Form/Trade/Trade.vue')
 const FormAccount = () => import('Pages/Form/Account/Account.vue')
 
 // Api
-const Api = () => import('Pages/Api/router')
+const Api = () => import('Pages/Api/RouterView')
 const ApiIndex = () => import('Pages/Api')
 const ApiEdit = () => import('Pages/Api/ApiEdit/ApiEdit')
 const ApiNew = () => import('Pages/Api/ApiNew/ApiNew')
 
 // Ticket
-const Ticket = () => import('Pages/Ticket/Ticket')
+const TicketRouter = () => import('Pages/Ticket/RouterView')
+const TicketIndex = () => import('Pages/Ticket/TicketIndex/TicketIndex')
+const TicketNew = () => import('Pages/Ticket/TicketNew/TicketNew')
 
 Vue.use(Router)
 
@@ -185,8 +187,24 @@ const router = new Router({
     },
     {
       path: `${version}/ticket`,
-      name: 'Ticket',
-      component: Ticket
+      component: TicketRouter,
+      children: [
+        {
+          path: '',
+          redirect: `${version}/ticket/open`
+        },
+        {
+          path: 'open',
+          name: 'TicketIndex',
+          alias: 'closed',
+          component: TicketIndex
+        },
+        {
+          path: 'new',
+          name: 'TicketNew',
+          component: TicketNew
+        }
+      ]
     },
     {
       path: `${version}/api`,

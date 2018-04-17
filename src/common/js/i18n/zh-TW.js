@@ -3,6 +3,8 @@ const zh = {
   'submit': `提交`,
   'cancel': `取消`,
   'confirm': `確認`,
+  'currency': '幣種',
+  'time': '次',
   'auth': {
     'email': `郵箱驗證`,
     'phone': `手機認證`,
@@ -74,6 +76,7 @@ const zh = {
     "1001_hint": "請驗證您的電子郵件l",
     "1002_hint": "請進行Google驗證或手機驗證",
     "1003_hint": "請實名認證",
+    "1004_hint": "請進行Google驗證",
     "200_hint": "驗證電子郵件成功",
     "verifying": "驗證中",
     "success_200": "Email has been sent, please check it",
@@ -211,7 +214,9 @@ const zh = {
     "api": "Api",
     "api_new": "新建金鑰",
     "api_edit": "編輯金鑰",
-    "ticket": "服務單"
+    "ticket": "服務單",
+    "ticket_open": "未結束服務單",
+    "ticket_closed": "已結束服務單",
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",

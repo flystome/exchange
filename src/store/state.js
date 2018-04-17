@@ -24,9 +24,14 @@ const state = {
   api: {
     apiData: [],
     editId: '',
+    editIp: '',
+    editLabel: '',
     editKey: '',
     editIndex: ''
-  }
+  },
+  assets: '',
+  TotalAssets: '',
+  LockedAssets: '',
 }
 
 export default state

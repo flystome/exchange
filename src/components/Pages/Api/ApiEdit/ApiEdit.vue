@@ -52,6 +52,10 @@ export default {
       disabled: false
     }
   },
+  mounted () {
+    this.parme.label = this.api.editLabel
+    this.parme.ip = this.api.editIp
+  },
   methods: {
     async editApi () {
       const gV = await this.$refs['gV'].$validator.validateAll()
@@ -72,6 +76,7 @@ export default {
       }, (d) => {
         this.disabled = false
         var label = this.parme.label
+        var ip = this.parme.ip
         Object.assign(this.parme, {
           label: '',
           ip: '',
@@ -79,6 +84,7 @@ export default {
         })
         if (d.data.success) {
           this.api.apiData[this.api.editIndex].label = label
+          this.api.apiData[this.api.editIndex].ip_whitelist = ip
           this.PopupBoxDisplay({message: this.$t('api.amend_the_success'), type: 'success', url: '/api'})
         } else {
           this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_1002'), type: 'error'})
@@ -93,7 +99,11 @@ export default {
     ...mapState(['api'])
   },
   watch: {
-    $route (to) {
+    $route (to, form) {
+      if (form.name === 'ApiIndex' ) {
+        this.parme.label = this.api.editLabel
+        this.parme.ip = this.api.editIp
+      }
       if (to.name === 'ApiIndex') {
         this.$refs['gV'].$validator.errors.clear()
         Object.assign(this.parme, {

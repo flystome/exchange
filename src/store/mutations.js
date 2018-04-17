@@ -63,6 +63,17 @@ const redirect = (state, action, route) => {
       }
     }
     break
+    case 'ApiIndex':
+    case 'ApiNew':
+    case 'ApiEdit':
+    if (!state.loginData.app_activated) {
+      action.commit('PopupBoxDisplay', {message: i18n.t(`my_account.1004_hint`) , type: 'warn' ,url: '/my_account'})
+      return
+    }
+    if (state.loginData.id_document.aasm_state !== 'verified') {
+      action.commit('PopupBoxDisplay', {message: i18n.t(`my_account.1003_hint`) , type: 'warn' ,url: '/my_account'})
+    }
+    break
   }
 }
 
@@ -81,6 +92,7 @@ const mutations = {
     //   d['referrals_account_name'] = data.data.referrals_account_name[index]
     // })
     state.loginData = data.data
+    state.assets = data.data.assets
   },
   AddAddress (state, data) {
     var address = state.DepositAddress

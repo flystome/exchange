@@ -63,23 +63,24 @@ export default {
       return [{content: [
         this.$t('form.order.type'),
         this.$t('form.order.entrustment_time'),
-        this.$t('form.trade.benchmark_currency'),
+        this.$t('form.order.monetary_pair'),
+        // this.$t('form.trade.benchmark_currency'),
         this.$t('form.trade.amount'),
         this.$t('form.trade.transaction_price'),
-        this.$t('form.trade.quoted_currency'),
+        // this.$t('form.trade.quoted_currency'),
         this.$t('form.trade.money'),
         this.$t('form.trade.poundage')
       ]}].concat(this.xhrData.map(data => {
         return {
           content: [
-            {style: data.kind === 'ask' ? { color: '#fd4041' } : { color: '#29c1a6' }, context: data.kind === 'ask' ? this.$t('form.order.buy') : this.$t('form.order.sell')},
+            {style: data.kind !== 'ask' ? { color: '#fd4041' } : { color: '#29c1a6' }, context: data.kind !== 'ask' ? this.$t('form.order.buy') : this.$t('form.order.sell')},
             { style: { 'white-space': 'nowrap' }, context: this.$moment(data.at).format('L H:mm:ss') },
-            data.base_currency.toUpperCase(),
+            data.market_name,
             Number(data.origin_volume).toFixed(Math.min(String(data.origin_volume).split('.')[1].length, 8)),
             Number(data.price).toFixed(Math.min(String(data.price).split('.')[1].length, 8)),
-            data.quote_currency.toUpperCase(),
+            // data.quote_currency.toUpperCase(),
             Number(data.amount).toFixed(Math.min(String(data.amount).split('.')[1].length, 8)),
-            `${(data.kind === 'bid' ? data.quote_currency : data.base_currency).toUpperCase()} ${Number(data.origin_volume).toFixed(Math.min(String(data.origin_volume).split('.')[1].length, 8))}`
+            `${(data.kind === 'ask' ? data.quote_currency : data.base_currency).toUpperCase()} ${Number(data.fee).toFixed(Math.min(String(data.fee).split('.')[1].length, 8))}`
           ]
         }
       }))

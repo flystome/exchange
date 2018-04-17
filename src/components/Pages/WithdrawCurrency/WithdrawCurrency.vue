@@ -229,6 +229,7 @@ export default {
         }
       })
       channel.bind('withdraws', (data) => {
+        console.log(data)
         if (data.type === 'create') {
           var d = data.attributes
           var time = new Date(d.created_at).getTime()
@@ -252,13 +253,15 @@ export default {
         }
       })
       channel.bind('account', (data) => {
-        this.Locked = Number(data.total_assets.locked_btc_worth).toFixed(8)
-        this.TotalAssets = Number(data.total_assets.btc_worth).toFixed(8)
+        console.log(data)
+        // this.Locked = Number(data.total_assets.locked_btc_worth).toFixed(8)
+        // this.TotalAssets = Number(data.total_assets.btc_worth).toFixed(8)
         this.Remain = data.today_withdraw_remain
         this.equivalence = data.today_withdraw_remain_btc === data.today_withdraw_remain ? '' : data.today_withdraw_remain_btc
         this.Balance = data.balance
       })
       channel.bind('deposits', (data) => {
+        console.log(data)
         var d = data.attributes
         if (this.depositId.includes(d.id)) {
           this.$set(this.depositRecord.item, 0, 0)
@@ -650,7 +653,7 @@ export default {
             this.WithdrawData.rucaptcha = ''
           }
           if (d.data.error.code === 1003) {
-            this.PopupBoxDisplay({message: `${this.$t('api_server.withdraw_currency.create_withdraw_1003')} ${d.data.c}`, type: 'error'})
+            this.PopupBoxDisplay({message: `${this.$t('api_server.withdraw_currency.create_withdraw_1003')}${d.data.c}${this.$t('time')}`, type: 'error'})
             return
           }
           this.Rucaptcha = this.Rucaptcha ? `${this.Rucaptcha}?${Math.random()}` : this.Rucaptcha
@@ -696,6 +699,9 @@ export default {
     ...mapMutations(['PopupBoxDisplay', 'ChangePopupBox'])
   },
   computed: {
+    LockAssets () {
+      return this.$store.getters.LockAssets()
+    },
     timer () {
       return this.resend ? (this.second < 0
         ? this.$t('withdraw_currency.resend')

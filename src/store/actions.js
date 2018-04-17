@@ -29,6 +29,7 @@ const actions = {
           this.dispatch('GetMarketData')
         }
       } // getMaretData
+      if (route === undefined) route = state.route
       if (unLogin.includes(route.name)) {
         if (!d.data.error) commit('getData', d)
         commit('redirect', route)

@@ -73,13 +73,13 @@ export default {
         return {
           content: [
             data.id,
-            {style: data.kind === 'ask' ? { color: '#fd4041' } : { color: '#29c1a6' }, context: data.kind === 'ask' ? this.$t('form.order.buy') : this.$t('form.order.sell')},
+            {style: data.kind !== 'ask' ? { color: '#fd4041' } : { color: '#29c1a6' }, context: data.kind !== 'ask' ? this.$t('form.order.buy') : this.$t('form.order.sell')},
             data.market_name,
             {style: data.state === 'done' ? { color: '#fd4041' } : { color: '#29c1a6' }, context: data.state === 'done' ? this.$t('form.order.success') : this.$t('form.order.cancel')},
             Number(data.price).toFixed(Math.min(String(data.price).split('.')[1].length, 8)),
             Number(data.origin_volume).toFixed(Math.min(String(data.origin_volume).split('.')[1].length, 8)),
             Number(data.avg_price).toFixed(Math.min(String(data.avg_price).split('.')[1].length, 8)),
-            Number(data.volume) === 0 ? data.origin_volume : (data.origin_volume * (Math.max(String(data.origin_volume).split('.')[1].length, String(data.volume).split('.')[1].length)) - data.volume * (Math.max(String(data.origin_volume).split('.')[1].length, String(data.volume).split('.')[1].length))) / (Math.max(String(data.origin_volume).split('.')[1].length, String(data.volume).split('.')[1].length)),
+            Number(data.deal_volume).toFixed(Math.min(String(data.deal_volume).split('.')[1].length, 8)),
             { style: { 'white-space': 'nowrap' }, context: this.$moment(data.at).format('L H:mm:ss') }
           ]
         }

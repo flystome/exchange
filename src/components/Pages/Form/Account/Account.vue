@@ -71,7 +71,7 @@ export default {
       return [{content: [
         this.$t('form.order.type'),
         this.$t('my_account.date'),
-        this.$t('homepage.currency'),
+        this.$t('currency'),
         this.$t('form.trade.amount'),
         this.$t('form.trade.poundage'),
         this.$t('deposit_currency.trading_hash'),

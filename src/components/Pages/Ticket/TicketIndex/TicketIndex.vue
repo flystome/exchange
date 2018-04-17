@@ -5,6 +5,7 @@
         <menu-underline
         ref="menu"
         v-model='setp'
+        :menu-index='setp'
         :underline-margin="'16px'"
         :menu-margin="'64px'"
         :menu-list="[$t('ticket.open_tickets'), $t('ticket.closed_tickets')]">
@@ -54,7 +55,7 @@
 
 <script>
 export default {
-  name: 'Ticket',
+  name: 'TicketIndex',
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
@@ -91,11 +92,21 @@ export default {
       ]
     }
   },
+  mounted () {
+    if (/closed/.test(this.$route.path)) {
+      this.setp = 1
+    } else {
+      this.setp = 0
+    }
+  },
   watch: {
+    setp () {
+      this.setp === 0 ? this.$router.push(`${this.ROUTER_VERSION}/ticket/open`) : this.$router.push(`${this.ROUTER_VERSION}/ticket/closed`)
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "./Ticket.scss"
+@import "./TicketIndex.scss"
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="menu-underline" :value='value'
+  <div class="menu-underline"
 >
     <nav>
       <ul ref="MenuList" :style="{'padding-bottom': UnderlineMargin}">
@@ -19,7 +19,7 @@ export default {
     return {
       index: 0,
       UnderlineLeft: 0,
-      UnderlineWidth: 0,
+      UnderlineWidth: 0
     }
   },
   props: {
@@ -42,7 +42,7 @@ export default {
       type: String,
       default: '4px'
     },
-    value: {
+    MenuIndex: {
       type: Number
     }
   },
@@ -59,6 +59,9 @@ export default {
     }
   },
   watch: {
+    MenuIndex () {
+      this.index = this.MenuIndex
+    },
     index () {
       this.changeOffset()
       this.$emit('input', this.index)

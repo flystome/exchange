@@ -12,6 +12,9 @@ const getters = {
       })
     }
     return arr
+  },
+  assets_t: state => () => {
+    return state.assets === '' ? '' : state.assets.bch.amount
   }
 }
 export default getters

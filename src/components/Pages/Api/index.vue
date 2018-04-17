@@ -35,7 +35,7 @@
               {{ data.access_key }}
             </span>
             <span class="btc-api-opreate">
-             <span class="btc-link" @click="editApi(data.id, data.access_key, index)">{{ $t('api.edit') }}</span> <span class="btc-link">|</span> <a @click="marketIndex(data.id, index)" class="btc-link">{{ $t('api.delete') }}</a>
+             <span class="btc-link" @click="editApi(data, index)">{{ $t('api.edit') }}</span> <span class="btc-link">|</span> <a @click="marketIndex(data.id, index)" class="btc-link">{{ $t('api.delete') }}</a>
             </span>
           </div>
         </div>
@@ -145,9 +145,11 @@ export default {
         buttondisplay: true
       })
     },
-    editApi (id, key, index) {
-      this.api.editId = id
-      this.api.editKey = key
+    editApi (data, index) {
+      this.api.editId = data.id
+      this.api.editIp = data.ip_whitelist
+      this.api.editLabel = data.label
+      this.api.editKey = data.access_key
       this.api.editIndex = index
       this.$router.push(`${this.ROUTER_VERSION}/api/edit`)
     },

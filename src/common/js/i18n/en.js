@@ -4,6 +4,8 @@ const en = {
     "submit": "Submit",
     "cancel": "Cancel",
     "confirm": "Confirm",
+    'currency': 'Currency',
+    'time': 'Time',
     "auth": {
       "email": "Verify Email",
       "phone": "Verify Cell Phone",
@@ -75,6 +77,7 @@ const en = {
       "1001_hint": "Please verify your email",
       "1002_hint": "Please do Google validation or Cell Phone validation",
       "1003_hint": "Please real name authentication",
+      "1004_hint": "Please do Google validation",
       "200_hint": "Verify Email Success",
       "verifying": "verifying",
       "success_200": "Email has been sent, please check it",
@@ -212,7 +215,9 @@ const en = {
       "api": "Api",
       "api_new": "New Key",
       "api_edit": "Edit Key",
-      "ticket": "Ticket"
+      "ticket": "Ticket",
+      "ticket_open": "Open Tickets",
+      "ticket_closed": "Closed Tickets",
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
