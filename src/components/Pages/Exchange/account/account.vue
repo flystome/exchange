@@ -14,9 +14,9 @@
         </thead>
         <tbody>
           <tr v-for="item in accounts" :key='"coin"+item.currency'>
-            <td>{{item.currency}}</td>
-            <td>{{item.balance}}</td>
-            <td>{{item.locked}}</td>
+            <td>{{item.currency | upper}}</td>
+            <td>{{item.balance | fixedNum(8)}}</td>
+            <td>{{item.locked | fixedNum(8)}}</td>
           </tr>
         </tbody>
       </table>

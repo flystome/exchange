@@ -1,4 +1,4 @@
-.setting {
+#setting {
   display: inline-block;
   height: 40px;
   padding: 0 15px;
@@ -32,6 +32,7 @@
       line-height: 30px;
       color: #728eaa;
       font-size: 12px;
+      cursor: pointer;
     }
     li:nth-child(n+2) {
       height: 30px;

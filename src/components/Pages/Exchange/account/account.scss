@@ -25,9 +25,19 @@
     padding: 1px 15px;
     background: #38475a;
     color: #728eaa;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: normal;
     margin-top: 0;
+    table {
+      width: 100%;
+    }
+    tr {
+      td {
+        &:last-child {
+          text-align: right;
+        }
+      }
+    }
     th {
       height: 36px;
       line-height: 36px;
@@ -40,10 +50,9 @@
     td {
       height: 36px;
       border-top: 1px solid #3a4a5e;
-      &:last-child {
-        text-align: right;
-        border-bottom: 1px solid #3a4a5e;
-      }
+    }
+    tr:last-child {
+      border-bottom: 1px solid #3a4a5e;
     }
     .viewAll {
       display: block;

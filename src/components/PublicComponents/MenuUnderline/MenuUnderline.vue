@@ -19,7 +19,7 @@ export default {
     return {
       index: 0,
       UnderlineLeft: 0,
-      UnderlineWidth: 0,
+      UnderlineWidth: 0
     }
   },
   props: {

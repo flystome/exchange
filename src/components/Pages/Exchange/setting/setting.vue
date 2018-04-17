@@ -1,5 +1,5 @@
 <template>
-  <div class="setting">
+  <div id="setting">
     <a class="dropdown-toggle setting_btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
       <span class="fa fa-user"></span><span>{{ loginData.show_name }}</span>
     </a>
