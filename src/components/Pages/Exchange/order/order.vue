@@ -38,10 +38,7 @@
         <span>{{market.base_currency | upper}}</span>
       </div>
       <div class="percent">
-        <span>1/4</span>
-        <span>1/3</span>
-        <span>1/2</span>
-        <span>All</span>
+        <span v-for='item in percent' :key='"btn"+item[1]' @click="addInputs(item[1])">{{item[0]}}</span>
       </div>
       <div class="tip">
         <div class="myTotal">{{buyAccount | fixedNum(market.price_fixed, market.volume_fixed)}} {{market.base_currency | upper}}</div>
@@ -62,10 +59,7 @@
         <span>{{market.base_currency | upper}}</span>
       </div>
       <div class="percent">
-        <span>1/4</span>
-        <span>1/3</span>
-        <span>1/2</span>
-        <span>All</span>
+        <span v-for='item in percent' :key='"btn"+item[1]' @click="addInputs(item[1])">{{item[0]}}</span>
       </div>
       <div class="tip">
         <div class="myTotal">{{sellAccount | fixedNum(market.volume_fixed)}} {{market.quote_currency | upper}}</div>
@@ -95,7 +89,8 @@ export default {
       sellAccount: 0,
       showDialog: false,
       order_type: 'buy',
-      isDisabled: true
+      isDisabled: true,
+      percent: [['1/4', 0.25], ['1/3', 0.333], ['1/2', 0.5], ['All', 1]]
     }
   },
   mounted () {
@@ -263,6 +258,19 @@ export default {
         this.sellVolume,
         this.sellTotal
       ] = []
+    },
+    addInputs (percent) {
+      var type = this.type
+      if (!this[type + 'Price'] || this[type + 'Price'] === 0) {
+        this[type + 'Price'] = this.market.last
+      }
+      if (type === 'buy') {
+        this.buyTotal = this.accounts[this.market.base_currency].balance * percent
+        this.handleTotal(this.buyTotal, 'buy')
+      } else if (type === 'sell') {
+        this.sellVolume = this.accounts[this.market.quote_currency].balance * percent
+        this.handleVol(this.sellVolume, 'sell')
+      }
     }
   }
 }

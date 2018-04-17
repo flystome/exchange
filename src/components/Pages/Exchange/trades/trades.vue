@@ -55,7 +55,9 @@ export default {
         bids: this.buyList,
         version: this.version
       } = val)
-      this.sellList.reverse()
+      if (this.sellList && this.sellList.length !== 0) {
+        this.sellList.reverse()
+      }
     }
   },
   methods: {

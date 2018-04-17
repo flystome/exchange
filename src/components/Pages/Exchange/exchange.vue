@@ -46,7 +46,7 @@
       </div>
       <div class="list_rt w240">
         <div class="list_box history">
-          <allOrder :tradesData="tradesData"></allOrder>
+          <allOrder :tradesData="all_trades" :market='market'></allOrder>
         </div>
         <div class="order sell">
           <order :market='market' :type='"sell"' :accounts='accounts'></order>
@@ -59,6 +59,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import pusher from '@/common/js/pusher'
+// import scrollbar from 'vue2-scrollbar'
 
 import lastPrice from './lastPrice/lastPrice'
 import language from './language/language'
@@ -78,7 +79,7 @@ export default {
     return {
       curMarket: '',
       lastPriceData: {},
-      tradesData: [],
+      all_trades: [],
       market: {},
       markets: {},
       loginName: '',
@@ -86,7 +87,9 @@ export default {
       total_assets: {},
       my_orders: [[], [], []],
       depth_data: [],
-      sn: ''
+      sn: '',
+      my_trades: [],
+      version: 0
     }
   },
   components: {
@@ -138,7 +141,8 @@ export default {
       console.log(res.data);
       ({
         // ticker: this.lastPriceData,
-        trades: this.tradesData,
+        my_trades: this.my_trades,
+        trades: this.all_trades,
         market: this.market,
         markets: this.markets,
         accounts: this.accounts,
@@ -148,13 +152,40 @@ export default {
       this.$set(this.my_orders, 0, res.data.my_orders.reverse())
       this.marketRefresh()
       this.globalRefresh()
+      this.version = this.depth_data.version
+      this.initMine()
+    },
+    initMine () {
+      this.initTrend()
+      this.my_trades.map((ele1) => {
+        this.all_trades.map((ele2, i) => {
+          if (ele1.id === ele2.tid) {
+            ele2.isMine = true
+            this.$set(this.all_trades, i, ele2)
+          }
+        })
+      })
+    },
+    initTrend () {
+      this.all_trades.map((ele, i, arr) => {
+        var len = arr.length
+        if (i === len - 1) {
+          ele.trend = 'up'
+        } else {
+          if (+ele.price >= +arr[i + 1]['price']) {
+            ele.trend = 'up'
+          } else {
+            ele.trend = 'down'
+          }
+        }
+      })
     },
     getMyOrder (index, days) {
       var self = this
       var time = ''
       if (days) {
         var date = new Date()
-        time = Math.floor(date.getTime()/1000) - 3600 * 24 * days
+        time = Math.floor(date.getTime() / 1000) - 3600 * 24 * days
       }
       if (index === 1) {
         this._get({
@@ -192,15 +223,90 @@ export default {
       })
     },
     marketRefresh () {
+      var self = this
       var market = pusher.subscribe('market-' + this.market.code + '-global')
-      market.bind('update', (data) => {
-
+      var lost = {
+        asks: [],
+        bids: [],
+        U: 0
+      }
+      market.bind('depthUpdate', (res) => {
+        if (res.U <= this.version + 1 && res.u >= this.version + 1) {
+          var asks = this.addOrderList(res.asks, this.depth_data.asks)
+          var bids = this.addOrderList(res.bids, this.depth_data.bids)
+          this.version = res.u
+          console.log(res.asks)
+          this.depth_data = Object.assign({}, this.depth_data, {'asks': asks.reverse(), 'bids': bids})
+          console.log(this.depth_data)
+        } else if (res.U > this.version + 1) {
+          var lost1 = this.addOrderList(res.asks, lost.asks)
+          var lost2 = this.addOrderList(res.bids, lost.bids)
+          console.log(lost1, lost2)
+          if (lost.U === 0) lost.U = res.U
+          lost.u = Math.max(lost.u, res.u)
+          this._get({
+            url: '/markets/' + self.market.code + '/get_depth_data.json'
+          }, function (res) {
+            var data = res.data.success.depth_data
+            var asks = self.addOrderList(lost.asks, data.asks)
+            var bids = self.addOrderList(lost.bids, data.bids)
+            self.version = data.version
+            self.depth_data = Object.assign({}, self.depth_data, {'asks': asks.reverse(), 'bids': bids})
+            lost = {
+              asks: [],
+              bids: [],
+              U: 0
+            }
+          })
+        }
       })
+      market.bind('trade', (res) => {
+        this.isMine(res.trade, 'trades')
+        if (res.trade.price >= this.all_trades[0].price) {
+          res.trade.trend = 'up'
+        } else {
+          res.trade.trend = 'down'
+        }
+        this.all_trades.unshift(res.trade)
+      })
+    },
+    addOrderList (origin, target) {
+      if (origin && origin.length !== 0) {
+        origin.map((ele1) => {
+          var b = target.some((ele2) => ele1[0] === ele2[0])
+          if (b) {
+            target.map((ele3) => {
+              if (ele1[0] === ele3[0]) {
+                ele3[1] = ele1[1]
+              }
+            })
+          } else {
+            target.push(ele1)
+          }
+        })
+        target = this.clearZero(target)
+        target.sort((a, b) => b[0] - a[0])
+      } else {
+        if (target.length !== 0) {
+          target = this.clearZero(target)
+        }
+        target.sort((a, b) => b[0] - a[0])
+      }
+      return target
+    },
+    clearZero (arr) {
+      var k = 0
+      arr.map((ele, i) => {
+        if (+ele[1] === 0) {
+          arr.splice(i - k, 1)
+          k++
+        }
+      })
+      return arr
     },
     privateRefresh (sn) {
       var privateAccount = pusher.subscribe('private-' + sn)
       privateAccount.bind('order', (data) => {
-        console.log(data)
         if (data.state === 'wait') {
           var arr = this.my_orders[0].map(function (ele) {
             return ele.id
@@ -228,6 +334,33 @@ export default {
           this.my_orders[2].unshift(data)
         }
       })
+      privateAccount.bind('trade', (res) => {
+        this.my_trades.unshift(res)
+        this.isMine(res, 'trade')
+      })
+      privateAccount.bind('account', (res) => {
+        console.log(res)
+        this.accounts[res.currency].balance = res.balance
+        this.accounts[res.currency].locked = res.locked
+        this.accounts = Object.assign({}, this.accounts)
+        console.log(this.accounts)
+      })
+    },
+    isMine (data, from) {
+      if (from === 'trade') {
+        this.all_trades.map((ele, i) => {
+          if (data.id === ele.tid) {
+            ele.isMine = true
+            this.$set(this.all_trades, i, ele)
+          }
+        })
+      } else if (from === 'trades') {
+        this.my_trades.map((ele) => {
+          if (data.tid === ele.id) {
+            data.isMine = true
+          }
+        })
+      }
     }
   }
 }

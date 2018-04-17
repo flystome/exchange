@@ -23,7 +23,7 @@
       <ul class="tab_filter tab_history_filter" v-show='!isOrder'>
         <li @click='get3Day'>{{$t('exchange.myorder.last3')}}</li>
         <li @click='get7Day'>{{$t('exchange.myorder.last7')}}</li>
-        <li>{{$t('exchange.myorder.more')}}</li>
+        <li @click="goMore">{{$t('exchange.myorder.more')}}</li>
       </ul>
       <ul class="tab_hd">
         <li v-for="(head, index) in heads" :key='$t(head)' :class="{'on': index === currencyIndex}" @click='changeTab(index)'>{{$t(head)}}</li>
@@ -31,7 +31,7 @@
     </div>
     <div class="tab_bd">
       <div class="noneData" v-show="curOrders && curOrders.length === 0">{{$t('exchange.myorder.noData')}}</div>
-      <orderList :myOrders='curOrders' :notPending='notPending' v-show="curOrders.length !== 0" @cancel="cancelOne"></orderList>
+      <orderList :myOrders='curOrders' :market='market' :notPending='notPending' v-show="curOrders.length !== 0" @cancel="cancelOne"></orderList>
     </div>
   </section>
 </template>
@@ -47,6 +47,7 @@ export default {
   },
   data () {
     return {
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       heads: ['exchange.myorder.pending', 'exchange.myorder.history', 'exchange.myorder.filling'],
       item1: ['exchange.myorder.buy', 'exchange.myorder.sell', 'exchange.myorder.all', 'exchange.myorder.cancel_all'],
       item2: ['exchange.myorder.last3', 'exchange.myorder.last7', 'exchange.myorder.more'],
@@ -58,7 +59,8 @@ export default {
       notPending: false,
       showDialog: false,
       cancelNum: 'one',
-      id: 0
+      id: 0,
+      hisOrFill: ''
     }
   },
   watch: {
@@ -73,9 +75,11 @@ export default {
       if (index === 0) {
         this.isOrder = true
         this.notPending = false
+        this.hisOrFill = ''
       } else if (index === 1) {
         this.isOrder = false
         this.notPending = true
+        this.hisOrFill = 'his'
         if (this.hisOrders) {
           return
         }
@@ -84,6 +88,7 @@ export default {
       } else if (index === 2) {
         this.isOrder = false
         this.notPending = true
+        this.hisOrFill = 'fill'
         if (this.filling) {
           return
         }
@@ -138,6 +143,16 @@ export default {
     },
     get7Day () {
       this.$emit('getMyOrder', this.currencyIndex, 7)
+    },
+    goMore () {
+      var routeData = ''
+      console.log(this.hisOrders, this.filling)
+      if (this.hisOrFill === 'his') {
+        routeData = this.$router.resolve({path: `${this.ROUTER_VERSION}/form/order`})
+      } else if (this.hisOrFill === 'fill') {
+        routeData = this.$router.resolve({path: `${this.ROUTER_VERSION}/form/trade`})
+      }
+      window.open(routeData.href, '_blank')
     }
   }
 }

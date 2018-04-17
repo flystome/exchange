@@ -28,6 +28,7 @@
         display: inline-block;
         float: left;
         width: 33.3%;
+        height: 18px;
         &.time {
           width: 25%;
           text-align: left;
@@ -36,6 +37,9 @@
         &.my {
           width: 8.3%;
           text-align: center;
+          img {
+            width: 13px;
+          }
         }
         &.price {
           text-align: right;
