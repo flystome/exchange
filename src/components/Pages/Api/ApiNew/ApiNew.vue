@@ -32,9 +32,13 @@
               <strong>
                 Access Key
               </strong>
+              <news-prompt style="margin-right: 53px;margin-top: 1px;" class="btc-fr" :text='prompt1'></news-prompt>
             </div>
-            <span class="btc-marginT10">
+            <span  id="copy2" class="btc-marginT10">
               {{ access_key }}
+            </span>
+            <span class='btn-copy2 btc-link btc-fr' data-clipboard-target="#copy2">
+              {{ $t('my_account.copy') }}
             </span>
           </div>
           <div class="btc-marginT20 btc-color666">
@@ -42,9 +46,13 @@
               <strong>
                 Secret Key
               </strong>
+              <news-prompt style="margin-right: 53px;margin-top: 1px;" class="btc-fr" :text='prompt'></news-prompt>
             </div>
-            <span>
+            <span id="copy1">
               {{ secret_key }}
+            </span>
+            <span class='btn-copy1 btc-link btc-fr' data-clipboard-target="#copy1">
+              {{ $t('my_account.copy') }}
             </span>
           </div>
           <span @click="goApi">
@@ -57,7 +65,9 @@
 </template>
 
 <script>
+import Clipboard from 'clipboard'
 import { mapMutations, mapState } from 'vuex'
+const _debounce = require('lodash/fp/debounce.js')
 export default {
   name: 'ApiNew',
   data () {
@@ -67,11 +77,41 @@ export default {
         label: '',
         otp: ''
       },
+      prompt: '',
+      prompt1: '',
       access_key: '',
       secret_key: '',
       setp: 0,
       disabled: false
     }
+  },
+  mounted () {
+    /* eslint-disable no-new */
+    var clipboard = new Clipboard('.btn-copy1')
+    var time = () => {
+      setTimeout(() => {
+        this.prompt = ''
+      }, 1500)
+    }
+
+    clipboard.on('success', () => {
+      clearTimeout(time)
+      this.prompt = this.$t('deposit_currency.copy_success')
+    })
+    clipboard.on('success', _debounce(500, time))
+
+    var clipboard1 = new Clipboard('.btn-copy2')
+    var time1 = () => {
+      setTimeout(() => {
+        this.prompt1 = ''
+      }, 1500)
+    }
+
+    clipboard1.on('success', () => {
+      clearTimeout(time1)
+      this.prompt1 = this.$t('deposit_currency.copy_success')
+    })
+    clipboard1.on('success', _debounce(500, time1))
   },
   methods: {
     goApi () {

@@ -55,7 +55,7 @@
               <div class="btc-pointer" v-for="(data, index) in FundSources[CurrencyType]" :key="index" @click.stop="ChoiceAddress(index, data.id)">
                   <div class="btc-fl">
                     <div class="btc-color999">
-                      <strong>
+                      <strong style="height: 16px;display: block;">
                         {{ data.extra }}
                       </strong>
                     </div>
@@ -85,35 +85,38 @@
             <div class="btc-withdraw-explain">
               <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance | toFixed }} {{ CurrencyType | toUpperCase }} <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain | toFixed }} {{ CurrencyType | toUpperCase }}<span v-if="equivalence" style="color:black">≈{{ equivalence | toFixed }} BTC</span>
             </div>
+            <template v-if="Address !== 'withdraw_currency.withdraw_currency_address' || withdrawAddress">
               <basic-input ref='WithdrawAll' v-model="WithdrawData.amount" class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
-                <basic-button :disabled='disabled' @click.native="WithdrawAll" class="btc-link btn" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
-              </basic-input>
-            <div class="btc-withdraw-explain">
-              <span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }} 0.001</span>
-              <span class="btc-fr">{{ $t('withdraw_currency.poundage') }} {{ withdraw_fee }}</span>
+                  <basic-button :disabled='disabled' @click.native="WithdrawAll" class="btc-link btn" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
+                </basic-input>
+              <div class="btc-withdraw-explain">
+                <span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }} 0.001</span>
+                <span class="btc-fr">{{ $t('withdraw_currency.poundage') }} {{ withdraw_fee }}</span>
 
-            <!-- <span class="btc-fr btc-link">
-              <img src="~Img/tariff-description.png">{{$t('withdraw_currency.tariff_description')}}
-            </span> -->
+              <!-- <span class="btc-fr btc-link">
+                <img src="~Img/tariff-description.png">{{$t('withdraw_currency.tariff_description')}}
+              </span> -->
+                </div>
+              <div class="btc-choice-validate">
+                <select class="btc-select-option" ref='select'
+                v-on:selected="validate = arguments[0]"
+                :disabled="disabled">
+                  <option v-if="loginData.app_activated" value="google">{{ this.$t('withdraw_currency.google_validate') }}</option>
+                  <option v-if="loginData.sms_activated" value="sms">{{ this.$t('withdraw_currency.sms') }}</option>
+                </select>
+                <basic-input v-model="WithdrawData.otp"  :key="validate" class="btc-marginB10">
+                </basic-input>
+                <button :disabled='disabled' @click="SendSms" v-if="validate === 'sms'" class="btc-white-btn btn">{{ timer }}</button>
               </div>
-            <div class="btc-choice-validate">
-              <select class="btc-select-option" ref='select'
-               v-on:selected="validate = arguments[0]"
-              :disabled="disabled">
-                <option v-if="loginData.app_activated" value="google">{{ this.$t('withdraw_currency.google_validate') }}</option>
-                <option v-if="loginData.sms_activated" value="sms">{{ this.$t('withdraw_currency.sms') }}</option>
-              </select>
-              <basic-input v-model="WithdrawData.otp"  :key="validate" class="btc-marginB10">
-              </basic-input>
-              <button :disabled='disabled' @click="SendSms" v-if="validate === 'sms'" class="btc-white-btn btn">{{ timer }}</button>
-            </div>
-            <div v-if="Rucaptcha">
-              <basic-input :placeholder="$t('deposit_currency.identifying_code')" v-model="WithdrawData.rucaptcha"  class="btc-marginT10">
-              </basic-input>
-              <img @click="ChangeRucaptcha" class="btc-pointer btc-marginB10" :key="'rucaptcha'" :src="`${HOST_URL}${Rucaptcha}`">
-            </div>
+              <div v-if="Rucaptcha">
+                <basic-input :placeholder="$t('deposit_currency.identifying_code')" v-model="WithdrawData.rucaptcha"  class="btc-marginT10">
+                </basic-input>
+                <img @click="ChangeRucaptcha" class="btc-pointer btc-marginB10" :key="'rucaptcha'" :src="`${HOST_URL}${Rucaptcha}`">
+              </div>
             <basic-button class="btn" :disabled='disabled' :class="{'btc-marginT30': !Rucaptcha}" @click.native="Withdraw" style="width:100%" :text="$t('withdraw_currency.withdraw')">
             </basic-button>
+            </template>
+
           </div>
         </div>
         <div class="btc-withdraw-currency">
@@ -257,8 +260,16 @@ export default {
       channel.bind('account', _debounce(500, (data) => {
         this.$store.state.assets[data.currency].balance = Number(data.balance)
         this.$store.state.assets[data.currency].locked = Number(data.locked)
-        this.Remain = data.today_withdraw_remain
-        this.equivalence = data.today_withdraw_remain_btc === data.today_withdraw_remain ? '' : data.today_withdraw_remain_btc
+        // this.equivalence = this.CurrencyType === data.currency ? this.equivalence : data.today_withdraw_remain_btc
+        if (this.CurrencyType === 'btc') {
+          if (data.currency === 'btc') this.Remain = data.today_withdraw_remain_btc
+        } else {
+          if (data.currency !== 'btc') {
+            this.Remain = data.today_withdraw_remain
+            this.equivalence = data.today_withdraw_remain_btc
+
+          }
+        }
         this.Balance = data.balance
       })) //account pusher
 
@@ -456,6 +467,7 @@ export default {
       }, 10000)
     },
     GetCoin (c, funds, sn) {
+      this.withdrawAddress = false
       var obj = this.WithdrawRecord
       var objd = this.depositRecord
       this.deposit_loading = true
@@ -481,7 +493,7 @@ export default {
         }
         this.confirm_num = d.deposit_max_confirmation
         this.withdraw_fee = d.withdraw_fee
-        this.equivalence = d.today_withdraw_remain_btc === d.today_withdraw_remain ? '' : d.today_withdraw_remain_btc
+        this.equivalence = (c || 'btc') === 'btc' ? '' : d.today_withdraw_remain_btc
         this.WithdrAwable = d.withdrawable
         this.Remain = d.today_withdraw_remain
         var withdraws = d.withdraws
@@ -557,7 +569,7 @@ export default {
         var d = d.data
         if (d.success) {
           if (id === this.WithdrawData.Address_id) {
-            this.Address = this.$t('withdraw_currency.withdraw_currency_address')
+            this.Address = 'withdraw_currency.withdraw_currency_address'
             this.WithdrawData.Address_id = ''
             this.ChoiceStatus(false)
           }
@@ -642,19 +654,20 @@ export default {
         data: obj
       }, (d) => {
         this.disabled = false
-          this.WithdrawData.amount = ''
-          this.WithdrawData.otp = ''
-          this.WithdrawData.remark = ''
-          this.WithdrawData.newAddress = ''
         if (d.data.success) {
           this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.create_withdraw_200'), type: 'success'})
           this.Rucaptcha = false
         } else {
           if (d.data.error.code === 1002) {
             this.Rucaptcha = d.data.error.rucaptcha
+            this.WithdrawData.otp = ''
             this.PopupBoxDisplay({message: `${this.$t(`withdraw_currency.${this.$refs['select'].value.match(/\w+/g)[0].toLowerCase()}`)}${this.$t('api_server.withdraw_currency.create_withdraw_1002')}`, type: 'error'})
             return
           }
+          this.WithdrawData.otp = ''
+          this.WithdrawData.amount = ''
+          this.WithdrawData.remark = ''
+          this.WithdrawData.newAddress = ''
           if (d.data.error.code === 1009) {
             this.WithdrawData.rucaptcha = ''
           }

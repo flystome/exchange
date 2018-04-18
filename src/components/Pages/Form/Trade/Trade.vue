@@ -71,16 +71,17 @@ export default {
         this.$t('form.trade.money'),
         this.$t('form.trade.poundage')
       ]}].concat(this.xhrData.map(data => {
+        var [first, lastName] = data.market_name.split('/')
         return {
           content: [
             {style: data.kind !== 'ask' ? { color: '#fd4041' } : { color: '#29c1a6' }, context: data.kind !== 'ask' ? this.$t('form.order.buy') : this.$t('form.order.sell')},
             { style: { 'white-space': 'nowrap' }, context: this.$moment(data.at).format('L H:mm:ss') },
             data.market_name,
-            Number(data.origin_volume).toFixed(Math.min(String(data.origin_volume).split('.')[1].length, 8)),
+            `${Number(data.origin_volume).toFixed(Math.min(String(data.origin_volume).split('.')[1].length, 8))} ${first}`,
             Number(data.price).toFixed(Math.min(String(data.price).split('.')[1].length, 8)),
             // data.quote_currency.toUpperCase(),
-            Number(data.amount).toFixed(Math.min(String(data.amount).split('.')[1].length, 8)),
-            `${(data.kind === 'ask' ? data.quote_currency : data.base_currency).toUpperCase()} ${Number(data.fee).toFixed(Math.min(String(data.fee).split('.')[1].length, 8))}`
+            `${Number(data.amount).toFixed(Math.min(String(data.amount).split('.')[1].length, 8))} ${lastName}`,
+            `${(data.kind !== 'ask' ? data.quote_currency : data.base_currency).toUpperCase()} ${Number(data.fee).toFixed(Math.min(String(data.fee).split('.')[1].length, 8))}`
           ]
         }
       }))

@@ -107,7 +107,7 @@ export default {
       url: '/api_tokens.json'
     }, (d) => {
       this.loading = false
-      this.api.apiData = d.data.success.api_tokens
+      if (d.data.success) this.api.apiData = d.data.success.api_tokens
     })
     bus.$on('Popbox-confirm', () => {
       this.deleteApi(this.apiId, this.apiIndex)
