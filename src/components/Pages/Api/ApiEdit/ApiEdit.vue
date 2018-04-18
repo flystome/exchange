@@ -100,7 +100,7 @@ export default {
   },
   watch: {
     $route (to, form) {
-      if (form.name === 'ApiIndex' ) {
+      if (form.name === 'ApiIndex') {
         this.parme.label = this.api.editLabel
         this.parme.ip = this.api.editIp
       }

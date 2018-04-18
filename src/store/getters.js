@@ -1,3 +1,4 @@
+import { BigNumber } from 'bignumber.js'
 const getters = {
   loginData: state => {
     return state.loginData
@@ -13,8 +14,24 @@ const getters = {
     }
     return arr
   },
-  assets_t: state => () => {
-    return state.assets === '' ? '' : state.assets.bch.amount
+  LockAssets: state => () => {
+    return state.assets === '' ? '' : Object.keys(state.assets).reduce((num, index) => {
+      var reg = /.*\..*/
+      var assets = state.assets[index]
+      var locked = new BigNumber(assets.locked.toString())
+      var LockedBtc = locked.multipliedBy(assets.price.toString())
+      var result = LockedBtc.plus(num)
+      return Number(result).toFixed(Math.min((!reg.test(result) ? 0 : String(result).split('.')[1]).length, 8))
+    }, 0)
+  },
+  TotalAssets: state => () => {
+    return state.assets === '' ? '' : Object.keys(state.assets).reduce((num, index) => {
+      var reg = /.*\..*/
+      var assets = state.assets[index]
+      var total = new BigNumber(assets.balance.toString()).plus(assets.locked.toString()).multipliedBy(assets.price.toString())
+      var result = total.plus(num)
+      return Number(result).toFixed(Math.min((!reg.test(result) ? 0 : String(result).split('.')[1]).length, 8))
+    }, 0)
   }
 }
 export default getters

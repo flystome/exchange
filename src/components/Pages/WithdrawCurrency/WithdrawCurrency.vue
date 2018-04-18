@@ -9,7 +9,7 @@
             </span>
             <img class="btc-marginL45 btc-marginR5" src="~Img/asset-freeze.png">
             <a class='btc-color999'>
-              {{$t('withdraw_currency.frozen_assets')}} {{ Locked | toLocaleString }} BTC
+              {{$t('withdraw_currency.frozen_assets')}} {{ LockAssets }} BTC
             </a>
           </div>
           <div class="btc-fr">
@@ -217,6 +217,7 @@ export default {
       this.disabled = false
       var d = d.data.success
       var channel = pusher.subscribe(`private-${d.sn}`)
+      var MarketChannel = pusher.subscribe(`market-global`)
       channel.bind('deposit_address', (data) => {
         if (typeof this.DepositAddress !== 'object') {
           this.DepositAddress = {
@@ -228,8 +229,8 @@ export default {
           }
         }
       })
+
       channel.bind('withdraws', (data) => {
-        console.log(data)
         if (data.type === 'create') {
           var d = data.attributes
           var time = new Date(d.created_at).getTime()
@@ -251,17 +252,23 @@ export default {
             ]
           })
         }
-      })
-      channel.bind('account', (data) => {
-        console.log(data)
-        // this.Locked = Number(data.total_assets.locked_btc_worth).toFixed(8)
-        // this.TotalAssets = Number(data.total_assets.btc_worth).toFixed(8)
+      }) //withdraws pusher
+
+      channel.bind('account', _debounce(500, (data) => {
+        this.$store.state.assets[data.currency].balance = Number(data.balance)
+        this.$store.state.assets[data.currency].locked = Number(data.locked)
         this.Remain = data.today_withdraw_remain
         this.equivalence = data.today_withdraw_remain_btc === data.today_withdraw_remain ? '' : data.today_withdraw_remain_btc
         this.Balance = data.balance
-      })
+      })) //account pusher
+
+      MarketChannel.bind('tickers', _debounce(5000 ,(data) => {
+        Object.keys(data).forEach((key) => {
+          this.$store.state.assets[data[key].base_currency].price = data[key].last
+        })
+      })) //market pusher
+
       channel.bind('deposits', (data) => {
-        console.log(data)
         var d = data.attributes
         if (this.depositId.includes(d.id)) {
           this.$set(this.depositRecord.item, 0, 0)
@@ -286,9 +293,9 @@ export default {
             ]
           })
         }
-      })
-      this.TotalAssets = Number(d.total_assets.btc_worth).toFixed(8)
-      this.Locked = Number(d.total_assets.locked_btc_worth).toFixed(8)
+      }) //deposits pusher
+
+      this.TotalAssetsa = Number(d.total_assets.btc_worth).toFixed(8)
       if (d.notice) {
         this.PopupBoxDisplay({message: this.$t('withdraw_currency.withdraw_confirm_completed'), type: d.notice.type})
       }
@@ -316,7 +323,7 @@ export default {
       HOST_URL: process.env.HOST_URL,
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       redirectLock: false,
-      TotalAssets: 0,
+      TotalAssetsa: 0,
       warn: {
         length: 0,
         message: '',
@@ -342,7 +349,6 @@ export default {
       Balance: '',
       Remain: '',
       withdraw_fee: '',
-      Locked: '',
       Address: 'withdraw_currency.withdraw_currency_address',
       Rucaptcha: false,
       Time: '',
@@ -701,6 +707,9 @@ export default {
   computed: {
     LockAssets () {
       return this.$store.getters.LockAssets()
+    },
+    TotalAssets () {
+      return this.$store.getters.TotalAssets()
     },
     timer () {
       return this.resend ? (this.second < 0

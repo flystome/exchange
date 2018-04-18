@@ -72,7 +72,7 @@
             </div>
             <div class="btc-marginT20">
               <span style="color:#999999">{{ $t('homepage.total_asset_estimation') }}</span>
-              <span v-if="open"><i class="fa fa-btc"/> {{ btc_worth }}
+              <span v-if="open"><i class="fa fa-btc"/> {{ TotalAssets | toLocaleString }}
                 <img class="pull-right btc-pointer" src="~Img/open.png" @click="displaystate">
               </span>
               <span v-else>
@@ -194,6 +194,7 @@ import { mapGetters, mapState, mapMutations } from 'vuex'
 import Cookies from 'js-cookie'
 import pusher from '@/common/js/pusher'
 import HomeMarket from './HomeMarket/HomeMarket'
+const _debounce = require('lodash/fp/debounce.js')
 export default {
   name: 'homepage',
   created () {
@@ -215,7 +216,6 @@ export default {
       d = d.data.success
       if (!d.commission_factor) return
       this.factor = (10 - d.commission_factor * 10) * 10
-      this.btc_worth = Number(d.total_assets.btc_worth).toFixed(2)
     }) // markets
 
     this._get({
@@ -227,10 +227,13 @@ export default {
     this.GetNewCoin()
 
     var channel = pusher.subscribe('market-global')
+    channel.bind('tickers', _debounce(5000, (data) => {
+      Object.keys(data).forEach((key) => {
+        this.$store.state.assets[data[key].base_currency].price = Number(data[key].last)
+      })
+    }))
+
     channel.bind('tickers', (data) => {
-      // console.log(data)
-      // var obj  = Object[Object.keys(data)[0]]
-      // [this.currency.indexOf(obj.base_currency)]
       Object.keys(data).forEach((key) => {
         this.curData[this.currency.indexOf(data[key].base_currency.toLowerCase())].forEach(d => {
           if (key === d.name.toLowerCase().replace('/', '')) {
@@ -248,13 +251,13 @@ export default {
   },
   data () {
     return {
+      channelTime: 0,
       new_coin: '',
       email: '',
       password: '',
-      trend: [0, 0],
+      trend: '',
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       HOST_URL: process.env.HOST_URL,
-      btc_worth: '',
       factor: '',
       currencyindex: 0,
       search: '',
@@ -406,6 +409,15 @@ export default {
     ...mapMutations(['PopupBoxDisplay'])
   },
   watch: {
+    loginData () {
+      if (this.channelTime > 0) return
+      this.channelTime++
+      var PersonalChannel = pusher.subscribe(`private-${this.loginData.sn}`)
+      PersonalChannel.bind('account', _debounce(500, (data) => {
+        this.$store.state.assets[data.currency].balance = Number(data.balance)
+        this.$store.state.assets[data.currency].locked = Number(data.locked)
+      })) // account pusher
+    },
     marketData () {
       this.GetmarketData()
     },
@@ -417,8 +429,19 @@ export default {
     }
   },
   computed: {
+    TotalAssets () {
+      return this.$store.getters.TotalAssets()
+    },
     ...mapGetters(['loginData']),
     ...mapState(['marketData', 'language', 'CmsUrl'])
+  },
+  filters: {
+    toLocaleString (n) {
+      if (!n) return
+      var re = /\d{1,3}(?=(\d{3})+$)/g
+      var n1 = String(n).replace(/^(\d+)((\.\d+)?)$/, function (s, s1, s2) { return s1.replace(re, '$&,') + s2 })
+      return n1
+    }
   }
 }
 </script>

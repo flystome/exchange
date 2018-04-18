@@ -38,7 +38,7 @@
           <td style="max-width: 155px;padding-right: 25px;width:220px">
             <trend
               viewBox="40 0 500 75"
-              :data="trend && trend[`${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`]"
+              :data="trendArray(item)"
               :gradient="['black']"
               :padding="'0'"
               >
@@ -189,6 +189,9 @@ export default {
           }
         })
       }
+    },
+    trendArray (item) {
+      return this.trend === '' ? [0, 0] : this.trend[`${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`]
     }
   },
   computed: {
