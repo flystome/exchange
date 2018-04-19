@@ -29,16 +29,18 @@
     </div>
     <div class="buy handleOrder" v-if='type==="buy"'>
       <div class="price put">
-        <input type="text" ref='buyPrice' v-model='buyPrice' @change='handlePrice($event.target.value, "buy")' :placeholder="$t('markets.price')">
+        <input type="number" ref='buyPrice' v-model='buyPrice' @change='handlePrice($event.target.value, "buy")' :placeholder="$t('markets.price')">
         <span>{{market.base_currency | upper}}</span>
-        <div class="warning" v-if='buywarning'>{{$t('exchange.priceWarn')}}</div>
+        <transition name="fade">
+          <div class="warning" v-if='buywarning'>{{$t('exchange.priceWarn')}}</div>
+        </transition>
       </div>
       <div class="volume put">
-        <input type="text" ref="buyVolume" v-model='buyVolume' @change='handleVol($event.target.value, "buy")' :placeholder="$t('exchange.volume')">
+        <input type="number" ref="buyVolume" v-model='buyVolume' @change='handleVol($event.target.value, "buy")' :placeholder="$t('exchange.volume')">
         <span>{{market.quote_currency | upper}}</span>
       </div>
       <div class="total put">
-        <input type="text" ref="buyTotal" v-model='buyTotal' @change='handleTotal($event.target.value, "buy")' :placeholder="$t('markets.total')">
+        <input type="number" ref="buyTotal" v-model='buyTotal' @change='handleTotal($event.target.value, "buy")' :placeholder="$t('markets.total')">
         <span>{{market.base_currency | upper}}</span>
       </div>
       <div class="percent">
@@ -53,16 +55,18 @@
     </div>
     <div class="sell handleOrder" v-if='type==="sell"'>
       <div class="price put">
-        <input type="text" ref="sellPrice" step="0.00000001" v-model='sellPrice' @change='handlePrice($event.target.value, "sell")' :placeholder="$t('markets.price')">
+        <input type="number" ref="sellPrice" step="0.00000001" v-model='sellPrice' @change='handlePrice($event.target.value, "sell")' :placeholder="$t('markets.price')">
         <span>{{market.base_currency | upper}}</span>
-        <div class="warning" v-if='sellwarning'>{{$t('exchange.priceWarn')}}</div>
+        <transition name="fade">
+          <div class="warning" v-if='sellwarning'>{{$t('exchange.priceWarn')}}</div>
+        </transition>
       </div>
       <div class="volume put">
-        <input type="text" ref="sellVolume" step="0.00000001" v-model='sellVolume' @change='handleVol($event.target.value, "sell")' :placeholder="$t('exchange.volume')">
+        <input type="number" ref="sellVolume" step="0.00000001" v-model='sellVolume' @change='handleVol($event.target.value, "sell")' :placeholder="$t('exchange.volume')">
         <span>{{market.quote_currency | upper}}</span>
       </div>
       <div class="total put">
-        <input type="text" ref="sellTotal" step="0.00000001" v-model='sellTotal' @change='handleTotal($event.target.value, "sell")' :placeholder="$t('markets.total')">
+        <input type="number" ref="sellTotal" step="0.00000001" v-model='sellTotal' @change='handleTotal($event.target.value, "sell")' :placeholder="$t('markets.total')">
         <span>{{market.base_currency | upper}}</span>
       </div>
       <div class="percent">
@@ -250,7 +254,7 @@ export default {
         this.status = 'success'
         this[type + 'Success'] = true
         this.resetOrderStatus()
-        this.$emit('play')
+        this.$emit('play', 'order_audio')
       } else if (data.status === 1102) {
         location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
       } else if (data.status === 1002) {
@@ -262,6 +266,7 @@ export default {
         this.isDisabled = false
         this.status = 'fail'
         this.resetOrderStatus()
+        this.$emit('play', 'fail')
       }
     },
     play (obj) {

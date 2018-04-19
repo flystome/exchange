@@ -25,6 +25,14 @@
         &::-webkit-input-placeholder {
           color: #85a7c8;
         }
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none !important;
+            margin: 0;
+        }
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none !important;
+            margin: 0;
+        }
       }
       span {
         display: inline-block;

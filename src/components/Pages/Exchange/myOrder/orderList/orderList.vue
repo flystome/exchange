@@ -16,18 +16,20 @@
     </ul>
     <scrollBar classes='myScroll'>
       <ul class="bd">
-        <li v-for="item in myOrders" :class='{"hoverBg": cancel && id === item.id}' :key="item.market+item.id" @mouseenter='addBg(item.id)' @mouseleave='cancel=false'>
-          <div class="time">{{item.at * 1000 | time | timeNoYear}}</div>
-          <div class="market">{{item.market_name}}</div>
-          <div class="type" :class='{"up": item.kind==="bid", "down": item.kind==="ask"}'>{{$t('exchange.myorder.'+item.kind)}}</div>
-          <div class="price">{{item.price | fixedNum(market.price_fixed)}}</div>
+        <transition-group name="slide-fade">
+          <li v-for="item in myOrders" :class='{"hoverBg": cancel && id === item.id}' :key="item.market+item.id" @mouseenter='addBg(item.id)' @mouseleave='cancel=false'>
+            <div class="time">{{item.at * 1000 | time | timeNoYear}}</div>
+            <div class="market">{{item.market_name}}</div>
+            <div class="type" :class='{"up": item.kind==="bid", "down": item.kind==="ask"}'>{{$t('exchange.myorder.'+item.kind)}}</div>
+            <div class="price">{{item.price | fixedNum(market.price_fixed)}}</div>
 
-          <div class="volume">{{item.origin_volume | fixedNum(market.volume_fixed)}}</div>
-          <div class="percent">{{(item.origin_volume - item.volume) * 100 / item.origin_volume | fixed2}}%</div>
-          <div class="traded">{{item.origin_volume - item.volume | fixedNum(market.volume_fixed)}}</div>
-          <div class="status">{{$t('exchange.myorder.'+item.state)}}</div>
-          <div class="cancel" v-show='cancel && id === item.id' @click="cancelOrder(item.id)">{{$t('exchange.myorder.cancel_one')}}</div>
-        </li>
+            <div class="volume">{{item.origin_volume | fixedNum(market.volume_fixed)}}</div>
+            <div class="percent">{{(item.origin_volume - item.volume) * 100 / item.origin_volume | fixed2}}%</div>
+            <div class="traded">{{item.origin_volume - item.volume | fixedNum(market.volume_fixed)}}</div>
+            <div class="status">{{$t('exchange.myorder.'+item.state)}}</div>
+            <div class="cancel" v-show='cancel && id === item.id' @click="cancelOrder(item.id)">{{$t('exchange.myorder.cancel_one')}}</div>
+          </li>
+        </transition-group>
       </ul>
     </scrollBar>
   </div>

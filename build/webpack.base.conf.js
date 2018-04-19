@@ -39,7 +39,7 @@ module.exports = {
       'Pages': resolve('src/components/Pages'),
       'Components': resolve('src/components/PublicComponents'),
       'Img': resolve('static/img'),
-      'Audio': resolve('static/audio'),
+      'Audio': resolve('static/media'),
     },
     modules: ["node_modules", "spritesmith-generated"]
   },

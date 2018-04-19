@@ -108,4 +108,30 @@
   .vue-scrollbar__scrollbar-vertical {
     width: 5px;
   }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      background: #293f60;
+    }
+    50% {
+      opacity: 0.8;
+      background: #293f60;
+    }
+    100% {
+      opacity: 1;
+      background: none;
+    }
+  }
+  .slide-fade-enter-active {
+    transition: fadeIn 1.6s ease;
+  }
+  .fade-enter-active {
+    transition: all .8s ease;
+  }
+  .fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
 }

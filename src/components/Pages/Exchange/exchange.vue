@@ -32,13 +32,13 @@
         </div>
       </div>
       <div class="my_order">
+        <audio id="order_cancel" src="/static/media/cancel.wav"></audio>
         <myOrder :myOrders='my_orders' :market="market" @getMyOrder='getMyOrder'></myOrder>
       </div>
     </section>
     <section class="list">
-      <audio id="order">
-        <source src="Audio/order.wav" type="audio/mp3" />
-      </audio>
+      <audio id="order_audio" src="/static/media/order.wav"></audio>
+      <audio id="order_ok" src="/static/media/settle.wav"></audio>
       <div class="list_lt w240">
         <div class="list_box trades">
           <trades :depthData='depth_data' :market='market'></trades>
@@ -52,7 +52,7 @@
           <allOrder :tradesData="all_trades" :market='market'></allOrder>
         </div>
         <div class="order sell">
-          <order :market='market' :type='"sell"' :accounts='accounts'></order>
+          <order :market='market' :type='"sell"' :accounts='accounts' @play='play'></order>
         </div>
       </div>
     </section>
@@ -240,8 +240,8 @@ export default {
           this.version = res.u
           this.depth_data = Object.assign({}, this.depth_data, {'asks': asks.reverse(), 'bids': bids})
         } else if (res.U > this.version + 1) {
-          var lost1 = this.addOrderList(res.asks, lost.asks)
-          var lost2 = this.addOrderList(res.bids, lost.bids)
+          this.addOrderList(res.asks, lost.asks)
+          this.addOrderList(res.bids, lost.bids)
           if (lost.U === 0) lost.U = res.U
           lost.u = Math.max(lost.u, res.u)
           this._get({
@@ -318,6 +318,7 @@ export default {
             this.my_orders[0].unshift(data)
           }
         } else if (data.state === 'cancel') {
+          this.play('order_cancel')
           this.my_orders[0].map(function (ele, i, arr) {
             if (ele.id === data.id) {
               arr.splice(i, 1)
@@ -336,6 +337,7 @@ export default {
       })
       privateAccount.bind('trade', (res) => {
         this.my_trades.unshift(res)
+        this.play('order_ok')
         this.isMine(res, 'trade')
       })
       privateAccount.bind('account', (res) => {
@@ -360,8 +362,8 @@ export default {
         })
       }
     },
-    play () {
-      var order = document.getElementById('order')
+    play (id) {
+      var order = document.getElementById(id)
       order.play()
     }
   }

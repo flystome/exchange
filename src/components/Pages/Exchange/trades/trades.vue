@@ -11,11 +11,13 @@
       </div>
       <div class="sell lists">
         <ul class="listbox">
-          <li v-for="(item, index) in sellList" :key='"sell"+item[0]' @click='addOrder("sell", item[0], index)'>
-            <div class="pirce">{{item[0] | fixedNum(market.price_fixed)}}</div>
-            <div class="volume">{{item[1] | fixedNum(market.volume_fixed)}}</div>
-            <div class="total">{{item[0] * item[1] | fixedNum(market.price_fixed, market.volume_fixed)}}</div>
-          </li>
+          <transition-group name="slide-fade">
+            <li v-for="(item, index) in sellList" :key='"sell"+item[0]' @click='addOrder("sell", item[0], index)'>
+              <div class="pirce">{{item[0] | fixedNum(market.price_fixed)}}</div>
+              <div class="volume">{{item[1] | fixedNum(market.volume_fixed)}}</div>
+              <div class="total">{{item[0] * item[1] | fixedNum(market.price_fixed, market.volume_fixed)}}</div>
+            </li>
+          </transition-group>
         </ul>
       </div>
       <div class="newPirce">
@@ -23,11 +25,13 @@
       </div>
       <div class="buy lists">
         <ul class="listbox">
-          <li v-for="(item,index) in buyList" :key='"buy"+item[0]' @click='addOrder("buy", item[0], index)'>
-            <div class="pirce">{{item[0] | fixedNum(market.price_fixed)}}</div>
-            <div class="volume">{{item[1] | fixedNum(market.volume_fixed)}}</div>
-            <div class="total">{{item[0] * item[1] | fixedNum(market.price_fixed, market.volume_fixed)}}</div>
-          </li>
+          <transition-group name="slide-fade">
+            <li v-for="(item,index) in buyList" :key='"buy"+item[0]' @click='addOrder("buy", item[0], index)'>
+              <div class="pirce">{{item[0] | fixedNum(market.price_fixed)}}</div>
+              <div class="volume">{{item[1] | fixedNum(market.volume_fixed)}}</div>
+              <div class="total">{{item[0] * item[1] | fixedNum(market.price_fixed, market.volume_fixed)}}</div>
+            </li>
+          </transition-group>
         </ul>
       </div>
     </div>
