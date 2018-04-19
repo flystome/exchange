@@ -5,4 +5,5 @@
   color: white;
   position: relative;
   min-width: 120px;
+  overflow: hidden
 }

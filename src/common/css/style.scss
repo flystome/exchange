@@ -92,10 +92,6 @@ body{
   cursor: not-allowed
 }
 
-.btc-poniter{
-  cursor: pointer;
-}
-
 .btc-pointer{
   cursor: pointer;
 }
@@ -160,6 +156,14 @@ ul,li {
 }
 .clearfix{
     zoom:1;
+}
+
+.btc-absolute {
+  position: absolute
+}
+
+.btc-relative {
+  position: relative
 }
 
 .btc-global-loading{

@@ -219,6 +219,7 @@ const en = {
       "ticket": "Ticket",
       "ticket_open": "Open Tickets",
       "ticket_closed": "Closed Tickets",
+      "ticket_new": "New Ticket",
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
@@ -535,6 +536,7 @@ const en = {
       "ip_input": "The IP addresses are separated by a comma, leaving blank means no restriction."
     },
     "ticket": {
+      "ticket": "Ticket",
       "open_tickets": "Open Tickets",
       "closed_tickets": "Closed Tickets",
       "new_ticket": "New Ticket",

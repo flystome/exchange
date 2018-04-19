@@ -1,9 +1,9 @@
 <template>
-  <div class="menu-underline"
+  <div class="menu-underline btc-link"
 >
     <nav>
-      <ul ref="MenuList" :style="{'padding-bottom': UnderlineMargin}">
-        <li v-for="(data, DataIndex) in MenuList" :key="data" @click="ChangeIndex(DataIndex)" :style="{'margin-left': MenuMargin}" :class="{'btc-link': DataIndex === index}">{{ data }}</li>
+      <ul ref="MenuList">
+        <li  v-for="(data, DataIndex) in MenuList" :key="data" @click="ChangeIndex(DataIndex)" :style="{'margin-left': MenuMargin, 'padding-bottom': UnderlineMargin}">{{ data }}</li>
         <span
         :style="{'background': UnderlineColor, 'height': UnderlineHeight, width: UnderlineWidth, left: UnderlineLeft}"
         >

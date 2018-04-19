@@ -27,6 +27,7 @@
     class="btc-basicInput btc-b"
     :placeholder='placeholder'
     @input="$emit('input', $event.target.value)">
+    <slot name='button'></slot>
     <span v-show="errors.has(`${validate}`)" class="help is-danger">{{ errors.first(`${validate}`) | toUpperCase }}</span>
   </div>
 </template>

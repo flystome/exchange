@@ -1,0 +1,94 @@
+.btc-ticket-new{
+  .btc-container-block{
+    padding: 13px 30px 0 30px;
+  }
+  header{
+    padding-bottom: 13px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #f2f2f2;
+  }
+  .btc-ticket-from{
+    width: 61.2%;
+    margin: 0 auto;
+    margin-top: 30px;
+    .btc-ticket-flex{
+      position: relative;
+      >div{
+        display: flex;
+      }
+      button{
+        outline: none;
+        background: white;
+        margin-top: 0;
+        padding: 4px 20px;
+        border: 1px solid #dfe0e1;
+        min-width: auto;
+        border-left: none;
+        text-indent: -3px;
+      }
+      .btc-ticket-files{
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        line-height: 33px;
+        padding-left: 6px;
+        >div {
+          color: #000000;
+          margin-left: 15px;
+          font-size: 12px;
+        }
+        span{
+          color: #666666
+        }
+      }
+    }
+    .btc-ticket-explain{
+      font-size: 12px;
+      margin: 10px 0;
+      .btc-basic-button{
+        width: 48%;
+      }
+    }
+    .btc-white-btn{
+      padding: 5px 0;
+      width: 48%;
+      float: right;
+      line-height: 20px;
+      outline: none;
+    }
+    .btc-basic-button{
+      input[type=file]{
+        z-index: 10;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+        left: -90px;
+      }
+    }
+  }
+  i{
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    cursor: pointer;
+    margin-left: 2px;
+  }
+}
+
+.btc-ticket-editDiv{
+  position: relative;
+  span{
+    position: absolute;
+    top: 0;
+    margin-left: 8px;
+    margin-top: 11px;
+    color: #666666;
+  }
+}
+
+.btc-ticket-newDelete{
+  @include sprite($delete);
+}

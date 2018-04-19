@@ -230,6 +230,10 @@ export default {
       var channel = pusher.subscribe(`private-${d.sn}`)
       var MarketChannel = pusher.subscribe(`market-global`)
       channel.bind('deposit_address', (data) => {
+        if (data.attributes.account_id === this.account_id) {
+          this.deposit_address = data.attributes.deposit_address
+          this.deposit_address_display = true
+        }
         if (typeof this.DepositAddress !== 'object') {
           this.DepositAddress = {
             [data.attributes.account_id]: data.attributes.deposit_address
@@ -275,7 +279,6 @@ export default {
           if (data.currency !== 'btc') {
             this.Remain = data.today_withdraw_remain
             this.equivalence = data.today_withdraw_remain_btc
-
           }
         }
         this.Balance = data.balance
@@ -351,6 +354,7 @@ export default {
         point: '.'
       },
       prompt:'',
+      account_id: '',
       usdt_worth: '',
       length: 0,
       DepositAddress: '',
@@ -500,6 +504,7 @@ export default {
             this.Generating()
           }
         }
+        this.account_id = d.account.account_id
         this.confirm_num = d.deposit_max_confirmation
         this.withdraw_fee = d.withdraw_fee
         this.equivalence = (c || 'btc') === 'btc' ? '' : d.today_withdraw_remain_btc
@@ -811,11 +816,12 @@ export default {
         this.route = 'deposit'
         // this.$store.commit('redirect', to)
         if (this.GeneratAddress !== '') {
-          this.GeneratAddress && this.Generating()
+          this.GeneratAddress && !this.deposit_address && this.Generating()
         }
       }
     },
     DepositAddress (to, from) {
+      if (!/deposit/.test(this.$route.path)) return
       if (Object.keys(to).length > Object.keys(from).length) {
         this.deposit_address = to[Object.keys(to)]
         this.deposit_address_display = true

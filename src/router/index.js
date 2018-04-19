@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store'
-const MemberCenter = () => import('Pages/MemberCenter/MemberCenter')
+const MemberCenter = () => import(/* webpackChunkName: "MemberCenter" */ 'Pages/MemberCenter/MemberCenter')
 // validate
-const ValidateEmail = () => import('Pages/Validate/Email/Email')
-const ValidateGoogle = () => import('Pages/Validate/Google/Google')
-const ValidateIdentity = () => import('Pages/Validate/Identity/Identity')
-const WithdrawCurrency = () => import('Pages/WithdrawCurrency/WithdrawCurrency')
-const ValidateSms = () => import('Pages/Validate/Sms/Sms')
+const ValidateEmail = () => import(/* webpackChunkName: "ValidateEmail" */'Pages/Validate/Email/Email')
+const ValidateGoogle = () => import(/* webpackChunkName: "ValidateGoogle" */'Pages/Validate/Google/Google')
+const ValidateIdentity = () => import(/* webpackChunkName: "ValidateIdentity" */'Pages/Validate/Identity/Identity')
+const WithdrawCurrency = () => import(/* webpackChunkName: "WithdrawCurrency" */'Pages/WithdrawCurrency/WithdrawCurrency')
+const ValidateSms = () => import(/* webpackChunkName: "ValidateSms" */'Pages/Validate/Sms/Sms')
 
 const Markets = () => import('Pages/market/mList/mlist')
 const MarketDetail = () => import('Pages/market/mList/marketDetail/market')
@@ -15,9 +15,9 @@ const Trades = () => import('Pages/market/mList/trades/trades')
 const Orders = () => import('Pages/market/mList/orders/orders')
 const Exchanage = () => import('Pages/Exchange/exchange')
 // import MarketList from './components/Pages/market/mList'
-const HomePage = () => import('Pages/HomePage/HomePage')
+const HomePage = () => import(/* webpackChunkName: "HomePage" */'Pages/HomePage/HomePage')
 const Prompt = () => import('Pages/Prompt/Prompt')
-const Page404 = () => import('Pages/Page404/Page404')
+const Page404 = () => import(/* webpackChunkName: "Page404" */'Pages/Page404/Page404')
 
 // Mobile pages
 const Mobile = () => import('Pages/Mobile')
@@ -29,21 +29,21 @@ const MobilePersonal = () => import('Pages/Mobile/Personal/Personal.vue')
 
 // Form
 const Form = () => import('Pages/Form')
-const FormOrder = () => import('Pages/Form/Order/Order.vue')
-const FormNews = () => import('Pages/Form/News/News.vue')
-const FormTrade = () => import('Pages/Form/Trade/Trade.vue')
-const FormAccount = () => import('Pages/Form/Account/Account.vue')
+const FormOrder = () => import(/* webpackChunkName: "FormOrder" */ 'Pages/Form/Order/Order.vue')
+const FormNews = () => import(/* webpackChunkName: "FormNews" */'Pages/Form/News/News.vue')
+const FormTrade = () => import(/* webpackChunkName: "FormTrade" */'Pages/Form/Trade/Trade.vue')
+const FormAccount = () => import(/* webpackChunkName: "FormAccount" */'Pages/Form/Account/Account.vue')
 
 // Api
-const Api = () => import('Pages/Api/RouterView')
-const ApiIndex = () => import('Pages/Api')
-const ApiEdit = () => import('Pages/Api/ApiEdit/ApiEdit')
-const ApiNew = () => import('Pages/Api/ApiNew/ApiNew')
+const Api = () => import(/* webpackChunkName: "Api" */ 'Pages/Api/RouterView')
+const ApiIndex = () => import(/* webpackChunkName: "Api" */ 'Pages/Api')
+const ApiEdit = () => import(/* webpackChunkName: "Api" */ 'Pages/Api/ApiEdit/ApiEdit')
+const ApiNew = () => import(/* webpackChunkName: "Api" */ 'Pages/Api/ApiNew/ApiNew')
 
 // Ticket
-const TicketRouter = () => import('Pages/Ticket/RouterView')
-const TicketIndex = () => import('Pages/Ticket/TicketIndex/TicketIndex')
-const TicketNew = () => import('Pages/Ticket/TicketNew/TicketNew')
+const TicketRouter = () => import(/* webpackChunkName: "Ticket" */'Pages/Ticket/RouterView')
+const TicketIndex = () => import(/* webpackChunkName: "Ticket" */'Pages/Ticket/TicketIndex/TicketIndex')
+const TicketNew = () => import(/* webpackChunkName: "Ticket" */'Pages/Ticket/TicketNew/TicketNew')
 
 Vue.use(Router)
 

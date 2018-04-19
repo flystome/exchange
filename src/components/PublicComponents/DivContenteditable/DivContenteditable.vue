@@ -1,9 +1,13 @@
 <template>
-  <div class="edit-div"
-  v-html="innerText" :contenteditable="canEdit"
-  @focus="isLocked = true"
-  @blur="isLocked = false"
-  @input="changeText">
+  <div>
+    <div class="edit-div"
+    v-html="innerText" :contenteditable="canEdit"
+    :value='value'
+    @focus="isLocked = true"
+    @blur="isLocked = false"
+    @input="changeText">
+    </div>
+    <slot v-if="!value" name='placeholder'></slot>
   </div>
 </template>
 
@@ -18,6 +22,9 @@ export default {
     canEdit: {
       type: Boolean,
       default: true
+    },
+    placeholder: {
+      type: String
     }
   },
   data () {
@@ -35,7 +42,7 @@ export default {
   },
   methods: {
     changeText () {
-      this.$emit('input', this.$el.innerHTML)
+      this.$emit('input', this.$el.children[0].innerHTML)
     }
   }
 }

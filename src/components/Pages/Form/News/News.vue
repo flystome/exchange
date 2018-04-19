@@ -28,7 +28,7 @@
       </header>
       <vue-simple-spinner class="btc-marginT100" size="88" v-if="loading"></vue-simple-spinner>
       <div class="btc-news" v-if="!loading">
-        <div class="btc-news-block" v-for="(d, index) in xhrData" @click="addClearList(d.id, index)" :key="d.id">
+        <div class="btc-news-block" :class="{'btc-news-read': !d.unread}" v-for="(d, index) in xhrData" @click="addClearList(d.id, index)" :key="d.id">
           <section class="btc-fl">
             <header>
               <i v-if="d.unread" class="btc-news-unread"></i>

@@ -218,6 +218,7 @@ const zh = {
     "ticket": "服務單",
     "ticket_open": "未結束服務單",
     "ticket_closed": "已結束服務單",
+    "ticket_new": "新建服務單"
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",
@@ -534,6 +535,7 @@ const zh = {
     "ip_input": "IP 地址以逗號分隔，不填表示任何 IP 都可使用該密匙"
   },
   "ticket": {
+    "ticket": "服務單",
     "open_tickets": "未結束服務單",
     "closed_tickets": "已結束服務單",
     "new_ticket": "新建服務單",

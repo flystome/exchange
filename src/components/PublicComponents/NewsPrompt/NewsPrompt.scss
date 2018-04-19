@@ -5,10 +5,13 @@
 }
 .prompt-enter, .prompt-leave-to {
   transform: translateX(30px);
+  position: absolute;
   opacity: 0;
 }
 
 .btc-newsPrompt{
   height: 13px;
   display: inline-block;
+  position: relative;
+  width: 100%;
 }
