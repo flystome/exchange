@@ -9,6 +9,9 @@
       background: #38475a;
       font-size: 12px;
       padding-right: 5px;
+      &.price {
+        position: relative;
+      }
       input {
         background: none;
         outline: none;
@@ -29,6 +32,17 @@
         width: 40px;
         text-align: right;
         line-height: 28px;
+      }
+      .warning {
+        position: absolute;
+        width: 100%;
+        top: 28px;
+        left: 0;
+        height: 18px;
+        text-align: center;
+        background: #fc4a4a;
+        color: #fff;
+        z-index: 20;
       }
     }
     .percent {
@@ -56,8 +70,20 @@
       line-height: 20px;
       margin-top: 15px;
       margin-bottom: 15px;
+      div {
+        display: inline-block;
+        i {
+          margin-right: 3px;
+        }
+      }
       .myTotal {
         float: right;
+      }
+      .success {
+        color: #41ca1b;
+      }
+      .fail {
+        color: #ff1e00;
       }
     }
     .btn {
@@ -92,6 +118,24 @@
       width: 100%;
       height: 100%;
       background: rgba(0,0,0,0.3);
+    }
+    .tip_info {
+      position: absolute;
+      z-index: 11;
+      background: #38475a;
+      width: 280px;
+      height: 100px;
+      left: 50%;
+      top: 50%;
+      margin-left: -140px;
+      margin-top: -50px;
+      color: #fff;
+      box-shadow: 0 0 2px #000;
+      p {
+        line-height: 100px;
+        text-align: center;
+        font-size: 16px;
+      }
     }
     .dia_content {
       position: absolute;

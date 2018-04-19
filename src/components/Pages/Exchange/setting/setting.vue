@@ -8,10 +8,20 @@
         <a @click="changeLang(locale.language)">{{locale.name}}</a>
       </li> -->
       <li>
-        <input type="checkbox" name="sound-checkbox" data-size='mini' data-on-color='success'>
+        <!-- <transition name="move"> -->
+        <div class="switch clearfix" :class="{'move-left': move1, 'move-zero': !move1}" @click.prevent='move1=!move1'>
+          <a href="###" class="on">ON</a>
+          <span>音效</span>
+          <a href="###" class="off">OFF</a>
+        </div>
+        <!-- </transition> -->
       </li>
       <li>
-        <input type="checkbox" name="notification-checkbox" data-size='mini' data-on-color='success'>
+        <div class="switch clearfix" :class="{'move-left': move2, 'move-zero': !move2}" @click.prevent='move2=!move2'>
+          <a href="###" class="on">ON</a>
+          <span>通知</span>
+          <a href="###" class="off">OFF</a>
+        </div>
       </li>
       <li><span class="fa fa-cogs"></span>{{$t('exchange.setting')}}</li>
       <li><span class="fa fa-history"></span>{{$t('exchange.history')}}</li>
@@ -27,7 +37,8 @@ export default {
   props: ['loginData'],
   data () {
     return {
-
+      move1: false,
+      move2: false
     }
   },
   computed: {

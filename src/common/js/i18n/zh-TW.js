@@ -313,6 +313,8 @@ const zh = {
       'price': '成交價',
       'volume': '成交量'
     },
+    'success': "下单成功",
+    'fail': "下单失败",
     'setting': '賬戶設置',
     'history': '歷史記錄',
     'signout': '安全退出',
@@ -324,6 +326,8 @@ const zh = {
     'volume': '数量',
     "buy": "買入",
     "sell": "賣出",
+    'marketClose':'市场暂时关闭',
+    'priceWarn': '偏離現價10%，請核准！',
     'myorder': {
       'pending': '當前委託',
       'history': '歷史委託',

@@ -24,51 +24,59 @@
       }
     }
     &.bd {
-      height: 160px;
-      overflow: hidden;
+      // height: 160px;
+      // overflow: hidden;
+    }
+    div {
+      display: inline-block;
+      float: left;
+      color: #fff;
+      font-size: 12px;
+      text-align: right;
+      :last-child {padding-right: 5px;}
+    }
+    .time {
+      width: 14%;
+      color: #728eaa;
+      text-align: left;
+    }
+    .market {
+      width: 12%;
+    }
+    .type {
+      width: 8%;
+      text-align: center;
+    }
+    .price {
+      width: 10%;
+    }
+    .volume {
+      width: 14%;
+    }
+    .percent {
+      width: 10%;
+      color: #728eaa;
+    }
+    .traded {
+      width: 14%;
+    }
+    .status {
+      width: 12%;
+      color: #728eaa;
+    }
+    .cancel {
+      width: 6%;
+      color: #4382f7;
+      text-align: center;
+      cursor: pointer;
     }
   }
-  div {
-    display: inline-block;
-    float: left;
-    color: #fff;
-    font-size: 12px;
-    text-align: right;
-  }
-  .time {
-    width: 14%;
-    color: #728eaa;
-    text-align: left;
-  }
-  .market {
-    width: 12%;
-  }
-  .type {
-    width: 8%;
-    text-align: center;
-  }
-  .price {
-    width: 10%;
-  }
-  .volume {
-    width: 14%;
-  }
-  .percent {
-    width: 10%;
-    color: #728eaa;
-  }
-  .traded {
-    width: 14%;
-  }
-  .status {
-    width: 12%;
-    color: #728eaa;
-  }
-  .cancel {
-    width: 6%;
-    color: #4382f7;
-    text-align: center;
-    cursor: pointer;
+  .myScroll {
+    width: 100%;
+    background: none;
+    max-height: 160px;
+    margin-right: -5px;
+    padding-right: 5px;
   }
 }
 .orderList.notPending {

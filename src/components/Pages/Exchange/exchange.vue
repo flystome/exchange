@@ -6,7 +6,7 @@
       </router-link>
       <lastPrice :market="market"></lastPrice>
       <div class="header_rt">
-        <account :totalAssets='total_assets' :accounts='accounts'></account>
+        <account :totalAssets='total_assets' :accounts='accounts' :market='market'></account>
         <setting :loginData='loginData'></setting>
         <language></language>
       </div>
@@ -36,12 +36,15 @@
       </div>
     </section>
     <section class="list">
+      <audio id="order">
+        <source src="Audio/order.wav" type="audio/mp3" />
+      </audio>
       <div class="list_lt w240">
         <div class="list_box trades">
           <trades :depthData='depth_data' :market='market'></trades>
         </div>
         <div class="order buy">
-          <order :market='market' :type='"buy"' :accounts='accounts'></order>
+          <order :market='market' :type='"buy"' :accounts='accounts' @play='play'></order>
         </div>
       </div>
       <div class="list_rt w240">
@@ -59,7 +62,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import pusher from '@/common/js/pusher'
-// import scrollbar from 'vue2-scrollbar'
+import 'vue2-scrollbar/dist/style/vue2-scrollbar.css'
 
 import lastPrice from './lastPrice/lastPrice'
 import language from './language/language'
@@ -235,13 +238,10 @@ export default {
           var asks = this.addOrderList(res.asks, this.depth_data.asks)
           var bids = this.addOrderList(res.bids, this.depth_data.bids)
           this.version = res.u
-          console.log(res.asks)
           this.depth_data = Object.assign({}, this.depth_data, {'asks': asks.reverse(), 'bids': bids})
-          console.log(this.depth_data)
         } else if (res.U > this.version + 1) {
           var lost1 = this.addOrderList(res.asks, lost.asks)
           var lost2 = this.addOrderList(res.bids, lost.bids)
-          console.log(lost1, lost2)
           if (lost.U === 0) lost.U = res.U
           lost.u = Math.max(lost.u, res.u)
           this._get({
@@ -339,11 +339,9 @@ export default {
         this.isMine(res, 'trade')
       })
       privateAccount.bind('account', (res) => {
-        console.log(res)
         this.accounts[res.currency].balance = res.balance
         this.accounts[res.currency].locked = res.locked
         this.accounts = Object.assign({}, this.accounts)
-        console.log(this.accounts)
       })
     },
     isMine (data, from) {
@@ -361,6 +359,10 @@ export default {
           }
         })
       }
+    },
+    play () {
+      var order = document.getElementById('order')
+      order.play()
     }
   }
 }

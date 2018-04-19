@@ -33,7 +33,7 @@
     .hd {
       div {
         display: inline-block;
-        width: 33.3%;
+        width: 32%;
         float: left;
         text-align: center;
         color: #49627b;
@@ -44,6 +44,7 @@
         }
         &:last-child {
           text-align: right;
+          width: 34%;
         }
       }
     }
@@ -62,7 +63,7 @@
       }
       div {
         display: inline-block;
-        width: 33.3%;
+        width: 32%;
         float: left;
         text-align: center;
         color: #fff;
@@ -75,6 +76,7 @@
         &:last-child {
           text-align: right;
           color: #728eaa;
+          width: 34%;
         }
       }
       &.buy {

@@ -96,4 +96,16 @@
       }
     }
   }
+  .vue-scrollbar__scrollbar-vertical:hover, .vue-scrollbar__scrollbar-horizontal {
+    background: none;
+    width: 5px;
+  }
+  .vue-scrollbar__scrollbar-vertical .scrollbar {
+    width: 5px;
+    background: #38475a;
+    border-radius: 2px;
+  }
+  .vue-scrollbar__scrollbar-vertical {
+    width: 5px;
+  }
 }

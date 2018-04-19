@@ -2,7 +2,7 @@
   <section id="order">
     <div class="dialog" v-show='showDialog'>
       <div class="mask"></div>
-      <div class="dia_content">
+      <div class="dia_content" v-if="ordering">
         <div class="text">
           <h4>{{$t('markets.confirm')}}{{$t('markets.dialog.' + order_type)}}</h4>
           <ul v-if="order_type === 'buy'">
@@ -23,11 +23,15 @@
           <span class="cancel" @click="confirmTrade(false)">{{$t('markets.cancel')}}</span>
         </div>
       </div>
+      <div class="tip_info" v-if='tips'>
+        <p class="market_close">{{$t('exchange.marketClose')}}</p>
+      </div>
     </div>
     <div class="buy handleOrder" v-if='type==="buy"'>
       <div class="price put">
         <input type="text" ref='buyPrice' v-model='buyPrice' @change='handlePrice($event.target.value, "buy")' :placeholder="$t('markets.price')">
         <span>{{market.base_currency | upper}}</span>
+        <div class="warning" v-if='buywarning'>{{$t('exchange.priceWarn')}}</div>
       </div>
       <div class="volume put">
         <input type="text" ref="buyVolume" v-model='buyVolume' @change='handleVol($event.target.value, "buy")' :placeholder="$t('exchange.volume')">
@@ -41,6 +45,8 @@
         <span v-for='item in percent' :key='"btn"+item[1]' @click="addInputs(item[1])">{{item[0]}}</span>
       </div>
       <div class="tip">
+        <div class="success" v-if='buySuccess'><i class="fa fa-check"></i>{{$t('exchange.success')}}</div>
+        <div class="fail" v-if='buyFail'><i class="fa fa-close"></i>{{$t('exchange.fail')}}</div>
         <div class="myTotal">{{buyAccount | fixedNum(market.price_fixed, market.volume_fixed)}} {{market.base_currency | upper}}</div>
       </div>
       <a class="buy_btn btn" href="###" @click.prevent="orderBid()">{{$t('exchange.buy')}}{{market.quote_currency | upper}}</a>
@@ -49,6 +55,7 @@
       <div class="price put">
         <input type="text" ref="sellPrice" step="0.00000001" v-model='sellPrice' @change='handlePrice($event.target.value, "sell")' :placeholder="$t('markets.price')">
         <span>{{market.base_currency | upper}}</span>
+        <div class="warning" v-if='sellwarning'>{{$t('exchange.priceWarn')}}</div>
       </div>
       <div class="volume put">
         <input type="text" ref="sellVolume" step="0.00000001" v-model='sellVolume' @change='handleVol($event.target.value, "sell")' :placeholder="$t('exchange.volume')">
@@ -62,6 +69,8 @@
         <span v-for='item in percent' :key='"btn"+item[1]' @click="addInputs(item[1])">{{item[0]}}</span>
       </div>
       <div class="tip">
+        <div class="success" v-if='sellSuccess'><i class="fa fa-check"></i>{{$t('exchange.success')}}</div>
+        <div class="fail" v-if='sellFail'><i class="fa fa-close"></i>{{$t('exchange.fail')}}</div>
         <div class="myTotal">{{sellAccount | fixedNum(market.volume_fixed)}} {{market.quote_currency | upper}}</div>
       </div>
       <a class="sell_btn btn" @click.prevent="orderAsk()">{{$t('exchange.sell')}}{{market.quote_currency | upper}}</a>
@@ -90,7 +99,15 @@ export default {
       showDialog: false,
       order_type: 'buy',
       isDisabled: true,
-      percent: [['1/4', 0.25], ['1/3', 0.333], ['1/2', 0.5], ['All', 1]]
+      percent: [['1/4', 0.25], ['1/3', 0.333], ['1/2', 0.5], ['All', 1]],
+      sellSuccess: false,
+      sellFail: false,
+      buySuccess: false,
+      buyFail: false,
+      tips: false,
+      ordering: false,
+      buywarning: false,
+      sellwarning: false
     }
   },
   mounted () {
@@ -146,6 +163,11 @@ export default {
     },
     handlePrice (value, type) {
       this[type + 'Price'] = this.fixNum(value, this.market.price_fixed)
+      var distance = Math.abs(this[type + 'Price'] - this.market.last) / this.market.last
+      if (distance > 0.1) {
+        this[type + 'warning'] = true
+        this.resetOrderStatus()
+      }
       if (this[type + 'Volume']) {
         var num = this.fixNum(this[type + 'Volume'] * value, this.market.volume_fixed, this.market.price_fixed)
         this[type + 'Total'] = num
@@ -202,7 +224,9 @@ export default {
             origin_volume: this.buyVolume
           }
         }
-      }, this.orderCallback)
+      }, (data) => {
+        this.orderCallback(data, 'buy')
+      })
     },
     confirmSell: function (bool) {
       this._post({
@@ -214,17 +238,40 @@ export default {
             origin_volume: this.sellVolume
           }
         }
-      }, this.orderCallback)
+      }, (data) => {
+        this.orderCallback(data, 'sell')
+      })
     },
-    orderCallback: function (data) {
+    orderCallback (data, type) {
+      console.log(data, type)
       if (data.status === 200) {
         this.isDisabled = false
         this.resetForm()
         this.status = 'success'
+        this[type + 'Success'] = true
+        this.resetOrderStatus()
+        this.$emit('play')
+      } else if (data.status === 1102) {
+        location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
+      } else if (data.status === 1002) {
+        this.showDialog = true
+        this.ordering = false
+        this.tips = true
       } else {
+        this[type + 'Fail'] = true
         this.isDisabled = false
         this.status = 'fail'
+        this.resetOrderStatus()
       }
+    },
+    play (obj) {
+      obj.play()
+    },
+    resetOrderStatus () {
+      var time = setTimeout(() => {
+        [this.buySuccess, this.buyFail, this.sellSuccess, this.sellFail, this.sellwarning, this.buywarning] = []
+        clearTimeout(time)
+      }, 5000)
     },
     loginCheck: function () {
       if (this.sn === 'unlogin') {
@@ -238,6 +285,8 @@ export default {
       }
       this.order_type = 'buy'
       this.showDialog = true
+      this.ordering = true
+      this.tips = false
       // this.isDisabled = true
     },
     orderAsk: function () {
@@ -247,6 +296,8 @@ export default {
       }
       this.order_type = 'sell'
       this.showDialog = true
+      this.ordering = true
+      this.tips = false
       // this.isDisabled = false
     },
     resetForm () {

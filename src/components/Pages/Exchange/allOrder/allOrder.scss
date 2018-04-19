@@ -50,4 +50,11 @@
       }
     }
   }
+  .myScroll {
+    width: 100%;
+    background: none;
+    max-height: calc(100% - 35px);
+    margin-right: 0;
+    padding-right: 2px;
+  }
 }

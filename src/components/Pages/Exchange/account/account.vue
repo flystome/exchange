@@ -1,7 +1,7 @@
 <template>
   <div class="account">
     <a class="dropdown-toggle account_btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-      <span>{{ totalAssets.btc_worth }} BTC</span>
+      <span>{{ totalAssets.btc_worth | fixedNum(8)}} BTC</span>
     </a>
     <div class="dropdown-menu text-center">
       <table>
@@ -28,14 +28,21 @@
 
 export default {
   name: 'account',
-  props: ['totalAssets', 'accounts'],
+  props: ['totalAssets', 'accounts', 'market'],
   data () {
     return {
-
+      accountsList: []
     }
   },
   computed: {
     // ...mapGetters(['loginData']),
+  },
+  watch: {
+    accounts (val) {
+    //   console.log(val)
+    //   this.accountsList[0] = val[this.market.base_currency]
+    //   this.accountsList[1] = val[this.market.quote_currency]
+    }
   }
 }
 </script>

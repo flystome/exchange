@@ -314,6 +314,8 @@ const en = {
         'price': 'Price',
         'volume': 'Volume'
       },
+      'success': "Success",
+      'fail': "Fail",
       'setting': 'Profile',
       'history': 'History',
       'signout': 'Sign Out',
@@ -325,6 +327,8 @@ const en = {
       'volume': 'Volume',
       'sell': 'Sell ',
       'buy': 'Buy ',
+      'marketClose':'Market Paused',
+      'priceWarn': 'Price deviates too much!',
       'myorder': {
         'pending': 'Pending Orders',
         'history': 'History Orders',

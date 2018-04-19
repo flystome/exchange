@@ -339,8 +339,9 @@ export default {
           since_date: time,
           market: this.curMarket
         }
-      }, function (data) {
-        self.trades = data.data.trades
+      }, function (res) {
+        self.trades = res.data.trades
+        console.log(self.trades)
       })
     },
     getRefresh: function (sn) {

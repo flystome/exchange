@@ -7,7 +7,7 @@
     <div class="marketBd">
       <marketList :curData = "curData[currencyindex]"></marketList>
     </div>
-    <vue-simple-spinner v-if='!curData' size="66" class="loading"></vue-simple-spinner>
+    <vue-simple-spinner v-if='curData.length === 0' size="66" class="loading"></vue-simple-spinner>
   </div>
 </template>
 <script>
