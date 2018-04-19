@@ -26,7 +26,7 @@
         <li @click="goMore">{{$t('exchange.myorder.more')}}</li>
       </ul>
       <ul class="tab_hd">
-        <li v-for="(head, index) in heads" :key='$t(head)' :class="{'on': index === currencyIndex}" @click='changeTab(index)'>{{$t(head)}}</li>
+        <li v-for="(head, index) in heads" :key='"head"+index' :class="{'on': index === currencyIndex}" @click='changeTab(index)'>{{$t(head)}}</li>
       </ul>
     </div>
     <div class="tab_bd">

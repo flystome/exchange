@@ -335,7 +335,7 @@ const zh = {
       'buy': '買',
       'sell': '賣',
       'all': '全部',
-      'cancle_one': '取消',
+      'cancel_one': '取消',
       'cancel_all': "取消全部訂單",
       'last3': '三天',
       'last7': '七天',

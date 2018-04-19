@@ -7,7 +7,7 @@
       <lastPrice :market="market"></lastPrice>
       <div class="header_rt">
         <account :totalAssets='total_assets' :accounts='accounts' :market='market'></account>
-        <setting :loginData='loginData'></setting>
+        <setting :loginData='loginData' @controlSound='controlSound'></setting>
         <language></language>
       </div>
     </header>
@@ -92,7 +92,8 @@ export default {
       depth_data: [],
       sn: '',
       my_trades: [],
-      version: 0
+      version: 0,
+      controlSound: true
     }
   },
   components: {
@@ -271,6 +272,7 @@ export default {
       })
     },
     addOrderList (origin, target) {
+      console.log(origin, target)
       if (origin && origin.length !== 0) {
         origin.map((ele1) => {
           var b = target.some((ele2) => ele1[0] === ele2[0])
@@ -362,9 +364,14 @@ export default {
         })
       }
     },
+    controlSound (bool) {
+      this.controlSound = bool
+    },
     play (id) {
-      var order = document.getElementById(id)
-      order.play()
+      if (this.controlSound) {
+        var order = document.getElementById(id)
+        order.play()
+      }
     }
   }
 }
