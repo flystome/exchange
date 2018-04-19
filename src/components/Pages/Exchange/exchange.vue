@@ -93,7 +93,7 @@ export default {
       sn: '',
       my_trades: [],
       version: 0,
-      controlSound: true
+      soundAllow: true
     }
   },
   components: {
@@ -272,7 +272,6 @@ export default {
       })
     },
     addOrderList (origin, target) {
-      console.log(origin, target)
       if (origin && origin.length !== 0) {
         origin.map((ele1) => {
           var b = target.some((ele2) => ele1[0] === ele2[0])
@@ -297,14 +296,14 @@ export default {
       return target
     },
     clearZero (arr) {
-      var k = 0
-      arr.map((ele, i) => {
-        if (+ele[1] === 0) {
-          arr.splice(i - k, 1)
-          k++
+      var len = arr.length
+      var arr0 = []
+      for (let i = 0; i < len; i++) {
+        if (+arr[i][1] !== 0) {
+          arr0.push(arr[i])
         }
-      })
-      return arr
+      }
+      return arr0
     },
     privateRefresh (sn) {
       var privateAccount = pusher.subscribe('private-' + sn)
@@ -365,10 +364,10 @@ export default {
       }
     },
     controlSound (bool) {
-      this.controlSound = bool
+      this.soundAllow = bool
     },
     play (id) {
-      if (this.controlSound) {
+      if (this.soundAllow) {
         var order = document.getElementById(id)
         order.play()
       }

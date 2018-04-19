@@ -114,32 +114,6 @@ export default {
       return val
     }
   },
-  filters: {
-    upper: function (params) {
-      if (!params || params === '/' || params === 'undefined/undefined') return '--'
-      return params.toUpperCase()
-    },
-    time: function (params) {
-      var d = new Date(params * 1000)
-      var y = d.getFullYear()
-      var m = d.getMonth() + 1 > 10 ? d.getMonth() + 1 : '0' + (d.getMonth() + 1)
-      var day = d.getDate() > 10 ? d.getDate() : '0' + d.getDate()
-      var h = d.getHours() > 10 ? d.getHours() : '0' + d.getHours()
-      var min = d.getMinutes() > 10 ? d.getMinutes() : '0' + d.getMinutes()
-      var s = d.getSeconds() > 10 ? d.getSeconds() : '0' + d.getSeconds()
-      return y + '-' + m + '-' + day + ' ' + h + ':' + min + ':' + s
-    },
-    fixedNum: function (params, num, num2) {
-      if (+params <= 0 || !params) return 0
-      if (!num) num = 6
-      if (num2) {
-        num = num > num2 ? num : num2
-      }
-      var value = (+Math.floor(params * Math.pow(10, num)) / Math.pow(10, num)).toFixed(num)
-      if (value.length >= 14) value = (+value).toFixed(num - 2)
-      return value
-    }
-  },
   methods: {
     fetchData: function () {
       var self = this

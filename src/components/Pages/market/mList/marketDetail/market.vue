@@ -57,7 +57,7 @@
         <li v-for="item in trades" :key="item.tid">
           <div class="order_price" :class="{'text-up': item.type === 'buy', 'text-down': item.type === 'sell'}">{{item.price | fixedNum(market.price_fixed)}}</div>
           <div class="order_amount">{{item.amount | fixedNum(market.volume_fixed)}}</div>
-          <div class="order_time">{{+item.date*1000 | time}}</div>
+          <div class="order_time">{{+item.date*1000 | dayTime}}</div>
         </li>
       </ul>
     </div>
@@ -93,30 +93,6 @@ export default {
   },
   mounted: function () {
     this.init()
-  },
-  filters: {
-    fixed2: function (params) {
-      if (!params) return 0
-      return (+params).toFixed(2)
-    },
-    upper: function (params) {
-      if (!params || params === '/' || params === 'undefined/undefined') return '--'
-      return params.toUpperCase()
-    },
-    fixedNum: function (params, num, num2) {
-      if (+params <= 0 || !params) return 0
-      if (!num) num = 6
-      if (num2) {
-        num = num > num2 ? num : num2
-      }
-      var value = (+Math.floor(params * Math.pow(10, num)) / Math.pow(10, num)).toFixed(num)
-      if (value.length >= 14) value = (+value).toFixed(num - 2)
-      return value
-    },
-    time: function (date) {
-      var d = new Date(date).toString()
-      return d.split(' ')[4]
-    }
   },
   watch: {
     '$route' (to, from) {

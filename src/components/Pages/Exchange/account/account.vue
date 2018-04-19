@@ -33,9 +33,6 @@ export default {
     return {
 
     }
-  },
-  computed: {
-    // ...mapGetters(['loginData']),
   }
 }
 </script>

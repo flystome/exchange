@@ -1,9 +1,9 @@
 <template>
-  <div id="setting" @mouseenter='show=true;animate1=false;animate2=false' @mouseleave='show=false;'>
+  <div id="setting" @mouseenter='show=true;animate2=false' @mouseleave='show=false;'>
     <a class="dropdown-toggle setting_btn" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
       <span class="fa fa-user"></span><span>{{ loginData.show_name }}</span>
     </a>
-    <ul class="dropdown text-center" v-if='show'>
+    <ul class="dropdown text-center" v-show='show'>
       <li>
         <div class="switch clearfix" :class="{'move-left': move1 && animate1, 'move-zero': !move1 && animate1}" @click.prevent='sound'>
           <a href="###" class="on">ON</a>
@@ -34,8 +34,8 @@ export default {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       move1: false,
       move2: false,
-      animate1: true,
-      animate2: true,
+      animate1: false,
+      animate2: false,
       show: false
     }
   },

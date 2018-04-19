@@ -146,7 +146,7 @@
           <li v-for="item in trades" :key="'id'+item.id" >
             <div class="order_price" :class="{'text-up': item.kind === 'bid', 'text-down': item.kind === 'ask'}">{{item.price | fixedNum(market.price_fixed)}}</div>
             <div class="order_amount">{{item.origin_volume - item.volume | fixedNum(market.volume_fixed)}}</div>
-            <div class="order_time">{{+item.at*1000 | time}}</div>
+            <div class="order_time">{{+item.at | time}}</div>
           </li>
         </transition-group>
       </ul>
@@ -238,30 +238,6 @@ export default {
           this.amount_sell = val
         }
       }
-    }
-  },
-  filters: {
-    upper: function (params) {
-      if (!params || params === '/' || params === 'undefined/undefined') return '--'
-      return params.toUpperCase()
-    },
-    fixedNum: function (params, num, num2) {
-      if (+params <= 0 || !params) return 0
-      if (!num) num = 6
-      if (num2) {
-        num = num > num2 ? num : num2
-      }
-      var value = (+Math.floor(params * Math.pow(10, num)) / Math.pow(10, num)).toFixed(num)
-      if (value.length >= 14) value = (+value).toFixed(num - 2)
-      return value
-    },
-    time: function (date) {
-      var d = new Date(date)
-      var y = d.getFullYear()
-      var m = d.getMonth() + 1
-      var day = d.getDate()
-      var time = d.toString().split(' ')[4]
-      return y + '-' + (m > 9 ? m : '0' + m) + '-' + (day > 9 ? day : '0' + day) + ' ' + time
     }
   },
   methods: {
