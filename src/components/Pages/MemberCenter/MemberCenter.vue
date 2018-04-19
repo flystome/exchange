@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="btc-member-center container">
-      <div v-if="!(step === 2 && fromApp) " class="btc-container-block btc-membercenter-header" :class="{'btc-member-padding' : step === 2}">
+      <div v-if="!(step === 1 && fromApp) " class="btc-container-block btc-membercenter-header" :class="{'btc-member-padding' : step === 1}">
         <div class="col-md-6">
           <div class="btc-member-info">
             <span class="btc-member-infoEmail">{{ loginData.show_name }}</span>
@@ -11,14 +11,22 @@
           </div>
         </div>
         <div class="btc-member-bt">
-          <span @click="account" :class="{'btc-link': step === 1 }">{{$t("my_account.account")}}</span>
+          <!-- <span @click="account" :class="{'btc-link': step === 1 }">{{$t("my_account.account")}}</span>
           <span>|</span>
           <span @click="referrals" :class="{'btc-link': step === 2 }">
             {{$t('my_account.recommended_statistics')}}
-          </span>
+          </span> -->
+          <menu-underline
+          ref="menu"
+          v-model='step'
+          :menu-index='step'
+          :underline-margin="'5px'"
+          :menu-margin="'24px'"
+          :menu-list="[$t('my_account.account'), $t('my_account.recommended_statistics')]">
+          </menu-underline>
         </div>
       </div>
-      <div class="btc-member-ver" v-if="step === 1">
+      <div class="btc-member-ver" v-if="step === 0">
         <div class="media">
           <div>
             <div class="media-left sprite-member-email">
@@ -91,7 +99,7 @@
         </div>
       </div>
     </div>
-    <template v-if="step === 1">
+    <template v-if="step === 0">
       <div class="container table">
       <basic-table :captionTitle='getLoginRecord.captionTitle' :item='getLoginRecord.Item'>
       <a :href="`${HOST_URL}/tickets/new`" slot="remark" class="btc-tableRemark">{{$t('my_account.have_questions_to_contact_us')}}</a>
@@ -129,7 +137,7 @@
       </div>
       </div>
     </template>
-    <template v-if="step === 2">
+    <template v-if="step === 1">
       <div class="container">
         <div class="btc-container-block btc-member-handleRecord btc-referral">
           <div class="btc-member-blockHeader">
@@ -185,14 +193,6 @@ var QRCode = require('qrcode')
 export default {
   name: 'MemberCenter',
   created () {
-    var to = this.$route
-    if (/my_account/.test(to.path)) {
-      this.step = 1
-    }
-    if (/referral/.test(to.path)) {
-      this.step = 2
-      this.referrals()
-    }
     var code = Cookies.get('code')
     this.$i18n.locale = Cookies.get('locale')
     if (code) {
@@ -219,6 +219,14 @@ export default {
       this.prompt = this.$t('deposit_currency.copy_success')
     })
     clipboard.on('success', _debounce(500, time))
+
+    var to = this.$route
+    if (/my_account/.test(to.path)) {
+      this.step = 0
+    }
+    if (/referral/.test(to.path)) {
+      this.step = 1
+    }
   },
   data () {
     return {
@@ -229,7 +237,7 @@ export default {
       wexin_activated: false,
       email_sent_message: this.$t('my_account.email_sent_message'),
       tickets: [],
-      step: 1,
+      step: 0,
       referral_loading: true,
       disabled: false,
       getRecommendCount: {
@@ -259,11 +267,11 @@ export default {
     async referrals () {
       this.$router.push(`${this.ROUTER_VERSION}/referral`)
       if (this.httplock) return
+      this.httplock = true
       this._get({
         url: '/settings/referrals.json'
       }, (d) => {
         this.referral_loading = false
-        this.httplock = true
         var data = d.data
 
         var obj = {
@@ -436,7 +444,7 @@ export default {
     $route (to) {
       if (/my_account/.test(to.path)) {
         this.headerStatus = true
-        this.step = 1
+        this.step = 0
       }
       if (/referral/.test(to.path)) {
         if (this.Pc) {
@@ -444,7 +452,14 @@ export default {
         } else {
           this.headerStatus = true
         }
-        this.step = 2
+        this.step = 1
+      }
+    },
+    step () {
+      if (this.step === 0) {
+        this.account()
+      } else {
+        this.referrals()
       }
     }
   }

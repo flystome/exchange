@@ -12,8 +12,8 @@
               {{$t('withdraw_currency.frozen_assets')}} {{ LockAssets }} BTC
             </a>
           </div>
-          <div class="btc-fr">
-          <router-link :to="`${ROUTER_VERSION}/currency/deposit`" class="btc-poniter" :class="{'btc-link':route === 'deposit'}">
+        <div class="btc-fr">
+          <!-- <router-link :to="`${ROUTER_VERSION}/currency/deposit`" class="btc-poniter" :class="{'btc-link':route === 'deposit'}">
             <strong>
               {{ $t('withdraw_currency.deposit') }}
             </strong>
@@ -23,7 +23,15 @@
             <strong>
               {{ $t('withdraw_currency.withdraw') }}
           </strong>
-          </router-link>
+          </router-link> -->
+          <menu-underline
+          ref="menu"
+          v-model='step'
+          :menu-index='step'
+          :underline-margin="'5px'"
+          :menu-margin="'24px'"
+          :menu-list="[$t('withdraw_currency.deposit'), $t('withdraw_currency.withdraw')]">
+          </menu-underline>
         </div>
       </div>
     </div>
@@ -335,6 +343,7 @@ export default {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       redirectLock: false,
       TotalAssetsa: 0,
+      step: 0,
       warn: {
         length: 0,
         message: '',
@@ -783,6 +792,15 @@ export default {
       this.prompt = this.$t('deposit_currency.copy_success')
     })
     clipboard.on('success', _debounce(500, time))
+
+    if (/withdraw/.test(this.$route.path)) {
+      this.step = 1
+    } else if (/deposit/.test(this.$route.path)) {
+      this.step = 0
+      if (this.GeneratAddress !== '') {
+        this.GeneratAddress && this.Generating()
+      }
+    }
   },
   watch: {
     $route (to) {
@@ -814,6 +832,13 @@ export default {
             buttondisplay: true
           })
         }, 2000)
+      }
+    },
+    step () {
+      if (this.step === 0) {
+        this.$router.push(`${this.ROUTER_VERSION}/currency/deposit`)
+      } else {
+        this.$router.push(`${this.ROUTER_VERSION}/currency/withdraw`)
       }
     }
   }

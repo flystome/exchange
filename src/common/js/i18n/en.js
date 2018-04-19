@@ -160,6 +160,7 @@ const en = {
       "canceled": "Canceled",
       "submitting": "Submitting",
       "submitted": "Submitted",
+      "confirming": "Confirming",
       "accepted": "Accepted",
       "suspect": "Suspicious",
       "rejected": "Rejected",

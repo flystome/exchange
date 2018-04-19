@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="btc-ticket-container">
     <header class="btc-ticket-header">
       <div class="btc-ticket-slide">
         <menu-underline
@@ -109,4 +109,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "./TicketIndex.scss"
+</style>
+
+<style lang="css">
+.btc-ticket-container nav li {
+  font-weight: 700
+}
 </style>

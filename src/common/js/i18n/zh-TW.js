@@ -157,6 +157,7 @@ const zh = {
     "resend": "重發",
     "temporarily_can_not_withdraw": "暫時不能提取",
     "canceled": "已取消",
+    "confirming": "確認中",
     "submitting": "待確認",
     "submitted": "已提交",
     "accepted": "已接受",
