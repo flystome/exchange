@@ -6,12 +6,12 @@
           <li class='btc-marginL30 btc-marginT30'>
             {{ loginData.show_name }}
           </li>
-          <!-- <li>
+          <li v-if="loginData !== 'none'">
             <span @click="validateEmail">
               <i class="sideslip-assets"></i>
               {{ $t('side_slip_menu.asset_management') }}
             </span>
-          </li> -->
+          </li>
           <li class="text-center">
             <div v-if="loginData === 'none'">
               <span style="margin-right: 23%;">
@@ -62,10 +62,10 @@
               </li>
             </ul>
           </li>
-          <!-- <li @click="validate()">
+          <li v-if="loginData !== 'none'" @click="validate()">
             <i class='sideslip-myaccount' />
             {{ $t('side_slip_menu.my_account') }}
-          </li> -->
+          </li>
           <li :class="{'btc-sideslip-marignB0': Lang}">
             <div @click="Lang = !Lang">
               <i class='sideslip-lang' /> {{ $t('side_slip_menu.language') }}

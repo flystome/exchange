@@ -34,8 +34,8 @@
             <div v-else-if="Number(item.percent) < 0"><span style="background:#00c4a2">{{ Number(item.percent).toFixed(2) }}%</span></div>
             <div v-else><span style="background:#999999">+{{ Number(item.percent).toFixed(2) }}</span></div>
           </td>
-          <td style="max-width: 155px;padding-right: 25px;width:220px">
-            <trend
+          <td class="btc-homepage-trend">
+            <trend style="position: absolute;left: 25px;"
               viewBox="40 0 500 75"
               :data="trendArray(item)"
               :gradient="['black']"
