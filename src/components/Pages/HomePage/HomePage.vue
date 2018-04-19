@@ -120,7 +120,7 @@
         </keep-alive>
       </div>
       <div class="btc-homepage-logo text-center">
-        <img src="~Img/logo.png" >
+        <img src="~Img/header-logo.png" >
       </div>
       <div class="btc-homepage-intr btc-marginT15 btc-marginB100">
         <span class="col-xs-3 btc-marginT10"></span>

@@ -87,6 +87,9 @@ export default {
       }, (d) => {
         this.loading = false
         if (d.data.success) {
+          if (!d.data.success.has_unread) {
+            this.loginData.has_unread_conversations = false
+          }
           if (list.length === this.xhrData.length && this.$refs['paginate'].selected !== 0) {
             if (this.$refs['paginate'].selected + 1 === this.pagination) {
               this.paging(this.$refs['paginate'].selected)

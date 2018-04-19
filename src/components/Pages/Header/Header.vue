@@ -9,7 +9,7 @@
             <span class="icon-bar"></span>
           </button>
           <router-link class="navbar-brand" to="/">
-            <img src="@/common/svg/logo.svg">
+            <i class='header-logo'/>
           </router-link>
           <div class="btc-header-sideslip" @click="SideSlipMenuDisplay(true)">
             <a></a>
@@ -50,7 +50,7 @@
             <li class="btc-marginL15">
               <router-link :to="`${ROUTER_VERSION}/form/news`" class="btc-header-letter">
                 <span :class="{'nav-unread': loginData.has_unread_conversations}">
-                  <img src="~Img/letterlog.png">
+                  <i class='header-letterlog' style="top: 4px;"/>
                 </span>
                 <span class="message">{{ $t("nav.message") }}</span>
               </router-link>
@@ -59,7 +59,8 @@
               <!-- <img src="~Img/avatarlog.png" class="btc-header-avatar">
               {{ this.loginData.email }} -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <img src="~Img/avatarlog.png" class="btc-header-avatar">
+                <!-- <img src="~Img/header-avatarlog.png" class="btc-header-avatar"> -->
+                <i class='header-avatarlog'/>
                 {{ this.loginData.show_name }}
                 <span class="caret"></span></a>
               <ul class="dropdown-menu">
