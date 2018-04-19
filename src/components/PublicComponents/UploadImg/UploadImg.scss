@@ -17,8 +17,10 @@
     display: inline-block;
     display: flex;
     align-items: center;
-    justify-content: center;
     >span{
+      width: 100%;
+      text-align: center;
+      margin-left: -8px;
       position: absolute;
       bottom: 36px;
       font-size: 23px;
@@ -33,7 +35,6 @@
     width: 320px;
     height: 200px;
     margin-right: 120px;
-
     >img{
       position: relative;
       width: 100%;
@@ -72,6 +73,7 @@
   height: 100%;
   opacity: 0;
   top: 0;
+  left: 0;
 }
 
 .btc-validateIdentity{
@@ -146,7 +148,7 @@
       }
     }
     .uploading{
-      padding-right: 0;
+      margin-right: 0;
       .alredy-img{
         max-height: 165px
       }

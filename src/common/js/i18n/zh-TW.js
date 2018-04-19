@@ -500,6 +500,7 @@ const zh = {
     "news": {
       "select_none": "全不選",
       "select_all": "全選",
+      "marked": "標記為已讀",
       "clear": "删除",
       "confirm": "您確定要刪除此記錄嗎?",
     }

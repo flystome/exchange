@@ -7,6 +7,12 @@
           <img v-if='!search' src="~Img/search.png" >
           <img class="btc-pointer" v-else @click="search = ''" src="~Img/search-delete.png" >
         </div>
+        <template slot="href"
+          slot-scope="props">
+          <span class="btc-pointer btc-link" @click="OpenWindow(props.data.url)">
+            {{ props.data.context }}
+          </span>
+        </template>
       </basic-table>
     </div>
     <paginate
@@ -44,6 +50,9 @@ export default {
     }
   },
   methods: {
+    OpenWindow (url) {
+      window.open(url)
+    },
     paging (num, currency) {
       if (this.disabled) return
       this.GetList(num, currency)
@@ -84,7 +93,7 @@ export default {
             data.code_text,
             Number(data.amount).toFixed(Math.min(String(data.amount).split('.')[1].length, 8)),
             Number(data.fee).toFixed(Math.min(String(data.fee).split('.')[1].length, 8)),
-            data.txid === null ? 'N/A' : data.txid,
+            data.txid === null ? 'N/A' : {hover: true, context: data.txid, url: data.blockchain_url},
             this.$t(`withdraw_currency.${data.aasm_state}`)
           ]
         }
@@ -96,7 +105,12 @@ export default {
       this.pagination = 0
       this.$refs['pagination'] && (this.$refs['pagination'].selected = 0)
       this.paging(1, a)
-    })
+    }),
+    $route (form, to) {
+      if (to.name === 'WithdrawCurrency') {
+        this.paging(1)
+      }
+    }
   }
 }
 </script>

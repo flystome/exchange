@@ -32,7 +32,7 @@ import dictionary from '@/common/js/validation'
 import VeeValidate from 'vee-validate'
 import i18n from '@/common/js/i18n/i18n.js'
 import axios from 'axios'
-import { _post, _get, _delete, _put } from './axios'
+import { _post, _get, _delete, _put, _request } from './axios'
 import 'bootstrap/js/dropdown.js'
 import 'bootstrap/js/collapse.js'
 import Pusher from 'pusher-js'
@@ -58,6 +58,7 @@ Vue.prototype._post = _post
 Vue.prototype._get = _get
 Vue.prototype._delete = _delete
 Vue.prototype._put = _put
+Vue.prototype._request = _request
 Vue.prototype.$http = axios
 Vue.prototype.$moment = moment
 

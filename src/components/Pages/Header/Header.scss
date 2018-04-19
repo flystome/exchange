@@ -70,8 +70,8 @@
     }
   }
   .btc-ifo{
-    a{
-      background: initial!important;
+    .dropdown-toggle{
+      background: #181f28!important;
     }
     ul{
       margin-top: 2px;
@@ -80,13 +80,13 @@
   .btc-country{
     cursor: pointer;
     .dropdown-toggle{
-      background-color: initial;
+      background-color: #181f28;
       padding-bottom: 18px;
       &:hover{
-        background-color: initial;
+        background-color: #181f28;
       }
       &:focus{
-        background-color: initial;
+        background-color: #181f28;
       }
     }
     .dropdown-menu{

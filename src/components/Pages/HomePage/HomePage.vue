@@ -229,11 +229,12 @@ export default {
     var channel = pusher.subscribe('market-global')
     channel.bind('tickers', _debounce(5000, (data) => {
       Object.keys(data).forEach((key) => {
-        this.$store.state.assets[data[key].base_currency].price = Number(data[key].last)
+        this.$store.state.assets !== '' && (this.$store.state.assets[data[key].base_currency].price = Number(data[key].last))
       })
     }))
 
     channel.bind('tickers', (data) => {
+      if (this.curData === '') return
       Object.keys(data).forEach((key) => {
         this.curData[this.currency.indexOf(data[key].base_currency.toLowerCase())].forEach(d => {
           if (key === d.name.toLowerCase().replace('/', '')) {

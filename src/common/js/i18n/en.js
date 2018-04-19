@@ -5,7 +5,7 @@ const en = {
     "cancel": "Cancel",
     "confirm": "Confirm",
     'currency': 'Currency',
-    'time': 'Time',
+    'time': 'time',
     "auth": {
       "email": "Verify Email",
       "phone": "Verify Cell Phone",
@@ -501,6 +501,7 @@ const en = {
       "news": {
         "select_none": "Select None",
         "select_all": "Select All",
+        "marked": "Marked As Read",
         "clear": "Clear",
         "confirm": "Are you sure you want to delete the selected records? This action cannot be reverted."
       }

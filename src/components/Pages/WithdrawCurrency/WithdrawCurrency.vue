@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="btc-fr"><span
-                @click.stop="DefaultFunds(data.id)">{{$t('withdraw_currency.set_as_default')}}</span>丨<span
+                @click.stop="DefaultFunds(data.id, index)">{{$t('withdraw_currency.set_as_default')}}</span>丨<span
                 @click.stop="DeleteFunds(data.id, FundSources[CurrencyType], index)">{{$t('withdraw_currency.delete')}}</span></div>
                 </div>
             </div>
@@ -580,7 +580,7 @@ export default {
         }
       })
     },
-    DefaultFunds (id) {
+    DefaultFunds (id, index) {
       this.disabled = true
       this._post({
         url: `/funds/${id}/set_default_fund_source.json`
@@ -596,6 +596,7 @@ export default {
               d.is_default = true
             }
           })
+          this.ChoiceAddress(index, id)
           this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.set_fund_source_200'), type: 'success'})
         } else {
           this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.set_fund_source_1001'), type: 'error'})
@@ -655,9 +656,19 @@ export default {
       }, (d) => {
         this.disabled = false
         if (d.data.success) {
-          this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.create_withdraw_200'), type: 'success'})
+          if (d.data.success.hasOwnProperty('fund_source')) {
+            this.FundSources[d.data.success.fund_source.currency].push(d.data.success.fund_source)
+          }
+          this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.create_withdraw_200'), type: 'success', url: '/form/account'})
+          this.WithdrawData.otp = ''
+          this.WithdrawData.amount = ''
+          this.WithdrawData.remark = ''
+          this.WithdrawData.newAddress = ''
           this.Rucaptcha = false
         } else {
+          if (d.data.error.hasOwnProperty('fund_source')) {
+            this.FundSources[d.data.error.fund_source.currency].push(d.data.error.fund_source)
+          }
           if (d.data.error.code === 1002) {
             this.Rucaptcha = d.data.error.rucaptcha
             this.WithdrawData.otp = ''
@@ -672,7 +683,7 @@ export default {
             this.WithdrawData.rucaptcha = ''
           }
           if (d.data.error.code === 1003) {
-            this.PopupBoxDisplay({message: `${this.$t('api_server.withdraw_currency.create_withdraw_1003')}${d.data.c}${this.$t('time')}`, type: 'error'})
+            this.PopupBoxDisplay({message: `${this.$t('api_server.withdraw_currency.create_withdraw_1003')} ${d.data.c} ${this.$t('time')}`, type: 'error'})
             return
           }
           this.Rucaptcha = this.Rucaptcha ? `${this.Rucaptcha}?${Math.random()}` : this.Rucaptcha

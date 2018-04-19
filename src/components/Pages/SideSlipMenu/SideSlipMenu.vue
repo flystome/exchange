@@ -6,11 +6,21 @@
           <li class='btc-marginL30 btc-marginT30'>
             {{ loginData.show_name }}
           </li>
-          <li>
+          <!-- <li>
             <span @click="validateEmail">
               <i class="sideslip-assets"></i>
               {{ $t('side_slip_menu.asset_management') }}
             </span>
+          </li> -->
+          <li class="text-center">
+            <div v-if="loginData === 'none'">
+              <span style="margin-right: 23%;">
+                <a :href="`${HOST_URL}/signin`">{{ $t('nav.login') }}</a>
+              </span>
+              <span>
+                <a :href="`${HOST_URL}/signup`">{{ $t('nav.register') }}</a>
+              </span>
+            </div>
           </li>
           <li class="marketlist" :class="{'btc-sideslip-marignB0': market}">
             <div @click="market = !market">
@@ -52,10 +62,10 @@
               </li>
             </ul>
           </li>
-          <li @click="validate()">
+          <!-- <li @click="validate()">
             <i class='sideslip-myaccount' />
             {{ $t('side_slip_menu.my_account') }}
-          </li>
+          </li> -->
           <li :class="{'btc-sideslip-marignB0': Lang}">
             <div @click="Lang = !Lang">
               <i class='sideslip-lang' /> {{ $t('side_slip_menu.language') }}
@@ -77,14 +87,8 @@
             </span>
           </li>
           <li class="text-center">
-            <div v-if="loginData !== 'none'"><a :href="`${HOST_URL}/signout`">{{ $t('nav.exit') }}</a></div>
-            <div v-else>
-              <span style="margin-right: 23%;">
-                <a :href="`${HOST_URL}/signin`">{{ $t('nav.login') }}</a>
-              </span>
-              <span>
-                <a :href="`${HOST_URL}/signup`">{{ $t('nav.register') }}</a>
-              </span>
+            <div v-if="loginData !== 'none'">
+              <a :href="`${HOST_URL}/signout`">{{ $t('nav.exit') }}</a>
             </div>
           </li>
         </ul>

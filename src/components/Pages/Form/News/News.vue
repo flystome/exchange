@@ -16,6 +16,9 @@
             </a>
             {{ $t('form.news.select_none') }}
           </span>
+          <span :class="{'btc-form-disabled': clearList.length === 0 || !havaUnread}" class="btc-marginR0" @click="marketRead">
+            {{ $t('form.news.marked') }}
+          </span>
           <span :class="{'btc-form-disabled': clearList.length === 0}" class="btc-marginR0" @click="clearRecord">
             {{ $t('form.news.clear') }}
           </span>
@@ -28,6 +31,7 @@
         <div class="btc-news-block" v-for="(d, index) in xhrData" @click="addClearList(d.id, index)" :key="d.id">
           <section class="btc-fl">
             <header>
+              <i v-if="d.unread" class="btc-news-unread"></i>
               <strong>{{d.subject}}</strong>
               <span class="btc-news-time">{{ $moment(d.created_at).format('L H:mm:ss') }}</span>
             </header>
@@ -69,7 +73,7 @@ import { mapMutations, mapState } from 'vuex'
 export default {
   name: 'FormNews',
   created () {
-    this.loginData !== 'none' && (this.loginData.has_unread_conversations = false)
+    // this.loginData !== 'none' && (this.loginData.has_unread_conversations = false)
     this.paging(1)
     bus.$on('Popbox-confirm', () => {
       this.loading = true
@@ -104,7 +108,8 @@ export default {
       disabled: false,
       all: false,
       none: true,
-      clearList: []
+      clearList: [],
+      unread: []
     }
   },
   methods: {
@@ -140,6 +145,7 @@ export default {
         d = d.data.success
         this.pagination = d.total_pages
         d.data.forEach((obj) => {
+          if (obj.unread) this.unread.push(obj.id)
           obj.choice = false
         })
         this.xhrData = d.data
@@ -170,6 +176,37 @@ export default {
         obj.choice = false
       })
     },
+    marketRead () {
+      if (this.clearList.length === 0) return
+      if (!this.havaUnread) return
+      this.loading = true
+      this._request({
+        url: '/conversations/batch_mark_as_read.json',
+        method: 'patch',
+        data: {
+          ids: this.clearList.join(',')
+        }
+      }, (data) => {
+        [...new Set(this.clearList)].filter(x => new Set(this.unread).has(x)).forEach((key) => {
+          this.unread.splice(this.unread.indexOf(key), 1)
+        })
+        this.loading = false
+        if (data.data.success) {
+          this.clearList.forEach((id) => {
+            this.xhrData.forEach((data, index) => {
+              if (id === data.id) {
+                data.unread = false
+              }
+            })
+          })
+          this.selectNone()
+
+          if (!data.data.success.has_unread) {
+            this.loginData.has_unread_conversations = false
+          }
+        }
+      })
+    },
     clearRecord () {
       if (this.clearList.length === 0) return
       this.PopupBoxDisplay({type: 'warn'})
@@ -183,12 +220,11 @@ export default {
     ...mapMutations(['PopupBoxDisplay', 'ChangePopupBox'])
   },
   computed: {
+    havaUnread () {
+      var acount = this.clearList.length + this.unread.length
+      return acount !== [...new Set(this.clearList.concat(this.unread))].length
+    },
     ...mapState(['loginData'])
-  },
-  watch: {
-    loginData () {
-      this.loginData.has_unread_conversations = false
-    }
   }
 }
 </script>
