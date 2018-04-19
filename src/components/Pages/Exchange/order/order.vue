@@ -102,7 +102,6 @@ export default {
       sellAccount: 0,
       showDialog: false,
       order_type: 'buy',
-      isDisabled: true,
       percent: [['1/4', 0.25], ['1/3', 0.333], ['1/2', 0.5], ['All', 1]],
       sellSuccess: false,
       sellFail: false,
@@ -246,18 +245,18 @@ export default {
         this.orderCallback(data, 'sell')
       })
     },
-    orderCallback (data, type) {
-      console.log(data, type)
-      if (data.status === 200) {
+    orderCallback (res, type) {
+      var data = res.data
+      if (data.success) {
         this.isDisabled = false
         this.resetForm()
         this.status = 'success'
         this[type + 'Success'] = true
         this.resetOrderStatus()
         this.$emit('play', 'order_audio')
-      } else if (data.status === 1102) {
+      } else if (data.error.code === 1102) {
         location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
-      } else if (data.status === 1002) {
+      } else if (data.error.code === 1002) {
         this.showDialog = true
         this.ordering = false
         this.tips = true
@@ -266,7 +265,6 @@ export default {
         this.isDisabled = false
         this.status = 'fail'
         this.resetOrderStatus()
-        this.$emit('play', 'fail')
       }
     },
     play (obj) {
@@ -292,7 +290,6 @@ export default {
       this.showDialog = true
       this.ordering = true
       this.tips = false
-      // this.isDisabled = true
     },
     orderAsk: function () {
       this.loginCheck()
@@ -303,7 +300,6 @@ export default {
       this.showDialog = true
       this.ordering = true
       this.tips = false
-      // this.isDisabled = false
     },
     resetForm () {
       [

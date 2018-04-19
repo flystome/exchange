@@ -31,18 +31,11 @@ export default {
   props: ['totalAssets', 'accounts', 'market'],
   data () {
     return {
-      accountsList: []
+
     }
   },
   computed: {
     // ...mapGetters(['loginData']),
-  },
-  watch: {
-    accounts (val) {
-    //   console.log(val)
-    //   this.accountsList[0] = val[this.market.base_currency]
-    //   this.accountsList[1] = val[this.market.quote_currency]
-    }
   }
 }
 </script>

@@ -122,8 +122,11 @@
       background: none;
     }
   }
-  .slide-fade-enter-active {
-    transition: fadeIn 1.6s ease;
+  .slide-fade-enter-active,.slide-fade-enter-active {
+    animation: fadeIn 2s ease;
+  }
+  .slide-fade-move {
+    transition: transform 1s;
   }
   .fade-enter-active {
     transition: all .8s ease;
