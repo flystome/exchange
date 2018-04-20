@@ -32,27 +32,33 @@
       width: 100%;
     }
     tr {
-      td {
+      &::last-child {
+        border-bottom: 1px solid #3a4a5e;
+      }
+      th {
+        height: 36px;
+        line-height: 36px;
+        color: #728eaa;
+        font-weight: normal;
         &:last-child {
           text-align: right;
         }
       }
-    }
-    th {
-      height: 36px;
-      line-height: 36px;
-      color: #728eaa;
-      font-weight: normal;
-      &:last-child {
-        text-align: right;
+      td {
+        height: 36px;
+        line-height: 18px;
+        border-top: 1px solid #3a4a5e;
+        &:last-child {
+          text-align: right;
+        }
+        img {
+          margin-right: 5px;
+        }
+        span {
+          display: inline-block;
+          vertical-align: middle;
+        }
       }
-    }
-    td {
-      height: 36px;
-      border-top: 1px solid #3a4a5e;
-    }
-    tr:last-child {
-      border-bottom: 1px solid #3a4a5e;
     }
     .viewAll {
       display: block;

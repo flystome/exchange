@@ -14,7 +14,7 @@
         </thead>
         <tbody>
           <tr v-for="item in accounts" :key='"coin"+item.currency'>
-            <td>{{item.currency | upper}}</td>
+            <td><img :src="`/static/img/market-${item.currency}.png`"><span>{{item.currency | upper}}</span></td>
             <td>{{item.balance | fixedNum(8)}}</td>
             <td>{{item.locked | fixedNum(8)}}</td>
           </tr>
