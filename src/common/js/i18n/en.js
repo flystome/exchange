@@ -395,7 +395,7 @@ const en = {
         "create_withdraw_200": "An confirmation email has been sent to your mailbox",
         "create_withdraw_1001": "Please give an valid currency parameter.",
         "create_withdraw_1002": "Authentication Failed",
-        "create_withdraw_1003": "The withdrawal requests can not be more than",
+        "create_withdraw_1003": "The withdrawal requests within one day cannot exceed ",
         "create_withdraw_1004": "The withdrawal amount exceeds the daily limit",
         "create_withdraw_1005": "Invalid Currency Address.",
         "create_withdraw_1006": "System error",

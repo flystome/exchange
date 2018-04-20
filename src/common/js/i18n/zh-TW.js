@@ -394,7 +394,7 @@ const zh = {
       "create_withdraw_200": "確認電子郵件已發送到您的郵箱",
       "create_withdraw_1001": "請給出一個有效的貨幣地址",
       "create_withdraw_1002": "驗證失敗",
-      "create_withdraw_1003": "提幣請求次數超出",
+      "create_withdraw_1003": "一天之內的提幣請求不能超過",
       "create_withdraw_1004": "提幣金額高於每日限額",
       "create_withdraw_1005": "地址來源無效",
       "create_withdraw_1006": "系統錯誤",
