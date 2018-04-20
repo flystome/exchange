@@ -323,6 +323,18 @@ export default {
         this.sellVolume = this.accounts[this.market.quote_currency].balance * percent
         this.handleVol(this.sellVolume, 'sell')
       }
+    },
+    showNotice () {
+      Notification.requestPermission((permit) => {
+        if (permit === 'granted') {
+          var notification = new Notification('This is a Notice', {
+            dir: 'auto',
+            icon: '/static/img/ok.svg',
+            body: 'hahahah',
+            renotify: true
+          })
+        }
+      })
     }
   }
 }

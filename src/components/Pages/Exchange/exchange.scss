@@ -122,8 +122,25 @@
       background: none;
     }
   }
-  .slide-fade-enter-active,.slide-fade-enter-active {
-    animation: fadeIn 2s ease;
+  @keyframes fadeOut{
+    0% {
+      opacity: 1;
+      background: #293f60;
+    }
+    50% {
+      opacity: 0.6;
+      background: #293f60;
+    }
+    100% {
+      opacity: 0;
+      background: none;
+    }
+  }
+  .slide-fade-enter-active {
+    animation: fadeIn 1s ease;
+  }
+  .slide-fade-leave-active {
+    animation: fadeOut 1s ease;
   }
   .slide-fade-move {
     transition: transform 1s;
