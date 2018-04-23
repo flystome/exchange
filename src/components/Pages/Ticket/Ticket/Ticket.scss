@@ -28,6 +28,9 @@
       border-bottom: 1px solid #dfe0e1;
       overflow: hidden;
     }
+    .btc-ticket-BroderNone{
+      border: none
+    }
     .btc-ticketReplay-byAdmin{
       float: right;
       position: absolute;
@@ -56,13 +59,20 @@
   }
 }
 
+.btn {
+  font-size: 12px;
+}
+
 .btc-ticketReplay-textarea{
   padding: 20px 15px;
-  background: #f2f2f2;
   input[type=text]{
     outline: none;
     border: none;
     flex: 1;
+    background: #f2f2f2;
+    padding: 4px;
+    position: relative;
+    top: -3px;
   }
   input[type=file]{
     position: absolute;

@@ -1,5 +1,5 @@
 <template>
-  <div @click="promptEmpty" class="btc-ticket-replay">
+  <div @click="promptEmpty" @keyup.enter="Reply" class="btc-ticket-replay">
     <div class="btc-block-container">
       <div class="btc-ticketReplay-header btc-marginB25">
         <router-link :to="`${ROUTER_VERSION}/ticket/open`">
@@ -9,33 +9,30 @@
         <div class="btc-fr" v-if="state === 'open' && !loading">
         <basic-button :text="$t('ticket.reminder')" class="btc-marginR25">
         </basic-button>
-        <basic-button @click.native="CloseTicket" :text="$t('ticket.close_ticket')">
+        <basic-button class="btn" :disabled='disabled' @click.native="CloseTicket" :text="$t('ticket.close_ticket')">
         </basic-button>
         </div>
       </div>
       <template v-if="!loading">
         <div class="btc-ticketReplay-origin">
           <header>
-            <strong>
-              {{ title }}
+            <strong v-text="title">
             </strong>
-            <span class="btc-font12 btc-color999 btc-fr">
-              {{ created_at }}
+            <span v-text="created_at" class="btc-font12 btc-color999 btc-fr">
             </span>
           </header>
-          <article class="btc-marginT20 btc-marginB15">
-            {{ content }}
+          <article v-text="content" class="btc-marginT20 btc-marginB15">
           </article>
-          <img :src="attachment_url">
+          <img v-if="attachment_url" :src="attachment_url">
         </div>
-        <div class="btc-ticketReplay-replay btc-font12">
+        <div v-if="this.comments.length !== 0" class="btc-ticketReplay-replay btc-font12">
           <div class="btc-ticket-triangle">
             <a></a>
           </div>
-          <div class="btc-ticketReplay-block" v-for="d in comments" :key="d.id">
-            <section class="btc-paddingB15">
+          <div class="btc-ticketReplay-block" v-for="(d, index) in comments" :key="d.id">
+            <section class="btc-paddingB15" :class="{'btc-ticket-BroderNone': index === comments.length - 1}">
               <header :class="{'btc-ticketReplay-byReplay': d.reply_from_admin}">
-                {{d.reply_from_admin ? $t('ticket.customer_service_reply') : $t('ticket.reply_to_customer_service')}} <span v-html="d.content"></span>
+                {{d.reply_from_admin ? $t('ticket.customer_service_reply') : $t('ticket.reply_to_customer_service')}} <span v-text="d.content"></span>
               </header>
               <img v-if="d.attachment_url" class="btc-marginT15"  :src="d.attachment_url" />
               <div class="btc-marginT15 btc-ticketReplay-byAdmin">
@@ -57,7 +54,7 @@
         </div>
       </template>
       <vue-simple-spinner class="btc-marginT100" size="88" v-else></vue-simple-spinner>
-      <div v-if="!loading" class="btc-ticketReplay-textarea btc-marginT15 btc-font12">
+      <div v-if="!loading && this.state !== 'closed'" class="btc-ticketReplay-textarea btc-marginT15 btc-font12">
         <div style="display:flex">
           {{ $t('ticket.reply_to_customer_service') }}
           <input v-model="context"  type="text" class="btc-marginL5"  v-focus>
@@ -71,8 +68,7 @@
             <input type="file" ref='file' @change="AddFile">
           </span>
           <div class="btc-fl btc-ticket-delte" v-if="FileName !== ''">
-            <div>
-              {{ FileName }}
+            <div v-text="FileName">
             </div>
             <i class="btc-ticket-newDelete btc-pointer" @click="DeleteFile"></i>
           </div>
@@ -86,6 +82,7 @@
 </template>
 
 <script>
+import { bus } from '@/common/js/bus'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Ticket',
@@ -95,7 +92,7 @@ export default {
       comments: '',
       title: '',
       content: '',
-      attachment_url: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524471843940&di=3dcf56289ef207e6a30be0037cfa1815&imgtype=0&src=http%3A%2F%2Fwww.zxin.net.cn%2FProduct%2FProductIntroPic%2F20154%2F130746649034475698.jpg",
+      attachment_url: '',
       created_at: '',
       state: '',
       loading: false,
@@ -103,7 +100,8 @@ export default {
       FileName: '',
       prompt: '',
       context: '',
-      ReplyState: true
+      ReplyState: true,
+      disabled: false
     }
   },
   created () {
@@ -130,13 +128,12 @@ export default {
           })
           this.state = d.success.ticket.aasm_state
           this.id = d.success.ticket.id
-          // this.attachment_url = d.success.ticket.attachment_url
           this.title = d.success.ticket.title
           this.content = d.success.ticket.content
           this.created_at = this.$moment(d.success.ticket.created_at).format('L H:mm:ss')
           this.comments = d.success.ticket.comments
-          this.comments[0].attachment_url = this.attachment_url
-          this.$nextTick(() => {
+          this.attachment_url = d.success.ticket.attachment_url
+          this.$refs['file'] && this.$nextTick(() => {
             this.$refs['file'].scrollIntoView({behavior: 'smooth', block: 'start'})
           })
         } else {
@@ -165,21 +162,44 @@ export default {
         this.prompt = this.$t('ticket.reply_can_not_be_empty')
         return
       }
-      var form = this.objectToFormData({
-        comment: {
-          content: this.context,
-          attachment_file_attributes: {
-            file: file
-          }
+      var fileObject = file ? {
+        attachment_file_attributes: {
+          file: file
         }
-      }, new FormData(), '')
+      } : undefined
+      var xhrObj = {
+        comment: {
+          content: this.context
+        }
+      }
+      Object.assign(xhrObj.comment, fileObject)
+      var form = this.objectToFormData(xhrObj, new FormData(), '')
+      this.disabled = true
       this._post({
         url: `/tickets/${this.id}/comments.json`,
         data: form
       }, (d) => {
-        console.log(d)
+        this.disabled = false
         if (d.data.success) {
-
+          if (!fileObject) {
+            this.comments.push({
+              created_at: this.$moment(new Date()).format('L H:mm:ss'),
+              content: this.context
+            })
+          } else {
+            var img = new FileReader(file)
+            img.readAsDataURL(file)
+            img.onload = (data) => {
+              this.comments.push({
+                created_at: this.$moment(new Date()).format('L H:mm:ss'),
+                content: this.context,
+                attachment_url: data.srcElement.result
+              })
+            }
+          }
+          this.context = ''
+          this.DeleteFile()
+          // this.PopupBoxDisplay({message: this.$t(`api_server.ticket.success_200`), type: 'success', url: '/ticket/open'})
         } else {
           this.PopupBoxDisplay({message: this.$t(`api_server.ticket.error_${d.data.error.code}`), type: 'error'})
         }
@@ -203,12 +223,20 @@ export default {
       }
     },
     CloseTicket () {
+      this.disabled = true
       this._request({
         method: 'PATCH',
         url: `/tickets/${this.id}/close.json`
       }, (d) => {
+        this.disabled = false
         if (d.data.success) {
-
+          bus.$emit('ticket-closed', {
+            id: this.id,
+            title: this.title,
+            created_at: this.created_at,
+            content: this.content
+          })
+          this.PopupBoxDisplay({message: this.$t(`api_server.ticket.success_201`), type: 'success', url: '/ticket/open'})
         } else {
           this.PopupBoxDisplay({message: this.$t(`api_server.ticket.error_1003`), type: 'error'})
         }

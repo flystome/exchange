@@ -107,9 +107,11 @@
       <div class="btc-member-handleRecord  btc-container-block">
         <header class="btc-member-blockHeader">
           <span class="btc-member-handleCount"><strong>{{$t('my_account.customer_service_record')}}</strong></span>
-          <a class="btc-member-handleServer btc-link" :href="`${HOST_URL}/tickets?closed=true`">{{$t('my_account.view_the_end_service_list')}}</a>
+          <router-link :to='`${ROUTER_VERSION}/ticket/closed`' class="btc-member-handleServer btc-link">
+            {{$t('my_account.view_the_end_service_list')}}
+          </router-link>
         </header>
-        <div class="btc-member-qContainer" v-for="(data, index) in tickets" :key="index" @click="toTickets(data.id)" v-if="data.aasm_state === 'open'">
+        <div @click='goTicket(data.id)' class="btc-member-qContainer" v-for="(data, index) in tickets" :key="index" v-if="index < 5">
           <div class="btc-member-question" :class="{'is-dispose':data.aasm_state === 'closed' }">
             {{data.content}}
             <span class="btc-member-qTime">{{ data.created_at | moment }}</span>
@@ -128,10 +130,14 @@
         </div>
         <template v-else>
           <div class="text-center btc-table-more col-md-6">
-            <a :href="`${HOST_URL}/tickets`" class="btc-link ">{{$t('my_account.show_more')}}</a>
+            <router-link :to="`${ROUTER_VERSION}/ticket/open`" class='btc-link '>
+              {{$t('my_account.show_more')}}
+            </router-link>
           </div>
           <div class="text-center btc-table-more btc-b-l col-md-6">
-            <a :href="`${HOST_URL}/tickets/new`" class="btc-link ">{{$t('my_account.new_questions')}}</a>
+            <router-link :to="`${ROUTER_VERSION}/ticket/new`" class='btc-link '>
+              {{$t('my_account.new_questions')}}
+            </router-link>
           </div>
         </template>
       </div>
@@ -253,6 +259,9 @@ export default {
     }
   },
   methods: {
+    goTicket (id) {
+      this.$router.push(`${this.ROUTER_VERSION}/ticket?id=${id}`)
+    },
     qrcode (str) {
       var dateUrl = ''
       QRCode.toDataURL(str, {widht: 150, height: 150}, (err, string) => {
@@ -343,9 +352,6 @@ export default {
         return 'IE 11'
       }
     },
-    toTickets (id) {
-      location.href = `${this.HOST_URL}/tickets/${id}`
-    },
     sendEmail () {
       if (this.loginData.activated) return
       this.disabled = true
@@ -378,6 +384,9 @@ export default {
     },
     getTicket () {
       this.tickets = this.loginData.tickets
+      this.tickets = this.tickets.filter((d) => {
+        return d.aasm_state === 'open'
+      })
       this.tickets.sort((a, b) => {
         return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       })

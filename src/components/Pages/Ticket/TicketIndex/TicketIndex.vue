@@ -15,7 +15,7 @@
         </menu-underline>
       </div>
       <router-link :to="`${ROUTER_VERSION}/ticket/new`">
-        <basic-button class="btc-fr" :text="$t('ticket.new_ticket')"></basic-button>
+        <basic-button class="btc-fr btc-ticket-frbutton" :text="$t('ticket.new_ticket')"></basic-button>
       </router-link>
     </header>
     <template v-if="!loading">
@@ -23,11 +23,10 @@
         <div @click="TicketDetails(d.id)" class="btc-ticket-block btc-pointer" v-for="d in openData" :key="d.id">
           <section class="btc-fl">
             <header>
-              <strong>{{d.title}}</strong>
+              <strong v-text="d.title"></strong>
               <span class="btc-ticket-time">{{ $moment(d.created_at).format('L H:mm:ss') }}</span>
             </header>
-            <article>
-              {{ d.content }}
+            <article v-text="d.content">
             </article>
           </section>
           <div v-if="d.choice" class="btc-ticket-select">
@@ -39,11 +38,10 @@
         <div @click="TicketDetails(d.id)" class="btc-ticket-block btc-pointer" v-for="d in closedData" :key="d.id">
           <section class="btc-fl">
             <header>
-              <strong>{{d.title}}</strong>
+              <strong v-text="d.title"></strong>
               <span class="btc-ticket-time">{{ $moment(d.created_at).format('L H:mm:ss') }}</span>
             </header>
-            <article>
-              {{ d.content }}
+            <article v-text="d.content">
             </article>
           </section>
           <div v-if="d.choice" class="btc-ticket-select">
@@ -52,6 +50,36 @@
         </div>
       </div>
     </template>
+    <paginate
+      class="btc-fr"
+      key='pagination'
+      ref="pagination"
+      :disabled="disabled"
+      v-show="pagination !== 0 && route === 'open'"
+      :page-count="pagination"
+      :page-range="3"
+      :margin-pages="1"
+      :click-handler="paging"
+      :disabled-class='"disabled"'
+      :prev-text="`${$t('form.previous')}`"
+      :next-text="`${$t('form.next')}`"
+      :page-class="'page-item'">
+    </paginate>
+    <paginate
+      class="btc-fr"
+      key='pagination1'
+      ref="pagination1"
+      :disabled="disabled"
+      v-show="pagination1 !== 0 && route !== 'open'"
+      :page-count="pagination1"
+      :page-range="3"
+      :margin-pages="1"
+      :click-handler="paging"
+      :disabled-class='"disabled"'
+      :prev-text="`${$t('form.previous')}`"
+      :next-text="`${$t('form.next')}`"
+      :page-class="'page-item'">
+    </paginate>
     <div class="text-center btc-marginT15 btc-paddingT50 btc-paddingB50" style="background:white" v-if="!loading && (setp === 0 ? openData.length === 0 : closedData.length === 0)">
       <strong>
         {{ $t('my_account.no_record') }}
@@ -65,23 +93,67 @@
 </template>
 
 <script>
+import { bus } from '@/common/js/bus'
 export default {
   name: 'TicketIndex',
   created () {
+    bus.$on('ticket-create', (d) => {
+      if (this.$refs.pagination.selected === 0) {
+        this.openData.unshift(d)
+        if (this.openData.length === 21) {
+          if (this.$refs.pagination.selected === this.pagination - 1) {
+            this.pagination++
+          }
+          this.openData.pop()
+        }
+      } else {
+        this.paging(1)
+        this.$refs.pagination.selected = 0
+      }
+    })
+    bus.$on('ticket-closed', (d) => {
+      this.openData.forEach((o, index) => {
+        if (o.id === d.id) {
+          if (this.$refs.pagination.selected !== 0) {
+            this.paging(this.$refs.pagination.selected--)
+          } else {
+            this.paging(1)
+          }
+        }
+      })
+      if (!this.closedData) return
+      if (this.$refs.pagination1.selected === 0) {
+        this.closedData.unshift(d)
+        if (this.closedData.length === 21) {
+          if (this.$refs.pagination1.selected === this.pagination1 - 1) {
+            this.pagination1++
+          }
+          this.closedData.pop()
+        }
+      } else {
+        this.getTickets(1, 'closed')
+        this.$refs.pagination1.selected = 0
+      }
+    })
     if (/open/.test(this.$route.path)) {
       this.getTickets(1, 'open')
+      this.route = 'open'
     } else {
       this.getTickets(1, 'closed')
+      this.route = 'closed'
     }
   },
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
-      route: 'closed',
+      route: '',
       loading: false,
       setp: 0,
       openData: '',
-      closedData: ''
+      closedData: '',
+      disabled: false,
+      pagination: 0,
+      pagination1: 0
     }
   },
   mounted () {
@@ -92,7 +164,12 @@ export default {
     }
   },
   methods: {
+    paging (num) {
+      if (this.disabled) return
+      this.getTickets(num, this.route)
+    },
     getTickets (num, state) {
+      this.disabled = true
       this.loading = true
       this._get({
         url: '/tickets.json',
@@ -101,12 +178,15 @@ export default {
           page: num
         }
       }, (d) => {
+        this.disabled = false
         this.loading = false
         d = d.data.success
         if (state === 'open') {
           this.openData = d.tickets
+          this.pagination = d.total_pages
         } else {
           this.closedData = d.tickets
+          this.pagination1 = d.total_pages
         }
       })
     },
@@ -116,7 +196,13 @@ export default {
   },
   watch: {
     setp () {
-      this.setp === 0 ? this.$router.push(`${this.ROUTER_VERSION}/ticket/open`) : this.$router.push(`${this.ROUTER_VERSION}/ticket/closed`)
+      if (this.setp === 0) {
+        this.$router.push(`${this.ROUTER_VERSION}/ticket/open`)
+        this.route = 'open'
+      } else {
+        this.$router.push(`${this.ROUTER_VERSION}/ticket/closed`)
+        this.route = 'closed'
+      }
     },
     $route (to, from) {
       if (from.name !== 'TicketIndex') {

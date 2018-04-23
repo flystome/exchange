@@ -40,9 +40,7 @@
           </div>
           <div class="btc-ticket-explain btc-color999 btc-paddingB45">
             <basic-button :disabled='disabled' @click.native="sumbit" class="btn" :text="$t('submit')"></basic-button>
-            <router-link :to="`${ROUTER_VERSION}/ticket`">
-              <button class="btc-white-btn">{{ $t('cancel') }}</button>
-            </router-link>
+            <button @click="goTicket" class="btc-white-btn">{{ $t('cancel') }}</button>
           </div>
         </div>
       </div>
@@ -50,6 +48,7 @@
   </div>
 </template>
 <script>
+import { bus } from '@/common/js/bus'
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'TicketNew',
@@ -98,25 +97,43 @@ export default {
         }
       }
     },
+    goTicket () {
+      if (this.disabled) return
+      this.$router.push(`${this.ROUTER_VERSION}/ticket`)
+    },
     sumbit () {
-      var file = this.$refs['file'].files[0]
-      var form = this.objectToFormData({
+      if (this.disabled) return
+      this.disabled = true
+      var file = this.$refs['file'].files
+      var fileObject = file[0] ? {
+        attachment_file_attributes: {
+          file: file[0]
+        }
+      } : undefined
+      var xhrObj = {
         ticket: {
           title: this.newTicket.label,
-          content: this.newTicket.details,
-          attachment_file_attributes: {
-            file: file
-          }
+          content: this.newTicket.details
         }
-      }, new FormData(), '')
+      }
+      Object.assign(xhrObj.ticket, fileObject)
+      var form = this.objectToFormData(xhrObj, new FormData(), '')
       this._post({
         url: '/tickets.json',
         data: form
       }, (d) => {
+        this.disabled = false
         if (d.data.success) {
-
+          this.$refs['file'].value = ''
+          this.FileName = ''
+          Object.assign(this.newTicket, {
+            label: '',
+            details: ''
+          })
+          bus.$emit('ticket-create', d.data.success.ticket)
+          this.PopupBoxDisplay({message: this.$t(`api_server.ticket.success_200`), type: 'success', url: '/ticket/open'})
         } else {
-          this.po({message: this.$t('ticket')})
+          this.PopupBoxDisplay({message: this.$t('api_server.ticket.error_1004')})
         }
       })
     },

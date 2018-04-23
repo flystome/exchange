@@ -417,9 +417,12 @@ const en = {
         "error_1001":  "Incorrect Email or password, please try again."
       },
       "ticket": {
+        "success_200": 'Create Success',
+        "success_201": 'Close off success',
         "error_1001": "Ticket has been closed.",
-        "error_1002": "Comment failed.",
-        "error_1003": "Failed to close ticket."
+        "error_1002": "Comment Failed.",
+        "error_1003": "Failed to close ticket.",
+        "error_1004": "Create Failed."
       }
     },
     "footer": {
