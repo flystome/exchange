@@ -1,15 +1,36 @@
 <template>
   <section id="chart">
+    <ul class="chart_hd">
+      <li v-for="(head, index) in heads"
+          :key='head'
+          :class="{'on': index === currencyIndex}"
+          @click="currencyIndex=index"
+      >{{$t("exchange." + head)}}</li>
+    </ul>
+    <div class="chart_bd">
+      <div class="candle">
+        <candleStick></candleStick>
+      </div>
+      <div class="depth">
+
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
+import candleStick from './candleStick/candleStick'
+
 export default {
   name: 'chart',
   data () {
     return {
-
+      heads: ['candle', 'depth'],
+      currencyIndex: 0
     }
+  },
+  components: {
+    candleStick
   }
 }
 </script>

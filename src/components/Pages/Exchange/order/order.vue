@@ -333,6 +333,7 @@ export default {
             body: 'hahahah',
             renotify: true
           })
+          console.log(notification)
         }
       })
     }

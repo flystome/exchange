@@ -332,6 +332,8 @@ const en = {
       'buy': 'Buy ',
       'marketClose':'Market Paused',
       'priceWarn': 'Price deviates too much!',
+      "candle": "Candle Sticks",
+      "depth": "Depth",
       'myorder': {
         'pending': 'Pending Orders',
         'history': 'History Orders',

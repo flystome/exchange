@@ -331,6 +331,8 @@ const zh = {
     "sell": "賣出",
     'marketClose':'市场暂时关闭',
     'priceWarn': '偏離現價10%，請核准！',
+    "candle": "K線",
+    "depth": "深度",
     'myorder': {
       'pending': '當前委託',
       'history': '歷史委託',
