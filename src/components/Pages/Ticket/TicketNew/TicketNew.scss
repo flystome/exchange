@@ -25,6 +25,7 @@
         min-width: auto;
         border-left: none;
         text-indent: -3px;
+        z-index: 2;
       }
       .btc-ticket-files{
         position: absolute;
@@ -34,9 +35,18 @@
         line-height: 33px;
         padding-left: 6px;
         >div {
+          flex: 1;
           color: #000000;
           margin-left: 15px;
           font-size: 12px;
+          width: 60%;
+          >div{
+            display: inline-block;
+            max-width: 60%;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+          }
         }
         span{
           color: #666666
@@ -72,7 +82,8 @@
   i{
     display: inline-block;
     position: relative;
-    top: 3px;
+    top: 9px;
+    vertical-align: top;
     cursor: pointer;
     margin-left: 2px;
   }
@@ -86,6 +97,23 @@
     margin-left: 8px;
     margin-top: 11px;
     color: #666666;
+  }
+}
+
+@media (max-width: 992px) {
+  .btc-ticket-from{
+    width: auto!important;
+  }
+  .btc-ticket-files{
+    >div{
+      max-width: 32%!important;
+      >div{
+        max-width: 32%!important;
+      }
+    }
+  }
+  .btc-ticket-new .btc-container-block{
+    padding: 13px 13px 0 13px;
   }
 }
 

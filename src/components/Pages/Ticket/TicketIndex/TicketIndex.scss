@@ -25,6 +25,9 @@
     padding: 6px 9px;
     min-width: initial;
   }
+  .btc-ticket-appButton{
+    display: none
+  }
 }
 
 .btc-ticket{
@@ -65,4 +68,15 @@
     display: block;
     float: left;
   }
+}
+
+@media (max-width: 768px) {
+ .btc-fr{
+   display: none;
+ }
+ .btc-ticket-appButton{
+   display: block!important;
+   float: none;
+   margin-bottom: 20px;
+ }
 }

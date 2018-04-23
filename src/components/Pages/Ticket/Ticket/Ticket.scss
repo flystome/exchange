@@ -1,0 +1,117 @@
+.btc-ticket-replay{
+  .btc-block-container {
+    background: white;
+    margin-top: 8px;
+    padding: 16px 30px 47px 30px;
+    .btc-ticketReplay-header{
+      font-size: 12px;
+    }
+  }
+  .btc-basic-button{
+    min-width: auto;
+    padding: 3px 15px;
+  }
+  img{
+    width: 400px;
+    height: 300px;
+    border: 1px solid #dfe0e1;
+  }
+  .btc-ticketReplay-replay{
+    margin-top: 18px;
+    background: #f2f2f2;
+    .btc-ticketReplay-block{
+      padding: 16px 20px;
+      padding-bottom: 0;
+    }
+    section{
+      position: relative;
+      border-bottom: 1px solid #dfe0e1;
+      overflow: hidden;
+    }
+    .btc-ticketReplay-byAdmin{
+      float: right;
+      position: absolute;
+      bottom: 15px;
+      right: 0;
+      padding-bottom: 0;
+    }
+    .btc-ticket-triangle{
+      height: 14px;
+      background: white;
+      a{
+        $len: 14px;
+        position: relative;
+        height: 0px;
+        width: 0px;
+        left: 32px;
+        top: -14px;
+        border-bottom: $len solid #f2f2f2;
+        border-right: $len solid transparent;
+        border-left: $len solid transparent;
+      }
+    }
+  }
+  .btc-ticketReplay-byReplay{
+    color: #ff7f18;
+  }
+}
+
+.btc-ticketReplay-textarea{
+  padding: 20px 15px;
+  background: #f2f2f2;
+  input[type=text]{
+    outline: none;
+    border: none;
+    flex: 1;
+  }
+  input[type=file]{
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+    left: -76px;
+  }
+  .btc-link{
+    position: relative;
+    top: 8px;
+    display: inline-block;
+    i{
+      vertical-align: top;
+    }
+  }
+  .btc-ticket-delte{
+    margin-left: 7px;
+    display: flex;
+    position: relative;
+    top: 8px;
+    overflow: hidden;
+    i{
+      top: 1px;
+      margin-left: 5px;
+    }
+  }
+  .btc-newsPrompt{
+    margin-top: 8px;
+    margin-left: 8px;
+    position: absolute;
+  }
+  i{
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    margin-right: 3px;
+  }
+}
+
+
+.ticket-replay {
+  @include sprite($ticket-replay);
+}
+
+.ticket-upload {
+  @include sprite($ticket-upload);
+}
+
+.btc-ticket-newDelete{
+  @include sprite($delete);
+}

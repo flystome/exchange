@@ -44,6 +44,7 @@ const ApiNew = () => import(/* webpackChunkName: "Api" */ 'Pages/Api/ApiNew/ApiN
 const TicketRouter = () => import(/* webpackChunkName: "Ticket" */'Pages/Ticket/RouterView')
 const TicketIndex = () => import(/* webpackChunkName: "Ticket" */'Pages/Ticket/TicketIndex/TicketIndex')
 const TicketNew = () => import(/* webpackChunkName: "Ticket" */'Pages/Ticket/TicketNew/TicketNew')
+const Ticket = () => import(/* webpackChunkName: "Ticket" */'Pages/Ticket/Ticket/Ticket')
 
 Vue.use(Router)
 
@@ -191,7 +192,15 @@ const router = new Router({
       children: [
         {
           path: '',
-          redirect: `${version}/ticket/open`
+          component: Ticket,
+          name: 'Ticket',
+          beforeEnter: (to, from, next) => {
+            if (to.query.hasOwnProperty('id') && !!to.query.id) {
+              next()
+            } else {
+              next(`${version}/ticket/open`)
+            }
+          }
         },
         {
           path: 'open',

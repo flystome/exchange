@@ -5,6 +5,7 @@ const zh = {
   'confirm': `確認`,
   'currency': '幣種',
   'time': '次',
+  "reply": "回復",
   'auth': {
     'email': `郵箱驗證`,
     'phone': `手機認證`,
@@ -394,7 +395,7 @@ const zh = {
       "create_withdraw_200": "確認電子郵件已發送到您的郵箱",
       "create_withdraw_1001": "請給出一個有效的貨幣地址",
       "create_withdraw_1002": "驗證失敗",
-      "create_withdraw_1003": "一天之內的提幣請求不能超過",
+      "create_withdraw_1003": "提幣請求次數超出",
       "create_withdraw_1004": "提幣金額高於每日限額",
       "create_withdraw_1005": "地址來源無效",
       "create_withdraw_1006": "系統錯誤",
@@ -413,6 +414,11 @@ const zh = {
     },
     "homepage": {
       "error_1001": "錯誤的帳號或密碼，請再試一次。"
+    },
+    "ticket": {
+      "error_1001": "服務單已被關閉。",
+      "error_1002": "回復失敗。",
+      "error_1003": "關閉服務單。"
     }
   },
   "footer": {
@@ -547,7 +553,11 @@ const zh = {
     "upload_attachment": "上傳附件",
     "detailed_description": "詳細描述",
     "upload_describe": "不大於1MB的.jpg, .png, .bmp文件",
-    "ticket_describe": "如果您有任何問題，意見或建議需要和我們溝通，請給我們建立一個服務單，我們會盡快回复您。"
+    "ticket_describe": "如果您有任何問題，意見或建議需要和我們溝通，請給我們建立一個服務單，我們會盡快回复您。",
+    "customer_service_reply": "客服回復:",
+    "reply_to_customer_service": "回復客服:",
+    "upload_photo": "上傳照片",
+    "reply_can_not_be_empty": "回復不能空"
   },
     "validation": {
       "verify_code": '驗證碼'

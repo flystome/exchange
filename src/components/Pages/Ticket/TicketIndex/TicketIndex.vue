@@ -1,6 +1,9 @@
 <template>
   <div class="btc-ticket-container">
     <header class="btc-ticket-header">
+      <router-link :to="`${ROUTER_VERSION}/ticket/new`">
+        <basic-button class="btc-fl btc-ticket-appButton" :text="$t('ticket.new_ticket')"></basic-button>
+      </router-link>
       <div class="btc-ticket-slide">
         <menu-underline
         ref="menu"
@@ -17,7 +20,7 @@
     </header>
     <template v-if="!loading">
       <div v-if="setp === 0" class="btc-ticket" >
-        <div class="btc-ticket-block" v-for="d in openData" :key="d.id">
+        <div @click="TicketDetails(d.id)" class="btc-ticket-block btc-pointer" v-for="d in openData" :key="d.id">
           <section class="btc-fl">
             <header>
               <strong>{{d.title}}</strong>
@@ -33,7 +36,7 @@
         </div>
       </div>
       <div v-else class="btc-ticket">
-        <div class="btc-ticket-block btc-pointer" v-for="d in closedData" :key="d.id">
+        <div @click="TicketDetails(d.id)" class="btc-ticket-block btc-pointer" v-for="d in closedData" :key="d.id">
           <section class="btc-fl">
             <header>
               <strong>{{d.title}}</strong>
@@ -100,19 +103,25 @@ export default {
       }, (d) => {
         this.loading = false
         d = d.data.success
-        if (this.setp === 0) {
+        if (state === 'open') {
           this.openData = d.tickets
         } else {
           this.closedData = d.tickets
         }
       })
     },
+    TicketDetails (id) {
+      this.$router.push(`${this.ROUTER_VERSION}/ticket?id=${id}`)
+    }
   },
   watch: {
     setp () {
       this.setp === 0 ? this.$router.push(`${this.ROUTER_VERSION}/ticket/open`) : this.$router.push(`${this.ROUTER_VERSION}/ticket/closed`)
     },
-    $route (to) {
+    $route (to, from) {
+      if (from.name !== 'TicketIndex') {
+        this.setp = 0
+      }
       if (/closed/.test(to.path)) {
         if (this.closedData !== '') return
         this.getTickets(1, 'closed')

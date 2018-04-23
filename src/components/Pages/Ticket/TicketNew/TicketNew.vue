@@ -28,8 +28,10 @@
                 {{ $t('ticket.upload_attachment') }}
               </span>
               <div v-if="FileName !== ''">
-                {{ this.FileName }}
-                <i class="btc-ticket-newDelete" @click="File = '', FileName = ''"></i>
+                <div>
+                  {{ this.FileName }}
+                </div>
+                <i class="btc-ticket-newDelete" @click="DeleteFile"></i>
               </div>
             </div>
           </div>
@@ -48,6 +50,7 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'TicketNew',
   data () {
@@ -65,9 +68,12 @@ export default {
     }
   },
   methods: {
-    upload () {
-
+    DeleteFile () {
+      this.$refs['file'].value = ''
+      this.File = ''
+      this.FileName = ''
     },
+    upload () {},
     promptEmpty () {
       this.prompt = ''
       this.File = ''
@@ -92,7 +98,32 @@ export default {
         }
       }
     },
-    sumbit () {}
+    sumbit () {
+      var file = this.$refs['file'].files[0]
+      var form = this.objectToFormData({
+        ticket: {
+          title: this.newTicket.label,
+          content: this.newTicket.details,
+          attachment_file_attributes: {
+            file: file
+          }
+        }
+      }, new FormData(), '')
+      this._post({
+        url: '/tickets.json',
+        data: form
+      }, (d) => {
+        if (d.data.success) {
+
+        } else {
+          this.po({message: this.$t('ticket')})
+        }
+      })
+    },
+    ...mapMutations(['PopupBoxDisplay'])
+  },
+  computed: {
+    ...mapGetters(['objectToFormData'])
   }
 }
 </script>

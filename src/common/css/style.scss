@@ -172,6 +172,13 @@ ul,li {
   }
 }
 
+a{
+ text-decoration: none;
+ &:focus,&:hover{
+   text-decoration: none;
+ }
+}
+
 @media (max-width: 992px) {
   html, body {
     height: auto;

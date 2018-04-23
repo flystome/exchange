@@ -6,6 +6,7 @@ const en = {
     "confirm": "Confirm",
     'currency': 'Currency',
     'time': 'time',
+    "reply": "Reply",
     "auth": {
       "email": "Verify Email",
       "phone": "Verify Cell Phone",
@@ -395,7 +396,7 @@ const en = {
         "create_withdraw_200": "An confirmation email has been sent to your mailbox",
         "create_withdraw_1001": "Please give an valid currency parameter.",
         "create_withdraw_1002": "Authentication Failed",
-        "create_withdraw_1003": "The withdrawal requests within one day cannot exceed ",
+        "create_withdraw_1003": "The withdrawal requests can not be more than",
         "create_withdraw_1004": "The withdrawal amount exceeds the daily limit",
         "create_withdraw_1005": "Invalid Currency Address.",
         "create_withdraw_1006": "System error",
@@ -414,6 +415,11 @@ const en = {
       },
       "homepage": {
         "error_1001":  "Incorrect Email or password, please try again."
+      },
+      "ticket": {
+        "error_1001": "Ticket has been closed.",
+        "error_1002": "Comment failed.",
+        "error_1003": "Failed to close ticket."
       }
     },
     "footer": {
@@ -548,7 +554,11 @@ const en = {
       "choose": "Choose",
       "detailed_description": "Detailed Description",
       "upload_describe": ".jpg,.png,.bmp file not more than 1MB",
-      "ticket_describe": "If you have any questions, comments or suggestions need to communicate with us, please create a service list for us, we will reply you as soon as possible."
+      "ticket_describe": "If you have any questions, comments or suggestions need to communicate with us, please create a service list for us, we will reply you as soon as possible.",
+      "customer_service_reply": "Customer Service Reply:",
+      "reply_to_customer_service": "Reply To Customer Service:",
+      "upload_photo": "Upload Photo",
+      "reply_can_not_be_empty": "Reply can not be empty"
     },
     "validation": {
       "verify_code": 'verify code'
