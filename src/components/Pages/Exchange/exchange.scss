@@ -1,0 +1,157 @@
+#exchange {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-size: 12px;
+  ul, li {
+    margin: 0;
+    padding: 0;
+  }
+  .up {
+    color: #fc4a4a;
+  }
+  .down {
+    color: #24d0b2;
+  }
+  header {
+    height: 60px;
+    width: 100%;
+    padding: 10px 0;
+    background: #232e3a;
+    vertical-align: -4px;
+    .logo {
+      display: inline-block;
+      width: 88px;
+      margin-left: 15px;
+      line-height: 40px;
+      img {
+        width: 100%;
+      }
+    }
+    .header_rt {
+      float: right;
+    }
+  }
+  .w240 {
+    display: inline-block;
+    width: 240px;
+    background: #232e3a;
+    height: 100%;
+    float: left;
+  }
+  .content {
+    display: inline-block;
+    float: left;
+    height: calc(100% - 62px);
+    width: calc(100% - 488px);
+    margin: 2px 2px 0;
+    .top_content {
+      width: 100%;
+      height: calc(100% - 218px);
+      margin-bottom: 2px;
+      .market {
+
+      }
+      .chart {
+        display: inline-block;
+        float: right;
+        width: calc(100% - 242px);
+        height: 100%;
+        background: #232e3a;
+      }
+    }
+    .my_order {
+      width: 100%;
+      height: 216px;
+      background: #232e3a;
+    }
+  }
+  .list {
+    display: inline-block;
+    float: left;
+    width: 482px;
+    height: calc(100% - 62px);
+    margin-top: 2px;
+    margin-right: 2px;
+    &>div {
+      background: none;
+    }
+    .list_box {
+      height: calc(100% - 267px);
+      overflow-y:hidden;
+      background: #232e3a;
+    }
+    .order {
+      background: #232e3a;
+      height: 265px;
+      margin-top: 2px;
+    }
+    .list_lt {
+
+    }
+    .list_rt {
+      float: right;
+      .history {
+
+      }
+    }
+  }
+  .vue-scrollbar__scrollbar-vertical:hover, .vue-scrollbar__scrollbar-horizontal {
+    background: none;
+    width: 5px;
+  }
+  .vue-scrollbar__scrollbar-vertical .scrollbar {
+    width: 5px;
+    background: #38475a;
+    border-radius: 2px;
+  }
+  .vue-scrollbar__scrollbar-vertical {
+    width: 5px;
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      background: #293f60;
+    }
+    50% {
+      opacity: 0.8;
+      background: #293f60;
+    }
+    100% {
+      opacity: 1;
+      background: none;
+    }
+  }
+  @keyframes fadeOut{
+    0% {
+      opacity: 1;
+      background: #293f60;
+    }
+    50% {
+      opacity: 0.6;
+      background: #293f60;
+    }
+    100% {
+      opacity: 0;
+      background: none;
+    }
+  }
+  .slide-fade-enter-active {
+    animation: fadeIn 1s ease;
+  }
+  .slide-fade-leave-active {
+    animation: fadeOut 1s ease;
+  }
+  .slide-fade-move {
+    transition: transform 1s;
+  }
+  .fade-enter-active {
+    transition: all .8s ease;
+  }
+  .fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+}
