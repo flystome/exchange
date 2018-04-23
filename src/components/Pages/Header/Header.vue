@@ -48,6 +48,14 @@
           </ul>
           <ul class="nav navbar-nav navbar-right" v-else>
             <li class="btc-marginL15">
+              <router-link :to="`${ROUTER_VERSION}/ticket/open`" class="btc-header-letter">
+                <span :class="{'nav-unread': loginData.has_unread_tickets}">
+                  <i class='header-ticket' style="top: 4px;"/>
+                </span>
+                <span class="message">{{ $t("nav.message") }}</span>
+              </router-link>
+            </li>
+            <li class="btc-marginL15">
               <router-link :to="`${ROUTER_VERSION}/form/news`" class="btc-header-letter">
                 <span :class="{'nav-unread': loginData.has_unread_conversations}">
                   <i class='header-letterlog' style="top: 4px;"/>

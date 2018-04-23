@@ -555,6 +555,7 @@ const en = {
       "title": "Title",
       "upload_attachment": "Upload Attachment",
       "choose": "Choose",
+      "no_empty": "Title or description can not be empty",
       "detailed_description": "Detailed Description",
       "upload_describe": ".jpg,.png,.bmp file not more than 1MB",
       "ticket_describe": "If you have any questions, comments or suggestions need to communicate with us, please create a service list for us, we will reply you as soon as possible.",

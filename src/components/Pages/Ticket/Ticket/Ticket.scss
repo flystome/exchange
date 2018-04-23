@@ -2,7 +2,7 @@
   .btc-block-container {
     background: white;
     margin-top: 8px;
-    padding: 16px 30px 47px 30px;
+    padding: 16px 30px 24px 30px;
     .btc-ticketReplay-header{
       font-size: 12px;
     }
@@ -22,6 +22,12 @@
     .btc-ticketReplay-block{
       padding: 16px 20px;
       padding-bottom: 0;
+      header{
+        span{
+          word-break: break-all;
+          margin-left: 5px;
+        }
+      }
     }
     section{
       position: relative;
@@ -34,7 +40,7 @@
     .btc-ticketReplay-byAdmin{
       float: right;
       position: absolute;
-      bottom: 15px;
+      bottom: 8px;
       right: 0;
       padding-bottom: 0;
     }
@@ -57,6 +63,11 @@
   .btc-ticketReplay-byReplay{
     color: #ff7f18;
   }
+  .btc-newsPrompt{
+    margin-left: 0;
+    font-size: 12px;
+
+  }
 }
 
 .btn {
@@ -64,7 +75,8 @@
 }
 
 .btc-ticketReplay-textarea{
-  padding: 20px 15px;
+  padding: 20px 0;
+  padding-bottom: 7px;
   input[type=text]{
     outline: none;
     border: none;
@@ -85,6 +97,7 @@
     position: relative;
     top: 8px;
     display: inline-block;
+    overflow: hidden;
     i{
       vertical-align: top;
     }
@@ -113,6 +126,27 @@
   }
 }
 
+.btc-ticket-flex{
+  display: flex
+}
+
+@media (max-width: 992px) {
+  .btc-ticket-replay img{
+    width: 100%!important;
+    height: 100%!important;
+  }
+}
+
+@media (max-width: 768px) {
+  .btc-ticket-flex{
+    display: block!important;
+    input{
+      margin-top: 20px;
+      width: 100%;
+      margin-left: 0
+    }
+  }
+}
 
 .ticket-replay {
   @include sprite($ticket-replay);

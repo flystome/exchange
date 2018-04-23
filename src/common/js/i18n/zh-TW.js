@@ -555,6 +555,7 @@ const zh = {
     "choose": "選擇",
     "upload_attachment": "上傳附件",
     "detailed_description": "詳細描述",
+    "no_empty": "標題或說明不能為空",
     "upload_describe": "不大於1MB的.jpg, .png, .bmp文件",
     "ticket_describe": "如果您有任何問題，意見或建議需要和我們溝通，請給我們建立一個服務單，我們會盡快回复您。",
     "customer_service_reply": "客服回復:",

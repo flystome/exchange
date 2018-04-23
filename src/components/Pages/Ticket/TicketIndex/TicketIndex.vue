@@ -206,7 +206,11 @@ export default {
     },
     $route (to, from) {
       if (from.name !== 'TicketIndex') {
-        this.setp = 0
+        if (/closed/.test(to.path)) {
+          this.setp = 1
+        } else {
+          this.setp = 0
+        }
       }
       if (/closed/.test(to.path)) {
         if (this.closedData !== '') return

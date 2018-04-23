@@ -52,7 +52,7 @@
 
 .btc-country{
   .dropdown-menu{
-    margin-top: 0px !important;
+    margin-top: 1px !important;
     text-align: center;
   }
 }
@@ -272,6 +272,7 @@
 $sprite: (
   'logo': $header-logo,
   'letterlog': $header-letterlog,
+  'ticket': $header-ticket,
   'avatarlog': $header-avatarlog
 );
 

@@ -1,5 +1,5 @@
 <template>
-  <div @click="promptEmpty" class="btc-ticket-new">
+  <div @keyup.enter="sumbit" @click="promptEmpty" class="btc-ticket-new">
     <div class="btc-container-block">
       <header>
         <strong>
@@ -12,7 +12,7 @@
         </div>
         <div class="btc-ticket-from">
         <news-prompt style="display: block;margin-left:0;top: -10px;" class="btc-marginL25" :text='prompt'></news-prompt>
-          <basic-input v-model="newTicket.label" :placeholder="$t('api.label')">
+          <basic-input v-model="newTicket.label" :placeholder="$t('ticket.title')">
           </basic-input>
           <div-contenteditable class="btc-marginT15 btc-ticket-editDiv" v-model="newTicket.details" :placeholder="$t('ticket.detailed_description')">
             <span slot="placeholder">{{ $t('ticket.detailed_description') }}</span>
@@ -103,6 +103,10 @@ export default {
     },
     sumbit () {
       if (this.disabled) return
+      if (!(this.newTicket.label || this.newTicket.details)) {
+        this.prompt = this.$t('ticket.no_empty')
+        return
+      }
       this.disabled = true
       var file = this.$refs['file'].files
       var fileObject = file[0] ? {
@@ -118,6 +122,7 @@ export default {
       }
       Object.assign(xhrObj.ticket, fileObject)
       var form = this.objectToFormData(xhrObj, new FormData(), '')
+      this.prompt = ''
       this._post({
         url: '/tickets.json',
         data: form

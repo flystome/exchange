@@ -2,7 +2,7 @@
   <div @click="promptEmpty" @keyup.enter="Reply" class="btc-ticket-replay">
     <div class="btc-block-container">
       <div class="btc-ticketReplay-header btc-marginB25">
-        <router-link :to="`${ROUTER_VERSION}/ticket/open`">
+        <router-link :to="`${ROUTER_VERSION}/ticket/${state}`">
           <basic-button :text="$t('ticket.return')">
           </basic-button>
         </router-link>
@@ -30,12 +30,14 @@
             <a></a>
           </div>
           <div class="btc-ticketReplay-block" v-for="(d, index) in comments" :key="d.id">
-            <section class="btc-paddingB15" :class="{'btc-ticket-BroderNone': index === comments.length - 1}">
+            <section class="btc-paddingB30" :class="{'btc-ticket-BroderNone': index === comments.length - 1}">
               <header :class="{'btc-ticketReplay-byReplay': d.reply_from_admin}">
-                {{d.reply_from_admin ? $t('ticket.customer_service_reply') : $t('ticket.reply_to_customer_service')}} <span v-text="d.content"></span>
+                <div>
+                  {{d.reply_from_admin ? $t('ticket.customer_service_reply') : $t('ticket.reply_to_customer_service')}} <span v-text="d.content"></span>
+                </div>
               </header>
               <img v-if="d.attachment_url" class="btc-marginT15"  :src="d.attachment_url" />
-              <div class="btc-marginT15 btc-ticketReplay-byAdmin">
+              <div class="btc-marginT15 btc-ticketReplay-byAdmin btc-color999">
                 <!-- <div v-if="d.reply_from_admin" class="btc-pointer btc-fl" @click="ShowReply(d)">
                   <i class="ticket-replay">
                   </i>
@@ -44,7 +46,7 @@
                   </span>
                 </div> -->
                 <div class="btc-fr">
-                  {{ $moment(d.create_at).format('L H:mm:ss') }}
+                  {{ $moment(d.created_at).format('L H:mm:ss') }}
                 </div>
               </div>
               <div class="clearfix">
@@ -55,9 +57,9 @@
       </template>
       <vue-simple-spinner class="btc-marginT100" size="88" v-else></vue-simple-spinner>
       <div v-if="!loading && this.state !== 'closed'" class="btc-ticketReplay-textarea btc-marginT15 btc-font12">
-        <div style="display:flex">
+        <div class="btc-ticket-flex" style="display:flex">
           {{ $t('ticket.reply_to_customer_service') }}
-          <input v-model="context"  type="text" class="btc-marginL5"  v-focus>
+          <input v-model="context"  type="text" class="btc-marginL10"  v-focus>
         </div>
         <div class="btc-marginT15" style="position: relative;">
           <span class="btc-link btc-fl">
@@ -72,11 +74,12 @@
             </div>
             <i class="btc-ticket-newDelete btc-pointer" @click="DeleteFile"></i>
           </div>
-          <news-prompt style="" class="btc-marginL25 btc-fl" :text='prompt'></news-prompt>
-          <basic-button @click.native.stop="Reply" class="btc-fr" :text="$t('reply')"></basic-button>
+          <basic-button :disabled="disabled" @click.native.stop="Reply" class="btc-fr btn" :text="$t('reply')"></basic-button>
         </div>
+
         <div class="clearfix"></div>
       </div>
+      <news-prompt style="" class="btc-marginL25 btc-fl" :text='prompt'></news-prompt>
     </div>
   </div>
 </template>
@@ -179,6 +182,7 @@ export default {
         url: `/tickets/${this.id}/comments.json`,
         data: form
       }, (d) => {
+        var context = this.context
         this.disabled = false
         if (d.data.success) {
           if (!fileObject) {
@@ -192,7 +196,7 @@ export default {
             img.onload = (data) => {
               this.comments.push({
                 created_at: this.$moment(new Date()).format('L H:mm:ss'),
-                content: this.context,
+                content: context,
                 attachment_url: data.srcElement.result
               })
             }
