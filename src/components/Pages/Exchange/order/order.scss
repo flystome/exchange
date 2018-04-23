@@ -33,6 +33,9 @@
           -webkit-appearance: none !important;
             margin: 0;
         }
+        &::-ms-clear {
+          display: none;
+        }
       }
       span {
         display: inline-block;

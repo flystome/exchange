@@ -11,3 +11,8 @@
 /src/store/mutations.js
 /src/common/js/trend
 ./index.html
+/src/common/js/tradingView/charting_library/charting_library.min.js
+/src/common/js/tradingView/datafeeds/udf/dist/bundle.js
+/src/common/js/tradingView/datafeeds/udf/dist/polyfills.js
+/src/common/js/tradingView/charting_library/charting_library.min.js
+/src/common/js/tradingView/datafeeds/udf/dist/datafeed.js

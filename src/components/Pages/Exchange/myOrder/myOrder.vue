@@ -8,7 +8,7 @@
           <p class="cancel_all" v-if="cancelNum === 'all'">{{$t('orders.dialog.cancel_all')}}</p>
         </div>
         <div class="confirm_box">
-          <span class="confirm" @click="confirmOrder(true)">{{$t('markets.confirm')}}</span>
+          <span class="confirm" @click="confirmOrder(true)">{{$t('markets.ok')}}</span>
           <span class="cancel" @click="confirmOrder(false)">{{$t('markets.cancel')}}</span>
         </div>
       </div>
@@ -97,17 +97,17 @@ export default {
       }
     },
     getBuy () {
-      this.curOrders = this.myOrders.filter(ele => {
+      this.curOrders = this.myOrders[this.currencyIndex].filter(ele => {
         return ele['kind'] === 'bid'
       })
     },
     getSell () {
-      this.curOrders = this.myOrders.filter(ele => {
+      this.curOrders = this.myOrders[this.currencyIndex].filter(ele => {
         return ele['kind'] === 'ask'
       })
     },
     getAll () {
-      this.curOrders = this.myOrders
+      this.curOrders = this.myOrders[this.currencyIndex]
     },
     confirmOrder: function (bool) {
       this.showDialog = false

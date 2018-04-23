@@ -18,17 +18,7 @@
           <marketList :markets="markets"></marketList>
         </div>
         <div class="chart">
-          <ul class="chart_hd">
-
-          </ul>
-          <div class="chart_bd">
-            <div class="candle" id="candle">
-
-            </div>
-            <div class="depth">
-
-            </div>
-          </div>
+          <chart></chart>
         </div>
       </div>
       <div class="my_order">
