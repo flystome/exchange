@@ -161,6 +161,9 @@
             height: 31px;
             background: #4382f7;
           }
+          &::-ms-clear {
+            display: none;
+          }
         }
       }
       .extra {
