@@ -19,7 +19,7 @@
           </ul>
         </div>
         <div class="confirm_box">
-          <span class="confirm" @click="confirmTrade(true)">{{$t('markets.confirm')}}</span>
+          <span class="confirm" @click="confirmTrade(true)">{{$t('markets.ok')}}</span>
           <span class="cancel" @click="confirmTrade(false)">{{$t('markets.cancel')}}</span>
         </div>
       </div>

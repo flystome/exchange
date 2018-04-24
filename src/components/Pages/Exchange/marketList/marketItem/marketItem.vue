@@ -7,7 +7,7 @@
       </li>
     </ul>
     <ul class="bd">
-      <li v-for="item in oldData" :key="item.quote_currency">
+      <li v-for="item in oldData" :key="'market-'+item.quote_currency">
         <div class="my_fav" :class='{"favorite": item.is_portfolios}' @click="toggleFav(item.quote_currency, item.base_currency, item.is_portfolios)">
           <i class="fa fa-star"></i>
         </div>

@@ -279,6 +279,7 @@ const zh = {
     "pair": "幣種對",
     "cancel": "撤銷",
     "confirm": "確認",
+    "ok": "確認",
     "dialog": {
         "buy": "買入",
         "sell": "賣出"

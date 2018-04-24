@@ -280,6 +280,7 @@ const en = {
       "pair": "Pair",
       "cancel": "Cancel",
       "confirm": "Confirm",
+      "ok": "OK",
       "dialog": {
         "buy": " to Bid",
         "sell": " to Ask"
