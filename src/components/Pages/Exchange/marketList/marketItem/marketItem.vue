@@ -8,7 +8,7 @@
     </ul>
     <ul class="bd">
       <li v-for="item in oldData" :key="'market-'+item.quote_currency">
-        <div class="my_fav" :class='{"favorite": item.is_portfolios}' @click="toggleFav(item.quote_currency, item.base_currency, item.is_portfolios)">
+        <div class="my_fav" :class='{"favorite": item.is_portfolios}' @click="toggleFav(item.quote_currency, item.base_currency, item.is_portfolios, item)">
           <i class="fa fa-star"></i>
         </div>
         <div class="list-coin">
@@ -94,37 +94,7 @@ export default {
       }
     },
     toggleFav (quote, base, bool) {
-      var market = '' + quote + base
-      var self = this
-
-      if (bool) {
-        this._delete({
-          url: '/portfolios/' + market + '.json'
-        }, function (xhr) {
-          if (xhr.status === 200) {
-            self.oldData.filter(ele => {
-              return ele.quote_currency === quote
-            }).map(ele => {
-              ele['is_portfolios'] = !ele['is_portfolios']
-            })
-          }
-        })
-      } else {
-        this._post({
-          url: '/portfolios.json',
-          data: {
-            market: market
-          }
-        }, function (xhr) {
-          if (xhr.status === 200) {
-            self.oldData.filter(ele => {
-              return ele.quote_currency === quote
-            }).map(ele => {
-              ele['is_portfolios'] = !ele['is_portfolios']
-            })
-          }
-        })
-      }
+      this.$emit('changeFav', quote, base, bool)
     }
   }
 }

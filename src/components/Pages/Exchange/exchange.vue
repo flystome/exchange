@@ -15,20 +15,20 @@
     <section class="content">
       <div class="top_content clearfix">
         <div class="market w240">
-          <marketList :markets="markets"></marketList>
+          <marketList :markets="markets" @reFreshFav='reFreshFav'></marketList>
         </div>
         <div class="chart">
           <chart></chart>
         </div>
       </div>
       <div class="my_order">
-        <audio id="order_cancel" src="/static/media/cancel.wav"></audio>
+        <audio id="order_cancel" src="/static/media/cancel.mp3"></audio>
         <myOrder :myOrders='my_orders' :market="market" @getMyOrder='getMyOrder'></myOrder>
       </div>
     </section>
     <section class="list">
-      <audio id="order_audio" src="/static/media/order.wav"></audio>
-      <audio id="order_ok" src="/static/media/settle.wav"></audio>
+      <audio id="order_audio" src="/static/media/order.mp3"></audio>
+      <audio id="order_ok" src="/static/media/settle.mp3"></audio>
       <div class="list_lt w240">
         <div class="list_box trades">
           <trades :depthData='depth_data' :market='market'></trades>
@@ -148,6 +148,7 @@ export default {
       this.globalRefresh()
       this.version = this.depth_data.version
       this.initMine()
+      document.title = `${this.market.quote_currency.toUpperCase()}/${this.market.base_currency.toUpperCase()} - ${this.$t('brand')}`
     },
     initMine () {
       this.initTrend()
@@ -360,6 +361,32 @@ export default {
       if (this.soundAllow) {
         var order = document.getElementById(id)
         order.play()
+      }
+    },
+    reFreshFav (quote, base, bool) {
+      var market = '' + quote + base
+      var self = this
+      if (bool) {
+        this._delete({
+          url: '/portfolios/' + market + '.json'
+        }, function (xhr) {
+          if (xhr.status === 200) {
+            self.markets[market]['is_portfolios'] = false
+            self.markets = Object.assign({}, self.markets)
+          }
+        })
+      } else {
+        this._post({
+          url: '/portfolios.json',
+          data: {
+            market: market
+          }
+        }, function (xhr) {
+          if (xhr.status === 200) {
+            self.markets[market]['is_portfolios'] = true
+            self.markets = Object.assign({}, self.markets)
+          }
+        })
       }
     }
   }

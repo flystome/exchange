@@ -36,11 +36,11 @@
         </transition>
       </div>
       <div class="volume put">
-        <input type="number" ref="buyVolume" v-model='buyVolume' @change='handleVol($event.target.value, "buy")' :placeholder="$t('exchange.volume')">
+        <input type="number" ref="buyVolume" v-model='buyVolume' @input='handleVol($event.target.value, "buy")' :placeholder="$t('exchange.volume')">
         <span>{{market.quote_currency | upper}}</span>
       </div>
       <div class="total put">
-        <input type="number" ref="buyTotal" v-model='buyTotal' @change='handleTotal($event.target.value, "buy")' :placeholder="$t('markets.total')">
+        <input type="number" ref="buyTotal" v-model='buyTotal' @input='handleTotal($event.target.value, "buy")' :placeholder="$t('markets.total')">
         <span>{{market.base_currency | upper}}</span>
       </div>
       <div class="percent">
@@ -62,11 +62,11 @@
         </transition>
       </div>
       <div class="volume put">
-        <input type="number" ref="sellVolume" step="0.00000001" v-model='sellVolume' @change='handleVol($event.target.value, "sell")' :placeholder="$t('exchange.volume')">
+        <input type="number" ref="sellVolume" step="0.00000001" v-model='sellVolume' @input='handleVol($event.target.value, "sell")' :placeholder="$t('exchange.volume')">
         <span>{{market.quote_currency | upper}}</span>
       </div>
       <div class="total put">
-        <input type="number" ref="sellTotal" step="0.00000001" v-model='sellTotal' @change='handleTotal($event.target.value, "sell")' :placeholder="$t('markets.total')">
+        <input type="number" ref="sellTotal" step="0.00000001" v-model='sellTotal' @input='handleTotal($event.target.value, "sell")' :placeholder="$t('markets.total')">
         <span>{{market.base_currency | upper}}</span>
       </div>
       <div class="percent">
@@ -146,6 +146,7 @@ export default {
   },
   methods: {
     handleVol (value, type) {
+      if (value === ' ') return
       if (this[type + 'Price']) {
         var num = +this[type + 'Price'] * +value
         if (type === 'buy') {
@@ -165,6 +166,7 @@ export default {
       }
     },
     handlePrice (value, type) {
+      if (value === ' ') return
       this[type + 'Price'] = this.fixNum(value, this.market.price_fixed)
       var distance = Math.abs(this[type + 'Price'] - this.market.last) / this.market.last
       if (distance > 0.1) {
@@ -183,6 +185,7 @@ export default {
       }
     },
     handleTotal (value, type) {
+      if (value === ' ') return
       if (type === 'buy') {
         if (value > +this.buyAccount) {
           value = this.fixNum(this.buyAccount, this.market.volume_fixed, this.market.price_fixed)
@@ -201,6 +204,7 @@ export default {
       this[type + 'Total'] = this.fixNum(value, this.market.volume_fixed, this.market.price_fixed)
     },
     fixNum (value, num, num1) {
+      if ((/[0-9]+\.$/).test(value) || value === ' ') return value
       var nums = num1 ? (num > num1 ? num : num1) : num
       var e = Math.pow(10, nums)
       return Math.floor(e * +value) / e
