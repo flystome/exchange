@@ -189,12 +189,9 @@ export default {
           this.pagination1 = d.total_pages
         }
       })
-<<<<<<< HEAD
     },
     TicketDetails (id) {
       this.$router.push(`${this.ROUTER_VERSION}/ticket?id=${id}`)
-=======
->>>>>>> candleStick
     }
   },
   watch: {
