@@ -5,14 +5,16 @@
         <basic-button class="btc-fl btc-ticket-appButton" :text="$t('ticket.new_ticket')"></basic-button>
       </router-link>
       <div class="btc-ticket-slide">
-        <menu-underline
-        ref="menu"
-        v-model='setp'
-        :menu-index='setp'
-        :underline-margin="'16px'"
-        :menu-margin="'64px'"
-        :menu-list="[$t('ticket.open_tickets'), $t('ticket.closed_tickets')]">
-        </menu-underline>
+        <keep-alive>
+          <menu-underline
+          ref="menu"
+          v-model='setp'
+          :menu-index='setp'
+          :underline-margin="'16px'"
+          :menu-margin="'64px'"
+          :menu-list="[$t('ticket.open_tickets'), $t('ticket.closed_tickets')]">
+          </menu-underline>
+        </keep-alive>
       </div>
       <router-link :to="`${ROUTER_VERSION}/ticket/new`">
         <basic-button class="btc-fr btc-ticket-frbutton" :text="$t('ticket.new_ticket')"></basic-button>
@@ -20,9 +22,10 @@
     </header>
     <template v-if="!loading">
       <div v-if="setp === 0" class="btc-ticket" >
-        <div @click="TicketDetails(d.id)" class="btc-ticket-block btc-pointer" v-for="d in openData" :key="d.id">
+        <div @click="TicketDetails(d)" class="btc-ticket-block btc-pointer" v-for="d in openData" :key="d.id">
           <section class="btc-fl">
             <header>
+              <i v-if="d.unread" class="btc-ticket-unread"></i>
               <strong v-text="d.title"></strong>
               <span class="btc-ticket-time">{{ $moment(d.created_at).format('L H:mm:ss') }}</span>
             </header>
@@ -35,7 +38,7 @@
         </div>
       </div>
       <div v-else class="btc-ticket">
-        <div @click="TicketDetails(d.id)" class="btc-ticket-block btc-pointer" v-for="d in closedData" :key="d.id">
+        <div @click="TicketDetails(d)" class="btc-ticket-block btc-pointer" v-for="d in closedData" :key="d.id">
           <section class="btc-fl">
             <header>
               <strong v-text="d.title"></strong>
@@ -55,7 +58,7 @@
       key='pagination'
       ref="pagination"
       :disabled="disabled"
-      v-show="pagination !== 0 && route === 'open'"
+      v-show="pagination > 1 && route === 'open'"
       :page-count="pagination"
       :page-range="3"
       :margin-pages="1"
@@ -70,7 +73,7 @@
       key='pagination1'
       ref="pagination1"
       :disabled="disabled"
-      v-show="pagination1 !== 0 && route !== 'open'"
+      v-show="pagination1 > 1 && route !== 'open'"
       :page-count="pagination1"
       :page-range="3"
       :margin-pages="1"
@@ -80,7 +83,7 @@
       :next-text="`${$t('form.next')}`"
       :page-class="'page-item'">
     </paginate>
-    <div class="text-center btc-marginT15 btc-paddingT50 btc-paddingB50" style="background:white" v-if="!loading && (setp === 0 ? openData.length === 0 : closedData.length === 0)">
+    <div class="text-center btc-paddingT40 btc-paddingB40" style="margin-top:8px;background:white" v-if="!loading && (setp === 0 ? openData.length === 0 : closedData.length === 0)">
       <strong>
         {{ $t('my_account.no_record') }}
       </strong>
@@ -190,8 +193,9 @@ export default {
         }
       })
     },
-    TicketDetails (id) {
-      this.$router.push(`${this.ROUTER_VERSION}/ticket?id=${id}`)
+    TicketDetails (d) {
+      d.unread = false
+      this.$router.push(`${this.ROUTER_VERSION}/ticket?id=${d.id}`)
     }
   },
   watch: {

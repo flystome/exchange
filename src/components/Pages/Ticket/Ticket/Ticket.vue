@@ -2,12 +2,10 @@
   <div @click="promptEmpty" @keyup.enter="Reply" class="btc-ticket-replay">
     <div class="btc-block-container">
       <div class="btc-ticketReplay-header btc-marginB25">
-        <router-link :to="`${ROUTER_VERSION}/ticket/${state}`">
-          <basic-button :text="$t('ticket.return')">
-          </basic-button>
-        </router-link>
+        <basic-button @click.native="goPath(`/ticket/${state}`)" :text="$t('ticket.return')">
+        </basic-button>
         <div class="btc-fr" v-if="state === 'open' && !loading">
-        <basic-button :text="$t('ticket.reminder')" class="btc-marginR25">
+        <basic-button :disabled='disabled' @click.native="Remind" :text="$t('ticket.reminder')" class="btn btc-marginR25">
         </basic-button>
         <basic-button class="btn" :disabled='disabled' @click.native="CloseTicket" :text="$t('ticket.close_ticket')">
         </basic-button>
@@ -55,7 +53,7 @@
           </div>
         </div>
       </template>
-      <vue-simple-spinner class="btc-marginT100" size="88" v-else></vue-simple-spinner>
+      <vue-simple-spinner class="btc-marginT100 btc-marginB100" size="88" v-else></vue-simple-spinner>
       <div v-if="!loading && this.state !== 'closed'" class="btc-ticketReplay-textarea btc-marginT15 btc-font12">
         <div class="btc-ticket-flex" style="display:flex">
           {{ $t('ticket.reply_to_customer_service') }}
@@ -86,7 +84,7 @@
 
 <script>
 import { bus } from '@/common/js/bus'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapMutations, mapState } from 'vuex'
 export default {
   name: 'Ticket',
   data () {
@@ -129,6 +127,7 @@ export default {
           d.success.ticket.comments.forEach((data) => {
             data.ReplyState = false
           })
+          if (!d.success.ticket.has_more_unread) this.loginData.has_unread_tickets = false
           this.state = d.success.ticket.aasm_state
           this.id = d.success.ticket.id
           this.title = d.success.ticket.title
@@ -246,9 +245,28 @@ export default {
         }
       })
     },
+    goPath (route) {
+      if (this.disabled) return
+      this.$router.push(`${this.ROUTER_VERSION}${route}`)
+    },
+    Remind () {
+      this.disabled = true
+      this._request({
+        method: 'PATCH',
+        url: `/tickets/${this.id}/remind.json`
+      }, (d) => {
+        this.disabled = false
+        if (d.data.success) {
+          this.PopupBoxDisplay({message: this.$t(`api_server.ticket.success_203`), type: 'success'})
+        } else {
+          this.PopupBoxDisplay({message: this.$t(`api_server.ticket.error_1005`), type: 'warn'})
+        }
+      })
+    },
     ...mapMutations(['PopupBoxDisplay'])
   },
   computed: {
+    ...mapState(['loginData']),
     ...mapGetters(['objectToFormData'])
   },
   watch: {

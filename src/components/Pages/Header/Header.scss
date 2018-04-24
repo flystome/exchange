@@ -241,6 +241,48 @@
   }
 }
 
+.navbar-from-home{
+  background: none;
+  position: absolute;
+  width: 100%;
+  .navbar-default{
+    background: none;
+    .navbar-collapse .navbar-nav > li a{
+      color: white;
+      &:hover,&:focus{
+        color: white;
+      }
+    }
+    .navbar-collapse .navbar-nav > li .dropdown-menu a{
+      color: #728eaa;
+      &:hover{
+        color: #417dee;
+      }
+    }
+  }
+  .btc-country .dropdown-toggle{
+    background: none;
+    &:hover,&:focus{
+      background: none!important
+    }
+  }
+  .btc-ifo .dropdown-toggle{
+    background: none!important;
+  }
+  .btc-header-signin{
+    color: white;
+    a{
+      color: white;
+      &:hover,&:focus{
+        color: white;
+      }
+    }
+  }
+  .btc-country .dropdown-menu{
+    margin-top: -15px !important;
+  }
+}
+
 @media(max-width: 764px){
   .navbar-header{
     margin-left: 15px;
@@ -273,7 +315,11 @@ $sprite: (
   'logo': $header-logo,
   'letterlog': $header-letterlog,
   'ticket': $header-ticket,
-  'avatarlog': $header-avatarlog
+  'avatarlog': $header-avatarlog,
+  'hticket': $header-hticket,
+  'hlog': $header-hlog,
+  'hletterlog': $header-hletterlog,
+  'havatarlog': $header-havatarlog,
 );
 
 @each $key, $val in $sprite{

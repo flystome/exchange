@@ -25,7 +25,9 @@ table{
     }
   }
   >tbody{
+    min-height: 370px;
     >tr{
+      height: 74px;
       >td{
         padding: 16px 16px;
         border: none;

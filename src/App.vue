@@ -1,18 +1,23 @@
 <template>
   <div id="app">
-    <transition name='SideSlipMenu'>
-      <section class="btc-main" :class="{'btc-background-white': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange'}">
-        <header v-if="!fromApp && !exChange" is='Header' />
-      <div class="btc-global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
-        <vue-simple-spinner size="88"></vue-simple-spinner>
+    <ul class="btc-homepage-newCoin" v-if="FROM_HOME && new_coin.length !== 0">
+      <div class="container">
+        <li v-for="data in new_coin" :key='data.id'>
+          <a :href="data.url">{{ data.the_title }}</a>
+        </li>
       </div>
-      <div v-else class="btc-container container" :class="{'noPadding':noPadding}" v-cloak>
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
-      </div>
-      </section>
-    </transition>
+    </ul>
+    <section class="btc-main" :class="{'btc-background-white': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange'}">
+      <header :FROM='FROM_HOME' v-if="!fromApp && !exChange" is='Header' />
+    <div class="btc-global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
+      <vue-simple-spinner size="88"></vue-simple-spinner>
+    </div>
+    <div v-else class="btc-container container" :class="{'noPadding':noPadding}" v-cloak>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
+    </div>
+    </section>
     <footer v-if='!fromApp && noMobile && !exChange' is='Footer' />
     <wrapper></wrapper>
     <popup-box></popup-box>
@@ -37,26 +42,26 @@ export default {
       noMobile: true,
       exChange: false,
       noPaddingList: ['Markets', 'MarketDetail', 'Trades', 'Orders'],
-      noPadding: false
+      noPadding: false,
+      FROM_HOME: '',
+      new_coin: ''
     }
   },
-  components: {
-    Header,
-    Footer,
-    SideSlipMenu,
-    Wrapper,
-    PopupBox
-  },
-  mounted: function () {
+  beforeMount: function () {
     this.noMobile = !/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)
   },
-  watch: {
-    '$route' (to, from) {
-      if (to.name === 'Exchange') {
-        this.exChange = true
-      } else if (this.noPaddingList.indexOf(to.name) !== -1) {
-        this.noPadding = true
-      }
+  methods: {
+    GetNewCoin () {
+      this._get({
+        url: '/cms/api/announcements.json',
+        data: {
+          category: 'new-coin',
+          locale: this.language,
+          per_page: '3'
+        }
+      }, (d) => {
+        this.new_coin = d.data
+      })
     }
   },
   computed: {
@@ -66,8 +71,30 @@ export default {
       }
       return false
     },
-    ...mapState(['fromApp']),
+    ...mapState(['fromApp', 'language']),
     ...mapGetters(['loginData'])
+  },
+  components: {
+    Header,
+    Footer,
+    SideSlipMenu,
+    Wrapper,
+    PopupBox
+  },
+  watch: {
+    '$route' (to, from) {
+      if (to.name === 'Exchange') {
+        this.exChange = true
+      } else if (this.noPaddingList.indexOf(to.name) !== -1) {
+        this.noPadding = true
+      }
+      if (to.name === 'HomePage' || to.name === 'home') {
+        if (this.new_coin === '') this.GetNewCoin()
+        this.FROM_HOME = true
+      } else {
+        this.FROM_HOME = false
+      }
+    }
   }
 }
 </script>
@@ -92,6 +119,34 @@ export default {
     height: 100%;
     background: none;
     padding: 0;
+  }
+}
+
+.btc-homepage-newCoin{
+  left: 0;
+  width: 100%;
+  background: #232731;
+  margin: 0;
+  padding: 0;
+  ul,li {
+    margin: 0;
+    padding: 0;
+  }
+  li{
+    display: inline-block;
+    width: 33%;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    text-align: center;
+    padding: 10px 0;
+    padding-bottom: 5px;
+  }
+  a{
+    color: #3e81ff;
+    &:focus,&:hover{
+      text-decoration: none;
+    }
   }
 }
 </style>

@@ -34,7 +34,9 @@
             </div>
           </div>
         </swiper-slide>
-        <vue-simple-spinner class="btc-notice-loading" v-if="Notice.length === 0" size="150"></vue-simple-spinner>
+        <div v-if="Notice.length === 0" style="position: absolute;left: 50%;margin-left: -75px;margin-top: 93px;">
+          <vue-simple-spinner class="btc-notice-loading" size="150"></vue-simple-spinner>
+        </div>
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
@@ -66,7 +68,7 @@
               <span style="color:#999999">{{ $t('homepage.discounts_of_transaction_costs') }}</span>
               <span>
                 <router-link class="btc-link" :to="`${ROUTER_VERSION}/referral`">
-                  {{ `${factor}%` }} {{ $t('homepage.off') }}
+                  {{ factor }} {{ $t('homepage.off') }}
                 </router-link>
               </span>
             </div>
@@ -94,13 +96,13 @@
       </div>
     </div>
     <div class="btc-homepage-notice">
-      <ul class="btc-homepage-newCoin">
+      <!-- <ul class="btc-homepage-newCoin">
         <div class="container">
           <li v-for="data in new_coin" :key='data.id'>
             <a :href="data.url">{{ data.the_title }}</a>
           </li>
         </div>
-      </ul>
+      </ul> -->
     </div>
     <div class="btc-homepage-main">
       <div class="btc-homepage-markets btc-marginT30">
@@ -120,7 +122,7 @@
         </keep-alive>
       </div>
       <div class="btc-homepage-logo text-center">
-        <img src="~Img/header-logo.png" >
+        <i class="home-log"></i>
       </div>
       <div class="btc-homepage-intr btc-marginT15 btc-marginB100">
         <span class="col-xs-3 btc-marginT10"></span>
@@ -186,6 +188,15 @@
           {{ $t('homepage.transaction_describe') }}
         </div>
       </div>
+      <!-- <div class="btc-marginT50 btc-homepage-introduce">
+        <div>
+        </div>
+        <div>
+        </div>
+        <div>
+          fefeffef
+        </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -209,14 +220,6 @@ export default {
       this.PopupBoxDisplay({message: this.$t(`my_account.${code.match(/\d+/g)[0]}_hint`), type: 'warn'})
       Cookies.remove('code')
     } // rails flash
-
-    this._get({
-      url: '/home/funds.json'
-    }, (d) => {
-      d = d.data.success
-      if (!d.commission_factor) return
-      this.factor = (10 - d.commission_factor * 10) * 10
-    }) // markets
 
     this._get({
       url: '/k/trends.json'
@@ -259,7 +262,6 @@ export default {
       trend: '',
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       HOST_URL: process.env.HOST_URL,
-      factor: '',
       currencyindex: 0,
       search: '',
       open: !Cookies.get('total_hide'),
@@ -307,7 +309,13 @@ export default {
       }, (d) => {
         this.disabled = false
         if (d.data.success) {
-          location.href = location.href
+          var loginData = JSON.parse(d.data.success.user_info)
+          Object.assign(this.$store.state, {
+            loginData: loginData,
+            assets: loginData.assets
+          })
+          this.curData = ''
+          this.$store.dispatch('GetMarketData')
         } else {
           if (d.data.error.code === 1002) {
             location.href = `${this.HOST_URL}/signin`
@@ -386,16 +394,16 @@ export default {
     },
     GetNewCoin () {
       var self = this
-      this.new_coin = ''
-      this.$http.get(`${this.HOST_URL}/cms/api/announcements.json`, {
-        params: {
-          category: 'new-coin',
-          locale: self.language,
-          per_page: '3'
-        }
-      }).then(d => {
-        self.new_coin = d.data
-      }) // new_coin
+      // this.new_coin = ''
+      // this.$http.get(`${this.HOST_URL}/cms/api/announcements.json`, {
+      //   params: {
+      //     category: 'new-coin',
+      //     locale: self.language,
+      //     per_page: '3'
+      //   }
+      // }).then(d => {
+      //   self.new_coin = d.data
+      // }) // new_coin
       this.Notice = []
       this.$http.get(`${this.HOST_URL}/cms/api/announcements.json`, {
         params: {
@@ -432,6 +440,9 @@ export default {
   computed: {
     TotalAssets () {
       return this.$store.getters.TotalAssets()
+    },
+    factor () {
+      return this.loginData === 'none' ? '' : `${(10 - Number(this.loginData.commission_factor * 10)) * 10}%`
     },
     ...mapGetters(['loginData']),
     ...mapState(['marketData', 'language', 'CmsUrl'])

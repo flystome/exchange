@@ -218,6 +218,7 @@ import Clipboard from 'clipboard'
 const _debounce = require('lodash/fp/debounce.js')
 import pusher from '@/common/js/pusher'
 var QRCode = require('qrcode')
+const timeLine = 20000
 export default {
   name: 'withdrawCurrency',
   created () {
@@ -477,7 +478,7 @@ export default {
           buttondisplay: true
         })
         this.Time = false
-      }, 10000)
+      }, timeLine)
     },
     GetCoin (c, funds, sn) {
       this.withdrawAddress = false

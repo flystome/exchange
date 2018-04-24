@@ -422,10 +422,12 @@ const en = {
       "ticket": {
         "success_200": 'Create Success',
         "success_201": 'Close off success',
+        "success_203": 'Urge ticket success',
         "error_1001": "Ticket has been closed.",
         "error_1002": "Comment Failed.",
         "error_1003": "Failed to close ticket.",
-        "error_1004": "Create Failed."
+        "error_1004": "Create Failed.",
+        "error_1005": "When there is a new reply, no further reminders can be sent within 60 minutes",
       }
     },
     "footer": {

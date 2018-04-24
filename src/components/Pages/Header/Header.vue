@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar-Home">
+  <div class="navbar-Home" :class="{'navbar-from-home': FROM}">
     <nav class="container navbar navbar-default">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -9,7 +9,8 @@
             <span class="icon-bar"></span>
           </button>
           <router-link class="navbar-brand" to="/">
-            <i class='header-logo'/>
+            <i v-if="FROM" class='header-hlog'/>
+            <i v-else class='header-logo'/>
           </router-link>
           <div class="btc-header-sideslip" @click="SideSlipMenuDisplay(true)">
             <a></a>
@@ -50,7 +51,8 @@
             <li class="btc-marginL15">
               <router-link :to="`${ROUTER_VERSION}/ticket/open`" class="btc-header-letter">
                 <span :class="{'nav-unread': loginData.has_unread_tickets}">
-                  <i class='header-ticket' style="top: 4px;"/>
+                  <i v-if="FROM" class='header-hticket' style="top: 4px;"/>
+                  <i v-else class='header-ticket' style="top: 4px;"/>
                 </span>
                 <span class="message">{{ $t("nav.message") }}</span>
               </router-link>
@@ -58,7 +60,8 @@
             <li class="btc-marginL15">
               <router-link :to="`${ROUTER_VERSION}/form/news`" class="btc-header-letter">
                 <span :class="{'nav-unread': loginData.has_unread_conversations}">
-                  <i class='header-letterlog' style="top: 4px;"/>
+                  <i v-if="FROM" class='header-hletterlog' style="top: 4px;"/>
+                  <i v-else class='header-letterlog' style="top: 4px;"/>
                 </span>
                 <span class="message">{{ $t("nav.message") }}</span>
               </router-link>
@@ -68,7 +71,8 @@
               {{ this.loginData.email }} -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <!-- <img src="~Img/header-avatarlog.png" class="btc-header-avatar"> -->
-                <i class='header-avatarlog'/>
+                <i v-if="FROM" class='header-havatarlog'/>
+                <i v-else class='header-avatarlog'/>
                 {{ this.loginData.show_name }}
                 <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -106,6 +110,11 @@ export default {
   // created () {
   //   this.$store.dispatch('getData')
   // },
+  props: {
+    FROM: {
+      type: Boolean
+    }
+  },
   data () {
     return {
       HOST_URL: process.env.HOST_URL,

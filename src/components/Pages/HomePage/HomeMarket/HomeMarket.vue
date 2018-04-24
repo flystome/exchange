@@ -13,7 +13,7 @@
           <th>{{ $t('homepage.price_trend') }}</th>
         </tr>
       </thead>
-      <tbody ref="itemlength">
+      <tbody ref="itemlength" class="btc-b-t">
         <tr v-for='(item , index) in oldData' :key='item.name' v-if="matchName(item.name, index)">
           <td>
             <a class="btc-homepage-currency" style="color: #333333;">

@@ -3,7 +3,6 @@
     <div :class="{'btc-news-minheight': !(pagination === 0 && firstLoad)}">
       <header class="btc-news-radio">
         <div class="btc-fl">
-          {{ $route.query.from }}
           <strong style="color:black">{{$t('title.form_news')}}</strong>
         </div>
         <div class="btc-fr">
