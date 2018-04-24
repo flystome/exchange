@@ -19,7 +19,8 @@
         width: 100%;
         min-height: 480px;
         background-repeat: no-repeat;
-        background:linear-gradient(to bottom, #206eff, #2f9aff);
+        // background:linear-gradient(to bottom, #206eff, #2f9aff);
+        background: url('~Img/large/home-background1.png')
       }
       .btc-notice{
         a:hover, a:focus{
@@ -32,7 +33,8 @@
           color: white;
         }
         p{
-          margin-top: 200px;
+          // margin-top: 200px;
+          margin-top: 151px;
           font-size: 44px;
         }
         span{
@@ -45,12 +47,6 @@
           margin-top: 33px;
         }
       }
-    }
-    .btc-notice-loading{
-      position: relative;
-      left: 50%;
-      margin-top: 75px;
-      margin-left: -75px;
     }
     .carousel-inner{
       height: 480px;
@@ -229,12 +225,16 @@
 }
 
 .btc-homepage-introduce{
+  .btc-homepage-transition{
+    transition: all .3s ease!important;
+  }
   height: 583px;
   >div:nth-child(2){
     position: absolute;
     left: 0;
     width: 100%;
     height: 583px;
+    min-width: 1200px;
     background: url('~Img/large/home-background.png');
     // padding-top: 92px;
     // padding-bottom: 96px;
@@ -244,6 +244,7 @@
     position: absolute;
     left: 0;
     width: 100%;
+    min-width: 1200px;
     height: 583px;
   }
   >div:nth-child(3){
@@ -252,6 +253,91 @@
     height: 100%;
     padding-top: 92px;
     padding-bottom: 96px;
+    .btc-margin0{
+      margin:0
+    }
+    >div>a>section{
+      display: inline-block;
+      width: 371px;
+      height: 128px;
+      background: white;
+      cursor: pointer;
+      margin-left: 15px;
+      padding-left: 24px;
+      padding-top: 20px;
+      box-shadow:0 0 30px #bbbbbb;
+      overflow: hidden;
+      &:hover{
+        box-shadow:none;
+      }
+      >div{
+        float: left;
+        div{
+          font-size: 13px;
+          margin-top: 10px;
+        }
+      }
+      >div:nth-child(2){
+        display: block;
+        width: 213px;
+        margin-left: 43px;
+      }
+    }
+    >div:nth-child(2){
+      margin-top: 36px
+    }
+    >div:last-child{
+      margin-top: 66px;
+      span{
+        display: block;
+        width: 683px;
+        font-size: 12px;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+.btc-homepage-end{
+  margin: 128px 0;
+  overflow: hidden;
+  .home-end-img {
+    >img:nth-child(3){
+      position: absolute;
+      margin-top: 93px;
+    }
+    >img:nth-child(2){
+      position: absolute;
+      margin-top: 78px;
+      margin-left: 73px;
+      z-index: 2;
+    }
+    >img:nth-child(1){
+      margin-left: 127px;
+      position: absolute;
+    }
+  }
+  >div:nth-child(2) {
+    float: right;
+    width: 364px;
+    margin-top: 82px;
+    margin-right: 49px;
+    >div:nth-child(2){
+      margin-top: 18px;
+      margin-bottom: 33px;
+    }
+  }
+}
+
+
+@media (max-width: 1302px){
+  .btc-homepage-login{
+    right: 53px!important;
+  }
+  .btc-homepage-header .carousel .btc-notice{
+    p,span{
+      margin-left: 58px;
+    }
   }
 }
 
@@ -261,8 +347,11 @@ $sprite: (
   'aboutus': $home-aboutus,
   'privacy': $home-privacy,
   'apply': $home-apply,
+  'application': $home-application,
   'api': $home-api,
   'contact': $home-contact,
+  'iosapp': $validate-iosapp,
+  'gplay': $validate-gplay
 );
 
 @each $key, $val in $sprite{

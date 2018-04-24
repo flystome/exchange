@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{'btc-background-white': this.$route.name === 'HomePage' ||  this.$route.name === 'home'}">
     <ul class="btc-homepage-newCoin" v-if="FROM_HOME && new_coin.length !== 0">
       <div class="container">
         <li v-for="data in new_coin" :key='data.id'>
@@ -8,7 +8,7 @@
       </div>
     </ul>
     <section class="btc-main" :class="{'btc-background-white': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange'}">
-      <header :FROM='FROM_HOME' v-if="!fromApp && !exChange" is='Header' />
+      <header :FROM='FROM_HOME'  v-if="loading && !fromApp && !exChange" is='Header' />
     <div class="btc-global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
       <vue-simple-spinner size="88"></vue-simple-spinner>
     </div>
@@ -123,6 +123,7 @@ export default {
 }
 
 .btc-homepage-newCoin{
+  min-width: 1200px;
   left: 0;
   width: 100%;
   background: #232731;

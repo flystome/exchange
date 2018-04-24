@@ -485,7 +485,17 @@ const en = {
       "turnover": "Turnover",
       "day_highs_and_lows": "24h Change %",
       "my_optional": "Favorite",
-      "off": "Off"
+      "off": "Off",
+      "api_interface": "API Interface",
+      "introduce_1": "Please send mail to support@hotex.com to contact us",
+      "introduce_2": "Provide a safe, reliable, detailed and timely API interface for developers.",
+      "introduce_3": "A highly competitive market transaction rate, recommending users to participate in the transaction can also get transaction discount rates.",
+      "introduce_4": "If your virtual currency is going to hotex.com, please click the jump to the new page to provide the details of your currency. We will provide meticulous service for the money.",
+      "introduce_5": "Hotex collection, processing and storage of personal data, which you have obtained by using our service, or with your consent, we will be cautious to your personal privacy.",
+      "introduce_6": "Team members from securities, futures, foreign exchange, quantitative investment and other industries, have many years of research and development and operation of similar products, in the industry has a wide range of contacts and resources.",
+      "introduce_7": 'The transaction of digital cipher currency has a risk. It has 7 days a week, 24 hours a day, 365 days a year and no stop trading. There is no daily limit of price and stop, the price is affected by various factors, such as policy, market, and so on. We strongly recommend that you investigate in advance and understand the risks involved in the transaction.',
+      "trading_platform": "Rapid, stable virtual asset trading platform",
+      "cross_platform": "Lightning fast order, covering iOS, Android, mobile web, PC four terminal, excellent platform performance guarantee, can accept the real business scene of mass users, make the transaction more focused."
     },
     "form": {
       "previous": "Previous",

@@ -7,7 +7,7 @@
         <p>{{ $t("footer.copyright") }}</p>
       </div>
       <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
-        <li class="">{{ $t("footer.support") }}</li>
+        <li class=""><strong>{{ $t("footer.support") }}</strong></li>
         <li>
           <a :href="`${HOST_URL}/documents/api_v2`">{{ $t("footer.api") }}</a>
         </li>
@@ -19,14 +19,14 @@
         </li>
       </ul>
       <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
-        <li class="">{{ $t("footer.service") }}</li>
+        <li class=""><strong>{{ $t("footer.service") }}</strong></li>
         <li>
           <a :href="CmsUrl.application">{{ $t("footer.application") }}</a>
         </li>
         <li><a :href="CmsUrl.rate_details">{{ $t("footer.rate_details") }}</a></li>
       </ul>
       <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
-        <li class="">{{ $t("footer.about") }}</li>
+        <li class=""><strong>{{ $t("footer.about") }}</strong></li>
         <li><a :href="`${CmsUrl.about_us}`">{{ $t("footer.about_us") }}</a></li>
         <li><a :href="`${CmsUrl.user_agreement}`">{{ $t("footer.user_agreement") }}</a></li>
         <li><a :href="CmsUrl.privacy_policy">{{ $t("footer.privacy_policy") }}</a></li>
@@ -34,7 +34,7 @@
       <ul class="btc-info pull-right btc-marginT30 btc-marginR30 dropup">
         <li class="btc-marginB30">
          <a style="cursor:initial">
-            {{ $t('homepage.contact_us') }}
+            <strong>{{ $t('homepage.contact_us') }}</strong>
         </a>
         </li>
         <li class="btc-marginB15"><a href="mailto:support@hotex.com">support@hotex.com</a></li>
@@ -120,4 +120,10 @@ export default {
 
 <style scoped lang='scss'>
 @import './Footer.scss'
+</style>
+
+<style>
+.btc-background-white .btc-footer{
+  min-width: 1200px;
+}
 </style>

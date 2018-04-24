@@ -1,6 +1,6 @@
 <template>
   <div @keyup.enter="login">
-    <div class="btc-homepage-header">
+    <div :data-url='"b"+123' class="btc-homepage-header">
       <!-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3500">
           <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -22,8 +22,12 @@
           </div>
         </div> -->
       <swiper class="carousel" :options="swiperOption">
+        <div v-if="Notice.length === 0" style="min-height:480px">
+            <vue-simple-spinner  style="position: absolute;left: 50%;margin-left: -75px;margin-top: -75px;top:50%;" class="btc-notice-loading" size="150"></vue-simple-spinner>
+        </div>
         <swiper-slide v-for="data in Notice" :key="data.id">
-          <div :style="{'background': 'url('+ data.thumb + ') 50% 50%', 'background-repeat': 'no-repeat'}" class="btc-pointer img-container">
+          <!-- 'background': 'url('+ data.thumb + ') 50% 50%', -->
+          <div :style="{ 'background-repeat': 'no-repeat'}" class="btc-pointer img-container">
             <div class="container btc-notice">
               <a :href="data.url" target='_blank'>
                 <div>
@@ -34,9 +38,6 @@
             </div>
           </div>
         </swiper-slide>
-        <div v-if="Notice.length === 0" style="position: absolute;left: 50%;margin-left: -75px;margin-top: 93px;">
-          <vue-simple-spinner class="btc-notice-loading" size="150"></vue-simple-spinner>
-        </div>
         <div class="swiper-pagination" slot="pagination"></div>
         <div class="swiper-button-prev" slot="button-prev"></div>
         <div class="swiper-button-next" slot="button-next"></div>
@@ -124,7 +125,7 @@
       <div class="btc-homepage-logo text-center">
         <i class="home-log"></i>
       </div>
-      <div class="btc-homepage-intr btc-marginT15 btc-marginB100">
+      <!-- <div class="btc-homepage-intr btc-marginT15 btc-marginB100">
         <span class="col-xs-3 btc-marginT10"></span>
         <div class="col-xs-6 text-center">
           <span>{{ $t('homepage.trading_platform') }}</span>
@@ -187,20 +188,121 @@
         <div class="col-xs-8 col-xs-offset-2 btc-paddingT80">
           {{ $t('homepage.transaction_describe') }}
         </div>
-      </div>
-      <!-- <div class="btc-marginT50 btc-homepage-introduce">
-        <div>
-        </div>
-        <div>
-        </div>
-        <div>
-          fefeffef
-        </div>
       </div> -->
+      <div class="btc-marginT50 btc-homepage-introduce">
+        <div>
+        </div>
+        <div>
+        </div>
+        <div id='btc-homepage-introduce'>
+          <div>
+            <a href="mailto:support@hotex.com">
+              <section :class="{'btc-homepage-transition': transition}" class="btc-margin0">
+                <div class="text-center">
+                  <i class="home-contact"/>
+                  <div>{{ $t('homepage.contact_us') }}</div>
+                </div>
+                <div class="btc-font12 btc-color999">
+                  {{ $t('homepage.introduce_1') }}
+                </div>
+              </section>
+            </a>
+            <a :href="`${HOST_URL}/documents/api_v2`">
+              <section :class="{'btc-homepage-transition': transition}">
+                <div class="text-center">
+                  <i class="home-api"/>
+                  <div>{{ $t('homepage.api_interface') }}</div>
+                </div>
+                <div class="btc-font12 btc-color999">
+                  {{ $t('homepage.introduce_2') }}
+                </div>
+              </section>
+            </a>
+            <a :href="`${CmsUrl.rate_details}`">
+              <section :class="{'btc-homepage-transition': transition}">
+                <div class="text-center">
+                  <i class="home-apply"/>
+                  <div>{{ $t('footer.rate_details') }}</div>
+                </div>
+                <div class="btc-font12 btc-color999">
+                  {{ $t('homepage.introduce_3') }}
+                </div>
+              </section>
+            </a>
+          </div>
+          <div>
+            <a :href="CmsUrl.application">
+              <section :class="{'btc-homepage-transition': transition}" class="btc-margin0">
+                <div class="text-center">
+                  <i class="home-application"/>
+                  <div>{{ $t('footer.application') }}</div>
+                </div>
+                <div class="btc-font12 btc-color999">
+                  {{ $t('homepage.introduce_4') }}
+                </div>
+              </section>
+            </a>
+            <a :href="CmsUrl.privacy_policy">
+              <section :class="{'btc-homepage-transition': transition}">
+                <div class="text-center">
+                  <i class="home-privacy"/>
+                  <div>{{ $t('footer.privacy_policy') }}</div>
+                </div>
+                <div class="btc-font12 btc-color999">
+                  {{ $t('homepage.introduce_5') }}
+                </div>
+              </section>
+            </a>
+            <a :href="CmsUrl.about_us">
+              <section :class="{'btc-homepage-transition': transition}">
+                <div class="text-center">
+                  <i class="home-aboutus"/>
+                  <div>{{ $t('footer.about_us') }}</div>
+                </div>
+                <div class="btc-font12 btc-color999">
+                  {{ $t('homepage.introduce_6') }}
+                </div>
+              </section>
+            </a>
+          </div>
+          <div class="btc-color999 btc-introduce-describe">
+            <span>{{ $t('homepage.introduce_7') }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="btc-homepage-end">
+        <div class="btc-fl home-end-img">
+          <img class="home-end" src="~Img/large/home-pc.png" />
+          <img class="home-end" src="~Img/large/home-iphone.png" />
+          <img class="home-end" src="~Img/large/home-android.png" />
+
+        </div>
+        <div id='home-end-font'>
+          <div>
+            <strong>
+              {{ $t('homepage.trading_platform') }}
+            </strong>
+          </div>
+          <div>
+            {{ $t('homepage.cross_platform') }}
+          </div>
+          <div>
+            <a href="https://itunes.apple.com/cn/app/google-authent icator/id388497605?mt=8" target="_blank">
+              <i class="home-iosapp"></i>
+            </a>
+            <a class="btc-marginL10" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">
+              <i class="home-gplay"></i>
+            </a>
+          </div>
+        </div>
+        <div class="clearfix">
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import ScrollReveal from 'scrollreveal'
 import { mapGetters, mapState, mapMutations } from 'vuex'
 import Cookies from 'js-cookie'
 import pusher from '@/common/js/pusher'
@@ -253,10 +355,53 @@ export default {
 
     if (!this.markData) this.GetmarketData()
   },
+  mounted () {
+    var time = 0
+    var self = this
+    var sr = ScrollReveal({
+      axis: 'y',
+      duration: 1000,
+      origin: 'left',
+      distance: '60px',
+      delay: 150,
+      viewportFactor: 0.33,
+      easing: 'cubic-bezier(0.3, 0.2, 0.1, 0.5)'
+    })
+    sr.reveal('.home-end', {
+      origin: 'left',
+      distance: '80px'
+    }, 300)
+    sr.reveal('#home-end-font', {
+      origin: 'right'
+    })
+    sr.reveal('#btc-homepage-introduce section', {
+      origin: 'top',
+      distance: '20px',
+      afterReveal () {
+        time++
+        if (time === 6) {
+          self.transition = true
+        }
+      }
+    }, 100)
+    sr.reveal('.btc-introduce-describe', {
+      origin: 'bottom',
+      distance: '40px'
+    }, 100)
+    // sr.reveal('#home-end', {
+    //   duration: 1800,
+    //   origin: '',
+    //   distance: '80px',
+    //   opacity: 0,
+    //   scale: 0.9,
+    //   easing: 'cubic-bezier(0.3, 0.2, 0.1, 0.5)',
+    // })
+  },
   data () {
     return {
       channelTime: 0,
       new_coin: '',
+      transition: false,
       email: '',
       password: '',
       trend: '',
@@ -459,4 +604,14 @@ export default {
 </script>
 <style scoped lang="scss">
 @import "./HomePage.scss"
+</style>
+
+<style lang='css'>
+.btc-homepage-header .swiper-pagination-bullet{
+  background: white!important;
+  opacity: .5!important;
+}
+.btc-homepage-header .swiper-pagination-bullet-active{
+  opacity: 1!important;
+}
 </style>

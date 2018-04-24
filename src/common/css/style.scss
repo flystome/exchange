@@ -212,8 +212,27 @@ a{
   border: none;
 }
 
+@media (min-width: 992px){
+  .btc-background-white{
+    .container {
+      width: auto;
+    }
+  }
+}
+
+@media (min-width: 768px){
+  .btc-background-white{
+    .container {
+      width: auto;
+    }
+  }
+}
+
 .btc-background-white{
-  min-width: 750px;
+  min-width: 1200px;
+  .container{
+    width: 1200px;
+  }
   .btc-container{
     padding: 0
   }
@@ -222,8 +241,28 @@ a{
   // }
 }
 
-
 /* -----------------------------------animation-------------------------- */
 .SideSlipMenu-enter, .SideSlipMenu-leave-to {
   transform: translateX(73.4%);
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("~@/common/fonts/roboto/Roboto-Regular-webfont.woff");
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('~@/common/fonts/roboto/Roboto-Medium-webfont.woff') format('woff');
+    font-style: normal;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("~@/common/fonts/roboto/Roboto-Bold-webfont.woff") format("woff");
+    font-style: normal;
+    font-weight: 700;
 }

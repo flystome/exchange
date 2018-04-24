@@ -294,6 +294,11 @@
   .btc-header-sideslip{
     display: block!important;
   }
+  .btc-background-white{
+    .btc-header-sideslip{
+      // display: none!important;
+    }
+  }
 }
 
 .collapsed{
