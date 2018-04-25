@@ -48,11 +48,14 @@
     </section>
   </section>
 </template>
-
+ 
 <script>
 import { mapGetters } from 'vuex'
 import pusher from '@/common/js/pusher'
 import 'vue2-scrollbar/dist/style/vue2-scrollbar.css'
+// import 'static/tradingView/charting_library/charting_library.min.js'
+// import 'static/tradingView/datafeeds/udf/dist/polyfills.js'
+// import 'static/tradingView/datafeeds/udf/dist/bundle.js'
 
 import lastPrice from './lastPrice/lastPrice'
 import language from './language/language'
