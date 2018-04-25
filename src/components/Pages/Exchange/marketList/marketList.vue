@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="marketBd">
-      <marketItem :curData = "curData[currencyIndex]"></marketItem>
+      <marketItem :curData = "curData[currencyIndex]" @changeFav='changeFav'></marketItem>
     </div>
   </section>
 </template>
@@ -93,6 +93,9 @@ export default {
     delAllInput () {
       this.getMarket = ''
       this.searchDel = false
+    },
+    changeFav (quote, base, bool) {
+      this.$emit('reFreshFav', quote, base, bool)
     }
   }
 }

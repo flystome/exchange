@@ -15,9 +15,9 @@
     </div>
     <div class="head">
       <ul class="tab_filter tab_order_filter" v-show='isOrder'>
-        <li @click='getBuy'>{{$t('exchange.myorder.buy')}}</li>
-        <li @click='getSell'>{{$t('exchange.myorder.sell')}}</li>
-        <li @click='getAll'>{{$t('exchange.myorder.all')}}</li>
+        <li :class="{on: filterIndex === 0}" @click='getBuy'>{{$t('exchange.myorder.buy')}}</li>
+        <li :class="{on: filterIndex === 1}" @click='getSell'>{{$t('exchange.myorder.sell')}}</li>
+        <li :class="{on: filterIndex === 2}" @click='getAll'>{{$t('exchange.myorder.all')}}</li>
         <li @click='cancelAll'>{{$t('exchange.myorder.cancel_all')}}</li>
       </ul>
       <ul class="tab_filter tab_history_filter" v-show='!isOrder'>
@@ -60,7 +60,8 @@ export default {
       showDialog: false,
       cancelNum: 'one',
       id: 0,
-      hisOrFill: ''
+      hisOrFill: '',
+      filterIndex: -1
     }
   },
   watch: {
@@ -97,16 +98,19 @@ export default {
       }
     },
     getBuy () {
+      this.filterIndex = 0
       this.curOrders = this.myOrders[this.currencyIndex].filter(ele => {
         return ele['kind'] === 'bid'
       })
     },
     getSell () {
+      this.filterIndex = 1
       this.curOrders = this.myOrders[this.currencyIndex].filter(ele => {
         return ele['kind'] === 'ask'
       })
     },
     getAll () {
+      this.filterIndex = 2
       this.curOrders = this.myOrders[this.currencyIndex]
     },
     confirmOrder: function (bool) {

@@ -15,7 +15,7 @@
     <section class="content">
       <div class="top_content clearfix">
         <div class="market w240">
-          <marketList :markets="markets"></marketList>
+          <marketList :markets="markets" @reFreshFav='reFreshFav'></marketList>
         </div>
         <div class="chart">
           <chart></chart>
@@ -148,6 +148,7 @@ export default {
       this.globalRefresh()
       this.version = this.depth_data.version
       this.initMine()
+      document.title = `${this.market.quote_currency.toUpperCase()}/${this.market.base_currency.toUpperCase()} - ${this.$t('brand')}`
     },
     initMine () {
       this.initTrend()
@@ -360,6 +361,32 @@ export default {
       if (this.soundAllow) {
         var order = document.getElementById(id)
         order.play()
+      }
+    },
+    reFreshFav (quote, base, bool) {
+      var market = '' + quote + base
+      var self = this
+      if (bool) {
+        this._delete({
+          url: '/portfolios/' + market + '.json'
+        }, function (xhr) {
+          if (xhr.status === 200) {
+            self.markets[market]['is_portfolios'] = false
+            self.markets = Object.assign({}, self.markets)
+          }
+        })
+      } else {
+        this._post({
+          url: '/portfolios.json',
+          data: {
+            market: market
+          }
+        }, function (xhr) {
+          if (xhr.status === 200) {
+            self.markets[market]['is_portfolios'] = true
+            self.markets = Object.assign({}, self.markets)
+          }
+        })
       }
     }
   }
