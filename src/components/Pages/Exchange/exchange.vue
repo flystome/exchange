@@ -22,13 +22,13 @@
         </div>
       </div>
       <div class="my_order">
-        <audio id="order_cancel" src="/static/media/cancel.wav"></audio>
+        <audio id="order_cancel" src="/static/media/cancel.mp3"></audio>
         <myOrder :myOrders='my_orders' :market="market" @getMyOrder='getMyOrder'></myOrder>
       </div>
     </section>
     <section class="list">
-      <audio id="order_audio" src="/static/media/order.wav"></audio>
-      <audio id="order_ok" src="/static/media/settle.wav"></audio>
+      <audio id="order_audio" src="/static/media/order.mp3"></audio>
+      <audio id="order_ok" src="/static/media/settle.mp3"></audio>
       <div class="list_lt w240">
         <div class="list_box trades">
           <trades :depthData='depth_data' :market='market'></trades>
