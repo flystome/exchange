@@ -18,7 +18,7 @@
           <marketList :markets="markets" @reFreshFav='reFreshFav'></marketList>
         </div>
         <div class="chart">
-          <chart></chart>
+          <chart :market="market"></chart>
         </div>
       </div>
       <div class="my_order">
@@ -48,7 +48,7 @@
     </section>
   </section>
 </template>
- 
+
 <script>
 import { mapGetters } from 'vuex'
 import pusher from '@/common/js/pusher'

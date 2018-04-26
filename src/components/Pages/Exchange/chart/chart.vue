@@ -9,7 +9,7 @@
     </ul>
     <div class="chart_bd">
       <div class="candle">
-        <candleStick></candleStick>
+        <candleStick :market="market"></candleStick>
       </div>
       <div class="depth">
 
@@ -23,6 +23,7 @@ import candleStick from './candleStick/candleStick'
 
 export default {
   name: 'chart',
+  props: ['market'],
   data () {
     return {
       heads: ['candle', 'depth'],
