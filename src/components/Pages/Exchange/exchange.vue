@@ -1,9 +1,9 @@
 <template>
   <section id="exchange">
     <header class="clearfix">
-      <router-link class="logo" to="/">
+      <a class="logo" href="/">
         <img src="@/common/svg/logo.svg">
-      </router-link>
+      </a>
       <lastPrice :market="market"></lastPrice>
       <div class="header_rt">
         <account :totalAssets='total_assets' :accounts='accounts' :market='market'></account>

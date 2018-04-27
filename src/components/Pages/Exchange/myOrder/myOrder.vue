@@ -61,7 +61,7 @@ export default {
       cancelNum: 'one',
       id: 0,
       hisOrFill: '',
-      filterIndex: -1
+      filterIndex: 2
     }
   },
   watch: {

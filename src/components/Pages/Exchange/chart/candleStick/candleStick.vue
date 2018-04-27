@@ -35,7 +35,7 @@ export default {
         // debug: true, // uncomment this line to see Library errors and warnings in the console
         autosize: true,
         symbol: this.curMarket,
-        interval: '1',
+        interval: '30',
         toolbar_bg: '#f4f7f9',
         container_id: 'candleStick',
         datafeed: udfDatafeed,
@@ -47,14 +47,14 @@ export default {
         enabled_features: ['move_logo_to_main_pane', 'study_templates', 'adaptive_logo'],
         overrides: {
           'mainSeriesProperties.style': 0,
-          'symbolWatermarkProperties.color' : 'rgba(0, 0, 0, 0)',
+          'symbolWatermarkProperties.color': 'rgba(0, 0, 0, 0)',
           'volumePaneSize': 'small',
           'paneProperties.background': '#232e3a',
           'paneProperties.vertGridProperties.color': '#273646',
           'paneProperties.horzGridProperties.color': '#273646',
           'paneProperties.crossHairProperties.color': '#ffffff',
           'paneProperties.crossHairProperties.style': 'border',
-          'scalesProperties.lineColor' : '#728eaa',
+          'scalesProperties.lineColor': '#728eaa',
           'mainSeriesProperties.haStyle.upColor': '#e9454d',
           'mainSeriesProperties.haStyle.downColor': '#40b246',
           'mainSeriesProperties.haStyle.borderUpColor': '#e9454d',
@@ -65,13 +65,13 @@ export default {
           'mainSeriesProperties.haStyle.drawBorder': true,
           'study_Overlay@tv-basicstudies.hollowCandleStyle.wickColor': '#ffff00',
           'mainSeriesProperties.style': 8,
-          'scalesProperties.showLeftScale' : false,
-          'scalesProperties.textColor' : '#728eaa',
+          'scalesProperties.showLeftScale': false,
+          'scalesProperties.textColor': '#728eaa',
           'mainSeriesProperties.barStyle.upColor': '#ffff00',
           'paneProperties.rightMargin': 10,
           'paneProperties.bottomMargin': 10,
           'mainSeriesProperties.showPriceLine': true,
-          'symbolWatermarkProperties.color' : 'rgba(0, 0, 0, 0.00)'
+          'symbolWatermarkProperties.color': 'rgba(0, 0, 0, 0.00)'
         },
         timezone: 'Asia/Shanghai',
         studies_overrides: {

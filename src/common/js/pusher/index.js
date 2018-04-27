@@ -18,5 +18,6 @@ var pusher = new Pusher(config.key, {
   encrypted: config.encrypted,
   disableStats: true
 })
+window.pusher = pusher
 
 export default pusher
