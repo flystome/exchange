@@ -32,9 +32,6 @@
             <article v-text="d.content">
             </article>
           </section>
-          <div v-if="d.choice" class="btc-ticket-select">
-            <img src="~Img/form-select.png">
-          </div>
         </div>
       </div>
       <div v-else class="btc-ticket">
@@ -47,9 +44,6 @@
             <article v-text="d.content">
             </article>
           </section>
-          <div v-if="d.choice" class="btc-ticket-select">
-            <img src="~Img/form-select.png">
-          </div>
         </div>
       </div>
     </template>

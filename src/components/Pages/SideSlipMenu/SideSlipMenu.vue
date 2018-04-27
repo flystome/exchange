@@ -26,8 +26,8 @@
             <div @click="market = !market">
               <i class="sideslip-market"></i> {{$t('nav.transaction')}}
               <span class="btc-fr btc-marginR20">
-                <img v-if="!market" src="~Img/triangle-down.png">
-                <img v-else src="~Img/triangle-up.png">
+                <i v-if="!market" class="sideslip-triangle-down"></i>
+                <i v-else class="sideslip-triangle-up"></i>
               </span>
             </div>
             <ul v-if="market" class="btc-marginT60 btc-marginL30">
@@ -42,8 +42,8 @@
             <div @click="Consulting = !Consulting">
               <i class='sideslip-consulting'/> {{ $t('side_slip_menu.consulting_center') }}
               <span class="btc-fr btc-marginR20">
-                <img v-if="!Consulting" src="~Img/triangle-down.png">
-                <img v-else src="~Img/triangle-up.png">
+                <i v-if="!Consulting" class="sideslip-triangle-down"></i>
+                <i v-else class="sideslip-triangle-up"></i>
               </span>
             </div>
             <ul v-if="Consulting">
@@ -70,8 +70,8 @@
             <div @click="Lang = !Lang">
               <i class='sideslip-lang' /> {{ $t('side_slip_menu.language') }}
               <span class="btc-fr btc-marginR20">
-                <img v-if="!Lang" src="~Img/triangle-down.png">
-                <img v-else src="~Img/triangle-up.png">
+                <i v-if="!Lang" class="sideslip-triangle-down"></i>
+                <i v-else class="sideslip-triangle-up"></i>
               </span>
             </div>
             <ul v-if="Lang" class="btc-marginT60">

@@ -40,7 +40,7 @@
             </article>
           </section>
           <div v-if="d.choice" class="btc-news-select">
-            <img src="~Img/form-select.png">
+            <i class="form-select"></i>
           </div>
         </div>
       </div>

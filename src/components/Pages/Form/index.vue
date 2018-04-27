@@ -43,4 +43,9 @@ export default {
   left: 50%;
   margin-left: -75px!important;
 }
+
+.form-select{
+  @include sprite($form-select);
+  display: inline-block;
+}
 </style>

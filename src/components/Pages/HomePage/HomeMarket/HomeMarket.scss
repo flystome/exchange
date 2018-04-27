@@ -134,3 +134,22 @@ i[disabled='disabled']{
     text-decoration: none;
   }
 }
+
+i{
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  margin-right: 3px;
+}
+
+.homemarket-both{
+  @include sprite($homemarket-both)
+}
+
+.homemarket-down{
+  @include sprite($homemarket-down)
+}
+
+.homemarket-up{
+  @include sprite($homemarket-up)
+}

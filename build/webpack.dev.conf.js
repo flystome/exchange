@@ -11,7 +11,10 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 var SpritesmithPlugin = require('webpack-spritesmith')
-
+const HappyPack = require('happypack');
+var vueLoaderConfig = require('./vue-loader.conf')
+const os = require('os')
+const HappyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length})
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -67,7 +70,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       {
         from: path.resolve(__dirname, '../static'),
         to: config.dev.assetsSubDirectory,
-        ignore: ['.*']
+        ignore: ['.*', 'img/sprites']
       }
     ]),
     new webpack.optimize.CommonsChunkPlugin('common.js'),
@@ -83,7 +86,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }),
     new SpritesmithPlugin({
       src: {
-          cwd: path.resolve(__dirname, '../static/img'),
+          cwd: path.resolve(__dirname, '../static/img/sprites'),
           glob: '*.png'
       },
       target: {
@@ -93,7 +96,23 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       apiOptions: {
           cssImageRef: "~@/common/img/sprite.png"
       }
-  })
+  }),
+  new HappyPack({
+    // 3) re-add the loaders you replaced above in #1:
+    id: 'js',
+    threadPool: HappyThreadPool,
+    loaders: ['babel-loader']
+  }),
+  new HappyPack({
+    id: 'vue',
+    threadPool: HappyThreadPool,
+    loaders: [
+      {
+        loader: 'vue-loader',
+        options: vueLoaderConfig
+      }
+    ]
+  }),
   ]
 })
 

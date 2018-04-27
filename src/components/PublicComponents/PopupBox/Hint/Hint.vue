@@ -5,8 +5,8 @@
         <template v-if="b">
                   <div  class="text-center btc-hint-middle btc-paddingR30 btc-paddingL30">
           <div style="magin:auto 0">
-            <img v-if="PopupBox.type === 'success' " src="~Img/Hint-success.png" class="btc-marginT55 btc-marginB35">
-            <img v-else-if="PopupBox.type === 'warn'" src="~Img/Hint-warn.png" class="btc-marginT55 btc-marginB35">
+            <i v-if="PopupBox.type === 'success' " class="Hint-success btc-marginT55 btc-marginB35" />
+            <i v-else-if="PopupBox.type === 'warn'" class="Hint-warn btc-marginT55 btc-marginB35" />
             <self-building-square-spinner
             v-else-if="PopupBox.type === 'loading'"
             class="btc-marginT55 btc-marginB35 btc-hint-loading"
@@ -14,7 +14,7 @@
             :size="45"
             color="#3e81ff"
             />
-            <img v-else src="~Img/Hint-error.png" class="btc-marginT55 btc-marginB35">
+            <i v-else class="Hint-error btc-marginT55 btc-marginB35" />
           </div>
           <div>
             {{this.PopupBox.message}}
@@ -118,6 +118,20 @@ export default {
     margin-bottom: 78px;
     top: 45px!important;
     position: relative;
+  }
+}
+
+// sprites
+$sprite: (
+  'warn': $hint-warn,
+  'success': $hint-success,
+  'error': $hint-error,
+);
+
+@each $key, $val in $sprite{
+  .Hint-#{$key} {
+    @include sprite(map-get($sprite, $key));
+    display: inline-block;
   }
 }
 

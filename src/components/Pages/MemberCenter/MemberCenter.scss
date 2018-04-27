@@ -282,7 +282,7 @@ a{
 }
 
 
-.btc-member-validata img{
+.btc-member-validata i{
   position: absolute;
   bottom: -1px;
   right: -1px;
@@ -474,5 +474,27 @@ a{
   img {
     width: 14px;
     height: 16px;
+  }
+}
+
+i{
+  display: inline-block;
+  position: relative;
+}
+
+$sprite: (
+  'false': $account-false,
+  'right': $account-right,
+  'email': $account-email,
+  'phone': $account-phone,
+  'identity': $account-identity,
+  'verifying': $account-verifying,
+  'unverified': $account-unverified,
+  'validate-true': $account-validate-true,
+);
+
+@each $key, $val in $sprite{
+  .account-#{$key} {
+    @include sprite(map-get($sprite, $key));
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="btc-boot btc-paddingT80 btc-paddingB80">
     <div class="text-center btc-marginT100">
-      <img src="~Img/bootvaildate.png" alt="" class="btc-marginB20">
+      <i class="btc-boot-vaildata btc-marginB20"></i>
       <div v-if="!loginData.activated">
         <p class="">{{ $t("prompt.email_not_certified") }}</p>
         <p class="btc-marginB50">{{ $t("prompt.not_certified_prompt") }}</p>

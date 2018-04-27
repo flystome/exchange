@@ -30,7 +30,7 @@
         <div class="media">
           <div>
             <div class="media-left sprite-member-email">
-              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-email.png" data-holder-rendered="true">
+              <i class="media-object account-email" />
             </div>
             <div class="media-body">
               <h5 class="media-heading">{{$t("my_account.tier_1")}}</h5>
@@ -39,41 +39,41 @@
                 <button type="button" id="myButton" data-text="Loading..." class="btn sendbutton" autocomplete="off" :disabled="disabled" v-else >
                   {{$t("auth.send_email")}}
                 </button>
-                <img v-if='loginData.activated' src="~Img/validate-true.png" alt="已认证">
+                <i v-if='loginData.activated' class='account-validate-true' />
               </span>
             </div>
             <div class="media-right">
-              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='loginData.activated' data-holder-rendered="true" >
-              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
+              <i class="media-object account-right" v-if='loginData.activated' />
+              <i class="media-object account-false" v-else />
             </div>
           </div>
         </div>
         <div class="media">
           <div>
             <div class="media-left">
-              <img class="media-object img-padding" data-src="holder.js/64x64" alt="64x64" src="~Img/member-google.png" data-holder-rendered="true">
+              <i class="media-object img-padding account-phone" />
             </div>
             <div class="media-body">
               <h5 class="media-heading">{{$t("my_account.korean_user_use_twice_verification")}}</h5>
               <span class="btc-member-validata btc-link" @click="validatephone" :class="{'btc-active': !loginData.sms_activated}">
                   <span>{{ $t("auth.phone") }}</span>
-                  <img v-if='loginData.sms_activated' src="~Img/validate-true.png" alt="已认证">
+                  <i v-if='loginData.sms_activated' class='account-validate-true' />
                 </span>
                 <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.app_activated}" @click="validateAuth">
                   <span>{{$t("auth.google")}}</span>
-                  <img v-if='loginData.app_activated' src="~Img/validate-true.png" alt="已认证">
+                  <i v-if='loginData.app_activated' class='account-validate-true' />
                 </span>
             </div>
             <div class="media-right">
-              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='loginData.sms_activated || loginData.app_activated' data-holder-rendered="true" >
-              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
+              <i class="media-object account-right" v-if='loginData.sms_activated || loginData.app_activated' />
+              <i class="media-object account-false"  v-else data-holder-rendered="true" />
             </div>
           </div>
         </div>
         <div class="media">
           <div>
             <div class="media-left">
-              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/member-identity.png" data-holder-rendered="true">
+              <i class="media-object account-identity" />
             </div>
             <div class="media-body">
               <h5 class="media-heading">{{$t("my_account.completion_of_real_name_authentication")}}</h5>
@@ -82,18 +82,18 @@
                   :class="{'btc-active': loginData.id_document && loginData.id_document.aasm_state==='unverified',
                   'btc-verifying':(loginData.id_document && loginData.id_document.aasm_state)==='verifying'}" @click="validateAll">
                   <span>{{$t("auth.real_name")}}</span>
-                  <img v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' src="~Img/validate-true.png" alt="已认证">
-                  <img v-else-if='(loginData.id_document && loginData.id_document.aasm_state)==="verifying"' src="~Img/verifying.png" alt="认证中">
+                  <i class='account-validate-true' v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"'/>
+                  <i class='account-verifying' v-else-if='(loginData.id_document && loginData.id_document.aasm_state)==="verifying"'></i>
                   <div v-if="loginData.sms_activated && loginData.activated">
-                    <img style="background: #fff;" v-if='(loginData.id_document && loginData.id_document.aasm_state)==="unverified"' src="~Img/unverified.png" alt="认证失败">
+                    <i class='account-unverified' v-if='(loginData.id_document && loginData.id_document.aasm_state)==="unverified"'></i>
                   </div>
                   <span class="verifying-prompt">{{$t('my_account.verifying')}}</span>
                 </span>
               </div>
             </div>
             <div class="media-right">
-              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/right.png" v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' data-holder-rendered="true" >
-              <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="~Img/false.png" v-else data-holder-rendered="true" >
+              <i class="media-object account-right" v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"' />
+              <i class="media-object account-false" v-else data-holder-rendered="true" />
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@
           <span>+</span>
           <div-contenteditable v-model="SmsData.CellPhonecode">
           </div-contenteditable>
-          <img @click.stop="ShowCallingcode(true)" src="~Img/triangle.png" >
+          <i @click.stop="ShowCallingcode(true)" class="sms-triangle" />
         </div>
       <div class="btc-code-list btc-b-def" v-if="callDisplay">
         <ul>

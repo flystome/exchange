@@ -7,9 +7,10 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "prod": "webpack-dev-server --inline --progress  --config build/webpack.prod.conf.js",
+    "vendor": " webpack -p --progress --config build/webpack.config.vendor.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js",
+    "build": " webpack -p --progress --config build/webpack.config.vendor.js && node build/build.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -23,7 +24,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "js-cookie": "^2.2.0",
-    "moment": "^2.10.6",
+    "moment": "^2.22.1",
     "pusher-js": "^4.2.2",
     "qrcode": "^1.2.0",
     "scrollreveal": "^3.4.0",
@@ -72,6 +73,7 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "happypack": "^5.0.0",
     "html-webpack-plugin": "^2.30.1",
     "node-notifier": "^5.1.2",
     "node-sass": "^4.7.2",
@@ -95,7 +97,8 @@
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0",
-    "webpack-spritesmith": "^0.4.1"
+    "webpack-spritesmith": "^0.4.1",
+    "webpack-uglify-parallel": "^0.1.4"
   },
   "engines": {
     "node": ">= 6.0.0",

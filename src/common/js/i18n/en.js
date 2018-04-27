@@ -226,6 +226,7 @@ const en = {
       "email_not_certified": "Email is not verified.",
       "not_certified": "Phone or Google is unverified",
       "google_not_certified": "Google Auth not bound",
+      "phone_not_certified": "Phone Auth not bound",
       "not_certified_prompt": "Help us keeping bad guys out of your account by using both your phone",
       "go_validate": "Do Validation",
       "log_and_operate": "Please login first!"

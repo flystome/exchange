@@ -3,3 +3,11 @@
   min-height: 70vh;
   margin-top: 8px;
 }
+
+.btc-boot-vaildata{
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  margin-right: 3px;
+  @include sprite($bootvaildate)
+}

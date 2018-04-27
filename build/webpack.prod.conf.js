@@ -9,8 +9,15 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJsPlugin = require('webpack-uglify-parallel')
 var SpritesmithPlugin = require('webpack-spritesmith')
+const HappyPack = require('happypack');
+var vueLoaderConfig = require('./vue-loader.conf')
+const os = require('os')
+const HappyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length}); // 启动线程池});
+const manifest = require('./dll/vendor-manifest.json');
+
+// ... 其他完美的配置
 
 const env = require('../config/prod.env')
 
@@ -34,6 +41,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       'process.env': env
     }),
     new UglifyJsPlugin({
+      workers: os.cpus().length,
       uglifyOptions: {
         compress: {
           warnings: false
@@ -115,7 +123,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       {
         from: path.resolve(__dirname, '../static'),
         to: config.build.assetsSubDirectory,
-        ignore: ['.*']
+        ignore: ['.*', 'img/sprites/*.png']
       }
     ]),
     new webpack.optimize.CommonsChunkPlugin('common.js'),
@@ -126,7 +134,7 @@ const webpackConfig = merge(baseWebpackConfig, {
 
     new SpritesmithPlugin({
       src: {
-          cwd: path.resolve(__dirname, '../static/img'),
+          cwd: path.resolve(__dirname, '../static/img/sprites'),
           glob: '*.png'
       },
       target: {
@@ -136,7 +144,27 @@ const webpackConfig = merge(baseWebpackConfig, {
       apiOptions: {
           cssImageRef: "~@/common/img/sprite.png"
       }
-  })
+  }),
+  new HappyPack({
+    // 3) re-add the loaders you replaced above in #1:
+    id: 'js',
+    threadPool: HappyThreadPool,
+    loaders: ['babel-loader']
+  }),
+  new HappyPack({
+    id: 'vue',
+    threadPool: HappyThreadPool,
+    loaders: [
+      {
+        loader: 'vue-loader',
+        options: vueLoaderConfig
+      }
+    ]
+  }),
+  new webpack.DllReferencePlugin({
+    context: __dirname,
+    manifest,
+  }),
   ]
 })
 

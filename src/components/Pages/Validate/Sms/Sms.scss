@@ -56,7 +56,7 @@
       outline: none;
       border: none;
     }
-    img{
+    i{
       position: absolute;
       display: inline-block;
       right: 6px;
@@ -93,6 +93,12 @@
     }
   }
 }
+
+.sms-triangle{
+  @include sprite($sms-triangle);
+  display: inline-block;
+}
+
 @media (max-width: 992px){
   .btc-sms-container{
     padding: 130px 150px 195px 150px!important;

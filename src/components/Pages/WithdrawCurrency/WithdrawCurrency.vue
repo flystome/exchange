@@ -4,10 +4,10 @@
       <div class="btc-currency-withdraw">
           <div class="btc-fl">
             <span>
-              <img src="~Img/asset-total.png">
+              <i class="withdraw-asset"></i>
               {{$t('withdraw_currency.total_assets')}} <span>{{ TotalAssets | toLocaleString }}</span> BTC
             </span>
-            <img class="btc-marginL45 btc-marginR5" src="~Img/asset-freeze.png">
+            <i class="withdraw-freeze btc-marginL45 btc-marginR5"></i>
             <a class='btc-color999'>
               {{$t('withdraw_currency.frozen_assets')}} {{ LockAssets }} BTC
             </a>
@@ -39,11 +39,11 @@
       <div class="btc-withdraw-coin">
         <a v-for="(coin,index) in this.currencies"
         :disabled='disabled'
-        :class="{'is-chioce':index === length, 'is-enabled': !coin.node_enabled, 'btc-indent': !(requireImg(`market-${coin.code}`))}"
+        :class="{'is-chioce':index === length, 'is-enabled': !coin.node_enabled, 'btc-indent': !(requireImg(`market/market-${coin.code}`))}"
         @click='ChoiceCoin(index, coin.node_enabled)'
         class="btc-b btn"
         :key="coin.code">
-          <img v-if="requireImg(`market-${coin.code}`)" :src="requireImg(`market-${coin.code}`)">
+          <img v-if="requireImg(`market/market-${coin.code}`)" :src="requireImg(`market/market-${coin.code}`)">
           <span>
             {{ coin.code | toUpperCase }}
           </span>
@@ -79,7 +79,7 @@
                 </div>
             </div>
             <div class="btc-addnew btc-pointer text-center" @click.stop="AddAddress">
-                <img src="~Img/withdraw-add.png">
+                <i class="withdraw-add"></i>
                 {{$t('withdraw_currency.use_a_new_address')}}
             </div>
           </div>

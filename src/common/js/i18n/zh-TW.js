@@ -224,7 +224,8 @@ const zh = {
   "prompt": {
     "email_not_certified": "郵件未驗證.",
     "not_certified": "手機或者Google沒有驗證",
-    "google_not_certified": "Google身份驗證不受限制",
+    "google_not_certified": "Google身份驗證沒有驗證",
+    "phone_not_certified": "手機沒有驗證",
     "not_certified_prompt": "為了不影響你在HotEx平台上的用戶體驗，請前往驗證",
     "go_validate": "驗證",
     "log_and_operate": "請登入後再操作"

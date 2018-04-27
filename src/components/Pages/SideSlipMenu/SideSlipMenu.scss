@@ -83,7 +83,10 @@ $sprite: (
   'consulting': $sideslip-consulting,
   'lang': $sideslip-lang,
   'myaccount': $sideslip-myaccount,
-  'pc': $sideslip-pc
+  'pc': $sideslip-pc,
+  'triangle-up': $triangle-up,
+  'triangle-down': $triangle-down
+
 );
 
 @each $key, $val in $sprite{
