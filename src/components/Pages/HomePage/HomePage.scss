@@ -152,7 +152,7 @@
       .btc-search{
         min-height: 0 !important;
         >input{
-          background: url("~Img/search.png") no-repeat right;
+          background: url("~Img/home-search.png") no-repeat right;
         }
       }
       .btc-active{
@@ -198,6 +198,7 @@
       display: inline-block;
       position: relative;
       top: 3px;
+      cursor: pointer;
       margin-right: 3px;
     }
   }
@@ -352,11 +353,18 @@ $sprite: (
   'api': $home-api,
   'contact': $home-contact,
   'iosapp': $validate-iosapp,
-  'gplay': $validate-gplay
+  'gplay': $validate-gplay,
+  'hide': $home-hide,
+  'open': $home-open,
+  'search': $home-search
 );
 
 @each $key, $val in $sprite{
   .home-#{$key} {
     @include sprite(map-get($sprite, $key));
   }
+}
+
+.home-search-delete{
+  @include sprite($search-delete)
 }

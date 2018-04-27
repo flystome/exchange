@@ -76,11 +76,11 @@
             <div class="btc-marginT20">
               <span style="color:#999999">{{ $t('homepage.total_asset_estimation') }}</span>
               <span v-if="open"><i class="fa fa-btc"/> {{ TotalAssets | toLocaleString }}
-                <img class="pull-right btc-pointer" src="~Img/open.png" @click="displaystate">
+                <i class="pull-right btc-pointer home-open" @click="displaystate"/>
               </span>
               <span v-else>
                 *******
-                <img class="pull-right btc-pointer" @click="displaystate" src="~Img/hide.png">
+                <i class="pull-right btc-pointer home-hide" @click="displaystate"/>
               </span>
             </div>
             <div class="btc-marginT25">
@@ -111,8 +111,8 @@
         @click.native="changemarket(index,item)" :text="item === 'my_optional' ? $t('homepage.my_optional') : `${item.toUpperCase()} ${$t('homepage.trading_area')}`"></basic-button>
         <div @keyup.esc="search = ''" class="btc-homepage-search btc-fr btc-b">
           <input v-model="search" class="btc-search" :placeholder='$t("homepage.search")' />
-          <img v-if='!search' src="~Img/search.png" >
-          <img class="btc-pointer" v-else @click="search = ''" src="~Img/search-delete.png" >
+          <i v-if='!search' class="home-search"></i>
+          <i v-else class="home-search-delete"></i>
         </div>
         <keep-alive>
           <HomeMarket ref="market" v-if="curData" v-on:marketChange="marketChange" :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]">

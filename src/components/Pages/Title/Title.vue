@@ -3,7 +3,6 @@
 </template>
 
 <script>
-console.log(process.env.ROUTER_VERSION)
 export default {
   name: 'Title',
   data () {

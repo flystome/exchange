@@ -409,7 +409,8 @@ export default {
       return str.toUpperCase()
     },
     toFixed (str) {
-      return Number(str).toFixed(8)
+      var reg = /.*\..*/
+      return Number(str).toFixed(Math.min((!reg.test(str) ? 0 : String(str).split('.')[1].length), 8))
     },
     toLocaleString (n) {
       if (!n) return

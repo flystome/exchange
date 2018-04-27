@@ -56,6 +56,9 @@ export default {
         this.xhrData = d.data.trades
         this.pagination = d.data.total_pages
       })
+    },
+    ToFixed (num) {
+      return this.$store.getters.ToFixed(num)
     }
   },
   computed: {
@@ -77,11 +80,11 @@ export default {
             {style: data.kind !== 'ask' ? { color: '#fd4041' } : { color: '#29c1a6' }, context: data.kind !== 'ask' ? this.$t('form.order.buy') : this.$t('form.order.sell')},
             { style: { 'white-space': 'nowrap' }, context: this.$moment(data.at).format('L H:mm:ss') },
             data.market_name,
-            `${Number(data.origin_volume).toFixed(Math.min(String(data.origin_volume).split('.')[1].length, 8))} ${first}`,
-            Number(data.price).toFixed(Math.min(String(data.price).split('.')[1].length, 8)),
+            `${this.ToFixed(data.origin_volume)} ${first}`,
+            this.ToFixed(data.price),
             // data.quote_currency.toUpperCase(),
-            `${Number(data.amount).toFixed(Math.min(String(data.amount).split('.')[1].length, 8))} ${lastName}`,
-            `${(data.kind !== 'ask' ? data.quote_currency : data.base_currency).toUpperCase()} ${Number(data.fee).toFixed(Math.min(String(data.fee).split('.')[1].length, 8))}`
+            `${this.ToFixed(data.amount)} ${lastName}`,
+            `${(data.kind !== 'ask' ? data.quote_currency : data.base_currency).toUpperCase()} ${this.ToFixed(data.fee)}`
           ]
         }
       }))

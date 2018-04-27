@@ -4,8 +4,8 @@
       <basic-table style="margin-top:0px" :SpinnerSize='150' :loading='loading' :len='xhrData.length' :captionTitle='captionTitle' :item='getRecord'>
         <div slot='remark' @keyup.esc="search = ''" class="btc-account-search btc-fr btc-b">
           <input v-model="search" class="btc-search" :placeholder='$t("homepage.search")' />
-          <img v-if='!search' src="~Img/search.png" >
-          <img class="btc-pointer" v-else @click="search = ''" src="~Img/search-delete.png" >
+          <i v-if='!search' class="account-search"></i>
+          <i v-else class="account-delete" @click="search = ''" ></i>
         </div>
         <template slot="href"
           slot-scope="props">
@@ -73,6 +73,9 @@ export default {
         this.xhrData = d.data.transactions
         this.pagination = d.data.total_pages
       })
+    },
+    ToFixed (num) {
+      return this.$store.getters.ToFixed(num)
     }
   },
   computed: {
@@ -91,8 +94,8 @@ export default {
             data.transaction_type,
             this.$moment(data.created_at).format('L H:mm:ss'),
             data.code_text,
-            Number(data.amount).toFixed(Math.min(String(data.amount).split('.')[1].length, 8)),
-            Number(data.fee).toFixed(Math.min(String(data.fee).split('.')[1].length, 8)),
+            this.ToFixed(data.amount),
+            this.ToFixed(data.fee),
             data.txid === null ? 'N/A' : {hover: true, context: data.txid, url: data.blockchain_url},
             this.$t(`withdraw_currency.${data.aasm_state}`)
           ]
@@ -134,4 +137,23 @@ export default {
       }
     }
   }
+</style>
+
+<style lang="scss" scoped>
+i{
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  cursor: pointer;
+  margin-right: 3px;
+}
+
+.account-search{
+  @include sprite($home-search)
+}
+
+.account-delete{
+  @include sprite($search-delete)
+}
+
 </style>

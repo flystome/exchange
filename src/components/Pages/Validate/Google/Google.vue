@@ -28,12 +28,12 @@
           <div class="row btc-marginT20">
             <div class="col-xs-6">
               <a href="https://itunes.apple.com/cn/app/google-authent icator/id388497605?mt=8" target="_blank">
-                <img src="~Img/validate-iosapp.png" class="btc-marginR5 googleImg">
+                <i class='google-ios btc-marginR5 googleImg'></i>
               </a>
             </div>
             <div class="col-xs-6">
               <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">
-                <img src="~Img/validate-gplay.png" class="googleImg img-margin">
+                <i class='google-gplay googleImg img-margin'></i>
               </a>
             </div>
           </div>
@@ -70,7 +70,7 @@
                 {{$t('validate_google.cant_scan_enter_keys')}}
               </span>
               <div class="refreshqrcode btc-marginT15 btn" :disabled="disabled" @click="RenovateQrcode">
-                <img src="~Img/RefreshQrcode.png" alt="">
+                <i class="google-refresh"></i>
                 {{$t('validate_google.refresh_qrcode')}}
               </div>
             </div>

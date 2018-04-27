@@ -162,3 +162,23 @@
     font-size: 12px;
   }
 }
+
+i{
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  cursor: pointer;
+  margin-right: 3px;
+}
+
+.google-refresh{
+  @include sprite($refresh-qrcode)
+}
+
+.google-ios{
+  @include sprite($validate-iosapp)
+}
+
+.google-gplay{
+  @include sprite($validate-gplay)
+}

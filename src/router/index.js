@@ -285,7 +285,7 @@ router.afterEach(() => {
   var mobile = user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
   if (mobile) {
     if (route.name === 'HomePage' || route.name === 'home') {
-      document.getElementById('meta').content = `initial-scale=1,minimum-scale=${document.body.offsetWidth / 1200},maximum-scale=0,user-scalable=no`
+      document.getElementById('meta').content = `initial-scale=1,minimum-scale=${document.body.offsetWidth / 1200},maximum-scale=0,user-scalable=yes`
     } else {
       document.getElementById('meta').content = `width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=0,user-scalable=no`
     }

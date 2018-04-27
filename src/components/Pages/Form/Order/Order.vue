@@ -55,6 +55,9 @@ export default {
         this.xhrData = d.data.orders
         this.pagination = d.data.total_pages
       })
+    },
+    ToFixed (num) {
+      return this.$store.getters.ToFixed(num)
     }
   },
   computed: {
@@ -76,10 +79,10 @@ export default {
             {style: data.kind !== 'ask' ? { color: '#fd4041' } : { color: '#29c1a6' }, context: data.kind !== 'ask' ? this.$t('form.order.buy') : this.$t('form.order.sell')},
             data.market_name,
             {style: data.state === 'done' ? { color: '#fd4041' } : { color: '#29c1a6' }, context: data.state === 'done' ? this.$t('form.order.success') : this.$t('form.order.cancel')},
-            Number(data.price).toFixed(Math.min(String(data.price).split('.')[1].length, 8)),
-            Number(data.origin_volume).toFixed(Math.min(String(data.origin_volume).split('.')[1].length, 8)),
-            Number(data.avg_price).toFixed(Math.min(String(data.avg_price).split('.')[1].length, 8)),
-            Number(data.deal_volume).toFixed(Math.min(String(data.deal_volume).split('.')[1].length, 8)),
+            this.ToFixed(data.price),
+            this.ToFixed(data.origin_volume),
+            this.ToFixed(data.avg_price),
+            this.ToFixed(data.deal_volume),
             { style: { 'white-space': 'nowrap' }, context: this.$moment(data.at).format('L H:mm:ss') }
           ]
         }
