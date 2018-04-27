@@ -8,8 +8,8 @@
       </div>
     </ul>
     <section class="btc-main" :class="{'btc-background-white': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange'}">
-      <header :FROM='FROM_HOME'  v-if="loading && !fromApp && !exChange" is='Header' />
-    <div class="btc-global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
+      <header :FROM='FROM_HOME'  v-if="!fromApp && !exChange" is='Header' />
+    <div style="position:relative;z-index:999;background:#f2f2f2" class="btc-global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
       <vue-simple-spinner size="88"></vue-simple-spinner>
     </div>
     <div v-else class="btc-container container" :class="{'noPadding':noPadding}" v-cloak>
