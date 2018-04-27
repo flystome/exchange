@@ -228,6 +228,20 @@ a{
   }
 }
 
+@media (max-width: 1200px){
+  .btc-homepage-markets{
+    padding: 0 11px;
+  }
+  .btc-homepage-introduce{
+    padding-left: 28px;
+  }
+  .btc-background-white{
+    .navbar-Home .navbar-brand{
+      margin-left: 21px;
+    }
+  }
+}
+
 .btc-background-white{
   min-width: 1200px;
   .container{

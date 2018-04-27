@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store'
+var route = ''
 const MemberCenter = () => import(/* webpackChunkName: "MemberCenter" */ 'Pages/MemberCenter/MemberCenter')
 // validate
 const ValidateEmail = () => import(/* webpackChunkName: "ValidateEmail" */'Pages/Validate/Email/Email')
@@ -257,10 +258,13 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  route = to
   if (to.query.from === 'app') {
     store.state.fromApp = true
   }
   var user = navigator.userAgent
+  // '<meta id="meta" name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">'
+  // '<meta id="meta" name=viewport content="initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">'
   var mobile = user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
   if ((to.path === '/' || to.path === `${version}` || to.path === `${version}/`) && !store.state.Pc) {
     if (mobile) {
@@ -274,6 +278,18 @@ router.beforeEach((to, from, next) => {
     store.commit('redirect', to)
   }
   next()
+})
+
+router.afterEach(() => {
+  var user = navigator.userAgent
+  var mobile = user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
+  if (mobile) {
+    if (route.name === 'HomePage' || route.name === 'home') {
+      document.getElementById('meta').content = `initial-scale=1,minimum-scale=${document.body.offsetWidth / 1200},maximum-scale=0,user-scalable=no`
+    } else {
+      document.getElementById('meta').content = `width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=0,user-scalable=no`
+    }
+  }
 })
 
 export default router

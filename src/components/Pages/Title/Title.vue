@@ -11,7 +11,6 @@ export default {
       ROUTER_VERSION: process.env.ROUTER_VERSION
     }
   },
-
   computed: {
     title () {
       var route = this.$route.path

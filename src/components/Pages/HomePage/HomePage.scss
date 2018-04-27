@@ -12,6 +12,8 @@
       min-height: 480px;
       left: 0;
       background:linear-gradient(to bottom, #206eff, #2f9aff);
+      background: url('~Img/large/home-background1.png');
+      background-size: cover;
       .swiper-slide-prev{
         overflow: hidden
       }
@@ -20,7 +22,6 @@
         min-height: 480px;
         background-repeat: no-repeat;
         // background:linear-gradient(to bottom, #206eff, #2f9aff);
-        background: url('~Img/large/home-background1.png')
       }
       .btc-notice{
         a:hover, a:focus{
