@@ -576,6 +576,7 @@ export default {
       this.GetmarketData()
     },
     $route () {
+      console.log(123)
       this.GetmarketData()
     },
     language () {

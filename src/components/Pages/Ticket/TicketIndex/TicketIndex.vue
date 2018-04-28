@@ -157,8 +157,10 @@ export default {
   mounted () {
     if (/closed/.test(this.$route.path)) {
       this.setp = 1
+      this.route = 'open'
     } else {
       this.setp = 0
+      this.route = 'open'
     }
   },
   methods: {
@@ -204,19 +206,25 @@ export default {
       }
     },
     $route (to, from) {
-      if (from.name !== 'TicketIndex') {
+      // if (from.name !== 'TicketIndex') {
+      //   if (/closed/.test(to.path)) {
+      //     this.setp = 1
+      //   } else {
+      //     this.setp = 0
+      //   }
+      // }
+      if (to.name === 'TicketIndex') {
         if (/closed/.test(to.path)) {
           this.setp = 1
+          this.route = 'closed'
+          if (this.closedData !== '') return
+          this.getTickets(1, 'closed')
         } else {
           this.setp = 0
+          this.route = 'open'
+          if (this.openData !== '') return
+          this.getTickets(1, 'open')
         }
-      }
-      if (/closed/.test(to.path)) {
-        if (this.closedData !== '') return
-        this.getTickets(1, 'closed')
-      } else {
-        if (this.openData !== '') return
-        this.getTickets(1, 'open')
       }
     }
   }

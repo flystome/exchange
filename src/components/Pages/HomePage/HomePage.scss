@@ -280,6 +280,10 @@
         div{
           font-size: 13px;
           margin-top: 10px;
+          color: #000000;
+          &:hover,&:focus{
+            color: #000000
+          }
         }
       }
       >div:nth-child(2){

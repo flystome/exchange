@@ -89,16 +89,15 @@ new Vue({
   router,
   i18n,
   store,
-  template: '<App/>',
-  components: { App }
+  render: h => h(App)
 })
 
 new Vue({
   router,
   i18n,
   // filetrs: Filters,
-  template: `<Title></Title>`,
-  components: { Title }
+  render: h => h(Title)
+
 }).$mount('#title')
 
 Object.keys(Filters).forEach(key => {
