@@ -19,64 +19,52 @@
     }
   }
 
-  function u(e) {
+  function c(e) {
     return void 0 === e ? "" : "string" == typeof e ? e : e.message
   }
   var i = function() {
       function e(e, t) {
         this._datafeedUrl = e, this._requester = t
       }
-      return e.prototype.getBars = function(e, t) {
-        var r = this,
-          s = {
+      return e.prototype.getBars = function(e, t, r, s) {
+        var o = this,
+          i = {
             symbol: e.ticker || "",
-            resolution: t
+            resolution: t,
+            from: r,
+            to: s
           };
-        return new Promise(function(n, a) {
-          r._requester.sendRequest(r._datafeedUrl, "k_data", s).then(function(e) {
-            if (e.prev_json) {
-              for (var t = [], r = e.data, s = r.length, o = 0; o < s; ++o) {
-                var i = {
-                  time: 1e3 * r[o].t,
-                  close: Number(r[o].c),
-                  open: Number(r[o].o),
-                  high: Number(r[o].h),
-                  low: Number(r[o].l),
-                  volume: Number(r[o].v)
-                };
-                t.push(i)
-              }
-              n({
-                bars: t,
-                meta: {
+        return new Promise(function(a, u) {
+          o._requester.sendRequest(o._datafeedUrl, "k_data", i).then(function(e) {
+            // if ("ok" === e.s || "no_data" === e.s) {
+            if (e.prev_json || "no_data" === e.s) {
+              var t = [],
+                r = {
                   noData: !1
+                };
+              // if ("no_data" === e.s) r.noData = !0, r.nextTime = e.nextTime;
+              if (!e.prev_json) r.noData = !0, r.nextTime = e.nextTime;
+              else
+                var data = e.data
+                // for (var s = void 0 !== e.v, o = void 0 !== e.o, i = 0; i < e.t.length; ++i) {
+                for (var i = 0; i < data.length; ++i) {
+                  var n = {
+                    time: 1e3 * data[i].t,
+                    close: Number(data[i].c),
+                    open: Number(data[i].o),
+                    high: Number(data[i].h),
+                    low: Number(data[i].l)
+                  };
+                  o && (n.open = Number(data[i].o), n.high = Number(data[i].h), n.low = Number(data[i].l)), (n.volume = Number(data[i].v)), t.push(n)
                 }
+              a({
+                bars: t,
+                meta: r
               })
-            } else a(e.errmsg)
+            } else u(e.errmsg)
           }).catch(function(e) {
-            var t = u(e);
-            console.warn("HistoryProvider: getBars() failed, error=" + t), a(t)
-          })
-        })
-      }, e.prototype.getNewBar = function(e, t) {
-        var s = pusher.subscribe("market-" + e.ticker + "-ticker-" + t);
-        return new Promise(function(e, t) {
-          var r = [];
-          s.bind("ticker", function(e) {
-            var t = {
-              time: 1e3 * e.t,
-              close: Number(e.c),
-              open: Number(e.o),
-              high: Number(e.h),
-              low: Number(e.l),
-              volume: Number(e.v)
-            };
-            r.push(t)
-          }), e({
-            bars: r,
-            meta: {
-              noData: !1
-            }
+            var t = c(e);
+            console.warn("HistoryProvider: getBars() failed, error=" + t), u(t)
           })
         })
       }, e
@@ -102,7 +90,7 @@
               s._requestsPending += 1, s._updateDataForSubscriber(t).then(function() {
                 r._requestsPending -= 1, n("DataPulseProvider: data for #" + t + " updated successfully, pending=" + r._requestsPending)
               }).catch(function(e) {
-                r._requestsPending -= 1, n("DataPulseProvider: data for #" + t + " updated with error=" + u(e) + ", pending=" + r._requestsPending)
+                r._requestsPending -= 1, n("DataPulseProvider: data for #" + t + " updated with error=" + c(e) + ", pending=" + r._requestsPending)
               })
             },
             s = this;
@@ -110,9 +98,14 @@
         }
       }, e.prototype._updateDataForSubscriber = function(t) {
         var r = this,
-          e = this._subscribers[t];
-        return this._historyProvider.getNewBar(e.symbolInfo, e.resolution).then(function(e) {
-          console.log(e)
+          e = this._subscribers[t],
+          s = parseInt((Date.now() / 1e3).toString()),
+          o = s - function(e, t) {
+            var r = 0;
+            r = "D" === e ? t : "M" === e ? 31 * t : "W" === e ? 7 * t : t * parseInt(e) / 1440;
+            return 24 * r * 60 * 60
+          }(e.resolution, 10);
+        return this._historyProvider.getBars(e.symbolInfo, e.resolution, o, s).then(function(e) {
           r._onSubscriberDataReceived(t, e)
         })
       }, e.prototype._onSubscriberDataReceived = function(e, t) {
@@ -132,36 +125,36 @@
           }
         } else n("DataPulseProvider: Data comes for already unsubscribed subscription #" + e)
       }, e
-    }(),
-    c = function() {
-      function e(e) {
-        this._subscribers = {}, this._requestsPending = 0, this._quotesProvider = e, setInterval(this._updateQuotes.bind(this, 1), 1e4), setInterval(this._updateQuotes.bind(this, 0), 6e4)
-      }
-      return e.prototype.subscribeQuotes = function(e, t, r, s) {
-        this._subscribers[s] = {
-          symbols: e,
-          fastSymbols: t,
-          listener: r
-        }, n("QuotesPulseProvider: subscribed quotes with #" + s)
-      }, e.prototype.unsubscribeQuotes = function(e) {
-        delete this._subscribers[e], n("QuotesPulseProvider: unsubscribed quotes with #" + e)
-      }, e.prototype._updateQuotes = function(s) {
-        var o = this;
-        if (!(0 < this._requestsPending)) {
-          var e = function(t) {
-              i._requestsPending++;
-              var r = i._subscribers[t];
-              i._quotesProvider.getQuotes(1 === s ? r.fastSymbols : r.symbols).then(function(e) {
-                o._requestsPending--, o._subscribers.hasOwnProperty(t) && (r.listener(e), n("QuotesPulseProvider: data for #" + t + " (" + s + ") updated successfully, pending=" + o._requestsPending))
-              }).catch(function(e) {
-                o._requestsPending--, n("QuotesPulseProvider: data for #" + t + " (" + s + ") updated with error=" + u(e) + ", pending=" + o._requestsPending)
-              })
-            },
-            i = this;
-          for (var t in this._subscribers) e(t)
-        }
-      }, e
     }();
+  var u = function() {
+    function e(e) {
+      this._subscribers = {}, this._requestsPending = 0, this._quotesProvider = e, setInterval(this._updateQuotes.bind(this, 1), 1e4), setInterval(this._updateQuotes.bind(this, 0), 6e4)
+    }
+    return e.prototype.subscribeQuotes = function(e, t, r, s) {
+      this._subscribers[s] = {
+        symbols: e,
+        fastSymbols: t,
+        listener: r
+      }, n("QuotesPulseProvider: subscribed quotes with #" + s)
+    }, e.prototype.unsubscribeQuotes = function(e) {
+      delete this._subscribers[e], n("QuotesPulseProvider: unsubscribed quotes with #" + e)
+    }, e.prototype._updateQuotes = function(s) {
+      var o = this;
+      if (!(0 < this._requestsPending)) {
+        var e = function(t) {
+            i._requestsPending++;
+            var r = i._subscribers[t];
+            i._quotesProvider.getQuotes(1 === s ? r.fastSymbols : r.symbols).then(function(e) {
+              o._requestsPending--, o._subscribers.hasOwnProperty(t) && (r.listener(e), n("QuotesPulseProvider: data for #" + t + " (" + s + ") updated successfully, pending=" + o._requestsPending))
+            }).catch(function(e) {
+              o._requestsPending--, n("QuotesPulseProvider: data for #" + t + " (" + s + ") updated with error=" + c(e) + ", pending=" + o._requestsPending)
+            })
+          },
+          i = this;
+        for (var t in this._subscribers) e(t)
+      }
+    }, e
+  }();
 
   function f(e, t, r) {
     var s = e[t];
@@ -169,7 +162,7 @@
   }
   var t = function() {
     function e(e, t, r) {
-      this._exchangesList = ["NYSE", "FOREX", "AMEX"], this._symbolsInfo = {}, this._symbolsList = [], this._datafeedUrl = e, this._datafeedSupportedResolutions = t, this._requester = r, this._readyPromise = this._init(), this._readyPromise.catch(function(e) {
+      this._exchangesList = ["Hotex"], this._symbolsInfo = {}, this._symbolsList = [], this._datafeedUrl = e, this._datafeedSupportedResolutions = t, this._requester = r, this._readyPromise = this._init(), this._readyPromise.catch(function(e) {
         console.error("SymbolsStorage: Cannot init, error=" + e.toString())
       })
     }
@@ -241,7 +234,7 @@
           }
           t()
         }).catch(function(e) {
-          n("SymbolsStorage: Request data for exchange '" + s + "' failed, reason=" + u(e)), t()
+          n("SymbolsStorage: Request data for exchange '" + s + "' failed, reason=" + c(e)), t()
         })
       })
     }, e.prototype._onExchangeDataReceived = function(t, r) {
@@ -305,7 +298,7 @@
         supported_resolutions: ["1", "5", "15", "30", "60", "1D", "1W", "1M"],
         supports_marks: !1,
         supports_timescale_marks: !1
-      }, this._symbolsStorage = null, this._datafeedURL = e, this._requester = r, this._historyProvider = new i(e, this._requester), this._quotesProvider = t, this._dataPulseProvider = new a(this._historyProvider, s), this._quotesPulseProvider = new c(this._quotesProvider), this._configurationReadyPromise = this._requestConfiguration().then(function(e) {
+      }, this._symbolsStorage = null, this._datafeedURL = e, this._requester = r, this._historyProvider = new i(e, this._requester), this._quotesProvider = t, this._dataPulseProvider = new a(this._historyProvider, s), this._quotesPulseProvider = new u(this._quotesProvider), this._configurationReadyPromise = this._requestConfiguration().then(function(e) {
         null === e && (e = {
           supports_search: !1,
           supports_group_request: !0,
@@ -349,7 +342,7 @@
           }
           s(e)
         }).catch(function(e) {
-          n("UdfCompatibleDatafeed: Request marks failed: " + u(e)), s([])
+          n("UdfCompatibleDatafeed: Request marks failed: " + c(e)), s([])
         })
       }
     }, e.prototype.getTimescaleMarks = function(e, t, r, s, o) {
@@ -373,7 +366,7 @@
           }
           s(e)
         }).catch(function(e) {
-          n("UdfCompatibleDatafeed: Request timescale marks failed: " + u(e)), s([])
+          n("UdfCompatibleDatafeed: Request timescale marks failed: " + c(e)), s([])
         })
       }
     }, e.prototype.getServerTime = function(r) {
@@ -381,7 +374,7 @@
         var t = parseInt(e);
         isNaN(t) || r(t)
       }).catch(function(e) {
-        n("UdfCompatibleDatafeed: Fail to load server time, error=" + u(e))
+        n("UdfCompatibleDatafeed: Fail to load server time, error=" + c(e))
       })
     }, e.prototype.searchSymbols = function(t, e, r, s) {
       if (this._configuration.supports_search) {
@@ -395,7 +388,7 @@
           if (void 0 !== e.s) return n("UdfCompatibleDatafeed: search symbols error=" + e.errmsg), void s([]);
           s(e)
         }).catch(function(e) {
-          n("UdfCompatibleDatafeed: Search symbols for '" + t + "' failed. Error=" + u(e)), s([])
+          n("UdfCompatibleDatafeed: Search symbols for '" + t + "' failed. Error=" + c(e)), s([])
         })
       } else {
         if (null === this._symbolsStorage) throw new Error("UdfCompatibleDatafeed: inconsistent configuration (symbols storage)");
@@ -418,11 +411,11 @@
         this._send("symbols", i).then(function(e) {
           void 0 !== e.s ? r("unknown_symbol") : o(e)
         }).catch(function(e) {
-          n("UdfCompatibleDatafeed: Error resolving symbol: " + u(e)), r("unknown_symbol")
+          n("UdfCompatibleDatafeed: Error resolving symbol: " + c(e)), r("unknown_symbol")
         })
       }
     }, e.prototype.getBars = function(e, t, r, s, o, i) {
-      this._historyProvider.getBars(e, t).then(function(e) {
+      this._historyProvider.getBars(e, t, r, s).then(function(e) {
         o(e.bars, e.meta)
       }).catch(i)
     }, e.prototype.subscribeBars = function(e, t, r, s, o) {
@@ -431,7 +424,7 @@
       this._dataPulseProvider.unsubscribeBars(e)
     }, e.prototype._requestConfiguration = function() {
       return this._send("trading_views/config").catch(function(e) {
-        return n("UdfCompatibleDatafeed: Cannot get datafeed configuration - use default, error=" + u(e)), null
+        return n("UdfCompatibleDatafeed: Cannot get datafeed configuration - use default, error=" + c(e)), null
       })
     }, e.prototype._send = function(e, t) {
       return this._requester.sendRequest(this._datafeedURL, e, t)
@@ -452,7 +445,7 @@
           }).then(function(e) {
             "ok" === e.s ? t(e.d) : r(e.errmsg)
           }).catch(function(e) {
-            var t = u(e);
+            var t = c(e);
             n("QuotesProvider: getQuotes failed, error=" + t), r("network error: " + t)
           })
         })

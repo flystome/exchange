@@ -29987,7 +29987,6 @@ webpackJsonp([12], [function(t, e, i) {
           case z:
             this.show = !1
         }
-        console.log(this)
         switch (this._layout) {
           case k:
             this._txt = $.t("{0} chart by TradingView").format(this._symbol);
