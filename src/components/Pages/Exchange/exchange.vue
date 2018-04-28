@@ -1,9 +1,9 @@
 <template>
   <section id="exchange">
     <header class="clearfix">
-      <router-link class="logo" to="/">
+      <a class="logo" href="/">
         <img src="@/common/svg/logo.svg">
-      </router-link>
+      </a>
       <lastPrice :market="market"></lastPrice>
       <div class="header_rt">
         <account :totalAssets='total_assets' :accounts='accounts' :market='market'></account>
@@ -18,7 +18,7 @@
           <marketList :markets="markets" @reFreshFav='reFreshFav'></marketList>
         </div>
         <div class="chart">
-          <chart></chart>
+          <chart :market="market"></chart>
         </div>
       </div>
       <div class="my_order">
@@ -53,6 +53,9 @@
 import { mapGetters } from 'vuex'
 import pusher from '@/common/js/pusher'
 import 'vue2-scrollbar/dist/style/vue2-scrollbar.css'
+// import 'static/tradingView/charting_library/charting_library.min.js'
+// import 'static/tradingView/datafeeds/udf/dist/polyfills.js'
+// import 'static/tradingView/datafeeds/udf/dist/bundle.js'
 
 import lastPrice from './lastPrice/lastPrice'
 import language from './language/language'
