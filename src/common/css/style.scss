@@ -167,8 +167,12 @@ ul,li {
 }
 
 .btc-global-loading{
-  >div{
-    padding-top: 25%;
+  .vue-simple-spinner{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -60px !important;
+    margin-top: -60px !important;
   }
 }
 
