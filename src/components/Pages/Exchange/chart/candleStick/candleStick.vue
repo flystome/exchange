@@ -29,7 +29,7 @@ export default {
       // let _this = this
       this.url = location.origin + '/static/charting_library/'
       this.cssUrl = location.origin + '/static/charting_library/static/style/selfTrading.scss'
-      var udfDatafeed = new Datafeeds.UDFCompatibleDatafeed(this.HOST_URL + '/api/v2')
+      var udfDatafeed = new Datafeeds.UDFCompatibleDatafeed(this.HOST_URL)
 
       var widget = new TradingView.widget({
         // debug: true, // uncomment this line to see Library errors and warnings in the console
