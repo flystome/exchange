@@ -141,7 +141,7 @@ export default {
     white-space:nowrap;
     text-align: center;
     padding: 10px 0;
-    padding-bottom: 5px;
+    padding-bottom: 9px;
   }
   a{
     color: #3e81ff;

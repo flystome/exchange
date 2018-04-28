@@ -17,7 +17,7 @@
      <slot name='button'></slot>
   </div> -->
   <div>
-    <input v-validate="validate ? `required|${validate}` : ''"
+    <input data-vv-delay="1000" v-validate="validate ? `required|${validate}` : ''"
     :class="{'input': true, 'is-danger':
     errors.has(`${validate}`) }"
     :value='value'

@@ -108,7 +108,7 @@
                 </div>
               <div class="btc-choice-validate">
                 <select class="btc-select-option" ref='select'
-                v-on:selected="validate = arguments[0]"
+                v-model="validate"
                 :disabled="disabled">
                   <option v-if="loginData.app_activated" value="google">{{ this.$t('withdraw_currency.google_validate') }}</option>
                   <option v-if="loginData.sms_activated" value="sms">{{ this.$t('withdraw_currency.sms') }}</option>
@@ -401,7 +401,7 @@ export default {
         captionTitle: 'deposit_currency.deposit_record',
         item: []
       },
-      validate: this.$t('withdraw_currency.google_validate'),
+      validate: '',
       FundSources: ''
     }
   },
@@ -787,6 +787,11 @@ export default {
     ...mapGetters(['loginData']),
   },
   mounted () {
+    if (this.loginData.app_activated) {
+      this.validate = 'google'
+    } else if (this.loginData.sms_activated) {
+      this.validate = 'sms'
+    }
     /* eslint-disable no-new */
     var clipboard = new Clipboard('.btn-copy')
     var time = () => {
