@@ -45,7 +45,7 @@
 <script>
 import { callingdata } from '@/common/js/countries'
 import { mapMutations, mapState } from 'vuex'
-const _debounce = require('lodash/fp/debounce.js')
+const _debounce = require('lodash.debounce')
 export default {
   name: 'ValidateSms',
   // updated () {
@@ -171,7 +171,7 @@ export default {
     }
   },
   watch: {
-    'SmsData.CellPhonecode': _debounce(500, function () {
+    'SmsData.CellPhonecode': _debounce(function () {
       var lock = false
       callingdata.forEach((d) => {
         if (d.number.slice(1) === this.SmsData.CellPhonecode) {
@@ -182,7 +182,7 @@ export default {
       if (!lock) {
         this.SmsData.CountryName = ''
       }
-    })
+    }, 500)
     // $route (to) {
     //   this.route = to.path.slice(to.path.lastIndexOf('/') + 1)
     //   if (this.route === 'sms') {

@@ -18,6 +18,7 @@
           </span> -->
           <menu-underline
           ref="menu"
+          :route="'my_account'"
           v-model='step'
           :menu-index='step'
           :underline-margin="'5px'"
@@ -114,7 +115,7 @@
         <div @click='goTicket(data.id)' class="btc-member-qContainer" v-for="(data, index) in tickets" :key="index" v-if="index < 5">
           <div class="btc-member-question" :class="{'is-dispose':data.aasm_state === 'closed' }">
             {{data.content}}
-            <span class="btc-member-qTime">{{ data.created_at | moment }}</span>
+            <span class="btc-member-qTime">{{ moment(data.created_at) }}</span>
           </div>
           <div class="btc-member-qTitle btc-marginB5" :class="{'is-dispose':data.aasm_state === 'closed' }">
             {{data.title}}
@@ -189,11 +190,9 @@
 </template>
 <script>
 import { mapGetters, mapMutations, mapState } from 'vuex'
-import moment from 'moment'
 import Cookies from 'js-cookie'
 import Clipboard from 'clipboard'
-const _debounce = require('lodash/fp/debounce.js')
-moment.locale('zh-cn')
+const _debounce = require('lodash.debounce')
 var QRCode = require('qrcode')
 
 export default {
@@ -224,7 +223,7 @@ export default {
       clearTimeout(time)
       this.prompt = this.$t('deposit_currency.copy_success')
     })
-    clipboard.on('success', _debounce(500, time))
+    clipboard.on('success', _debounce(time, 500))
 
     var to = this.$route
     if (/my_account/.test(to.path)) {
@@ -415,6 +414,9 @@ export default {
           this.goPath('/validate/identity', (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verified' || (this.loginData.id_document && this.loginData.id_document.aasm_state) === 'verifying', false)
         }
       }
+    },
+    moment (date) {
+      return this.$moment(date).format('L H:mm:ss')
     }
   },
   computed: {
@@ -442,11 +444,6 @@ export default {
       }
       this.getTicket()
       return obj
-    }
-  },
-  filters: {
-    moment (date) {
-      return moment(date).format('L H:mm:ss')
     }
   },
   watch: {

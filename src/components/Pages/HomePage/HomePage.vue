@@ -307,7 +307,7 @@ import { mapGetters, mapState, mapMutations } from 'vuex'
 import Cookies from 'js-cookie'
 import pusher from '@/common/js/pusher'
 import HomeMarket from './HomeMarket/HomeMarket'
-const _debounce = require('lodash/fp/debounce.js')
+const _debounce = require('lodash.debounce')
 export default {
   name: 'homepage',
   created () {
@@ -332,11 +332,11 @@ export default {
     this.GetNewCoin()
 
     var channel = pusher.subscribe('market-global')
-    channel.bind('tickers', _debounce(5000, (data) => {
+    channel.bind('tickers', _debounce((data) => {
       Object.keys(data).forEach((key) => {
         this.$store.state.assets !== '' && (this.$store.state.assets[data[key].base_currency].price = Number(data[key].last))
       })
-    }))
+    }, 5000))
 
     channel.bind('tickers', (data) => {
       if (this.curData === '') return
@@ -567,10 +567,10 @@ export default {
       if (this.channelTime > 0) return
       this.channelTime++
       var PersonalChannel = pusher.subscribe(`private-${this.loginData.sn}`)
-      PersonalChannel.bind('account', _debounce(500, (data) => {
+      PersonalChannel.bind('account', _debounce((data) => {
         this.$store.state.assets[data.currency].balance = Number(data.balance)
         this.$store.state.assets[data.currency].locked = Number(data.locked)
-      })) // account pusher
+      }, 500)) // account pusher
     },
     marketData () {
       this.GetmarketData()

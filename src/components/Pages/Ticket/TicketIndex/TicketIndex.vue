@@ -8,6 +8,7 @@
         <keep-alive>
           <menu-underline
           ref="menu"
+          :route="'TicketIndex'"
           v-model='setp'
           :menu-index='setp'
           :underline-margin="'16px'"

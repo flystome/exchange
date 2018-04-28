@@ -33,7 +33,7 @@
 </template>
 
 <script>
-const _debounce = require('lodash/fp/debounce.js')
+const _debounce = require('lodash.debounce')
 export default {
   name: 'FormAccount',
   created () {
@@ -104,11 +104,11 @@ export default {
     }
   },
   watch: {
-    'search': _debounce(500, function (a) {
+    'search': _debounce(function (a) {
       this.pagination = 0
       this.$refs['pagination'] && (this.$refs['pagination'].selected = 0)
       this.paging(1, a)
-    }),
+    }, 500),
     $route (form, to) {
       if (to.name === 'WithdrawCurrency') {
         this.paging(1)

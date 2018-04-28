@@ -26,6 +26,7 @@
           </router-link> -->
           <menu-underline
           ref="menu"
+          :route="'WithdrawCurrency'"
           v-model='step'
           :menu-index='step'
           :underline-margin="'5px'"
@@ -215,7 +216,7 @@
 <script>
 import { mapGetters, mapMutations, mapState } from 'vuex'
 import Clipboard from 'clipboard'
-const _debounce = require('lodash/fp/debounce.js')
+const _debounce = require('lodash.debounce')
 import pusher from '@/common/js/pusher'
 var QRCode = require('qrcode')
 const timeLine = 20000
@@ -270,7 +271,7 @@ export default {
         }
       }) //withdraws pusher
 
-      channel.bind('account', _debounce(500, (data) => {
+      channel.bind('account', _debounce((data) => {
         this.$store.state.assets[data.currency].balance = Number(data.balance)
         this.$store.state.assets[data.currency].locked = Number(data.locked)
         // this.equivalence = this.CurrencyType === data.currency ? this.equivalence : data.today_withdraw_remain_btc
@@ -283,13 +284,13 @@ export default {
           }
         }
         this.Balance = data.balance
-      })) //account pusher
+      }, 500)) //account pusher
 
-      MarketChannel.bind('tickers', _debounce(5000 ,(data) => {
+      MarketChannel.bind('tickers', _debounce((data) => {
         Object.keys(data).forEach((key) => {
           this.$store.state.assets[data[key].base_currency].price = data[key].last
         })
-      })) //market pusher
+      }, 5000)) //market pusher
 
       channel.bind('deposits', (data) => {
         var d = data.attributes
@@ -798,7 +799,7 @@ export default {
       clearTimeout(time)
       this.prompt = this.$t('deposit_currency.copy_success')
     })
-    clipboard.on('success', _debounce(500, time))
+    clipboard.on('success', _debounce(time, 500))
 
     if (/withdraw/.test(this.$route.path)) {
       this.step = 1
