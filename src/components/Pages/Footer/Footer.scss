@@ -51,6 +51,23 @@ a{
   }
 }
 
+.footer-from-home{
+  .btc-info{
+    width: 8.33333333%;
+    float: left;
+  }
+  .btc-footer-logo {
+    width: 41.66666667%;
+    float: left;
+  }
+}
+
+@media (max-width: 767px){
+  .footer-from-home{
+    display: block!important;
+  }
+}
+
 @media (max-width: 768px) {
   .btc-footer{
     margin-top: 0;

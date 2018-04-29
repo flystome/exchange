@@ -47,6 +47,9 @@ const TicketIndex = () => import(/* webpackChunkName: "Ticket" */'Pages/Ticket/T
 const TicketNew = () => import(/* webpackChunkName: "Ticket" */'Pages/Ticket/TicketNew/TicketNew')
 const Ticket = () => import(/* webpackChunkName: "Ticket" */'Pages/Ticket/Ticket/Ticket')
 
+// MarketMaker
+const MarketMaker = () => import(/* webpackChunkName: "MarketMaker" */'Pages/MarketMaker/MarketMaker')
+
 Vue.use(Router)
 
 const version = process.env.ROUTER_VERSION
@@ -83,6 +86,11 @@ const router = new Router({
       path: `${version}/markets/:id/orders`,
       name: 'Orders',
       component: Orders
+    },
+    {
+      path: `${version}/market_maker`,
+      name: 'MarketMaker',
+      component: MarketMaker
     },
     {
       path: `${version}/`,

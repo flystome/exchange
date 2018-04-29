@@ -819,8 +819,10 @@ export default {
     $route (to) {
       if (/withdraw/.test(to.path)) {
         this.route = 'withdraw'
+        this.step = 1
         // this.$store.commit('redirect', to)
       } else if (/deposit/.test(to.path)) {
+        this.step = 0
         this.route = 'deposit'
         // this.$store.commit('redirect', to)
         if (this.GeneratAddress !== '') {

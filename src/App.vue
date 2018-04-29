@@ -18,7 +18,7 @@
       </keep-alive>
     </div>
     </section>
-    <footer v-if='!fromApp && noMobile && !exChange' is='Footer' />
+    <footer :FROM='FROM_HOME' v-if='!fromApp && noMobile && !exChange' is='Footer' />
     <wrapper></wrapper>
     <popup-box></popup-box>
     <side-slip-menu></side-slip-menu>

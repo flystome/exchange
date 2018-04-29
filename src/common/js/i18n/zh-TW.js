@@ -197,6 +197,16 @@ const zh = {
     "in_query": "中查詢。",
     "form_account": "充值提現記錄"
   },
+  "market_maker" :{
+    "current_market": "當前做市幣種",
+    "preferential_describe": "做市商可獲得手續費减免等優惠",
+    "market_maker_program_access": "做市商程式接入",
+    "apply_for_market_making": "申請做市",
+    "Yesterday_deal": "昨日成交筆數",
+    "Volume_of_yesterday": "昨日成交量",
+    "Yesterday_fee_income": "昨日手續費收入",
+    "cumulative_fee_income": "累計手續費收入"
+  },
   "title": {
     "my_account": "我的帳戶",
     "validate_email": "驗證郵件",

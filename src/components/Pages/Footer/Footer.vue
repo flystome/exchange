@@ -1,5 +1,5 @@
 <template>
-  <footer class="btc-footer hidden-xs">
+  <footer class="btc-footer hidden-xs" :class="{'footer-from-home': FROM}">
     <nav class="container">
       <div class="btc-footer-logo col-md-5">
         <img src="@/common/svg/logo.svg" alt="">
@@ -58,6 +58,11 @@
 import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'Footer',
+  props: {
+    FROM: {
+      type: Boolean
+    }
+  },
   data () {
     return {
       HOST_URL: process.env.HOST_URL,

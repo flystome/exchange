@@ -198,6 +198,16 @@ const en = {
       "in_query": "",
       "form_account": " Transfer History"
     },
+    "market_maker" :{
+      "current_market": "Current Market Making Currency",
+      "preferential_describe": "The market maker can obtain concessions such as commissions and other preferential",
+      "market_maker_program_access": "Market Maker Program Access",
+      "apply_for_market_making": "Apply For Market Making",
+      "Yesterday_deal": "Yesterday's Deal",
+      "Volume_of_yesterday": "Volume Of Yesterday",
+      "Yesterday_fee_income": "Yesterday's Fee Income",
+      "cumulative_fee_income": "Cumulative Fee Income"
+    },
     "title": {
       "my_account": "My Account",
       "validate_email": "Validate Email",

@@ -1,6 +1,6 @@
 <template>
   <div @keyup.enter="login">
-    <div :data-url='"b"+123' class="btc-homepage-header">
+    <div class="btc-homepage-header">
       <!-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3500">
           <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -576,7 +576,6 @@ export default {
       this.GetmarketData()
     },
     $route () {
-      console.log(123)
       this.GetmarketData()
     },
     language () {

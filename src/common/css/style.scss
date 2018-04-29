@@ -35,6 +35,13 @@ html, body {
   height: 100%;
 }
 
+a{
+  color: black;
+  &:hover,&:focus{
+    color: black
+  }
+}
+
 body{
   background: #f2f2f2;
   font-family: 'Arial',"Microsoft YaHei", sans-serif;
