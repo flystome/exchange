@@ -128,35 +128,32 @@ export default {
           resolution: '1',
           chartType: 3
         }, {
-          label: '1分',
+          label: '1Min',
           resolution: '1'
         }, {
-          label: '5分',
+          label: '5Min',
           resolution: '5'
         }, {
-          label: '15分',
+          label: '15Min',
           resolution: '15'
         }, {
-          label: '30分',
+          label: '30Min',
           resolution: '30'
         }, {
-          label: '1小时',
+          label: '1Hour',
           resolution: '60'
         }, {
-          label: '4小时',
+          label: '4Hour',
           resolution: '240'
         }, {
-          label: '1天',
-          resolution: '1D'
+          label: '1D',
+          resolution: '1440'
         }, {
-          label: '5天',
-          resolution: '5D'
+          label: '3D',
+          resolution: '4320'
         }, {
-          label: '1周',
-          resolution: '7D'
-        }, {
-          label: '1个月',
-          resolution: '1M'
+          label: '1W',
+          resolution: '10080'
         }]
 
         mas.forEach(item => {
@@ -165,43 +162,33 @@ export default {
           }, {'plot.color': item.color})
         })
 
-        // buttons.forEach((item, index) => {
-        //   let button = widget.createButton()
+        buttons.forEach((item, index) => {
+          let button = widget.createButton()
 
-        //   item.resolution === widget.options.interval && updateSelectedIntervalButton(button)
-        //   button.attr('data-resolution', item.resolution)
-        //     .attr('data-chart-type', item.chartType === undefined ? 1 : item.chartType)
-        //     .html('<span>' + item.label + '</span>')
-        //     .on('click', function () {
-        //       if (!widget.changingInterval && !button.hasClass('selected')) {
-        //         let chartType = +button.attr('data-chart-type')
-        //         let resolution = button.attr('data-resolution')
+          // item.resolution === widget.options.interval && updateSelectedIntervalButton(button)
+          button.attr('data-resolution', item.resolution)
+            .attr('data-chart-type', item.chartType === undefined ? 1 : item.chartType)
+            .html('<span>' + item.label + '</span>')
+            .on('click', function () {
+              console.log(1, !button.hasClass('selected'), chart.resolution())
+              if (!button.hasClass('selected')) {
+                let chartType = +button.attr('data-chart-type')
+                let resolution = button.attr('data-resolution')
 
-        //         if (chart.resolution() !== resolution) {
-        //           widget.changingInterval = true
-        //           chart.setResolution(resolution)
-        //         }
-        //         if (chart.chartType() !== chartType) {
-        //           chart.setChartType(chartType)
-        //           // widget.applyOverrides({
-        //           //  'mainSeriesProperties.style': chartType
-        //           // })
-        //         }
-        //         updateSelectedIntervalButton(button)
-        //         showMAStudies(chartType !== 3)
-        //       }
-        //     })
-        // })
+                if (chart.resolution() !== resolution) {
+                  chart.setResolution(resolution)
+                }
+                if (chart.chartType() !== chartType) {
+                  chart.setChartType(chartType)
+                }
+                updateSelectedIntervalButton(button)
+              }
+            })
+        })
         function updateSelectedIntervalButton (button) {
           widget.selectedIntervalButton && widget.selectedIntervalButton.removeClass('selected')
           button.addClass('selected')
           widget.selectedIntervalButton = button
-        }
-
-        function showMAStudies (visible) {
-          widget.MAStudies.forEach(item => {
-            chart.setEntityVisibility(item, visible)
-          })
         }
       })
     },
@@ -225,71 +212,6 @@ export default {
       if (this.widget) {
         this.widget.remove()
         this.widget = null
-      }
-    },
-    overrides () {
-      let style = {
-        up: '#fc4a4a',
-        down: '#24d0b2',
-        bg: '#ffffff',
-        grid: '#1f2943',
-        cross: '#9194A3',
-        border: '#4e5b85',
-        text: '#61688A',
-        areatop: 'rgba(122, 152, 247, .1)',
-        areadown: 'rgba(122, 152, 247, .02)'
-      }
-
-      return {
-        volumePaneSize: 'medium',
-        'scalesProperties.lineColor': style.text,
-        'scalesProperties.textColor': style.text,
-        'paneProperties.background': 'rgba(0, 0, 0, 0)',
-        'paneProperties.vertGridProperties.color': style.grid,
-        'paneProperties.horzGridProperties.color': style.grid,
-        'paneProperties.crossHairProperties.color': style.cross,
-        'paneProperties.legendProperties.showLegend': !!style.showLegend,
-        'paneProperties.legendProperties.showStudyArguments': true,
-        'paneProperties.legendProperties.showStudyTitles': true,
-        'paneProperties.legendProperties.showStudyValues': true,
-        'paneProperties.legendProperties.showSeriesTitle': true,
-        'paneProperties.legendProperties.showSeriesOHLC': true,
-        'mainSeriesProperties.hollowCandleStyle.upColor': style.up,
-        'mainSeriesProperties.hollowCandleStyle.downColor': style.down,
-        'mainSeriesProperties.hollowCandleStyle.drawWick': true,
-        'mainSeriesProperties.hollowCandleStyle.drawBorder': true,
-        'mainSeriesProperties.hollowCandleStyle.borderColor': style.border,
-        'mainSeriesProperties.hollowCandleStyle.borderUpColor': style.up,
-        'mainSeriesProperties.hollowCandleStyle.borderDownColor': style.down,
-        'mainSeriesProperties.hollowCandleStyle.wickUpColor': style.up,
-        'mainSeriesProperties.hollowCandleStyle.wickDownColor': style.down,
-        // 'mainSeriesProperties.hollowCandleStyle.upColor': '#fc4a4a',
-        // 'mainSeriesProperties.hollowCandleStyle.downColor': '#24d0b2',
-        // 'mainSeriesProperties.hollowCandleStyle.borderUpColor': '#fc4a4a'
-        // 'mainSeriesProperties.hollowCandleStyle.borderDownColor': '#24d0b2',
-        // 'mainSeriesProperties.hollowCandleStyle.wickUpColor': '#fc4a4a',
-        // 'mainSeriesProperties.hollowCandleStyle.wickDownColor': '#24d0b2',
-        // 'mainSeriesProperties.haStyle.upColor': style.up,
-        // 'mainSeriesProperties.haStyle.downColor': style.down,
-        // 'mainSeriesProperties.haStyle.drawWick': true,
-        // 'mainSeriesProperties.haStyle.drawBorder': true,
-        // 'mainSeriesProperties.haStyle.borderColor': style.border,
-        // 'mainSeriesProperties.haStyle.borderUpColor': style.up,
-        // 'mainSeriesProperties.haStyle.borderDownColor': style.down,
-        // 'mainSeriesProperties.haStyle.wickColor': style.border,
-        // 'mainSeriesProperties.haStyle.barColorsOnPrevClose': false,
-        // 'mainSeriesProperties.barStyle.upColor': style.up,
-        // 'mainSeriesProperties.barStyle.downColor': style.down,
-        // 'mainSeriesProperties.barStyle.barColorsOnPrevClose': false,
-        // 'mainSeriesProperties.barStyle.dontDrawOpen': false,
-        // 'mainSeriesProperties.lineStyle.color': style.border,
-        // 'mainSeriesProperties.lineStyle.linewidth': 1,
-        // 'mainSeriesProperties.lineStyle.priceSource': 'close',
-        // 'mainSeriesProperties.areaStyle.color1': style.areatop,
-        // 'mainSeriesProperties.areaStyle.color2': style.areadown,
-        // 'mainSeriesProperties.areaStyle.linecolor': style.border,
-        // 'mainSeriesProperties.areaStyle.linewidth': 1,
-        'mainSeriesProperties.areaStyle.priceSource': 'close'
       }
     }
   }

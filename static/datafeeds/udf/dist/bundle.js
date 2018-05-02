@@ -24,20 +24,21 @@
   }
   var i = function() {
       function e(e, t) {
-        this._datafeedUrl = e, this._requester = t, this.prev_json = null
+        this._datafeedUrl = e, this._requester = t, this.prev_json = null, this.curResolution = 0, this.flag = !1
       }
       return e.prototype.getBars = function(e, t) {
+        this.curResolution !== t && (this.flag = !1, this.prev_json = null, this.curResolution = t);
         var r = {
           symbol: e.ticker || "",
           resolution: t
         };
-        return this.prev_json ? this.createPromise(this.prev_json) : this.createPromise("api/v2/k_data", r)
+        return this.flag ? this.createPromise(this.prev_json) : this.createPromise("api/v2/k_data", r)
       }, e.prototype.createPromise = function(e, t) {
         var u = this;
-        return new Promise(function(n, a) {
+        if (!this.flag || this.prev_json) return new Promise(function(n, a) {
           u._requester.sendRequest(u._datafeedUrl, e, t).then(function(e) {
-            if (e.prev_json) {
-              u.prev_json = e.prev_json;
+            if (0 !== e.data.length) {
+              u.prev_json = e.prev_json, u.flag = !0;
               for (var t = [], r = e.data, s = r.length, o = 0; o < s; ++o) {
                 var i = {
                   time: 1e3 * r[o].t,
@@ -61,15 +62,17 @@
             console.warn("HistoryProvider: getBars() failed, error=" + t), a(t)
           })
         })
-      }, e.prototype.getNewBar = function(e, t, r, s) {
-        var o = pusher.subscribe("market-" + e.ticker + "-ticker-" + t),
-          i = [],
-          n = {
+      }, e.prototype.getNewBar = function(e, r, s, o) {
+        var i = this,
+          n = pusher.subscribe("market-" + e.ticker + "-ticker-" + r),
+          a = [],
+          u = {
             noData: !1
           };
+        n = this.createPush(e, r, this.curResolution);
         return new Promise(function(e, t) {
-          o.bind("ticker", function(e) {
-            i = 0 < i.length ? [i[i.length - 1]] : [];
+          n.bind("ticker", function(e) {
+            console.log(this.curResolution, r), a = 0 < a.length ? [a[a.length - 1]] : [];
             var t = {
               time: 1e3 * e.t,
               close: Number(e.c),
@@ -78,17 +81,19 @@
               low: Number(e.l),
               volume: Number(e.v)
             };
-            i.push(t), s(r, {
-              bars: i,
-              meta: n
-            })
+            a.push(t), o(s, {
+              bars: a,
+              meta: u
+            }, i.resolution)
           })
         })
+      }, e.prototype.createPush = function(e, t, r) {
+        return t !== r && pusher.unsubscribe("market-" + e.ticker + "-ticker-" + t), pusher.subscribe("market-" + e.ticker + "-ticker-" + r)
       }, e
     }(),
     a = function() {
       function e(e, t) {
-        this._subscribers = {}, this._requestsPending = 0, this._historyProvider = e, setInterval(this._updateData.bind(this), t)
+        this._subscribers = {}, this._requestsPending = 0, this._historyProvider = e, this.updateFrequency = t, this.oldResolution = 0, this.timer = setInterval(this._updateData.bind(this), t)
       }
       return e.prototype.subscribeBars = function(e, t, r, s) {
         this._subscribers.hasOwnProperty(s) ? n("DataPulseProvider: already has subscriber with id=" + s) : (this._subscribers[s] = {
@@ -96,7 +101,7 @@
           listener: r,
           resolution: t,
           symbolInfo: e
-        }, n("DataPulseProvider: subscribed for #" + s + " - {" + e.name + ", " + t + "}"))
+        }, 0 !== this.oldResolution && t !== this.oldResolution && (this.timer = setInterval(this._updateData.bind(this), this.updateFrequency)), n("DataPulseProvider: subscribed for #" + s + " - {" + e.name + ", " + t + "}"))
       }, e.prototype.unsubscribeBars = function(e) {
         delete this._subscribers[e], n("DataPulseProvider: unsubscribed for #" + e)
       }, e.prototype._updateData = function() {
@@ -115,7 +120,7 @@
         }
       }, e.prototype._updateDataForSubscriber = function(e) {
         var t = this._subscribers[e];
-        return this._historyProvider.getNewBar(t.symbolInfo, t.resolution, e, this._onSubscriberDataReceived.bind(this))
+        return console.log(.1, this._subscribers[e]), this._historyProvider.getNewBar(t.symbolInfo, t.resolution, e, this._onSubscriberDataReceived.bind(this))
       }, e.prototype._onSubscriberDataReceived = function(e, t) {
         if (this._subscribers.hasOwnProperty(e)) {
           var r = t.bars;
@@ -306,7 +311,7 @@
         supported_resolutions: ["1", "5", "15", "30", "60", "1D", "1W", "1M"],
         supports_marks: !1,
         supports_timescale_marks: !1
-      }, this._symbolsStorage = null, this._datafeedURL = e, this._requester = r, this._historyProvider = new i(e, this._requester), this._quotesProvider = t, this._dataPulseProvider = new a(this._historyProvider, s), this._quotesPulseProvider = new u(this._quotesProvider), this._configurationReadyPromise = this._requestConfiguration().then(function(e) {
+      }, this._symbolsStorage = null, this._datafeedURL = e, this._requester = r, this._historyProvider = new i(e, this._requester), this._quotesProvider = t, this._dataPulseProvider = new a(this._historyProvider, s), this._quotesPulseProvider = new u(this._quotesProvider), this._oldResolution = 0, this._configurationReadyPromise = this._requestConfiguration().then(function(e) {
         null === e && (e = {
           supports_search: !1,
           supports_group_request: !0,
