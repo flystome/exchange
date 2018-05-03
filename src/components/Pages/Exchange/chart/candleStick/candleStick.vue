@@ -35,7 +35,7 @@ export default {
         // debug: true, // uncomment this line to see Library errors and warnings in the console
         autosize: true,
         symbol: this.curMarket,
-        interval: '1',
+        interval: '5',
         toolbar_bg: '#f4f7f9',
         container_id: 'candleStick',
         datafeed: udfDatafeed,

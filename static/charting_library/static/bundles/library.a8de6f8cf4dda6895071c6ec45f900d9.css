@@ -7191,9 +7191,11 @@ html.theme-dark.feature-no-touch .tv-control-input.i-disabled:hover, html.theme-
 .header-chart-panel .group {
   display: inline-block;
   white-space: nowrap;
+  cursor: pointer;
   padding: 0;
-  margin: 5px 0 0;
-  height: 30px;
+  margin: 5px 5px 0 0;
+  height: 28px;
+  line-height: 28px;
   vertical-align: top
 }
 
@@ -7203,7 +7205,7 @@ html.theme-dark.feature-no-touch .tv-control-input.i-disabled:hover, html.theme-
 }
 
 .chart-top-toolbar .space-single, .header-chart-panel .space-single {
-  padding: 0 4px 0 0
+  /* padding: 0 4px 0 0 */
 }
 
 .header-chart-panel--compact .group.header-group-back-button, .header-chart-panel--compact .group.header-group-bars-style, .header-chart-panel--compact .group.header-group-compare, .header-chart-panel--compact .group.header-group-create-alert, .header-chart-panel--compact .group.header-group-eot-pro, .header-chart-panel--compact .group.header-group-properties, .header-chart-panel--compact .group.header-group-publishing, .header-chart-panel--compact .group.header-group-screenshot, .header-chart-panel--compact .group.header-group-select-layout, .header-chart-panel--compact .group.header-group-undo-redo, .header-chart-panel--compact .layout-toggle-container, .header-chart-panel--compact .save-load-buttons .title, .header-chart-panel--compact .save-load-buttons .titled .separator {
@@ -7215,12 +7217,11 @@ html.theme-dark.feature-no-touch .tv-control-input.i-disabled:hover, html.theme-
   position: relative;
   float: left;
   cursor: default;
-  padding: 7px 12px;
-  border: 1px solid;
-  border-color: #dadde0;
-  height: 14px;
-  background: #fff;
-  color: #555;
+  line-height: 28px;
+  height: 28px;
+  padding: 0 10px;
+  background: #37506e;
+  color: #fff;
   font-size: 11px;
   font-weight: 600
 }
@@ -8130,7 +8131,8 @@ html.theme-dark .symbol-edit-popup .filter .exchange-filter a, html.theme-dark .
 }
 
 .feature-no-touch .header-chart-panel .button:hover:not(.disabled), .feature-no-touch .symbol-edit-widget .button:hover:not(.disabled) {
-  color: #68696b
+  color: #fff;
+  background: #4382f7;
 }
 
 html.theme-dark.feature-no-touch .header-chart-panel .button:hover:not(.disabled), html.theme-dark.feature-no-touch .symbol-edit-widget .button:hover:not(.disabled) {
@@ -8310,7 +8312,7 @@ html.theme-dark .favored-list-container.active span.submenu, html.theme-dark .fa
 }
 
 .button.iconed, .header-chart-panel .button.iconed {
-  padding: 6px 10px 8px
+  padding: 0 10px;
 }
 
 .feature-no-touch .header-chart-panel .button.disabled:active, .feature-touch .header-chart-panel .button.disabled:active, .header-chart-panel .button.disabled, .header-chart-panel .button.disabled.active {
@@ -8380,7 +8382,8 @@ html.theme-dark.feature-no-touch .button.fullscreen:hover svg {
 }
 
 .button.properties svg {
-  fill: #7d7d7d
+  fill: #7d7d7d;
+  vertical-align: middle;
 }
 
 html.theme-dark .button.properties svg {
@@ -8418,13 +8421,18 @@ html.theme-dark .button.alerts.active svg, html.theme-dark.feature-no-touch .but
 }
 
 .button.indicators svg {
-  fill: #7d7d7d
+  fill: #7d7d7d;
+  vertical-align: middle;
 }
 
 html.theme-dark .button.indicators svg {
   fill: #758696
 }
 
+.button.indicators {
+  height: 28px;
+  line-height: 28px;
+}
 .button.indicators:not(:only-child) {
   border-right: none
 }
@@ -8500,8 +8508,10 @@ html.theme-dark .favored-list-container.study-template-widget svg {
 }
 
 .favored-list-container.study-template-widget .submenu {
-  border-left-style: dotted;
-  border-left-width: 1px
+  /* border-left-style: dotted;
+  border-left-width: 1px */
+  height: 28px;
+  line-height: 28px;
 }
 
 .favored-list-container.study-template-widget .quick>span {
@@ -11053,8 +11063,8 @@ html.theme-dark .chart-gui-button-pseudo-border {
   left: -1px;
   width: 100%;
   height: 100%;
-  border: 1px solid;
-  border-color: #b5b7b9;
+/*   border: 1px solid;
+  border-color: #b5b7b9; */
   background: transparent;
   z-index: 1
 }
