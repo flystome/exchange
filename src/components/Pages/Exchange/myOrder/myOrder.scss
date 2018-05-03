@@ -1,22 +1,24 @@
 #myOrder {
   color: #fff;
+  background: #101622;
+  height: 100%;
   .head {
     background: #1b242e;
     height: 32px;
-    padding-top: 2px;
     font-size: 12px;
     .tab_hd {
+      background: #18283b;
       li {
         display: inline-block;
         width: 16%;
-        height: 30px;
-        line-height: 30px;
+        height: 32px;
+        line-height: 32px;
         text-align: center;
-        color: #49627b;
+        color: #87a3bf;
         cursor: pointer;
         &.on {
-          background: #232e3a;
-          color: #4382f7;
+          background: #101622;
+          color: #207cff;
           font-weight: bold;
         }
       }
@@ -30,7 +32,7 @@
         cursor: pointer;
         height: 20px;
         line-height: 20px;
-        background: #344151;
+        background: #37506e;
         color: #85a7c8;
         padding: 0 7px;
         margin-right: 10px;
@@ -52,6 +54,7 @@
   }
   .tab_bd {
     height: 180px;
+    background: #101622;
     .noneData {
       height: 180px;
       line-height: 180px;

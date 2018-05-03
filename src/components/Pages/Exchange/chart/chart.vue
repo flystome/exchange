@@ -8,11 +8,11 @@
       >{{$t("exchange." + head)}}</li>
     </ul>
     <div class="chart_bd">
-      <div class="candle">
+      <div class="candle" v-show='currencyIndex === 0'>
         <candleStick :market="market"></candleStick>
       </div>
-      <div class="depth">
-
+      <div class="depth" v-show='currencyIndex === 1'>
+        <depths :market="market"></depths>
       </div>
     </div>
   </section>
@@ -20,6 +20,7 @@
 
 <script>
 import candleStick from './candleStick/candleStick'
+import depths from './depths/depths'
 
 export default {
   name: 'chart',
@@ -27,11 +28,12 @@ export default {
   data () {
     return {
       heads: ['candle', 'depth'],
-      currencyIndex: 0
+      currencyIndex: 1
     }
   },
   components: {
-    candleStick
+    candleStick,
+    depths
   }
 }
 </script>

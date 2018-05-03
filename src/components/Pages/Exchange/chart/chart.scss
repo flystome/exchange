@@ -3,16 +3,17 @@
   height: 100%;
   .chart_hd {
     height: 32px;
-    background: #1b242e;
+    background: #18283b;
     li {
       cursor: pointer;
       font-size: 13px;
       display: inline-block;
       padding: 0 15px;
       line-height: 32px;
+      color: #87a3bf;
       margin: 0;
       &.on {
-        background: #232e3a;
+        background: #101622;
         color: #4382f7;
         font-weight: bold;
       }
@@ -22,6 +23,10 @@
     height: calc(100% - 32px);
     width: 100%;
     .candle {
+      width: 100%;
+      height: 100%;
+    }
+    .depths {
       width: 100%;
       height: 100%;
     }

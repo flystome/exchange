@@ -46,10 +46,8 @@ export default {
         disabled_features: ['left_toolbar', 'header_saveload', 'compare_symbol', 'display_market_status', 'go_to_date', 'header_chart_type', 'header_compare', 'header_interval_dialog_button', 'header_resolutions', 'header_screenshot', 'header_symbol_search', 'header_undo_redo', 'legend_context_menu', 'show_hide_button_in_legend', 'show_interval_dialog_on_key_press', 'snapshot_trading_drawings', 'symbol_info', 'timeframes_toolbar', 'use_localstorage_for_settings', 'volume_force_overlay', 'hide_last_na_study_output', 'legend_context_menu', 'dont_show_boolean_study_arguments'],
         enabled_features: ['move_logo_to_main_pane', 'study_templates', 'adaptive_logo'],
         overrides: {
-          'mainSeriesProperties.style': 0,
-          'symbolWatermarkProperties.color': 'rgba(0, 0, 0, 0)',
           'volumePaneSize': 'small',
-          'paneProperties.background': '#232e3a',
+          'paneProperties.background': '#101622',
           'paneProperties.vertGridProperties.color': '#273646',
           'paneProperties.horzGridProperties.color': '#273646',
           'paneProperties.crossHairProperties.color': '#ffffff',
@@ -63,11 +61,9 @@ export default {
           'mainSeriesProperties.haStyle.wickDownColor': '#40b246',
           'mainSeriesProperties.haStyle.drawWick': true,
           'mainSeriesProperties.haStyle.drawBorder': true,
-          'study_Overlay@tv-basicstudies.hollowCandleStyle.wickColor': '#ffff00',
           'mainSeriesProperties.style': 8,
           'scalesProperties.showLeftScale': false,
           'scalesProperties.textColor': '#728eaa',
-          'mainSeriesProperties.barStyle.upColor': '#ffff00',
           'paneProperties.rightMargin': 10,
           'paneProperties.bottomMargin': 10,
           'mainSeriesProperties.showPriceLine': true,
@@ -75,13 +71,10 @@ export default {
         },
         timezone: 'Asia/Shanghai',
         studies_overrides: {
-          'volume.volume.color.0': '#e9454d',
-          'volume.volume.color.1': '#40b246',
+          'volume.volume.color.0': '#40b246',
+          'volume.volume.color.1': '#e9454d',
           'volume.volume.transparency': 100,
-          'volume.volume ma.color': '#FF0000',
-          'volume.volume ma.transparency': 100,
-          'volume.volume ma.linewidth': 5,
-          'volume.show ma': true,
+          'volume.show ma': false,
           'bollinger bands.median.color': '#33FF88',
           'bollinger bands.upper.linewidth': 7
           // "price.precision": 8
@@ -99,12 +92,7 @@ export default {
           { text: '3d', resolution: '10' },
           { text: '2d', resolution: '5' },
           { text: '1d', resolution: '5' }
-        ],
-        charts_storage_api_version: '1.1',
-        favorites: {
-          intervals: ['1D', '3D', '3W', 'W', 'M'],
-          chartTypes: ['Area', 'Line']
-        }
+        ]
       })
 
       widget.onChartReady(function () {

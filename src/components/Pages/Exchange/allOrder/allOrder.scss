@@ -1,6 +1,7 @@
 #allOrder {
   height: 100%;
   padding-bottom: 4px;
+  background: #101622;
   .hd {
     width: 100%;
     padding: 0 5px;
@@ -11,7 +12,7 @@
       width: 33.3%;
       float: left;
       text-align: right;
-      color: #49627b;
+      color: #818b95;
       &:first-child {
         text-align: left;
       }

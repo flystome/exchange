@@ -107,7 +107,7 @@ webpackJsonp([12], [function(t, e, i) {
               f.emit("onAutoSaveNeeded")
             }), t.enabled("charting_library_debug_mode") && f.subscribeToAll(function() {
               var t = Array.prototype.slice.call(arguments);
-              console.log('Event "{0}", arguments: {1}'.format(t[0], JSON.stringify(t.slice(1))))
+              // console.log('Event "{0}", arguments: {1}'.format(t[0], JSON.stringify(t.slice(1))))
             })
           }), f.subscribe("chart_load_requested", function(t) {
             window.tradingViewApi.loadChart({
@@ -33547,9 +33547,9 @@ webpackJsonp([12], [function(t, e, i) {
             p = d[d.length - 1];
           if (o) {
             if (!l._studiesCache[i][n]) throw Error("This should never happen");
-            u = s - 1, l._logMessage("New bar arrived: symbol {0}, bar {1}".format(h.full_name, JSON.stringify(p))),
+            u = s - 1,
               TradingView.ChartapiMessagerInstances[i].onTimescaleUpdate(n, r, [p], h, u), a(h, u, 1e3 * p.value[0]), l.rebuildExtrapolatedData(i, h.full_name, e, h, 1e3 * p.value[0])
-          } else l._logMessage("Last bar update: symbol {0}, bar {1}".format(h.full_name, JSON.stringify(p))), TradingView.ChartapiMessagerInstances[i].onDataUpdate(n, r, d, null, h);
+          } else TradingView.ChartapiMessagerInstances[i].onDataUpdate(n, r, d, null, h);
           l._fireEvent("realtime_tick", t[t.length - 1], !0)
         }, function(t) {
           l._logMessage("Series error: {0}".format(t)), TradingView.ChartapiMessagerInstances[i].onSeriesError(n, t), o.enabled("clear_bars_on_series_error") && TradingView.ChartapiMessagerInstances[i].onSeriesClearData(n, r)
@@ -34127,7 +34127,7 @@ webpackJsonp([12], [function(t, e, i) {
         title: $.t("Hollow Candles")
       }, {
         id: p.STYLE_HEIKEN_ASHI,
-        title: $.t("Heikin Ashi")
+        // title: $.t("Heikin Ashi")
       }, {
         id: p.STYLE_LINE,
         title: $.t("Line")
@@ -42709,7 +42709,7 @@ webpackJsonp([12], [function(t, e, i) {
         s = a.inputs.style + ("ATR" === a.inputs.style ? "(" + a.inputs.atrLength + ")" : ""), h.chartStyle = $.t("PnF") + " [" + s + ", " + e(a.boxSize, 8) + ", " + a.inputs.reversalAmount + "]";
         break;
       case r.STYLE_HEIKEN_ASHI:
-        h.chartStyle = $.t("Heikin Ashi")
+        // h.chartStyle = $.t("Heikin Ashi")
     }
     return c = h.symbolDescription + (h.interval ? ", " + h.interval : "") + (h.provider ? ", " + h.provider : "") + (h.exchange ? ", " + h.exchange : "") + (h.chartStyle ? ", " + h.chartStyle : ""), c = c.replace(/\'/g, "")
   }

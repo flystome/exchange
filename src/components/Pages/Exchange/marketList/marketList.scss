@@ -1,9 +1,9 @@
 #marketList {
-  background: #232e3a;
+  background: #101622;
   font-size: 12px;
   .marketsHd {
     height: 32px;
-    background: #1b242e;
+    background: #18283b;
     padding: 0;
     margin-bottom: 0;
     li {
@@ -16,11 +16,11 @@
       font-size: 13px;
       text-align: center;
       list-style: none;
-      color: #49627b;
+      color: #87a3bf;
       cursor: pointer;
       &.check {
         color: #4382f7;
-        background: #232e3a;
+        background: #101622;
         // border-bottom: 2px solid #4382f7;
         font-weight: bold;
       }
@@ -34,13 +34,13 @@
       display: inline-block;
       width: 70px;
       text-indent: 10px;
-      color: #49627b;
+      color: #87a3bf;
     }
     .search {
       display: inline-block;
       width: 160px;
       height: 26px;
-      border: 1px solid #49627b;
+      border: 1px solid #87a3bf;
       border-radius: 3px;
       input {
         height: 24px;
@@ -59,6 +59,10 @@
         height: 24px;
         line-height: 24px;
         text-align: center;
+        i {
+          font-size: 14px;
+          color: #87a3bf;
+        }
       }
     }
 

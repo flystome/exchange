@@ -7216,7 +7216,7 @@ html.theme-dark.feature-no-touch .tv-control-input.i-disabled:hover, html.theme-
   display: block;
   position: relative;
   float: left;
-  cursor: default;
+  cursor: pointer;
   line-height: 28px;
   height: 28px;
   padding: 0 10px;
@@ -8144,6 +8144,11 @@ html.theme-dark.feature-no-touch .header-chart-panel .button:hover:not(.disabled
   color: #4c525e
 }
 
+.group.space-single .button.selected {
+  color: #fff;
+  background: #4382f7
+}
+
 html.theme-dark .bottom-widgetbar-content.backtesting .button.active, html.theme-dark .ch-controls .button.active, html.theme-dark.feature-no-touch .bottom-widgetbar-content.backtesting .button:active, html.theme-dark.feature-no-touch .ch-controls .button:active, html.theme-dark.feature-no-touch .header-chart-panel .button.active:hover, html.theme-dark.feature-no-touch .header-chart-panel .button:active, html.theme-dark.feature-no-touch .hotlist-controls .button:active, html.theme-dark.feature-no-touch .save-load-buttons .active:hover, html.theme-dark.feature-no-touch .save-load-buttons a:not(.link):active, html.theme-dark.feature-no-touch .symbol-edit-widget .button:active, html.theme-dark.feature-touch .bottom-widgetbar-content.backtesting .button:active, html.theme-dark.feature-touch .ch-controls .button:active, html.theme-dark.feature-touch .header-chart-panel .button:active, html.theme-dark.feature-touch .hotlist-controls .button:active, html.theme-dark.feature-touch .save-load-buttons a:not(.link):active, html.theme-dark.feature-touch .symbol-edit-widget .button:active, html.theme-dark .header-chart-panel .button.active, html.theme-dark .header-chart-panel .button.i-active, html.theme-dark .hotlist-controls .button.active, html.theme-dark .save-load-buttons .active, html.theme-dark .symbol-edit-widget .button.active {
   color: #f7f8fa;
   background: #131722
@@ -8220,7 +8225,6 @@ html.theme-dark .favored-list-container span.active, html.theme-dark .favored-li
 }
 
 .feature-no-touch .favored-list-container span:hover {
-  background: #f2f3f5;
   color: #4c525e
 }
 
@@ -8362,11 +8366,14 @@ html.theme-dark .button.redo.disabled svg, html.theme-dark .button.undo.disabled
 }
 
 .button.fullscreen, .header-chart-panel .button.fullscreen {
-  padding: 5px 6px 9px
+  /* padding: 5px 6px 9px; */
+  height: 28px;
+  line-height: 28px;
 }
 
 .button.fullscreen svg {
-  fill: #7d7d7d
+  fill: #87a3bf;
+  vertical-align: middle;
 }
 
 html.theme-dark .button.fullscreen svg {
@@ -8382,7 +8389,7 @@ html.theme-dark.feature-no-touch .button.fullscreen:hover svg {
 }
 
 .button.properties svg {
-  fill: #7d7d7d;
+  fill: #87a3bf;
   vertical-align: middle;
 }
 
@@ -8421,7 +8428,7 @@ html.theme-dark .button.alerts.active svg, html.theme-dark.feature-no-touch .but
 }
 
 .button.indicators svg {
-  fill: #7d7d7d;
+  fill: #87a3bf;
   vertical-align: middle;
 }
 
@@ -8512,6 +8519,8 @@ html.theme-dark .favored-list-container.study-template-widget svg {
   border-left-width: 1px */
   height: 28px;
   line-height: 28px;
+  background: #37506e;
+  border: none;
 }
 
 .favored-list-container.study-template-widget .quick>span {
@@ -9396,7 +9405,7 @@ html.theme-dark .pane-legend {
   padding: 0;
   vertical-align: middle;
   line-height: 20px;
-  fill: #7d7d7d;
+  fill: #87a3bf;
   pointer-events: auto
 }
 
@@ -9413,6 +9422,9 @@ html.theme-dark .pane-legend .pane-legend-icon .expand, html.theme-dark .pane-le
   cursor: pointer;
   border: none;
   box-sizing: border-box
+}
+.pane-legend-line.study {
+  display: none;
 }
 
 .pane-legend-line.pane-legend-wrap.main {
@@ -9581,6 +9593,7 @@ html.theme-dark .pane-legend-line.disabled {
 
 .pane-controls {
   position: absolute;
+  display: none;
   right: 5px;
   top: 4px;
   line-height: 20px;
@@ -9598,7 +9611,8 @@ html.theme-dark .pane-legend-line.disabled {
 }
 
 .pane-controls.toppane {
-  top: 22px
+  top: 22px;
+  display: none;
 }
 
 .pane-legend-icon {
@@ -18168,7 +18182,7 @@ html.theme-dark.feature-no-touch .tv-compare-dialog__tab-page input:hover {
   height: 0;
   border-style: solid;
   border-width: 4px 4px 0;
-  border-color: currentColor transparent transparent;
+  border-color: #87a3bf transparent transparent;
   margin-left: 5px;
   vertical-align: middle;
   transition: transform .35s ease
