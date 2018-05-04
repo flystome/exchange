@@ -42,7 +42,7 @@ export default {
         library_path: this.url,
         custom_css_url: this.cssUrl,
         // locale: getParameterByName('lang') || 'en',
-        drawings_access: { type: 'black', tools: [ { name: 'Regression Trend' } ] },
+        // drawings_access: { type: 'black', tools: [ { name: 'Regression Trend' } ] },
         disabled_features: ['left_toolbar', 'header_saveload', 'compare_symbol', 'display_market_status', 'go_to_date', 'header_chart_type', 'header_compare', 'header_interval_dialog_button', 'header_resolutions', 'header_screenshot', 'header_symbol_search', 'header_undo_redo', 'legend_context_menu', 'show_hide_button_in_legend', 'show_interval_dialog_on_key_press', 'snapshot_trading_drawings', 'symbol_info', 'timeframes_toolbar', 'use_localstorage_for_settings', 'volume_force_overlay', 'hide_last_na_study_output', 'legend_context_menu', 'dont_show_boolean_study_arguments'],
         enabled_features: ['move_logo_to_main_pane', 'study_templates', 'adaptive_logo'],
         overrides: {
@@ -53,15 +53,14 @@ export default {
           'paneProperties.crossHairProperties.color': '#ffffff',
           'paneProperties.crossHairProperties.style': 'border',
           'scalesProperties.lineColor': '#728eaa',
-          'mainSeriesProperties.haStyle.upColor': '#e9454d',
-          'mainSeriesProperties.haStyle.downColor': '#40b246',
-          'mainSeriesProperties.haStyle.borderUpColor': '#e9454d',
-          'mainSeriesProperties.haStyle.borderDownColor': '#40b246',
-          'mainSeriesProperties.haStyle.wickUpColor': '#e9454d',
-          'mainSeriesProperties.haStyle.wickDownColor': '#40b246',
-          'mainSeriesProperties.haStyle.drawWick': true,
-          'mainSeriesProperties.haStyle.drawBorder': true,
-          'mainSeriesProperties.style': 8,
+          'mainSeriesProperties.candleStyle.upColor': '#40b246',
+          'mainSeriesProperties.candleStyle.downColor': '#e9454d',
+          'mainSeriesProperties.candleStyle.borderUpColor': '#40b246',
+          'mainSeriesProperties.candleStyle.borderDownColor': '#e9454d',
+          'mainSeriesProperties.candleStyle.wickUpColor': '#40b246',
+          'mainSeriesProperties.candleStyle.wickDownColor': '#e9454d',
+          'mainSeriesProperties.candleStyle.drawWick': true,
+          'mainSeriesProperties.candleStyle.drawBorder': true,
           'scalesProperties.showLeftScale': false,
           'scalesProperties.textColor': '#728eaa',
           'paneProperties.rightMargin': 10,
@@ -77,7 +76,6 @@ export default {
           'volume.show ma': false,
           'bollinger bands.median.color': '#33FF88',
           'bollinger bands.upper.linewidth': 7
-          // "price.precision": 8
         },
         debug: true,
         time_frames: [
@@ -179,28 +177,6 @@ export default {
           widget.selectedIntervalButton = button
         }
       })
-    },
-    updateWidget (item) {
-      this.symbolInfo = {
-        name: item.virtualCoinName,
-        ticker: item.virtualCoinId,
-        description: '',
-        session: '24x7',
-        supported_resolutions: ['1', '5', '15', '30', '60', '240', '1D', '5D', '1W', '1M'],
-        has_intraday: true,
-        has_daily: true,
-        has_weekly_and_monthly: true,
-        timezone: 'UTC'
-      }
-
-      this.removeWidget()
-      this.createWidget()
-    },
-    removeWidget () {
-      if (this.widget) {
-        this.widget.remove()
-        this.widget = null
-      }
     }
   }
 }

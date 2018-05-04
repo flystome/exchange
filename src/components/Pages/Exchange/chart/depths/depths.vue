@@ -4,61 +4,127 @@
 </template>
 
 <script>
-require('Static/js/echarts.min.js')
+const echarts = require('echarts')
 
 export default {
   name: 'depths',
-  props: ['market'],
+  props: ['depthData', 'chartInit'],
   data () {
     return {
-
+      depths: null,
+      option: null,
+      sellList: [],
+      buylist: [],
+      max: 0,
+      min: 0
+    }
+  },
+  mounted () {
+    this.createDepths()
+  },
+  watch: {
+    depthData (val, oldVal) {
+      this.getChartData(val)
     }
   },
   methods: {
     createDepths () {
-      var option = {
-        tooltip : {
-            trigger: 'axis'
-        },
-        legend: {
-            data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
+      var _this = this
+      this.depths = echarts.init(document.getElementById('depths'))
+      this.option = {
+        tooltip: {
+          trigger: 'item',
+          backgroundColor: '#37506e',
+          formatter: function (params) {
+            return `<p class='item1'><span>${_this.$t('markets.price')}</span><span> ${params.data[0]}</span></p>
+              <p class='item1'><span>${_this.$t('markets.price')}</span><span> ${params.data[1]}</span></p>`
+          }
         },
         grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
+          left: 0,
+          right: 0,
+          bottom: 0,
+          containLabel: false
         },
-        xAxis : [
-            {
-                type : 'category',
-                boundaryGap : false,
-                data : ['周一','周二','周三','周四','周五','周六','周日']
-            }
+        xAxis: [
+          {
+            type: 'value',
+            boundaryGap: false,
+            show: false,
+          }
         ],
-        yAxis : [
-            {
-                type : 'value'
-            }
+        yAxis: [
+          {
+            type: 'value',
+            show: false
+          }
         ],
-        series : [
-            {
-                name:'邮件营销',
-                type:'line',
-                stack: '总量',
-                areaStyle: {normal: {}},
-                data:[120, 132, 101, 134, 90, 230, 210]
+        series: [
+          {
+            name: 'buy',
+            type: 'line',
+            symbolSize: 4,
+            color: '#fff',
+            lineStyle: {
+              normal: {
+                color: '#23464c'
+              }
             },
-            {
-                name:'联盟广告',
-                type:'line',
-                stack: '总量',
-                areaStyle: {normal: {}},
-                data:[220, 182, 191, 234, 290, 330, 310]
-            }
+            areaStyle: {normal: {
+              color: '#23464c'
+            }},
+            data: []
+          },
+          {
+            name: 'sell',
+            type: 'line',
+            symbolSize: 4,
+            color: '#fff',
+            lineStyle: {
+              normal: {
+                color: '#43323c'
+              }
+            },
+            areaStyle: {normal: {color: '#43323c'}},
+            data: []
+          }
         ]
-    };
-
+      }
+      this.depths.setOption(this.option)
+    },
+    getChartData (val) {
+      var sell = JSON.parse(JSON.stringify(val.asks))
+      this.sellList = sell.map((ele, index, arr) => {
+        if (index !== 0) {
+          ele[1] = +ele[1] + +arr[index - 1][1]
+        }
+        return ele
+      })
+      this.max = this.sellList[this.sellList.length - 1]
+      var buy = JSON.parse(JSON.stringify(val.bids))
+      this.buylist = buy.map((ele, index, arr) => {
+        if (index !== 0) {
+          ele[1] = +ele[1] + +arr[index - 1][1]
+        }
+        return ele
+      })
+      this.min = this.sellList[0]
+      this.buylist.reverse()
+      console.log(this.buylist, this.sellList)
+      this.refreshChart()
+    },
+    refreshChart () {
+      this.depths.setOption({
+        xAxis: [{
+          min: this.min,
+          max: this.max
+        }],
+        series: [{
+          data: this.buylist
+        }, {
+          data: this.sellList
+        }]
+      })
     }
   }
 }

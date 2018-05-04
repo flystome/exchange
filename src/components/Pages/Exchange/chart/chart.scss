@@ -1,6 +1,9 @@
 #chart {
   width: 100%;
   height: 100%;
+  p {
+    margin-bottom: 0;
+  }
   .chart_hd {
     height: 32px;
     background: #18283b;
@@ -22,13 +25,24 @@
   .chart_bd {
     height: calc(100% - 32px);
     width: 100%;
+    position: relative;
     .candle {
+      position: absolute;
       width: 100%;
       height: 100%;
+      z-index: 1;
+      opacity: 0;
     }
     .depths {
+      position: absolute;
       width: 100%;
       height: 100%;
+      z-index: 1;
+      opacity: 0;
+    }
+    .zIndex {
+      z-index: 10;
+      opacity: 1;
     }
   }
 }

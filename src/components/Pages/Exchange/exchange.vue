@@ -18,7 +18,7 @@
           <marketList :markets="markets" @reFreshFav='reFreshFav'></marketList>
         </div>
         <div class="chart">
-          <chart :market="market"></chart>
+          <chart :market="market" :depthData='depth_data'></chart>
         </div>
       </div>
       <div class="my_order">

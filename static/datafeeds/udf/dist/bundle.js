@@ -139,8 +139,8 @@
           }
         } else n("DataPulseProvider: Data comes for already unsubscribed subscription #" + e)
       }, e
-    }(),
-    u = function() {
+    }();
+    var u = function() {
       function e(e) {
         this._subscribers = {}, this._requestsPending = 0, this._quotesProvider = e, setInterval(this._updateQuotes.bind(this, 1), 1e4), setInterval(this._updateQuotes.bind(this, 0), 6e4)
       }

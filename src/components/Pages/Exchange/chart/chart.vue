@@ -8,11 +8,11 @@
       >{{$t("exchange." + head)}}</li>
     </ul>
     <div class="chart_bd">
-      <div class="candle" v-show='currencyIndex === 0'>
+      <div class="candle" :class="{'zIndex': !currencyIndex}">
         <candleStick :market="market"></candleStick>
       </div>
-      <div class="depth" v-show='currencyIndex === 1'>
-        <depths :market="market"></depths>
+      <div class="depths" :class="{'zIndex': currencyIndex}">
+        <depths :depthData='depthData' :chartInit='currencyIndex === 1'></depths>
       </div>
     </div>
   </section>
@@ -24,11 +24,11 @@ import depths from './depths/depths'
 
 export default {
   name: 'chart',
-  props: ['market'],
+  props: ['market', 'depthData'],
   data () {
     return {
       heads: ['candle', 'depth'],
-      currencyIndex: 1
+      currencyIndex: 0
     }
   },
   components: {
