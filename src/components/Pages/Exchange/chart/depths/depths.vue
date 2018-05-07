@@ -36,8 +36,8 @@ export default {
           trigger: 'item',
           backgroundColor: '#37506e',
           formatter: function (params) {
-            return `<p class='item1'><span>${_this.$t('markets.price')}</span><span> ${params.data[0]}</span></p>
-              <p class='item1'><span>${_this.$t('markets.price')}</span><span> ${params.data[1]}</span></p>`
+            return `<p class='item1'><span>${_this.$t('markets.price')}:</span><span> ${params.data[0]}</span></p>
+              <p class='item1'><span>${_this.$t('exchange.grand')}:</span><span> ${params.data[1]}</span></p>`
           }
         },
         grid: {
@@ -50,7 +50,7 @@ export default {
           {
             type: 'value',
             boundaryGap: false,
-            show: false,
+            show: false
           }
         ],
         yAxis: [
@@ -91,6 +91,7 @@ export default {
         ]
       }
       this.depths.setOption(this.option)
+      this.resize()
     },
     getChartData (val) {
       var sell = JSON.parse(JSON.stringify(val.asks))
@@ -124,6 +125,11 @@ export default {
         }, {
           data: this.sellList
         }]
+      })
+    },
+    resize () {
+      window.addEventListener('resize', () => {
+        this.depths.resize()
       })
     }
   }

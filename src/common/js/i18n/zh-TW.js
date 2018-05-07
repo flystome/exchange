@@ -334,6 +334,7 @@ const zh = {
     'priceWarn': '偏離現價10%，請核准！',
     "candle": "K線",
     "depth": "深度",
+    "grand": '累计',
     'myorder': {
       'pending': '當前委託',
       'history': '歷史委託',

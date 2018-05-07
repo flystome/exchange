@@ -335,6 +335,7 @@ const en = {
       'priceWarn': 'Price deviates too much!',
       "candle": "Candle Sticks",
       "depth": "Depth",
+      "grand": 'Grand Total',
       'myorder': {
         'pending': 'Pending Orders',
         'history': 'History Orders',
