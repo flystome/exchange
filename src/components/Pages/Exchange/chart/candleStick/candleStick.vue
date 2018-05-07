@@ -29,44 +29,40 @@ export default {
       // let _this = this
       this.url = location.origin + '/static/charting_library/'
       this.cssUrl = location.origin + '/static/charting_library/static/style/selfTrading.scss'
-      var udfDatafeed = new Datafeeds.UDFCompatibleDatafeed(this.HOST_URL + '/api/v2')
+      var udfDatafeed = new Datafeeds.UDFCompatibleDatafeed(this.HOST_URL)
 
       var widget = new TradingView.widget({
         // debug: true, // uncomment this line to see Library errors and warnings in the console
         autosize: true,
         symbol: this.curMarket,
-        interval: '30',
+        interval: '5',
         toolbar_bg: '#f4f7f9',
         container_id: 'candleStick',
         datafeed: udfDatafeed,
         library_path: this.url,
         custom_css_url: this.cssUrl,
         // locale: getParameterByName('lang') || 'en',
-        drawings_access: { type: 'black', tools: [ { name: 'Regression Trend' } ] },
+        // drawings_access: { type: 'black', tools: [ { name: 'Regression Trend' } ] },
         disabled_features: ['left_toolbar', 'header_saveload', 'compare_symbol', 'display_market_status', 'go_to_date', 'header_chart_type', 'header_compare', 'header_interval_dialog_button', 'header_resolutions', 'header_screenshot', 'header_symbol_search', 'header_undo_redo', 'legend_context_menu', 'show_hide_button_in_legend', 'show_interval_dialog_on_key_press', 'snapshot_trading_drawings', 'symbol_info', 'timeframes_toolbar', 'use_localstorage_for_settings', 'volume_force_overlay', 'hide_last_na_study_output', 'legend_context_menu', 'dont_show_boolean_study_arguments'],
         enabled_features: ['move_logo_to_main_pane', 'study_templates', 'adaptive_logo'],
         overrides: {
-          'symbolWatermarkProperties.color': 'rgba(0, 0, 0, 0)',
           'volumePaneSize': 'small',
-          'paneProperties.background': '#232e3a',
+          'paneProperties.background': '#101622',
           'paneProperties.vertGridProperties.color': '#273646',
           'paneProperties.horzGridProperties.color': '#273646',
           'paneProperties.crossHairProperties.color': '#ffffff',
           'paneProperties.crossHairProperties.style': 'border',
           'scalesProperties.lineColor': '#728eaa',
-          'mainSeriesProperties.haStyle.upColor': '#e9454d',
-          'mainSeriesProperties.haStyle.downColor': '#40b246',
-          'mainSeriesProperties.haStyle.borderUpColor': '#e9454d',
-          'mainSeriesProperties.haStyle.borderDownColor': '#40b246',
-          'mainSeriesProperties.haStyle.wickUpColor': '#e9454d',
-          'mainSeriesProperties.haStyle.wickDownColor': '#40b246',
-          'mainSeriesProperties.haStyle.drawWick': true,
-          'mainSeriesProperties.haStyle.drawBorder': true,
-          'study_Overlay@tv-basicstudies.hollowCandleStyle.wickColor': '#ffff00',
-          'mainSeriesProperties.style': 8,
+          'mainSeriesProperties.candleStyle.upColor': '#40b246',
+          'mainSeriesProperties.candleStyle.downColor': '#e9454d',
+          'mainSeriesProperties.candleStyle.borderUpColor': '#40b246',
+          'mainSeriesProperties.candleStyle.borderDownColor': '#e9454d',
+          'mainSeriesProperties.candleStyle.wickUpColor': '#40b246',
+          'mainSeriesProperties.candleStyle.wickDownColor': '#e9454d',
+          'mainSeriesProperties.candleStyle.drawWick': true,
+          'mainSeriesProperties.candleStyle.drawBorder': true,
           'scalesProperties.showLeftScale': false,
           'scalesProperties.textColor': '#728eaa',
-          'mainSeriesProperties.barStyle.upColor': '#ffff00',
           'paneProperties.rightMargin': 10,
           'paneProperties.bottomMargin': 10,
           'mainSeriesProperties.showPriceLine': true,
@@ -74,16 +70,12 @@ export default {
         },
         timezone: 'Asia/Shanghai',
         studies_overrides: {
-          'volume.volume.color.0': '#e9454d',
-          'volume.volume.color.1': '#40b246',
+          'volume.volume.color.0': '#40b246',
+          'volume.volume.color.1': '#e9454d',
           'volume.volume.transparency': 100,
-          'volume.volume ma.color': '#FF0000',
-          'volume.volume ma.transparency': 100,
-          'volume.volume ma.linewidth': 5,
-          'volume.show ma': true,
+          'volume.show ma': false,
           'bollinger bands.median.color': '#33FF88',
           'bollinger bands.upper.linewidth': 7
-          // "price.precision": 8
         },
         debug: true,
         time_frames: [
@@ -98,12 +90,7 @@ export default {
           { text: '3d', resolution: '10' },
           { text: '2d', resolution: '5' },
           { text: '1d', resolution: '5' }
-        ],
-        charts_storage_api_version: '1.1',
-        favorites: {
-          intervals: ['1D', '3D', '3W', 'W', 'M'],
-          chartTypes: ['Area', 'Line']
-        }
+        ]
       })
 
       widget.onChartReady(function () {
@@ -127,35 +114,32 @@ export default {
           resolution: '1',
           chartType: 3
         }, {
-          label: '1分',
+          label: '1Min',
           resolution: '1'
         }, {
-          label: '5分',
+          label: '5Min',
           resolution: '5'
         }, {
-          label: '15分',
+          label: '15Min',
           resolution: '15'
         }, {
-          label: '30分',
+          label: '30Min',
           resolution: '30'
         }, {
-          label: '1小时',
+          label: '1Hour',
           resolution: '60'
         }, {
-          label: '4小时',
+          label: '4Hour',
           resolution: '240'
         }, {
-          label: '1天',
-          resolution: '1D'
+          label: '1D',
+          resolution: '1440'
         }, {
-          label: '5天',
-          resolution: '5D'
+          label: '3D',
+          resolution: '4320'
         }, {
-          label: '1周',
-          resolution: '7D'
-        }, {
-          label: '1个月',
-          resolution: '1M'
+          label: '1W',
+          resolution: '10080'
         }]
 
         mas.forEach(item => {
@@ -166,29 +150,45 @@ export default {
 
         buttons.forEach((item, index) => {
           let button = widget.createButton()
+<<<<<<< HEAD
           console.log(item)
+=======
+>>>>>>> tradingView
 
           // item.resolution === widget.options.interval && updateSelectedIntervalButton(button)
           button.attr('data-resolution', item.resolution)
             .attr('data-chart-type', item.chartType === undefined ? 1 : item.chartType)
             .html('<span>' + item.label + '</span>')
             .on('click', function () {
+<<<<<<< HEAD
               if (!widget.changingInterval && !button.hasClass('selected')) {
+=======
+              console.log(1, !button.hasClass('selected'), chart.resolution())
+              if (!button.hasClass('selected')) {
+>>>>>>> tradingView
                 let chartType = +button.attr('data-chart-type')
                 let resolution = button.attr('data-resolution')
 
                 if (chart.resolution() !== resolution) {
+<<<<<<< HEAD
                   widget.changingInterval = true
+=======
+>>>>>>> tradingView
                   chart.setResolution(resolution)
                 }
                 if (chart.chartType() !== chartType) {
                   chart.setChartType(chartType)
+<<<<<<< HEAD
                   widget.applyOverrides({
                    'mainSeriesProperties.style': chartType
                   })
                 }
                 updateSelectedIntervalButton(button)
                 showMAStudies(chartType !== 3)
+=======
+                }
+                updateSelectedIntervalButton(button)
+>>>>>>> tradingView
               }
             })
         })
@@ -197,13 +197,8 @@ export default {
           button.addClass('selected')
           widget.selectedIntervalButton = button
         }
-
-        function showMAStudies (visible) {
-          widget.MAStudies.forEach(item => {
-            chart.setEntityVisibility(item, visible)
-          })
-        }
       })
+<<<<<<< HEAD
     },
     updateWidget (item) {
       this.symbolInfo = {
@@ -226,6 +221,8 @@ export default {
         this.widget.remove()
         this.widget = null
       }
+=======
+>>>>>>> tradingView
     }
   }
 }

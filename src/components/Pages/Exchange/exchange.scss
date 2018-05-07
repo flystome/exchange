@@ -3,21 +3,22 @@
   height: 100%;
   color: #fff;
   font-size: 12px;
+  background: #1f344e;
   ul, li {
     margin: 0;
     padding: 0;
   }
   .up {
-    color: #fc4a4a;
+    color: #40b246;
   }
   .down {
-    color: #24d0b2;
+    color: #e9454d;
   }
   header {
     height: 60px;
     width: 100%;
     padding: 10px 0;
-    background: #232e3a;
+    background: #1f3651;
     vertical-align: -4px;
     .logo {
       display: inline-block;
@@ -35,29 +36,29 @@
   .w240 {
     display: inline-block;
     width: 240px;
-    background: #232e3a;
+    background: #101622;
     height: 100%;
     float: left;
   }
   .content {
     display: inline-block;
     float: left;
-    height: calc(100% - 62px);
-    width: calc(100% - 488px);
-    margin: 2px 2px 0;
+    height: calc(100% - 63px);
+    width: calc(100% - 492px);
+    margin: 3px 3px 0;
     .top_content {
       width: 100%;
-      height: calc(100% - 218px);
-      margin-bottom: 2px;
+      height: calc(100% - 219px);
+      margin-bottom: 3px;
       .market {
 
       }
       .chart {
         display: inline-block;
         float: right;
-        width: calc(100% - 242px);
+        width: calc(100% - 243px);
         height: 100%;
-        background: #232e3a;
+        background: #101622;
       }
     }
     .my_order {
@@ -69,10 +70,10 @@
   .list {
     display: inline-block;
     float: left;
-    width: 482px;
-    height: calc(100% - 62px);
-    margin-top: 2px;
-    margin-right: 2px;
+    width: 483px;
+    height: calc(100% - 63px);
+    margin-top: 3px;
+    margin-right: 3px;
     &>div {
       background: none;
     }
@@ -82,7 +83,7 @@
       background: #232e3a;
     }
     .order {
-      background: #232e3a;
+      background: #101622;
       height: 265px;
       margin-top: 2px;
     }

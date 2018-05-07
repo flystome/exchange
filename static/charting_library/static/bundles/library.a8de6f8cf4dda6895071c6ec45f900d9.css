@@ -7191,9 +7191,11 @@ html.theme-dark.feature-no-touch .tv-control-input.i-disabled:hover, html.theme-
 .header-chart-panel .group {
   display: inline-block;
   white-space: nowrap;
+  cursor: pointer;
   padding: 0;
-  margin: 5px 0 0;
-  height: 30px;
+  margin: 5px 5px 0 0;
+  height: 28px;
+  line-height: 28px;
   vertical-align: top
 }
 
@@ -7203,7 +7205,7 @@ html.theme-dark.feature-no-touch .tv-control-input.i-disabled:hover, html.theme-
 }
 
 .chart-top-toolbar .space-single, .header-chart-panel .space-single {
-  padding: 0 4px 0 0
+  /* padding: 0 4px 0 0 */
 }
 
 .header-chart-panel--compact .group.header-group-back-button, .header-chart-panel--compact .group.header-group-bars-style, .header-chart-panel--compact .group.header-group-compare, .header-chart-panel--compact .group.header-group-create-alert, .header-chart-panel--compact .group.header-group-eot-pro, .header-chart-panel--compact .group.header-group-properties, .header-chart-panel--compact .group.header-group-publishing, .header-chart-panel--compact .group.header-group-screenshot, .header-chart-panel--compact .group.header-group-select-layout, .header-chart-panel--compact .group.header-group-undo-redo, .header-chart-panel--compact .layout-toggle-container, .header-chart-panel--compact .save-load-buttons .title, .header-chart-panel--compact .save-load-buttons .titled .separator {
@@ -7214,13 +7216,12 @@ html.theme-dark.feature-no-touch .tv-control-input.i-disabled:hover, html.theme-
   display: block;
   position: relative;
   float: left;
-  cursor: default;
-  padding: 7px 12px;
-  border: 1px solid;
-  border-color: #dadde0;
-  height: 14px;
-  background: #fff;
-  color: #555;
+  cursor: pointer;
+  line-height: 28px;
+  height: 28px;
+  padding: 0 10px;
+  background: #37506e;
+  color: #fff;
   font-size: 11px;
   font-weight: 600
 }
@@ -8130,7 +8131,8 @@ html.theme-dark .symbol-edit-popup .filter .exchange-filter a, html.theme-dark .
 }
 
 .feature-no-touch .header-chart-panel .button:hover:not(.disabled), .feature-no-touch .symbol-edit-widget .button:hover:not(.disabled) {
-  color: #68696b
+  color: #fff;
+  background: #4382f7;
 }
 
 html.theme-dark.feature-no-touch .header-chart-panel .button:hover:not(.disabled), html.theme-dark.feature-no-touch .symbol-edit-widget .button:hover:not(.disabled) {
@@ -8140,6 +8142,11 @@ html.theme-dark.feature-no-touch .header-chart-panel .button:hover:not(.disabled
 .bottom-widgetbar-content.backtesting .button.active, .ch-controls .button.active, .feature-no-touch .bottom-widgetbar-content.backtesting .button:active, .feature-no-touch .ch-controls .button:active, .feature-no-touch .header-chart-panel .button.active:hover, .feature-no-touch .header-chart-panel .button:active, .feature-no-touch .hotlist-controls .button:active, .feature-no-touch .save-load-buttons .active:hover, .feature-no-touch .save-load-buttons a:not(.link):active, .feature-no-touch .symbol-edit-widget .button:active, .feature-touch .bottom-widgetbar-content.backtesting .button:active, .feature-touch .ch-controls .button:active, .feature-touch .header-chart-panel .button:active, .feature-touch .hotlist-controls .button:active, .feature-touch .save-load-buttons a:not(.link):active, .feature-touch .symbol-edit-widget .button:active, .header-chart-panel .button.active, .header-chart-panel .button.i-active, .hotlist-controls .button.active, .save-load-buttons .active, .symbol-edit-widget .button.active {
   background: #f2f3f5;
   color: #4c525e
+}
+
+.group.space-single .button.selected {
+  color: #fff;
+  background: #4382f7
 }
 
 html.theme-dark .bottom-widgetbar-content.backtesting .button.active, html.theme-dark .ch-controls .button.active, html.theme-dark.feature-no-touch .bottom-widgetbar-content.backtesting .button:active, html.theme-dark.feature-no-touch .ch-controls .button:active, html.theme-dark.feature-no-touch .header-chart-panel .button.active:hover, html.theme-dark.feature-no-touch .header-chart-panel .button:active, html.theme-dark.feature-no-touch .hotlist-controls .button:active, html.theme-dark.feature-no-touch .save-load-buttons .active:hover, html.theme-dark.feature-no-touch .save-load-buttons a:not(.link):active, html.theme-dark.feature-no-touch .symbol-edit-widget .button:active, html.theme-dark.feature-touch .bottom-widgetbar-content.backtesting .button:active, html.theme-dark.feature-touch .ch-controls .button:active, html.theme-dark.feature-touch .header-chart-panel .button:active, html.theme-dark.feature-touch .hotlist-controls .button:active, html.theme-dark.feature-touch .save-load-buttons a:not(.link):active, html.theme-dark.feature-touch .symbol-edit-widget .button:active, html.theme-dark .header-chart-panel .button.active, html.theme-dark .header-chart-panel .button.i-active, html.theme-dark .hotlist-controls .button.active, html.theme-dark .save-load-buttons .active, html.theme-dark .symbol-edit-widget .button.active {
@@ -8218,7 +8225,6 @@ html.theme-dark .favored-list-container span.active, html.theme-dark .favored-li
 }
 
 .feature-no-touch .favored-list-container span:hover {
-  background: #f2f3f5;
   color: #4c525e
 }
 
@@ -8310,7 +8316,7 @@ html.theme-dark .favored-list-container.active span.submenu, html.theme-dark .fa
 }
 
 .button.iconed, .header-chart-panel .button.iconed {
-  padding: 6px 10px 8px
+  padding: 0 10px;
 }
 
 .feature-no-touch .header-chart-panel .button.disabled:active, .feature-touch .header-chart-panel .button.disabled:active, .header-chart-panel .button.disabled, .header-chart-panel .button.disabled.active {
@@ -8360,11 +8366,14 @@ html.theme-dark .button.redo.disabled svg, html.theme-dark .button.undo.disabled
 }
 
 .button.fullscreen, .header-chart-panel .button.fullscreen {
-  padding: 5px 6px 9px
+  /* padding: 5px 6px 9px; */
+  height: 28px;
+  line-height: 28px;
 }
 
 .button.fullscreen svg {
-  fill: #7d7d7d
+  fill: #87a3bf;
+  vertical-align: middle;
 }
 
 html.theme-dark .button.fullscreen svg {
@@ -8380,7 +8389,8 @@ html.theme-dark.feature-no-touch .button.fullscreen:hover svg {
 }
 
 .button.properties svg {
-  fill: #7d7d7d
+  fill: #87a3bf;
+  vertical-align: middle;
 }
 
 html.theme-dark .button.properties svg {
@@ -8418,13 +8428,18 @@ html.theme-dark .button.alerts.active svg, html.theme-dark.feature-no-touch .but
 }
 
 .button.indicators svg {
-  fill: #7d7d7d
+  fill: #87a3bf;
+  vertical-align: middle;
 }
 
 html.theme-dark .button.indicators svg {
   fill: #758696
 }
 
+.button.indicators {
+  height: 28px;
+  line-height: 28px;
+}
 .button.indicators:not(:only-child) {
   border-right: none
 }
@@ -8500,8 +8515,12 @@ html.theme-dark .favored-list-container.study-template-widget svg {
 }
 
 .favored-list-container.study-template-widget .submenu {
-  border-left-style: dotted;
-  border-left-width: 1px
+  /* border-left-style: dotted;
+  border-left-width: 1px */
+  height: 28px;
+  line-height: 28px;
+  background: #37506e;
+  border: none;
 }
 
 .favored-list-container.study-template-widget .quick>span {
@@ -9386,7 +9405,7 @@ html.theme-dark .pane-legend {
   padding: 0;
   vertical-align: middle;
   line-height: 20px;
-  fill: #7d7d7d;
+  fill: #87a3bf;
   pointer-events: auto
 }
 
@@ -9403,6 +9422,9 @@ html.theme-dark .pane-legend .pane-legend-icon .expand, html.theme-dark .pane-le
   cursor: pointer;
   border: none;
   box-sizing: border-box
+}
+.pane-legend-line.study {
+  display: none;
 }
 
 .pane-legend-line.pane-legend-wrap.main {
@@ -9571,6 +9593,7 @@ html.theme-dark .pane-legend-line.disabled {
 
 .pane-controls {
   position: absolute;
+  display: none;
   right: 5px;
   top: 4px;
   line-height: 20px;
@@ -9588,7 +9611,8 @@ html.theme-dark .pane-legend-line.disabled {
 }
 
 .pane-controls.toppane {
-  top: 22px
+  top: 22px;
+  display: none;
 }
 
 .pane-legend-icon {
@@ -11053,8 +11077,8 @@ html.theme-dark .chart-gui-button-pseudo-border {
   left: -1px;
   width: 100%;
   height: 100%;
-  border: 1px solid;
-  border-color: #b5b7b9;
+/*   border: 1px solid;
+  border-color: #b5b7b9; */
   background: transparent;
   z-index: 1
 }
@@ -18158,7 +18182,7 @@ html.theme-dark.feature-no-touch .tv-compare-dialog__tab-page input:hover {
   height: 0;
   border-style: solid;
   border-width: 4px 4px 0;
-  border-color: currentColor transparent transparent;
+  border-color: #87a3bf transparent transparent;
   margin-left: 5px;
   vertical-align: middle;
   transition: transform .35s ease

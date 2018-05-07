@@ -24,54 +24,77 @@
   }
   var i = function() {
       function e(e, t) {
-        this._datafeedUrl = e, this._requester = t
+        this._datafeedUrl = e, this._requester = t, this.prev_json = null, this.curResolution = 0, this.flag = !1, this.handleNewBar = null
       }
-      return e.prototype.getBars = function(e, t, r, s) {
-        var o = this,
-          i = {
-            symbol: e.ticker || "",
-            resolution: t,
-            from: r,
-            to: s
-          };
-        return new Promise(function(a, u) {
-          o._requester.sendRequest(o._datafeedUrl, "k_data", i).then(function(e) {
-            // if ("ok" === e.s || "no_data" === e.s) {
-            if (e.prev_json || "no_data" === e.s) {
-              var t = [],
-                r = {
-                  noData: !1
+      return e.prototype.getBars = function(e, t) {
+        var r = e.name + "_" + t;
+        this.curResolution !== t && (this.flag = !1, this.prev_json = null, this.curResolution && this.getNewBar(e, t, r, this.handleNewBar), this.curResolution = t);
+        var s = {
+          symbol: e.ticker || "",
+          resolution: t
+        };
+        return this.curResolution = t, this.flag ? this.createPromise(this.prev_json) : this.createPromise("api/v2/k_data", s)
+      }, e.prototype.createPromise = function(e, t) {
+        var u = this;
+        if (!this.flag || this.prev_json) return new Promise(function(n, a) {
+          u._requester.sendRequest(u._datafeedUrl, e, t).then(function(e) {
+            if (0 !== e.data.length) {
+              u.prev_json = e.prev_json, u.flag = !0;
+              for (var t = [], r = e.data, s = r.length, o = 0; o < s; ++o) {
+                var i = {
+                  time: 1e3 * r[o].t,
+                  close: Number(r[o].c),
+                  open: Number(r[o].o),
+                  high: Number(r[o].h),
+                  low: Number(r[o].l),
+                  volume: Number(r[o].v)
                 };
-              // if ("no_data" === e.s) r.noData = !0, r.nextTime = e.nextTime;
-              if (!e.prev_json) r.noData = !0, r.nextTime = e.nextTime;
-              else
-                var data = e.data
-                // for (var s = void 0 !== e.v, o = void 0 !== e.o, i = 0; i < e.t.length; ++i) {
-                for (var i = 0; i < data.length; ++i) {
-                  var n = {
-                    time: 1e3 * data[i].t,
-                    close: Number(data[i].c),
-                    open: Number(data[i].o),
-                    high: Number(data[i].h),
-                    low: Number(data[i].l)
-                  };
-                  o && (n.open = Number(data[i].o), n.high = Number(data[i].h), n.low = Number(data[i].l)), (n.volume = Number(data[i].v)), t.push(n)
-                }
-              a({
+                t.push(i)
+              }
+              n({
                 bars: t,
-                meta: r
+                meta: {
+                  noData: !1
+                }
               })
-            } else u(e.errmsg)
+            } else a(e.errmsg)
           }).catch(function(e) {
             var t = c(e);
-            console.warn("HistoryProvider: getBars() failed, error=" + t), u(t)
+            console.warn("HistoryProvider: getBars() failed, error=" + t), a(t)
           })
         })
+      }, e.prototype.getNewBar = function(e, t, r, s) {
+        var o = this;
+        this.handleNewBar = s;
+        var i = [],
+          n = {
+            noData: !1
+          },
+          a = this.createPush(e, t, this.curResolution);
+        return new Promise(function(e, t) {
+          a.bind("ticker", function(e) {
+            i = 0 < i.length ? [i[i.length - 1]] : [];
+            var t = {
+              time: 1e3 * e.t,
+              close: Number(e.c),
+              open: Number(e.o),
+              high: Number(e.h),
+              low: Number(e.l),
+              volume: Number(e.v)
+            };
+            i.push(t), s(r, {
+              bars: i,
+              meta: n
+            }, o.resolution)
+          })
+        })
+      }, e.prototype.createPush = function(e, t, r) {
+        return t !== r && pusher.unsubscribe("market-" + e.ticker + "-ticker-" + r), pusher.subscribe("market-" + e.ticker + "-ticker-" + t)
       }, e
     }(),
     a = function() {
       function e(e, t) {
-        this._subscribers = {}, this._requestsPending = 0, this._historyProvider = e, setInterval(this._updateData.bind(this), t)
+        this._subscribers = {}, this._requestsPending = 0, this._historyProvider = e, this.updateFrequency = t, this.oldResolution = 0, this.timer = setInterval(this._updateData.bind(this), t)
       }
       return e.prototype.subscribeBars = function(e, t, r, s) {
         this._subscribers.hasOwnProperty(s) ? n("DataPulseProvider: already has subscriber with id=" + s) : (this._subscribers[s] = {
@@ -79,7 +102,7 @@
           listener: r,
           resolution: t,
           symbolInfo: e
-        }, n("DataPulseProvider: subscribed for #" + s + " - {" + e.name + ", " + t + "}"))
+        }, 0 !== this.oldResolution && t !== this.oldResolution && (this.timer = setInterval(this._updateData.bind(this), this.updateFrequency)), n("DataPulseProvider: subscribed for #" + s + " - {" + e.name + ", " + t + "}"))
       }, e.prototype.unsubscribeBars = function(e) {
         delete this._subscribers[e], n("DataPulseProvider: unsubscribed for #" + e)
       }, e.prototype._updateData = function() {
@@ -96,18 +119,9 @@
             s = this;
           for (var t in this._subscribers) e(t)
         }
-      }, e.prototype._updateDataForSubscriber = function(t) {
-        var r = this,
-          e = this._subscribers[t],
-          s = parseInt((Date.now() / 1e3).toString()),
-          o = s - function(e, t) {
-            var r = 0;
-            r = "D" === e ? t : "M" === e ? 31 * t : "W" === e ? 7 * t : t * parseInt(e) / 1440;
-            return 24 * r * 60 * 60
-          }(e.resolution, 10);
-        return this._historyProvider.getBars(e.symbolInfo, e.resolution, o, s).then(function(e) {
-          r._onSubscriberDataReceived(t, e)
-        })
+      }, e.prototype._updateDataForSubscriber = function(e) {
+        var t = this._subscribers[e];
+        return this._historyProvider.getNewBar(t.symbolInfo, t.resolution, e, this._onSubscriberDataReceived.bind(this))
       }, e.prototype._onSubscriberDataReceived = function(e, t) {
         if (this._subscribers.hasOwnProperty(e)) {
           var r = t.bars;
@@ -126,37 +140,37 @@
         } else n("DataPulseProvider: Data comes for already unsubscribed subscription #" + e)
       }, e
     }();
-  var u = function() {
-    function e(e) {
-      this._subscribers = {}, this._requestsPending = 0, this._quotesProvider = e, setInterval(this._updateQuotes.bind(this, 1), 1e4), setInterval(this._updateQuotes.bind(this, 0), 6e4)
-    }
-    return e.prototype.subscribeQuotes = function(e, t, r, s) {
-      this._subscribers[s] = {
-        symbols: e,
-        fastSymbols: t,
-        listener: r
-      }, n("QuotesPulseProvider: subscribed quotes with #" + s)
-    }, e.prototype.unsubscribeQuotes = function(e) {
-      delete this._subscribers[e], n("QuotesPulseProvider: unsubscribed quotes with #" + e)
-    }, e.prototype._updateQuotes = function(s) {
-      var o = this;
-      if (!(0 < this._requestsPending)) {
-        var e = function(t) {
-            i._requestsPending++;
-            var r = i._subscribers[t];
-            i._quotesProvider.getQuotes(1 === s ? r.fastSymbols : r.symbols).then(function(e) {
-              o._requestsPending--, o._subscribers.hasOwnProperty(t) && (r.listener(e), n("QuotesPulseProvider: data for #" + t + " (" + s + ") updated successfully, pending=" + o._requestsPending))
-            }).catch(function(e) {
-              o._requestsPending--, n("QuotesPulseProvider: data for #" + t + " (" + s + ") updated with error=" + c(e) + ", pending=" + o._requestsPending)
-            })
-          },
-          i = this;
-        for (var t in this._subscribers) e(t)
+    var u = function() {
+      function e(e) {
+        this._subscribers = {}, this._requestsPending = 0, this._quotesProvider = e, setInterval(this._updateQuotes.bind(this, 1), 1e4), setInterval(this._updateQuotes.bind(this, 0), 6e4)
       }
-    }, e
-  }();
+      return e.prototype.subscribeQuotes = function(e, t, r, s) {
+        this._subscribers[s] = {
+          symbols: e,
+          fastSymbols: t,
+          listener: r
+        }, n("QuotesPulseProvider: subscribed quotes with #" + s)
+      }, e.prototype.unsubscribeQuotes = function(e) {
+        delete this._subscribers[e], n("QuotesPulseProvider: unsubscribed quotes with #" + e)
+      }, e.prototype._updateQuotes = function(s) {
+        var o = this;
+        if (!(0 < this._requestsPending)) {
+          var e = function(t) {
+              i._requestsPending++;
+              var r = i._subscribers[t];
+              i._quotesProvider.getQuotes(1 === s ? r.fastSymbols : r.symbols).then(function(e) {
+                o._requestsPending--, o._subscribers.hasOwnProperty(t) && (r.listener(e), n("QuotesPulseProvider: data for #" + t + " (" + s + ") updated successfully, pending=" + o._requestsPending))
+              }).catch(function(e) {
+                o._requestsPending--, n("QuotesPulseProvider: data for #" + t + " (" + s + ") updated with error=" + c(e) + ", pending=" + o._requestsPending)
+              })
+            },
+            i = this;
+          for (var t in this._subscribers) e(t)
+        }
+      }, e
+    }();
 
-  function f(e, t, r) {
+  function d(e, t, r) {
     var s = e[t];
     return Array.isArray(s) ? s[r] : s
   }
@@ -224,7 +238,7 @@
     }, e.prototype._requestExchangeData = function(s) {
       var o = this;
       return new Promise(function(t, r) {
-        o._requester.sendRequest(o._datafeedUrl, "trading_views/symbol_info", {
+        o._requester.sendRequest(o._datafeedUrl, "api/v2/trading_views/symbol_info", {
           group: s
         }).then(function(e) {
           try {
@@ -243,10 +257,10 @@
       try {
         for (var o = r.symbol.length, i = void 0 !== r.ticker; s < o; ++s) {
           var n = r.symbol[s],
-            a = f(r, "exchange-listed", s),
-            u = f(r, "exchange-traded", s),
+            a = d(r, "exchange-listed", s),
+            u = d(r, "exchange-traded", s),
             c = u + ":" + n,
-            l = i ? f(r, "ticker", s) : n,
+            l = i ? d(r, "ticker", s) : n,
             h = {
               ticker: l,
               name: n,
@@ -254,23 +268,23 @@
               full_name: c,
               listed_exchange: a,
               exchange: u,
-              description: f(r, "description", s),
-              has_intraday: d(f(r, "has-intraday", s), !1),
-              has_no_volume: d(f(r, "has-no-volume", s), !1),
-              minmov: f(r, "minmovement", s) || f(r, "minmov", s) || 0,
-              minmove2: f(r, "minmove2", s) || f(r, "minmov2", s),
-              fractional: f(r, "fractional", s),
-              pricescale: f(r, "pricescale", s),
-              type: f(r, "type", s),
-              session: f(r, "session-regular", s),
-              timezone: f(r, "timezone", s),
-              supported_resolutions: d(f(r, "supported-resolutions", s), e._datafeedSupportedResolutions),
-              force_session_rebuild: f(r, "force-session-rebuild", s),
-              has_daily: d(f(r, "has-daily", s), !0),
-              intraday_multipliers: d(f(r, "intraday-multipliers", s), ["1", "5", "15", "30", "60"]),
-              has_weekly_and_monthly: f(r, "has-weekly-and-monthly", s),
-              has_empty_bars: f(r, "has-empty-bars", s),
-              volume_precision: d(f(r, "volume-precision", s), 0)
+              description: d(r, "description", s),
+              has_intraday: f(d(r, "has-intraday", s), !1),
+              has_no_volume: f(d(r, "has-no-volume", s), !1),
+              minmov: d(r, "minmovement", s) || d(r, "minmov", s) || 0,
+              minmove2: d(r, "minmove2", s) || d(r, "minmov2", s),
+              fractional: d(r, "fractional", s),
+              pricescale: d(r, "pricescale", s),
+              type: d(r, "type", s),
+              session: d(r, "session-regular", s),
+              timezone: d(r, "timezone", s),
+              supported_resolutions: f(d(r, "supported-resolutions", s), e._datafeedSupportedResolutions),
+              force_session_rebuild: d(r, "force-session-rebuild", s),
+              has_daily: f(d(r, "has-daily", s), !0),
+              intraday_multipliers: f(d(r, "intraday-multipliers", s), ["1", "5", "15", "30", "60"]),
+              has_weekly_and_monthly: d(r, "has-weekly-and-monthly", s),
+              has_empty_bars: d(r, "has-empty-bars", s),
+              volume_precision: f(d(r, "volume-precision", s), 0)
             };
           e._symbolsInfo[l] = h, e._symbolsInfo[n] = h, e._symbolsInfo[c] = h, e._symbolsList.push(n)
         }
@@ -280,7 +294,7 @@
     }, e
   }();
 
-  function d(e, t) {
+  function f(e, t) {
     return void 0 !== e ? e : t
   }
 
@@ -298,7 +312,7 @@
         supported_resolutions: ["1", "5", "15", "30", "60", "1D", "1W", "1M"],
         supports_marks: !1,
         supports_timescale_marks: !1
-      }, this._symbolsStorage = null, this._datafeedURL = e, this._requester = r, this._historyProvider = new i(e, this._requester), this._quotesProvider = t, this._dataPulseProvider = new a(this._historyProvider, s), this._quotesPulseProvider = new u(this._quotesProvider), this._configurationReadyPromise = this._requestConfiguration().then(function(e) {
+      }, this._symbolsStorage = null, this._datafeedURL = e, this._requester = r, this._historyProvider = new i(e, this._requester), this._quotesProvider = t, this._dataPulseProvider = new a(this._historyProvider, s), this._quotesPulseProvider = new u(this._quotesProvider), this._oldResolution = 0, this._configurationReadyPromise = this._requestConfiguration().then(function(e) {
         null === e && (e = {
           supports_search: !1,
           supports_group_request: !0,
@@ -370,7 +384,7 @@
         })
       }
     }, e.prototype.getServerTime = function(r) {
-      this._configuration.supports_time && this._send("trading_views/time").then(function(e) {
+      this._configuration.supports_time && this._send("api/v2/trading_views/time").then(function(e) {
         var t = parseInt(e);
         isNaN(t) || r(t)
       }).catch(function(e) {
@@ -395,11 +409,9 @@
         this._symbolsStorage.searchSymbols(t, e, r, 30).then(s).catch(s.bind(null, []))
       }
     }, e.prototype.resolveSymbol = function(e, t, r) {
-      n("Resolve requested");
       var s = Date.now();
-
       function o(e) {
-        n("Symbol resolved: " + (Date.now() - s) + "ms"), t(e)
+        t(e)
       }
       if (this._configuration.supports_group_request) {
         if (null === this._symbolsStorage) throw new Error("UdfCompatibleDatafeed: inconsistent configuration (symbols storage)");
@@ -415,7 +427,7 @@
         })
       }
     }, e.prototype.getBars = function(e, t, r, s, o, i) {
-      this._historyProvider.getBars(e, t, r, s).then(function(e) {
+      this._historyProvider.getBars(e, t).then(function(e) {
         o(e.bars, e.meta)
       }).catch(i)
     }, e.prototype.subscribeBars = function(e, t, r, s, o) {
@@ -423,7 +435,7 @@
     }, e.prototype.unsubscribeBars = function(e) {
       this._dataPulseProvider.unsubscribeBars(e)
     }, e.prototype._requestConfiguration = function() {
-      return this._send("trading_views/config").catch(function(e) {
+      return this._send("api/v2/trading_views/config").catch(function(e) {
         return n("UdfCompatibleDatafeed: Cannot get datafeed configuration - use default, error=" + c(e)), null
       })
     }, e.prototype._send = function(e, t) {

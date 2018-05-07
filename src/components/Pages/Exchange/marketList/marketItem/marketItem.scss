@@ -12,7 +12,7 @@
     margin-bottom: 0;
     li {
       width: 34%;
-      color: #42637d;
+      color: #818b95;
       font-size: 12px;
       cursor: pointer;
       display: inline-block;
@@ -54,7 +54,7 @@
     width: 100%;
     li {
       width: 100%;
-      color: #fff;
+      color: #87a3bf;
       float: none;
       font-size: 12px;
       height: 20px;
@@ -67,7 +67,7 @@
         width: 8%;
         text-align: center;
         &.favorite {
-          color: #fc4a4a;
+          color: #e9454d;
         }
         i {
           cursor: pointer;
@@ -77,7 +77,7 @@
         width: 28%;
         text-align: left;
         a {
-          color: #fff;
+          color: #87a3bf;
           &:hover {
             color: #4682b4;
           }
@@ -87,20 +87,20 @@
         width: 34%;
         text-align: right;
         &.done {
-          color: #29c1a6;
+          color: #40b246;
         }
         &.up {
-          color: #fc4a4a;
+          color: #fbfbfb;
         }
       }
       .list-btn {
         width: 30%;
         text-align: right;
         &.text-up {
-          color: #fc4a4a;
+          color: #fbfbfb;
         }
         &.text-down {
-          color: #29c1a6;
+          color: #40b246;
         }
       }
     }

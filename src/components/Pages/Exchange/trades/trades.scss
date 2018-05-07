@@ -2,7 +2,7 @@
   width: 100%;
   height: 100%;
   .tab_hd {
-    background: #1b242e;
+    background: #18283b;
     height: 32px;
     li {
       display: inline-block;
@@ -10,17 +10,18 @@
       height: 32px;
       line-height: 32px;
       color: #4382f7;
-      background: #232e3a;
+      background: #101622;
       font-weight: bold;
     }
   }
   .bd {
     padding: 0 4px;
     height: calc(100% - 32px);
+    background: #101622;
     .newPirce {
       height: 28px;
       line-height: 28px;
-      background: #38475a;
+      background: #37506e;
       margin-left: -4px;
       margin-right: -4px;
       text-indent: 4px;
@@ -36,7 +37,7 @@
         width: 32%;
         float: left;
         text-align: center;
-        color: #49627b;
+        color: #818b95;
         height: 30px;
         line-height: 30px;
         &:first-child {
@@ -81,13 +82,13 @@
       }
       &.buy {
         div:first-child {
-          color: #fc4a4a
+          color: #40b246
         }
       }
       &.sell {
         position: relative;
         div:first-child {
-          color: #24d0b2;
+          color: #e9454d;
         }
         .listbox {
           position: absolute;
