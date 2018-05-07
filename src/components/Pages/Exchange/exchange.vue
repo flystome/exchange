@@ -135,7 +135,7 @@ export default {
       }, self.handleGlobal)
     },
     handleGlobal (res) {
-      console.log(res.data);
+      // console.log(res.data);
       ({
         // ticker: this.lastPriceData,
         my_trades: this.my_trades,
@@ -257,10 +257,14 @@ export default {
       })
       market.bind('trade', (res) => {
         this.isMine(res.trade, 'trades')
-        if (res.trade.price >= this.all_trades[0].price) {
+        if (this.all_trades.length === 0) {
           res.trade.trend = 'up'
         } else {
-          res.trade.trend = 'down'
+          if (res.trade.price >= (this.all_trades[0].price || 0)) {
+            res.trade.trend = 'up'
+          } else {
+            res.trade.trend = 'down'
+          }
         }
         this.all_trades.unshift(res.trade)
       })

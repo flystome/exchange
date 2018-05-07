@@ -2,58 +2,69 @@
   padding: 15px 10px;
   .handleOrder {
     .put {
-      width: 220px;
-      height: 28px;
-      margin-bottom: 15px;
-      color: #85a7c8;
-      background: #37506e;
-      font-size: 12px;
-      padding-right: 5px;
-      &.price {
-        position: relative;
+      padding-left: 45px;
+      &>.input_box {
+        width: 175px;
+        height: 28px;
+        margin-bottom: 15px;
+        color: #85a7c8;
+        background: #37506e;
+        font-size: 12px;
+        padding-right: 5px;
+        &.price {
+          position: relative;
+        }
+        input {
+          background: none;
+          outline: none;
+          border: 0;
+          color: #fff;
+          height: 28px;
+          line-height: 28px;
+          font-size: 12px;
+          width: 130px;
+          padding-left: 5px;
+          &::-webkit-input-placeholder {
+            color: #85a7c8;
+          }
+          &::-webkit-outer-spin-button {
+              -webkit-appearance: none !important;
+              margin: 0;
+          }
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none !important;
+              margin: 0;
+          }
+          &::-ms-clear {
+            display: none;
+          }
+        }
+        span {
+          display: inline-block;
+          float: right;
+          width: 40px;
+          text-align: right;
+          line-height: 28px;
+        }
+        .warning {
+          position: absolute;
+          width: 100%;
+          top: 28px;
+          left: 0;
+          height: 18px;
+          text-align: center;
+          background: #fc4a4a;
+          color: #fff;
+          z-index: 20;
+        }
       }
-      input {
-        background: none;
-        outline: none;
-        border: 0;
-        color: #fff;
+      &>.name {
+        width: 40px;
+        display: inline-block;
         height: 28px;
         line-height: 28px;
-        font-size: 12px;
-        width: 175px;
-        padding-left: 5px;
-        &::-webkit-input-placeholder {
-          color: #85a7c8;
-        }
-        &::-webkit-outer-spin-button {
-            -webkit-appearance: none !important;
-            margin: 0;
-        }
-        &::-webkit-inner-spin-button {
-          -webkit-appearance: none !important;
-            margin: 0;
-        }
-        &::-ms-clear {
-          display: none;
-        }
-      }
-      span {
-        display: inline-block;
-        float: right;
-        width: 40px;
-        text-align: right;
-        line-height: 28px;
-      }
-      .warning {
-        position: absolute;
-        width: 100%;
-        top: 28px;
-        left: 0;
-        height: 18px;
-        text-align: center;
-        background: #fc4a4a;
-        color: #fff;
-        z-index: 20;
+        float: left;
+        margin-left: -45px;
       }
     }
     .percent {

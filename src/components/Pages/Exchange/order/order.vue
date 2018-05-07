@@ -28,23 +28,34 @@
       </div>
     </div>
     <div class="buy handleOrder" v-if='type==="buy"'>
-      <div class="price put">
-        <input type="number" ref='buyPrice' v-model='buyPrice' @change='handlePrice($event.target.value, "buy")' :placeholder="$t('markets.price')">
-        <span>{{market.base_currency | upper}}</span>
-        <transition name="fade">
-          <div class="warning" v-if='buywarning'>{{$t('exchange.priceWarn')}}</div>
-        </transition>
+      <div class="put">
+        <div class="name">{{$t('markets.price')}}</div>
+        <div class="price input_box">
+          <input type="number" v-model='buyPrice' @change='handlePrice($event.target.value, "buy")' :placeholder="$t('markets.price')">
+          <span>{{market.base_currency | upper}}</span>
+          <transition name="fade">
+            <div class="warning" v-if='buywarning'>{{$t('exchange.priceWarn')}}</div>
+          </transition>
+        </div>
       </div>
-      <div class="volume put">
-        <input type="number" ref="buyVolume" v-model='buyVolume' @input='handleVol($event.target.value, "buy")' :placeholder="$t('exchange.volume')">
-        <span>{{market.quote_currency | upper}}</span>
+      <div class="put">
+        <div class="name">{{$t('exchange.volume')}}</div>
+        <div class="volume input_box">
+          <input type="number" v-model='buyVolume' @input='handleVol($event.target.value, "buy")' :placeholder="$t('exchange.volume')">
+          <span>{{market.quote_currency | upper}}</span>
+        </div>
       </div>
-      <div class="total put">
-        <input type="number" ref="buyTotal" v-model='buyTotal' @input='handleTotal($event.target.value, "buy")' :placeholder="$t('markets.total')">
-        <span>{{market.base_currency | upper}}</span>
+      <div class="put">
+        <div class="name">{{$t('markets.total')}}</div>
+        <div class="total input_box">
+          <input type="number" v-model='buyTotal' @input='handleTotal($event.target.value, "buy")' :placeholder="$t('markets.total')">
+          <span>{{market.base_currency | upper}}</span>
+        </div>
       </div>
-      <div class="percent">
-        <span v-for='item in percent' :key='"btn"+item[1]' @click="addInputs(item[1])">{{item[0]}}</span>
+      <div class="put">
+        <div class="percent">
+          <span v-for='item in percent' :key='"btn"+item[1]' @click="addInputs(item[1])">{{item[0]}}</span>
+        </div>
       </div>
       <div class="tip">
         <div class="success" v-if='buySuccess'><i class="fa fa-check"></i>{{$t('exchange.success')}}</div>
@@ -54,23 +65,34 @@
       <a class="buy_btn btn" href="###" @click.prevent="orderBid()">{{$t('exchange.buy')}}{{market.quote_currency | upper}}</a>
     </div>
     <div class="sell handleOrder" v-if='type==="sell"'>
-      <div class="price put">
-        <input type="number" ref="sellPrice" step="0.00000001" v-model='sellPrice' @change='handlePrice($event.target.value, "sell")' :placeholder="$t('markets.price')">
-        <span>{{market.base_currency | upper}}</span>
-        <transition name="fade">
-          <div class="warning" v-if='sellwarning'>{{$t('exchange.priceWarn')}}</div>
-        </transition>
+      <div class="put">
+        <div class="name">{{$t('markets.price')}}</div>
+        <div class="price input_box">
+          <input type="number" step="0.00000001" v-model='sellPrice' @change='handlePrice($event.target.value, "sell")' :placeholder="$t('markets.price')">
+          <span>{{market.base_currency | upper}}</span>
+          <transition name="fade">
+            <div class="warning" v-if='sellwarning'>{{$t('exchange.priceWarn')}}</div>
+          </transition>
+        </div>
       </div>
-      <div class="volume put">
-        <input type="number" ref="sellVolume" step="0.00000001" v-model='sellVolume' @input='handleVol($event.target.value, "sell")' :placeholder="$t('exchange.volume')">
-        <span>{{market.quote_currency | upper}}</span>
+      <div class="put">
+        <div class="name">{{$t('exchange.volume')}}</div>
+        <div class="volume input_box">
+          <input type="number" step="0.00000001" v-model='sellVolume' @input='handleVol($event.target.value, "sell")' :placeholder="$t('exchange.volume')">
+          <span>{{market.quote_currency | upper}}</span>
+        </div>
       </div>
-      <div class="total put">
-        <input type="number" ref="sellTotal" step="0.00000001" v-model='sellTotal' @input='handleTotal($event.target.value, "sell")' :placeholder="$t('markets.total')">
-        <span>{{market.base_currency | upper}}</span>
+      <div class="put">
+        <div class="name">{{$t('markets.total')}}</div>
+        <div class="total input_box">
+          <input type="number" step="0.00000001" v-model='sellTotal' @input='handleTotal($event.target.value, "sell")' :placeholder="$t('markets.total')">
+          <span>{{market.base_currency | upper}}</span>
+        </div>
       </div>
-      <div class="percent">
-        <span v-for='item in percent' :key='"btn"+item[1]' @click="addInputs(item[1])">{{item[0]}}</span>
+      <div class="put">
+        <div class="percent">
+          <span v-for='item in percent' :key='"btn"+item[1]' @click="addInputs(item[1])">{{item[0]}}</span>
+        </div>
       </div>
       <div class="tip">
         <div class="success" v-if='sellSuccess'><i class="fa fa-check"></i>{{$t('exchange.success')}}</div>

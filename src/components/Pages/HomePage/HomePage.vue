@@ -29,7 +29,7 @@
           <!-- 'background': 'url('+ data.thumb + ') 50% 50%', -->
           <div :style="{ 'background-repeat': 'no-repeat'}" class="btc-pointer img-container">
             <div class="container btc-notice">
-              <a :href="data.url" target='_blank'>
+              <a :href="data.url">
                 <div>
                   <p>{{ data.the_title }}</p>
                   <span>{{ data.the_content }}</span>

@@ -34,7 +34,7 @@
                 <li>123</li>
                 <li>123</li> -->
                 <li v-for="d in markList" :key="Object.keys(d)[0]">
-                  <a :href="`/exchange/${Object.keys(d)[0]}`" target="_blamk">
+                  <a :href="`/exchange/${Object.keys(d)[0]}`">
                     {{ d[Object.keys(d)[0]].name }}
                   </a>
                 </li>

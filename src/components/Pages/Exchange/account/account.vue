@@ -20,7 +20,7 @@
           </tr>
         </tbody>
       </table>
-      <a href="/currency/withdraw" target="_blank" class="viewAll">{{$t('exchange.allAccount')}}</a>
+      <a href="/currency/withdraw" class="viewAll">{{$t('exchange.allAccount')}}</a>
     </div>
   </div>
 </template>

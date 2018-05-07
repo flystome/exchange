@@ -20,7 +20,7 @@
           </a> -->
         </div>
         <div class="list-price" :class="{'up': item.trend == 'up' , 'down': item.trend == 'down'}">{{item.last | fixedNum(item.price_fixed)}}</div>
-        <div class="list-btn" :class="{'text-up': item.percent > 0, 'text-down': item.percent < 0}">{{item.percent | fixed2}}%</div>
+        <div class="list-btn" :class="{'up': item.percent > 0, 'down': item.percent < 0}">{{item.percent | fixed2}}%</div>
       </li>
     </ul>
   </div>

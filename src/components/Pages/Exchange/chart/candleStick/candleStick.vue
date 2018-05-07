@@ -24,6 +24,12 @@ export default {
     this.curMarket = this.$route.params.id
     this.createWidget()
   },
+  watch: {
+    '$route' (to, from) {
+      this.curMarket = to.params.id
+      this.createWidget()
+    },
+  },
   methods: {
     createWidget () {
       // let _this = this
