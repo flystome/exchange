@@ -10,7 +10,7 @@
       &>div {
         display: inline-block;
         float: left;
-        color: #fff;
+        color: #87a3bf;
         font-size: 12px;
       }
     }
@@ -19,7 +19,7 @@
         height: 20px;
         line-height: 20px;
         &>div {
-          color: #49627b;
+          color: #818b95;
         }
       }
     }
@@ -30,14 +30,13 @@
     div {
       display: inline-block;
       float: left;
-      color: #fff;
+      color: #87a3bf;
       font-size: 12px;
       text-align: right;
       :last-child {padding-right: 5px;}
     }
     .time {
       width: 14%;
-      color: #728eaa;
       text-align: left;
     }
     .market {
@@ -49,20 +48,21 @@
     }
     .price {
       width: 10%;
+      color: #fff;
     }
     .volume {
       width: 14%;
+      color: #fff;
     }
     .percent {
       width: 10%;
-      color: #728eaa;
     }
     .traded {
       width: 14%;
+      color: #fff;
     }
     .status {
       width: 12%;
-      color: #728eaa;
     }
     .cancel {
       width: 6%;

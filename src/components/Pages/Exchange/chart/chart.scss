@@ -1,18 +1,22 @@
 #chart {
   width: 100%;
   height: 100%;
+  p {
+    margin-bottom: 0;
+  }
   .chart_hd {
     height: 32px;
-    background: #1b242e;
+    background: #18283b;
     li {
       cursor: pointer;
       font-size: 13px;
       display: inline-block;
       padding: 0 15px;
       line-height: 32px;
+      color: #87a3bf;
       margin: 0;
       &.on {
-        background: #232e3a;
+        background: #101622;
         color: #4382f7;
         font-weight: bold;
       }
@@ -21,9 +25,24 @@
   .chart_bd {
     height: calc(100% - 32px);
     width: 100%;
+    position: relative;
     .candle {
+      position: absolute;
       width: 100%;
       height: 100%;
+      z-index: 1;
+      opacity: 0;
+    }
+    .depths {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0;
+    }
+    .zIndex {
+      z-index: 10;
+      opacity: 1;
     }
   }
 }
