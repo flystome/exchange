@@ -7205,7 +7205,13 @@ html.theme-dark.feature-no-touch .tv-control-input.i-disabled:hover, html.theme-
 }
 
 .chart-top-toolbar .space-single, .header-chart-panel .space-single {
-  /* padding: 0 4px 0 0 */
+  float: left;
+}
+
+.chart-page .header-chart-panel .header-group-indicators,
+.chart-page .header-chart-panel .header-group-properties,
+.chart-page .header-chart-panel .header-group-fullscreen {
+    float: none;
 }
 
 .header-chart-panel--compact .group.header-group-back-button, .header-chart-panel--compact .group.header-group-bars-style, .header-chart-panel--compact .group.header-group-compare, .header-chart-panel--compact .group.header-group-create-alert, .header-chart-panel--compact .group.header-group-eot-pro, .header-chart-panel--compact .group.header-group-properties, .header-chart-panel--compact .group.header-group-publishing, .header-chart-panel--compact .group.header-group-screenshot, .header-chart-panel--compact .group.header-group-select-layout, .header-chart-panel--compact .group.header-group-undo-redo, .header-chart-panel--compact .layout-toggle-container, .header-chart-panel--compact .save-load-buttons .title, .header-chart-panel--compact .save-load-buttons .titled .separator {

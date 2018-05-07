@@ -65,6 +65,7 @@
         line-height: 28px;
         float: left;
         margin-left: -45px;
+        color: #818b95;
       }
     }
     .percent {
@@ -82,6 +83,10 @@
         background: #37506e;
         color: #85a7c8;
         border-radius: 2px;
+        &.on {
+          background: #4382f7;
+          color: #fff;
+        }
         &:last-child {
           margin-right: 0;
         }

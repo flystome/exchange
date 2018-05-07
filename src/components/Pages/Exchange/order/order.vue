@@ -54,7 +54,7 @@
       </div>
       <div class="put">
         <div class="percent">
-          <span v-for='item in percent' :key='"btn"+item[1]' @click="addInputs(item[1])">{{item[0]}}</span>
+          <span v-for='(item, index) in percent' :class="{'on': buyIndex === index}" :key='"btn"+item[1]' @click="addInputs(item[1], index)">{{item[0]}}</span>
         </div>
       </div>
       <div class="tip">
@@ -91,7 +91,7 @@
       </div>
       <div class="put">
         <div class="percent">
-          <span v-for='item in percent' :key='"btn"+item[1]' @click="addInputs(item[1])">{{item[0]}}</span>
+          <span v-for='(item, index) in percent' :class="{'on': sellIndex === index}" :key='"btn"+item[1]' @click="addInputs(item[1], index)">{{item[0]}}</span>
         </div>
       </div>
       <div class="tip">
@@ -132,7 +132,9 @@ export default {
       tips: false,
       ordering: false,
       buywarning: false,
-      sellwarning: false
+      sellwarning: false,
+      buyIndex: -1,
+      sellIndex: -1
     }
   },
   mounted () {
@@ -337,8 +339,9 @@ export default {
         this.sellTotal
       ] = []
     },
-    addInputs (percent) {
+    addInputs (percent, index) {
       var type = this.type
+      this[type + 'Index'] = index
       if (!this[type + 'Price'] || this[type + 'Price'] === 0) {
         this[type + 'Price'] = this.market.last
       }

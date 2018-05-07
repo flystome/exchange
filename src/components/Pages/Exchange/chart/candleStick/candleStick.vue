@@ -155,7 +155,7 @@ export default {
         })
 
         buttons.forEach((item, index) => {
-          let button = widget.createButton()
+          let button = widget.createButton({align: 'left'})
           // item.resolution === widget.options.interval && updateSelectedIntervalButton(button)
           button.attr('data-resolution', item.resolution)
             .attr('data-chart-type', item.chartType === undefined ? 1 : item.chartType)
