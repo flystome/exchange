@@ -1,17 +1,17 @@
 <template>
   <div @click="promptEmpty" @keyup.enter="Reply" class="btc-ticket-replay">
     <div class="btc-block-container">
-      <div class="btc-ticketReplay-header btc-marginB25">
-        <basic-button @click.native="goPath(`/ticket/${state}`)" :text="$t('ticket.return')">
-        </basic-button>
-        <div class="btc-fr" v-if="state === 'open' && !loading">
-        <basic-button :disabled='disabled' @click.native="Remind" :text="$t('ticket.reminder')" class="btn btc-marginR25">
-        </basic-button>
-        <basic-button class="btn" :disabled='disabled' @click.native="CloseTicket" :text="$t('ticket.close_ticket')">
-        </basic-button>
-        </div>
-      </div>
       <template v-if="!loading">
+        <div class="btc-ticketReplay-header btc-marginB25">
+          <basic-button @click.native="goPath(`/ticket/${state}`)" :text="$t('ticket.return')">
+          </basic-button>
+          <div class="btc-fr" v-if="state === 'open' && !loading">
+          <basic-button :disabled='disabled' @click.native="Remind" :text="$t('ticket.reminder')" class="btn btc-marginR25">
+          </basic-button>
+          <basic-button class="btn" :disabled='disabled' @click.native="CloseTicket" :text="$t('ticket.close_ticket')">
+          </basic-button>
+          </div>
+        </div>
         <div class="btc-ticketReplay-origin">
           <header>
             <strong v-text="title">

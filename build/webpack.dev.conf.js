@@ -74,11 +74,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       }
     ]),
     new webpack.optimize.CommonsChunkPlugin('common.js'),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-
-    }),
     new BundleAnalyzerPlugin({
       openAnalyzer: false,
       analyzerHost: '0.0.0.0',

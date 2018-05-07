@@ -107,6 +107,7 @@
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex'
 export default {
+  name: 'Header',
   // created () {
   //   this.$store.dispatch('getData')
   // },

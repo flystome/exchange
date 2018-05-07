@@ -27,6 +27,9 @@ export default {
     MenuList: {
       type: Array
     },
+    route: {
+      type: String
+    },
     MenuMargin: {
       type: String,
       default: '20px'
@@ -68,6 +71,12 @@ export default {
       this.$emit('input', this.index)
     },
     async language () {
+      if (this.route !== this.$route.name) return
+      await this.$nextTick()
+      this.changeOffset()
+    },
+    async $route (to) {
+      if (this.route !== to.name) return
       await this.$nextTick()
       this.changeOffset()
     }

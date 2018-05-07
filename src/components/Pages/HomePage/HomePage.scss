@@ -14,6 +14,9 @@
       background:linear-gradient(to bottom, #206eff, #2f9aff);
       background: url('~Img/large/home-background1.png');
       background-size: cover;
+      .swiper-button-next, .swiper-container-rtl .swiper-button-prev {
+        right: 19px
+      }
       .swiper-slide-prev{
         overflow: hidden
       }
@@ -277,12 +280,17 @@
         div{
           font-size: 13px;
           margin-top: 10px;
+          color: #000000;
+          &:hover,&:focus{
+            color: #000000
+          }
         }
       }
       >div:nth-child(2){
         display: block;
         width: 213px;
-        margin-left: 43px;
+        position: absolute;
+        right: 18px;
       }
     }
     >div:nth-child(2){
@@ -334,7 +342,7 @@
 
 @media (max-width: 1302px){
   .btc-homepage-login{
-    right: 53px!important;
+    right: 75px!important;
   }
   .btc-homepage-header .carousel .btc-notice{
     p,span{

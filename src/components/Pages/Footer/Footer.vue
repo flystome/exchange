@@ -57,6 +57,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 export default {
+  name: 'Footer',
   data () {
     return {
       HOST_URL: process.env.HOST_URL,

@@ -67,7 +67,7 @@
 <script>
 import Clipboard from 'clipboard'
 import { mapMutations, mapState } from 'vuex'
-const _debounce = require('lodash/fp/debounce.js')
+const _debounce = require('lodash.debounce')
 export default {
   name: 'ApiNew',
   data () {
@@ -98,7 +98,7 @@ export default {
       clearTimeout(time)
       this.prompt = this.$t('deposit_currency.copy_success')
     })
-    clipboard.on('success', _debounce(500, time))
+    clipboard.on('success', _debounce(time, 500))
 
     var clipboard1 = new Clipboard('.btn-copy2')
     var time1 = () => {
@@ -111,7 +111,7 @@ export default {
       clearTimeout(time1)
       this.prompt1 = this.$t('deposit_currency.copy_success')
     })
-    clipboard1.on('success', _debounce(500, time1))
+    clipboard1.on('success', _debounce(time1, 500))
   },
   methods: {
     goApi () {

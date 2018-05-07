@@ -127,11 +127,6 @@ const webpackConfig = merge(baseWebpackConfig, {
       }
     ]),
     new webpack.optimize.CommonsChunkPlugin('common.js'),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
-    }),
-
     new SpritesmithPlugin({
       src: {
           cwd: path.resolve(__dirname, '../static/img/sprites'),
