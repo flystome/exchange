@@ -18,7 +18,7 @@
           <td>
             <a class="btc-homepage-currency" style="color: #333333;">
               <span>
-                <a class="btc-homepage-market" :href="`${HOST_URL}/markets/${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`">{{item.quote_currency}}<span style="color:#999;min-width: auto;">/{{ item.base_currency }}</span>
+                <a class="btc-homepage-market" :href="`/exchange/${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`" target="_blank">{{item.quote_currency}}<span style="color:#999;min-width: auto;">/{{ item.base_currency }}</span>
                 </a>
               </span>
               <i :disabled="disabled" @click="portfolios(item, index)" class="far fa fa-star mylove" :class="{'is-star': item.is_portfolios}"></i>

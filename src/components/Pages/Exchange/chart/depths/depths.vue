@@ -50,7 +50,7 @@ export default {
           {
             type: 'value',
             boundaryGap: false,
-            show: false,
+            show: false
           }
         ],
         yAxis: [
@@ -127,7 +127,7 @@ export default {
         }]
       })
     },
-    resize() {
+    resize () {
       window.addEventListener('resize', () => {
         this.depths.resize()
       })
