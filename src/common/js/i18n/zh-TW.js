@@ -229,7 +229,8 @@ const zh = {
     "ticket": "服務單",
     "ticket_open": "未結束服務單",
     "ticket_closed": "已結束服務單",
-    "ticket_new": "新建服務單"
+    "ticket_new": "新建服務單",
+    "market_maker": "做市商"
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",

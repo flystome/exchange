@@ -231,6 +231,7 @@ const en = {
       "ticket_open": "Open Tickets",
       "ticket_closed": "Closed Tickets",
       "ticket_new": "New Ticket",
+      "market_maker": "Market Marker"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",

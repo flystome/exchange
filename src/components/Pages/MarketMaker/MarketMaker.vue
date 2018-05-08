@@ -8,8 +8,10 @@
         {{ $t('market_maker.preferential_describe') }}
       </span>
       <div>
-        <basic-button class="btc-marginR20" :text="$t('market_maker.market_maker_program_access')">
-        </basic-button>
+        <a :href="`${HOST_URL}/documents/api_v2`">
+          <basic-button class="btc-marginR20" :text="$t('market_maker.market_maker_program_access')">
+          </basic-button>
+        </a>
         <basic-button :text="$t('market_maker.apply_for_market_making')">
         </basic-button>
       </div>
@@ -53,6 +55,7 @@ export default {
   data () {
     return {
       loading: true,
+      HOST_URL: process.env.HOST_URL,
       MarketMakerList: [
         [
           'EOS/BTC',
