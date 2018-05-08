@@ -15,6 +15,22 @@
         </transition-group>
       </ul>
     </scrollBar>
+    <div class="maker">
+      <ul class="mk_hd clearfix">
+        <li class="mk1">{{$t('exchange.maker')}}</li>
+        <li class="mk2">{{$t('exchange.maker_24h')}}({{market.base_currency | upper}})</li>
+      </ul>
+      <scrollBar classes='myScroll1'>
+        <ul class="mk_bd">
+          <transition-group name="slide-fade">
+            <li v-for='item in tradesData' :key='"maker"+item.date'>
+              <div class="mk1">{{item.date * 1000 | dayTime}}</div>
+              <div class="mk2">{{item.date * 1000 | dayTime}}</div>
+            </li>
+          </transition-group>
+        </ul>
+      </scrollBar>
+    </div>
   </section>
 </template>
 

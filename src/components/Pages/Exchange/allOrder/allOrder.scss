@@ -2,6 +2,7 @@
   height: 100%;
   padding-bottom: 4px;
   background: #101622;
+  position: relative;
   .hd {
     width: 100%;
     padding: 0 5px;
@@ -54,8 +55,49 @@
   .myScroll {
     width: 100%;
     background: none;
-    max-height: calc(100% - 32px);
+    max-height: calc(100% - 136px);
     margin-right: 0;
     padding-right: 2px;
+  }
+  .maker {
+    height: 110px;
+    width: 100%;
+    padding: 4px 2px 4px 4px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #101622;
+    .mk1 {
+      width: 40%;
+      display: inline-block;
+      float: left;
+    }
+    .mk2 {
+      width: 60%;
+      display: inline-block;
+      float: left;
+      text-align: right;
+    }
+    .mk_hd {
+      height: 24px;
+      line-height: 24px;
+      color: #818b95;
+      padding-right: 4px;
+    }
+    .myScroll1 {
+      width: 100%;
+      background: none;
+      max-height: 84px;
+      margin-right: 0;
+      padding-right: 2px;
+    }
+    .mk_bd {
+      padding-right: 2px;
+      li {
+        height: 20px;
+        line-height: 20px;
+        color: #87a3bf;
+      }
+    }
   }
 }

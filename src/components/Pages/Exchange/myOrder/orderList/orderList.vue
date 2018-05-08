@@ -16,7 +16,7 @@
     </ul>
     <scrollBar classes='myScroll'>
       <ul class="bd">
-        <transition-group name="slide-fade">
+        <transition-group name="slide-fade" mode='out-in'>
           <li v-for="item in myOrders" :class='{"hoverBg": cancel && id === item.id}' :key="item.market+''+item.id" @mouseenter='addBg(item.id)' @mouseleave='cancel=false'>
             <div class="time">{{item.at | time | timeNoYear}}</div>
             <div class="market">{{item.market_name}}</div>

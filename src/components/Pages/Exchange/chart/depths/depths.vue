@@ -111,7 +111,6 @@ export default {
       })
       this.min = this.sellList[0]
       this.buylist.reverse()
-      console.log(this.buylist, this.sellList)
       this.refreshChart()
     },
     refreshChart () {

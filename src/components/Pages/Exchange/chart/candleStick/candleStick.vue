@@ -28,7 +28,7 @@ export default {
     '$route' (to, from) {
       this.curMarket = to.params.id
       this.createWidget()
-    },
+    }
   },
   methods: {
     createWidget () {

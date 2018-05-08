@@ -6,7 +6,7 @@
       </a>
       <lastPrice :market="market"></lastPrice>
       <div class="header_rt">
-        <account :totalAssets='total_assets' :accounts='accounts' :market='market'></account>
+        <account :totalAssets='TotalAssets' :accounts='accounts' :market='market'></account>
         <setting :loginData='loginData' @controlSound='controlSound'></setting>
         <language></language>
       </div>
@@ -50,12 +50,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import pusher from '@/common/js/pusher'
 import 'vue2-scrollbar/dist/style/vue2-scrollbar.css'
-// import 'static/tradingView/charting_library/charting_library.min.js'
-// import 'static/tradingView/datafeeds/udf/dist/polyfills.js'
-// import 'static/tradingView/datafeeds/udf/dist/bundle.js'
 
 import lastPrice from './lastPrice/lastPrice'
 import language from './language/language'
@@ -68,6 +65,7 @@ import trades from './trades/trades'
 import order from './order/order'
 import allOrder from './allOrder/allOrder'
 import myOrder from './myOrder/myOrder'
+const _debounce = require('lodash.debounce')
 
 export default {
   name: 'ExChange',
@@ -79,14 +77,14 @@ export default {
       market: {},
       markets: {},
       loginName: '',
-      accounts: {},
       total_assets: {},
       my_orders: [[], [], []],
       depth_data: [],
       sn: '',
       my_trades: [],
       version: 0,
-      soundAllow: true
+      soundAllow: true,
+      accounts: {}
     }
   },
   components: {
@@ -121,7 +119,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['loginData'])
+    TotalAssets () {
+      return this.$store.getters.TotalAssets()
+    },
+    ...mapGetters(['loginData']),
+    ...mapState(['marketData'])
   },
   methods: {
     init () {
@@ -135,15 +137,12 @@ export default {
       }, self.handleGlobal)
     },
     handleGlobal (res) {
-      // console.log(res.data);
       ({
-        // ticker: this.lastPriceData,
         my_trades: this.my_trades,
         trades: this.all_trades,
         market: this.market,
         markets: this.markets,
         accounts: this.accounts,
-        total_assets: this.total_assets,
         depth_data: this.depth_data
       } = res.data)
       this.$set(this.my_orders, 0, res.data.my_orders.reverse())
@@ -207,6 +206,12 @@ export default {
     },
     globalRefresh () {
       var channel = pusher.subscribe('market-global')
+      channel.bind('tickers', _debounce((data) => {
+        Object.keys(data).forEach((key) => {
+          this.$store.state.assets !== '' && (this.$store.state.assets[data[key].base_currency].price = Number(data[key].last))
+        })
+      }, 5000))
+
       channel.bind('tickers', (data) => {
         if (JSON.stringify(data) !== '{}') {
           for (let key in data) {
@@ -342,6 +347,8 @@ export default {
       privateAccount.bind('account', (res) => {
         this.accounts[res.currency].balance = res.balance
         this.accounts[res.currency].locked = res.locked
+        this.$store.state.assets[res.currency].balance = Number(res.balance)
+        this.$store.state.assets[res.currency].locked = Number(res.locked)
         this.accounts = Object.assign({}, this.accounts)
       })
     },

@@ -1,7 +1,7 @@
 <template>
   <div class="account">
     <a class="dropdown-toggle account_btn" data-toggle="dropdown" href="###" role="button" aria-haspopup="true" aria-expanded="false">
-      <span>{{ totalAssets.btc_worth | fixedNum(8)}} BTC</span>
+      <span>{{ totalAssets}} BTC</span>
     </a>
     <div class="dropdown-menu text-center">
       <table>

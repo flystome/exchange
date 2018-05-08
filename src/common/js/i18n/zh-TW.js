@@ -346,6 +346,8 @@ const zh = {
     "candle": "K線",
     "depth": "深度",
     "grand": '累计',
+    "maker": '做市商',
+    "maker_24h": '24h成交量',
     'myorder': {
       'pending': '當前委託',
       'history': '歷史委託',

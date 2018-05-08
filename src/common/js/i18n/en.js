@@ -347,6 +347,8 @@ const en = {
       "candle": "Candle Sticks",
       "depth": "Depth",
       "grand": 'Grand Total',
+      "maker": 'Market Maker',
+      "maker_24h": 'Vol(24h)',
       'myorder': {
         'pending': 'Pending Orders',
         'history': 'History Orders',
