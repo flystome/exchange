@@ -27,14 +27,16 @@
         </div>
         <swiper-slide v-for="data in Notice" :key="data.id">
           <!-- 'background': 'url('+ data.thumb + ') 50% 50%', -->
-          <div :style="{ 'background-repeat': 'no-repeat'}" class="btc-pointer img-container">
+          <div :style="{ 'background-repeat': 'no-repeat'}" class=" img-container">
             <div class="container btc-notice">
-              <a :href="data.url">
                 <div>
-                  <p>{{ data.the_title }}</p>
-                  <span>{{ data.the_content }}</span>
+                  <a :href="data.url">
+                    <p>{{ data.the_title }}</p>
+                  </a>
+                  <a v-if="data.the_content" :href="data.url">
+                    <span>{{ data.the_content }}</span>
+                  </a>
                 </div>
-              </a>
             </div>
           </div>
         </swiper-slide>

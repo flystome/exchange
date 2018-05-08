@@ -595,6 +595,11 @@ const en = {
     },
     "validation": {
       "verify_code": 'verify code'
+    },
+    "page_not_found": {
+      "lost": "The page is lost, ",
+      "click": "click",
+      "back": " back to the home page"
     }
   }
 }

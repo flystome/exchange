@@ -100,7 +100,11 @@
   }
   .btc-header-signin{
     a{
-      margin: 6px
+      margin: 6px;
+      color: #337ab7;
+      &:hover{
+        color: #23527c;
+      }
     }
   }
   .navbar-default{
@@ -294,7 +298,7 @@
   .btc-header-sideslip{
     display: block!important;
   }
-  .btc-background-white{
+  .btc-home-contain{
     .btc-header-sideslip{
       // display: none!important;
     }

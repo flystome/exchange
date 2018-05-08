@@ -177,7 +177,7 @@ ul,li {
   .vue-simple-spinner{
     position: fixed;
     left: 50%;
-    top: 50%;
+    top: 39%;
     margin-left: -60px !important;
     margin-top: -60px !important;
   }
@@ -206,7 +206,7 @@ a{
   .noPadding {
     padding: 0;
   }
-  // .btc-background-white{
+  // .btc-home-contain{
   //   .container{
   //     width: 750px
   //   }
@@ -224,7 +224,7 @@ a{
 }
 
 @media (min-width: 992px){
-  .btc-background-white{
+  .btc-home-contain{
     .container {
       width: auto;
     }
@@ -232,7 +232,7 @@ a{
 }
 
 @media (min-width: 768px){
-  .btc-background-white{
+  .btc-home-contain{
     .container {
       width: auto;
     }
@@ -246,14 +246,14 @@ a{
   .btc-homepage-introduce{
     padding-left: 28px;
   }
-  .btc-background-white{
+  .btc-home-contain{
     .navbar-Home .navbar-brand{
       margin-left: 21px;
     }
   }
 }
 
-.btc-background-white{
+.btc-home-contain{
   min-width: 1200px;
   .container{
     width: 1200px;

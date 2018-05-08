@@ -27,6 +27,9 @@
         // background:linear-gradient(to bottom, #206eff, #2f9aff);
       }
       .btc-notice{
+        a{
+          color: white;
+        }
         a:hover, a:focus{
           text-decoration: none;
           color: white;

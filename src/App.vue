@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="{'btc-background-white': this.$route.name === 'HomePage' ||  this.$route.name === 'home'}">
+  <div id="app" :class="{'btc-home-contain': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'btc-backround-white': isWhiteBackground, 'btc-lang-long': language !== 'zh-TW'}">
     <ul class="btc-homepage-newCoin" v-if="FROM_HOME && new_coin.length !== 0">
       <div class="container">
         <li v-for="data in new_coin" :key='data.id'>
@@ -7,7 +7,7 @@
         </li>
       </div>
     </ul>
-    <section class="btc-main" :class="{'btc-background-white': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange'}">
+    <section class="btc-main" :class="{'btc-home-contain': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange', 'btc-backround-white': isWhiteBackground}">
       <header :FROM='FROM_HOME'  v-if="!fromApp && !exChange" is='Header' />
     <div style="position:relative;z-index:999;background:#f2f2f2" class="btc-global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
       <vue-simple-spinner size="88"></vue-simple-spinner>
@@ -71,6 +71,10 @@ export default {
       }
       return false
     },
+    isWhiteBackground () {
+      var route = ['MarketMaker', 'notFound']
+      return this.loading && route.includes(this.$route.name)
+    },
     ...mapState(['fromApp', 'language']),
     ...mapGetters(['loginData'])
   },
@@ -103,7 +107,13 @@ export default {
 .btc-main{
   background:#f2f2f2;
 }
-.btc-background-white{
+.btc-backround-white{
+  background: white;
+  .btc-container{
+    background: white;
+  }
+}
+.btc-home-contain{
   background: white;
   .btc-container{
   background: white;

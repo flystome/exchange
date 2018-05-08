@@ -129,7 +129,7 @@ export default {
 </style>
 
 <style>
-.btc-background-white .btc-footer{
+.btc-home-contain .btc-footer{
   min-width: 1200px;
 }
 </style>

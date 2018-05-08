@@ -594,6 +594,11 @@ const zh = {
   },
     "validation": {
       "verify_code": '驗證碼'
+  },
+  "page_not_found": {
+    "lost": "頁面丟失,",
+    "click": "點擊",
+    "back": "返回首頁"
   }
 }
 
