@@ -4,6 +4,8 @@
   color: #fff;
   font-size: 12px;
   background: #1f344e;
+  min-width: 1200px;
+  min-height: 768px;
   ul, li {
     margin: 0;
     padding: 0;
@@ -43,8 +45,10 @@
   .content {
     display: inline-block;
     float: left;
-    height: calc(100% - 63px);
+    height: calc(100vh - 63px);
     width: calc(100% - 492px);
+    min-height: 702px;
+    min-width: 708px;
     margin: 3px 3px 0;
     .top_content {
       width: 100%;
@@ -71,7 +75,7 @@
     display: inline-block;
     float: left;
     width: 483px;
-    height: calc(100% - 63px);
+    height: calc(100vh - 63px);
     margin-top: 3px;
     margin-right: 3px;
     &>div {
@@ -79,6 +83,7 @@
     }
     .list_box {
       height: calc(100% - 267px);
+      min-height: 438px;
       overflow-y:hidden;
       background: #232e3a;
     }
@@ -88,10 +93,11 @@
       margin-top: 2px;
     }
     .list_lt {
-
+      min-height: 705px;
     }
     .list_rt {
       float: right;
+      min-height: 705px;
       .history {
 
       }

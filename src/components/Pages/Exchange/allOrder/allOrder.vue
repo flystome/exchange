@@ -4,7 +4,7 @@
       <li v-for="hd in hds" :key="'market'+hd">{{$t(hd)}}</li>
     </ul>
     <scrollBar classes='myScroll'>
-      <ul class="bd">
+      <ul class="order_bd">
         <transition-group name="slide-fade">
           <li v-for='item in tradesData' :key='"trade"+item.tid'>
             <div class="time">{{item.date * 1000 | dayTime}}</div>

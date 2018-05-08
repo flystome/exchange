@@ -150,7 +150,7 @@ export default {
       this.globalRefresh()
       this.version = this.depth_data.version
       this.initMine()
-      document.title = `${this.market.quote_currency.toUpperCase()}/${this.market.base_currency.toUpperCase()} - ${this.$t('brand')}`
+      document.title = `${this.market.last}-${this.market.quote_currency.toUpperCase()}/${this.market.base_currency.toUpperCase()} - ${this.$t('brand')}`
     },
     initMine () {
       this.initTrend()

@@ -7232,6 +7232,16 @@ html.theme-dark.feature-no-touch .tv-control-input.i-disabled:hover, html.theme-
   font-weight: 600
 }
 
+@media (max-width: 1260px){
+  .bottom-widgetbar-content.backtesting .button, .header-chart-panel .button, .hotlist-controls .button, .symbol-edit-widget .button {
+    line-height: 26px;
+    height: 26px;
+    padding: 0 6px;
+  }
+}
+
+
+
 html.theme-dark .bottom-widgetbar-content.backtesting .button, html.theme-dark .header-chart-panel .button, html.theme-dark .hotlist-controls .button, html.theme-dark .symbol-edit-widget .button {
   color: #758696;
   background: #131722;
@@ -8377,6 +8387,13 @@ html.theme-dark .button.redo.disabled svg, html.theme-dark .button.undo.disabled
   line-height: 28px;
 }
 
+@media (max-width:1260px) {
+  .button.fullscreen, .header-chart-panel .button.fullscreen {
+    height: 26px;
+    line-height: 26px;
+  }
+}
+
 .button.fullscreen svg {
   fill: #87a3bf;
   vertical-align: middle;
@@ -8446,6 +8463,14 @@ html.theme-dark .button.indicators svg {
   height: 28px;
   line-height: 28px;
 }
+
+@media (max-width:1260px) {
+  .button.indicators {
+    height: 26px;
+    line-height: 26px;
+  }
+}
+
 .button.indicators:not(:only-child) {
   border-right: none
 }
@@ -8527,6 +8552,14 @@ html.theme-dark .favored-list-container.study-template-widget svg {
   line-height: 28px;
   background: #37506e;
   border: none;
+  cursor: pointer;
+}
+
+@media (max-width:1260px){
+  .favored-list-container.study-template-widget .submenu {
+    line-height: 26px;
+    height: 26px;
+  }
 }
 
 .favored-list-container.study-template-widget .quick>span {

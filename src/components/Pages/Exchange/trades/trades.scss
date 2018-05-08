@@ -51,6 +51,7 @@
     }
     .lists {
       height: calc(50% - 29px);
+      min-height: 174px;
       overflow: hidden;
       ul {
         width: 100%;
