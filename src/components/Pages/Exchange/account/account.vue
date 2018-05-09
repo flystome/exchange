@@ -1,9 +1,9 @@
 <template>
-  <div class="account">
+  <div class="account" @mouseenter='show=true' @mouseleave='show=false'>
     <a class="dropdown-toggle account_btn" data-toggle="dropdown" href="###" role="button" aria-haspopup="true" aria-expanded="false">
       <span>{{ totalAssets}} BTC</span>
     </a>
-    <div class="dropdown-menu text-center">
+    <div class="dropdown text-center" v-show='show'>
       <table>
         <thead>
           <tr>
@@ -31,7 +31,7 @@ export default {
   props: ['totalAssets', 'accounts', 'market'],
   data () {
     return {
-
+      show: false
     }
   }
 }

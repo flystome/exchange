@@ -1,10 +1,9 @@
 <template>
-  <div class="language">
+  <div class="language" @mouseenter='show=true' @mouseleave='show=false'>
     <a class="dropdown-toggle checkout" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-      <span>{{getLanguage.name}}</span><span class="caret">
-      </span>
+      <span>{{getLanguage.name}}</span><span class="caret"></span>
     </a>
-    <ul class="dropdown-menu text-center">
+    <ul class="dropdown text-center" v-show='show'>
       <li v-for="locale in locale" :key="locale.language">
         <a @click="changeLang(locale.language)">{{locale.name}}</a>
       </li>
@@ -18,6 +17,7 @@ export default {
   name: 'language',
   data () {
     return {
+      show: false,
       locale: [{
         language: 'zh-TW',
         name: '正體中文'

@@ -1,7 +1,8 @@
 #setting {
   display: inline-block;
-  padding: 0 15px 10px;
+  padding: 0 15px;
   position: relative;
+  height: 40px;
   .setting_btn {
     font-size: 12px;
     line-height: 40px;
@@ -21,12 +22,15 @@
     position: absolute;
     right: 15px;
     left: auto;
-    top: 48px;
+    top: 40px;
     background: #38475a;
     width: 100px;
     min-width: 80px;
-    padding: 1px 10px;
-    z-index: 50;
+    padding: 10px 10px 0;
+    z-index: -1;
+    &.show {
+      z-index: 50;
+    }
     li {
       height: 30px;
       line-height: 30px;
@@ -40,7 +44,7 @@
         position: absolute;
         left: 0;
         top: 0;
-        width: 117px;
+        width: 120px;
         overflow: hidden;
         color: #fff;
         font-size: 12px;
@@ -53,12 +57,12 @@
         }
         a {
           display: inline-block;
-          width: 39px;
+          float: left;
+          width: 40px;
           height: 20px;
           line-height: 20px;
           background: #4382f7;
-          vertical-align: middle;
-          margin-right: -3px;
+          vertical-align: top;
           color: #fff;
           text-decoration: none;
           &:last-child {
@@ -73,12 +77,12 @@
         }
         span {
           display: inline-block;
-          width: 39px;
+          float: left;
+          width: 40px;
           height: 20px;
           line-height: 20px;
           background: #49627b;
-          margin-right: -3px;
-          vertical-align: middle;
+          vertical-align: top;
         }
       }
     }
@@ -111,7 +115,7 @@
     left: 0
   }
   100% {
-    left: -42px;
+    left: -40px;
   }
 }
 @keyframes move-zero {

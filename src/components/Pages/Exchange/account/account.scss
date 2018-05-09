@@ -16,10 +16,10 @@
       display: inline-block;
     }
   }
-  .dropdown-menu {
+  .dropdown {
     position: absolute;
     right: 0;
-    top: 48px;
+    top: 40px;
     background: #38475a;
     width: 320px;
     padding: 1px 15px;
@@ -28,6 +28,7 @@
     font-size: 12px;
     font-weight: normal;
     margin-top: 0;
+    z-index: 20;
     table {
       width: 100%;
     }

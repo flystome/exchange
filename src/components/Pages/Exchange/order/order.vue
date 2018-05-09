@@ -160,8 +160,8 @@ export default {
   },
   watch: {
     accounts (val) {
-      this.buyAccount = val[this.market.base_currency].balance
-      this.sellAccount = val[this.market.quote_currency].balance
+      this.buyAccount = (val[this.market.base_currency] && val[this.market.base_currency].balance) || 0
+      this.sellAccount = (val[this.market.quote_currency] && val[this.market.quote_currency].balance) || 0
     },
     loginData (val, oldValue) {
       this.sn = val.sn

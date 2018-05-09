@@ -46,17 +46,14 @@
     display: inline-block;
     float: left;
     height: calc(100vh - 63px);
-    width: calc(100% - 492px);
+    width: calc(100% - 490px);
     min-height: 705px;
     min-width: 708px;
-    margin: 3px 3px 0;
+    margin: 3px 2px 0 2px;
     .top_content {
       width: 100%;
       height: calc(100% - 219px);
-      margin-bottom: 3px;
-      .market {
-
-      }
+      margin-bottom: 2px;
       .chart {
         display: inline-block;
         float: right;
@@ -73,34 +70,32 @@
   }
   .list {
     display: inline-block;
-    float: left;
+    float: right;
     width: 483px;
     height: calc(100vh - 63px);
     margin-top: 3px;
     margin-right: 3px;
     &>div {
       background: none;
+      height: 100%;
+      min-height: 705px;
+    }
+    .list_lt {
+      float: left;
+    }
+    .list_rt {
+      float: right;
     }
     .list_box {
       height: calc(100% - 267px);
       min-height: 438px;
       overflow-y:hidden;
       background: #232e3a;
+      margin-bottom: 2px;
     }
     .order {
       background: #101622;
-      height: 265px;
-      margin-top: 2px;
-    }
-    .list_lt {
-      min-height: 705px;
-    }
-    .list_rt {
-      float: right;
-      min-height: 705px;
-      .history {
-
-      }
+      height: 264px;
     }
   }
   .vue-scrollbar__scrollbar-vertical:hover, .vue-scrollbar__scrollbar-horizontal {

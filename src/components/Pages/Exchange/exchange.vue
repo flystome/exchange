@@ -23,7 +23,7 @@
       </div>
       <div class="my_order">
         <audio id="order_cancel" src="/static/media/cancel.mp3"></audio>
-        <myOrder :myOrders='my_orders' :market="market" @getMyOrder='getMyOrder'></myOrder>
+        <myOrder :myOrders='my_orders' :market="market" :markets='markets' @getMyOrder='getMyOrder'></myOrder>
       </div>
     </section>
     <section class="list">
@@ -150,7 +150,7 @@ export default {
       this.globalRefresh()
       this.version = this.depth_data.version
       this.initMine()
-      document.title = `${this.market.last}-${this.market.quote_currency.toUpperCase()}/${this.market.base_currency.toUpperCase()} - ${this.$t('brand')}`
+      document.title = `${this.market.last} ${this.market.quote_currency.toUpperCase()}/${this.market.base_currency.toUpperCase()} - ${this.$t('brand')}`
     },
     initMine () {
       this.initTrend()

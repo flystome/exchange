@@ -21,11 +21,11 @@
             <div class="time">{{item.at | time | timeNoYear}}</div>
             <div class="market">{{item.market_name}}</div>
             <div class="type" :class='{"up": item.kind==="bid", "down": item.kind==="ask"}'>{{$t('exchange.myorder.'+item.kind)}}</div>
-            <div class="price">{{item.price | fixedNum(market.price_fixed)}}</div>
+            <div class="price">{{item.price | fixedNum(markets[item.market].price_fixed)}}</div>
 
-            <div class="volume">{{item.origin_volume | fixedNum(market.volume_fixed)}}</div>
+            <div class="volume">{{item.origin_volume | fixedNum(markets[item.market].volume_fixed)}}</div>
             <div class="percent">{{(item.origin_volume - item.volume) * 100 / item.origin_volume | fixed2}}%</div>
-            <div class="traded">{{item.origin_volume - item.volume | fixedNum(market.volume_fixed)}}</div>
+            <div class="traded">{{item.origin_volume - item.volume | fixedNum(markets[item.market].volume_fixed)}}</div>
             <div class="status">{{$t('exchange.myorder.'+item.state)}}</div>
             <div class="cancel" v-show='cancel && id === item.id' @click="cancelOrder(item.id)">{{$t('exchange.myorder.cancel_one')}}</div>
           </li>
@@ -41,7 +41,7 @@ import scrollBar from 'vue2-scrollbar'
 
 export default {
   name: 'orderList',
-  props: ['myOrders', 'market', 'notPending'],
+  props: ['myOrders', 'market', 'notPending', 'markets'],
   data () {
     return {
       cancel: false,
