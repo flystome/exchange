@@ -9,14 +9,14 @@
     </ul>
     <section class="btc-main" :class="{'btc-home-contain': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange', 'btc-backround-white': isWhiteBackground}">
       <header :FROM='FROM_HOME'  v-if="!fromApp && !exChange" is='Header' />
-    <div style="position:relative;z-index:999;background:#f2f2f2" class="btc-global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
-      <vue-simple-spinner size="88"></vue-simple-spinner>
-    </div>
-    <div v-else class="btc-container container" :class="{'noPadding':noPadding}" v-cloak>
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
-    </div>
+      <div style="position:relative;z-index:999;background:#f2f2f2" class="btc-global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
+        <vue-simple-spinner size="88"></vue-simple-spinner>
+      </div>
+      <div v-else class="btc-container container" :class="{'noPadding':noPadding}" v-cloak>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+      </div>
     </section>
     <footer :FROM='FROM_HOME' v-if='!fromApp && noMobile && !exChange' is='Footer' />
     <wrapper></wrapper>
@@ -40,9 +40,9 @@ export default {
       unLogin: ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home', 'Orders', 'notFound', 'FormNews', 'Exchanage'],
       version: process.env.ROUTER_VERSION,
       noMobile: true,
-      exChange: false,
       noPaddingList: ['Markets', 'MarketDetail', 'Trades', 'Orders'],
       noPadding: false,
+      exChange: true,
       FROM_HOME: '',
       new_coin: ''
     }
@@ -89,7 +89,10 @@ export default {
     '$route' (to, from) {
       if (to.name === 'Exchange') {
         this.exChange = true
-      } else if (this.noPaddingList.indexOf(to.name) !== -1) {
+      } else {
+        this.exChange = false
+      }
+      if (this.noPaddingList.indexOf(to.name) !== -1) {
         this.noPadding = true
       }
       if (to.name === 'HomePage' || to.name === 'home') {

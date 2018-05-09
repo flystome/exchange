@@ -14,7 +14,7 @@ let fixedNum = (params, num, num2) => {
   if (num2) {
     num = num > num2 ? num : num2
   }
-  var value = (+Math.floor(params * Math.pow(10, num)) / Math.pow(10, num)).toFixed(num)
+  var value = (Math.floor(+params * Math.pow(10, num)) / Math.pow(10, num)).toFixed(num)
   if (value.length >= 14) value = (+value).toFixed(num - 2)
   return value
 }

@@ -22,12 +22,13 @@
       </ul>
       <scrollBar classes='myScroll1'>
         <ul class="mk_bd">
-          <transition-group name="slide-fade">
-            <li v-for='item in tradesData' :key='"maker"+item.date'>
-              <div class="mk1">{{item.date * 1000 | dayTime}}</div>
-              <div class="mk2">{{item.date * 1000 | dayTime}}</div>
+          <!-- <transition-group name="slide-fade"> -->
+            <li>
+            <!-- <li v-for='item in tradesData' :key='"maker_"+item.date/1000'> -->
+              <div class="mk1">1</div>
+              <div class="mk2">1</div>
             </li>
-          </transition-group>
+          <!-- </transition-group> -->
         </ul>
       </scrollBar>
     </div>

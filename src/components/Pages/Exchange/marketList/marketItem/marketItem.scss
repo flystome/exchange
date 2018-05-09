@@ -18,14 +18,14 @@
       display: inline-block;
       float: left;
       text-align: right;
-      &.up {
+      &.text-up {
         .caret {
           opacity: 1;
           border-color: transparent transparent #728eaa transparent;
           border-bottom: 4px solid #4382f7;
         }
       }
-      &.down {
+      &.text-down {
         .caret {
           opacity: 1;
           color: #4382f7;

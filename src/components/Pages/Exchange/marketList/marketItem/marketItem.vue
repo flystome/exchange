@@ -1,7 +1,7 @@
 <template>
   <div class="marketItem">
     <ul class="hd clearfix">
-      <li :class="{'up': times == 1 && currencyIndex == index , 'down': times == 2 && currencyIndex == index}"  v-for="(head, index) in heads" :key="head" @click="sortList(index)">
+      <li :class="{'text-up': times == 1 && currencyIndex == index , 'text-down': times == 2 && currencyIndex == index}"  v-for="(head, index) in heads" :key="head" @click="sortList(index)">
         <span>{{$t(head)}}</span>
         <i class="caret"></i>
       </li>

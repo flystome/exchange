@@ -31,7 +31,9 @@
     </div>
     <div class="tab_bd">
       <div class="noneData" v-show="curOrders && curOrders.length === 0">{{$t('exchange.myorder.noData')}}</div>
-      <orderList :myOrders='curOrders' :market='market' :notPending='notPending' v-show="curOrders.length !== 0" @cancel="cancelOne"></orderList>
+      <keep-alive><orderList :myOrders='myOrders[0]' :market='market' :notPending='notPending' v-show="curOrders.length !== 0 && currencyIndex ===0" @cancel="cancelOne"></orderList></keep-alive>
+      <keep-alive><orderList :myOrders='myOrders[1]' :market='market' :notPending='notPending' v-show="curOrders.length !== 0 && currencyIndex ===1"></orderList></keep-alive>
+      <keep-alive><orderList :myOrders='myOrders[2]' :market='market' :notPending='notPending' v-show="curOrders.length !== 0 && currencyIndex ===2"></orderList></keep-alive>
     </div>
   </section>
 </template>

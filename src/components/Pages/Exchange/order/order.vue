@@ -171,6 +171,9 @@ export default {
   methods: {
     handleVol (value, type) {
       if (value === ' ') return
+      if (value < 0) {
+        value = Math.abs(value)
+      }
       if (this[type + 'Price']) {
         var num = +this[type + 'Price'] * +value
         if (type === 'buy') {
@@ -228,7 +231,11 @@ export default {
       this[type + 'Total'] = this.fixNum(value, this.market.volume_fixed, this.market.price_fixed)
     },
     fixNum (value, num, num1) {
-      if ((/[0-9]+\.$/).test(value) || value === ' ') return value
+      if (value === ' ') return
+      if ((/[0-9]+\.0*$/).test(value)) return value
+      if (+value < 0) {
+        value = Math.abs(value)
+      }
       var nums = num1 ? (num > num1 ? num : num1) : num
       var e = Math.pow(10, nums)
       return Math.floor(e * +value) / e

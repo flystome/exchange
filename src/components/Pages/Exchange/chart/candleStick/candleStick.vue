@@ -38,7 +38,6 @@ export default {
       var udfDatafeed = new Datafeeds.UDFCompatibleDatafeed(this.HOST_URL)
 
       var widget = new TradingView.widget({
-        // debug: true, // uncomment this line to see Library errors and warnings in the console
         autosize: true,
         symbol: this.curMarket,
         interval: '5',
@@ -83,7 +82,6 @@ export default {
           'bollinger bands.median.color': '#33FF88',
           'bollinger bands.upper.linewidth': 7
         },
-        debug: true,
         time_frames: [
           { text: '50y', resolution: '6M' },
           { text: '3y', resolution: 'W' },
@@ -116,7 +114,7 @@ export default {
           color: '#3da235'
         }]
         let buttons = [{
-          label: '分时',
+          label: 'Time',
           resolution: '1',
           chartType: 3
         }, {

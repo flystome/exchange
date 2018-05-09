@@ -8151,6 +8151,12 @@ html.theme-dark .symbol-edit-popup .filter .exchange-filter a, html.theme-dark .
   background: #4382f7;
 }
 
+.chart-page .header-chart-panel .header-group-indicators .button:hover,
+.chart-page .header-chart-panel .header-group-properties .button:hover,
+.chart-page .header-chart-panel .header-group-fullscreen .button:hover {
+    background: #37506e;
+}
+
 html.theme-dark.feature-no-touch .header-chart-panel .button:hover:not(.disabled), html.theme-dark.feature-no-touch .symbol-edit-widget .button:hover:not(.disabled) {
   color: #8797a5
 }
@@ -8400,15 +8406,15 @@ html.theme-dark .button.redo.disabled svg, html.theme-dark .button.undo.disabled
 }
 
 html.theme-dark .button.fullscreen svg {
-  fill: #758696
+  fill: #87a3bf
 }
 
 .feature-no-touch .button.fullscreen:hover svg {
-  fill: #68696b
+  fill: #87a3bf
 }
 
 html.theme-dark.feature-no-touch .button.fullscreen:hover svg {
-  fill: #8797a5
+  fill: #87a3bf
 }
 
 .button.properties svg {
@@ -8421,11 +8427,11 @@ html.theme-dark .button.properties svg {
 }
 
 .feature-no-touch .button.properties:hover svg {
-  fill: #68696b
+  fill: #87a3bf
 }
 
 html.theme-dark.feature-no-touch .button.properties:hover svg {
-  fill: #8797a5
+  fill: #87a3bf
 }
 
 .button.properties.active svg, html.theme-dark .button.properties.active svg {
