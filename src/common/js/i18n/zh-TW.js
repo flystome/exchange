@@ -138,8 +138,8 @@ const zh = {
     "confirm_apply_for_success": "提幣請求成功後，請轉至電子郵件並點擊鏈接以確認取款請求。 您可以跟踪退款歷史記錄頁面上的狀態.",
     "make_sure_safe": "確保您的電腦和瀏覽器是安全的，以防止信息被篡改或洩漏.",
     "do_not_response": "請確保您要提幣的地址無誤，如若輸錯提幣地址，且交易完成，由您自行承擔損失，HotEx不做賠償",
-    "withdraw_currency_record": "取消提幣记录",
-    "number": "數量",
+    "withdraw_currency_record": "提幣记录",
+    "number": "ID",
     "withdraw_time": "提幣時間",
     "withdraw_address": "提幣地址",
     "actual_account": "實際金額",
@@ -207,6 +207,19 @@ const zh = {
     "Yesterday_fee_income": "昨日手續費收入",
     "cumulative_fee_income": "累計手續費收入"
   },
+  "market_apply": {
+    "market_maker_apply": "做市商申請",
+    "become_market_maker": "成为HotEx做市商，享受更多优质服务",
+    "zero_transaction_cost": "交易零費用",
+    "free_fee": "做市商交易手續費全免，並且交易過程中用戶產生的手續費也歸於做市商",
+    "exclusive_customer_service": "專屬客服",
+    "one_to_one_customer": "一對一的客服服務，對平臺使用過程中的問題能够保障快速解决",
+    "custom_activity": "定制活動",
+    "network_promotion": "可根據做市商需求定制針對性全網推廣，優勢盡顯",
+    "read_and_agree": "我已閱讀並同意",
+    "authentication_protocol": "《做市商认证协议》",
+    "immediate_apply": "立即申請"
+  },
   "title": {
     "my_account": "我的帳戶",
     "validate_email": "驗證郵件",
@@ -230,7 +243,8 @@ const zh = {
     "ticket_open": "未結束服務單",
     "ticket_closed": "已結束服務單",
     "ticket_new": "新建服務單",
-    "market_maker": "做市商"
+    "market_maker": "做市商",
+    "market_apply": "做市商申請"
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",

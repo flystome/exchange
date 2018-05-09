@@ -49,6 +49,7 @@ const Ticket = () => import(/* webpackChunkName: "Ticket" */'Pages/Ticket/Ticket
 
 // MarketMaker
 const MarketMaker = () => import(/* webpackChunkName: "MarketMaker" */'Pages/MarketMaker/MarketMaker')
+const MarketApply = () => import(/* webpackChunkName: "MarketMaker" */'Pages/MarketMaker/MarketApply/MarketApply')
 
 Vue.use(Router)
 
@@ -91,6 +92,11 @@ const router = new Router({
       path: `${version}/market_maker`,
       name: 'MarketMaker',
       component: MarketMaker
+    },
+    {
+      path: `${version}/market_apply`,
+      name: 'MarketApply',
+      component: MarketApply
     },
     {
       path: `${version}/`,

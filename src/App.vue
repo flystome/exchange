@@ -72,7 +72,7 @@ export default {
       return false
     },
     isWhiteBackground () {
-      var route = ['MarketMaker', 'notFound']
+      var route = ['MarketMaker', 'notFound', 'MarketApply']
       return this.loading && route.includes(this.$route.name)
     },
     ...mapState(['fromApp', 'language']),

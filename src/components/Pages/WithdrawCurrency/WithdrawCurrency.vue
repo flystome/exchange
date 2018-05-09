@@ -186,12 +186,12 @@
       </div>
     </div>
     <basic-table :loading='withdraw_loading' :captionTitle='WithdrawRecord.captionTitle' :item='getWithdrawRecord' :perfix='CurrencyType.toUpperCase()' v-if="route === 'withdraw'">
-      <template slot="cancel"
+      <!-- <template slot="cancel"
       slot-scope="props">
         <a>
           / <span :disabled='disabled' @click="cancelWithdraw(props.id, props.data)" class="btc-link btn">{{$t(`withdraw_currency.cancel`)}}</span>
         </a>
-      </template>
+      </template> -->
       <div slot="more" class="text-center btc-b-t btc-table-more">
         <router-link class="btc-link" :to="`${ROUTER_VERSION}/form/account`">
           {{$t('my_account.show_more')}}

@@ -1,0 +1,75 @@
+.btc-MarketApply{
+  .btc-MarketApply-title{
+    color: #333333;
+    font-size: 20px;
+    margin-top: 77px;
+  }
+  header>:nth-child(2){
+    margin-top: 15px;
+    margin-bottom: 65px
+  }
+  .btc-MarketApply-section{
+    section{
+      float: left;
+      width: 23%;
+      height: 346px;
+      padding: 0 40px;
+      margin-left: 92px;
+      box-shadow: 0 7px 35px rgba(0, 0, 0, 0.08);
+      padding-top: 93px;
+      span{
+        display: block;
+        font-size: 14px;
+        color: #333333;
+        margin-top: 33px;
+        margin-bottom: 23px;
+      }
+      div{
+        color: #999999;
+        font-size: 12px;
+        text-align: left;
+        word-break: break-all;
+      }
+    }
+  }
+  .btc-MarketApply-authentication{
+    margin-top: 65px;
+    margin-bottom: 35px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .btc-MarketApply .btc-MarketApply-section section{
+    margin-left: 46px;
+    width: 27%;
+  }
+}
+
+@media (max-width: 992px) {
+  .btc-MarketApply .btc-MarketApply-section section{
+    width: 46%;
+    min-width: 264px;
+    float: none;
+    margin: auto;
+    margin-top: 53px;
+  }
+}
+
+// sprites
+$sprite: (
+  'activity': $-market-maker-activity,
+  'free': $-market-maker-free,
+  'service': $-market-maker-service,
+  'right': $-market-maker-right
+);
+
+@each $key, $val in $sprite{
+  .MarketMaker-#{$key} {
+    @include sprite(map-get($sprite, $key));
+    margin: auto;
+  }
+}
+
+i{
+  display: block;
+}

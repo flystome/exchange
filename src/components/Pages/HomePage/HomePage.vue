@@ -304,7 +304,6 @@
   </div>
 </template>
 <script>
-import ScrollReveal from 'scrollreveal'
 import { mapGetters, mapState, mapMutations } from 'vuex'
 import Cookies from 'js-cookie'
 import pusher from '@/common/js/pusher'
