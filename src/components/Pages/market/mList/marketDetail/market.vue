@@ -36,12 +36,12 @@
         </div>
         <div class="detail_rt">
           <p>
-            <span class="name">{{$t("markets.low")}}</span>
-            <span class="volume">{{ticker.low | fixedNum(market.price_fixed)}}</span>
-          </p>
-          <p>
             <span class="name">{{$t("markets.high")}}</span>
             <span class="volume">{{ticker.high | fixedNum(market.price_fixed)}}</span>
+          </p>
+          <p>
+            <span class="name">{{$t("markets.low")}}</span>
+            <span class="volume">{{ticker.low | fixedNum(market.price_fixed)}}</span>
           </p>
         </div>
       </div>
