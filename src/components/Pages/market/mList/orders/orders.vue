@@ -128,6 +128,7 @@ export default {
           self.curData = initdata.success.orders
         }
         self.curListData = self.curData
+        console.log(self.curListData)
         document.title = `Markets - ${self.$t('brand')}`
       })
     },

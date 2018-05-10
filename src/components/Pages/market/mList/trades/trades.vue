@@ -154,7 +154,7 @@
   </div>
 </template>
 <script>
-import {mapState} from 'vuex'
+import {mapGetters} from 'vuex'
 import pusher from '@/common/js/pusher'
 
 export default {
@@ -190,7 +190,7 @@ export default {
   mounted: function () {
     this.init()
     this.tradeShow = false
-    if (this.loginData && this.loginData !== 'none') {
+    if (this.loginData) {
       this.sn = this.loginData.sn
       this.tradeShow = true
       this.fetchTrades(this.curMarket)
@@ -205,7 +205,7 @@ export default {
         return 0
       }
     },
-    ...mapState(['loginData'])
+    ...mapGetters(['marketData', 'loginData'])
   },
   watch: {
     loginData (val, oldValue) {
@@ -213,7 +213,6 @@ export default {
       this.tradeShow = true
       var m = this.$route.params.id
       this.fetchTrades(m)
-      return val
     },
     '$route' (to, from) {
       if (!this.curMarket) return
@@ -301,7 +300,6 @@ export default {
         } else {
           self.sn = initdata.current_user.sn
         }
-        self.isDisabled = false
         document.title = `${self.market.quote_currency.toUpperCase()}/${self.market.base_currency.toUpperCase()} - ${self.$t('brand')}`
       })
     },
@@ -317,7 +315,6 @@ export default {
         }
       }, function (res) {
         self.trades = res.data.trades
-        console.log(self.trades)
       })
     },
     getRefresh: function (sn) {
@@ -372,8 +369,6 @@ export default {
         } else if (this.order_type === 'sell') {
           this.confirmSell()
         }
-      } else {
-        this.isDisabled = false
       }
     },
     confirmBuy: function (bool) {

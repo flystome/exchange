@@ -91,10 +91,10 @@
       line-height: 26px;
       text-align: left;
       &.done {
-        color: #29c1a6;
+        color: #e9454d;
       }
       &.up {
-        color: #fc4a4a;
+        color: #40b246;
       }
     }
     .val {
@@ -110,7 +110,7 @@
     text-align: center;
     div {
       display: inline-block;
-      width: 80%;
+      width: 84%;
       height: 44px;
       line-height: 44px;
       text-align: center;
@@ -119,10 +119,10 @@
       background: #999999;
       border-radius: 2px;
       &.text-up {
-        background: #fc4a4a;
+        background: #40b246;
       }
       &.text-down {
-        background: #29c1a6;
+        background: #e9454d;
       }
     }
   }

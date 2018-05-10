@@ -44,26 +44,6 @@ export default {
   mounted: function () {
     this.initData()
   },
-  filters: {
-    fixed2: function (params) {
-      if (!params) return 0
-      return (+params).toFixed(2)
-    },
-    upper: function (params) {
-      if (!params) return '--'
-      return params.toUpperCase()
-    },
-    fixedNum: function (params, num, num2) {
-      if (+params <= 0 || !params) return 0
-      if (!num) num = 6
-      if (num2) {
-        num = num > num2 ? num : num2
-      }
-      var value = (+Math.floor(params * Math.pow(10, num)) / Math.pow(10, num)).toFixed(num)
-      if (value.length >= 14) value = (+value).toFixed(num - 2)
-      return value
-    }
-  },
   watch: {
     curData: function (val, oldVal) {
       if (!val) {

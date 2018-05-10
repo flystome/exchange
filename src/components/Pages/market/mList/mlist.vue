@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-// import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters } from 'vuex'
 import marketList from './marketList/marketList'
 import pusher from '@/common/js/pusher'
 
@@ -21,7 +21,7 @@ export default {
     return {
       hds: ['markets.favorite', 'BTC', 'USDT'],
       currencyindex: 1,
-      marketData: {},
+      listData: {},
       curData: []
     }
   },
@@ -41,23 +41,48 @@ export default {
       if (to.path === '/markets') {
         this.init()
       }
+    },
+    marketData (val) {
+      if (val) {
+        var obj = {
+          eth: [],
+          btc: [],
+          usdt: []
+        }
+        val.map((ele, index) => {
+          var key = Object.keys(ele)[0]
+          if ((/eth$/i).test(key)) {
+            obj.eth.push(ele)
+          } else if ((/btc$/i).test(key)) {
+            obj.btc.push(ele)
+          } else if ((/usdt$/i).test(key)) {
+            obj.usdt.push(ele)
+          }
+        })
+        this.getCurData(obj)
+        this.listData = obj
+      }
     }
+  },
+  computed: {
+    ...mapGetters(['marketData', 'loginData'])
   },
   methods: {
     init: function () {
       this.getRefresh()
-      this.fetchData()
+      if (JSON.stringify(this.listData) !== '{}') {
+        this.getCurData(this.listData)
+      }
     },
     getRefresh: function () {
       var self = this
       var channel = pusher.subscribe('market-global')
       channel.bind('tickers', (data) => {
         if (JSON.stringify(data) !== '{}') {
-          var i
-          for (i in data) {
+          for (let i in data) {
             var obj = data[i]
             var key = obj.base_currency
-            var Arr = self.marketData[key]
+            var Arr = self.listData[key]
             if (!Arr) return
             var len = Arr.length
             var target = null
@@ -71,20 +96,9 @@ export default {
                 target[arrKey].legal_worth = data[i]['legal_worth']
               }
             }
-            this.getCurData(self.marketData)
+            this.getCurData(self.listData)
           }
         }
-      })
-    },
-    fetchData: function () {
-      var self = this
-      this._get({
-        url: '/home.json',
-        data: {}
-      }, function (data) {
-        var getdata = JSON.parse(data.request.response)
-        self.getCurData(getdata.success)
-        self.marketData = getdata.success
       })
     },
     getCurData: function (data) {
@@ -98,7 +112,7 @@ export default {
     },
     initDate: function (data) {
       var arr = []
-      if (data.current_user) {
+      if (this.loginData) {
         arr = this.getFavorite(data)
       } else {
         arr = this.getLocal(data)
@@ -117,14 +131,12 @@ export default {
     getFavorite: function (data) {
       var arr = []
       for (var key in data) {
-        if (key !== 'current_user' && key !== 'code') {
-          var list = data[key]
-          var len = list.length
-          for (var i = 0; i < len; i++) {
-            for (var item in list[i]) {
-              if (list[i][item]['is_portfolios'] === true) {
-                arr.push(list[i][item])
-              }
+        var list = data[key]
+        var len = list.length
+        for (var i = 0; i < len; i++) {
+          for (var item in list[i]) {
+            if (list[i][item]['is_portfolios'] === true) {
+              arr.push(list[i][item])
             }
           }
         }
