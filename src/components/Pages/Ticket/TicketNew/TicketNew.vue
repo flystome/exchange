@@ -39,7 +39,7 @@
             {{ $t('ticket.upload_describe') }}
           </div>
           <div class="btc-ticket-explain btc-color999 btc-paddingB45">
-            <basic-button :disabled='disabled' @click.native="sumbit" class="btn" :text="$t('submit')"></basic-button>
+            <basic-button :disabled='disabled' @click.native.stop="sumbit" class="btn" :text="$t('submit')"></basic-button>
             <button @click="goTicket" class="btc-white-btn">{{ $t('cancel') }}</button>
           </div>
         </div>

@@ -10,7 +10,7 @@
           </button>
           <router-link class="navbar-brand" to="/">
             <i v-if="FROM" class='header-hlog'/>
-            <i v-else class='header-logo'/>
+            <img v-else src="@/common/svg/logo.svg" style="margin-top: 3px;">
           </router-link>
           <div class="btc-header-sideslip" @click="SideSlipMenuDisplay(true)">
             <a></a>

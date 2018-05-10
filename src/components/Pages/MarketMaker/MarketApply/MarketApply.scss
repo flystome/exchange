@@ -28,13 +28,43 @@
         color: #999999;
         font-size: 12px;
         text-align: left;
-        word-break: break-all;
       }
     }
   }
   .btc-MarketApply-authentication{
     margin-top: 65px;
     margin-bottom: 35px;
+    >:nth-child(1){
+      display: inline-block;
+      height: 14px;
+      border: 1px solid #dfdfdf;
+      width: 14px;
+      position: relative;
+      top: 3px;
+      margin-right: 6px;
+      cursor: pointer;
+    }
+    .btc-marketApply-right{
+      border: none;
+      &:after{
+        content: '';
+        @include sprite($-market-maker-right);
+        display: block;
+      }
+    }
+  }
+  .btc-marketApply-apply{
+    background: #4382f7;
+    color: white;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    padding: 12px 20px;
+    margin-bottom: 50px;
+  }
+  .btc-choice{
+    background: #d9d9d9;
+    cursor: not-allowed;
   }
 }
 
@@ -59,8 +89,7 @@
 $sprite: (
   'activity': $-market-maker-activity,
   'free': $-market-maker-free,
-  'service': $-market-maker-service,
-  'right': $-market-maker-right
+  'service': $-market-maker-service
 );
 
 @each $key, $val in $sprite{

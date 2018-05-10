@@ -602,7 +602,7 @@ const zh = {
     "return": "返回",
     "reminder": "催單",
     "close_ticket": "關閉服務單",
-    "tltle": "標題",
+    "title": "標題",
     "choose": "選擇",
     "upload_attachment": "上傳附件",
     "detailed_description": "詳細描述",

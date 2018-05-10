@@ -321,7 +321,6 @@
 
 // sprites
 $sprite: (
-  'logo': $header-logo,
   'letterlog': $header-letterlog,
   'ticket': $header-ticket,
   'avatarlog': $header-avatarlog,
@@ -336,3 +335,4 @@ $sprite: (
     @include sprite(map-get($sprite, $key));
   }
 }
+

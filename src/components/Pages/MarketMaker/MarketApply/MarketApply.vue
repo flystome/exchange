@@ -27,8 +27,11 @@
       <div class="clearfix"></div>
     </div>
     <div class="btc-MarketApply-authentication btc-font12 btc-color999">
-      {{$t('market_apply.read_and_agree')}} <span class="btc-link">{{$t('market_apply.authentication_protocol')}}</span>
+      <span @click="read = !read" :class="{'btc-marketApply-right': read}"></span>{{$t('market_apply.read_and_agree')}} <span class="btc-link">{{$t('market_apply.authentication_protocol')}}</span>
     </div>
+    <button class="btc-marketApply-apply" :class="{'btc-choice': !read}">
+      {{ $t('market_apply.immediate_apply') }}
+    </button>
   </div>
 </template>
 
