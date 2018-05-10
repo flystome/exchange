@@ -99,7 +99,7 @@
                   <basic-button :disabled='disabled' @click.native="WithdrawAll" class="btc-link btn" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
                 </basic-input>
               <div class="btc-withdraw-explain">
-                <span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }} 0.001</span>
+                <span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }} {{ 2 * withdraw_fee }}</span>
                 <span class="btc-fr">{{ $t('withdraw_currency.poundage') }} {{ withdraw_fee }}</span>
 
               <!-- <span class="btc-fr btc-link">
