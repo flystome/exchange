@@ -343,6 +343,13 @@ const zh = {
       'price': '成交價',
       'volume': '成交量'
     },
+    'unlogin': {
+      'please': '请',
+      'or': '或',
+      'operate': '后进行操作',
+      'login': '登录',
+      'register': '注册'
+    },
     'success': "下单成功",
     'fail': "下单失败",
     'setting': '賬戶設置',

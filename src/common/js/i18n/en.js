@@ -344,6 +344,13 @@ const en = {
         'price': 'Price',
         'volume': 'Volume'
       },
+      'unlogin': {
+        'please': 'Please',
+        'or': 'or',
+        'operate': 'for operation',
+        'login': 'Login',
+        'register': 'Register'
+      },
       'success': "Success",
       'fail': "Fail",
       'setting': 'Profile',

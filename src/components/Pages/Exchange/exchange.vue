@@ -6,7 +6,10 @@
       </a>
       <lastPrice :market="market"></lastPrice>
       <div class="header_rt">
-        <account :totalAssets='TotalAssets' :accounts='accounts' :market='market'></account>
+        <account v-if='loginData !== "none"' :totalAssets='TotalAssets' :accounts='accounts' :market='market'></account>
+        <div v-if='loginData === "none"' class="loginTip">
+          <p>{{$t('exchange.unlogin.please')}}<a :href="`${HOST_URL}/signin?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${HOST_URL}/signup?from=${location}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
+        </div>
         <setting :loginData='loginData' @controlSound='controlSound'></setting>
         <language></language>
       </div>
@@ -23,7 +26,7 @@
       </div>
       <div class="my_order">
         <audio id="order_cancel" src="/static/media/cancel.mp3"></audio>
-        <myOrder :myOrders='my_orders' :market="market" :markets='markets' @getMyOrder='getMyOrder'></myOrder>
+        <myOrder :myOrders='my_orders' :market="market" :markets='markets' @getMyOrder='getMyOrder' :loginData='loginData'></myOrder>
       </div>
     </section>
     <section class="list">
@@ -71,6 +74,8 @@ export default {
   name: 'ExChange',
   data () {
     return {
+      HOST_URL: process.env.HOST_URL,
+      location: location.href,
       curMarket: '',
       lastPriceData: {},
       all_trades: [],

@@ -60,7 +60,8 @@
       <div class="tip">
         <div class="success" v-if='buySuccess'><i class="fa fa-check"></i>{{$t('exchange.success')}}</div>
         <div class="fail" v-if='buyFail'><i class="fa fa-close"></i>{{$t('exchange.fail')}}</div>
-        <div class="myTotal">{{buyAccount | fixedNum(market.price_fixed, market.volume_fixed)}} {{market.base_currency | upper}}</div>
+        <p v-if='loginData === "none"' class="loginTip">{{$t('exchange.unlogin.please')}}<a :href="`${HOST_URL}/signin?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${HOST_URL}/signup?from=${location}`">{{$t('exchange.unlogin.register')}}</a></p>
+        <div v-if='loginData !== "none"' class="myTotal">{{buyAccount | fixedNum(market.price_fixed, market.volume_fixed)}} {{market.base_currency | upper}}</div>
       </div>
       <a class="buy_btn btn" href="###" @click.prevent="orderBid()">{{$t('exchange.buy')}}{{market.quote_currency | upper}}</a>
     </div>
@@ -97,7 +98,8 @@
       <div class="tip">
         <div class="success" v-if='sellSuccess'><i class="fa fa-check"></i>{{$t('exchange.success')}}</div>
         <div class="fail" v-if='sellFail'><i class="fa fa-close"></i>{{$t('exchange.fail')}}</div>
-        <div class="myTotal">{{sellAccount | fixedNum(market.volume_fixed)}} {{market.quote_currency | upper}}</div>
+        <p v-if='loginData === "none"' class="loginTip">{{$t('exchange.unlogin.please')}}<a :href="`${HOST_URL}/signin?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${HOST_URL}/signup?from=${location}`">{{$t('exchange.unlogin.register')}}</a></p>
+        <div v-if='loginData !== "none"' class="myTotal">{{sellAccount | fixedNum(market.volume_fixed)}} {{market.quote_currency | upper}}</div>
       </div>
       <a class="sell_btn btn" @click.prevent="orderAsk()">{{$t('exchange.sell')}}{{market.quote_currency | upper}}</a>
     </div>
@@ -114,6 +116,8 @@ export default {
   props: ['market', 'type', 'accounts'],
   data () {
     return {
+      HOST_URL: process.env.HOST_URL,
+      location: location.href,
       buyPrice: '',
       buyVolume: '',
       buyTotal: '',

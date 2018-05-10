@@ -55,6 +55,15 @@
   .tab_bd {
     height: 180px;
     background: #101622;
+    .loginTip {
+      width: 100%;
+      height: 100%;
+      p {
+        height: 180px;
+        line-height: 180px;
+        text-align: center;
+      }
+    }
     .noneData {
       height: 180px;
       line-height: 180px;

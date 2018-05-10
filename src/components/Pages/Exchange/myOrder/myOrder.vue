@@ -30,10 +30,15 @@
       </ul>
     </div>
     <div class="tab_bd">
-      <div class="noneData" v-show="curOrders && curOrders.length === 0">{{$t('exchange.myorder.noData')}}</div>
-      <keep-alive><orderList :myOrders='myOrders[0]' :market='market' :markets='markets' :notPending='notPending' v-show="curOrders.length !== 0 && currencyIndex ===0" @cancel="cancelOne"></orderList></keep-alive>
-      <keep-alive><orderList :myOrders='myOrders[1]' :market='market' :markets='markets' :notPending='notPending' v-show="curOrders.length !== 0 && currencyIndex ===1"></orderList></keep-alive>
-      <keep-alive><orderList :myOrders='myOrders[2]' :market='market' :markets='markets' :notPending='notPending' v-show="curOrders.length !== 0 && currencyIndex ===2"></orderList></keep-alive>
+      <div v-if='loginData === "none"' class="loginTip">
+        <p>{{$t('exchange.unlogin.please')}}<a :href="`${HOST_URL}/signin?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${HOST_URL}/signup?from=${location}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
+      </div>
+      <div v-if='loginData !== "none"'>
+        <div class="noneData" v-show="curOrders && curOrders.length === 0">{{$t('exchange.myorder.noData')}}</div>
+        <keep-alive><orderList :myOrders='myOrders[0]' :market='market' :markets='markets' :notPending='notPending' v-show="curOrders.length !== 0 && currencyIndex ===0" @cancel="cancelOne"></orderList></keep-alive>
+        <keep-alive><orderList :myOrders='myOrders[1]' :market='market' :markets='markets' :notPending='notPending' v-show="curOrders.length !== 0 && currencyIndex ===1"></orderList></keep-alive>
+        <keep-alive><orderList :myOrders='myOrders[2]' :market='market' :markets='markets' :notPending='notPending' v-show="curOrders.length !== 0 && currencyIndex ===2"></orderList></keep-alive>
+      </div>
     </div>
   </section>
 </template>
@@ -43,13 +48,15 @@ import orderList from './orderList/orderList'
 
 export default {
   name: 'myOrder',
-  props: ['myOrders', 'market', 'markets'],
+  props: ['myOrders', 'market', 'markets', 'loginData'],
   components: {
     orderList
   },
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
+      HOST_URL: process.env.HOST_URL,
+      location: location.href,
       heads: ['exchange.myorder.pending', 'exchange.myorder.history', 'exchange.myorder.filling'],
       item1: ['exchange.myorder.buy', 'exchange.myorder.sell', 'exchange.myorder.all', 'exchange.myorder.cancel_all'],
       item2: ['exchange.myorder.last3', 'exchange.myorder.last7', 'exchange.myorder.more'],
