@@ -184,15 +184,20 @@ export default {
       price: '',
       amount_buy: '',
       amount_sell: '',
-      amount: ''
+      amount: '',
+      version: 0,
+      depthUpdate: {}
     }
   },
   mounted: function () {
     this.init()
     this.tradeShow = false
-    if (this.loginData) {
+    console.log(this.loginData)
+    if (this.loginData && this.loginData !== "none") {
+      console.log('mounted')
       this.sn = this.loginData.sn
       this.tradeShow = true
+      console.log(this.curMarket)
       this.fetchTrades(this.curMarket)
       this.getRefresh(this.sn)
     }
@@ -209,9 +214,13 @@ export default {
   },
   watch: {
     loginData (val, oldValue) {
-      this.getRefresh(val.sn)
+      console.log(val, oldValue)
+      if (!this.sn && this.sn === 'unlogin') {
+        this.getRefresh(val.sn)
+      }
       this.tradeShow = true
       var m = this.$route.params.id
+      console.log(m)
       this.fetchTrades(m)
     },
     '$route' (to, from) {
@@ -241,6 +250,7 @@ export default {
   },
   methods: {
     init: function () {
+      console.log('init')
       this.order_type = this.$route.hash.substr(1) || 'buy'
       this.curMarket = this.$route.params.id
       this.fetchData(this.curMarket)
@@ -250,13 +260,40 @@ export default {
     getPusher: function (market) {
       var self = this
       var marketPush = pusher.subscribe('market-' + market + '-global')
-      marketPush.bind('update', (data) => {
-        if (data.asks || data.asks.length !== 0) {
-          self.sellList = data.asks.slice(0, 8).reverse()
+      var lost = {
+        asks: [],
+        bids: [],
+        U: 0
+      }
+      marketPush.bind('depthUpdate', (res) => {
+        if (res.U <= this.version + 1 && res.u >= this.version + 1) {
+          var asks = this.addOrderList(res.asks, this.depthUpdate.asks)
+          var bids = this.addOrderList(res.bids, this.depthUpdate.bids)
+          this.version = res.u
+          this.depthUpdate = Object.assign({}, this.depthUpdate, {'asks': asks.reverse(), 'bids': bids})
+        } else if (res.U > this.version + 1) {
+          this.addOrderList(res.asks, lost.asks)
+          this.addOrderList(res.bids, lost.bids)
+          if (lost.U === 0) lost.U = res.U
+          lost.u = Math.max(lost.u, res.u)
+          this._get({
+            url: '/markets/' + self.market.code + '/get_depth_data.json'
+          }, function (res) {
+            var data = res.data.success.depthUpdate
+            var asks = self.addOrderList(lost.asks, data.asks)
+            var bids = self.addOrderList(lost.bids, data.bids)
+            self.version = data.version
+            self.depthUpdate = Object.assign({}, self.depthUpdate, {'asks': asks.reverse(), 'bids': bids})
+            lost = {
+              asks: [],
+              bids: [],
+              U: 0
+            }
+          })
         }
-        if (data.bids || data.bids.length !== 0) {
-          self.buyList = data.bids.slice(0, 8)
-        }
+        this.sellList = this.depthUpdate.asks && this.depthUpdate.asks.slice(-8).reverse()
+        this.buyList = this.depthUpdate.bids && this.depthUpdate.bids.slice(0, 8)
+        this.version = this.depthUpdate.version
       })
       var channel = pusher.subscribe('market-global')
       channel.bind('tickers', (data) => {
@@ -269,6 +306,40 @@ export default {
         }
       })
     },
+    addOrderList (origin, target) {
+      if (origin && origin.length !== 0) {
+        origin.map((ele1) => {
+          var b = target.some((ele2) => ele1[0] === ele2[0])
+          if (b) {
+            target.map((ele3) => {
+              if (ele1[0] === ele3[0]) {
+                ele3[1] = ele1[1]
+              }
+            })
+          } else {
+            target.push(ele1)
+          }
+        })
+        target = this.clearZero(target)
+        target.sort((a, b) => b[0] - a[0])
+      } else {
+        if (target.length !== 0) {
+          target = this.clearZero(target)
+        }
+        target.sort((a, b) => b[0] - a[0])
+      }
+      return target
+    },
+    clearZero (arr) {
+      var len = arr.length
+      var arr0 = []
+      for (let i = 0; i < len; i++) {
+        if (+arr[i][1] !== 0) {
+          arr0.push(arr[i])
+        }
+      }
+      return arr0
+    },
     reload: function () {
       window.onpageshow = function (e) {
         if (e.persisted) {
@@ -277,30 +348,28 @@ export default {
       }
     },
     fetchData: function (market) {
-      var self = this
       this._get({
         url: '/markets/' + market + '.json',
         data: {}
-      }, function (data) {
-        var initdata = JSON.parse(data.request.response)
-        self.ticker = initdata.ticker
-        if (initdata.asks) {
-          self.sellList = initdata.asks.slice(-8, 0).reverse()
+      }, (data) => {
+        console.log(data.data);
+        ({
+          ticker: this.ticker,
+          depth_data: this.depthUpdate,
+          market: this.market,
+          accounts: this.accounts
+        } = data.data)
+        console.log(this.ticker, this.depthUpdate, this.market, this.accounts)
+
+        this.sellList = this.depthUpdate.asks && this.depthUpdate.asks.slice(-8).reverse()
+        this.buyList = this.depthUpdate.bids && this.depthUpdate.bids.slice(0, 8)
+        this.version = this.depthUpdate.version
+        if (this.accounts) {
+          this.extra_base = this.accounts[this.market.base_currency] && this.accounts[this.market.base_currency].balance
+          this.extra_quote = this.accounts[this.market.quote_currency] && this.accounts[this.market.quote_currency].balance
         }
-        if (initdata.bids) {
-          self.buyList = initdata.bids.slice(0, 8)
-        }
-        self.market = initdata.market
-        if (initdata.accounts) {
-          self.extra_base = initdata.accounts[self.market.base_currency] && initdata.accounts[self.market.base_currency].balance
-          self.extra_quote = initdata.accounts[self.market.quote_currency] && initdata.accounts[self.market.quote_currency].balance
-        }
-        if (!initdata.current_user) {
-          self.sn = 'unlogin'
-        } else {
-          self.sn = initdata.current_user.sn
-        }
-        document.title = `${self.market.quote_currency.toUpperCase()}/${self.market.base_currency.toUpperCase()} - ${self.$t('brand')}`
+        document.title = `${this.market.quote_currency.toUpperCase()}/${this.market.base_currency.toUpperCase()} - ${this.$t('brand')}`
+        this.isDisabled = false
       })
     },
     fetchTrades: function (market) {
@@ -319,19 +388,22 @@ export default {
     },
     getRefresh: function (sn) {
       var self = this
-      var privateAccount = pusher.subscribe('private-' + sn)
-      privateAccount.bind('account', (data) => {
-        if (data.currency === self.market.base_currency) {
-          self.extra_base = data.balance
-        } else if (data.currency === self.market.quote_currency) {
-          self.extra_quote = data.balance
-        }
-      })
-      privateAccount.bind('order', (data) => {
-        if (data.state === 'done') {
-          this.trades.unshift(data)
-        }
-      })
+      if (sn && sn !== 'unlogin') {
+        console.log(sn)
+        var privateAccount = pusher.subscribe('private-' + sn)
+        privateAccount.bind('account', (data) => {
+          if (data.currency === self.market.base_currency) {
+            self.extra_base = data.balance
+          } else if (data.currency === self.market.quote_currency) {
+            self.extra_quote = data.balance
+          }
+        })
+        privateAccount.bind('order', (data) => {
+          if (data.state === 'done') {
+            this.trades.unshift(data)
+          }
+        })
+      }
     },
     orderType: function (type) {
       this.order_type = type
