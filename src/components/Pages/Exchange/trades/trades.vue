@@ -54,13 +54,15 @@ export default {
   },
   watch: {
     depthData (val) {
-      ({
-        asks: this.sellList,
-        bids: this.buyList,
-        version: this.version
-      } = val)
-      if (this.sellList && this.sellList.length !== 0) {
-        this.sellList.reverse()
+      if (val) {
+        ({
+          asks: this.sellList,
+          bids: this.buyList,
+          version: this.version
+        } = val)
+        if (this.sellList && this.sellList.length !== 0) {
+          this.sellList.reverse()
+        }
       }
     }
   },

@@ -10,7 +10,7 @@
         <div v-if='loginData === "none"' class="loginTip">
           <p>{{$t('exchange.unlogin.please')}}<a :href="`${HOST_URL}/signin?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${HOST_URL}/signup?from=${location}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
         </div>
-        <setting :loginData='loginData' @controlSound='controlSound'></setting>
+        <setting v-if='loginData !== "none"' :loginData='loginData' @controlSound='controlSound'></setting>
         <language></language>
       </div>
     </header>
@@ -150,23 +150,25 @@ export default {
         accounts: this.accounts,
         depth_data: this.depth_data
       } = res.data)
-      this.$set(this.my_orders, 0, res.data.my_orders.reverse())
+      res.data.my_orders && res.data.my_orders.length !== 0 && this.$set(this.my_orders, 0, res.data.my_orders.reverse())
       this.marketRefresh()
       this.globalRefresh()
-      this.version = this.depth_data.version
+      this.version = this.depth_data && this.depth_data.version
       this.initMine()
       document.title = `${this.market.last} ${this.market.quote_currency.toUpperCase()}/${this.market.base_currency.toUpperCase()} - ${this.$t('brand')}`
     },
     initMine () {
       this.initTrend()
-      this.my_trades.map((ele1) => {
-        this.all_trades.map((ele2, i) => {
-          if (ele1.id === ele2.tid) {
-            ele2.isMine = true
-            this.$set(this.all_trades, i, ele2)
-          }
+      if (this.my_trades) {
+        this.my_trades.map((ele1) => {
+          this.all_trades.map((ele2, i) => {
+            if (ele1.id === ele2.tid) {
+              ele2.isMine = true
+              this.$set(this.all_trades, i, ele2)
+            }
+          })
         })
-      })
+      }
     },
     initTrend () {
       this.all_trades.map((ele, i, arr) => {

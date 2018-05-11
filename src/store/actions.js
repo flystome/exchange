@@ -19,7 +19,7 @@ const actions = {
         Cookies.set('locale', 'en')
       } // setCookie
       if (state.marketData === '') {
-        if (d.data.error) {
+        if (d.data && d.data.error) {
           if (!localStorage.getItem('marketData')) {
             this.dispatch('GetMarketData', 'local')
           } else {
@@ -31,7 +31,7 @@ const actions = {
       } // getMaretData
       if (route === undefined) route = state.route
       if (unLogin.includes(route.name)) {
-        if (!d.data.error) commit('getData', d)
+        if (d.data && !d.data.error) commit('getData', d)
         commit('redirect', route)
         commit('GetCmsUrl')
         return

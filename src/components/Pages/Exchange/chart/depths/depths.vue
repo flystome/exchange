@@ -94,24 +94,26 @@ export default {
       this.resize()
     },
     getChartData (val) {
-      var sell = JSON.parse(JSON.stringify(val.asks))
-      this.sellList = sell.map((ele, index, arr) => {
-        if (index !== 0) {
-          ele[1] = +ele[1] + +arr[index - 1][1]
-        }
-        return ele
-      })
-      this.max = this.sellList[this.sellList.length - 1]
-      var buy = JSON.parse(JSON.stringify(val.bids))
-      this.buylist = buy.map((ele, index, arr) => {
-        if (index !== 0) {
-          ele[1] = +ele[1] + +arr[index - 1][1]
-        }
-        return ele
-      })
-      this.min = this.sellList[0]
-      this.buylist.reverse()
-      this.refreshChart()
+      if (val) {
+        var sell = JSON.parse(JSON.stringify(val.asks))
+        this.sellList = sell.map((ele, index, arr) => {
+          if (index !== 0) {
+            ele[1] = +ele[1] + +arr[index - 1][1]
+          }
+          return ele
+        })
+        this.max = this.sellList[this.sellList.length - 1]
+        var buy = JSON.parse(JSON.stringify(val.bids))
+        this.buylist = buy.map((ele, index, arr) => {
+          if (index !== 0) {
+            ele[1] = +ele[1] + +arr[index - 1][1]
+          }
+          return ele
+        })
+        this.min = this.sellList[0]
+        this.buylist.reverse()
+        this.refreshChart()
+      }
     },
     refreshChart () {
       this.depths.setOption({
