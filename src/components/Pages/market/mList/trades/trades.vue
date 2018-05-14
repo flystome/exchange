@@ -119,18 +119,22 @@
           </div>
           <div class=" trade_list trade_top">
             <ul class="sell_list clearfix">
-              <li v-for="(item,index) in sellList" :key="'sell'+index">
-                <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixedNum(market.price_fixed)}}</div>
-                <div class="trade_num trade_rt">{{item[1] | fixedNum(market.volume_fixed)}}</div>
-              </li>
+              <transition-group name="slide-fade">
+                <li v-for="(item,index) in sellList" :key="'sell'+index">
+                  <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixedNum(market.price_fixed)}}</div>
+                  <div class="trade_num trade_rt">{{item[1] | fixedNum(market.volume_fixed)}}</div>
+                </li>
+              </transition-group>
             </ul>
           </div>
           <div class=" trade_list">
             <ul class="buy_list clearfix">
-              <li v-for="(item,index) in buyList" :key="'buy'+index">
-                <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixedNum(market.price_fixed)}}</div>
-                <div class="trade_num trade_rt">{{item[1] | fixedNum(market.volume_fixed)}}</div>
-              </li>
+              <transition-group name="slide-fade">
+                <li v-for="(item,index) in buyList" :key="'buy'+index">
+                  <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixedNum(market.price_fixed)}}</div>
+                  <div class="trade_num trade_rt">{{item[1] | fixedNum(market.volume_fixed)}}</div>
+                </li>
+              </transition-group>
             </ul>
           </div>
         </div>
@@ -192,12 +196,9 @@ export default {
   mounted: function () {
     this.init()
     this.tradeShow = false
-    console.log(this.loginData)
-    if (this.loginData && this.loginData !== "none") {
-      console.log('mounted')
+    if (this.loginData && this.loginData !== 'none') {
       this.sn = this.loginData.sn
       this.tradeShow = true
-      console.log(this.curMarket)
       this.fetchTrades(this.curMarket)
       this.getRefresh(this.sn)
     }
@@ -214,13 +215,11 @@ export default {
   },
   watch: {
     loginData (val, oldValue) {
-      console.log(val, oldValue)
-      if (!this.sn && this.sn === 'unlogin') {
+      if (!this.sn) {
         this.getRefresh(val.sn)
       }
       this.tradeShow = true
       var m = this.$route.params.id
-      console.log(m)
       this.fetchTrades(m)
     },
     '$route' (to, from) {
@@ -250,7 +249,6 @@ export default {
   },
   methods: {
     init: function () {
-      console.log('init')
       this.order_type = this.$route.hash.substr(1) || 'buy'
       this.curMarket = this.$route.params.id
       this.fetchData(this.curMarket)
@@ -271,19 +269,23 @@ export default {
           var bids = this.addOrderList(res.bids, this.depthUpdate.bids)
           this.version = res.u
           this.depthUpdate = Object.assign({}, this.depthUpdate, {'asks': asks.reverse(), 'bids': bids})
+          this.sellList = this.depthUpdate.asks && this.depthUpdate.asks.slice(-8).reverse()
+          this.buyList = this.depthUpdate.bids && this.depthUpdate.bids.slice(0, 8)
         } else if (res.U > this.version + 1) {
           this.addOrderList(res.asks, lost.asks)
           this.addOrderList(res.bids, lost.bids)
           if (lost.U === 0) lost.U = res.U
           lost.u = Math.max(lost.u, res.u)
           this._get({
-            url: '/markets/' + self.market.code + '/get_depth_data.json'
-          }, function (res) {
-            var data = res.data.success.depthUpdate
-            var asks = self.addOrderList(lost.asks, data.asks)
-            var bids = self.addOrderList(lost.bids, data.bids)
-            self.version = data.version
-            self.depthUpdate = Object.assign({}, self.depthUpdate, {'asks': asks.reverse(), 'bids': bids})
+            url: '/markets/' + this.market.code + '/get_depth_data.json'
+          }, (res) => {
+            var data = res.data.success.depth_data
+            var asks = this.addOrderList(lost.asks, data.asks)
+            var bids = this.addOrderList(lost.bids, data.bids)
+            this.version = data.version
+            this.depthUpdate = Object.assign({}, this.depthUpdate, {'asks': asks.reverse(), 'bids': bids})
+            this.sellList = this.depthUpdate.asks && this.depthUpdate.asks.slice(-8).reverse()
+            this.buyList = this.depthUpdate.bids && this.depthUpdate.bids.slice(0, 8)
             lost = {
               asks: [],
               bids: [],
@@ -291,9 +293,6 @@ export default {
             }
           })
         }
-        this.sellList = this.depthUpdate.asks && this.depthUpdate.asks.slice(-8).reverse()
-        this.buyList = this.depthUpdate.bids && this.depthUpdate.bids.slice(0, 8)
-        this.version = this.depthUpdate.version
       })
       var channel = pusher.subscribe('market-global')
       channel.bind('tickers', (data) => {
@@ -352,15 +351,16 @@ export default {
         url: '/markets/' + market + '.json',
         data: {}
       }, (data) => {
-        console.log(data.data);
         ({
           ticker: this.ticker,
           depth_data: this.depthUpdate,
           market: this.market,
           accounts: this.accounts
         } = data.data)
-        console.log(this.ticker, this.depthUpdate, this.market, this.accounts)
-
+        if (data.data.currency_user) {
+          this.sn = data.data.currency_user.sn
+          this.getRefresh(this.sn)
+        }
         this.sellList = this.depthUpdate.asks && this.depthUpdate.asks.slice(-8).reverse()
         this.buyList = this.depthUpdate.bids && this.depthUpdate.bids.slice(0, 8)
         this.version = this.depthUpdate.version
@@ -387,15 +387,13 @@ export default {
       })
     },
     getRefresh: function (sn) {
-      var self = this
-      if (sn && sn !== 'unlogin') {
-        console.log(sn)
+      if (sn) {
         var privateAccount = pusher.subscribe('private-' + sn)
         privateAccount.bind('account', (data) => {
-          if (data.currency === self.market.base_currency) {
-            self.extra_base = data.balance
-          } else if (data.currency === self.market.quote_currency) {
-            self.extra_quote = data.balance
+          if (data.currency === this.market.base_currency) {
+            this.extra_base = data.balance
+          } else if (data.currency === this.market.quote_currency) {
+            this.extra_quote = data.balance
           }
         })
         privateAccount.bind('order', (data) => {
@@ -479,7 +477,8 @@ export default {
       }
     },
     loginCheck: function () {
-      if (this.sn === 'unlogin') {
+      console.log(this.sn)
+      if (!this.sn || this.sn === 'none') {
         location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
       }
     },
