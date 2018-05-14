@@ -10,10 +10,10 @@ const ValidateIdentity = () => import(/* webpackChunkName: "ValidateIdentity" */
 const WithdrawCurrency = () => import(/* webpackChunkName: "WithdrawCurrency" */'Pages/WithdrawCurrency/WithdrawCurrency')
 const ValidateSms = () => import(/* webpackChunkName: "ValidateSms" */'Pages/Validate/Sms/Sms')
 
-const Markets = () => import('Pages/market/mList/mlist')
-const MarketDetail = () => import('Pages/market/mList/marketDetail/market')
-const Trades = () => import('Pages/market/mList/trades/trades')
-const Orders = () => import('Pages/market/mList/orders/orders')
+const MexchangeMarkets = () => import(/* webpackChunkName: "Mexchange" */'Pages/market/mList/mlist')
+const MexchangeDetail = () => import(/* webpackChunkName: "Mexchange" */'Pages/market/mList/marketDetail/market')
+const MexchangeTrades = () => import(/* webpackChunkName: "Mexchange" */'Pages/market/mList/trades/trades')
+const MexchangeOrders = () => import(/* webpackChunkName: "Mexchange" */'Pages/market/mList/orders/orders')
 const Exchanage = () => import('Pages/Exchange/exchange')
 // import MarketList from './components/Pages/market/mList'
 const HomePage = () => import(/* webpackChunkName: "HomePage" */'Pages/HomePage/HomePage')
@@ -70,23 +70,23 @@ const router = new Router({
     },
     {
       path: `${version}/markets`,
-      name: 'Markets',
-      component: Markets
+      name: 'MexchangeMarkets',
+      component: MexchangeMarkets
     },
     {
       path: `${version}/markets/:id`,
-      name: 'MarketDetail',
-      component: MarketDetail
+      name: 'MexchangeDetail',
+      component: MexchangeDetail
     },
     {
       path: `${version}/markets/:id/trades`,
-      name: 'Trades',
-      component: Trades
+      name: 'MexchangeTrades',
+      component: MexchangeTrades
     },
     {
       path: `${version}/markets/:id/orders`,
-      name: 'Orders',
-      component: Orders
+      name: 'MexchangeOrders',
+      component: MexchangeOrders
     },
     {
       path: `${version}/market_maker`,

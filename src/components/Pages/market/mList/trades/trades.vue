@@ -120,7 +120,7 @@
           <div class=" trade_list trade_top">
             <ul class="sell_list clearfix">
               <transition-group name="slide-fade">
-                <li v-for="(item,index) in sellList" :key="'sell'+index">
+                <li v-for="(item,index) in sellList" :key="'sell'+item[0]">
                   <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixedNum(market.price_fixed)}}</div>
                   <div class="trade_num trade_rt">{{item[1] | fixedNum(market.volume_fixed)}}</div>
                 </li>
@@ -130,7 +130,7 @@
           <div class=" trade_list">
             <ul class="buy_list clearfix">
               <transition-group name="slide-fade">
-                <li v-for="(item,index) in buyList" :key="'buy'+index">
+                <li v-for="(item,index) in buyList" :key="'buy'+item[0]">
                   <div class="trade_price trade_lt" @click='addPrice(item[0])'>{{item[0] | fixedNum(market.price_fixed)}}</div>
                   <div class="trade_num trade_rt">{{item[1] | fixedNum(market.volume_fixed)}}</div>
                 </li>

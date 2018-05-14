@@ -37,10 +37,10 @@ export default {
   name: 'App',
   data () {
     return {
-      unLogin: ['HomePage', 'Markets', 'MarketDetail', 'Trades', 'home', 'Orders', 'notFound', 'FormNews', 'Exchange'],
+      unLogin: ['HomePage', 'MexchangeMarkets', 'MexchangeDetail', 'MexchangeTrades', 'home', 'MexchangeOrders', 'notFound', 'FormNews', 'Exchange'],
       version: process.env.ROUTER_VERSION,
       noMobile: true,
-      noPaddingList: ['Markets', 'MarketDetail', 'Trades', 'Orders'],
+      noPaddingList: ['MexchangeMarkets', 'MexchangeDetail', 'MexchangeTrades', 'MexchangeOrders'],
       noPadding: false,
       exChange: true,
       FROM_HOME: '',

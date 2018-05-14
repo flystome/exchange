@@ -449,8 +449,25 @@
     background: none;
   }
 }
+@keyframes fadeOut{
+    0% {
+      opacity: 1;
+      background: #293f60;
+    }
+    50% {
+      opacity: 0.4;
+      background: #293f60;
+    }
+    100% {
+      opacity: 0;
+      background: none;
+    }
+  }
 .slide-fade-enter-active {
-  transition: fadeIn 2s ease;
+  transition: fadeIn 1s ease;
+}
+.slide-fade-leave-active {
+  transition: fadeOut 1s ease;
 }
 
 .slide-fade-move {
