@@ -35,13 +35,13 @@
         </div>
         <div class="btc-marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
-            <basic-input style="min-height:66px"  ref='first_name' :placeholder='$t("validate_identity.surname")' :validate='"First Name"' v-model="user.first_name"></basic-input>
+            <basic-input style="min-height:66px"  ref='first_name' :placeholder='$t("validate_identity.surname")' :validate='"required|first_name"' v-model="user.first_name"></basic-input>
           <!--<div class=" btc-marginT20">-->
             <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
             <!--<basic-input  v-model="user.name"></basic-input>-->
           <!--</div>-->
-            <basic-input style="min-height:66px"  ref='last_name' :placeholder='$t("validate_identity.name")' :validate='"Last Name"'  v-model="user.last_name"></basic-input>
-            <basic-input style="min-height:66px"  ref="IdCard"  :placeholder='$t("validate_identity.valid_id_card")' :validate='"IdCard"'  v-model="user.IdCard"></basic-input>
+            <basic-input style="min-height:66px"  ref='last_name' :placeholder='$t("validate_identity.name")' :validate='"required|last_name"'  v-model="user.last_name"></basic-input>
+            <basic-input style="min-height:66px"  ref="IdCard"  :placeholder='$t("validate_identity.valid_id_card")' :validate='"required|IdCard"'  v-model="user.IdCard"></basic-input>
         </div>
       </div>
     </div>
@@ -207,6 +207,7 @@ export default {
           message: this.$t('hint.go_tickets'),
           type: 'error',
           confirm: true,
+          href: '/ticket/new',
           buttonText: this.$t('hint.no'),
           buttondisplay: true
         })

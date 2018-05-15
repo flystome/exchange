@@ -67,6 +67,7 @@
     padding-right: 25px;
     img {
       width: 88px;
+      margin-top: 3px;
     }
   }
   .btc-ifo{
@@ -302,6 +303,9 @@
     .btc-header-sideslip{
       // display: none!important;
     }
+  }
+  .navbar-Home .navbar-brand img{
+    margin-top: 6px;
   }
 }
 

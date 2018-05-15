@@ -8,7 +8,7 @@
       <div class="btc-sms-phone">
         <div class="btc-sms-choice btc-b-def">
           <span>+</span>
-          <div-contenteditable v-model="SmsData.CellPhonecode">
+          <div-contenteditable @keyup.stop.native v-model="SmsData.CellPhonecode">
           </div-contenteditable>
           <i @click.stop="ShowCallingcode(true)" class="sms-triangle" />
         </div>
@@ -22,18 +22,18 @@
           </li>
         </ul>
       </div>
-        <basic-input style="min-height:66px" :validate='"CellPhone"' ref="cellphone" :placeholder='$t("placeholder.cell_phone_number")' v-model="SmsData.CellPhone">
+        <basic-input style="min-height:66px" :validate='"required|cellphone"' ref="cellphone" :placeholder='$t("placeholder.cell_phone_number")' v-model="SmsData.CellPhone">
         </basic-input>
       </div>
       <div class="btc-sms-code">
-        <basic-input  style="min-height:66px" :validate='"Verify Code"' ref="verifiycode" :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
+        <basic-input  style="min-height:66px" :validate='"required|verify_code"' ref="verifiycode" :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
         </basic-input>
         <button :disabled="disabled" class="btc-white-btn" @click="SendSms">
           {{ timer }}
         </button>
       </div>
       <div class="btc-sms-google btc-marginB30" v-if="loginData.app_activated">
-        <basic-input  style="min-height:66px"  :placeholder='$t("validate_sms.google_verification_code")' :validate='"Google Verify Code"' ref="googlecode" v-model="SmsData.googlecode">
+        <basic-input  style="min-height:66px"  :placeholder='$t("validate_sms.google_verification_code")' :validate='"required|google_verify_code"' ref="googlecode" v-model="SmsData.googlecode">
         </basic-input>
       </div>
       <basic-button  @click.native.enter.stop="Validate" style='width:100%' :text='$t("validate_sms.confirm")'>

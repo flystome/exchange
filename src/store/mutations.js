@@ -124,12 +124,14 @@ const mutations = {
       buttondisplay: state.PopupBox.buttondisplay,
       buttonText: state.PopupBox.buttonText,
       url: state.PopupBox.url,
+      href: state.PopupBox.href,
       confirm: state.PopupBox.confirm
     } = {
       type: obj.type ? obj.type : state.PopupBox.type,
       url: obj.url ? obj.url : state.PopupBox.url,
       status: obj.hasOwnProperty('status') ? obj.status : state.PopupBox.status,
       message: obj.message ? obj.message : state.PopupBox.message,
+      href: obj.href ? obj.href : state.PopupBox.href,
       buttonText: obj.buttonText !== undefined ? obj.buttonText : state.PopupBox.buttonText,
       confirm: obj.hasOwnProperty('confirm') ? obj.confirm : state.PopupBox.confirm,
       buttondisplay: Object.keys(obj).includes('buttondisplay') ? obj.buttondisplay : state.PopupBox.buttondisplay

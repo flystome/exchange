@@ -42,11 +42,9 @@ import * as Filters from '@/common/filters/filters.js'
 import 'swiper/dist/css/swiper.css'
 
 Vue.use(VueAwesomeSwiper)
-Vue.use(VeeValidate, {
-  i18n,
-  i18nRootKey: 'validation',
-  dictionary: dictionary
-})
+Vue.use(VeeValidate)
+
+// Vue.use(VeeValidate)
 
 Vue.use(Trend)
 

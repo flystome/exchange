@@ -10,7 +10,7 @@
           </button>
           <router-link class="navbar-brand" to="/">
             <i v-if="FROM" class='header-hlog'/>
-            <img v-else src="@/common/svg/logo.svg" style="margin-top: 3px;">
+            <img v-else src="@/common/svg/logo.svg">
           </router-link>
           <div class="btc-header-sideslip" @click="SideSlipMenuDisplay(true)">
             <a></a>
@@ -78,11 +78,13 @@
               <ul class="dropdown-menu">
                  <!-- <a><a :href="`${HOST_URL}/`">{{$t('nav.settings')}}</a></li> -->
                 <li><a @click="goPath('/my_account')">{{$t('nav.my_account')}}</a></li>
-                <li><a @click="goPath('/api')">{{$t("my_account.api")}}</a></li>
                 <li class="divider" role="separator"></li>
                 <li><a @click="goPath('/form/order')">{{$t("title.form_order")}}</a></li>
                 <li><a @click="goPath('/form/trade')">{{$t("title.form_trade")}}</a></li>
                 <li><a @click="goPath('/form/account')">{{$t("title.form_account")}}</a></li>
+                <li class="divider" role="separator"></li>
+                <li><a @click="goPath('/api')">{{$t("my_account.api")}}</a></li>
+                <li><a @click="goPath('/ticket')">{{$t("title.ticket")}}</a></li>
                 <li class="divider" role="separator"></li>
                 <li><a :href="`${HOST_URL}/signout`">{{$t('nav.exit')}}</a></li>
               </ul>

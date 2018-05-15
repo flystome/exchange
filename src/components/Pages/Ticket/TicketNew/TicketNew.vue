@@ -14,7 +14,7 @@
         <news-prompt style="display: block;margin-left:0;top: -10px;" class="btc-marginL25" :text='prompt'></news-prompt>
           <basic-input v-model="newTicket.label" :placeholder="$t('ticket.title')">
           </basic-input>
-          <div-contenteditable class="btc-marginT15 btc-ticket-editDiv" v-model="newTicket.details" :placeholder="$t('ticket.detailed_description')">
+          <div-contenteditable class="btc-marginT15 btc-ticket-editDiv" @keyup.enter.stop.native  v-model="newTicket.details" :placeholder="$t('ticket.detailed_description')">
             <span slot="placeholder">{{ $t('ticket.detailed_description') }}</span>
           </div-contenteditable>
           <div class="btc-ticket-flex btc-marginT15">

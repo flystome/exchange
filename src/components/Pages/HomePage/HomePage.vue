@@ -50,8 +50,8 @@
           <!-- <div class="btc-nologin"> -->
             <div class="form">
               <span>{{ $t('homepage.login') }}</span>
-              <basic-input ref="email" :validate='"email"' v-model="email" :placeholder="this.$t('homepage.enter_the_mailbox')" class="btc-input"></basic-input>
-              <basic-input ref="password" type='password' :validate='"password"' v-model="password" :placeholder="this.$t('homepage.enter_the_password')" class="btc-input"></basic-input>
+              <basic-input :delay='1000' ref="email" :validate='"required|email"' v-model="email" :placeholder="this.$t('homepage.enter_the_mailbox')" class="btc-input"></basic-input>
+              <basic-input :delay='1000' ref="password" type='password' :validate='"required|password"' v-model="password" :placeholder="this.$t('homepage.enter_the_password')" class="btc-input"></basic-input>
               <basic-button :disabled='disabled' @click.native="login" class="btn btc-button" :text="this.$t('homepage.login')"></basic-button>
               <div>
                 <a :href="`${HOST_URL}/signup`">{{ $t('homepage.free_registration') }}</a>
@@ -114,7 +114,7 @@
         <div @keyup.esc="search = ''" class="btc-homepage-search btc-fr btc-b">
           <input v-model="search" class="btc-search" :placeholder='$t("homepage.search")' />
           <i v-if='!search' class="home-search"></i>
-          <i v-else class="home-search-delete"></i>
+          <i @click="search = ''" v-else class="home-search-delete"></i>
         </div>
         <keep-alive>
           <HomeMarket ref="market" v-if="curData" v-on:marketChange="marketChange" :trend='trend' :search='search' :currency='currency[currencyindex]' :curData = "curData[currencyindex]">

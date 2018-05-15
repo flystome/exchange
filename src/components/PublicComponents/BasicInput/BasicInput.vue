@@ -17,7 +17,7 @@
      <slot name='button'></slot>
   </div> -->
   <div>
-    <input data-vv-delay="1000" v-validate="validate ? `required|${validate}` : ''"
+    <input :data-vv-delay="delay" v-validate="validate ? `${validate}` : ''"
     :class="{'input': true, 'is-danger':
     errors.has(`${validate}`) }"
     :value='value'
@@ -28,17 +28,24 @@
     :placeholder='placeholder'
     @input="$emit('input', $event.target.value)">
     <slot name='button'></slot>
-    <span v-show="errors.has(`${validate}`)" class="help is-danger">{{ errors.first(`${validate}`) | toUpperCase }}</span>
+    <span v-show="errors.has(`${validate}`) && !danger" class="help is-danger">{{ error }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['placeholder', 'validate', 'value', 'type', 'hidden', 'readonly'],
+  props: ['placeholder', 'validate', 'value', 'type', 'hidden', 'readonly', 'delay', 'danger'],
   name: 'BasicInput',
-  filters: {
-    toUpperCase (str) {
-      return str && `${str.slice(0, 1).toUpperCase()}${str.slice(1)}`
+  computed: {
+    error () {
+      var result = this.errors.first(this.validate)
+      if (!result) return ''
+      if (/\$/.test(result)) {
+        var [field, empty] = result.split('$')
+        return `${this.$t(`validation.field`).replace('%', this.$t(`validation.${field}`))}${this.$t(empty)}`
+      } else {
+        return this.$t(`validation.${result}`)
+      }
     }
   }
 }

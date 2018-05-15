@@ -11,6 +11,7 @@ const state = {
     buttonText: '',
     buttondisplay: true,
     confirm: false,
+    href: '',
     b: ''
   },
   fromApp: false,

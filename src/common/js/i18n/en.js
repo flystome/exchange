@@ -616,7 +616,18 @@ const en = {
       "reply_can_not_be_empty": "Reply can not be empty"
     },
     "validation": {
-      "verify_code": 'verify code'
+      "verify_code": 'verify code',
+      "no_empty": " can not be empty",
+      "field": "The % field",
+      "password_fail": "The password must be 8 digits and above",
+      "email_fail": "Not a valid email",
+      "email": "email",
+      "password": "Password",
+      "cellphone": "phone number",
+      "google_verify_code": "google verify code",
+      "first_name": "first name",
+      "last_name": "last name",
+      "IdCard": "IdCard"
     },
     "page_not_found": {
       "lost": "The page is lost, ",
@@ -625,4 +636,5 @@ const en = {
     }
   }
 }
+
 export default en

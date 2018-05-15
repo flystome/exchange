@@ -30,20 +30,39 @@ export default {
   data () {
     return {
       innerText: this.value,
-      isLocked: false
-    }
-  },
-  watch: {
-    'value' () {
-      if (!this.isLocked || !this.innerText) {
-        this.innerText = this.value
-      }
+      isLocked: true,
+      edit: true
     }
   },
   methods: {
     changeText () {
+      this.edit = true
       this.$emit('input', this.$el.children[0].innerHTML)
+      this.$nextTick(() => {
+        this.edit = false
+      })
+    },
+    changeInnerText () {
+      this.innerText = Math.random()
+      this.$nextTick(() => {
+        this.innerText = this.value
+      })
+    }
+  },
+  watch: {
+    'value' () {
+      if (this.edit && !this.innerText) return
+      this.changeInnerText()
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+ .edit-div{
+   &[contenteditable=true]{
+      -webkit-user-modify: read-write-plaintext-only;
+   }
+ }
+</style>
+

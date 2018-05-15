@@ -55,7 +55,11 @@ export default {
   methods: {
     confirm () {
       if (this.PopupBox.href) {
-        location.href = `${this.HOST_URL}/tickets/new`
+        this.$router.push(`${this.ROUTER_VERSION}${this.PopupBox.href}`)
+        this.ChangePopupBox({
+          href: '',
+          status: false
+        })
       } else {
         bus.$emit('Popbox-confirm')
         this.ChangePopupBox({

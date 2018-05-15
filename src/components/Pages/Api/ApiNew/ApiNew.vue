@@ -12,7 +12,7 @@
         <div class="btc-explain">
           {{ $t('api.label_describe') }}
         </div>
-        <basic-input ref="gV" :validate='"Google Verify Code"' :placeholder="$t('api.google_verification_code')" v-model="parme.otp">
+        <basic-input ref="gV" :validate='"required|google_verify_code"' :placeholder="$t('api.google_verification_code')" v-model="parme.otp">
         </basic-input>
         <div class="btc-marginT30 btc-marginB40">
           <basic-button class="btn" :disabled="disabled" @click.native='NewKey' :text='$t("api.confirm")'></basic-button>
@@ -29,12 +29,13 @@
           </div>
           <div class="btc-marginT40 btc-color666">
             <div class="btc-marginB10">
-              <strong>
+              <strong class="btc-fl">
                 Access Key
               </strong>
-              <news-prompt style="margin-right: 53px;margin-top: 1px;" class="btc-fr" :text='prompt1'></news-prompt>
+              <news-prompt class="btc-fl" :text='prompt1'></news-prompt>
+              <div class="clearfix"></div>
             </div>
-            <span  id="copy2" class="btc-marginT10">
+            <span id="copy2">
               {{ access_key }}
             </span>
             <span class='btn-copy2 btc-link btc-fr' data-clipboard-target="#copy2">
@@ -43,10 +44,11 @@
           </div>
           <div class="btc-marginT20 btc-color666">
             <div class="btc-marginB10">
-              <strong>
+              <strong class="btc-fl">
                 Secret Key
               </strong>
-              <news-prompt style="margin-right: 53px;margin-top: 1px;" class="btc-fr" :text='prompt'></news-prompt>
+              <news-prompt class="btc-fl" :text='prompt'></news-prompt>
+              <div class="clearfix"></div>
             </div>
             <span id="copy1">
               {{ secret_key }}
@@ -197,6 +199,19 @@ export default {
     float: right;
     padding: 5px 0;
   }
+}
+
+#copy1,#copy2{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 85%;
+    display: inline-block;
+}
+
+.btc-newsPrompt{
+  width: auto;
+  margin-left: 10px;
 }
 .btc-api-show{
   .btc-basic-button{

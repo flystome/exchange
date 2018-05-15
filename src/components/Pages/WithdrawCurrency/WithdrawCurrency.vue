@@ -101,7 +101,6 @@
               <div class="btc-withdraw-explain">
                 <span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }} {{ 2 * withdraw_fee }}</span>
                 <span class="btc-fr">{{ $t('withdraw_currency.poundage') }} {{ withdraw_fee }}</span>
-
               <!-- <span class="btc-fr btc-link">
                 <img src="~Img/tariff-description.png">{{$t('withdraw_currency.tariff_description')}}
               </span> -->
@@ -468,7 +467,6 @@ export default {
       this.PopupBoxDisplay({message: '', type: 'loading'})
       this.ChangePopupBox({
         buttondisplay: false,
-        type: 'loading',
         message: this.$t('hint.generating_address')
       })
       this.Time = setTimeout(() => {
@@ -476,6 +474,7 @@ export default {
           message: this.$t('hint.go_tickets'),
           type: 'error',
           confirm: true,
+          href: '/ticket/new',
           buttonText: this.$t('hint.no'),
           buttondisplay: true
         })

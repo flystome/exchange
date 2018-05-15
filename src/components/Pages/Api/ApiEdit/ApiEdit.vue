@@ -19,7 +19,7 @@
         <div class="btc-explain">
           {{ $t('api.ip_input') }}
         </div>
-        <basic-input ref="gV" :validate='"Google Verify Code"' :placeholder="$t('api.google_verification_code')" v-model="parme.otp">
+        <basic-input ref="gV" :validate='"required|google_verify_code"' :placeholder="$t('api.google_verification_code')" v-model="parme.otp">
         </basic-input>
         <div class="btc-marginT30 btc-marginB40">
           <basic-button class="btn" :disabled="disabled" @click.native="editApi" :text='$t("api.confirm")'></basic-button>

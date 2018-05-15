@@ -614,8 +614,25 @@ const zh = {
     "upload_photo": "上傳照片",
     "reply_can_not_be_empty": "回復不能空"
   },
-    "validation": {
-      "verify_code": '驗證碼'
+  "validation": {
+    "verify_code": '驗證碼',
+    "password": "密碼",
+    "no_empty": "不能為空",
+    "required|email": "郵箱"
+  },
+  "validation": {
+    "verify_code": '驗證碼',
+    "no_empty": "不能為空",
+    "field": "%",
+    "password_fail": "密碼必須是8位數及以上",
+    "email_fail": "郵箱無效",
+    "email": "郵箱",
+    "password": "密碼",
+    "cellphone": "手機號碼",
+    "google_verify_code": "谷歌驗證碼",
+    "first_name": "名字",
+    "last_name": "姓",
+    "IdCard": "身份證"
   },
   "page_not_found": {
     "lost": "頁面丟失,",
