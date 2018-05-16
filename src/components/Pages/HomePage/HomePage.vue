@@ -359,6 +359,7 @@ export default {
   mounted () {
     var time = 0
     var self = this
+    /* global ScrollReveal */
     var sr = ScrollReveal({
       axis: 'y',
       duration: 1000,

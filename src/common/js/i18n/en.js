@@ -627,7 +627,12 @@ const en = {
       "google_verify_code": "google verify code",
       "first_name": "first name",
       "last_name": "last name",
-      "IdCard": "IdCard"
+      "IdCard": "IdCard",
+      "withdraw_amount": "withdraw amount",
+      "less_then": "Minimum withdraw amount can not be less then",
+      "more_then": "Minimum withdraw amount can not be more then",
+      "withdraw_amount_NaN": "withdraw amount must be a number",
+      "withdraw_address": "withdraw address"
     },
     "page_not_found": {
       "lost": "The page is lost, ",

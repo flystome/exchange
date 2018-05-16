@@ -179,6 +179,10 @@
         .btc-withdraw-form {
             padding: 40px 230px;
             border-top: none;
+            .btc-newsPrompt{
+              margin-left: 0;
+              line-height: 13px;
+            }
         }
         .btc-withdraw-explain {
             line-height: 33px;
@@ -231,8 +235,10 @@
                 // border-width: 1px 0.5px 0.5px 0.5px;
             }
             img {
-                width: 18px;
-                height: 18px;
+              position: relative;
+              top: -1px;
+              width: 18px;
+              height: 18px;
             }
             span {
                 width: 25px;

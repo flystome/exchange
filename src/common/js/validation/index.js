@@ -1,4 +1,5 @@
 import { Validator } from 'vee-validate'
+import { BigNumber } from 'bignumber.js'
 import i18n from '@/common/js/i18n/i18n.js'
 const $t = i18n.t.bind(i18n)
 const dictionary = {
@@ -11,25 +12,13 @@ const dictionary = {
   }
 }
 Validator.localize(dictionary)
-// var empty = ['First Name', 'Verify Code', 'Last Name', 'IdCard', 'CellPhone', 'Google Verify Code']
 
-// empty.forEach(d => {
-//   Validator.extend(d, {
-//     getMessage () {
-//       console.log(123)
-//       return (data && data.validation) || 'Something went wrong'
-//     },
-//     validate: value => {
-//       return /\S+/.test(value)
-//     }
-//   })
-// })
-var empty = ['cellphone', 'google_verify_code', 'first_name', 'last_name', 'IdCard']
+var getMessage = (field, params, data) => { return `${field.replace('required|', '')}_fail` }
+
+var empty = ['cellphone', 'google_verify_code', 'first_name', 'withdraw_address', 'last_name', 'IdCard', 'verify_code']
 empty.forEach(d => {
   Validator.extend(d, {
-    getMessage (field) {
-      return `${field.replace('required|', '')}$validation.no_empty`
-    },
+    getMessage,
     validate: value => {
       return /\S+/.test(value)
     }
@@ -56,9 +45,36 @@ var validation = {
 
 Object.keys(validation).forEach((key) => {
   Validator.extend(key, {
-    ...{ getMessage: (field, params, data) => { return `${field.replace('required|', '')}_fail` } },
+    ...{ getMessage: getMessage },
     ...{ validate: validation[key] }
   })
+})
+
+Validator.extend('withdraw_amount', {
+  getMessage (field, params, data) {
+    return data
+  },
+  validate (value) {
+    return new Promise(resolve => {
+      try {
+        new BigNumber(value)
+        resolve({
+          valid: true
+        })
+      } catch (e) {
+        resolve({
+          data: 'withdraw_amount_NaN',
+          valid: false
+        })
+      }
+      // if (num.isNaN()) {
+      //   resolve({
+      //     messages: 'withdraw_amount_NaN',
+      //     valid: false
+      //   })
+      // }
+    })
+  }
 })
 
 export default dictionary

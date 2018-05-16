@@ -67,7 +67,6 @@ export default {
       callingcode: '',
       second: -1,
       resend: false,
-      isLocked: false,
       SmsData: {
         CellPhone: '',
         CellPhonecode: '86',

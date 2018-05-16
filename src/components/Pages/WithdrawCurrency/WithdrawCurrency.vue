@@ -44,7 +44,7 @@
         @click='ChoiceCoin(index, coin.node_enabled)'
         class="btc-b btn"
         :key="coin.code">
-          <img v-if="requireImg(`market/market-${coin.code}`)" :src="requireImg(`market/market-${coin.code}`)">
+          <img v-if="requireImg(`market/market-${coin.code}.svg`)" :src="requireImg(`market/market-${coin.code}.svg`)">
           <span>
             {{ coin.code | toUpperCase }}
           </span>
@@ -56,7 +56,8 @@
             name: "withdraw_currency_address",
             value: this.$t("withdraw_currency.withdraw_currency_address")
           }]' v-model="this.withdrawAddress"></basic-option> -->
-          <div @click.stop="ChoiceStatus(!choice)" class="btc-withdraw-address btc-b-l" :style="{background:`url('${requireImg('large/select')}') 100% 100%`}">
+          <news-prompt :Time='3000' v-on:bind='withdraw_prompt = $event' :text='withdraw_prompt'></news-prompt>
+          <div @click.stop="ChoiceStatus(!choice)" class="btc-withdraw-address btc-b-l" :style="{background:`url('${requireImg('large/select.png')}') 100% 100%`}">
             {{ Address !== 'withdraw_currency.withdraw_currency_address' ? Address : $t('withdraw_currency.withdraw_currency_address') }}
           </div>
           <div v-show="choice" @click.stop="ChoiceStatus(true)" class='btc-b btc-address-contain'>
@@ -88,14 +89,14 @@
             <div class="btc-marginT15 btc-withdraw-add" style="display: flex" v-if="withdrawAddress">
               <basic-input class="btc-withdraw-all" v-model="WithdrawData.remark" :placeholder='$t("withdraw_currency.remark_label")'>
               </basic-input>
-              <basic-input class="btc-withdraw-all" v-model="WithdrawData.newAddress" :placeholder='$t("withdraw_currency.withdraw_currency_address")'>
+              <basic-input class="btc-withdraw-all" :validate='"required|withdraw_address"' :danger='true' ref="withdraw_address" v-model="WithdrawData.newAddress" :placeholder='$t("withdraw_currency.withdraw_currency_address")'>
               </basic-input>
             </div>
             <div class="btc-withdraw-explain">
               <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance | toFixed }} {{ CurrencyType | toUpperCase }} <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain | toFixed }} {{ CurrencyType | toUpperCase }}<span v-if="equivalence" style="color:black">≈{{ equivalence | toFixed }} BTC</span>
             </div>
             <template v-if="Address !== 'withdraw_currency.withdraw_currency_address' || withdrawAddress">
-              <basic-input ref='WithdrawAll' v-model="WithdrawData.amount" class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
+              <basic-input :validate='"required|withdraw_amount"' :invalid='invalid' :danger='true' ref='withdraw_amount' v-model="WithdrawData.amount" class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
                   <basic-button :disabled='disabled' @click.native="WithdrawAll" class="btc-link btn" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
                 </basic-input>
               <div class="btc-withdraw-explain">
@@ -112,12 +113,12 @@
                   <option v-if="loginData.app_activated" value="google">{{ this.$t('withdraw_currency.google_validate') }}</option>
                   <option v-if="loginData.sms_activated" value="sms">{{ this.$t('withdraw_currency.sms') }}</option>
                 </select>
-                <basic-input v-model="WithdrawData.otp"  :key="validate" class="btc-marginB10">
+                <basic-input :danger='true' ref='verify_code' :validate='"required|verify_code"'  v-model="WithdrawData.otp"  :key="validate" class="btc-marginB10">
                 </basic-input>
                 <button :disabled='disabled' @click="SendSms" v-if="validate === 'sms'" class="btc-white-btn btn">{{ timer }}</button>
               </div>
               <div v-if="Rucaptcha">
-                <basic-input :placeholder="$t('deposit_currency.identifying_code')" v-model="WithdrawData.rucaptcha"  class="btc-marginT10">
+                <basic-input :danger='true' ref='rucaptcha' :validate='"required|verify_code"' :placeholder="$t('deposit_currency.identifying_code')" v-model="WithdrawData.rucaptcha"  class="btc-marginT10">
                 </basic-input>
                 <img @click="ChangeRucaptcha" class="btc-pointer btc-marginB10" :key="'rucaptcha'" :src="`${HOST_URL}${Rucaptcha}`">
               </div>
@@ -354,7 +355,9 @@ export default {
         type: 'success',
         point: '.'
       },
+      invalid: false,
       prompt:'',
+      withdraw_prompt: '',
       account_id: '',
       usdt_worth: '',
       length: 0,
@@ -424,10 +427,13 @@ export default {
       window.open(url)
     },
     ChangeRucaptcha () {
-      this.Rucaptcha += `?${Math.random()}`
+      this.Rucaptcha = `${this.Rucaptcha.replace(/\?.+/, '')}?${Math.random()}`
     },
     WithdrawAll () {
-      this.WithdrawData.amount = Math.min(Number(this.Remain), Number(this.Balance)).toFixed(8)
+      this.WithdrawData.amount = this.$store.getters.ToFixed(Math.min(Number(this.Remain), Number(this.Balance)))
+      this.$nextTick(() => {
+        this.$refs.withdraw_amount.$validator.validateAll()
+      })
     },
     AddAddress () {
       this.withdrawAddress = true
@@ -437,9 +443,13 @@ export default {
     },
     requireImg (img) {
       try {
-        return require(`../../../../static/img/${img}.png`)
+        return require(`../../../../static/img/${img}`)
       } catch (error) {
-        return false
+        try {
+          return require(`../../../../static/img/${img.replace('.svg', '.png')}`)
+        } catch (error) {
+          return false
+        }
       }
     },
     ChoiceCoin (index, type) {
@@ -635,11 +645,56 @@ export default {
         }
       })
     },
-    Withdraw () {
+    async Withdraw () {
+      if (this.disabled) return
       if (!this.WithdrAwable) {
         this.PopupBoxDisplay({message: this.$t('withdraw_currency.temporarily_can_not_withdraw'), type: 'error'})
         return
       }
+
+      if (this.withdrawAddress) {
+        const withdraw_address = this.$refs['withdraw_address']
+        var withdraw_valid = await withdraw_address.$validator.validateAll()
+        if (!withdraw_valid) {
+          this.withdraw_prompt = withdraw_address.error
+          return
+        }
+      }
+
+      const withdraw_amount = this.$refs['withdraw_amount']
+      var amount_valid = await withdraw_amount.$validator.validateAll()
+      if (!amount_valid) {
+        this.withdraw_prompt = withdraw_amount.error
+        return
+      } else {
+        if (this.WithdrawData.amount < this.withdraw_fee * 2) {
+          this.withdraw_prompt = `${this.$t('validation.less_then')} ${this.withdraw_fee * 2} ${this.CurrencyType.toUpperCase()}`
+          this.invalid = true
+          return
+        }
+        if (this.WithdrawData.amount > Math.min(Number(this.Remain), Number(this.Balance))) {
+          this.invalid = true
+          this.withdraw_prompt = `${this.$t('validation.more_then')} ${Math.min(Number(this.Remain), Number(this.Balance))} ${this.CurrencyType.toUpperCase()}`
+          return
+        }
+      }
+
+      const verify_code = this.$refs['verify_code']
+      var verify_valid = await verify_code.$validator.validateAll()
+      if (!verify_valid) {
+        this.withdraw_prompt = verify_code.error
+        return
+      }
+
+      if (this.$refs['rucaptcha']) {
+        const rucaptcha = this.$refs['rucaptcha']
+        var rucaptcha_valid = await rucaptcha.$validator.validateAll()
+        if (!rucaptcha_valid) {
+          this.withdraw_prompt = rucaptcha.error
+          return
+        }
+      }
+
       var validate = this.validate !== 'sms' ? {
         type: 'app',
         otp: this.WithdrawData.otp
@@ -855,6 +910,9 @@ export default {
       } else {
         this.$router.push(`${this.ROUTER_VERSION}/currency/withdraw`)
       }
+    },
+    'WithdrawData.amount' () {
+      this.invalid = false
     }
   }
 }

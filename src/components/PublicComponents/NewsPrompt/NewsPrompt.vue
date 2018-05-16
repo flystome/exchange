@@ -13,7 +13,29 @@
 <script>
 export default {
   name: 'NewsPrompt',
-  props: ['text']
+  props: {
+    text: {
+      type: String
+    },
+    Time: {
+      type: Number
+    }
+  },
+  data () {
+    return {
+      Timer: ''
+    }
+  },
+  watch: {
+    text () {
+      if (this.text && this.Time) {
+        if (this.Timer) clearTimeout(this.Timer)
+        this.Timer = setTimeout(() => {
+          this.$emit('bind', '')
+        }, this.Time)
+      }
+    }
+  }
 }
 </script>
 

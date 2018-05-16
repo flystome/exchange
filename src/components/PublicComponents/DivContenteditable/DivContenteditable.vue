@@ -3,8 +3,6 @@
     <div class="edit-div"
     v-html="innerText" :contenteditable="canEdit"
     :value='value'
-    @focus="isLocked = true"
-    @blur="isLocked = false"
     @input="changeText">
     </div>
     <slot v-if="!value" name='placeholder'></slot>
@@ -30,7 +28,6 @@ export default {
   data () {
     return {
       innerText: this.value,
-      isLocked: true,
       edit: true
     }
   },
@@ -49,9 +46,15 @@ export default {
       })
     }
   },
+  mounted () {
+    if (this.value) {
+      this.edit = false
+      this.changeText()
+    }
+  },
   watch: {
     'value' () {
-      if (this.edit && !this.innerText) return
+      if (this.edit) return
       this.changeInnerText()
     }
   }
@@ -65,4 +68,3 @@ export default {
    }
  }
 </style>
-

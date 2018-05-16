@@ -19,7 +19,7 @@
   <div>
     <input :data-vv-delay="delay" v-validate="validate ? `${validate}` : ''"
     :class="{'input': true, 'is-danger':
-    errors.has(`${validate}`) }"
+    errors.has(`${validate}`) || invalid }"
     :value='value'
     :readonly='readonly'
     :type="type ? type : 'text'"
@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  props: ['placeholder', 'validate', 'value', 'type', 'hidden', 'readonly', 'delay', 'danger'],
+  props: ['placeholder', 'validate', 'value', 'type', 'hidden', 'readonly', 'delay', 'danger', 'invalid'],
   name: 'BasicInput',
   computed: {
     error () {
