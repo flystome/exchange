@@ -2,10 +2,10 @@
   display: inline-block;
   padding: 0 15px;
   position: relative;
-  height: 40px;
+  height: 32px;
   .setting_btn {
     font-size: 12px;
-    line-height: 40px;
+    line-height: 32px;
     color: #728eaa;
     text-decoration: none;
     &:hover {
@@ -22,7 +22,7 @@
     position: absolute;
     right: 15px;
     left: auto;
-    top: 40px;
+    top: 32px;
     background: #38475a;
     width: 100px;
     min-width: 80px;

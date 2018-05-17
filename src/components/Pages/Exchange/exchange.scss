@@ -18,7 +18,7 @@
   }
   .loginTip {
     display: inline-block;
-    height: 40px;
+    height: 32px;
     color: #87a3bf;
     font-size: 12px;
     p {
@@ -35,22 +35,32 @@
     }
   }
   header {
-    height: 60px;
+    height: 48px;
     width: 100%;
-    padding: 10px 0;
+    padding: 8px 0;
     background: #1f3651;
-    vertical-align: -4px;
     .logo {
       display: inline-block;
       width: 88px;
       margin-left: 15px;
-      line-height: 40px;
+      vertical-align: 6px;
+      height: 100%;
       img {
         width: 100%;
       }
     }
     .header_rt {
+      height: 32px;
+      line-height: 32px;
       float: right;
+      .person_info {
+        display: inline-block;
+        a {
+          display: inline-block;
+          @include sprite($header-letterlog)
+          vertical-align: -2px;
+        }
+      }
     }
   }
   .w240 {
@@ -63,21 +73,42 @@
   .content {
     display: inline-block;
     float: left;
-    height: calc(100vh - 63px);
+    height: calc(100vh - 48px);
     width: calc(100% - 492px);
     min-height: 705px;
     min-width: 708px;
-    margin: 3px 3px 0 3px;
+    margin: 0 3px 0 3px;
     .top_content {
       width: 100%;
       height: calc(100% - 219px);
       margin-bottom: 3px;
+      position: relative;
       .chart {
         display: inline-block;
-        float: right;
+        position: absolute;
+        left: 243px;
+        top: 0;
         width: calc(100% - 243px);
         height: 100%;
         background: #101622;
+        &.move-right {
+          animation: expandRight 0.8s ease forwards;
+        }
+        &.move-zero {
+          animation: expandZero2 0.8s ease forwards;
+        }
+      }
+      .market {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 240px;
+        &.move-left {
+          animation: expandLeft 0.8s ease forwards;
+        }
+        &.move-zero {
+          animation: expandZero1 0.8s ease forwards;
+        }
       }
     }
     .my_order {
@@ -90,8 +121,7 @@
     display: inline-block;
     float: right;
     width: 483px;
-    height: calc(100vh - 63px);
-    margin-top: 3px;
+    height: calc(100vh - 48px);
     margin-right: 3px;
     &>div {
       background: none;
@@ -105,7 +135,7 @@
       float: right;
     }
     .list_box {
-      height: calc(100% - 267px);
+      height: calc(100% - 237px);
       min-height: 438px;
       overflow-y:hidden;
       background: #232e3a;
@@ -113,7 +143,7 @@
     }
     .order {
       background: #101622;
-      height: 264px;
+      height: 234px;
     }
   }
   .vue-scrollbar__scrollbar-vertical:hover, .vue-scrollbar__scrollbar-horizontal {
@@ -156,6 +186,44 @@
       background: none;
     }
   }
+
+  @keyframes expandLeft {
+    0% {
+      left: 0;
+    }
+    100% {
+      left: -243px;
+    }
+  }
+  @keyframes expandZero1 {
+    0% {
+      left: -243px
+    }
+    100% {
+      left: 0;
+    }
+  }
+  @keyframes expandRight {
+    0% {
+      left: 0;
+      width: 100%;
+    }
+    100% {
+      left: 243px;
+      width: calc(100% - 243px);
+    }
+  }
+  @keyframes expandZero2 {
+    0% {
+      left: 243px;
+      width: calc(100% - 243px);
+    }
+    100% {
+      left: 0;
+      width: 100%;
+    }
+  }
+
   .slide-fade-enter-active {
     animation: fadeIn 1s ease;
   }

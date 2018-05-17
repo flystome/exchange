@@ -1,6 +1,7 @@
 #lastPrice {
   display: inline-block;
   vertical-align: middle;
+  height: 40px;
   ul {
     display: inline-block;
     margin-bottom: 0;
@@ -14,12 +15,15 @@
       .name {
         color: #87a3bf;
         font-size: 12px;
-        line-height: 20px;
+        height: 16px;
+        line-height: 16px;
         display: block;
       }
       .value {
         color: #fff;
         display: block;
+        height: 16px;
+        line-height: 16px;
       }
     }
   }

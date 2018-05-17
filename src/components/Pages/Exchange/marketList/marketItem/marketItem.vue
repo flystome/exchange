@@ -6,27 +6,28 @@
         <i class="caret"></i>
       </li>
     </ul>
-    <ul class="bd">
-      <li v-for="item in oldData" :key="'market-'+item.quote_currency">
-        <div class="my_fav" :class='{"favorite": item.is_portfolios}' @click="toggleFav(item.quote_currency, item.base_currency, item.is_portfolios, item)">
-          <i class="fa fa-star"></i>
-        </div>
-        <div class="list-coin">
-          <router-link :to="{path: `${ROUTER_VERSION}/exchange/${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`}">
-            <span>{{item.quote_currency | upper}}/</span><span>{{item.base_currency | upper}}</span>
-          </router-link>
-          <!-- <a href="###" @click='refreshPage(item.quote_currency, item.base_currency)'>
-            <span>{{item.quote_currency | upper}}</span>/<span>{{item.base_currency | upper}}</span>
-          </a> -->
-        </div>
-        <div class="list-price" :class="{'up': item.trend == 'up' , 'down': item.trend == 'down'}">{{item.last | fixedNum(item.price_fixed)}}</div>
-        <div class="list-btn" :class="{'up': item.percent > 0, 'down': item.percent < 0}">{{item.percent | fixed2}}%</div>
-      </li>
-    </ul>
+    <scrollBar classes='myScroll'>
+      <ul class="bd">
+        <li v-for="item in oldData" :key="'market-'+item.quote_currency">
+          <div class="my_fav" :class='{"favorite": item.is_portfolios}' @click="toggleFav(item.quote_currency, item.base_currency, item.is_portfolios, item)">
+            <i class="fa fa-star"></i>
+          </div>
+          <div class="list-coin">
+            <router-link :to="{path: `${ROUTER_VERSION}/exchange/${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`}">
+              <span>{{item.quote_currency | upper}}/</span><span>{{item.base_currency | upper}}</span>
+            </router-link>
+          </div>
+          <div class="list-price" :class="{'up': item.trend == 'up' , 'down': item.trend == 'down'}">{{item.last | fixedNum(item.price_fixed)}}</div>
+          <div class="list-btn" :class="{'up': item.percent > 0, 'down': item.percent < 0}">{{item.percent | fixed2}}%</div>
+        </li>
+      </ul>
+    </scrollBar>
   </div>
 </template>
 
 <script>
+import scrollBar from 'vue2-scrollbar'
+
 export default {
   name: 'marketItem',
   props: ['curData'],
@@ -40,6 +41,7 @@ export default {
       oldData: []
     }
   },
+  components: { scrollBar },
   watch: {
     curData: function (val, oldVal) {
       if (!val) {

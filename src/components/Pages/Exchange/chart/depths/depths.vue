@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import { bus } from '@/common/js/bus/index'
 const echarts = require('echarts')
 
 export default {
@@ -21,6 +22,12 @@ export default {
   },
   mounted () {
     this.createDepths()
+    bus.$on('slidelr', (bool) => {
+      var timer = setTimeout(() => {
+        this.depths.resize()
+        clearTimeout(timer)
+      }, 800)
+    })
   },
   watch: {
     depthData (val, oldVal) {

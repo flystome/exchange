@@ -1,14 +1,20 @@
 .account {
   display: inline-block;
-  height: 40px;
+  height: 32px;
   padding: 0 15px;
   position: relative;
   .account_btn {
     display: inline-block;
-    line-height: 40px;
+    line-height: 32px;
     font-size: 12px;
     color: #87a3bf;
     text-decoration: none;
+    i.sideslipAssets {
+      @include sprite($assert)
+      display: inline-block;
+      vertical-align: -1px;
+      margin-right: 3px;
+    }
     &:hover {
       text-decoration: none;
     }
@@ -19,7 +25,7 @@
   .dropdown {
     position: absolute;
     right: 0;
-    top: 40px;
+    top: 32px;
     background: #38475a;
     width: 320px;
     padding: 1px 15px;

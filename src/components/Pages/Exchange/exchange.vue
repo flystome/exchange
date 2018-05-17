@@ -11,16 +11,19 @@
           <p>{{$t('exchange.unlogin.please')}}<a :href="`${HOST_URL}/signin?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${HOST_URL}/signup?from=${location}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
         </div>
         <setting v-if='loginData !== "none"' :loginData='loginData' @controlSound='controlSound'></setting>
+        <div class="person_info">
+          <a :href="`${ROUTER_VERSION}/form/news`"><i></i></a>
+        </div>
         <language></language>
       </div>
     </header>
 
     <section class="content">
       <div class="top_content clearfix">
-        <div class="market w240">
-          <marketList :markets="markets" @reFreshFav='reFreshFav'></marketList>
+        <div class="market w240" :class="{'move-left': moveToLeft1, 'move-zero': moveToRight1}">
+          <marketList :markets="markets" @reFreshFav='reFreshFav' @moveLeft='moveLeft'></marketList>
         </div>
-        <div class="chart">
+        <div class="chart" :class="{'move-right': moveToLeft2, 'move-zero': moveToRight2}">
           <chart :market="market" :depthData='depth_data'></chart>
         </div>
       </div>
@@ -76,6 +79,7 @@ export default {
     return {
       HOST_URL: process.env.HOST_URL,
       location: location.href,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       curMarket: '',
       lastPriceData: {},
       all_trades: [],
@@ -89,7 +93,11 @@ export default {
       my_trades: [],
       version: 0,
       soundAllow: true,
-      accounts: {}
+      accounts: {},
+      moveToLeft1: false,
+      moveToLeft2: false,
+      moveToRight1: false,
+      moveToRight2: false
     }
   },
   components: {
@@ -337,6 +345,8 @@ export default {
           })
           this.my_orders[1].unshift(data)
         } else if (data.state === 'done') {
+          console.log(data)
+          this.showNotice(data.price, data.origin_volume - data.volume)
           this.my_orders[0].map(function (ele, i, arr) {
             if (ele.id === data.id) {
               arr.splice(i, 1)
@@ -409,6 +419,32 @@ export default {
           }
         })
       }
+    },
+    moveLeft (bool) {
+      if (bool) {
+        this.moveToLeft1 = true
+        this.moveToLeft2 = false
+        this.moveToRight1 = false
+        this.moveToRight2 = true
+      } else {
+        this.moveToLeft1 = false
+        this.moveToLeft2 = true
+        this.moveToRight1 = true
+        this.moveToRight2 = false
+      }
+    },
+    showNotice (price, volume) {
+      Notification.requestPermission((permit) => {
+        if (permit === 'granted') {
+          new Notification('Trade', {
+            dir: 'auto',
+            icon: 'Static/img/ok.svg',
+            body: `Price: ${price}\nVoluume: ${volume}`,
+            tag: 'trade',
+            renotify: true
+          })
+        }
+      })
     }
   }
 }

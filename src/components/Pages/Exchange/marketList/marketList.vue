@@ -1,5 +1,6 @@
 <template>
   <section id="marketList">
+    <a class="expand" @click='changePos'><i :class="{'mycaret': move, 'left_caret': !move}"></i></a>
     <ul class="marketsHd clearfix">
       <li v-for="(hd,index) in hds" :key="'market'+hd" :class="{'check': currencyIndex == index}"
       @click="changeMarket(index,hd)">{{$t(hd)}}</li>
@@ -21,6 +22,7 @@
 
 <script>
 import marketItem from './marketItem/marketItem'
+import { bus } from '@/common/js/bus/index'
 
 export default {
   name: 'marketList',
@@ -32,7 +34,8 @@ export default {
       curData: [],
       pipeData: [],
       getMarket: '',
-      searchDel: false
+      searchDel: false,
+      move: false
     }
   },
   components: {
@@ -96,6 +99,11 @@ export default {
     },
     changeFav (quote, base, bool) {
       this.$emit('reFreshFav', quote, base, bool)
+    },
+    changePos () {
+      this.move = !this.move
+      this.$emit('moveLeft', this.move)
+      bus.$emit('slidelr', this.move)
     }
   }
 }

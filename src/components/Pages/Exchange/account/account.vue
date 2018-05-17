@@ -1,6 +1,7 @@
 <template>
   <div class="account" @mouseenter='show=true' @mouseleave='show=false'>
     <a class="dropdown-toggle account_btn" data-toggle="dropdown" href="###" role="button" aria-haspopup="true" aria-expanded="false">
+      <i class="sideslipAssets"></i>
       <span>{{ totalAssets}} BTC</span>
     </a>
     <div class="dropdown text-center" v-show='show'>
