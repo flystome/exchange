@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store'
+import { redirect } from '../store/mutations'
 var route = ''
 const MemberCenter = () => import(/* webpackChunkName: "MemberCenter" */ 'Pages/MemberCenter/MemberCenter')
 // validate
@@ -285,7 +286,7 @@ const router = new Router({
   ]
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   route = to
   if (to.query.from === 'app') {
     store.state.fromApp = true
@@ -301,9 +302,17 @@ router.beforeEach((to, from, next) => {
     }
   }
   if (store.state.loginData === 'none') {
-    store.dispatch('getData', to)
+    var result = await store.dispatch('getData', to)
+    if (result) {
+      next(`${version}/my_account`)
+      return
+    }
   } else {
-    store.commit('redirect', to)
+    // store.commit('redirect', to)
+    if (to.name !== 'my_account' && !redirect(store.state, store, to)) {
+      next(from.path)
+      return
+    }
   }
   next()
 })

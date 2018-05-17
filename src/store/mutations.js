@@ -5,33 +5,39 @@ import Cookies from 'js-cookie'
 const ROUTER_VERSION = process.env.ROUTER_VERSION
 const HOST_URL = process.env.HOST_URL
 
-const redirect = (state, action, route) => {
+export const redirect = (state, action, route) => {
   // var route = type ? state.route.from.name : state.route.name
   // var path = type ? state.route.from.path : state.route.path
   i18n.locale = Cookies.get('locale') ? Cookies.get('locale') : 'en'
+  var flag = true
   switch (route.name) {
     case 'ValidateGoogle':
       if (!state.loginData.activated) {
         action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/my_account'})
+        flag = false
+        return
       } else if (state.loginData.app_activated) {
-        router.replace(`${ROUTER_VERSION}/`)
+        router.replace(`${ROUTER_VERSION}/my_account`)
       }
       break
     case 'ValidateSms':
       if (!state.loginData.activated) {
         action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/my_account'})
+        flag = false
       } else if (state.loginData.sms_activated) {
-        router.replace({path: `${ROUTER_VERSION}/`})
+        router.replace({path: `${ROUTER_VERSION}/my_account`})
       }
       break
     case 'ValidateIdentity':
       if (!state.loginData.activated) {
         action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint'), type: 'warn', url: '/my_account'})
+        flag = false
         return
       } else if (!(state.loginData.sms_activated || state.loginData.app_activated)) {
         action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1002_hint'), type: 'warn', url: '/my_account'})
+        flag = false
       } else if (state.loginData.id_document.aasm_state !== 'unverified') {
-        router.replace({path: `${ROUTER_VERSION}/`})
+        router.replace({path: `${ROUTER_VERSION}/my_account`})
       }
       break
     case 'WithdrawCurrency':
@@ -54,10 +60,12 @@ const redirect = (state, action, route) => {
         code = 1002
       }
       if (code) {
+        flag = false
         action.commit('PopupBoxDisplay', {message: i18n.t(`my_account.${code}_hint`) , type: 'warn' ,url: '/my_account'})
       }
     } else if (/deposit/.test(route.path)) {
       if (!state.loginData.activated) {
+        flag = false
         action.commit('PopupBoxDisplay', {message: i18n.t('my_account.1001_hint') , type: 'warn' ,url: '/my_account'})
         return
       }
@@ -67,14 +75,17 @@ const redirect = (state, action, route) => {
     case 'ApiNew':
     case 'ApiEdit':
     if (!state.loginData.app_activated) {
+      flag = false
       action.commit('PopupBoxDisplay', {message: i18n.t(`my_account.1004_hint`) , type: 'warn' ,url: '/my_account'})
       return
     }
     if (state.loginData.id_document.aasm_state !== 'verified') {
+      flag = false
       action.commit('PopupBoxDisplay', {message: i18n.t(`my_account.1003_hint`) , type: 'warn' ,url: '/my_account'})
     }
     break
   }
+  return flag
 }
 
 const mutations = {

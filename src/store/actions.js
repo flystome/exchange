@@ -1,49 +1,104 @@
 import { _get } from '../axios'
 import Cookies from 'js-cookie'
+import { redirect } from '../store/mutations'
 
 const unLogin = ['HomePage', 'MexchangeMarkets', 'MexchangeDetail', 'MexchangeTrades', 'home', 'MexchangeOrders', 'notFound', 'Exchange']
 
 const actions = {
   getData ({ commit, state }, route) {
     Cookies.get('validate_token') && Cookies.set('php_session', Cookies.get('validate_token'))
-    _get({
-      url: '/settings/member.json',
-      headers: {
-        'DataType': 'application/json;charset=utf-8'
-      }
-    }, (d) => {
-      var lang = Cookies.get('locale')
-      if (lang) {
-        this.commit('ChangeLanguage', lang)
-      } else {
-        Cookies.set('locale', 'en')
-      } // setCookie
-      if (state.marketData === '') {
-        if (d.data && d.data.error) {
-          if (!localStorage.getItem('marketData')) {
-            this.dispatch('GetMarketData', 'local')
-          } else {
-            commit('GetMarketData', JSON.parse(localStorage.getItem('marketData')))
-          }
-        } else {
-          this.dispatch('GetMarketData')
+    return new Promise((resolve, reject) => {
+      _get({
+        url: '/settings/member.json',
+        headers: {
+          'DataType': 'application/json;charset=utf-8'
         }
-      } // getMaretData
-      if (route === undefined) route = state.route
-      if (unLogin.includes(route.name)) {
-        if (d.data && !d.data.error) commit('getData', d)
-        commit('redirect', route)
+      }, (d) => {
+        var lang = Cookies.get('locale')
+        if (lang) {
+          this.commit('ChangeLanguage', lang)
+        } else {
+          Cookies.set('locale', 'en')
+        } // setCookie
+        if (state.marketData === '') {
+          if (d.data && d.data.error) {
+            if (!localStorage.getItem('marketData')) {
+              this.dispatch('GetMarketData', 'local')
+            } else {
+              commit('GetMarketData', JSON.parse(localStorage.getItem('marketData')))
+            }
+          } else {
+            this.dispatch('GetMarketData')
+          }
+        } // getMaretData
+        if (route === undefined) route = state.route
+        if (unLogin.includes(route.name)) {
+          if (d.data && !d.data.error) commit('getData', d)
+          if (!redirect(state, arguments[0], route)) {
+            resolve(true)
+          } else {
+            resolve(false)
+          }
+          commit('GetCmsUrl')
+          return
+        } // unredirct pages
+        if (d.data.error) {
+          Cookies.set('status', 'nologin')
+          location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
+        }
         commit('GetCmsUrl')
-        return
-      } // unredirct pages
-      if (d.data.error) {
-        Cookies.set('status', 'nologin')
-        location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
-      }
-      commit('GetCmsUrl')
-      commit('getData', d)
-      commit('redirect', route)
+        commit('getData', d)
+        if (!redirect(state, arguments[0], route)) {
+          resolve(true)
+        } else {
+          resolve(false)
+        }
+      })
     })
+    // _get({
+    //   url: '/settings/member.json',
+    //   headers: {
+    //     'DataType': 'application/json;charset=utf-8'
+    //   }
+    // }, (d) => {
+    //   var lang = Cookies.get('locale')
+    //   if (lang) {
+    //     this.commit('ChangeLanguage', lang)
+    //   } else {
+    //     Cookies.set('locale', 'en')
+    //   } // setCookie
+    //   if (state.marketData === '') {
+    //     if (d.data && d.data.error) {
+    //       if (!localStorage.getItem('marketData')) {
+    //         this.dispatch('GetMarketData', 'local')
+    //       } else {
+    //         commit('GetMarketData', JSON.parse(localStorage.getItem('marketData')))
+    //       }
+    //     } else {
+    //       this.dispatch('GetMarketData')
+    //     }
+    //   } // getMaretData
+    //   if (route === undefined) route = state.route
+    //   if (unLogin.includes(route.name)) {
+    //     if (d.data && !d.data.error) commit('getData', d)
+    //     if(!redirect(state, arguments[0], route)) {
+    //       router.push(`${ROUTER_VERSION}/my_account`)
+    //       return
+    //     }
+    //     commit('GetCmsUrl')
+    //     return
+    //   } // unredirct pages
+    //   if (d.data.error) {
+    //     Cookies.set('status', 'nologin')
+    //     location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
+    //   }
+    //   commit('GetCmsUrl')
+    //   commit('getData', d)
+    //   if(!redirect(state, arguments[0], route)) {
+    //     router.push(`${ROUTER_VERSION}/my_account`)
+    //     return
+    //   }
+    // })
   },
   redirect ({ commit, state }, route) {
     commit('redirect', route)
