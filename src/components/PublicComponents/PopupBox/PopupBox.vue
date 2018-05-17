@@ -30,7 +30,7 @@ export default {
     width: 100%;
     height: 100%;
     left: 0;
-    background: black;
+    background: rgba(0,0,0,0.3);
     transition: all 0.23s;
     z-index: 9999;
   }
