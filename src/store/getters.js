@@ -25,6 +25,14 @@ const getters = {
     }, 0)
   },
   TotalAssets: state => () => {
+    console.log(1)
+    console.log(Object.keys(state.assets).reduce((num, index) => {
+      var reg = /.*\..*/
+      var assets = state.assets[index]
+      var total = new BigNumber(assets.balance.toString()).plus(assets.locked.toString()).multipliedBy(assets.price.toString())
+      var result = total.plus(num)
+      return Number(result).toFixed(Math.min((!reg.test(result) ? 0 : String(result).split('.')[1]).length, 8))
+    }, 0))
     return state.assets === '' ? '' : Object.keys(state.assets).reduce((num, index) => {
       var reg = /.*\..*/
       var assets = state.assets[index]
