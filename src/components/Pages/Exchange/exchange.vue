@@ -133,6 +133,7 @@ export default {
   },
   computed: {
     TotalAssets () {
+      console.log(this.$store.getters.TotalAssets())
       return this.$store.getters.TotalAssets()
     },
     ...mapGetters(['loginData']),
@@ -345,7 +346,6 @@ export default {
           })
           this.my_orders[1].unshift(data)
         } else if (data.state === 'done') {
-          console.log(data)
           this.showNotice(data.price, data.origin_volume - data.volume)
           this.my_orders[0].map(function (ele, i, arr) {
             if (ele.id === data.id) {

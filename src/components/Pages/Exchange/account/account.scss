@@ -1,11 +1,11 @@
 .account {
   display: inline-block;
-  height: 32px;
+  height: 48px;
   padding: 0 15px;
   position: relative;
   .account_btn {
     display: inline-block;
-    line-height: 32px;
+    line-height: 48px;
     font-size: 12px;
     color: #87a3bf;
     text-decoration: none;
@@ -25,11 +25,10 @@
   .dropdown {
     position: absolute;
     right: 0;
-    top: 32px;
-    background: #38475a;
+    top: 48px;
+    background: #1f3651;
     width: 320px;
     padding: 1px 15px;
-    background: #38475a;
     color: #87a3bf;
     font-size: 12px;
     font-weight: normal;

@@ -37,21 +37,21 @@
   header {
     height: 48px;
     width: 100%;
-    padding: 8px 0;
+    // padding: 8px 0;
     background: #1f3651;
     .logo {
       display: inline-block;
       width: 88px;
       margin-left: 15px;
-      vertical-align: 6px;
+      vertical-align: -3px;
       height: 100%;
       img {
         width: 100%;
       }
     }
     .header_rt {
-      height: 32px;
-      line-height: 32px;
+      height: 48px;
+      line-height: 48px;
       float: right;
       .person_info {
         display: inline-block;
