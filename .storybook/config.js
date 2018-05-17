@@ -1,10 +1,10 @@
 import { configure } from '@storybook/vue'
-import Vue from 'vue';
+import Vue from 'vue/dist/vue.min.js';
 import Vuex from 'vuex'; // Vue plugins
-import Mybutton from '../src/stories/Button.vue';
+import MyButton from '../src/stories/MyButton.vue';
 
 Vue.use(Vuex);
-Vue.component('my-button', Mybutton);
+Vue.component('my-button', MyButton);
 
 // automatically import all files ending in *.stories.js
 const req = require.context('../src/stories', true, /.stories.js$/);

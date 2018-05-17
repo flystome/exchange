@@ -51,6 +51,10 @@ const Ticket = () => import(/* webpackChunkName: "Ticket" */'Pages/Ticket/Ticket
 const MarketMaker = () => import(/* webpackChunkName: "MarketMaker" */'Pages/MarketMaker/MarketMaker')
 const MarketApply = () => import(/* webpackChunkName: "MarketMaker" */'Pages/MarketMaker/MarketApply/MarketApply')
 
+// signin and signup
+const SignIn = () => import(/* webpackChunkName: "sign" */'Pages/Sign/SignIn.vue')
+const SignUp = () => import(/* webpackChunkName: "sign" */'Pages/Sign/SignUp.vue')
+
 Vue.use(Router)
 
 const version = process.env.ROUTER_VERSION
@@ -62,6 +66,16 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: HomePage
+    },
+    {
+      path: `${version}/login`,
+      name: 'SignIn',
+      component: SignIn
+    },
+    {
+      path: `${version}/register`,
+      name: 'SignUp',
+      component: SignUp
     },
     {
       path: `${version}/exchange/:id`,

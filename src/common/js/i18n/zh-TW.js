@@ -632,7 +632,12 @@ const zh = {
     "google_verify_code": "谷歌驗證碼",
     "first_name": "名字",
     "last_name": "姓",
-    "IdCard": "身份證"
+    "IdCard": "身份證",
+    "withdraw_amount": "提幣金額数量",
+    "less_then": "最小提幣金額數量不能小於",
+    "more_then": "最大提幣金額數量不能大於",
+    "withdraw_amount_NaN": "提幣金額數量必須為數位",
+    "withdraw_address": "提币地址"
   },
   "page_not_found": {
     "lost": "頁面丟失,",

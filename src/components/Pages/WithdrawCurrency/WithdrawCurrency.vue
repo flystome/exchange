@@ -921,3 +921,12 @@ export default {
 <style scoped lang='scss'>
 @import './WithdrawCurrency.scss'
 </style>
+
+<style lang='css'>
+@media (max-width: 991px) {
+  .btc-deposit-address .btc-newsPrompt .btc-news-animation{
+    width: 100%;
+    left: 0;
+  }
+}
+</style>

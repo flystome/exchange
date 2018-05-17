@@ -31,7 +31,7 @@
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .btc-marginL50 {
       margin-left: 0;
   }
@@ -361,7 +361,6 @@
       margin-left: -20px;
     }
     .btc-newsPrompt{
-      margin-left: 13px;
       line-height: 25px;
     }
     .btc-withdraw-loading{
@@ -369,6 +368,7 @@
     }
     .btc-deposit-confirNum{
       margin-left: 186px;
+      margin-top: 5px
     }
 }
 

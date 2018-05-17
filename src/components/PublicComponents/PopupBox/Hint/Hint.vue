@@ -99,6 +99,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@-webkit-keyframes swal2-show {
+  0% {
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7)
+  }
+  45% {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+  }
+  80% {
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
 .btc-hint{
   margin-top: 203px;
   z-index: 3;
