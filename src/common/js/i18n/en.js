@@ -638,6 +638,20 @@ const en = {
       "lost": "The page is lost, ",
       "click": "click",
       "back": " back to the home page"
+    },
+    "sign": {
+      "login_account": "Login Account",
+      "email_address": "Email Address",
+      "login_password": "Login Password",
+      "login": "Login",
+      "no_account_number": "There is no account number yet?",
+      "to_register": "go to registration",
+      "create_my_account": "Create My Account",
+      "confirm_password": "Confirm Password",
+      "already_registered": "Already registered?",
+      "log_in": "log in",
+      "official_website": "Official Website",
+      "official_email": "Official Email"
     }
   }
 }

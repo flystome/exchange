@@ -616,12 +616,6 @@ const zh = {
   },
   "validation": {
     "verify_code": '驗證碼',
-    "password": "密碼",
-    "no_empty": "不能為空",
-    "required|email": "郵箱"
-  },
-  "validation": {
-    "verify_code": '驗證碼',
     "no_empty": "不能為空",
     "field": "%",
     "password_fail": "密碼必須是8位數及以上",
@@ -643,6 +637,20 @@ const zh = {
     "lost": "頁面丟失,",
     "click": "點擊",
     "back": "返回首頁"
+  },
+  "sign": {
+    "login_account": "登入帳戶",
+    "email_address": "郵箱地址",
+    "login_password": "登錄密碼",
+    "login": "登錄",
+    "no_account_number": "還沒有賬號?",
+    "to_register": "去註冊",
+    "create_my_account": "創建我的賬戶",
+    "confirm_password": "確認密碼",
+    "already_registered": "已經註冊?",
+    "log_in": "去登錄",
+    "official_website": "官方網站",
+    "official_email": "官方郵件"
   }
 }
 

@@ -56,8 +56,8 @@ export default {
         url: '/cms/api/announcements.json',
         data: {
           category: 'new-coin',
-          locale: this.language,
-          per_page: '3'
+          locale: this.language
+          // per_page: '3'
         }
       }, (d) => {
         this.new_coin = d.data
@@ -101,6 +101,9 @@ export default {
       } else {
         this.FROM_HOME = false
       }
+    },
+    language () {
+      this.GetNewCoin()
     }
   }
 }

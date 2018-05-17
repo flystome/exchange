@@ -541,22 +541,12 @@ export default {
     },
     GetNewCoin () {
       var self = this
-      // this.new_coin = ''
-      // this.$http.get(`${this.HOST_URL}/cms/api/announcements.json`, {
-      //   params: {
-      //     category: 'new-coin',
-      //     locale: self.language,
-      //     per_page: '3'
-      //   }
-      // }).then(d => {
-      //   self.new_coin = d.data
-      // }) // new_coin
       this.Notice = []
       this.$http.get(`${this.HOST_URL}/cms/api/announcements.json`, {
         params: {
           category: 'official-announcement',
-          locale: self.language,
-          per_page: '8'
+          locale: self.language
+          // per_page: '8'
         }
       }).then(d => {
         self.Notice = d.data
