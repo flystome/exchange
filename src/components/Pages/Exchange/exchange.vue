@@ -11,8 +11,8 @@
           <p>{{$t('exchange.unlogin.please')}}<a :href="`${HOST_URL}/signin?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${HOST_URL}/signup?from=${location}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
         </div>
         <setting v-if='loginData !== "none"' :loginData='loginData' @controlSound='controlSound'></setting>
-        <div class="person_info">
-          <a :href="`${ROUTER_VERSION}/form/news`"><i></i></a>
+        <div class="person_info" v-if='loginData !== "none"'>
+          <a :href="`${ROUTER_VERSION}/form/news`" :class="{'unread': loginData.has_unread_conversations}"><i></i></a>
         </div>
         <language></language>
       </div>

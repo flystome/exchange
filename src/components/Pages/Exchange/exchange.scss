@@ -59,6 +59,19 @@
           display: inline-block;
           @include sprite($header-letterlog)
           vertical-align: -2px;
+          position: relative;
+          &.unread {
+            i {
+              display: inline-block;
+              position: absolute;
+              width: 6px;
+              height: 6px;
+              border-radius: 3px;
+              background: #fc4a4a;
+              right: -4px;
+              top: -3px;
+            }
+          }
         }
       }
     }
