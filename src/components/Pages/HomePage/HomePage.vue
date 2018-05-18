@@ -54,8 +54,8 @@
               <basic-input :delay='1000' ref="password" type='password' :validate='"required|password"' v-model="password" :placeholder="this.$t('homepage.enter_the_password')" class="btc-input"></basic-input>
               <basic-button :disabled='disabled' @click.native="login" class="btn btc-button" :text="this.$t('homepage.login')"></basic-button>
               <div>
-                <a :href="`${HOST_URL}/signup`">{{ $t('homepage.free_registration') }}</a>
-                <a :href="`${HOST_URL}/reset_passwords/new`" :class='{"pull-right": language !=="en", "btc-homepage-block": language!=="zh-TW"}' class="btc-pointer">{{ $t('homepage.forget_the_password') }}</a>
+                <a class='btc-link' :href="`${HOST_URL}/signup`">{{ $t('homepage.free_registration') }}</a>
+                <a :href="`${HOST_URL}/reset_passwords/new`" :class='{"pull-right": language !=="en", "btc-homepage-block": language!=="zh-TW"}' class="btc-pointer btc-link">{{ $t('homepage.forget_the_password') }}</a>
               </div>
             </div>
           </div>
