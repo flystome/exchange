@@ -36,11 +36,12 @@ export default {
       this.url = location.origin + '/static/charting_library/'
       this.cssUrl = location.origin + '/static/charting_library/static/style/selfTrading.scss'
       var udfDatafeed = new Datafeeds.UDFCompatibleDatafeed(this.HOST_URL)
+      var interval = localStorage.getItem('interval') || '5'
 
       var widget = new TradingView.widget({
         autosize: true,
         symbol: this.curMarket,
-        interval: '5',
+        interval: interval,
         toolbar_bg: '#f4f7f9',
         container_id: 'candleStick',
         datafeed: udfDatafeed,
@@ -162,6 +163,7 @@ export default {
               if (!button.hasClass('selected')) {
                 let chartType = +button.attr('data-chart-type')
                 let resolution = button.attr('data-resolution')
+                localStorage.setItem('interval', resolution)
 
                 if (chart.resolution() !== resolution) {
                   chart.setResolution(resolution)
