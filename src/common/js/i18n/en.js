@@ -125,6 +125,7 @@ const en = {
       "ie": "IE"
     },
     "withdraw_currency": {
+      "cancel_withdraw": "Cancel Withdraw",
       "total_assets": "Total Assets",
       "frozen_assets": "Frozen Assets",
       "deposit": "Deposit",
@@ -222,6 +223,7 @@ const en = {
       "immediate_apply": "Immediate Apply"
     },
     "title": {
+      "form_withdraw_cancel": "Cancel Withdraw",
       "my_account": "My Account",
       "validate_email": "Validate Email",
       "validate_google": "Validate Google",

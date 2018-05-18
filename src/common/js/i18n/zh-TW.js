@@ -124,6 +124,7 @@ const zh = {
     "ie": "IE瀏覽器"
   },
   "withdraw_currency": {
+    "cancel_withdraw": "撤銷提幣",
     "total_assets": "總資產",
     "frozen_assets": "凍結資產",
     "deposit": "充值",
@@ -221,6 +222,7 @@ const zh = {
     "immediate_apply": "立即申請"
   },
   "title": {
+    "form_withdraw_cancel": "撤銷提幣",
     "my_account": "我的帳戶",
     "validate_email": "驗證郵件",
     "validate_google": "驗證Google",

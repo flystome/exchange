@@ -38,7 +38,7 @@
             <trend style="position: absolute;left: 25px;"
               viewBox="40 0 500 75"
               :data="trendArray(item)"
-              :gradient="['black']"
+              :gradient="['#4382f7']"
               :padding="'0'"
               >
             </trend>

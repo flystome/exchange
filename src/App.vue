@@ -12,7 +12,7 @@
       <div style="position:relative;z-index:999;background:#f2f2f2" class="btc-global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
         <vue-simple-spinner size="88"></vue-simple-spinner>
       </div>
-      <div v-else class="btc-container container" :class="{'noPadding':noPadding}" v-cloak>
+      <div v-else class="btc-container container" :class="{'noPadding':noPadding}">
         <keep-alive>
           <router-view></router-view>
         </keep-alive>
@@ -140,6 +140,7 @@ export default {
 
 .btc-homepage-newCoin{
   min-width: 1200px;
+  font-size: 12px;
   left: 0;
   width: 100%;
   background: #232731;

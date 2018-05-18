@@ -192,9 +192,14 @@
           / <span :disabled='disabled' @click="cancelWithdraw(props.id, props.data)" class="btc-link btn">{{$t(`withdraw_currency.cancel`)}}</span>
         </a>
       </template> -->
-      <div slot="more" class="text-center btc-b-t btc-table-more">
+      <div slot="more" class="text-center btc-b-t btc-table-more col-md-6">
         <router-link class="btc-link" :to="`${ROUTER_VERSION}/form/account`">
           {{$t('my_account.show_more')}}
+        </router-link>
+      </div>
+      <div  slot="more" class="btc-b-t text-center btc-table-more btc-b-l col-md-6">
+        <router-link :to="`${ROUTER_VERSION}/form/withdraw_cancel`" class='btc-link '>
+          {{$t('withdraw_currency.cancel_withdraw')}}
         </router-link>
       </div>
     </basic-table>
@@ -248,27 +253,27 @@ export default {
       })
 
       channel.bind('withdraws', (data) => {
-        if (data.type === 'create') {
-          var d = data.attributes
-          var time = new Date(d.created_at).getTime()
-          this.WithdrawRecord.item.unshift({
-            content: [
-              d.id,
-              this.$moment(d.created_at).format('L H:mm:ss'),
-              d.fund_uid,
-              d.amount,
-              d.fee,
-              { type: {
-                "id": d.id,
-                "created_at": time,
-                "amount": d.amount,
-                "fee": d.fee,
-                "aasm_state": d.aasm_state,
-                "fund_uid": d.fund_uid
-              }, context: this.$t(`withdraw_currency.${d.aasm_state}`), id: d.id }
-            ]
-          })
-        }
+        // if (data.type === 'create') {
+        //   var d = data.attributes
+        //   var time = new Date(d.created_at).getTime()
+        //   this.WithdrawRecord.item.unshift({
+        //     content: [
+        //       d.id,
+        //       this.$moment(d.created_at).format('L H:mm:ss'),
+        //       d.fund_uid,
+        //       d.amount,
+        //       d.fee,
+        //       { type: {
+        //         "id": d.id,
+        //         "created_at": time,
+        //         "amount": d.amount,
+        //         "fee": d.fee,
+        //         "aasm_state": d.aasm_state,
+        //         "fund_uid": d.fund_uid
+        //       }, context: this.$t(`withdraw_currency.${d.aasm_state}`), id: d.id }
+        //     ]
+        //   })
+        // }
       }) //withdraws pusher
 
       channel.bind('account', _debounce((data) => {
@@ -730,7 +735,7 @@ export default {
           if (d.data.success.hasOwnProperty('fund_source')) {
             this.FundSources[d.data.success.fund_source.currency].push(d.data.success.fund_source)
           }
-          this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.create_withdraw_200'), type: 'success', url: '/form/account'})
+          this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.create_withdraw_200'), type: 'success', url: '/form/withdraw_cancel'})
           this.WithdrawData.otp = ''
           this.WithdrawData.amount = ''
           this.WithdrawData.remark = ''

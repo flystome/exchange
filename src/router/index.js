@@ -32,9 +32,10 @@ const MobilePersonal = () => import('Pages/Mobile/Personal/Personal.vue')
 // Form
 const Form = () => import('Pages/Form')
 const FormOrder = () => import(/* webpackChunkName: "FormOrder" */ 'Pages/Form/Order/Order.vue')
-const FormNews = () => import(/* webpackChunkName: "FormNews" */'Pages/Form/News/News.vue')
-const FormTrade = () => import(/* webpackChunkName: "FormTrade" */'Pages/Form/Trade/Trade.vue')
-const FormAccount = () => import(/* webpackChunkName: "FormAccount" */'Pages/Form/Account/Account.vue')
+const WithdrawCancel = () => import(/* webpackChunkName: "FormOrder" */ 'Pages/Form/WithdrawCancel/WithdrawCancel.vue')
+const FormNews = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/News/News.vue')
+const FormTrade = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Trade/Trade.vue')
+const FormAccount = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Account/Account.vue')
 
 // Api
 const Api = () => import(/* webpackChunkName: "Api" */ 'Pages/Api/RouterView')
@@ -213,6 +214,11 @@ const router = new Router({
           path: 'account',
           name: 'FormAccount',
           component: FormAccount
+        },
+        {
+          path: 'withdraw_cancel',
+          name: 'WithdrawCancel',
+          component: WithdrawCancel
         }
       ]
     },

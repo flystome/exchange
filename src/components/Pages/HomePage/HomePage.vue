@@ -598,12 +598,46 @@ export default {
 @import "./HomePage.scss"
 </style>
 
-<style lang='css'>
+<style lang='scss'>
 .btc-homepage-header .swiper-pagination-bullet{
   background: white!important;
   opacity: .5!important;
 }
 .btc-homepage-header .swiper-pagination-bullet-active{
   opacity: 1!important;
+}
+
+.btc-homepage-header .swiper-button-prev{
+  width: 30px;
+  height: 30px;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+  opacity: 0.5;
+  transform: rotate(-135deg);
+  background-image: none;
+  left:29px;
+  outline: none;
+  &:hover{
+    opacity: 1
+  }
+}
+
+.btc-homepage-header .swiper-button-next{
+  width: 30px;
+  height: 30px;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+  opacity: 0.5;
+  transform: rotate(45deg);
+  background-image: none;
+  right:29px!important;
+  outline: none;
+  &:hover{
+    opacity: 1
+  }
+}
+
+.btc-homepage-header .btc-nologin input{
+  font-size: 12px;
 }
 </style>

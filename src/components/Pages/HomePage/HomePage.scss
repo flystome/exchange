@@ -88,6 +88,7 @@
             >span{
               display: block;
               margin-bottom: 21px;
+              font-size: 13px;
             }
             .btc-input{
               min-height: 50px !important;
@@ -153,7 +154,7 @@
       min-height: 400px;
       position: relative;
       .btc-button{
-        padding: 15px 12px 12px 12px;
+        padding:  10px 12px;
       }
       .btc-search{
         min-height: 0 !important;
@@ -210,8 +211,9 @@
   }
   .btc-homepage-search{
     background: #f2f2f2;
-    padding: 5px 8px;
-    margin-top: 5px;
+    padding: 4px 8px;
+    margin-top: 1px;
+    border: 1px solid #dfe0e1;
     input{
       outline: none;
       border: none;
@@ -273,7 +275,7 @@
       margin-left: 15px;
       padding-left: 24px;
       padding-top: 20px;
-      box-shadow:0 0 30px #bbbbbb;
+      box-shadow:0 0 30px #dadada;
       overflow: hidden;
       position: relative;
       &:hover{
