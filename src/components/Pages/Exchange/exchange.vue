@@ -133,7 +133,6 @@ export default {
   },
   computed: {
     TotalAssets () {
-      console.log(this.$store.getters.TotalAssets())
       return this.$store.getters.TotalAssets()
     },
     ...mapGetters(['loginData']),

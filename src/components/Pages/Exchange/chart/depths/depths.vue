@@ -15,7 +15,7 @@ export default {
       depths: null,
       option: null,
       sellList: [],
-      buylist: [],
+      buyList: [],
       max: 0,
       min: 0
     }
@@ -101,24 +101,53 @@ export default {
       this.resize()
     },
     getChartData (val) {
+      var mid = 0
       if (val) {
         var sell = JSON.parse(JSON.stringify(val.asks))
-        this.sellList = sell.map((ele, index, arr) => {
-          if (index !== 0) {
-            ele[1] = +ele[1] + +arr[index - 1][1]
-          }
-          return ele
-        })
-        this.max = this.sellList[this.sellList.length - 1]
+        if (sell.length) {
+          this.sellList = sell.map((ele, index, arr) => {
+            if (index !== 0) {
+              ele[1] = +ele[1] + +arr[index - 1][1]
+            } else {
+              ele[1] = +ele[1]
+            }
+            return ele
+          })
+          this.max = +this.sellList[this.sellList.length - 1][0]
+        } else {
+          this.max = 0
+        }
         var buy = JSON.parse(JSON.stringify(val.bids))
-        this.buylist = buy.map((ele, index, arr) => {
-          if (index !== 0) {
-            ele[1] = +ele[1] + +arr[index - 1][1]
+        if (buy.length) {
+          this.buyList = buy.map((ele, index, arr) => {
+            if (index !== 0) {
+              ele[1] = +ele[1] + +arr[index - 1][1]
+            } else {
+              ele[1] = +ele[1]
+            }
+            return ele
+          })
+          this.min = +this.buyList[this.buyList.length - 1][0]
+          this.buyList.reverse()
+        } else {
+          this.min = 0
+        }
+        if (!this.max && !this.min) {
+
+        } else if (!this.max) {
+          this.max = (+this.buyList[0][0] - +this.min) * 2 + +this.min
+        } else if (!this.min) {
+          this.min = this.max - (this.max - +this.sellList[0][0]) * 2
+        } else {
+          mid = (+this.sellList[0][0] + +this.buyList[this.buyList.length - 1][0]) / 2
+          if (this.max - mid > mid - this.min) {
+            this.min = this.max - (this.max - mid) * 2
+          } else {
+            this.max = this.min + (mid - this.min) * 2
           }
-          return ele
-        })
-        this.min = this.sellList[0]
-        this.buylist.reverse()
+        }
+        console.log(this.sellList, this.buyList)
+        this.min = this.min < 0 ? 0 : this.min
         this.refreshChart()
       }
     },
@@ -129,7 +158,7 @@ export default {
           max: this.max
         }],
         series: [{
-          data: this.buylist
+          data: this.buyList
         }, {
           data: this.sellList
         }]
