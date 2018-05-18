@@ -129,8 +129,7 @@ export default {
       {
         language: 'en',
         name: 'English'
-      }],
-      markList: []
+      }]
     }
   },
   methods: {
@@ -178,14 +177,17 @@ export default {
     },
     ...mapMutations(['ChangeLanguage'])
   },
-  watch: {
-    marketData () {
-      if (this.marketData) {
-        this.markList = this.marketData
-      }
-    }
-  },
+  // watch: {
+  //   marketData () {
+  //     if (this.marketData) {
+  //       this.markList = this.marketData
+  //     }
+  //   }
+  // },
   computed: {
+    markList () {
+      return this.marketData
+    },
     getLanguage () {
       this.localed()
       var lang = ''

@@ -67,7 +67,7 @@
     padding-right: 25px;
     img {
       width: 88px;
-      margin-top: 6px;
+      margin-top: 3px;
     }
   }
   .btc-ifo{
@@ -133,6 +133,8 @@
 
         }
         .navbar-right{
+          position: relative;
+          top: -2px;
           .message{
             display: none;
           }

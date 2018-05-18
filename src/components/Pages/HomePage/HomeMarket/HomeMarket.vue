@@ -18,8 +18,8 @@
           <td>
             <a class="btc-homepage-currency" style="color: #333333;">
               <span>
-                <a class="btc-homepage-market" :href="`/exchange/${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`">{{item.quote_currency}}<span style="color:#999;min-width: auto;">/{{ item.base_currency }}</span>
-                </a>
+                <router-link class="btc-homepage-market" :to="`${ROUTER_VERSION}/exchange/${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`">{{item.quote_currency}}<span style="color:#999;min-width: auto;">/{{ item.base_currency }}</span>
+                </router-link>
               </span>
               <i :disabled="disabled" @click="portfolios(item, index)" class="far fa fa-star mylove" :class="{'is-star': item.is_portfolios}"></i>
             </a>
@@ -66,6 +66,7 @@ export default {
     return {
       oldData: null,
       HOST_URL: process.env.HOST_URL,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       heads: ['price', `volume`, 'turnover', 'day_highs_and_lows'],
       coins: ['last', 'volume', 'total', 'percent'],
       times: 0,

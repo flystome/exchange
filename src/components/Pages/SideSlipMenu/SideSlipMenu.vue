@@ -32,7 +32,7 @@
             </div>
             <ul v-if="market" class="btc-marginT60 btc-marginL30">
                <li v-for="d in marketData" :key="Object.keys(d)[0]">
-                  <a :href="`/exchange/${Object.keys(d)[0]}`">
+                  <a :href="`${ROUTER_VERSION}/exchange/${Object.keys(d)[0]}`">
                     {{ d[Object.keys(d)[0]].name }}
                   </a>
                 </li>
