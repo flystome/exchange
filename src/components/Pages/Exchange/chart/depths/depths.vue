@@ -135,18 +135,25 @@ export default {
         if (!this.max && !this.min) {
 
         } else if (!this.max) {
-          this.max = (+this.buyList[0][0] - +this.min) * 2 + +this.min
+          this.max = (+this.buyList[this.buyList.length - 1][0] - +this.min) * 2 + +this.min
         } else if (!this.min) {
           this.min = this.max - (this.max - +this.sellList[0][0]) * 2
+          if (this.min <= 0) {
+            this.min = 0
+            this.max = +this.sellList[0][0] * 2
+          }
         } else {
           mid = (+this.sellList[0][0] + +this.buyList[this.buyList.length - 1][0]) / 2
           if (this.max - mid > mid - this.min) {
             this.min = this.max - (this.max - mid) * 2
+            if (this.min <= 0) {
+              this.min = 0
+              this.max = (mid - this.min) * 2
+            }
           } else {
             this.max = this.min + (mid - this.min) * 2
           }
         }
-        console.log(this.sellList, this.buyList)
         this.min = this.min < 0 ? 0 : this.min
         this.refreshChart()
       }
