@@ -537,7 +537,7 @@ const en = {
       "cross_platform": "Lightning fast order, covering iOS, Android, mobile web, PC four terminal, excellent platform performance guarantee, can accept the real business scene of mass users, make the transaction more focused."
     },
     "form": {
-      "previous": "Previous",
+      "previous": "Prev",
       "next": "Next",
       "order": {
         "order_record": "Order Record",
