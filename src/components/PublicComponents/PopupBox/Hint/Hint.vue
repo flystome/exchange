@@ -2,28 +2,28 @@
   <div>
     <div class="btc-hint">
       <transition name="hint">
-        <template v-if="b">
-                  <div  class="text-center btc-hint-middle btc-paddingR30 btc-paddingL30">
-          <div style="magin:auto 0">
-            <i v-if="PopupBox.type === 'success' " class="Hint-success btc-marginT55 btc-marginB35" />
-            <i v-else-if="PopupBox.type === 'warn'" class="Hint-warn btc-marginT55 btc-marginB35" />
-            <self-building-square-spinner
-            v-else-if="PopupBox.type === 'loading'"
-            class="btc-marginT55 btc-marginB35 btc-hint-loading"
-            :animation-duration="6000"
-            :size="45"
-            color="#3e81ff"
-            />
-            <i v-else class="Hint-error btc-marginT55 btc-marginB35" />
-          </div>
-          <div>
+        <template v-if="tick">
+          <div  class="text-center btc-hint-middle">
+            <div>
+              <i v-if="PopupBox.type === 'success' " class="Hint-success" />
+              <i v-else-if="PopupBox.type === 'warn'" class="Hint-warn" />
+              <self-building-square-spinner
+              v-else-if="PopupBox.type === 'loading'"
+              class="btc-hint-loading"
+              :animation-duration="6000"
+              :size="45"
+              color="#3e81ff"
+              />
+              <i v-else class="Hint-error" />
+            </div>
+          <div style="padding-left:35px;padding-right:35px;word-break: break-all;margin-top: 29px;" :class="{'btc-paddingB45': !this.PopupBox.buttondisplay}">
             {{this.PopupBox.message}}
           </div>
-          <div class="btc-paddingB30">
+          <div v-if="this.PopupBox.buttondisplay" class="btc-hint-confirm">
             <span style="display:flex">
-              <basic-button @click.native.stop="confirm" style="margin-right: 28px;" v-if='PopupBox.confirm'  class="btn btc-marginT50"  :text='$t(`hint.yes`)' :class="{'btc-hint-hidden': !this.PopupBox.buttondisplay}">
+              <basic-button @click.native.stop="confirm" v-if='PopupBox.confirm'  class="btn"  :text='$t(`hint.yes`)'>
               </basic-button>
-              <basic-button @click.native.stop="gopath"  class="btn btc-marginT50"  :text='buttonText' :class="{'btc-hint-hidden': !this.PopupBox.buttondisplay}">
+              <basic-button @click.native.stop="gopath" class="btn"  :text='buttonText' :class="{'btc-background-999': PopupBox.confirm}">
               </basic-button>
             </span>
           </div>
@@ -42,14 +42,14 @@ export default {
   name: 'Hint',
   created () {
     setTimeout(() => {
-      this.b = true
+      this.tick = true
     }, 6)
   },
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       HOST_URL: process.env.HOST_URL,
-      b: false
+      tick: false
     }
   },
   methods: {
@@ -70,7 +70,7 @@ export default {
       }
     },
     gopath (href) {
-      this.b = false
+      this.tick = false
       setTimeout(() => {
         this.ChangePopupBox({
           confirm: false,
@@ -117,21 +117,29 @@ export default {
     transform: scale(1);
   }
 }
-
 .btc-hint{
   margin-top: 203px;
   z-index: 3;
+  .btc-hint-confirm{
+    .btc-basic-button{
+      margin-top: 30px;
+      outline: none;
+    }
+  }
   .btc-hint-middle{
-    transition: all 0.23s;
+    transition: all 50s;
     background: #ffffff;
     position: relative;
-    width: 360px;
+    width: 300px;
     margin: 0 auto;
     box-shadow:0 0 30px #bbbbbb;
     z-index: 99999;
+    >div>div, >div>i{
+      margin-top: 27px;
+    }
   }
-  .btc-hint-hidden{
-    visibility: hidden;
+  .btc-background-999{
+    background: #999999;
   }
   button{
     width: 100%;
@@ -139,7 +147,7 @@ export default {
   .btc-hint-loading{
     margin: 0 auto;
     margin-bottom: 78px;
-    top: 45px!important;
+    top: 24px!important;
     position: relative;
   }
 }
@@ -158,7 +166,12 @@ $sprite: (
   }
 }
 
+.hint-enter-to{
+  animation: swal2-show 0.4s;
+}
+
 .hint-enter, .hint-leave-to {
   transform: scale(0);
+  // animation: swal2-show 0.3s;
 }
 </style>

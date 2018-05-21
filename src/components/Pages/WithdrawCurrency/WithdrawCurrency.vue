@@ -247,7 +247,7 @@ export default {
           }
         } else {
           if (!Object.keys(this.DepositAddress).includes((data.attributes.account_id).toString())) {
-            this.DepositAddress[data.attributes.account_id] = data.attributes.deposit_address
+            this.$set(this.DepositAddress, data.attributes.account_id, data.attributes.deposit_address)
           }
         }
       })
@@ -360,6 +360,7 @@ export default {
         type: 'success',
         point: '.'
       },
+      pusherCurreny: [],
       invalid: false,
       prompt:'',
       withdraw_prompt: '',
@@ -515,7 +516,8 @@ export default {
         this.disabled = false
         var d = d.data.success
         this.loading = false
-        if (d.code === 201) {
+        if (d.code === 201 && !this.pusherCurreny.includes(`${c || 'btc'}`)) {
+          this.pusherCurreny.push(`${c || 'btc'}`)
           this.GeneratAddress = true
           if (/deposit/.test(this.$route.path)) {
             this.Generating()
@@ -524,9 +526,9 @@ export default {
         this.account_id = d.account.account_id
         this.confirm_num = d.deposit_max_confirmation
         this.withdraw_fee = d.withdraw_fee
-        this.equivalence = (c || 'btc') === 'btc' ? '' : d.today_withdraw_remain_btc
+        this.equivalence = (c || 'btc') === 'btc' ? '' : (d.today_withdraw_remain_btc ? d.today_withdraw_remain_btc : 0)
         this.WithdrAwable = d.withdrawable
-        this.Remain = d.today_withdraw_remain
+        this.Remain = d.today_withdraw_remain ? d.today_withdraw_remain : 0
         var withdraws = d.withdraws
         var deposits = d.deposits
         if (d.address) {
@@ -892,9 +894,13 @@ export default {
     DepositAddress (to, from) {
       if (!/deposit/.test(this.$route.path)) return
       if (Object.keys(to).length > Object.keys(from).length) {
+        if(Number(Object.keys(to)[0]) !== this.account_id) {
+          this.$set(this, 'DepositAddress', '')
+          return
+        }
         this.deposit_address = to[Object.keys(to)]
         this.deposit_address_display = true
-        delete this.DepositAddress[Object.keys(to)]
+        this.$set(this, 'DepositAddress', '')
         clearTimeout(this.Time)
         if (this.Time === false) return
         this.ChangePopupBox({

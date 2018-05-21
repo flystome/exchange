@@ -493,6 +493,7 @@ const zh = {
     "desktop_end": "切換到PC首頁"
   },
   "homepage": {
+    "coming_soon": "敬請期待",
     "banner_describe1": "權威透明的數字資產交易平台",
     "banner_describe2": "提供最佳的投資渠道",
     "login": "登錄",
@@ -620,7 +621,7 @@ const zh = {
     "verify_code": '驗證碼',
     "no_empty": "不能為空",
     "field": "%",
-    "password_fail": "密碼必須是8位數及以上",
+    "password_fail": "密碼應當至少為8比特字元，並且包含字母和數位",
     "email_fail": "郵箱無效",
     "email": "郵箱",
     "password": "密碼",

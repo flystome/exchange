@@ -67,16 +67,11 @@
       line-height: 20px;
       outline: none;
     }
-    .btc-basic-button{
-      input[type=file]{
-        z-index: 10;
-        position: absolute;
-        top: 0;
-        height: 100%;
-        opacity: 0;
-        cursor: pointer;
-        left: -90px;
-      }
+    input[type=file]{
+      position: absolute;
+      opacity: 0;
+      left: -9999px;
+      top: -9999px;
     }
   }
   i{

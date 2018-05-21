@@ -19,10 +19,11 @@
           </div-contenteditable>
           <div class="btc-ticket-flex btc-marginT15">
             <basic-input readonly="readonly">
-              <basic-button :disabled='disabled' @click.native="upload" class="btc-link btn" slot="button" :text="$t('ticket.choose')">
-                <input type="file" @change="addFile" ref="file" accept="image/jpeg,image/jpg" slot="file" slot-scope="props">
+              <basic-button :disabled='disabled' @click.native="$refs['file'].click()" class="btc-link btn" slot="button" :text="$t('ticket.choose')">
+                <!-- <input type="file" @change="addFile" ref="file" accept="image/jpeg,image/jpg" slot="file" slot-scope="props"> -->
               </basic-button>
             </basic-input>
+            <input type="file" @change="addFile" ref="file" accept="image/jpeg,image/jpg" />
             <div class="btc-ticket-files">
               <span>
                 {{ $t('ticket.upload_attachment') }}
@@ -72,7 +73,6 @@ export default {
       this.File = ''
       this.FileName = ''
     },
-    upload () {},
     promptEmpty () {
       this.prompt = ''
       this.File = ''

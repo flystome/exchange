@@ -49,14 +49,15 @@ export default {
         return
       }
       if (el.target.files[0].size > 0.7 * 1024 * 1024) {
-        this.prompt = `${this.$t('validate_identity.img_to_big')} 700k`
+        this.prompt = `${this.$t('validate_identity.img_to_big')}700k`
         this.$refs.input.value = ''
         this.UploadImg = ''
       } else {
         var FileRead = new FileReader()
         FileRead.readAsDataURL(el.target.files[0])
         FileRead.onload = (d) => {
-          this.UploadImg = d.srcElement.result
+          var target = d.srcElement ? d.srcElement : d.target
+          this.UploadImg = target.result
         }
       }
     },

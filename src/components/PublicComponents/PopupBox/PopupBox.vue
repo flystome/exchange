@@ -31,16 +31,10 @@ export default {
     height: 100%;
     left: 0;
     background: rgba(0,0,0,0.3);
-    transition: all 0.23s;
+    transition: all 0.5;
     z-index: 9999;
   }
   .PopupBox-enter, .PopupBox-leave-to {
-    opacity: 0;
-    .bb{
-      color: red;
-    }
-  }
-  .bb {
-    transition: all 0.5s;
+    // opacity: 0;
   }
 </style>

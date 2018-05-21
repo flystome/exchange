@@ -74,7 +74,6 @@
           </div>
           <basic-button :disabled="disabled" @click.native.stop="Reply" class="btc-fr btn" :text="$t('reply')"></basic-button>
         </div>
-
         <div class="clearfix"></div>
       </div>
       <news-prompt style="" class="btc-marginL25 btc-fl" :text='prompt'></news-prompt>
@@ -193,10 +192,11 @@ export default {
             var img = new FileReader(file)
             img.readAsDataURL(file)
             img.onload = (data) => {
+              var target = data.srcElement ? data.srcElement : data.target
               this.comments.push({
                 created_at: this.$moment(new Date()).format('L H:mm:ss'),
                 content: context,
-                attachment_url: data.srcElement.result
+                attachment_url: target.result
               })
             }
           }

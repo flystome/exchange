@@ -106,7 +106,7 @@ const en = {
       "click_upload": "Click To Upload",
       "information_upload_success": "Real-name authentication information upload success",
       "please_upload_file": "Please upload the file",
-      "img_to_big": "Upload pictures are not allowed to exceed"
+      "img_to_big": "Upload pictures are not allowed to exceed "
     },
     "validate_sms": {
       "binding_cell_phone_authentication": "Verify Your Cell Phone",
@@ -125,7 +125,7 @@ const en = {
       "ie": "IE"
     },
     "withdraw_currency": {
-      "cancel_withdraw": "Cancel Withdraw",
+      "cancel_withdraw": "Pending Withdraw",
       "total_assets": "Total Assets",
       "frozen_assets": "Frozen Assets",
       "deposit": "Deposit",
@@ -223,7 +223,7 @@ const en = {
       "immediate_apply": "Immediate Apply"
     },
     "title": {
-      "form_withdraw_cancel": "Cancel Withdraw",
+      "form_withdraw_cancel": "Pending Withdraw",
       "my_account": "My Account",
       "validate_email": "Validate Email",
       "validate_google": "Validate Google",
@@ -494,6 +494,7 @@ const en = {
       "desktop_end": "Switch To PC"
     },
     "homepage": {
+      "coming_soon": "Coming Soon",
       "banner_describe1": "High Quality Block Chain Assets",
       "banner_describe2": "Subtitle you Want to ",
       "login": "Login",
@@ -621,7 +622,7 @@ const en = {
       "verify_code": 'verify code',
       "no_empty": " can not be empty",
       "field": "The % field",
-      "password_fail": "The password must be 8 digits and above",
+      "password_fail": "The password should be at least 8 bits, and contain letters and numbers",
       "email_fail": "Not a valid email",
       "email": "email",
       "password": "Password",

@@ -36,9 +36,18 @@ var validation = {
   },
   password (value) {
     return new Promise(resolve => {
-      resolve({
-        valid: /.{8,}/.test(value)
-      })
+      if (!(/.{8,}/.test(value) && /[a-zA-Z]/.test(value) && /\d/.test(value))) {
+        resolve({
+          valid: false
+        })
+      } else {
+        resolve({
+          valid: true
+        })
+      }
+      // resolve({
+      //   valid: /.{8,}/.test(value)
+      // })
     })
   }
 }

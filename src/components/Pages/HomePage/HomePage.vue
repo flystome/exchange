@@ -289,12 +289,13 @@
             {{ $t('homepage.cross_platform') }}
           </div>
           <div>
-            <a href="https://itunes.apple.com/cn/app/google-authent icator/id388497605?mt=8" target="_blank">
+            <!-- <a href="https://itunes.apple.com/cn/app/google-authent icator/id388497605?mt=8" target="_blank">
               <i class="home-iosapp"></i>
             </a>
             <a class="btc-marginL10" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">
               <i class="home-gplay"></i>
-            </a>
+            </a> -->
+            <strong>{{ $t('homepage.coming_soon') }}</strong>
           </div>
         </div>
         <div class="clearfix">

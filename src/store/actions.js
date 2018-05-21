@@ -45,6 +45,7 @@ const actions = {
         if (d.data.error) {
           Cookies.set('status', 'nologin')
           location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
+          return
         }
         commit('GetCmsUrl')
         commit('getData', d)
