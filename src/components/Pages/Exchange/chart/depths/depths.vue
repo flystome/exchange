@@ -9,7 +9,7 @@ const echarts = require('echarts')
 
 export default {
   name: 'depths',
-  props: ['depthData', 'chartInit'],
+  props: ['depthData', 'chartInit', 'market'],
   data () {
     return {
       depths: null,
@@ -40,11 +40,13 @@ export default {
       this.depths = echarts.init(document.getElementById('depths'))
       this.option = {
         tooltip: {
-          trigger: 'item',
+          trigger: 'axis',
           backgroundColor: '#37506e',
           formatter: function (params) {
-            return `<p class='item1'><span>${_this.$t('markets.price')}:</span><span> ${params.data[0]}</span></p>
-              <p class='item1'><span>${_this.$t('exchange.grand')}:</span><span> ${params.data[1]}</span></p>`
+            var p1 = (params[0].data && params[0].data[0]) || ""
+            var p2 = (params[0].data && params[0].data[1]) || ""
+            return `<p class='item1'><span>${_this.$t('markets.price')}:</span><span> ${p1}</span></p>
+              <p class='item1'><span>${_this.$t('exchange.grand')}:</span><span> ${p2}</span></p>`
           }
         },
         grid: {
@@ -57,13 +59,19 @@ export default {
           {
             type: 'value',
             boundaryGap: false,
-            show: false
+            show: true,
+            splitLine: {
+              show: false
+            }
           }
         ],
         yAxis: [
           {
             type: 'value',
-            show: false
+            show: true,
+            splitLine: {
+              show: false
+            }
           }
         ],
         series: [
@@ -107,9 +115,9 @@ export default {
         if (sell.length) {
           this.sellList = sell.map((ele, index, arr) => {
             if (index !== 0) {
-              ele[1] = +ele[1] + +arr[index - 1][1]
+              ele[1] = (+ele[1] + +arr[index - 1][1]).toFixed(this.market.price_fixed)
             } else {
-              ele[1] = +ele[1]
+              ele[1] = (+ele[1]).toFixed(8)
             }
             return ele
           })
@@ -121,9 +129,9 @@ export default {
         if (buy.length) {
           this.buyList = buy.map((ele, index, arr) => {
             if (index !== 0) {
-              ele[1] = +ele[1] + +arr[index - 1][1]
+              ele[1] = (+ele[1] + +arr[index - 1][1]).toFixed(this.market.price_fixed)
             } else {
-              ele[1] = +ele[1]
+              ele[1] = (+ele[1]).toFixed(8)
             }
             return ele
           })
@@ -163,6 +171,10 @@ export default {
         xAxis: [{
           min: this.min,
           max: this.max
+        }],
+        yAxis: [{
+          min: 0,
+          max: Math.max((this.sellList[this.sellList.length - 1] && this.sellList[this.sellList.length - 1][1]), (this.buyList[0] && this.buyList[0][1]))
         }],
         series: [{
           data: this.buyList

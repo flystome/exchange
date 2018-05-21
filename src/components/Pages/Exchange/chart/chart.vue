@@ -12,7 +12,7 @@
         <candleStick :market="market"></candleStick>
       </div>
       <div class="depths" :class="{'zIndex': currencyIndex}">
-        <depths :depthData='depthData' :chartInit='currencyIndex === 1'></depths>
+        <depths :depthData='depthData' :market="market" :chartInit='currencyIndex === 1'></depths>
       </div>
     </div>
   </section>
