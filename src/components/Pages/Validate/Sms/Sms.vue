@@ -28,9 +28,9 @@
       <div class="btc-sms-code">
         <basic-input  style="min-height:66px" :validate='"required|verify_code"' ref="verifiycode" :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
         </basic-input>
-        <button :disabled="disabled" class="btc-white-btn" @click="SendSms">
+        <span :disabled="disabled" class="btc-white-btn" @click="SendSms">
           {{ timer }}
-        </button>
+        </span>
       </div>
       <div class="btc-sms-google btc-marginB30" v-if="loginData.app_activated">
         <basic-input  style="min-height:66px"  :placeholder='$t("validate_sms.google_verification_code")' :validate='"required|google_verify_code"' ref="googlecode" v-model="SmsData.googlecode">
@@ -128,7 +128,7 @@ export default {
           'google_code': this.SmsData.googlecode
         }
       }, (d) => {
-      this.disabled = false
+        this.disabled = false
         if (d.data.success) {
           this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_200'), type: 'success', url: '/my_account'})
           this.$store.dispatch('getData')

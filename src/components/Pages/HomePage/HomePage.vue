@@ -360,7 +360,7 @@ export default {
       this.$refs['market'].$emit('market')
     }) // pusher
 
-    if (!this.markData) this.GetmarketData()
+    if (!this.marketData) this.GetmarketData()
   },
   mounted () {
     var time = 0
@@ -474,6 +474,11 @@ export default {
             location.href = `${this.HOST_URL}/signin`
             Cookies.set('status', 'captcha_error')
           } else {
+            if (d.data.error.captcha_required) {
+              location.href = `${this.HOST_URL}/signin`
+              Cookies.set('status', 'captcha_error')
+              return
+            }
             this.password = ''
             this.PopupBoxDisplay({type: 'error', message: this.$t('api_server.homepage.error_1001')})
           }
@@ -590,8 +595,8 @@ export default {
       this.channelTime++
       var PersonalChannel = pusher.subscribe(`private-${this.loginData.sn}`)
       PersonalChannel.bind('account', _debounce((data) => {
-        this.$store.state.assets[data.currency].balance = Number(data.balance)
-        this.$store.state.assets[data.currency].locked = Number(data.locked)
+         this.$store.state.assets[data.currency].balance && (this.$store.state.assets[data.currency].balance = Number(data.balance))
+        this.$store.state.assets[data.currency].locked && (this.$store.state.assets[data.currency].locked = Number(data.locked))
       }, 500)) // account pusher
     },
     marketData () {

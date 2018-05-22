@@ -274,18 +274,17 @@ export default {
       }) //withdraws pusher
 
       channel.bind('account', _debounce((data) => {
-        console.log(data)
-        this.$store.state.assets[data.currency].balance = Number(data.balance)
-        this.$store.state.assets[data.currency].locked = Number(data.locked)
+        this.$store.state.assets[data.currency].balance && (this.$store.state.assets[data.currency].balance = Number(data.balance))
+        this.$store.state.assets[data.currency].locked && (this.$store.state.assets[data.currency].locked = Number(data.locked))
         // this.equivalence = this.CurrencyType === data.currency ? this.equivalence : data.today_withdraw_remain_btc
-        if (this.CurrencyType === 'btc') {
-          if (data.currency === 'btc') this.Remain = data.today_withdraw_remain_btc
-        } else {
-          if (data.currency !== 'btc') {
-            this.Remain = data.today_withdraw_remain
-            this.equivalence = data.today_withdraw_remain_btc
-          }
-        }
+        // if (this.CurrencyType === 'btc') {
+        //   if (data.currency === 'btc') this.Remain = data.today_withdraw_remain_btc
+        // } else {
+        //   if (data.currency !== 'btc') {
+        //     this.Remain = data.today_withdraw_remain
+        //     this.equivalence = data.today_withdraw_remain_btc
+        //   }
+        // }
         this.Balance = data.balance
       }, 500)) //account pusher
 

@@ -451,7 +451,7 @@ const zh = {
       "send_code_1001": "發送速度太快，請等待一分鐘",
       "auth_sms_200": "驗證成功",
       "auth_sms_1001": "驗證失敗",
-      "auth_sms_1002": "Google身份驗證碼不正確",
+      "auth_sms_1002": "驗證碼不正確",
     },
     "homepage": {
       "error_1001": "錯誤的帳號或密碼，請再試一次"
@@ -524,7 +524,7 @@ const zh = {
     "day_highs_and_lows": "日跌漲",
     "my_optional": "我的自選",
     "off": "折扣率",
-    "api_interface": "API 介面",
+    "api_interface": "API 接口",
     "introduce_1": "請發送郵件至support@hotex.com聯繫我們",
     "introduce_2": "為開發者用戶提供安全可靠，詳盡及時的API介面",
     "introduce_3": "極具市場競爭力的交易費率，推薦用戶參與交易還可獲交易費率折扣",

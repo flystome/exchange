@@ -16,9 +16,14 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-  // create () {
-  //   this.$store.dispatch('getData')
-  // },
+  create () {
+    // this.$store.dispatch('getData')
+    this._get({
+      url: '/sessions/get_captcha.json'
+    }, (d) => {
+      console.log(d)
+    })
+  },
   data () {
     return {
       error: '',

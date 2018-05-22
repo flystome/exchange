@@ -9,7 +9,7 @@ const HOST_URL = process.env.HOST_URL
 export const redirect = (state, action, route) => {
   // var route = type ? state.route.from.name : state.route.name
   // var path = type ? state.route.from.path : state.route.path
-  // i18n.locale = CookieLocale
+  i18n.locale = CookieLocale
   var flag = true
   switch (route.name) {
     case 'ValidateGoogle':

@@ -9,10 +9,13 @@
           {{ $t('sign.login_account') }}
         </div>
         <news-prompt :text="prompt"></news-prompt>
-        <basic-input :placeholder="$t('sign.email_address')"></basic-input>
-        <basic-input v-model="password" class="btc-marginT15" :placeholder="$t('sign.login_password')"></basic-input>
-        <basic-input v-model="password1" :validate='`confirmed:${password}|password`' :placeholder="$t('sign.confirm_password')"></basic-input>
-        <basic-input :placeholder="$t('validation.verify_code')"></basic-input>
+        <basic-input v-model="SignUpData.email" :placeholder="$t('sign.email_address')"></basic-input>
+        <basic-input v-model="SignUpData.password" :placeholder="$t('sign.login_password')"></basic-input>
+        <div class="btc-marginT15 btc-color999">
+          {{ $t('validation.password_fail') }}
+        </div>
+        <basic-input v-model="SignUpData.confirm_password" :validate='`confirmed:${password}|password`' :placeholder="$t('sign.confirm_password')"></basic-input>
+        <basic-input v-model="SignUpData.verifycode" :placeholder="$t('validation.verify_code')"></basic-input>
         <basic-button :text='$t("nav.register")'></basic-button>
         <div class="form-footer">
           <span class="btc-fr">{{$t('sign.already_registered')}}<router-link :to='`${ROUTER_VERSION}/login`' class="btc-link">{{$t('sign.log_in')}}</router-link></span>
@@ -32,10 +35,11 @@ export default {
   name: 'SignUp',
   data () {
     return {
-      password: '',
-      password1: '',
       SignUpData: {
-
+        confirm_password: '',
+        password: '',
+        verifycode: '',
+        email: '',
       },
       prompt: '',
       ROUTER_VERSION: process.env.ROUTER_VERSION

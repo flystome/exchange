@@ -2,8 +2,7 @@ import { _get } from '../axios'
 import Cookies from 'js-cookie'
 import { redirect } from '../store/mutations'
 import { CookieLocale } from '@/common/js/i18n/i18n.js'
-
-const unLogin = ['HomePage', 'MexchangeMarkets', 'MexchangeDetail', 'MexchangeTrades', 'home', 'MexchangeOrders', 'notFound', 'Exchange']
+export const unLogin = ['SignUp', 'SignIn', 'HomePage', 'MexchangeMarkets', 'MexchangeDetail', 'MexchangeTrades', 'home', 'MexchangeOrders', 'notFound', 'Exchange']
 
 const actions = {
   getData ({ commit, state }, route) {

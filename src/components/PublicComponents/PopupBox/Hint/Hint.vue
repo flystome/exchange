@@ -16,7 +16,7 @@
               />
               <i v-else class="Hint-error" />
             </div>
-          <div style="padding-left:35px;padding-right:35px;word-break: break-all;margin-top: 29px;" :class="{'btc-paddingB45': !this.PopupBox.buttondisplay}">
+          <div style="padding-left:35px;padding-right:35px;margin-top: 29px;" :class="{'btc-paddingB45': !this.PopupBox.buttondisplay}">
             {{this.PopupBox.message}}
           </div>
           <div v-if="this.PopupBox.buttondisplay" class="btc-hint-confirm">
