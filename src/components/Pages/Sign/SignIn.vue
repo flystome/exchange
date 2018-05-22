@@ -9,8 +9,8 @@
           {{ $t('sign.login_account') }}
         </div>
         <news-prompt :text="prompt"></news-prompt>
-        <basic-input :placeholder="$t('sign.email_address')"></basic-input>
-        <basic-input class="btc-marginT15" :placeholder="$t('sign.login_password')"></basic-input>
+        <basic-input data-vv-name="password" v-model="SignInData.email" :validate='"password"' :placeholder="$t('sign.email_address')"></basic-input>
+        <basic-input v-model="SignInData.password" :validate='"confirmed:password"' class="btc-marginT15" :placeholder="$t('sign.login_password')"></basic-input>
         <basic-button :text='$t("sign.login")'></basic-button>
         <div class="form-footer">
           <span class="btc-link">{{$t('homepage.forget_the_password')}}</span>
@@ -31,7 +31,8 @@ export default {
   data () {
     return {
       SignInData: {
-
+        password: '',
+        email: ''
       },
       prompt: '',
       ROUTER_VERSION: process.env.ROUTER_VERSION

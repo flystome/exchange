@@ -1,6 +1,7 @@
 import { _get } from '../axios'
 import Cookies from 'js-cookie'
 import { redirect } from '../store/mutations'
+import { CookieLocale } from '@/common/js/i18n/i18n.js'
 
 const unLogin = ['HomePage', 'MexchangeMarkets', 'MexchangeDetail', 'MexchangeTrades', 'home', 'MexchangeOrders', 'notFound', 'Exchange']
 
@@ -14,7 +15,7 @@ const actions = {
           'DataType': 'application/json;charset=utf-8'
         }
       }, (d) => {
-        var lang = Cookies.get('locale')
+        var lang = CookieLocale
         if (lang) {
           this.commit('ChangeLanguage', lang)
         } else {

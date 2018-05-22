@@ -8,7 +8,7 @@
     <form class="form-signin">
       <label>{{ error }}</label>
       <basic-input placeholder='邮箱'></basic-input>
-      <basic-input placeholder='登录密码'></basic-input>
+      <basic-input placeholder='登录密码111'></basic-input>
     </form>
   </div>
 </template>

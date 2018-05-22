@@ -449,7 +449,7 @@ const zh = {
     "validate_sms": {
       "send_code_1002": "電話號碼無效",
       "send_code_1001": "發送速度太快，請等待一分鐘",
-      "auth_sms_200": "驗證碼錯誤！請重新輸入",
+      "auth_sms_200": "驗證成功",
       "auth_sms_1001": "驗證失敗",
       "auth_sms_1002": "Google身份驗證碼不正確",
     },

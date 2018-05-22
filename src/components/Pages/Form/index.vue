@@ -30,9 +30,12 @@ export default {
   span{
     position: absolute;
     top: 50%;
-    left: 50%;
-    margin-left: -21px;
     margin-top: -10px;
+    color: black;
+    width: 100%;
+    display: block;
+    left: 0;
+    text-align: center;
   }
 }
 

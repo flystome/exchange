@@ -190,6 +190,7 @@
 </template>
 <script>
 import { mapGetters, mapMutations, mapState } from 'vuex'
+import { CookieLocale } from '@/common/js/i18n/i18n.js'
 import Cookies from 'js-cookie'
 import Clipboard from 'clipboard'
 const _debounce = require('lodash.debounce')
@@ -199,7 +200,7 @@ export default {
   name: 'MemberCenter',
   created () {
     var code = Cookies.get('code')
-    this.$i18n.locale = Cookies.get('locale')
+    this.$i18n.locale = CookieLocale
     if (code) {
       if (code.match(/\d+/g)[0] === '200') {
         this.PopupBoxDisplay({message: this.$t(`my_account.200_hint`), type: 'success'})

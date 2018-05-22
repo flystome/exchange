@@ -63,6 +63,16 @@
     top: 3px;
     margin-right: 3px;
   }
+  .sideslip-triangle{
+    width: 14px;
+    height: 24px;
+  }
+  .sideslip-triangle-up{
+    transform: rotate(-90deg);
+  }
+  .sideslip-triangle-down{
+    transform: rotate(90deg);
+  }
 }
 
 @media(max-width: 992px){
@@ -76,21 +86,14 @@
   }
 }
 
-// sprites
-$sprite: (
-  'assets': $sideslip-assets,
-  'market': $sideslip-market,
-  'consulting': $sideslip-consulting,
-  'lang': $sideslip-lang,
-  'myaccount': $sideslip-myaccount,
-  'pc': $sideslip-pc,
-  'triangle-up': $triangle-up,
-  'triangle-down': $triangle-down
+// // sprites
+// $sprite: (
+//   'triangle-up': $triangle-up,
+//   'triangle-down': $triangle-down
+// );
 
-);
-
-@each $key, $val in $sprite{
-  .sideslip-#{$key} {
-    @include sprite(map-get($sprite, $key));
-  }
-}
+// @each $key, $val in $sprite{
+//   .sideslip-#{$key} {
+//     @include sprite(map-get($sprite, $key));
+//   }
+// }

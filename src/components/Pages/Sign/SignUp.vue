@@ -10,8 +10,8 @@
         </div>
         <news-prompt :text="prompt"></news-prompt>
         <basic-input :placeholder="$t('sign.email_address')"></basic-input>
-        <basic-input class="btc-marginT15" :placeholder="$t('sign.login_password')"></basic-input>
-        <basic-input :placeholder="$t('sign.confirm_password')"></basic-input>
+        <basic-input v-model="password" class="btc-marginT15" :placeholder="$t('sign.login_password')"></basic-input>
+        <basic-input v-model="password1" :validate='`confirmed:${password}|password`' :placeholder="$t('sign.confirm_password')"></basic-input>
         <basic-input :placeholder="$t('validation.verify_code')"></basic-input>
         <basic-button :text='$t("nav.register")'></basic-button>
         <div class="form-footer">
@@ -32,6 +32,8 @@ export default {
   name: 'SignUp',
   data () {
     return {
+      password: '',
+      password1: '',
       SignUpData: {
 
       },

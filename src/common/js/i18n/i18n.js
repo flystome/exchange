@@ -10,8 +10,11 @@ const messages = {
   en: en.en
 }
 
+const localeArray = Object.keys(messages)
+export const CookieLocale = Cookies.get('locale') ? (localeArray.includes(Cookies.get('locale')) ? Cookies.get('locale') : 'en') : 'en'
+
 const i18n = new VueI18n({
-  locale: Cookies.get('locale') ? Cookies.get('locale') : 'en',
+  locale: 'en',
   messages
 })
 

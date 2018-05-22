@@ -1,14 +1,15 @@
 import router from '@/router'
 import axios from 'axios'
-import i18n from '@/common/js/i18n/i18n.js'
+import i18n, { CookieLocale } from '@/common/js/i18n/i18n.js'
 import Cookies from 'js-cookie'
+
 const ROUTER_VERSION = process.env.ROUTER_VERSION
 const HOST_URL = process.env.HOST_URL
 
 export const redirect = (state, action, route) => {
   // var route = type ? state.route.from.name : state.route.name
   // var path = type ? state.route.from.path : state.route.path
-  i18n.locale = Cookies.get('locale') ? Cookies.get('locale') : 'en'
+  // i18n.locale = CookieLocale
   var flag = true
   switch (route.name) {
     case 'ValidateGoogle':

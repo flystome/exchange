@@ -8,7 +8,7 @@
           </li>
           <li v-if="loginData !== 'none'">
             <span @click="validateEmail">
-              <i class="sideslip-assets"></i>
+              <img src='@/common/svg/sideslip-assets.svg' />
               {{ $t('side_slip_menu.asset_management') }}
             </span>
           </li>
@@ -24,10 +24,9 @@
           </li>
           <li class="marketlist" :class="{'btc-sideslip-marignB0': market}">
             <div @click="market = !market">
-              <i class="sideslip-market"></i> {{$t('nav.transaction')}}
+              <img src='@/common/svg/sideslip-market.svg' /> {{$t('nav.transaction')}}
               <span class="btc-fr btc-marginR20">
-                <i v-if="!market" class="sideslip-triangle-down"></i>
-                <i v-else class="sideslip-triangle-up"></i>
+                <img src='@/common/svg/sideslip-dropdown.svg' class="sideslip-triangle" :class="`${!market ? 'sideslip-triangle-down' : 'sideslip-triangle-up'}`">
               </span>
             </div>
             <ul v-if="market" class="btc-marginT60 btc-marginL30">
@@ -40,10 +39,9 @@
           </li>
           <li class='btc-paddingB0' :class="{'btc-sideslip-marignB0': Consulting}">
             <div @click="Consulting = !Consulting">
-              <i class='sideslip-consulting'/> {{ $t('side_slip_menu.consulting_center') }}
+              <img src='@/common/svg/sideslip-consulting.svg' /> {{ $t('side_slip_menu.consulting_center') }}
               <span class="btc-fr btc-marginR20">
-                <i v-if="!Consulting" class="sideslip-triangle-down"></i>
-                <i v-else class="sideslip-triangle-up"></i>
+                <img src='@/common/svg/sideslip-dropdown.svg' class="sideslip-triangle" :class="`${!Consulting ? 'sideslip-triangle-down' : 'sideslip-triangle-up'}`">
               </span>
             </div>
             <ul v-if="Consulting">
@@ -63,15 +61,14 @@
             </ul>
           </li>
           <li v-if="loginData !== 'none'" @click="validate()">
-            <i class='sideslip-myaccount' />
+            <img src='@/common/svg/sideslip-myaccount.svg' />
             {{ $t('side_slip_menu.my_account') }}
           </li>
           <li :class="{'btc-sideslip-marignB0': Lang}">
             <div @click="Lang = !Lang">
-              <i class='sideslip-lang' /> {{ $t('side_slip_menu.language') }}
+              <img src='@/common/svg/sideslip-lang.svg' /> {{ $t('side_slip_menu.language') }}
               <span class="btc-fr btc-marginR20">
-                <i v-if="!Lang" class="sideslip-triangle-down"></i>
-                <i v-else class="sideslip-triangle-up"></i>
+                <img src='@/common/svg/sideslip-dropdown.svg' class="sideslip-triangle" :class="`${!Lang ? 'sideslip-triangle-down' : 'sideslip-triangle-up'}`">
               </span>
             </div>
             <ul v-if="Lang" class="btc-marginT60">
@@ -81,7 +78,7 @@
             </ul>
           </li>
           <li class="">
-            <i class='sideslip-pc' />
+            <img src='@/common/svg/sideslip-pc.svg' />
             <span @click="goPc">
               {{$t('side_slip_menu.desktop_end')}}
             </span>

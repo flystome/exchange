@@ -39,6 +39,7 @@ export default {
   computed: {
     error () {
       var result = this.errors.first(this.validate)
+      console.log(result)
       if (!result) return ''
       if (/\$/.test(result)) {
         var [field, empty] = result.split('$')

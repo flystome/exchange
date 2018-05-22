@@ -1,5 +1,4 @@
-import Cookies from 'js-cookie'
-
+import { CookieLocale } from '@/common/js/i18n/i18n.js'
 const state = {
   loginData: 'none',
   Wrapper: false,
@@ -11,11 +10,10 @@ const state = {
     buttonText: '',
     buttondisplay: true,
     confirm: false,
-    href: '',
-    b: ''
+    href: ''
   },
   fromApp: false,
-  language: Cookies.get('locale') ? Cookies.get('locale') : 'en',
+  language: CookieLocale,
   DepositAddress: {
   },
   SideSlipMenu: false,

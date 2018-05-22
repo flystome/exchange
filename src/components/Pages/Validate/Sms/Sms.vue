@@ -102,6 +102,7 @@ export default {
       })
     },
     async Validate () {
+      if (this.disabled) return
       if (this.SmsData.CountryName === '') {
         this.prompt = this.$t('validate_sms.use_right_code')
       }
@@ -117,6 +118,7 @@ export default {
           return
         }
       }
+      this.disabled = true
       this._post({
         url: `/verify/auth_sms.json`,
         data: {
@@ -126,6 +128,7 @@ export default {
           'google_code': this.SmsData.googlecode
         }
       }, (d) => {
+      this.disabled = false
         if (d.data.success) {
           this.PopupBoxDisplay({message: this.$t('api_server.validate_sms.auth_sms_200'), type: 'success', url: '/my_account'})
           this.$store.dispatch('getData')

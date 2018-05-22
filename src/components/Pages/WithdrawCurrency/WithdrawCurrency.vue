@@ -277,6 +277,7 @@ export default {
       }) //withdraws pusher
 
       channel.bind('account', _debounce((data) => {
+        console.log(data)
         this.$store.state.assets[data.currency].balance = Number(data.balance)
         this.$store.state.assets[data.currency].locked = Number(data.locked)
         // this.equivalence = this.CurrencyType === data.currency ? this.equivalence : data.today_withdraw_remain_btc

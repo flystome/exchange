@@ -101,19 +101,15 @@ export default {
 <style lang="scss" scoped>
 @-webkit-keyframes swal2-show {
   0% {
-    -webkit-transform: scale(0.7);
-    transform: scale(0.7)
+    transform: scale(.7)
   }
   45% {
-    -webkit-transform: scale(1.05);
     transform: scale(1.05);
   }
   80% {
-    -webkit-transform: scale(0.95);
     transform: scale(0.95);
   }
   100% {
-    -webkit-transform: scale(1);
     transform: scale(1);
   }
 }
@@ -121,18 +117,20 @@ export default {
   margin-top: 203px;
   z-index: 3;
   .btc-hint-confirm{
+    position: relative;
+    bottom: -1px;
     .btc-basic-button{
       margin-top: 30px;
       outline: none;
     }
   }
   .btc-hint-middle{
-    transition: all 50s;
+    transition: all .4;
     background: #ffffff;
     position: relative;
     width: 300px;
     margin: 0 auto;
-    box-shadow:0 0 30px #bbbbbb;
+    // box-shadow:0 0 30px #bbbbbb;
     z-index: 99999;
     >div>div, >div>i{
       margin-top: 27px;
@@ -167,7 +165,7 @@ $sprite: (
 }
 
 .hint-enter-to{
-  animation: swal2-show 0.4s;
+  animation: swal2-show .4s;
 }
 
 .hint-enter, .hint-leave-to {

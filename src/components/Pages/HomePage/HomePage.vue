@@ -41,8 +41,12 @@
           </div>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
-        <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div>
+        <div class="swiper-button-prev-div" slot="button-prev">
+          <div class='swiper-button-prev'></div>
+        </div>
+        <div class="swiper-button-next-div" slot="button-next">
+          <div class='swiper-button-next'></div>
+        </div>
       </swiper>
       <div class="from-container">
         <div class="btc-homepage-login">
@@ -308,13 +312,14 @@
 import { mapGetters, mapState, mapMutations } from 'vuex'
 import Cookies from 'js-cookie'
 import pusher from '@/common/js/pusher'
+import { CookieLocale } from '@/common/js/i18n/i18n.js'
 import HomeMarket from './HomeMarket/HomeMarket'
 const _debounce = require('lodash.debounce')
 export default {
   name: 'homepage',
   created () {
     var code = Cookies.get('code')
-    this.$i18n.locale = Cookies.get('locale')
+    this.$i18n.locale = CookieLocale
     if (code) {
       if (code.match(/\d+/g)[0] === '200') {
         this.PopupBoxDisplay({message: this.$t(`my_account.200_hint`), type: 'success'})
@@ -431,8 +436,8 @@ export default {
           clickable: true
         },
         navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
+          nextEl: '.swiper-button-next-div',
+          prevEl: '.swiper-button-prev-div'
         }
       }
     }
@@ -608,33 +613,81 @@ export default {
   opacity: 1!important;
 }
 
-.btc-homepage-header .swiper-button-prev{
-  width: 30px;
-  height: 30px;
-  border-top: 1px solid #fff;
-  border-right: 1px solid #fff;
-  opacity: 0.5;
-  transform: rotate(-135deg);
-  background-image: none;
-  left:29px;
-  outline: none;
-  &:hover{
-    opacity: 1
+// .btc-homepage-header .swiper-button-prev{
+//   width: 30px;
+//   height: 30px;
+//   border-top: 1px solid #fff;
+//   border-right: 1px solid #fff;
+//   opacity: 0.5;
+//   transform: rotate(-135deg);
+//   background-image: none;
+//   left:29px;
+//   outline: none;
+//   &:hover{
+//     opacity: 1
+//   }
+// }
+
+.btc-homepage-header {
+  .swiper-button-prev-div{
+    left: 16px !important;
+    outline:none;
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    margin-top: -25px;
+    z-index: 10;
+    cursor: pointer;
+    &:hover{
+      .swiper-button-prev{
+        opacity: 1
+      }
+    }
+    .swiper-button-prev{
+      width: 30px;
+      height: 30px;
+      border-top: 1px solid #fff;
+      border-right: 1px solid #fff;
+      opacity: 0.5;
+      -webkit-transform: rotate(-135deg);
+      transform: rotate(-135deg);
+      background-image: none;
+      left: 20px;
+      outline: none;
+      margin-top: -15px;
+    }
   }
 }
 
-.btc-homepage-header .swiper-button-next{
-  width: 30px;
-  height: 30px;
-  border-top: 1px solid #fff;
-  border-right: 1px solid #fff;
-  opacity: 0.5;
-  transform: rotate(45deg);
-  background-image: none;
-  right:29px!important;
-  outline: none;
-  &:hover{
-    opacity: 1
+.btc-homepage-header {
+  .swiper-button-next-div{
+    right: 16px !important;
+    position: absolute;
+    outline:none;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    margin-top: -25px;
+    z-index: 10;
+    cursor: pointer;
+    &:hover{
+      .swiper-button-next{
+        opacity: 1
+      }
+    }
+    .swiper-button-next{
+      width: 30px;
+      height: 30px;
+      border-top: 1px solid #fff;
+      border-right: 1px solid #fff;
+      opacity: 0.5;
+      transform: rotate(45deg);
+      background-image: none;
+      right: 20px !important;
+      outline: none;
+      margin-top: -16px;
+    }
   }
 }
 
