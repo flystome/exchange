@@ -134,7 +134,6 @@ const en = {
       "Amount_to_withdraw": "Amount to withdraw",
       "google_validate": "Google Validate",
       "withdraw_all": "Withdraw All",
-      "tariff_description": "Tariff description",
       "reminder": "Guide",
       "min_currency": "Do not tell other people your mobile phone verification code or Google verification code",
       "confirm_apply_for_success": "After the withdrawal request is successful, please go to the email and click the link to confirm the withdrawal request. You can track the status on the withdrawal history page.",
@@ -153,7 +152,7 @@ const en = {
       "remark_label": "Remark",
       "use_a_new_address": "Use a new address",
       "sms": "SMS",
-      "send_identify_code": "Send Identify Code",
+      "send_identify_code": "Send Code",
       "set_as_default": "Set As Default",
       "delete": "Delete",
       "cancel": "Cancel",
@@ -450,9 +449,9 @@ const en = {
       "validate_sms": {
         "send_code_1002": "Phone number is invalid",
         "send_code_1001": "Send too fast, please wait for one minute",
-        "auth_sms_200": "Verify Code Success",
-        "auth_sms_1001": "Verify Failed",
-        "auth_sms_1002": "authentication code incorrect",
+        "auth_sms_200": "SMS verificaiton succeed.",
+        "auth_sms_1001": "Verification Failed",
+        "auth_sms_1002": "The verification code is incorrect",
       },
       "homepage": {
         "error_1001":  "Incorrect Email or password, please try again."

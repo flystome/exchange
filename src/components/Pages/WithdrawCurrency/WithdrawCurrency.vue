@@ -102,9 +102,6 @@
               <div class="btc-withdraw-explain">
                 <span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }} {{ 2 * withdraw_fee }}</span>
                 <span class="btc-fr">{{ $t('withdraw_currency.poundage') }} {{ withdraw_fee }}</span>
-              <!-- <span class="btc-fr btc-link">
-                <img src="~Img/tariff-description.png">{{$t('withdraw_currency.tariff_description')}}
-              </span> -->
                 </div>
               <div class="btc-choice-validate">
                 <select class="btc-select-option" ref='select'
