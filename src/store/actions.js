@@ -22,15 +22,16 @@ const actions = {
           Cookies.set('locale', 'en')
         } // setCookie
         if (state.marketData === '') {
-          if (d.data && d.data.error) {
-            if (!localStorage.getItem('marketData')) {
-              this.dispatch('GetMarketData', 'local')
-            } else {
-              commit('GetMarketData', JSON.parse(localStorage.getItem('marketData')))
-            }
-          } else {
-            this.dispatch('GetMarketData')
-          }
+          this.dispatch('GetMarketData')
+          // if (d.data && d.data.error) {
+          //   if (!localStorage.getItem('marketData')) {
+          //     this.dispatch('GetMarketData', 'local')
+          //   } else {
+          //     commit('GetMarketData', JSON.parse(localStorage.getItem('marketData')))
+          //   }
+          // } else {
+          //   this.dispatch('GetMarketData')
+          // }
         } // getMaretData
         if (route === undefined) route = state.route
         if (unLogin.includes(route.name)) {
@@ -113,7 +114,7 @@ const actions = {
         var data = d.data.success
         delete data.current_user
         delete data.code
-        localStorage.setItem('marketData', JSON.stringify(data))
+        // localStorage.setItem('marketData', JSON.stringify(data))
       }
       commit('GetMarketData', d.data.success)
     })

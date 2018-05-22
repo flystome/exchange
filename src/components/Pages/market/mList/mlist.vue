@@ -44,23 +44,13 @@ export default {
     },
     marketData (val) {
       if (val) {
-        var obj = {
-          eth: [],
-          btc: [],
-          usdt: []
-        }
+        var obj = {}
         val.map((ele, index) => {
           var key = Object.keys(ele)[0]
-          if ((/eth$/i).test(key)) {
-            obj.eth.push(ele)
-          } else if ((/btc$/i).test(key)) {
-            obj.btc.push(ele)
-          } else if ((/usdt$/i).test(key)) {
-            obj.usdt.push(ele)
-          }
+          obj[key] = ele[key]
         })
-        this.getCurData(obj)
         this.listData = obj
+        this.getCurData()
       }
     }
   },
@@ -78,90 +68,68 @@ export default {
       var self = this
       var channel = pusher.subscribe('market-global')
       channel.bind('tickers', (data) => {
-        if (JSON.stringify(data) !== '{}') {
-          for (let i in data) {
-            var obj = data[i]
-            var key = obj.base_currency
-            var Arr = self.listData[key]
-            if (!Arr) return
-            var len = Arr.length
-            var target = null
-            for (var j = 0; j < len; j++) {
-              var arrKey = Object.keys(Arr[j])
-              if (arrKey[0] === i) {
-                target = Arr[j]
-                target[arrKey].last = data[i]['last']
-                target[arrKey].percent = data[i]['percent']
-                target[arrKey].volume = data[i]['volume']
-                target[arrKey].legal_worth = data[i]['legal_worth']
-              }
-            }
-            this.getCurData(self.listData)
-          }
+        if (JSON.stringify(data) !== '{}' && JSON.stringify(this.listData) !== '{}') {
+          var obj = this.listData
+          Object.keys(data).map((ele) => {
+            obj[ele].last = data[ele].last
+            obj[ele].percent = data[ele].percent
+            obj[ele].volume = data[ele].volume
+            obj[ele].legal_worth = data[ele].legal_worth
+          })
+          this.getCurData(this.listData)
         }
       })
     },
-    getCurData: function (data) {
+    getCurData: function () {
       this.curData = []
-      this.curData.push(this.initDate(data))
-      this.curData.push(this.getItem(data['btc']))
-      this.curData.push(this.getItem(data['usdt']))
+      this.curData.push(this.initDate())
+      this.curData.push(this.getItem('btc'))
+      this.curData.push(this.getItem('usdt'))
     },
     changemarket: function (index, item) {
       this.currencyindex = index
     },
-    initDate: function (data) {
+    initDate: function () {
       var arr = []
-      if (this.loginData) {
-        arr = this.getFavorite(data)
+      if (this.loginData === 'none') {
+        arr = this.getLocal()
       } else {
-        arr = this.getLocal(data)
+        arr = this.getFavorite()
       }
       return arr
     },
-    getItem: function (data) {
+    getItem: function (key) {
       var arr = []
-      for (var i in data) {
-        for (var item in data[i]) {
-          arr.push(data[i][item])
+      var reg = new RegExp(key+'$', 'i')
+      for (var item in this.listData) {
+        if (reg.test(item)) {
+          arr.push(this.listData[item])
         }
       }
       return arr
     },
-    getFavorite: function (data) {
+    getFavorite: function () {
       var arr = []
+      var data = this.listData
       for (var key in data) {
-        var list = data[key]
-        var len = list.length
-        for (var i = 0; i < len; i++) {
-          for (var item in list[i]) {
-            if (list[i][item]['is_portfolios'] === true) {
-              arr.push(list[i][item])
-            }
-          }
+        if (data[key]['is_portfolios']) {
+          arr.push(data[key])
         }
       }
       return arr
     },
-    getLocal: function (data) {
+    getLocal: function () {
       var localList = localStorage.getItem('markets')
       if (!localList || localList.length === 0) {
         return ''
       }
+
+      var data = this.listData
       var arr = []
-      for (var key in data) {
-        if (key !== 'current_user') {
-          var list = data[key]
-          var len = list.length
-          for (var i = 0; i < len; i++) {
-            for (var item in list[i]) {
-              if (localList.indexOf(item) !== -1) {
-                arr.push(list[i][item])
-              }
-            }
-          }
-        }
-      }
+      localList.split(',').map((ele) => {
+        data[ele]['is_portfolios'] = true
+        arr.push(data[ele])
+      })
       return arr
     }
   }

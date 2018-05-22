@@ -21,7 +21,7 @@
     <section class="content">
       <div class="top_content clearfix">
         <div class="market w240" :class="{'move-left': moveToLeft1, 'move-zero': moveToRight1}">
-          <marketList :markets="markets" @reFreshFav='reFreshFav' @moveLeft='moveLeft'></marketList>
+          <marketList :markets="markets" @reFreshFav='reFreshFav' @moveLeft='moveLeft' :loginData='loginData'></marketList>
         </div>
         <div class="chart" :class="{'move-right': moveToLeft2, 'move-zero': moveToRight2}">
           <chart :market="market" :depthData='depth_data'></chart>

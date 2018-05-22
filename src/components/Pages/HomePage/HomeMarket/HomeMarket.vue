@@ -30,8 +30,8 @@
           <td>{{ item.volume }}</td>
           <td>{{ (Number(item.volume) * Number(item.last)).toFixed(2) }}</td>
           <td class="btc-percent" style="color:#fff">
-            <div v-if="Number(item.percent) > 0"><span style="background:#fd4041">+{{ Number(item.percent).toFixed(2) }}%</span></div>
-            <div v-else-if="Number(item.percent) < 0"><span style="background:#00c4a2">{{ Number(item.percent).toFixed(2) }}%</span></div>
+            <div v-if="Number(item.percent) > 0"><span style="background:#40b246">+{{ Number(item.percent).toFixed(2) }}%</span></div>
+            <div v-else-if="Number(item.percent) < 0"><span style="background:#e9454d">{{ Number(item.percent).toFixed(2) }}%</span></div>
             <div v-else><span style="background:#999999">+{{ Number(item.percent).toFixed(2) }}</span></div>
           </td>
           <td class="btc-homepage-trend">
@@ -109,6 +109,7 @@ export default {
     initData: function () {
       if (!this.curData) return ''
       this.oldData = JSON.parse(JSON.stringify(this.curData))
+      console.log(this.oldData)
     },
     sortList: function (index) {
       var order = this.coins[index]

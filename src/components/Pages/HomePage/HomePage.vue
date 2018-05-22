@@ -536,14 +536,38 @@ export default {
         this.curData.push(this.getItem(this.marketData['usdt']))
         this.curData.push(this.getItem(this.marketData['btc']))
         this.curData.push(this.getItem(this.marketData['eth']))
-        this.curData.push(this.getItem(Object.keys(this.marketData).map((d) => {
-          return this.marketData[d].map((data) => {
-            return data[Object.keys(data)[0]]
-          }).filter((d) => {
-            return d.is_portfolios
-          })
-        })))
+        if (this.loginData === 'none') {
+          this.curData.push(this.getLocal(this.marketData))
+        } else {
+          this.curData.push(this.getItem(Object.keys(this.marketData).map((d) => {
+            return this.marketData[d].map((data) => {
+              return data[Object.keys(data)[0]]
+            }).filter((d) => {
+              return d.is_portfolios
+            })
+          })))
+        }
       }
+    },
+    getLocal: function (data) {
+      var localList = localStorage.getItem('markets')
+      if (!localList || localList.length === 0) {
+        return ''
+      }
+      var arr = []
+      for (var key in data) {
+        var list = data[key]
+        var len = list.length
+        for (var i = 0; i < len; i++) {
+          for (var item in list[i]) {
+            if (localList.indexOf(item) !== -1) {
+              list[i][item]['is_portfolios'] = true
+              arr.push(list[i][item])
+            }
+          }
+        }
+      }
+      return arr
     },
     GetNewCoin () {
       var self = this
