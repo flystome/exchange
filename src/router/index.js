@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store'
 import { redirect } from '../store/mutations'
+import { unLogin } from '@/common/js/bus/public'
+
 var route = ''
 const MemberCenter = () => import(/* webpackChunkName: "MemberCenter" */ 'Pages/MemberCenter/MemberCenter')
 // validate
@@ -57,6 +59,8 @@ const MarketApply = () => import(/* webpackChunkName: "MarketMaker" */'Pages/Mar
 const SignIn = () => import(/* webpackChunkName: "sign" */'Pages/Sign/SignIn.vue')
 const SignUp = () => import(/* webpackChunkName: "sign" */'Pages/Sign/SignUp.vue')
 
+const ChangePassword = () => import(/* webpackChunkName: "ChangePassword" */'Pages/Sign/ChangePassword.vue')
+
 Vue.use(Router)
 
 const version = process.env.ROUTER_VERSION
@@ -78,6 +82,11 @@ const router = new Router({
       path: `${version}/register`,
       name: 'SignUp',
       component: SignUp
+    },
+    {
+      path: `${version}/change_password`,
+      name: 'ChangePassword',
+      component: ChangePassword
     },
     {
       path: `${version}/exchange/:id`,
@@ -292,6 +301,8 @@ const router = new Router({
   ]
 })
 
+var Time = 0
+
 router.beforeEach(async (to, from, next) => {
   route = to
   if (to.query.from === 'app') {
@@ -307,14 +318,14 @@ router.beforeEach(async (to, from, next) => {
       return
     }
   }
-  if (store.state.loginData === 'none') {
+  if (store.state.loginData === 'none' && Time === 0) {
     var result = await store.dispatch('getData', to)
+    Time = 1
     if (result) {
       next(`${version}/my_account`)
       return
     }
   } else {
-    // store.commit('redirect', to)
     if (to.name !== 'my_account' && !redirect(store.state, store, to)) {
       next(from.path)
       return

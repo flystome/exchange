@@ -246,7 +246,10 @@ const zh = {
     "ticket_closed": "已結束服務單",
     "ticket_new": "新建服務單",
     "market_maker": "做市商",
-    "market_apply": "做市商申請"
+    "market_apply": "做市商申請",
+    "login": "登錄",
+    "register": "注册",
+    "change_password": "修改密碼"
   },
   "prompt": {
     "email_not_certified": "郵件未驗證.",
@@ -349,7 +352,7 @@ const zh = {
       'please': '请',
       'or': '或',
       'operate': '后进行操作',
-      'login': '登录',
+      'login': '登錄',
       'register': '注册'
     },
     'success': "下单成功",
@@ -454,7 +457,15 @@ const zh = {
       "auth_sms_1002": "驗證碼不正確",
     },
     "homepage": {
-      "error_1001": "錯誤的帳號或密碼，請再試一次"
+      "error_1003": "錯誤的帳號或密碼，請再試一次",
+      "error_1002": "驗證碼錯誤",
+      "error_1001": "登錄失败次数太多，锁定3分钟",
+    },
+    "signup": {
+      "error_1001":  "帳戶已被鎖定",
+      "error_1002": "驗證碼錯誤",
+      "error_1003": "電子郵件已被使用",
+      "success_200": "注册成功。找到電子郵件啟動您的帳戶"
     },
     "ticket": {
       "success_200": "創建成功",
@@ -465,6 +476,13 @@ const zh = {
       "error_1003": "關閉服務單",
       "error_1004": "創建失敗",
       "error_1005": "如有新的答覆，60分鐘內不能再次催單"
+    },
+    "change_password": {
+      "success_200": '修改成功',
+      "error_1001": "驗證碼錯誤",
+      "error_1002": "您輸入的原始密碼不正確",
+      "error_1003": "您輸入的新密碼與舊密碼不相同",
+      "error_1004": "帳戶密碼更新失敗"
     }
   },
   "footer": {
@@ -625,6 +643,7 @@ const zh = {
     "email_fail": "郵箱無效",
     "email": "郵箱",
     "password": "密碼",
+    "empty_password": "密碼",
     "cellphone": "手機號碼",
     "google_verify_code": "谷歌驗證碼",
     "first_name": "名字",
@@ -634,7 +653,8 @@ const zh = {
     "less_then": "最小提幣金額數量不能小於",
     "more_then": "最大提幣金額數量不能大於",
     "withdraw_amount_NaN": "提幣金額數量必須為數位",
-    "withdraw_address": "提币地址"
+    "withdraw_address": "提币地址",
+    "inconsistency_of_password": "密碼不一致"
   },
   "page_not_found": {
     "lost": "頁面丟失,",
@@ -653,7 +673,10 @@ const zh = {
     "already_registered": "已經註冊?",
     "log_in": "去登錄",
     "official_website": "官方網站",
-    "official_email": "官方郵件"
+    "official_email": "官方郵件",
+    "old_password": "舊密碼",
+    "referrer": "推薦者",
+    "login_failure": "登入失敗"
   }
 }
 

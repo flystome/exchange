@@ -15,10 +15,10 @@
           <li class="text-center">
             <div v-if="loginData === 'none'">
               <span style="margin-right: 23%;">
-                <a :href="`${HOST_URL}/signin`">{{ $t('nav.login') }}</a>
+                <a :href="`${ROUTER_VERSION}/login`">{{ $t('nav.login') }}</a>
               </span>
               <span>
-                <a :href="`${HOST_URL}/signup`">{{ $t('nav.register') }}</a>
+                <router-link :to="`${ROUTER_VERSION}/register`">{{ $t('nav.register') }}</router-link>
               </span>
             </div>
           </li>
@@ -98,7 +98,8 @@
 import {
   mapState,
   mapMutations,
-  mapGetters
+  mapGetters,
+mapActions
 } from 'vuex'
 export default {
   name: 'SideSlipMenu',
@@ -131,16 +132,6 @@ export default {
       this.SideSlipMenuDisplay(false)
       this.Lang = !this.Lang
       this.ChangeLanguage(str)
-      this.$i18n.locale = str
-      this._post({
-        url: '/settings/language.json',
-        headers: {
-          'DataType': 'application/json;charset=utf-8'
-        },
-        data: {
-          'content_language': str
-        }
-      })
     },
     goPc () {
       this.SideSlipMenuDisplay(false)
@@ -177,7 +168,8 @@ export default {
         path: `${this.ROUTER_VERSION}${path}`
       })
     },
-    ...mapMutations(['SideSlipMenuDisplay', 'ChangeLanguage', 'PopupBoxDisplay', 'gotoPc'])
+    ...mapActions(['ChangeLanguage']),
+    ...mapMutations(['SideSlipMenuDisplay', 'PopupBoxDisplay', 'gotoPc'])
   },
   computed: {
     ...mapState(['SideSlipMenu', 'loginData', 'CmsUrl']),

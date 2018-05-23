@@ -15,7 +15,7 @@ Validator.localize(dictionary)
 
 var getMessage = (field, params, data) => { return `${field.replace('required|', '')}_fail` }
 
-var empty = ['cellphone', 'google_verify_code', 'first_name', 'withdraw_address', 'last_name', 'IdCard', 'verify_code']
+var empty = ['empty_password', 'cellphone', 'google_verify_code', 'first_name', 'withdraw_address', 'last_name', 'IdCard', 'verify_code']
 empty.forEach(d => {
   Validator.extend(d, {
     getMessage,

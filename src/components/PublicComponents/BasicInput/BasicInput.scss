@@ -16,6 +16,12 @@
   }
 }
 
+.is-danger{
+  &:focus{
+    border-color: #ff3860!important;
+  }
+}
+
 .btc-input-hiddenDanger{
   min-height: 66px;
 }

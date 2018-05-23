@@ -27,17 +27,17 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
+import { unLogin } from '@/common/js/bus/public'
 import Header from '@/components/Pages/Header/Header'
 import Footer from '@/components/Pages/Footer/Footer'
 import SideSlipMenu from '@/components/Pages/SideSlipMenu/SideSlipMenu'
 import Wrapper from '@/components/PublicComponents/Wrapper/Wrapper'
 import PopupBox from '@/components/PublicComponents/PopupBox/PopupBox'
-
 export default {
   name: 'App',
   data () {
     return {
-      unLogin: ['SignIn', 'HomePage', 'MexchangeMarkets', 'MexchangeDetail', 'MexchangeTrades', 'home', 'MexchangeOrders', 'notFound', 'Exchange'],
+      unLogin: unLogin,
       version: process.env.ROUTER_VERSION,
       noMobile: true,
       noPaddingList: ['MexchangeMarkets', 'MexchangeDetail', 'MexchangeTrades', 'MexchangeOrders'],

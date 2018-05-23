@@ -1,8 +1,8 @@
-import { _get } from '../axios'
+import { _get, _post } from '../axios'
 import Cookies from 'js-cookie'
 import { redirect } from '../store/mutations'
-import { CookieLocale } from '@/common/js/i18n/i18n.js'
-export const unLogin = ['SignUp', 'SignIn', 'HomePage', 'MexchangeMarkets', 'MexchangeDetail', 'MexchangeTrades', 'home', 'MexchangeOrders', 'notFound', 'Exchange']
+import { unLogin } from '@/common/js/bus/public'
+import router from '@/router'
 
 const actions = {
   getData ({ commit, state }, route) {
@@ -14,12 +14,6 @@ const actions = {
           'DataType': 'application/json;charset=utf-8'
         }
       }, (d) => {
-        var lang = CookieLocale
-        if (lang) {
-          this.commit('ChangeLanguage', lang)
-        } else {
-          Cookies.set('locale', 'en')
-        } // setCookie
         if (state.marketData === '') {
           this.dispatch('GetMarketData')
           // if (d.data && d.data.error) {
@@ -44,8 +38,7 @@ const actions = {
           return
         } // unredirct pages
         if (d.data.error) {
-          Cookies.set('status', 'nologin')
-          location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
+          router.replace(`${process.env.ROUTER_VERSION}/login?from=${location.href}`)
           return
         }
         commit('GetCmsUrl')
@@ -116,6 +109,22 @@ const actions = {
         // localStorage.setItem('marketData', JSON.stringify(data))
       }
       commit('GetMarketData', d.data.success)
+    })
+  },
+  ChangeLanguage ({ commit, state }, lang) {
+    if (lang === state.language) return
+    _post({
+      url: '/settings/language.json',
+      headers: {
+        'DataType': 'application/json;charset=utf-8'
+      },
+      data: {
+        'content_language': lang
+      }
+    }, (d) => {
+      if (d.data.success) {
+        commit('ChangeLanguage', lang)
+      }
     })
   }
 }

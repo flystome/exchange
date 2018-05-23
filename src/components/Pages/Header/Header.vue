@@ -45,7 +45,7 @@
             <li class="btc-link"><a :href="CmsUrl.helper_center">{{$t('nav.qa')}}</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right btc-header-signin btc-marginT15" v-if="loginData === 'none' || loginData.errors">
-            {{$t('nav.please')}}<a :href="`${HOST_URL}/signin`">{{$t('nav.login')}}</a>{{$t('nav.or')}}<a :href="`${HOST_URL}/signup`">{{$t('nav.register')}}</a>
+            {{$t('nav.please')}}<router-link :to="`${ROUTER_VERSION}/login`">{{$t('nav.login')}}</router-link>{{$t('nav.or')}}<router-link :to="`${ROUTER_VERSION}/register`">{{$t('nav.register')}}</router-link>
           </ul>
           <ul class="nav navbar-nav navbar-right" v-else>
             <li class="btc-marginL15">
@@ -150,19 +150,6 @@ export default {
       } else {
         this.goPath('/currency/deposit')
       }
-    },
-    changeLang (str) {
-      this.ChangeLanguage(str)
-      this.$i18n.locale = str
-      this._post({
-        url: '/settings/language.json',
-        headers: {
-          'DataType': 'application/json;charset=utf-8'
-        },
-        data: {
-          'content_language': str
-        }
-      })
     },
     goPath (path, status, href) {
       if (status) {

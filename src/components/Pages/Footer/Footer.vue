@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Footer',
   props: {
@@ -82,18 +82,7 @@ export default {
       // this.$i18n.locale = this.language
     },
     changeLang (str, index) {
-      if (this.$i18n.locale === str) return
       this.ChangeLanguage(str)
-      this.$i18n.locale = str
-      this._post({
-        url: '/settings/language.json',
-        headers: {
-          'DataType': 'application/json;charset=utf-8'
-        },
-        data: {
-          'content_language': str
-        }
-      })
     },
     goPath (path, status, href) {
       if (status) {
@@ -106,7 +95,7 @@ export default {
         path: `${this.ROUTER_VERSION}${path}`
       })
     },
-    ...mapMutations(['ChangeLanguage'])
+    ...mapActions(['ChangeLanguage'])
   },
   computed: {
     getLanguage () {

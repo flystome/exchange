@@ -246,7 +246,10 @@ const en = {
       "ticket_closed": "Closed Tickets",
       "ticket_new": "New Ticket",
       "market_maker": "Market Marker",
-      "market_apply": "Market Apply"
+      "market_apply": "Market Apply",
+      "login": "Login",
+      "register": "register",
+      "change_password": "Change Password"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
@@ -454,17 +457,32 @@ const en = {
         "auth_sms_1002": "The verification code is incorrect",
       },
       "homepage": {
-        "error_1001":  "Incorrect Email or password, please try again."
+        "error_1003":  "Incorrect Email or password, please try again",
+        "error_1002": "Captcha error",
+        "error_1001": "Too many failed login attempts, locked 3 minutes"
+      },
+      "signup": {
+        "error_1001":  "Account is locked",
+        "error_1002": "Captcha error",
+        "error_1003": "Email has already been taken",
+        "success_200": "Registration succeed. Find the Email to activate your account"
       },
       "ticket": {
         "success_200": 'Create Success',
         "success_201": 'Close off success',
         "success_203": 'Urge ticket success',
-        "error_1001": "Ticket has been closed.",
-        "error_1002": "Comment Failed.",
-        "error_1003": "Failed to close ticket.",
-        "error_1004": "Create Failed.",
+        "error_1001": "Ticket has been closed",
+        "error_1002": "Comment Failed",
+        "error_1003": "Failed to close ticket",
+        "error_1004": "Create Failed",
         "error_1005": "When there is a new reply, no further reminders can be sent within 60 minutes",
+      },
+      "change_password": {
+        "success_200": 'Change Success',
+        "error_1001": "Captcha error",
+        "error_1002": "The original password you entered is incorrect",
+        "error_1003": "The new password you entered is different from that of the old one",
+        "error_1004": "Account password updated failed"
       }
     },
     "footer": {
@@ -625,6 +643,7 @@ const en = {
       "email_fail": "Not a valid email",
       "email": "email",
       "password": "Password",
+      "empty_password": "Password",
       "cellphone": "phone number",
       "google_verify_code": "google verify code",
       "first_name": "first name",
@@ -634,7 +653,8 @@ const en = {
       "less_then": "Minimum withdraw amount can not be less then",
       "more_then": "Minimum withdraw amount can not be more then",
       "withdraw_amount_NaN": "withdraw amount must be a number",
-      "withdraw_address": "withdraw address"
+      "withdraw_address": "withdraw address",
+      "inconsistency_of_password": "Inconsistency Of Password"
     },
     "page_not_found": {
       "lost": "The page is lost, ",
@@ -653,7 +673,10 @@ const en = {
       "already_registered": "Already registered?",
       "log_in": "log in",
       "official_website": "Official Website",
-      "official_email": "Official Email"
+      "official_email": "Official Email",
+      "old_password": "Old Password",
+      "referrer": "Referrer",
+      "login_failure": "Login Failure"
     }
   }
 }

@@ -1,12 +1,14 @@
 <template>
-  <div class="btc-newsPrompt">
-      <transition name="prompt">
-        <span class="btc-news-animation" v-if="text">
+  <div style="min-height: 22px;">
+    <transition name="prompt">
+      <div v-if="text" class="btc-newsPrompt">
+        <span class="btc-news-animation">
           <strong>
             {{ this.text }}
           </strong>
         </span>
-      </transition>
+      </div>
+    </transition>
   </div>
 </template>
 

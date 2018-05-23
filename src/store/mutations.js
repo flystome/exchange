@@ -9,7 +9,7 @@ const HOST_URL = process.env.HOST_URL
 export const redirect = (state, action, route) => {
   // var route = type ? state.route.from.name : state.route.name
   // var path = type ? state.route.from.path : state.route.path
-  i18n.locale = CookieLocale
+  // i18n.locale = CookieLocale
   var flag = true
   switch (route.name) {
     case 'ValidateGoogle':
@@ -85,6 +85,11 @@ export const redirect = (state, action, route) => {
       action.commit('PopupBoxDisplay', {message: i18n.t(`my_account.1003_hint`) , type: 'warn' ,url: '/my_account'})
     }
     break
+    case 'SignUp':
+    case 'SignIn':
+    if (state.loginData !== 'none') {
+      router.replace({path: `/`})
+    }
   }
   return flag
 }
@@ -127,6 +132,8 @@ const mutations = {
   },
   ChangeLanguage (state, lang) {
     state.language = lang
+    i18n.locale = lang
+    Cookies.set('locale', lang)
   },
   ChangePopupBox (state, obj) {
     ({

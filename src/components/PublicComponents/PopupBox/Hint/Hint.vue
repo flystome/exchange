@@ -16,7 +16,7 @@
               />
               <i v-else class="Hint-error" />
             </div>
-          <div style="padding-left:35px;padding-right:35px;margin-top: 29px;" :class="{'btc-paddingB45': !this.PopupBox.buttondisplay}">
+          <div style="padding-left:35px;padding-right:35px;margin-top: 15px;" :class="{'btc-paddingB45': !this.PopupBox.buttondisplay}">
             {{this.PopupBox.message}}
           </div>
           <div v-if="this.PopupBox.buttondisplay" class="btc-hint-confirm">
@@ -128,7 +128,7 @@ export default {
     transition: all .4;
     background: #ffffff;
     position: relative;
-    width: 300px;
+    width: 264px;
     margin: 0 auto;
     // box-shadow:0 0 30px #bbbbbb;
     z-index: 99999;
@@ -144,7 +144,7 @@ export default {
   }
   .btc-hint-loading{
     margin: 0 auto;
-    margin-bottom: 78px;
+    margin-bottom: 46px;
     top: 24px!important;
     position: relative;
   }

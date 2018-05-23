@@ -43,6 +43,11 @@
           // margin-top: 200px;
           margin-top: 151px;
           font-size: 44px;
+          overflow: hidden;
+          height: 62px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
         span{
           font-size: 30px;

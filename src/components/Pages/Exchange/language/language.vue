@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'language',
   data () {
@@ -30,20 +30,9 @@ export default {
   },
   methods: {
     changeLang (str) {
-      if (this.$i18n.locale === str) return
       this.ChangeLanguage(str)
-      this.$i18n.locale = str
-      this._post({// 同步3000端口
-        url: '/settings/language.json',
-        headers: {
-          'DataType': 'application/json;charset=utf-8'
-        },
-        data: {
-          'content_language': str
-        }
-      })
     },
-    ...mapMutations(['ChangeLanguage'])
+    ...mapActions(['ChangeLanguage'])
   },
   computed: {
     getLanguage () {

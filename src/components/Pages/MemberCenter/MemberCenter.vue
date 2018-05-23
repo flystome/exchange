@@ -5,9 +5,9 @@
         <div class="col-md-6">
           <div class="btc-member-info">
             <span class="btc-member-infoEmail">{{ loginData.show_name }}</span>
-            <a :href="`${HOST_URL}/identity/edit`">
+            <router-link :to="`${ROUTER_VERSION}/change_password`">
               {{$t("my_account.change_password")}}
-            </a>
+            </router-link>
           </div>
         </div>
         <div class="btc-member-bt">
@@ -103,7 +103,7 @@
     <template v-if="step === 0">
       <div class="container table">
       <basic-table :captionTitle='getLoginRecord.captionTitle' :item='getLoginRecord.Item'>
-      <a :href="`${HOST_URL}/tickets/new`" slot="remark" class="btc-tableRemark">{{$t('my_account.have_questions_to_contact_us')}}</a>
+      <router-link :to="`${ROUTER_VERSION}/ticket/new`" slot="remark" class="btc-tableRemark">{{$t('my_account.have_questions_to_contact_us')}}</router-link>
       </basic-table>
       <div class="btc-member-handleRecord  btc-container-block">
         <header class="btc-member-blockHeader">
@@ -190,7 +190,6 @@
 </template>
 <script>
 import { mapGetters, mapMutations, mapState } from 'vuex'
-import { CookieLocale } from '@/common/js/i18n/i18n.js'
 import Cookies from 'js-cookie'
 import Clipboard from 'clipboard'
 const _debounce = require('lodash.debounce')
@@ -200,7 +199,6 @@ export default {
   name: 'MemberCenter',
   created () {
     var code = Cookies.get('code')
-    this.$i18n.locale = CookieLocale
     if (code) {
       if (code.match(/\d+/g)[0] === '200') {
         this.PopupBoxDisplay({message: this.$t(`my_account.200_hint`), type: 'success'})
@@ -427,13 +425,13 @@ export default {
       var data = this.loginData.recent_signin_histories
       var obj = {
         captionTitle: 'my_account.login_record',
-        Item: ''
+        Item: []
       }
       if (data) {
         data.sort((a, b) => {
           return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         })
-        data.length === 0 ? obj.Item = '' : obj.Item = [{content: [this.$t('my_account.login_time'), this.$t('my_account.ip_adress'), this.$t('my_account.login_location')]}].concat(data.map(d => {
+        data.length === 0 ? obj.Item = [] : obj.Item = [{content: [this.$t('my_account.login_time'), this.$t('my_account.ip_adress'), this.$t('my_account.login_location')]}].concat(data.map(d => {
           return {
             content: [
               this.$moment(d.created_at).format('L H:mm:ss'),

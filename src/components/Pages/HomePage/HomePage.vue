@@ -55,10 +55,10 @@
             <div class="form">
               <span>{{ $t('homepage.login') }}</span>
               <basic-input :delay='1000' ref="email" :validate='"required|email"' v-model="email" :placeholder="this.$t('homepage.enter_the_mailbox')" class="btc-input"></basic-input>
-              <basic-input :delay='1000' ref="password" type='password' :validate='"required|password"' v-model="password" :placeholder="this.$t('homepage.enter_the_password')" class="btc-input"></basic-input>
+              <basic-input :delay='1000' ref="password" type='password' :validate='"required|empty_password"' v-model="password" :placeholder="this.$t('homepage.enter_the_password')" class="btc-input"></basic-input>
               <basic-button :disabled='disabled' @click.native="login" class="btn btc-button" :text="this.$t('homepage.login')"></basic-button>
               <div>
-                <a class='btc-link' :href="`${HOST_URL}/signup`">{{ $t('homepage.free_registration') }}</a>
+                <router-link class='btc-link' :to="`${ROUTER_VERSION}/register`">{{ $t('homepage.free_registration') }}</router-link>
                 <a :href="`${HOST_URL}/reset_passwords/new`" :class='{"pull-right": language !=="en", "btc-homepage-block": language!=="zh-TW"}' class="btc-pointer btc-link">{{ $t('homepage.forget_the_password') }}</a>
               </div>
             </div>
@@ -312,14 +312,12 @@
 import { mapGetters, mapState, mapMutations } from 'vuex'
 import Cookies from 'js-cookie'
 import pusher from '@/common/js/pusher'
-import { CookieLocale } from '@/common/js/i18n/i18n.js'
 import HomeMarket from './HomeMarket/HomeMarket'
 const _debounce = require('lodash.debounce')
 export default {
   name: 'homepage',
   created () {
     var code = Cookies.get('code')
-    this.$i18n.locale = CookieLocale
     if (code) {
       if (code.match(/\d+/g)[0] === '200') {
         this.PopupBoxDisplay({message: this.$t(`my_account.200_hint`), type: 'success'})
@@ -471,16 +469,14 @@ export default {
           this.$store.dispatch('GetMarketData')
         } else {
           if (d.data.error.code === 1002) {
-            location.href = `${this.HOST_URL}/signin`
-            Cookies.set('status', 'captcha_error')
+            this.$router.push(`${this.ROUTER_VERSION}/login?captcha=error`)
           } else {
             if (d.data.error.captcha_required) {
-              location.href = `${this.HOST_URL}/signin`
-              Cookies.set('status', 'captcha_error')
+              this.$router.push(`${this.ROUTER_VERSION}/login?captcha=error`)
               return
             }
             this.password = ''
-            this.PopupBoxDisplay({type: 'error', message: this.$t('api_server.homepage.error_1001')})
+            this.PopupBoxDisplay({type: 'error', message: this.$t(`api_server.homepage.error_${d.data.error.code}`)})
           }
         }
       })
@@ -660,12 +656,12 @@ export default {
 .btc-homepage-header {
   .swiper-button-prev-div{
     left: 16px !important;
-    outline:none;
     position: absolute;
+    outline: none;
     top: 50%;
-    width: 50px;
-    height: 50px;
-    margin-top: -25px;
+    width: 55px;
+    height: 66px;
+    margin-top: -33px;
     z-index: 10;
     cursor: pointer;
     &:hover{
@@ -693,11 +689,11 @@ export default {
   .swiper-button-next-div{
     right: 16px !important;
     position: absolute;
-    outline:none;
+    outline: none;
     top: 50%;
-    width: 50px;
-    height: 50px;
-    margin-top: -25px;
+    width: 55px;
+    height: 66px;
+    margin-top: -33px;
     z-index: 10;
     cursor: pointer;
     &:hover{
