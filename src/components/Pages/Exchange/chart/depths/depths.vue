@@ -43,8 +43,8 @@ export default {
           trigger: 'axis',
           backgroundColor: '#37506e',
           formatter: function (params) {
-            var p1 = (params[0].data && params[0].data[0]) || ""
-            var p2 = (params[0].data && params[0].data[1]) || ""
+            var p1 = (params[0].data && params[0].data[0]) || ''
+            var p2 = (params[0].data && params[0].data[1]) || ''
             return `<p class='item1'><span>${_this.$t('markets.price')}:</span><span> ${p1}</span></p>
               <p class='item1'><span>${_this.$t('exchange.grand')}:</span><span> ${p2}</span></p>`
           }

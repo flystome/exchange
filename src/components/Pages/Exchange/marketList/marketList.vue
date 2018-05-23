@@ -96,7 +96,7 @@ export default {
     getLocal: function () {
       var localList = localStorage.getItem('markets')
       if (!localList || localList.length === 0) {
-        return ''
+        return []
       }
 
       var data = this.pipeData

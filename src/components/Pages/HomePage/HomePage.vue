@@ -498,7 +498,7 @@ export default {
       if (this.loginData === 'none') {
         var markData = JSON.parse(JSON.stringify(this.marketData))
         markData[this.currency[this.currencyindex]][index][Object.keys(markData[this.currency[this.currencyindex]][index])[0]].is_portfolios = status
-        localStorage.setItem('marketData', JSON.stringify(markData))
+        // localStorage.setItem('marketData', JSON.stringify(markData))
       }
     },
     displaystate () {
@@ -557,7 +557,7 @@ export default {
     getLocal: function (data) {
       var localList = localStorage.getItem('markets')
       if (!localList || localList.length === 0) {
-        return ''
+        return []
       }
       var arr = []
       for (var key in data) {

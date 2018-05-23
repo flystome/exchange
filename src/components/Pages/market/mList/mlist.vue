@@ -65,7 +65,6 @@ export default {
       }
     },
     getRefresh: function () {
-      var self = this
       var channel = pusher.subscribe('market-global')
       channel.bind('tickers', (data) => {
         if (JSON.stringify(data) !== '{}' && JSON.stringify(this.listData) !== '{}') {
@@ -100,7 +99,7 @@ export default {
     },
     getItem: function (key) {
       var arr = []
-      var reg = new RegExp(key+'$', 'i')
+      var reg = new RegExp(key + '$', 'i')
       for (var item in this.listData) {
         if (reg.test(item)) {
           arr.push(this.listData[item])
@@ -121,7 +120,7 @@ export default {
     getLocal: function () {
       var localList = localStorage.getItem('markets')
       if (!localList || localList.length === 0) {
-        return ''
+        return []
       }
 
       var data = this.listData

@@ -109,7 +109,6 @@ export default {
     initData: function () {
       if (!this.curData) return ''
       this.oldData = JSON.parse(JSON.stringify(this.curData))
-      console.log(this.oldData)
     },
     sortList: function (index) {
       var order = this.coins[index]
@@ -152,6 +151,7 @@ export default {
       if (this.curData[index].is_portfolios) {
         if (this.loginData === 'none') {
           this.curData[index].is_portfolios = false
+          this.addLocalFav(currency, true)
           this.$emit('marketChange', { index: index, type: 'delete', status: false })
           this.curData.splice()
           return
@@ -170,6 +170,7 @@ export default {
       } else {
         if (this.loginData === 'none') {
           this.curData[index].is_portfolios = true
+          this.addLocalFav(currency, false)
           this.$emit('marketChange', { index: index, type: 'add', status: true })
           this.curData.splice()
           return
@@ -190,6 +191,16 @@ export default {
           }
         })
       }
+    },
+    addLocalFav (market, bool) {
+      var localList = localStorage.getItem('markets')
+      var arr = (localList && localList.split(',')) || []
+      if (bool) {
+        arr.splice(arr.indexOf(market), 1)
+      } else {
+        arr.push(market)
+      }
+      localStorage.setItem('markets', arr)
     },
     trendArray (item) {
       return this.trend === '' ? [0, 0] : this.trend[`${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`]

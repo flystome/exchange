@@ -377,11 +377,14 @@ export default {
           }
         })
       } else if (from === 'trades') {
-        this.my_trades.map((ele) => {
-          if (data.tid === ele.id) {
-            data.isMine = true
-          }
-        })
+        if (this.my_trades) {
+          this.my_trades.map((ele) => {
+            if (data.tid === ele.id) {
+              data.isMine = true
+            }
+          })
+        }
+
       }
     },
     controlSound (bool) {
