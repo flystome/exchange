@@ -38,7 +38,7 @@ export default {
       SignInData: {
         password: '',
         email: '',
-        verifycode: '',
+        verifycode: ''
       },
       random: false,
       prompt: '',
@@ -57,7 +57,7 @@ export default {
     }
   },
   methods: {
-    initUrl() {
+    initUrl () {
       if (!this.$route.query.from) {
         this.from = ''
       } else {
@@ -73,11 +73,12 @@ export default {
     async login () {
       if (this.disabled) return
       const email = await this.$refs['email'].$validator.validateAll()
-      const password = await this.$refs['password'].$validator.validateAll()
       if (!email) {
         this.prompt = this.$refs['email'].error
         return
       }
+
+      const password = await this.$refs['password'].$validator.validateAll()
       if (!password) {
         this.prompt = this.$refs['password'].error
         return
@@ -102,19 +103,18 @@ export default {
           this.$router.push(`/`)
           this.random = false
         } else {
+          this.$store.commit('PopupBoxDisplay', {type: 'error', message: this.$t(`api_server.homepage.error_${d.data.error.code}`)})
           if (d.data.error.code === 1002) {
             this.changeCaptcha()
-            this.$store.commit('PopupBoxDisplay', {type: 'error', message: this.$t('api_server.homepage.error_1002')})
           } else {
             if (d.data.error.captcha_required) {
               this.changeCaptcha()
             }
             this.password = ''
-            this.$store.commit('PopupBoxDisplay', {type: 'error', message: this.$t('api_server.homepage.error_1001')})
           }
           Object.assign(this.SignInData, {
             password: '',
-            verifycode: '',
+            verifycode: ''
           })
         }
       })

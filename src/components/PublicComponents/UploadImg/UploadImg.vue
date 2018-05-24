@@ -5,12 +5,11 @@
       </div>
       <div class="btc-UploadExplain btc-marginR20 btc-marginT25">
         <strong>{{ Upload.UploadExplain }}</strong>
-          <news-prompt class="btc-marginL25" :text='prompt'></news-prompt>
       </div>
       <div class=" btc-marginT20 btc-marginB20">
         {{ Upload.ImgExplain }}
       </div>
-      <div class="validate-uploadImg">
+      <div class="validate-uploadImg" style="overflow: hidden;">
         <div class="col-xs-6 btc-UploadImg-model">
           <img :src="requireImg(Upload.ImgModel)" ref="height"  >
           <span>{{$t('validate_identity.example')}}</span>
@@ -21,8 +20,9 @@
           <img width="100%" height="100%" class="alredy-img" style="z-index:10" :src="UploadImg" v-else>
           <input type="file" ref="input" style="z-index:10" @change='ShowImg'  accept="image/jpeg,image/jpg" slot="file">
         </div>
+        <news-prompt class="btc-Upload-prompt" :text='verifyImg'></news-prompt>
+        <news-prompt class="btc-Upload-prompt" :text='prompt'></news-prompt>
       </div>
-      <news-prompt class="btc-marginL25" :text='verifyImg'></news-prompt>
     </div>
   </div>
 </template>

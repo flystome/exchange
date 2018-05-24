@@ -87,6 +87,7 @@ export const redirect = (state, action, route) => {
     break
     case 'SignUp':
     case 'SignIn':
+    case 'ForgotPassword':
     if (state.loginData !== 'none') {
       router.replace({path: `/`})
     }

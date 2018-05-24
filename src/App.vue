@@ -13,7 +13,7 @@
         <vue-simple-spinner size="88"></vue-simple-spinner>
       </div>
       <div v-else class="btc-container container" :class="{'noPadding':noPadding}">
-        <keep-alive>
+        <keep-alive :exclude="['SignUp', 'ValidateSms', 'ForgotPassword', 'SignIn', 'ValidateIdentity']">
           <router-view></router-view>
         </keep-alive>
       </div>

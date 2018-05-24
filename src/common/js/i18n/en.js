@@ -4,6 +4,7 @@ const en = {
     "submit": "Submit",
     "cancel": "Cancel",
     "confirm": "Confirm",
+    "slogen": "Hotex - Rapid, stable virtual asset trading platform",
     'currency': 'Currency',
     'time': 'time',
     "reply": "Reply",
@@ -222,6 +223,7 @@ const en = {
       "immediate_apply": "Immediate Apply"
     },
     "title": {
+      "forgot_password": "Forgot Password",
       "form_withdraw_cancel": "Pending Withdraw",
       "my_account": "My Account",
       "validate_email": "Validate Email",
@@ -483,6 +485,20 @@ const en = {
         "error_1002": "The original password you entered is incorrect",
         "error_1003": "The new password you entered is different from that of the old one",
         "error_1004": "Account password updated failed"
+      },
+      "send_eamil": {
+        'success_200': 'Send a success, please check the mailbox and fill in the verification code',
+        'error_1001': 'User no exist',
+        'error_1002': 'Ask too much, please try again later'
+      },
+      "validate_email": {
+        'error_1001': "miss params",
+        'error_1002': "verify code error",
+        'error_1003': "Verify the code failure, please resend the mailbox"
+      },
+      "forgot_password": {
+        'error_1001': "password format error",
+        'success_200': "reset password success",
       }
     },
     "footer": {
@@ -654,7 +670,8 @@ const en = {
       "more_then": "Minimum withdraw amount can not be more then",
       "withdraw_amount_NaN": "withdraw amount must be a number",
       "withdraw_address": "withdraw address",
-      "inconsistency_of_password": "Inconsistency Of Password"
+      "inconsistency_of_password": "Inconsistency Of Password",
+      "email_verify_code": "Email Verify Code"
     },
     "page_not_found": {
       "lost": "The page is lost, ",
@@ -676,7 +693,10 @@ const en = {
       "official_email": "Official Email",
       "old_password": "Old Password",
       "referrer": "Referrer",
-      "login_failure": "Login Failure"
+      "login_failure": "Login Failure",
+      "check_agreement": "Please agree to the User Agreement",
+      "reset_password": "Reset Password",
+      "new_password": "New Password"
     }
   }
 }

@@ -99,7 +99,7 @@ import {
   mapState,
   mapMutations,
   mapGetters,
-mapActions
+  mapActions
 } from 'vuex'
 export default {
   name: 'SideSlipMenu',

@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store'
 import { redirect } from '../store/mutations'
-import { unLogin } from '@/common/js/bus/public'
 
 var route = ''
 const MemberCenter = () => import(/* webpackChunkName: "MemberCenter" */ 'Pages/MemberCenter/MemberCenter')
@@ -58,6 +57,7 @@ const MarketApply = () => import(/* webpackChunkName: "MarketMaker" */'Pages/Mar
 // signin and signup
 const SignIn = () => import(/* webpackChunkName: "sign" */'Pages/Sign/SignIn.vue')
 const SignUp = () => import(/* webpackChunkName: "sign" */'Pages/Sign/SignUp.vue')
+const ForgotPassword = () => import(/* webpackChunkName: "sign" */'Pages/Sign/ForgotPassword.vue')
 
 const ChangePassword = () => import(/* webpackChunkName: "ChangePassword" */'Pages/Sign/ChangePassword.vue')
 
@@ -82,6 +82,11 @@ const router = new Router({
       path: `${version}/register`,
       name: 'SignUp',
       component: SignUp
+    },
+    {
+      path: `${version}/forgot_password`,
+      name: 'ForgotPassword',
+      component: ForgotPassword
     },
     {
       path: `${version}/change_password`,

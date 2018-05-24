@@ -112,7 +112,7 @@
             {{$t('my_account.view_the_end_service_list')}}
           </router-link>
         </header>
-        <div @click='goTicket(data.id)' class="btc-member-qContainer" v-for="(data, index) in tickets" :key="index" v-if="index < 5">
+        <div @click='goTicket(data.id)' class="btc-member-qContainer" v-for="(data, index) in tickets" :key="index" v-if="index < 5" :class="{'btc-border-none': index === tickets.length - 1 }">
           <div class="btc-member-question" :class="{'is-dispose':data.aasm_state === 'closed' }">
             {{data.content}}
             <span class="btc-member-qTime">{{ moment(data.created_at) }}</span>
@@ -130,12 +130,12 @@
           </div>
         </div>
         <template v-else>
-          <div class="text-center btc-table-more col-md-6">
+          <div class="text-center btc-table-more btc-b-t col-md-6">
             <router-link :to="`${ROUTER_VERSION}/ticket/open`" class='btc-link '>
               {{$t('my_account.show_more')}}
             </router-link>
           </div>
-          <div class="text-center btc-table-more btc-b-l col-md-6">
+          <div class="text-center btc-table-more btc-b-l btc-b-t col-md-6">
             <router-link :to="`${ROUTER_VERSION}/ticket/new`" class='btc-link '>
               {{$t('my_account.new_questions')}}
             </router-link>

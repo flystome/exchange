@@ -1,5 +1,5 @@
 <template>
-  <div @keyup.enter="ChangePassword" class="btc-signUp btc-sign-block">
+  <div @keyup.enter="ChangePassword" class="btc-changePassword btc-sign-block">
     <div class="btc-sign-form">
       <header class="text-center">
         <img src="~Img/large/sign-logo.png">
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
   name: 'ChangePassword',
   data () {
@@ -54,6 +55,7 @@ export default {
     },
     async ChangePassword () {
       if (this.disabled) return
+      /* eslint camelcase: "error" */
       const old_password = this.$refs['old_password']
       const password = this.$refs['password']
       const verify_code = this.$refs['verify_code']
@@ -140,10 +142,6 @@ export default {
 
 <style lang="scss" scoped>
 @import './common.scss';
-.form-footer{
-  padding-top: 16px;
-  padding-bottom: 27px;
-}
 .btc-basic-button{
   margin-top: 16px
 }
@@ -155,11 +153,11 @@ export default {
   font-size: 14px;
 }
 
-.btc-signUp .btc-basicInput{
+.btc-changePassword .btc-basicInput{
   margin-top: 16px;
 }
 
-.btc-signUp .old_password input{
+.btc-changePassword .old_password input{
   margin-top: 5px;
 }
 </style>

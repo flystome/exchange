@@ -591,7 +591,7 @@ export default {
       this.channelTime++
       var PersonalChannel = pusher.subscribe(`private-${this.loginData.sn}`)
       PersonalChannel.bind('account', _debounce((data) => {
-         this.$store.state.assets[data.currency].balance && (this.$store.state.assets[data.currency].balance = Number(data.balance))
+        this.$store.state.assets[data.currency].balance && (this.$store.state.assets[data.currency].balance = Number(data.balance))
         this.$store.state.assets[data.currency].locked && (this.$store.state.assets[data.currency].locked = Number(data.locked))
       }, 500)) // account pusher
     },

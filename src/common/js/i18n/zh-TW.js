@@ -3,6 +3,7 @@ const zh = {
   'submit': `提交`,
   'cancel': `取消`,
   'confirm': `確認`,
+  "slogen": "Hotex - 急速，穩定的虛擬資產交易平臺",
   'currency': '幣種',
   'time': '次',
   "reply": "回復",
@@ -222,6 +223,7 @@ const zh = {
     "immediate_apply": "立即申請"
   },
   "title": {
+    "forgot_password": "忘記密碼",
     "form_withdraw_cancel": "撤銷提幣",
     "my_account": "我的帳戶",
     "validate_email": "驗證郵件",
@@ -483,6 +485,20 @@ const zh = {
       "error_1002": "您輸入的原始密碼不正確",
       "error_1003": "您輸入的新密碼與舊密碼不相同",
       "error_1004": "帳戶密碼更新失敗"
+    },
+    "send_eamil": {
+      'success_200': '發送成功，請檢查郵箱，填寫驗證碼',
+      'error_1001': '用戶不存在',
+      'error_1002': '請求過多，請稍後再試'
+    },
+    "validate_email": {
+      'error_1001': "遺失參數",
+      'error_1002': "用戶不存在",
+      'error_1003': "驗證碼失效，請重新發送郵箱"
+    },
+    "forgot_password": {
+      'error_1001': "密碼格式錯誤",
+      'success_200': "重置密碼成功",
     }
   },
   "footer": {
@@ -654,7 +670,8 @@ const zh = {
     "more_then": "最大提幣金額數量不能大於",
     "withdraw_amount_NaN": "提幣金額數量必須為數位",
     "withdraw_address": "提币地址",
-    "inconsistency_of_password": "密碼不一致"
+    "inconsistency_of_password": "密碼不一致",
+    "email_verify_code": "郵箱驗證碼"
   },
   "page_not_found": {
     "lost": "頁面丟失,",
@@ -676,7 +693,10 @@ const zh = {
     "official_email": "官方郵件",
     "old_password": "舊密碼",
     "referrer": "推薦者",
-    "login_failure": "登入失敗"
+    "login_failure": "登入失敗",
+    "check_agreement": "請勾選用戶協議",
+    "reset_password": "重置密碼",
+    "new_password": "新密碼"
   }
 }
 

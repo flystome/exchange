@@ -17,6 +17,7 @@
     display: inline-block;
     display: flex;
     align-items: center;
+    padding-right: 0;
     >span{
       width: 100%;
       text-align: center;
@@ -49,6 +50,13 @@
       color: #fff;
     }
   }
+}
+
+.btc-Upload-prompt{
+  width: 100%;
+  text-align: right;
+  position: absolute;
+  bottom: 0;
 }
 
 .btc-validateIdentity{

@@ -3,6 +3,9 @@
   float: right;
   cursor: pointer;
 }
+.btc-border-none{
+  border: none!important;
+}
 a{
   &:hover{
     text-decoration: none;
@@ -108,6 +111,7 @@ a{
   .btc-table-more{
     margin-top: 0px;
     padding: 8px 0;
+    font-size: 12px;
   }
 }
 
@@ -322,7 +326,7 @@ a{
   }
   .btc-referral-data{
     margin-left: 50px;
-    margin-top: 23px;
+    margin-top: 17px;
     margin-bottom: 40px;
     width: 61%;
   }
@@ -362,7 +366,10 @@ a{
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
+  .btc-table-more.btc-b-l{
+    border-left: none!important;
+  }
   .btc-referral .btc-referral-data{
     width: 70%;
     margin-left: 132px;

@@ -76,7 +76,7 @@
         </div>
         <div class="clearfix"></div>
       </div>
-      <news-prompt style="" class="btc-marginL25 btc-fl" :text='prompt'></news-prompt>
+      <news-prompt class="btc-fl" :text='prompt'></news-prompt>
     </div>
   </div>
 </template>

@@ -32,7 +32,7 @@
               <strong class="btc-fl">
                 Access Key
               </strong>
-              <news-prompt class="btc-fl" :text='prompt1'></news-prompt>
+              <news-prompt class="btc-fl btc-marginL10" :text='prompt1'></news-prompt>
               <div class="clearfix"></div>
             </div>
             <span id="copy2">
@@ -47,7 +47,7 @@
               <strong class="btc-fl">
                 Secret Key
               </strong>
-              <news-prompt class="btc-fl" :text='prompt'></news-prompt>
+              <news-prompt class="btc-fl btc-marginL10" :text='prompt'></news-prompt>
               <div class="clearfix"></div>
             </div>
             <span id="copy1">

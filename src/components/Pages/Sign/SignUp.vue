@@ -24,7 +24,7 @@
         <div class="btc-authentication btc-marginT10">
           <span @click="read = !read" :class="{'btc-authentication-right': read}"></span>{{ $t('market_apply.read_and_agree') }} <a :href="`${$store.state.CmsUrl.user_agreement}`" class="btc-link">{{ $t('footer.user_agreement') }}</a>
         </div>
-        <basic-button :class="{'btc-choice': !read}" :disabled="disabled" @click.native='register' class="btn" :text='$t("nav.register")'></basic-button>
+        <basic-button  :disabled="disabled" @click.native='register' class="btn" :text='$t("nav.register")'></basic-button>
         <div class="form-footer">
           <span class="btc-fr">{{$t('sign.already_registered')}}<router-link :to='`${ROUTER_VERSION}/login`' class="btc-link">{{$t('sign.log_in')}}</router-link></span>
           <div class="clearfix"></div>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import Cookies from 'js-cookie'
 export default {
   name: 'SignUp',
@@ -48,7 +49,7 @@ export default {
         password_confirmation: '',
         password: '',
         _rucaptcha: '',
-        email: '',
+        email: ''
       },
       read: false,
       referrer: '',
@@ -76,12 +77,12 @@ export default {
       this.random = Math.random()
     },
     async register () {
-      if (!this.read) return
       if (this.disabled) return
       const email = this.$refs['email']
       const password = this.$refs['password']
       const verify_code = this.$refs['verify_code']
 
+      /*eslint camelcase: ["error", {properties: "never"}]*/
       const email_valid = await email.$validator.validateAll()
       if (!email_valid) {
         this.prompt = email.error
@@ -105,6 +106,12 @@ export default {
         this.prompt = verify_code.error
         return
       }
+
+      if (!this.read) {
+        this.prompt = this.$t('sign.check_agreement')
+        return
+      }
+
       this.disabled = true
       this._post({
         url: '/sessions/signup.json',
