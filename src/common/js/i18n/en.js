@@ -483,13 +483,14 @@ const en = {
         "success_200": 'Change Success',
         "error_1001": "Captcha error",
         "error_1002": "The original password you entered is incorrect",
-        "error_1003": "The new password you entered is different from that of the old one",
+        "error_1003": "The new password you entered can not the same as the old one",
         "error_1004": "Account password updated failed"
       },
       "send_eamil": {
         'success_200': 'Send a success, please check the mailbox and fill in the verification code',
         'error_1001': 'User no exist',
-        'error_1002': 'Ask too much, please try again later'
+        'error_1002': 'Ask too much, please try again later',
+        'error_1003': 'Captcha error'
       },
       "validate_email": {
         'error_1001': "miss params",

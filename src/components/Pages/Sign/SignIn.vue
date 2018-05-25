@@ -15,7 +15,7 @@
         <img v-if="random" class="btc-pointer" :src="Rucaptcha" @click="changeCaptcha">
         <basic-button :disabled="disabled" class="btn" @click.native='login' :text='$t("sign.login")'></basic-button>
         <div class="form-footer">
-          <span class="btc-link">{{$t('homepage.forget_the_password')}}</span>
+          <span><router-link class="btc-link" :to="`${ROUTER_VERSION}/forgot_password`">{{$t('homepage.forget_the_password')}}</router-link></span>
           <span :class="lang === 'en' ? 'btc-fl' : 'btc-fr'">{{$t('sign.no_account_number')}}<router-link :to='`${ROUTER_VERSION}/register`' class="btc-link">{{$t('sign.to_register')}}</router-link></span>
         </div>
       </div>

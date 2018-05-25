@@ -126,6 +126,17 @@ const actions = {
         commit('ChangeLanguage', lang)
       }
     })
+  },
+  GetCaptcha () {
+    return new Promise((resolve, reject) => {
+      _get({
+        url: '/sessions/get_captcha.json'
+      }, (d) => {
+        if (d.data.success) {
+          resolve(d.data.success)
+        }
+      })
+    })
   }
 }
 

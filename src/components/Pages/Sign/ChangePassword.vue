@@ -9,8 +9,8 @@
           {{ $t('title.change_password') }}
         </div>
         <news-prompt :Time='3000' v-on:bind='prompt = $event' :text="prompt"></news-prompt>
-        <basic-input :danger='true' ref="old_password" :validate='"required|password"' class="old_password" v-model="ChangePasswordData.identity.old_password" :placeholder="$t('sign.old_password')"></basic-input>
-        <basic-input :danger='true' type='password' ref="password" :validate='"required|password"' v-model="ChangePasswordData.identity.password" :placeholder="$t('sign.login_password')"></basic-input>
+        <basic-input type='password' :danger='true' ref="old_password" :validate='"required|password"' class="old_password" v-model="ChangePasswordData.identity.old_password" :placeholder="$t('sign.old_password')"></basic-input>
+        <basic-input :danger='true' type='password' ref="password" :validate='"required|password"' v-model="ChangePasswordData.identity.password" :placeholder="$t('sign.new_password')"></basic-input>
         <div class="btc-marginT15 btc-color999">
           {{ $t('validation.password_fail') }}
         </div>

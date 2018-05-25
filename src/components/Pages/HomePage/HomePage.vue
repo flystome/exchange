@@ -59,7 +59,7 @@
               <basic-button :disabled='disabled' @click.native="login" class="btn btc-button" :text="this.$t('homepage.login')"></basic-button>
               <div>
                 <router-link class='btc-link' :to="`${ROUTER_VERSION}/register`">{{ $t('homepage.free_registration') }}</router-link>
-                <a :href="`${HOST_URL}/reset_passwords/new`" :class='{"pull-right": language !=="en", "btc-homepage-block": language!=="zh-TW"}' class="btc-pointer btc-link">{{ $t('homepage.forget_the_password') }}</a>
+                <router-link :to="`${ROUTER_VERSION}/forgot_password`" :class='{"pull-right": language !=="en", "btc-homepage-block": language!=="zh-TW"}' class="btc-pointer btc-link">{{ $t('homepage.forget_the_password') }}</router-link>
               </div>
             </div>
           </div>

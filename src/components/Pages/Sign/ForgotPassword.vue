@@ -11,8 +11,9 @@
         <news-prompt :Time='3000' v-on:bind='prompt = $event' :text="prompt"></news-prompt>
         <div v-show="step === 0">
           <basic-input :danger='true' ref="email" v-model="SendEmailData.email" :validate='"required|email"' :placeholder="$t('sign.email_address')"></basic-input>
-          <basic-input class="btc-marginT15" v-if="random" :validate='"required|verify_code"' :danger='true' ref="verify_code" v-model="SendEmailData.verify_code" :placeholder="$t('validation.verify_code')"></basic-input>
-          <img v-if="random" class="btc-pointer btc-marginT5" :src="Rucaptcha" @click="changeCaptcha">
+          <basic-input class="btc-marginT15" :validate='"required|verify_code"' :danger='true' ref="verify_code" v-model="SendEmailData.verify_code" :placeholder="$t('validation.verify_code')"></basic-input>
+          <img v-if="random !== 'loading'" class="btc-pointer btc-marginT5" :src="random" @click="getCaptch">
+          <vue-simple-spinner v-else style="float: left;margin-top: 15px;" size="60"></vue-simple-spinner>
           <basic-button :disabled="disabled" class="btn btc-marginT15" @click.native='SendEmail' :text='$t("auth.send_email")'></basic-button>
         </div>
         <div v-show="step === 1">
@@ -43,15 +44,13 @@ export default {
   created () {
     this.init()
   },
-  mounted () {
-    this.changeCaptcha()
-  },
   data () {
     return {
       SendEmailData: {
         email: '',
         verify_code: ''
       },
+      auth_code: '',
       invalid: false,
       ChangePasswordData: {
         password: '',
@@ -59,7 +58,7 @@ export default {
         verify_code: ''
       },
       step: 0,
-      random: false,
+      random: 'loading',
       prompt: '',
       token: '',
       disabled: false,
@@ -67,24 +66,18 @@ export default {
       HOST_URL: process.env.HOST_URL
     }
   },
-  computed: {
-    Rucaptcha () {
-      return `${this.HOST_URL}/rucaptcha?${this.random}`
-    }
-  },
   methods: {
+    async getCaptch () {
+      this.random = 'loading'
+      const data = await this.$store.dispatch('GetCaptcha')
+      this.random = `data:image/jpeg;base64,${data.image}`
+      this.auth_code = data.auth_code
+    },
     keyEvent () {
       this.step === 0 ? this.SendEmail() : this.ChangePassword()
     },
     init () {
-      // if (!/forget_password/.test(this.$route.path)) {
-      //   if (this.$route.query.token) {
-      //     this.token = this.$route.query.token
-      //   } else {
-      //     this.token = ''
-      //     this.$router.push(`${this.ROUTER_VERSION}/404`)
-      //   }
-      // }
+      this.getCaptch()
     },
     async SendEmail () {
       if (this.disabled) return
@@ -94,18 +87,22 @@ export default {
         return
       }
 
-      // const verify_code = await this.$refs['verify_code'].$validator.validateAll()
-      // if (!verify_code) {
-      //   this.prompt = this.$refs['verify_code'].error
-      //   return
-      // }
+      const verify_code = await this.$refs['verify_code'].$validator.validateAll()
+      if (!verify_code) {
+        this.prompt = this.$refs['verify_code'].error
+        return
+      }
 
       this.disabled = true
       this._post({
         url: '/reset_passwords.json',
         data: {
-          origin: 'app',
-          reset_password: this.SendEmailData
+          reset_password: {
+            email: this.SendEmailData.email,
+            origin: 'web'
+          },
+          _rucaptcha: this.SendEmailData.verify_code,
+          auth_code: this.auth_code
         }
       }, (d) => {
         this.disabled = false
@@ -113,6 +110,7 @@ export default {
           this.step = 1
           this.$store.commit('PopupBoxDisplay', {type: 'success', message: this.$t(`api_server.send_eamil.success_200`)})
         } else {
+          this.getCaptch()
           this.$store.commit('PopupBoxDisplay', {type: 'error', message: this.$t(`api_server.send_eamil.error_${d.data.error.code}`)})
           Object.assign(this.SendEmailData, {
             email: '',
@@ -151,11 +149,12 @@ export default {
         if (d.data.success) {
           this._request({
             url: `/reset_passwords/${d.data.success.token}.json`,
-            method: 'PUT',
+            method: 'PATCH',
             data: {
               token: d.data.success.token,
               reset_password: {
-                password: this.ChangePasswordData.password_confirmation
+                password_confirmation: this.ChangePasswordData.password_confirmation,
+                password: this.ChangePasswordData.password
               }
             }
           }, (data) => {
@@ -180,17 +179,9 @@ export default {
           })
         }
       })
-    },
-    changeCaptcha () {
-      this.random = Math.random()
     }
   },
   watch: {
-    $route (to) {
-      if (to.name === 'ForgotPassword') {
-        this.changeCaptcha()
-      }
-    },
     'ChangePasswordData.password_confirmation' () {
       if (this.ChangePasswordData.password_confirmation !== this.ChangePasswordData.password) {
         this.invalid = true
