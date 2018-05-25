@@ -162,6 +162,7 @@ const mutations = {
   },
   GetMarketData (state, data) {
     delete data.current_user
+    delete data.geographic_location
     delete data.code
     state.marketData = data
   },
