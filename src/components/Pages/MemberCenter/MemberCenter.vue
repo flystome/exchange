@@ -161,7 +161,7 @@
               </div>
               <div class="btc-referrals-address">
                 <span v-if="loginData !== 'none'" id="copy1" class="btc-b">
-                   {{ `${HOST_URL}/signup?r=${loginData.promotion_id}` }}
+                  {{ `${BASE_URL}/register?r=${loginData.promotion_id}` }}
                 </span>
                 <basic-button class='btn-copy1' data-clipboard-target="#copy1" :text="$t('my_account.copy')"></basic-button>
               </div>
@@ -235,6 +235,7 @@ export default {
   data () {
     return {
       prompt: '',
+      BASE_URL: location.origin,
       HOST_URL: process.env.HOST_URL,
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       name_activated: false,
