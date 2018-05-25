@@ -358,7 +358,7 @@ export default {
       this.$refs['market'].$emit('market')
     }) // pusher
 
-    if (!this.marketData) this.GetmarketData()
+    if (this.marketData) this.GetmarketData()
   },
   mounted () {
     var time = 0

@@ -63,6 +63,7 @@ export default {
   },
   created () {
     this.initReferrer()
+    this.changeCaptcha()
   },
   methods: {
     initReferrer () {

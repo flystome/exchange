@@ -26,6 +26,7 @@
     :name="`${validate}`"
     class="btc-basicInput btc-b"
     :placeholder='placeholder'
+    autocomplete='off'
     @input="$emit('input', $event.target.value)">
     <slot name='button'></slot>
     <span v-show="errors.has(`${validate}`) && !danger" class="help is-danger">{{ error }}</span>
