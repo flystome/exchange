@@ -128,10 +128,10 @@ export default {
       }
 
       if (this.ChangePasswordData.password !== this.ChangePasswordData.password_confirmation) {
-          this.invalid = true
-          this.prompt = this.$t('validation.inconsistency_of_password')
-          return
-        }
+        this.invalid = true
+        this.prompt = this.$t('validation.inconsistency_of_password')
+        return
+      }
 
       const verify_email_code = await this.$refs['verify_email_code'].$validator.validateAll()
       if (!verify_email_code) {
@@ -195,7 +195,7 @@ export default {
       } else {
         this.invalid = false
       }
-    },
+    }
   }
 }
 </script>
@@ -214,4 +214,3 @@ export default {
   font-size: 14px;
 }
 </style>
-

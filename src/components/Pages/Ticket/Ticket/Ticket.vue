@@ -44,7 +44,7 @@
                   </span>
                 </div> -->
                 <div class="btc-fr">
-                  {{ $moment(d.created_at).format('L H:mm:ss') }}
+                  {{ $moment(d.created_at).format('YYYY-MM-DD H:mm:ss') }}
                 </div>
               </div>
               <div class="clearfix">
@@ -131,7 +131,7 @@ export default {
           this.id = d.success.ticket.id
           this.title = d.success.ticket.title
           this.content = d.success.ticket.content
-          this.created_at = this.$moment(d.success.ticket.created_at).format('L H:mm:ss')
+          this.created_at = this.$moment(d.success.ticket.created_at).format('YYYY-MM-DD H:mm:ss')
           this.comments = d.success.ticket.comments
           this.attachment_url = d.success.ticket.attachment_url
           this.$refs['file'] && this.$nextTick(() => {
@@ -185,7 +185,7 @@ export default {
         if (d.data.success) {
           if (!fileObject) {
             this.comments.push({
-              created_at: this.$moment(new Date()).format('L H:mm:ss'),
+              created_at: this.$moment(new Date()).format('YYYY-MM-DD H:mm:ss'),
               content: this.context
             })
           } else {
@@ -194,7 +194,7 @@ export default {
             img.onload = (data) => {
               var target = data.srcElement ? data.srcElement : data.target
               this.comments.push({
-                created_at: this.$moment(new Date()).format('L H:mm:ss'),
+                created_at: this.$moment(new Date()).format('YYYY-MM-DD H:mm:ss'),
                 content: context,
                 attachment_url: target.result
               })

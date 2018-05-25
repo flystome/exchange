@@ -28,13 +28,10 @@ import { sync } from 'vuex-router-sync'
 import store from './store'
 import router from './router'
 import '@/common/js/validation'
-import VeeValidate from 'vee-validate'
 import i18n from '@/common/js/i18n/i18n.js'
-import axios from 'axios'
 import { _post, _get, _delete, _put, _request } from './axios'
 import 'bootstrap/js/dropdown.js'
 import 'bootstrap/js/collapse.js'
-import Pusher from 'pusher-js'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import * as Filters from '@/common/filters/filters.js'
 
@@ -42,22 +39,22 @@ import * as Filters from '@/common/filters/filters.js'
 import 'swiper/dist/css/swiper.css'
 
 Vue.use(VueAwesomeSwiper)
-Vue.use(VeeValidate)
+Vue.use(window.VeeValidate)
 
 // Vue.use(VeeValidate)
 
 Vue.use(Trend)
 
 window.QRCode = window.qrcode
-window.moment.locale('zh-cn')
+
 Vue.config.productionTip = false
 Vue.prototype._post = _post
 Vue.prototype._get = _get
 Vue.prototype._delete = _delete
 Vue.prototype._put = _put
 Vue.prototype._request = _request
-Vue.prototype.$http = axios
-Vue.prototype.$moment = window.moment
+Vue.prototype.$http = window.axios
+Vue.prototype.$moment = window.dayjs
 
 Paginate.name = 'Paginate'
 
@@ -101,9 +98,3 @@ new Vue({
 Object.keys(Filters).forEach(key => {
   Vue.filter(key, Filters[key])
 })
-
-Pusher.Runtime.createXHR = function () {
-  var xhr = new XMLHttpRequest()
-  xhr.withCredentials = true
-  return xhr
-}

@@ -1,4 +1,3 @@
-import axios from 'axios'
 // import qs from 'qs'
 const requestUrl = process.env.HOST_URL
 axios.defaults.withCredentials = true

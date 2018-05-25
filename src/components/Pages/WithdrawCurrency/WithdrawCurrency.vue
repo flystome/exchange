@@ -256,7 +256,7 @@ export default {
         //   this.WithdrawRecord.item.unshift({
         //     content: [
         //       d.id,
-        //       this.$moment(d.created_at).format('L H:mm:ss'),
+        //       this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
         //       d.fund_uid,
         //       d.amount,
         //       d.fee,
@@ -300,7 +300,7 @@ export default {
           this.$set(this.depositRecord.item, 0, 0)
           this.depositRecord.item[this.depositId.indexOf(d.id)] = {
             content: [
-              this.$moment(d.created_at).format('L H:mm:ss'),
+              this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
               {hover: true, context: d.txid, url: d.blockchain_url},
               d.amount,
               d.confirmations,
@@ -311,7 +311,7 @@ export default {
         this.depositId.unshift(d.id)
         this.depositRecord.item.unshift({
             content: [
-              this.$moment(d.created_at).format('L H:mm:ss'),
+              this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
               {hover: true, context: d.txid, url: d.blockchain_url},
               d.amount,
               d.confirmations,
@@ -543,7 +543,7 @@ export default {
           return {
             content: [
               id,
-              this.$moment(d.created_at).format('L H:mm:ss'),
+              this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
               d.fund_uid,
               d.amount,
               d.fee,
@@ -556,7 +556,7 @@ export default {
           this.depositId.push(d.id)
           return {
             content: [
-              this.$moment(d.created_at).format('L H:mm:ss'),
+              this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
               {hover: 'true', context: d.txid, url: d.blockchain_url},
               d.amount,
               d.confirmations === null ? '0' : d.confirmations,

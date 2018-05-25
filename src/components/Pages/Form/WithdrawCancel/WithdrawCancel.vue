@@ -102,7 +102,7 @@ export default {
         return {
           content: [
             d.id,
-            this.$moment(d.created_at).format('L H:mm:ss'),
+            this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
             d.fund_uid,
             d.amount,
             d.fee,

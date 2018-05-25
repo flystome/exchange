@@ -28,7 +28,7 @@
             <header>
               <i v-if="d.unread" class="btc-ticket-unread"></i>
               <strong v-text="d.title"></strong>
-              <span class="btc-ticket-time">{{ $moment(d.created_at).format('L H:mm:ss') }}</span>
+              <span class="btc-ticket-time">{{ $moment(d.created_at).format('YYYY-MM-DD H:mm:ss') }}</span>
             </header>
             <article v-text="d.content">
             </article>
@@ -40,7 +40,7 @@
           <section class="btc-fl">
             <header>
               <strong v-text="d.title"></strong>
-              <span class="btc-ticket-time">{{ $moment(d.created_at).format('L H:mm:ss') }}</span>
+              <span class="btc-ticket-time">{{ $moment(d.created_at).format('YYYY-MM-DD H:mm:ss') }}</span>
             </header>
             <article v-text="d.content">
             </article>

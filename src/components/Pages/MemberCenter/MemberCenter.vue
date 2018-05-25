@@ -293,7 +293,7 @@ export default {
           data.referral_datas.length === 0 ? obj.Item = [] : obj.Item = [{content: [this.$t('my_account.date'), this.$t('my_account.number_of_users'), this.$t('my_account.new_user'), this.$t('my_account.page_browsing'), this.$t('my_account.bounce_rate')]}].concat(data.referral_datas.map(d => {
             return {
               content: [
-                this.$moment(d.date).format('L'),
+                this.$moment(d.date).format('YYYY-MM-DD'),
                 d.users,
                 d.new_users,
                 d.page_views,
@@ -322,7 +322,7 @@ export default {
                 data.referral_signup_history[index].ip,
                 data.referral_signup_history[index].location ? data.referral_signup_history[index].location : '占无',
                 this.bser(data.referral_signup_history[index].ua),
-                this.$moment(data.referrals[index].created_at).format('L H:mm:ss'),
+                this.$moment(data.referrals[index].created_at).format('YYYY-MM-DD H:mm:ss'),
                 data.referrals[index].activated ? this.$t('my_account.yes') : this.$t('my_account.no')
               ]
             }
@@ -416,7 +416,7 @@ export default {
       }
     },
     moment (date) {
-      return this.$moment(date).format('L H:mm:ss')
+      return this.$moment(date).format('YYYY-MM-DD H:mm:ss')
     }
   },
   computed: {
@@ -435,7 +435,7 @@ export default {
         data.length === 0 ? obj.Item = [] : obj.Item = [{content: [this.$t('my_account.login_time'), this.$t('my_account.ip_adress'), this.$t('my_account.login_location')]}].concat(data.map(d => {
           return {
             content: [
-              this.$moment(d.created_at).format('L H:mm:ss'),
+              this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
               d.ip,
               d.location === null ? 'N/A' : d.location
             ]

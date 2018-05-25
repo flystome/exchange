@@ -83,7 +83,7 @@ export default {
             this.ToFixed(data.origin_volume),
             this.ToFixed(data.avg_price),
             this.ToFixed(data.deal_volume),
-            { style: { 'white-space': 'nowrap' }, context: this.$moment(data.at).format('L H:mm:ss') }
+            { style: { 'white-space': 'nowrap' }, context: this.$moment(data.at).format('YYYY-MM-DD H:mm:ss') }
           ]
         }
       }))

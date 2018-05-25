@@ -66,12 +66,29 @@ export default {
   },
   methods: {
     initReferrer () {
-      if (!this.$route.query.r) {
-        this.referrer = ''
+      // if (!this.$route.query.r) {
+      //   this.referrer = ''
+      // } else {
+      //   this.referrer = this.$route.query.r
+      //   this.SignUpData.referrer = this.referrer
+      // }
+      if (Cookies.get('referrer')) {
+        if (!this.$route.query.r) {
+          this.referrer = Cookies.get('referrer')
+        } else {
+          this.referrer = this.$route.query.r
+          this.SignUpData.referrer = this.referrer
+          Cookies.set('referrer', this.referrer, { expires: 30 })
+        }
       } else {
-        this.referrer = this.$route.query.r
+        if (!this.$route.query.r) {
+          this.referrer = ''
+        } else {
+          this.referrer = this.$route.query.r
+          this.SignUpData.referrer = this.referrer
+          Cookies.set('referrer', this.referrer, { expires: 30 })
+        }
       }
-      Cookies.set('referrer', this.referrer)
     },
     changeCaptcha () {
       this.random = Math.random()

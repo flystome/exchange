@@ -1,6 +1,6 @@
-import { Validator } from 'vee-validate'
 import { BigNumber } from 'bignumber.js'
 import i18n from '@/common/js/i18n/i18n.js'
+var Validator = VeeValidate.Validator
 const $t = i18n.t.bind(i18n)
 const dictionary = {
   en: {

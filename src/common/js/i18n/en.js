@@ -456,7 +456,7 @@ const en = {
         "send_code_1001": "Send too fast, please wait for one minute",
         "auth_sms_200": "SMS verificaiton succeed.",
         "auth_sms_1001": "Verification Failed",
-        "auth_sms_1002": "The verification code is incorrect",
+        "auth_sms_1002": "The Google verification code is incorrect",
       },
       "homepage": {
         "error_1003":  "Incorrect Email or password, please try again",

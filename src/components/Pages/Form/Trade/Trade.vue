@@ -78,7 +78,7 @@ export default {
         return {
           content: [
             {style: data.kind !== 'ask' ? { color: '#fd4041' } : { color: '#29c1a6' }, context: data.kind !== 'ask' ? this.$t('form.order.buy') : this.$t('form.order.sell')},
-            { style: { 'white-space': 'nowrap' }, context: this.$moment(data.at).format('L H:mm:ss') },
+            { style: { 'white-space': 'nowrap' }, context: this.$moment(data.at).format('YYYY-MM-DD H:mm:ss') },
             data.market_name,
             `${this.ToFixed(data.origin_volume)} ${first}`,
             this.ToFixed(data.price),

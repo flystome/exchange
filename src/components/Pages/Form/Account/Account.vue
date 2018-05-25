@@ -92,7 +92,7 @@ export default {
         return {
           content: [
             data.transaction_type,
-            this.$moment(data.created_at).format('L H:mm:ss'),
+            this.$moment(data.created_at).format('YYYY-MM-DD H:mm:ss'),
             data.code_text,
             this.ToFixed(data.amount),
             this.ToFixed(data.fee),

@@ -66,7 +66,7 @@ const zh = {
     "account": "帳戶",
     "browser": "瀏覽器",
     "register_time": "註冊時間",
-    "activated": "Activated",
+    "activated": "是否激活",
     "yes": "是",
     "no": "否",
     "no_record": "無記錄",
@@ -456,7 +456,7 @@ const zh = {
       "send_code_1001": "發送速度太快，請等待一分鐘",
       "auth_sms_200": "驗證成功",
       "auth_sms_1001": "驗證失敗",
-      "auth_sms_1002": "驗證碼不正確",
+      "auth_sms_1002": "谷歌驗證碼不正確",
     },
     "homepage": {
       "error_1003": "錯誤的帳號或密碼，請再試一次",

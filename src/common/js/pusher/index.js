@@ -1,4 +1,9 @@
-import Pusher from 'pusher-js'
+var Pusher = window.Pusher
+Pusher.Runtime.createXHR = function () {
+  var xhr = new XMLHttpRequest()
+  xhr.withCredentials = true
+  return xhr
+}
 var config = process.env.PUSHER_CONFIG
 Pusher.Runtime.createXHR = function () {
   var xhr = new XMLHttpRequest()
