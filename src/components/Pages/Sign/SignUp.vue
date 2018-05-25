@@ -13,9 +13,9 @@
           </span>
         </div>
         <news-prompt :Time='3000' v-on:bind='prompt = $event' :text="prompt"></news-prompt>
-        <basic-input style="position:absolute;opacity: 0;"  :danger='true' ref="email" class="email" :placeholder="$t('sign.email_address')"></basic-input>
         <basic-input :danger='true' ref="email" :validate='"required|email"' class="email" v-model="SignUpData.email" :placeholder="$t('sign.email_address')"></basic-input>
-        <basic-input style="position:absolute;opacity: 0;" :danger='true' type='password' ref="password" :validate='"required|password"' :placeholder="$t('sign.login_password')"></basic-input>
+        <input style="visibility: hidden;position:absolute;opacity: 0;" :danger='true' class="email"  :placeholder="$t('sign.email_address')" />
+        <basic-input style="visibility: hidden;position:absolute;opacity: 0;" :danger='true' type='password' :validate='"required|password"' :placeholder="$t('sign.login_password')"></basic-input>
         <basic-input :danger='true' type='password' ref="password" :validate='"required|password"' v-model="SignUpData.password" :placeholder="$t('sign.login_password')"></basic-input>
         <div class="btc-marginT15 btc-color999">
           {{ $t('validation.password_fail') }}

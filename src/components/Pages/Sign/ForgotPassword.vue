@@ -11,6 +11,8 @@
         <news-prompt :Time='3000' v-on:bind='prompt = $event' :text="prompt"></news-prompt>
         <div v-show="step === 0">
           <basic-input :danger='true' ref="email" v-model="SendEmailData.email" :validate='"required|email"' :placeholder="$t('sign.email_address')"></basic-input>
+          <input style="visibility: hidden;position:absolute;opacity: 0;" :danger='true' class="email"  :placeholder="$t('sign.email_address')" />
+          <input  style="visibility: hidden;position:absolute;opacity: 0;" name="filed" :danger='true' type='password'  :placeholder="$t('sign.login_password')" />
           <basic-input class="btc-marginT15" :validate='"required|verify_code"' :danger='true' ref="verify_code" v-model="SendEmailData.verify_code" :placeholder="$t('validation.verify_code')"></basic-input>
           <img v-if="random !== 'loading'" class="btc-pointer btc-marginT5" :src="random" @click="getCaptch">
           <vue-simple-spinner v-else style="float: left;margin-top: 15px;" size="60"></vue-simple-spinner>

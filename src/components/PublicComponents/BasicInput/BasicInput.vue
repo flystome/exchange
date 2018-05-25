@@ -26,7 +26,6 @@
     :name="`${validate}`"
     class="btc-basicInput btc-b"
     :placeholder='placeholder'
-    :autocomplete='AutoComplete'
     @input="$emit('input', $event.target.value)">
     <slot name='button'></slot>
     <span v-show="errors.has(`${validate}`) && !danger" class="help is-danger">{{ error }}</span>
@@ -47,9 +46,6 @@ export default {
       } else {
         return this.$t(`validation.${result}`)
       }
-    },
-    AutoComplete () {
-      return this.type === 'password' ? 'new-password' : 'off'
     }
   }
 }
