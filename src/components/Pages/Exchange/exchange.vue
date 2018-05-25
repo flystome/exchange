@@ -10,7 +10,10 @@
         <div v-if='loginData === "none"' class="loginTip">
           <p>{{$t('exchange.unlogin.please')}}<a :href="`${HOST_URL}/signin?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${HOST_URL}/signup?from=${location}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
         </div>
-        <setting v-if='loginData !== "none"' :loginData='loginData' @controlSound='controlSound'></setting>
+        <setting v-if='loginData !== "none"' :loginData='loginData'
+          @controlSound='controlSound'
+          @notification='notification'>
+        </setting>
         <div class="person_info" v-if='loginData !== "none"'>
           <a :href="`${ROUTER_VERSION}/form/news`" :class="{'unread': loginData.has_unread_conversations}"><i></i></a>
         </div>
@@ -93,6 +96,7 @@ export default {
       my_trades: [],
       version: 0,
       soundAllow: true,
+      noticeAllow: true,
       accounts: {},
       moveToLeft1: false,
       moveToLeft2: false,
@@ -384,7 +388,6 @@ export default {
             }
           })
         }
-
       }
     },
     controlSound (bool) {
@@ -435,7 +438,11 @@ export default {
         this.moveToRight2 = false
       }
     },
+    notification (bool) {
+      this.noticeAllow = bool
+    },
     showNotice (price, volume) {
+      if (!this.noticeAllow) return
       Notification.requestPermission((permit) => {
         if (permit === 'granted') {
           new Notification('Trade', {

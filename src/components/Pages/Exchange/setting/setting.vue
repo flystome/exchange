@@ -12,7 +12,7 @@
         </div>
       </li>
       <li>
-        <div class="switch clearfix" :class="{'move-left': move2, 'move-zero': !move2}" @click.prevent='move2=!move2'>
+        <div class="switch clearfix" :class="{'move-left': move2, 'move-zero': !move2}" @click.prevent='notification'>
           <a href="###" class="on">ON</a>
           <span>通知</span>
           <a href="###" class="off">OFF</a>
@@ -43,7 +43,8 @@ export default {
       this.$emit('controlSound', !this.move1)
     },
     notification () {
-
+      this.move2 = !this.move2
+      this.$emit('notification', !this.move2)
     }
   }
 }

@@ -88,7 +88,7 @@
     float: left;
     height: calc(100vh - 48px);
     width: calc(100% - 492px);
-    min-height: 705px;
+    min-height: 720px;
     min-width: 708px;
     margin: 0 3px 0 3px;
     .top_content {
@@ -139,7 +139,7 @@
     &>div {
       background: none;
       height: 100%;
-      min-height: 705px;
+      min-height: 720px;
     }
     .list_lt {
       float: left;
@@ -149,7 +149,7 @@
     }
     .list_box {
       height: calc(100% - 237px);
-      min-height: 438px;
+      min-height: 453px;
       overflow-y:hidden;
       background: #232e3a;
       margin-bottom: 3px;
