@@ -213,6 +213,7 @@
 </template>
 <script>
 import { mapGetters, mapState, mapMutations } from 'vuex'
+import { unsupportedRegionNames, unsupportedCountryCodes } from '@/common/js/bus/public'
 import Cookies from 'js-cookie'
 import pusher from '@/common/js/pusher'
 import HomeMarket from './HomeMarket/HomeMarket'
@@ -220,6 +221,9 @@ const _debounce = require('lodash.debounce')
 export default {
   name: 'homepage',
   created () {
+    this.RegionHint()
+    // console.log(Cookies.set('gg', 'fef', { expires: 2}))
+
     var code = Cookies.get('code')
     if (code) {
       if (code.match(/\d+/g)[0] === '200') {
@@ -478,6 +482,15 @@ export default {
         self.Notice = d.data
       }) // new_coin
     },
+    RegionHint () {
+      // Cookies.get('')
+      if (!this.Location) return
+      if (unsupportedCountryCodes.includes(this.Location.country_code2) || unsupportedRegionNames.includes(this.Location.region_name)) {
+        if (Cookies.get('LocationHint')) return
+        Cookies.set('LocationHint', 'true', { expires: 1 })
+        this.PopupBoxDisplay({message: this.$t('unsupported_countries_and_regions'), type: 'warn'})
+      }
+    },
     ...mapMutations(['PopupBoxDisplay'])
   },
   watch: {
@@ -493,8 +506,14 @@ export default {
     marketData () {
       this.GetmarketData()
     },
-    $route () {
+    $route (to) {
       this.GetmarketData()
+      if (to.name === 'HomePage' || to.name === 'home') {
+        this.RegionHint()
+      }
+    },
+    Location () {
+      this.RegionHint()
     },
     language () {
       this.GetNewCoin()
@@ -508,7 +527,7 @@ export default {
       return this.loginData === 'none' ? '' : `${(10 - Number(this.loginData.commission_factor * 10)) * 10}%`
     },
     ...mapGetters(['loginData']),
-    ...mapState(['marketData', 'language', 'CmsUrl'])
+    ...mapState(['marketData', 'language', 'CmsUrl', 'Location'])
   },
   filters: {
     toLocaleString (n) {

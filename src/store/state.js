@@ -30,7 +30,8 @@ const state = {
   },
   assets: '',
   TotalAssets: '',
-  LockedAssets: ''
+  LockedAssets: '',
+  Location: ''
 }
 
 export default state

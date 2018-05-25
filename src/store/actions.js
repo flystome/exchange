@@ -105,7 +105,6 @@ const actions = {
       if (type) {
         var data = d.data.success
         delete data.current_user
-        delete data.geographic_location
         delete data.code
         // localStorage.setItem('marketData', JSON.stringify(data))
       }
