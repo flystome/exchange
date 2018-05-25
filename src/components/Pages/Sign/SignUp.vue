@@ -46,7 +46,6 @@ export default {
   data () {
     return {
       SignUpData: {
-        referrer: '',
         password_confirmation: '',
         password: '',
         _rucaptcha: '',
@@ -71,7 +70,6 @@ export default {
         this.referrer = ''
       } else {
         this.referrer = this.$route.query.r
-        this.SignUpData.referrer = this.referrer
       }
       Cookies.set('referrer', this.referrer)
     },
