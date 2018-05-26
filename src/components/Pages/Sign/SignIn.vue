@@ -87,7 +87,7 @@ export default {
       this._post({
         url: '/sessions/log_in.json',
         data: {
-          'auth_key': this.SignInData.email,
+          'auth_key': this.$store.getters.Trim(this.SignInData.email),
           'password': this.SignInData.password,
           '_rucaptcha': this.SignInData.verifycode
         }

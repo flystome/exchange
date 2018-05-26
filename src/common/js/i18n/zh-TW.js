@@ -254,7 +254,7 @@ const zh = {
     "change_password": "修改密碼"
   },
   "prompt": {
-    "email_not_certified": "郵件未驗證.",
+    "email_not_certified": "郵件未驗證",
     "not_certified": "手機或者Google沒有驗證",
     "google_not_certified": "Google身份驗證沒有驗證",
     "phone_not_certified": "手機沒有驗證",
@@ -657,6 +657,7 @@ const zh = {
     "no_empty": "不能為空",
     "field": "%",
     "password_fail": "密碼應當至少為8比特字元，並且包含字母和數位",
+    'password_space': "密碼的開頭和結尾不可為空格",
     "email_fail": "郵箱無效",
     "email": "郵箱",
     "password": "密碼",

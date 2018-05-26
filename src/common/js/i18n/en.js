@@ -126,7 +126,7 @@ const en = {
       "ie": "IE"
     },
     "withdraw_currency": {
-      "cancel_withdraw": "Pending Withdraw",
+      "cancel_withdraw": "Pending Withdrawal",
       "total_assets": "Total Assets",
       "frozen_assets": "Frozen Assets",
       "deposit": "Deposit",
@@ -657,6 +657,7 @@ const en = {
       "no_empty": " can not be empty",
       "field": "The % field",
       "password_fail": "The password should be at least 8 bits, and contain letters and numbers",
+      'password_space': "Your password can't start or end with a blank space",
       "email_fail": "Not a valid email",
       "email": "email",
       "password": "Password",

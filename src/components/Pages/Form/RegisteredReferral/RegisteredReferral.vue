@@ -23,13 +23,13 @@
 
 <script>
 export default {
-  name: 'FormReferral',
+  name: 'FormRegisteredReferral',
   created () {
     this.paging(1)
   },
   data () {
     return {
-      captionTitle: 'my_account.recommended_statistics',
+      captionTitle: 'my_account.recommended_users',
       xhrData: [],
       pagination: 0,
       disabled: false,
@@ -46,7 +46,7 @@ export default {
       this.disabled = true
       this.loading = true
       this._get({
-        url: `/settings/referral_datas.json`,
+        url: `/settings/registered_referrals.json`,
         data: {
           page: num
         }
@@ -61,19 +61,20 @@ export default {
   computed: {
     getRecord () {
       return [{content: [
-        this.$t('my_account.date'),
-        this.$t('my_account.number_of_users'),
-        this.$t('my_account.new_user'),
-        this.$t('my_account.page_browsing'),
-        this.$t('my_account.bounce_rate')]
-      }].concat(this.xhrData.map(d => {
+        this.$t('my_account.account'),
+        this.$t('my_account.ip_adress'),
+        this.$t('my_account.login_location'),
+        this.$t('my_account.browser'),
+        this.$t('my_account.login_time'),
+        this.$t('my_account.activated')
+      ]}].concat(this.xhrData.map(d => {
         return {
           content: [
-            this.$moment(d.date).format('YYYY-MM-DD'),
-            d.users,
-            d.new_users,
-            d.page_views,
-            Number(d.bounce_rate).toFixed(1) + '%'
+            // this.$moment(d.date).format('YYYY-MM-DD'),
+            // d.users,
+            // d.new_users,
+            // d.page_views,
+            // Number(d.bounce_rate).toFixed(1) + '%'
           ]
         }
       }))
@@ -81,7 +82,7 @@ export default {
   },
   watch: {
     $route (to, form) {
-      if (to.name === 'FormReferral') {
+      if (to.name === 'FormRegisteredReferral') {
         this.$refs.paginate.selected = 0
         this.paging(1)
       }

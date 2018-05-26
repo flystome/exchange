@@ -1,5 +1,6 @@
 import { BigNumber } from 'bignumber.js'
 import i18n from '@/common/js/i18n/i18n.js'
+import { constructArgumentList } from 'node-notifier/lib/utils';
 var Validator = VeeValidate.Validator
 const $t = i18n.t.bind(i18n)
 const dictionary = {
@@ -13,7 +14,10 @@ const dictionary = {
 }
 Validator.localize(dictionary)
 
-var getMessage = (field, params, data) => { return `${field.replace('required|', '')}_fail` }
+var getMessage = (field, params, data) => {
+
+  return `${field.replace('required|', '')}_fail`
+}
 
 var empty = ['empty_password', 'cellphone', 'google_verify_code', 'first_name', 'withdraw_address', 'last_name', 'IdCard', 'verify_code']
 empty.forEach(d => {
@@ -27,7 +31,7 @@ empty.forEach(d => {
 
 var validation = {
   email (value) {
-    var regex = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+    var regex = /^\s*[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+\s*$/
     return new Promise(resolve => {
       resolve({
         valid: regex.test(value),

@@ -59,6 +59,9 @@ const getters = {
   ToFixed: () => (num) => {
     var reg = /.*\..*/
     return Number(num).toFixed(Math.min((!reg.test(num) ? 0 : String(num).split('.')[1].length), 8))
+  },
+  Trim: () => (str) => {
+    return str.replace(/(^\s*)|(\s*$)/g, "")
   }
 }
 export default getters

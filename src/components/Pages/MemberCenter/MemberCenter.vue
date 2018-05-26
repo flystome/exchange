@@ -320,7 +320,7 @@ export default {
               content: [
                 data.referrals_account_name[index],
                 data.referral_signup_history[index].ip,
-                data.referral_signup_history[index].location ? data.referral_signup_history[index].location : '占无',
+                data.referral_signup_history[index].location ? data.referral_signup_history[index].location : 'N/A',
                 this.bser(data.referral_signup_history[index].ua),
                 this.$moment(data.referrals[index].created_at).format('YYYY-MM-DD H:mm:ss'),
                 data.referrals[index].activated ? this.$t('my_account.yes') : this.$t('my_account.no')

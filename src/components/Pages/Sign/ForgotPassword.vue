@@ -98,7 +98,7 @@ export default {
         url: '/reset_passwords.json',
         data: {
           reset_password: {
-            email: this.SendEmailData.email,
+            email: this.$store.getters.Trim(this.SendEmailData.email),
             origin: 'web'
           },
           _rucaptcha: this.SendEmailData.verify_code,
