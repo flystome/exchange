@@ -75,6 +75,7 @@
       background: #181f28!important;
     }
     ul{
+      border-radius: 0;
       margin-top: 4px;
     }
   }
@@ -267,6 +268,7 @@
       color: #728eaa;
       &:hover{
         color: #417dee;
+        background: white;
       }
     }
   }

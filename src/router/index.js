@@ -37,6 +37,7 @@ const WithdrawCancel = () => import(/* webpackChunkName: "FormOrder" */ 'Pages/F
 const FormNews = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/News/News.vue')
 const FormTrade = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Trade/Trade.vue')
 const FormAccount = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Account/Account.vue')
+const Referral = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Referral/Referral.vue')
 
 // Api
 const Api = () => import(/* webpackChunkName: "Api" */ 'Pages/Api/RouterView')
@@ -233,6 +234,11 @@ const router = new Router({
           path: 'withdraw_cancel',
           name: 'WithdrawCancel',
           component: WithdrawCancel
+        },
+        {
+          path: 'referral',
+          name: 'Referral',
+          component: Referral
         }
       ]
     },

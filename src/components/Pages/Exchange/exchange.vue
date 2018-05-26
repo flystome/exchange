@@ -75,7 +75,7 @@ import trades from './trades/trades'
 import order from './order/order'
 import allOrder from './allOrder/allOrder'
 import myOrder from './myOrder/myOrder'
-// const _debounce = require('lodash.debounce')
+const _debounce = require('lodash.debounce')
 
 export default {
   name: 'ExChange',

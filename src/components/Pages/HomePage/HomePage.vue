@@ -244,6 +244,7 @@ export default {
 
     var channel = pusher.subscribe('market-global')
     channel.bind('tickers', _debounce((data) => {
+      if (!this.$store.state.marketData) return
       var BtcMarket = this.$store.state.marketData['btc'].reduce((a, b) => {
         return a.concat(Object.keys(b)[0])
       }, [])
