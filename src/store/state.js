@@ -10,7 +10,8 @@ const state = {
     buttonText: '',
     buttondisplay: true,
     confirm: false,
-    href: ''
+    href: '',
+    largeWidth: false
   },
   fromApp: false,
   language: CookieLocale,

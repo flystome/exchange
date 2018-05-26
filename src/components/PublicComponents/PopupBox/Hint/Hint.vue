@@ -3,7 +3,7 @@
     <div class="btc-hint">
       <transition name="hint">
         <template v-if="tick">
-          <div  class="text-center btc-hint-middle">
+          <div  :class="{'btc-hint-large': PopupBox.largeWidth}" class="text-center btc-hint-middle">
             <div>
               <i v-if="PopupBox.type === 'success' " class="Hint-success" />
               <i v-else-if="PopupBox.type === 'warn'" class="Hint-warn" />
@@ -74,7 +74,8 @@ export default {
       setTimeout(() => {
         this.ChangePopupBox({
           confirm: false,
-          buttonText: ''
+          buttonText: '',
+          largeWidth: false
         })
         if (this.PopupBox.url) {
           this.$router.replace(`${this.ROUTER_VERSION}${this.PopupBox.url}`)
@@ -128,13 +129,17 @@ export default {
     transition: all .4;
     background: #ffffff;
     position: relative;
-    width: 264px;
+    min-width: 264px;
+    max-width: 264px;
     margin: 0 auto;
     // box-shadow:0 0 30px #bbbbbb;
     z-index: 99999;
     >div>div, >div>i{
       margin-top: 27px;
     }
+  }
+  .btc-hint-large{
+    max-width: 399px;
   }
   .btc-background-999{
     background: #999999;

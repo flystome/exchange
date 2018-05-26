@@ -4,6 +4,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 const TradingView = require('Static/charting_library/charting_library.min.js')
 require('Static/datafeeds/udf/dist/polyfills.js')
 const Datafeeds = require('Static/datafeeds/udf/dist/bundle.js')

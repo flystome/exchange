@@ -256,7 +256,7 @@ export default {
         //   this.WithdrawRecord.item.unshift({
         //     content: [
         //       d.id,
-        //       this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
+        //       this.$moment(d.created_at).format('L H:mm:ss'),
         //       d.fund_uid,
         //       d.amount,
         //       d.fee,
@@ -273,7 +273,7 @@ export default {
         // }
       }) //withdraws pusher
 
-      channel.bind('account', _debounce((data) => {
+      channel.bind('account', (data) => {
         this.$store.state.assets[data.currency].balance && (this.$store.state.assets[data.currency].balance = Number(data.balance))
         this.$store.state.assets[data.currency].locked && (this.$store.state.assets[data.currency].locked = Number(data.locked))
         // this.equivalence = this.CurrencyType === data.currency ? this.equivalence : data.today_withdraw_remain_btc
@@ -286,11 +286,30 @@ export default {
         //   }
         // }
         this.Balance = data.balance
-      }, 500)) //account pusher
+      }) //account pusher
 
       MarketChannel.bind('tickers', _debounce((data) => {
+        var BtcMarket = this.$store.state.marketData["btc"].reduce((a, b) => {
+          return a.concat(Object.keys(b)[0])
+        }, [])
         Object.keys(data).forEach((key) => {
-          this.$store.state.assets[data[key].base_currency].price = data[key].last
+          if (this.$store.state.assets !== '') {
+            if (data[key].base_currency === 'usdt') {
+              if (key === 'btcusdt') {
+                this.$store.state.assets['usdt'].price = 1 / Number(data[key].last)
+              }
+              return
+            }
+            if (data[key].base_currency === 'btc') {
+              this.$store.state.assets[data[key].quote_currency].price = data[key].last
+              return
+            }
+            if (data[key].base_currency === 'eth') {
+              if (!BtcMarket.includes(`${data[key].quote_currency}/btc`)) {
+                this.$store.state.assets[data[key].quote_currency].price = data[key].last * this.$store.state.assets['eth'].price
+              }
+            }
+          }
         })
       }, 5000)) //market pusher
 
@@ -300,7 +319,7 @@ export default {
           this.$set(this.depositRecord.item, 0, 0)
           this.depositRecord.item[this.depositId.indexOf(d.id)] = {
             content: [
-              this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
+              this.$moment(d.created_at).format('L H:mm:ss'),
               {hover: true, context: d.txid, url: d.blockchain_url},
               d.amount,
               d.confirmations,
@@ -311,7 +330,7 @@ export default {
         this.depositId.unshift(d.id)
         this.depositRecord.item.unshift({
             content: [
-              this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
+              this.$moment(d.created_at).format('L H:mm:ss'),
               {hover: true, context: d.txid, url: d.blockchain_url},
               d.amount,
               d.confirmations,
@@ -543,7 +562,7 @@ export default {
           return {
             content: [
               id,
-              this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
+              this.$moment(d.created_at).format('L H:mm:ss'),
               d.fund_uid,
               d.amount,
               d.fee,
@@ -556,7 +575,7 @@ export default {
           this.depositId.push(d.id)
           return {
             content: [
-              this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
+              this.$moment(d.created_at).format('L H:mm:ss'),
               {hover: 'true', context: d.txid, url: d.blockchain_url},
               d.amount,
               d.confirmations === null ? '0' : d.confirmations,

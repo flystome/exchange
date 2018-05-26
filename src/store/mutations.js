@@ -124,6 +124,7 @@ const mutations = {
         message: ''
       }
     }
+    state.PopupBox.largeWidth = obj.largeWidth
     state.PopupBox.confirm = obj.confirm
     state.PopupBox.type = obj.type
     state.PopupBox.status = !state.PopupBox.status
@@ -145,7 +146,8 @@ const mutations = {
       buttonText: state.PopupBox.buttonText,
       url: state.PopupBox.url,
       href: state.PopupBox.href,
-      confirm: state.PopupBox.confirm
+      confirm: state.PopupBox.confirm,
+      largeWidth: state.PopupBox.largeWidth
     } = {
       type: obj.type ? obj.type : state.PopupBox.type,
       url: obj.url ? obj.url : state.PopupBox.url,
@@ -154,7 +156,8 @@ const mutations = {
       href: obj.href ? obj.href : state.PopupBox.href,
       buttonText: obj.buttonText !== undefined ? obj.buttonText : state.PopupBox.buttonText,
       confirm: obj.hasOwnProperty('confirm') ? obj.confirm : state.PopupBox.confirm,
-      buttondisplay: Object.keys(obj).includes('buttondisplay') ? obj.buttondisplay : state.PopupBox.buttondisplay
+      buttondisplay: Object.keys(obj).includes('buttondisplay') ? obj.buttondisplay : state.PopupBox.buttondisplay,
+      largeWidth: obj.hasOwnProperty('largeWidth') ? obj.largeWidth : state.PopupBox.largeWidth
     })
   },
   SideSlipMenuDisplay (state, type) {

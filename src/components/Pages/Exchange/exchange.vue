@@ -59,6 +59,7 @@
 </template>
 
 <script>
+/* eslint-disable no-new */
 import { mapGetters, mapState } from 'vuex'
 import pusher from '@/common/js/pusher'
 import 'vue2-scrollbar/dist/style/vue2-scrollbar.css'
@@ -226,8 +227,29 @@ export default {
     globalRefresh () {
       var channel = pusher.subscribe('market-global')
       channel.bind('tickers', _debounce((data) => {
+        if (this.$store.state.marketData) {
+          var BtcMarket = this.$store.state.marketData['btc'].reduce((a, b) => {
+            return a.concat(Object.keys(b)[0])
+          }, [])
+        }
         Object.keys(data).forEach((key) => {
-          this.$store.state.assets !== '' && (this.$store.state.assets[data[key].base_currency].price = Number(data[key].last))
+          if (this.$store.state.assets !== '') {
+            if (data[key].base_currency === 'usdt') {
+              if (key === 'btcusdt') {
+                this.$store.state.assets['usdt'].price = 1 / Number(data[key].last)
+              }
+              return
+            }
+            if (data[key].base_currency === 'btc') {
+              this.$store.state.assets[data[key].quote_currency].price = data[key].last
+              return
+            }
+            if (data[key].base_currency === 'eth') {
+              if (!BtcMarket.includes(`${data[key].quote_currency}/btc`)) {
+                this.$store.state.assets[data[key].quote_currency].price = data[key].last * this.$store.state.assets['eth'].price
+              }
+            }
+          }
         })
       }, 5000))
 

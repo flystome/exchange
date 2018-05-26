@@ -222,8 +222,7 @@ export default {
   name: 'homepage',
   created () {
     this.RegionHint()
-    // console.log(Cookies.set('gg', 'fef', { expires: 2}))
-
+    this.BindChannel()
     var code = Cookies.get('code')
     if (code) {
       if (code.match(/\d+/g)[0] === '200') {
@@ -245,8 +244,27 @@ export default {
 
     var channel = pusher.subscribe('market-global')
     channel.bind('tickers', _debounce((data) => {
+      var BtcMarket = this.$store.state.marketData['btc'].reduce((a, b) => {
+        return a.concat(Object.keys(b)[0])
+      }, [])
       Object.keys(data).forEach((key) => {
-        this.$store.state.assets !== '' && (this.$store.state.assets[data[key].base_currency].price = Number(data[key].last))
+        if (this.$store.state.assets !== '') {
+          if (data[key].base_currency === 'usdt') {
+            if (key === 'btcusdt') {
+              this.$store.state.assets['usdt'].price = 1 / Number(data[key].last)
+            }
+            return
+          }
+          if (data[key].base_currency === 'btc') {
+            this.$store.state.assets[data[key].quote_currency].price = data[key].last
+            return
+          }
+          if (data[key].base_currency === 'eth') {
+            if (!BtcMarket.includes(`${data[key].quote_currency}/btc`)) {
+              this.$store.state.assets[data[key].quote_currency].price = data[key].last * this.$store.state.assets['eth'].price
+            }
+          }
+        }
       })
     }, 5000))
 
@@ -483,25 +501,28 @@ export default {
       }) // new_coin
     },
     RegionHint () {
-      // Cookies.get('')
       if (!this.Location) return
       if (unsupportedCountryCodes.includes(this.Location.country_code2) || unsupportedRegionNames.includes(this.Location.region_name)) {
         if (Cookies.get('LocationHint')) return
         Cookies.set('LocationHint', 'true', { expires: 1 })
-        this.PopupBoxDisplay({message: this.$t('unsupported_countries_and_regions'), type: 'warn'})
+        this.PopupBoxDisplay({message: this.$t('unsupported_countries_and_regions'), type: 'warn', largeWidth: true})
       }
+    },
+    BindChannel () {
+      if (this.loginData === 'none') return
+      if (this.channelTime > 0) return
+      this.channelTime++
+      var PersonalChannel = pusher.subscribe(`private-${this.loginData.sn}`)
+      PersonalChannel.bind('account', (data) => {
+        this.$store.state.assets[data.currency].balance && (this.$store.state.assets[data.currency].balance = Number(data.balance))
+        this.$store.state.assets[data.currency].locked && (this.$store.state.assets[data.currency].locked = Number(data.locked))
+      }) // account pusher
     },
     ...mapMutations(['PopupBoxDisplay'])
   },
   watch: {
     loginData () {
-      if (this.channelTime > 0) return
-      this.channelTime++
-      var PersonalChannel = pusher.subscribe(`private-${this.loginData.sn}`)
-      PersonalChannel.bind('account', _debounce((data) => {
-        this.$store.state.assets[data.currency].balance && (this.$store.state.assets[data.currency].balance = Number(data.balance))
-        this.$store.state.assets[data.currency].locked && (this.$store.state.assets[data.currency].locked = Number(data.locked))
-      }, 500)) // account pusher
+      this.BindChannel()
     },
     marketData () {
       this.GetmarketData()
@@ -510,6 +531,7 @@ export default {
       this.GetmarketData()
       if (to.name === 'HomePage' || to.name === 'home') {
         this.RegionHint()
+        this.BindChannel()
       }
     },
     Location () {
