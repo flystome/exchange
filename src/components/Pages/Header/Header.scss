@@ -96,6 +96,9 @@
       min-width: 0;
       a{
         padding: 3px 9px;
+        &:hover{
+          background: white;
+        }
       }
     }
   }
