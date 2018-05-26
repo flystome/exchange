@@ -43,7 +43,7 @@
           <trades :depthData='depth_data' :market='market'></trades>
         </div>
         <div class="order buy">
-          <order :market='market' :type='"buy"' :accounts='accounts' @play='play'></order>
+          <order :market='market' :type='"buy"' :accounts='accounts' @play='play' :loginData='loginData'></order>
         </div>
       </div>
       <div class="list_rt w240">
@@ -51,7 +51,7 @@
           <allOrder :tradesData="all_trades" :market='market'></allOrder>
         </div>
         <div class="order sell">
-          <order :market='market' :type='"sell"' :accounts='accounts' @play='play'></order>
+          <order :market='market' :type='"sell"' :accounts='accounts' @play='play' :loginData='loginData'></order>
         </div>
       </div>
     </section>
@@ -75,7 +75,7 @@ import trades from './trades/trades'
 import order from './order/order'
 import allOrder from './allOrder/allOrder'
 import myOrder from './myOrder/myOrder'
-const _debounce = require('lodash.debounce')
+// const _debounce = require('lodash.debounce')
 
 export default {
   name: 'ExChange',
@@ -98,6 +98,7 @@ export default {
       version: 0,
       soundAllow: true,
       noticeAllow: true,
+      TotalAssets: 0,
       accounts: {},
       moveToLeft1: false,
       moveToLeft2: false,
@@ -137,9 +138,6 @@ export default {
     }
   },
   computed: {
-    TotalAssets () {
-      return this.$store.getters.TotalAssets()
-    },
     ...mapGetters(['loginData']),
     ...mapState(['marketData'])
   },
@@ -161,9 +159,11 @@ export default {
         market: this.market,
         markets: this.markets,
         accounts: this.accounts,
-        depth_data: this.depth_data
+        depth_data: this.depth_data,
+        total_assets: this.total_assets
       } = res.data)
       res.data.my_orders && res.data.my_orders.length !== 0 && this.$set(this.my_orders, 0, res.data.my_orders.reverse())
+      this.TotalAssets = this.total_assets && (+this.total_assets.btc_worth).toFixed(8)
       this.marketRefresh()
       this.globalRefresh()
       this.version = this.depth_data && this.depth_data.version
@@ -256,15 +256,42 @@ export default {
       channel.bind('tickers', (data) => {
         if (JSON.stringify(data) !== '{}') {
           for (let key in data) {
-            var fav = this.markets[key]['is_portfolios']
+            // var fav = this.markets[key]['is_portfolios']
             this.markets[key] = data[key]
-            this.markets = Object.assign({}, this.markets, {'is_portfolios': fav})
+            this.markets = Object.assign({}, this.markets)
+            // this.setPrice(key, data)
+            // this.markets = Object.assign({}, this.markets, {'is_portfolios': fav})
             if (key === this.market.code) {
               this.market = Object.assign({}, data[key], {'code': key})
             }
           }
         }
+        this.accountsTotal()
       })
+    },
+    accountsTotal () {
+      var total = 0
+      var markets = this.markets
+      var accounts = this.accounts
+      for (let key in accounts) {
+        var val = accounts[key]
+        if (key === 'usdt') {
+          total += (+val.balance + +val.locked) / +markets['btcusdt'].last
+        } else if (key === 'btc') {
+          total += (+val.balance + +val.locked)
+        } else {
+          if (markets[key + 'btc']) {
+            total += +markets[key + 'btc'].last * (+val.balance + +val.locked)
+          } else if (markets[key + 'eth']) {
+            total += +markets[key + 'eth'].last * +markets.ethbtc.last * (+val.balance + +val.locked)
+          } else if (markets[key + 'usdt']) {
+            total += +markets[key + 'usdt'].last * +markets.btcusdt.last * (+val.balance + +val.locked)
+          } else {
+            console.log('Cant get this Coin')
+          }
+        }
+      }
+      this.TotalAssets = total.toFixed(8)
     },
     marketRefresh () {
       var self = this
@@ -392,6 +419,7 @@ export default {
         this.$store.state.assets[res.currency].balance = Number(res.balance)
         this.$store.state.assets[res.currency].locked = Number(res.locked)
         this.accounts = Object.assign({}, this.accounts)
+        this.accountsTotal()
       })
     },
     isMine (data, from) {

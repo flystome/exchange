@@ -108,12 +108,12 @@
 </template>
 
 <script>
+import { BigNumber } from 'bignumber.js'
 import { bus } from '@/common/js/bus/index'
-import {mapState} from 'vuex'
 
 export default {
   name: 'order',
-  props: ['market', 'type', 'accounts'],
+  props: ['market', 'type', 'accounts', 'loginData'],
   data () {
     return {
       HOST_URL: process.env.HOST_URL,
@@ -159,47 +159,17 @@ export default {
       }
     })
   },
-  computed: {
-    ...mapState(['loginData'])
-  },
   watch: {
     accounts (val) {
       if (val) {
         this.buyAccount = (val[this.market.base_currency] && val[this.market.base_currency].balance) || 0
         this.sellAccount = (val[this.market.quote_currency] && val[this.market.quote_currency].balance) || 0
       }
-    },
-    loginData (val, oldValue) {
-      this.sn = val.sn
-      return val
     }
   },
   methods: {
-    handleVol (value, type) {
-      if (value === ' ') return
-      if (value < 0) {
-        value = Math.abs(value)
-      }
-      if (this[type + 'Price']) {
-        var num = +this[type + 'Price'] * +value
-        if (type === 'buy') {
-          if (num > +this.buyAccount) {
-            value = +this.buyAccount / this.buyPrice
-          }
-        } else if (type === 'sell') {
-          if (value > +this.sellAccount) {
-            value = this.sellAccount
-            num = value * this.sellPrice
-          }
-        }
-        this[type + 'Volume'] = this.fixNum(value, this.market.volume_fixed)
-        this[type + 'Total'] = this.fixNum(+this[type + 'Volume'] * +this[type + 'Price'], this.market.volume_fixed, this.market.price_fixed)
-      } else {
-        this[type + 'Volume'] = this.fixNum(value, this.market.volume_fixed)
-      }
-    },
     handlePrice (value, type) {
-      if (value === ' ') return
+      if (value === '') return ''
       this[type + 'Price'] = this.fixNum(value, this.market.price_fixed)
       var distance = Math.abs(this[type + 'Price'] - this.market.last) / this.market.last
       if (distance > 0.1) {
@@ -207,44 +177,74 @@ export default {
         this.resetOrderStatus()
       }
       if (this[type + 'Volume']) {
-        var num = this.fixNum(this[type + 'Volume'] * value, this.market.volume_fixed, this.market.price_fixed)
-        this[type + 'Total'] = num
-        if (type === 'buy') {
-          if (num > this.buyAccount) {
-            this.buyVolume = this.fixNum(this.buyAccount / value, this.market.volume_fixed)
-            this.buyTotal = this.fixNum(this.buyVolume * value, this.market.volume_fixed, this.market.price_fixed)
-          }
-        }
+        var Price = new BigNumber(this[type + 'Price'])
+        var Volume = new BigNumber(this[type + 'Volume'])
+        this.handleTotal(null, type, Price, Volume)
       }
     },
-    handleTotal (value, type) {
-      if (value === ' ') return
-      if (type === 'buy') {
-        if (value > +this.buyAccount) {
-          value = this.fixNum(this.buyAccount, this.market.volume_fixed, this.market.price_fixed)
+    handleVol (value, type, from) {
+      if (value === '') return ''
+      if (value < 0) {
+        value = Math.abs(value)
+      }
+      if (from === 'total') {
+        value = +value.toString()
+      }
+      this[type + 'Volume'] = this.fixNum(value, this.market.volume_fixed)
+      if (type === 'sell') {
+        if (this.sellVolume > this.sellAccount) {
+          this.sellVolume = this.fixNum(this.sellAccount, this.market.volume_fixed)
         }
       }
       if (this[type + 'Price']) {
-        var num = value / this[type + 'Price']
-        if (type === 'sell') {
-          if (num > this.sellAccount) {
-            num = this.sellAccount
-          }
-        }
-        this[type + 'Volume'] = this.fixNum(num, this.market.volume_fixed)
-        value = this.fixNum(this[type + 'Volume'] * this[type + 'Price'], this.market.volume_fixed, this.market.price_fixed)
+        var Price = new BigNumber(this[type + 'Price'])
+        var Volume = new BigNumber(this[type + 'Volume'])
+        this.handleTotal(null, type, Price, Volume)
       }
+    },
+    handleTotal (value, type, price, volume) {
+      if (value === ' ') return ''
+      if (value < 0) {
+        value = Math.abs(value)
+      }
+
+      var p = new BigNumber(price)
+      var v = new BigNumber(volume)
+      if (!value) {
+        value = p.multipliedBy(v)
+      }
+      if (type === 'buy') {
+        if (value > this.buyAccount) {
+          value = new BigNumber(this.buyAccount)
+          v = value.dividedBy(price)
+          this.handleVol(v, 'buy', 'total')
+          // value = this.fixNum(this.buyAccount, this.market.volume_fixed, this.market.price_fixed)
+        }
+      } else if (type === 'sell') {
+        if (volume > this.sellAccount) {
+          v = new BigNumber(this.sellAccount)
+          value = volume.multipliedBy(p)
+          this.handleVol(v, 'sell', 'total')
+        }
+      }
+      value = +value.toString()
       this[type + 'Total'] = this.fixNum(value, this.market.volume_fixed, this.market.price_fixed)
     },
     fixNum (value, num, num1) {
-      if (value === ' ') return
+      if (value === ' ') return ''
       if ((/[0-9]+\.0*$/).test(value)) return value
       if (+value < 0) {
         value = Math.abs(value)
       }
       var nums = num1 ? (num > num1 ? num : num1) : num
-      var e = Math.pow(10, nums)
-      return Math.floor(e * +value) / e
+      var arr = value.toString().split('.')
+      if (arr.length > 2) {
+        arr = arr.splice(1, arr.length - 2)
+      }
+      if (arr[1] && arr[1].length > nums) {
+        arr[1] = arr[1].substring(0, nums)
+      }
+      return arr.join('.')
     },
     confirmTrade: function (bool) {
       this.showDialog = false
@@ -318,7 +318,7 @@ export default {
       }, 5000)
     },
     loginCheck: function () {
-      if (this.sn === 'unlogin') {
+      if (this.loginData === 'none') {
         location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
       }
     },
@@ -351,19 +351,33 @@ export default {
         this.sellVolume,
         this.sellTotal
       ] = []
+      this.sellIndex = -1
+      this.buyIndex = -1
     },
     addInputs (percent, index) {
       var type = this.type
+      var p = 0
       this[type + 'Index'] = index
       if (!this[type + 'Price'] || this[type + 'Price'] === 0) {
-        this[type + 'Price'] = this.market.last
+        console.log(this.market.last, -1)
+        p = new BigNumber(this.market.last)
+        this.handleVol(0, 'buy')
+        this.handlePrice(this.market.last, type)
+      } else {
+        p = new BigNumber(this[type + 'Price'])
       }
       if (type === 'buy') {
-        this.buyTotal = this.accounts[this.market.base_currency].balance * percent
-        this.handleTotal(this.buyTotal, 'buy')
+        var value = this.accounts[this.market.base_currency].balance * percent
+        if (value.toString().length > 14) {
+          value = value.toFixed(8)
+        }
+        var val = new BigNumber(value)
+        var v = val.dividedBy(p)
+        this.buyTotal = this.fixNum(+value, this.market.volume_fixed, this.market.price_fixed)
+        this.handleVol(v, 'buy', 'from')
       } else if (type === 'sell') {
-        this.sellVolume = this.accounts[this.market.quote_currency].balance * percent
-        this.handleVol(this.sellVolume, 'sell')
+        this.sellVolume = this.fixNum(+this.accounts[this.market.quote_currency].balance * percent, this.market.volume_fixed)
+        this.handleTotal(null, 'sell', p, this.sellVolume)
       }
     }
   }

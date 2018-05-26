@@ -88,13 +88,11 @@ export default {
         this.prompt = this.$refs['email'].error
         return
       }
-
       const verify_code = await this.$refs['verify_code'].$validator.validateAll()
       if (!verify_code) {
         this.prompt = this.$refs['verify_code'].error
         return
       }
-
       this.disabled = true
       this._post({
         url: '/reset_passwords.json',
@@ -208,9 +206,6 @@ export default {
   padding-top: 10px;
   padding-bottom: 30px;
 }
-</style>
-
-<style>
 .btc-sign-block .btc-basicInput{
   height:39px;
   font-size: 14px;
