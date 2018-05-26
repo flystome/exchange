@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="marketBd">
-      <marketItem :curData = "curData[currencyIndex]" @changeFav='changeFav'></marketItem>
+      <marketItem :curData = "curData[currencyIndex]" :i='currencyIndex' @changeFav='changeFav'></marketItem>
     </div>
   </section>
 </template>
@@ -52,6 +52,7 @@ export default {
         this.getData()
       } else {
         this.searchDel = true
+        this.getData()
         var reg = new RegExp(`${val}`, 'i')
         this.curData[this.currencyIndex] = this.curData[this.currencyIndex].filter(ele => {
           var key = '' + ele['quote_currency'] + ele['base_currency']
