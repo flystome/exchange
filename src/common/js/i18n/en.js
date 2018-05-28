@@ -698,7 +698,8 @@ const en = {
       "check_agreement": "Please agree to the User Agreement",
       "reset_password": "Reset Password",
       "new_password": "New Password"
-    }
+    },
+    "unsupported_countries_and_regions": "Hotex presently does not serve customers in the following countries/regions/territories: Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan. For more details, please read our Terms of Service and Risks and Compliance Disclosures."
   }
 }
 
