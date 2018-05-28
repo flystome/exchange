@@ -26,8 +26,8 @@
       <div class="detail_bottom clearfix">
         <div class="detail_lt">
           <p>
-            <span class="change">{{ticker.last - ticker.open | fixedNum(market.price_fixed)}}</span>
-            <span class="percent">{{ticker.percent | fixed2}}%</span>
+            <span class="change">{{(ticker.last - ticker.open) | fixedNum(market.price_fixed)}}</span>
+            <span class="percent" :class="{'text-down': ticker.percent < 0,'text-up': ticker.percent > 0}">{{ticker.percent | fixed2}}%</span>
           </p>
           <p>
             <span class="name">{{$t("markets.volume24")}}</span>
@@ -120,25 +120,25 @@ export default {
       }
     },
     getPusher: function () {
-      var self = this
       var market = pusher.subscribe('market-' + this.curmarket + '-global')
       market.bind('trades', (data) => {
-        self.trades.pop()
-        self.trades.unshift(data['trades'][0])
+        this.trades.pop()
+        this.trades.unshift(data['trades'][0])
       })
       var channel = pusher.subscribe('market-global')
       channel.bind('tickers', (data) => {
         if (JSON.stringify(data) !== '{}') {
           for (var key in data) {
-            if (key === self.curmarket) {
-              self.ticker.last = data[key].last
-              self.ticker.legal_worth = data[key].legal_worth
-              self.ticker.percent = data[key].percent
-              self.ticker.volume = data[key].volume
-              self.ticker.low = data[key].low
-              self.ticker.high = data[key].high
+            if (key === this.curmarket) {
+              this.ticker.last = data[key].last
+              this.ticker.legal_worth = data[key].legal_worth
+              this.ticker.percent = data[key].percent
+              this.ticker.volume = data[key].volume
+              this.ticker.low = data[key].low
+              this.ticker.high = data[key].high
             }
           }
+          this.ticker = Object.assign({}, this.ticker)
         }
       })
     },
@@ -150,25 +150,28 @@ export default {
       }
     },
     fetchData: function (market) {
-      var self = this
       this._get({
         url: '/markets/' + market + '.json',
         data: {}
-      }, function (data) {
+      }, (data) => {
         var initdata = JSON.parse(data.request.response)
-        console.log(initdata)
-        self.ticker = initdata.ticker
-        self.market = initdata.market
-        self.logined = !!initdata.current_user
-        if (initdata.trades && initdata.trades.length !== 0) {
-          self.trades = initdata.trades.slice(0, 10)
+        console.log(initdata);
+        ({
+          ticker: this.ticker,
+          market: this.market,
+          current_user: this.logined,
+          trades: this.trades
+        } = initdata)
+        console.log(this.ticker)
+        if (this.trades && this.trades.length !== 0) {
+          this.trades = initdata.trades.slice(0, 10)
         }
-        if (self.logined) {
-          self.favorite = initdata.market['is_portfolios']
+        if (this.logined) {
+          this.favorite = initdata.market['is_portfolios']
         } else {
-          self.getLocal()
+          this.getLocal()
         }
-        document.title = `${self.market.quote_currency.toUpperCase()}/${self.market.base_currency.toUpperCase()} - ${self.$t('brand')}`
+        document.title = `${this.market.quote_currency.toUpperCase()}/${this.market.base_currency.toUpperCase()} - ${this.$t('brand')}`
       })
     },
     goPath: function (index) {

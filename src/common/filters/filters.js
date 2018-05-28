@@ -12,7 +12,7 @@ let upper = value => {
 }
 
 let fixedNum = (params, num, num2) => {
-  if (+params <= 0 || !params) return 0
+  if (!params) return 0
   if (!num) num = 6
   if (num2) {
     num = num > num2 ? num : num2
