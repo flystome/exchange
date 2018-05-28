@@ -1,26 +1,6 @@
 <template>
   <div @keyup.enter="login">
     <div class="btc-homepage-header">
-      <!-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3500">
-          <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-          </ol>
-          <div class="carousel-inner" role="listbox">
-            <div class="item active" :style="{background:`url('${requireImg('silde1')}') 50% 50% no-repeat`}">
-              <div class="container">
-                <div class="btc-slide-info">
-                  <p class="btc-marginB40" style="font-size: 36px">{{ $t('homepage.banner_describe1') }}</p>
-                  <p style="font-size: 24px">{{ $t('homepage.banner_describe2') }}</p>
-                </div>
-              </div>
-            </div>
-            <div class="item" :style="{background:`url('${requireImg('silde2')}') 50% 50% no-repeat`}">
-              <div class="carousel-caption">
-              </div>
-            </div>
-          </div>
-        </div> -->
       <swiper class="carousel" :options="swiperOption">
         <div v-if="Notice.length === 0" style="min-height:480px">
             <vue-simple-spinner  style="position: absolute;left: 50%;margin-left: -75px;margin-top: -75px;top:50%;" class="btc-notice-loading" size="150"></vue-simple-spinner>
@@ -103,13 +83,6 @@
       </div>
     </div>
     <div class="btc-homepage-notice">
-      <!-- <ul class="btc-homepage-newCoin">
-        <div class="container">
-          <li v-for="data in new_coin" :key='data.id'>
-            <a :href="data.url">{{ data.the_title }}</a>
-          </li>
-        </div>
-      </ul> -->
     </div>
     <div class="btc-homepage-main">
       <div class="btc-homepage-markets btc-marginT30">
@@ -131,70 +104,6 @@
       <div class="btc-homepage-logo text-center">
         <i class="home-log"></i>
       </div>
-      <!-- <div class="btc-homepage-intr btc-marginT15 btc-marginB100">
-        <span class="col-xs-3 btc-marginT10"></span>
-        <div class="col-xs-6 text-center">
-          <span>{{ $t('homepage.trading_platform') }}</span>
-        </div>
-        <span class="col-xs-3 pull-right btc-marginT10"></span>
-      </div>
-      <div class="btc-homepage-info btc-marginT25 text-center">
-        <a class="col-xs-2 col-xs-offset-1">
-          <a href="mailto:support@hotex.com">
-            <img src="~Img/homepage-us.png" >
-          </a>
-          <span class="btc-marginT15">
-            <a href="mailto:support@hotex.com">
-              {{ $t('homepage.contact_us') }}
-            </a>
-          </span>
-        </a>
-        <a class="col-xs-2">
-          <a :href="`${HOST_URL}/documents/api_v2`">
-            <img src="~Img/homepage-api.png" >
-          </a>
-          <span class="btc-marginT15">
-            <a :href="`${HOST_URL}/documents/api_v2`">
-              {{$t("my_account.api")}}
-            </a>
-          </span>
-        </a>
-        <a class="col-xs-2">
-          <a :href="`${CmsUrl.rate_details}`">
-            <img src="~Img/homepage-rate.png" >
-          </a>
-          <span class="btc-marginT15">
-            <a :href="`${CmsUrl.rate_details}`">
-              {{ $t('homepage.exchange_rate_details') }}
-            </a>
-          </span>
-        </a>
-        <a class="col-xs-2">
-          <a :href="CmsUrl.application">
-            <img src="~Img/homepage-apply.png" width="56" height="56">
-          </a>
-          <span class="btc-marginT15">
-            <a :href="CmsUrl.application">
-              {{ $t('homepage.apply_to_list') }}
-            </a>
-          </span>
-        </a>
-        <a class="col-xs-2">
-          <a :href="CmsUrl.privacy_policy">
-            <img src="~Img/homepage-clause.png" >
-          </a>
-          <span class="btc-marginT15">
-            <a :href="CmsUrl.privacy_policy">
-              {{ $t('homepage.privacy_clause') }}
-            </a>
-          </span>
-        </a>
-      </div>
-      <div class="btc-homepage-prompt text-left">
-        <div class="col-xs-8 col-xs-offset-2 btc-paddingT80">
-          {{ $t('homepage.transaction_describe') }}
-        </div>
-      </div> -->
       <div class="btc-marginT50 btc-homepage-introduce">
         <div>
         </div>
@@ -293,12 +202,6 @@
             {{ $t('homepage.cross_platform') }}
           </div>
           <div>
-            <!-- <a href="https://itunes.apple.com/cn/app/google-authent icator/id388497605?mt=8" target="_blank">
-              <i class="home-iosapp"></i>
-            </a>
-            <a class="btc-marginL10" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">
-              <i class="home-gplay"></i>
-            </a> -->
             <strong>{{ $t('homepage.coming_soon') }}</strong>
           </div>
         </div>
@@ -394,14 +297,6 @@ export default {
       origin: 'bottom',
       distance: '40px'
     }, 100)
-    // sr.reveal('#home-end', {
-    //   duration: 1800,
-    //   origin: '',
-    //   distance: '80px',
-    //   opacity: 0,
-    //   scale: 0.9,
-    //   easing: 'cubic-bezier(0.3, 0.2, 0.1, 0.5)',
-    // })
   },
   data () {
     return {
@@ -637,21 +532,6 @@ export default {
 .btc-homepage-header .swiper-pagination-bullet-active{
   opacity: 1!important;
 }
-
-// .btc-homepage-header .swiper-button-prev{
-//   width: 30px;
-//   height: 30px;
-//   border-top: 1px solid #fff;
-//   border-right: 1px solid #fff;
-//   opacity: 0.5;
-//   transform: rotate(-135deg);
-//   background-image: none;
-//   left:29px;
-//   outline: none;
-//   &:hover{
-//     opacity: 1
-//   }
-// }
 
 .btc-homepage-header {
   .swiper-button-prev-div{
