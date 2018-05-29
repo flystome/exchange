@@ -256,7 +256,6 @@ export default {
       this.reload()
     },
     getPusher: function (market) {
-      var self = this
       var marketPush = pusher.subscribe('market-' + market + '-global')
       var lost = {
         asks: [],
@@ -299,7 +298,7 @@ export default {
         if (JSON.stringify(data) !== '{}') {
           for (var key in data) {
             if (key === market) {
-              self.ticker.last = data[key].last
+              this.ticker.last = data[key].last
             }
           }
         }
@@ -475,6 +474,13 @@ export default {
         this.isDisabled = false
         this.status = 'fail'
       }
+      this.resetOrderStatus()
+    },
+    resetOrderStatus () {
+      var time = setTimeout(() => {
+        this.status = ''
+        clearTimeout(time)
+      }, 5000)
     },
     loginCheck: function () {
       console.log(this.sn)

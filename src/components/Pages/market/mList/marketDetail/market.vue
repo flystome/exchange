@@ -26,7 +26,7 @@
       <div class="detail_bottom clearfix">
         <div class="detail_lt">
           <p>
-            <span class="change">{{(ticker.last - ticker.open) | fixedNum(market.price_fixed)}}</span>
+            <span class="change" :class="{'text-down': ticker.percent < 0,'text-up': ticker.percent > 0}">{{(ticker.last - ticker.open) | fixedNum(market.price_fixed)}}</span>
             <span class="percent" :class="{'text-down': ticker.percent < 0,'text-up': ticker.percent > 0}">{{ticker.percent | fixed2}}%</span>
           </p>
           <p>
@@ -154,15 +154,13 @@ export default {
         url: '/markets/' + market + '.json',
         data: {}
       }, (data) => {
-        var initdata = JSON.parse(data.request.response)
-        console.log(initdata);
+        var initdata = JSON.parse(data.request.response);
         ({
           ticker: this.ticker,
           market: this.market,
           current_user: this.logined,
           trades: this.trades
         } = initdata)
-        console.log(this.ticker)
         if (this.trades && this.trades.length !== 0) {
           this.trades = initdata.trades.slice(0, 10)
         }
@@ -187,7 +185,7 @@ export default {
       var self = this
       if (this.logined) {
         if (this.favorite) {
-          self._delete({
+          this._delete({
             url: '/portfolios/' + self.curmarket + '.json'
           }, function (xhr) {
             if (xhr.status === 200) {

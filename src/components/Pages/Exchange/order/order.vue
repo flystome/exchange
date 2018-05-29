@@ -183,7 +183,6 @@ export default {
       }
     },
     handleVol (value, type, from) {
-      console.log(value)
       if (value === '') return ''
       if (value < 0) {
         value = Math.abs(value)
