@@ -64,7 +64,6 @@ export default {
   methods: {
     changeMarket: function (index, item) {
       this.currencyIndex = index
-      console.log(this.currencyIndex)
     },
     getData () {
       this.curData = []

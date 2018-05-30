@@ -44,7 +44,6 @@ export default {
   components: { scrollBar },
   watch: {
     curData: function (val, oldVal) {
-      console.log(val)
       if (!val) {
         this.oldData = []
       } else {
