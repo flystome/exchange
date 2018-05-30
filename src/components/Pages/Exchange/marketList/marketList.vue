@@ -52,6 +52,7 @@ export default {
         this.getData()
       } else {
         this.searchDel = true
+        this.getData()
         var reg = new RegExp(`${val}`, 'i')
         this.curData[this.currencyIndex] = this.curData[this.currencyIndex].filter(ele => {
           var key = '' + ele['quote_currency'] + ele['base_currency']
