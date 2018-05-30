@@ -358,7 +358,6 @@ export default {
       var p = 0
       this[type + 'Index'] = index
       if (!this[type + 'Price'] || this[type + 'Price'] === 0) {
-        console.log(this.market.last, -1)
         p = new BigNumber(this.market.last)
         this.handleVol(0, 'buy')
         this.handlePrice(this.market.last, type)
