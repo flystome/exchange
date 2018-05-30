@@ -497,7 +497,7 @@ export default {
         if (permit === 'granted') {
           new Notification('Trade', {
             dir: 'auto',
-            icon: '~Img/ok.svg',
+            icon: '../../../../static/img/ok.svg',
             body: `Price: ${price}\nVoluume: ${volume}`,
             tag: 'trade',
             renotify: true
