@@ -207,7 +207,6 @@ export default {
       if (value < 0) {
         value = Math.abs(value)
       }
-
       var p = new BigNumber(price)
       var v = new BigNumber(volume)
       if (!value) {
