@@ -8,7 +8,7 @@
     </ul>
     <scrollBar classes='myScroll'>
       <ul class="bd">
-        <li v-for="item in oldData" :key="'market-' +currencyIndex+item.quote_currency">
+        <li v-for="item in oldData" :key="'market-' +i+item.quote_currency">
           <div class="my_fav" :class='{"favorite": item.is_portfolios}' @click="toggleFav(item.quote_currency, item.base_currency, item.is_portfolios, item)">
             <i class="fa fa-star"></i>
           </div>
@@ -30,7 +30,7 @@ import scrollBar from 'vue2-scrollbar'
 
 export default {
   name: 'marketItem',
-  props: ['curData'],
+  props: ['curData', 'i'],
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
@@ -44,6 +44,7 @@ export default {
   components: { scrollBar },
   watch: {
     curData: function (val, oldVal) {
+      console.log(val)
       if (!val) {
         this.oldData = []
       } else {

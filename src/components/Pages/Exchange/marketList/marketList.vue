@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="marketBd">
-      <marketItem :curData = "curData[currencyIndex]" @changeFav='changeFav'></marketItem>
+      <marketItem :curData = "curData[currencyIndex]" :i='currencyIndex' @changeFav='changeFav'></marketItem>
     </div>
   </section>
 </template>
@@ -64,6 +64,7 @@ export default {
   methods: {
     changeMarket: function (index, item) {
       this.currencyIndex = index
+      console.log(this.currencyIndex)
     },
     getData () {
       this.curData = []
