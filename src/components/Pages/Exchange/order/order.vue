@@ -60,7 +60,7 @@
       <div class="tip">
         <div class="success" v-if='buySuccess'><i class="fa fa-check"></i>{{$t('exchange.success')}}</div>
         <div class="fail" v-if='buyFail'><i class="fa fa-close"></i>{{$t('exchange.fail')}}</div>
-        <p v-if='loginData === "none"' class="loginTip">{{$t('exchange.unlogin.please')}}<a :href="`${HOST_URL}/signin?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${HOST_URL}/signup?from=${location}`">{{$t('exchange.unlogin.register')}}</a></p>
+        <p v-if='loginData === "none"' class="loginTip">{{$t('exchange.unlogin.please')}}<a :href="`${ROUTER_VERSION}/login?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${ROUTER_VERSION}/register?from=${location}`">{{$t('exchange.unlogin.register')}}</a></p>
         <div v-if='loginData !== "none"' class="myTotal">{{buyAccount | fixedNum(market.price_fixed, market.volume_fixed)}} {{market.base_currency | upper}}</div>
       </div>
       <a class="buy_btn btn" href="###" @click.prevent="orderBid()">{{$t('exchange.buy')}}{{market.quote_currency | upper}}</a>
@@ -98,7 +98,7 @@
       <div class="tip">
         <div class="success" v-if='sellSuccess'><i class="fa fa-check"></i>{{$t('exchange.success')}}</div>
         <div class="fail" v-if='sellFail'><i class="fa fa-close"></i>{{$t('exchange.fail')}}</div>
-        <p v-if='loginData === "none"' class="loginTip">{{$t('exchange.unlogin.please')}}<a :href="`${HOST_URL}/signin?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${HOST_URL}/signup?from=${location}`">{{$t('exchange.unlogin.register')}}</a></p>
+        <p v-if='loginData === "none"' class="loginTip">{{$t('exchange.unlogin.please')}}<a :href="`${ROUTER_VERSION}/login?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${ROUTER_VERSION}/register?from=${location}`">{{$t('exchange.unlogin.register')}}</a></p>
         <div v-if='loginData !== "none"' class="myTotal">{{sellAccount | fixedNum(market.volume_fixed)}} {{market.quote_currency | upper}}</div>
       </div>
       <a class="sell_btn btn" @click.prevent="orderAsk()">{{$t('exchange.sell')}}{{market.quote_currency | upper}}</a>
@@ -116,7 +116,7 @@ export default {
   props: ['market', 'type', 'accounts', 'loginData'],
   data () {
     return {
-      HOST_URL: process.env.HOST_URL,
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       location: location.href,
       buyPrice: '',
       buyVolume: '',
@@ -295,7 +295,7 @@ export default {
         this.resetOrderStatus()
         this.$emit('play', 'order_audio')
       } else if (data.error.code === 1102) {
-        location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
+        location.href = `${ROUTER_VERSION}/login?from=${location.href}`
       } else if (data.error.code === 1002) {
         this.showDialog = true
         this.ordering = false
@@ -318,7 +318,7 @@ export default {
     },
     loginCheck: function () {
       if (this.loginData === 'none') {
-        location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
+        location.href = `${ROUTER_VERSION}/login?from=${location.href}`
       }
     },
     orderBid: function () {
@@ -358,7 +358,6 @@ export default {
       var p = 0
       this[type + 'Index'] = index
       if (!this[type + 'Price'] || this[type + 'Price'] === 0) {
-        console.log(this.market.last, -1)
         p = new BigNumber(this.market.last)
         this.handleVol(0, 'buy')
         this.handlePrice(this.market.last, type)

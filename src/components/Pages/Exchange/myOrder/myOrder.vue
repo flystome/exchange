@@ -31,7 +31,7 @@
     </div>
     <div class="tab_bd">
       <div v-if='loginData === "none"' class="loginTip">
-        <p>{{$t('exchange.unlogin.please')}}<a :href="`${HOST_URL}/signin?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${HOST_URL}/signup?from=${location}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
+        <p>{{$t('exchange.unlogin.please')}}<a :href="`${ROUTER_VERSION}/login?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${ROUTER_VERSION}/register?from=${location}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
       </div>
       <div v-if='loginData !== "none"'>
         <div class="noneData" v-show="curOrders && curOrders.length === 0">{{$t('exchange.myorder.noData')}}</div>
@@ -55,7 +55,6 @@ export default {
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
-      HOST_URL: process.env.HOST_URL,
       location: location.href,
       heads: ['exchange.myorder.pending', 'exchange.myorder.history', 'exchange.myorder.filling'],
       item1: ['exchange.myorder.buy', 'exchange.myorder.sell', 'exchange.myorder.all', 'exchange.myorder.cancel_all'],

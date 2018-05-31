@@ -8,7 +8,7 @@
       <div class="header_rt">
         <account v-if='loginData !== "none"' :totalAssets='TotalAssets' :accounts='accounts' :market='market'></account>
         <div v-if='loginData === "none"' class="loginTip">
-          <p>{{$t('exchange.unlogin.please')}}<a :href="`${HOST_URL}/signin?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${HOST_URL}/signup?from=${location}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
+          <p>{{$t('exchange.unlogin.please')}}<a :href="`${ROUTER_VERSION}/login?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${ROUTER_VERSION}/register?from=${location}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
         </div>
         <setting v-if='loginData !== "none"' :loginData='loginData'
           @controlSound='controlSound'
@@ -81,7 +81,6 @@ export default {
   name: 'ExChange',
   data () {
     return {
-      HOST_URL: process.env.HOST_URL,
       location: location.href,
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       curMarket: '',
@@ -226,32 +225,30 @@ export default {
     },
     globalRefresh () {
       var channel = pusher.subscribe('market-global')
-      channel.bind('tickers', _debounce((data) => {
-        if (this.$store.state.marketData) {
-          var BtcMarket = this.$store.state.marketData['btc'].reduce((a, b) => {
-            return a.concat(Object.keys(b)[0])
-          }, [])
-        }
-        Object.keys(data).forEach((key) => {
-          if (this.$store.state.assets !== '') {
-            if (data[key].base_currency === 'usdt') {
-              if (key === 'btcusdt') {
-                this.$store.state.assets['usdt'].price = 1 / Number(data[key].last)
-              }
-              return
-            }
-            if (data[key].base_currency === 'btc') {
-              this.$store.state.assets[data[key].quote_currency].price = data[key].last
-              return
-            }
-            if (data[key].base_currency === 'eth') {
-              if (!BtcMarket.includes(`${data[key].quote_currency}/btc`)) {
-                this.$store.state.assets[data[key].quote_currency].price = data[key].last * this.$store.state.assets['eth'].price
-              }
-            }
-          }
-        })
-      }, 5000))
+      // channel.bind('tickers', _debounce((data) => {
+      //   if (this.$store.state.marketData) {
+      //     var BtcMarket = this.$store.state.marketData['btc'].reduce((a, b) => {
+      //       return a.concat(Object.keys(b)[0])
+      //     }, [])
+      //   }
+      //   Object.keys(data).forEach((key) => {
+      //     if (this.$store.state.assets !== '') {
+      //       if (data[key].base_currency === 'usdt') {
+      //         if (key === 'btcusdt') {
+      //           this.$store.state.assets['usdt'].price = 1 / Number(data[key].last)
+      //         }
+      //       }
+      //       if (data[key].base_currency === 'btc') {
+      //         this.$store.state.assets[data[key].quote_currency].price = data[key].last
+      //       }
+      //       if (data[key].base_currency === 'eth') {
+      //         if (!BtcMarket.includes(`${data[key].quote_currency}/btc`)) {
+      //           this.$store.state.assets[data[key].quote_currency].price = data[key].last * this.$store.state.assets['eth'].price
+      //         }
+      //       }
+      //     }
+      //   })
+      // }, 5000))
 
       channel.bind('tickers', (data) => {
         if (JSON.stringify(data) !== '{}') {
@@ -497,7 +494,7 @@ export default {
         if (permit === 'granted') {
           new Notification('Trade', {
             dir: 'auto',
-            icon: '../../../../static/img/notification2.png',
+            icon: '../../../../static/img/notification1.png',
             body: `Price: ${price}\nVoluume: ${volume}`,
             tag: 'trade',
             renotify: true
