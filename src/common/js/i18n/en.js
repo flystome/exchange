@@ -238,6 +238,8 @@ const en = {
       "404": "404 Not Found",
       "form_order": "Order History",
       "form_trade": "Trade History",
+      "form_registered_referral": "Registered Referrals",
+      "form_referral": "Referrals",
       "form_news": "My Messages",
       "form_account": "Transfer History",
       "api": "Api",

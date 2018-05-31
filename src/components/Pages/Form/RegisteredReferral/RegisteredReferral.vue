@@ -56,6 +56,25 @@ export default {
         this.xhrData = d.data.data
         this.pagination = d.data.total_pages
       })
+    },
+    bser (explorer) {
+      if (explorer.indexOf('MSIE') >= 0) {
+        return 'IE'
+      } else if (explorer.indexOf('Firefox') >= 0) {
+        return this.$t('browser.firefox')
+      } else if (explorer.indexOf('Chrome') >= 0) {
+        return this.$t('browser.chrome')
+      } else if (explorer.indexOf('Opera') >= 0) {
+        return this.$t('browser.opera')
+      } else if (explorer.indexOf('Safari') >= 0) {
+        return this.$t('browser.safari')
+      } else if (explorer.indexOf('Netscape') >= 0) {
+        return this.$t('browser.netscape')
+      } else if (explorer.indexOf('rv:10')) {
+        return 'IE 10'
+      } else if (explorer.indexOf('rv:11')) {
+        return 'IE 11'
+      }
     }
   },
   computed: {
@@ -67,14 +86,15 @@ export default {
         this.$t('my_account.browser'),
         this.$t('my_account.login_time'),
         this.$t('my_account.activated')
-      ]}].concat(this.xhrData.map(d => {
+      ]}].concat(this.xhrData.map(data => {
         return {
           content: [
-            // this.$moment(d.date).format('YYYY-MM-DD'),
-            // d.users,
-            // d.new_users,
-            // d.page_views,
-            // Number(d.bounce_rate).toFixed(1) + '%'
+            data.account_name,
+            data.signup_history.ip,
+            data.signup_history.location ? data.signup_history.location : 'N/A',
+            this.bser(data.signup_history.ua),
+            this.$moment(data.created_at).format('YYYY-MM-DD H:mm:ss'),
+            data.activated ? this.$t('my_account.yes') : this.$t('my_account.no')
           ]
         }
       }))

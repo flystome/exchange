@@ -176,12 +176,12 @@
         </div>
       <basic-table :loading='referral_loading' :captionTitle='getRecommendCount.captionTitle' :item='getRecommendCount.Item'>
       <div slot="more" class="text-center btc-b-t btc-table-more">
-        <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('my_account.show_more')}}</a>
+        <router-link :to="`${ROUTER_VERSION}/form/referral`" class="btc-link ">{{$t('my_account.show_more')}}</router-link>
       </div>
       </basic-table>
       <basic-table :loading='referral_loading' :captionTitle='getRecommendUser.captionTitle' :item='getRecommendUser.Item'>
          <div slot="more" class="text-center btc-b-t btc-table-more">
-          <a :href="`${HOST_URL}/member/referral`" class="btc-link ">{{$t('my_account.show_more')}}</a>
+          <router-link :to="`${ROUTER_VERSION}/form/registered_referral`" class="btc-link ">{{$t('my_account.show_more')}}</router-link>
         </div>
       </basic-table>
       </div>
@@ -308,20 +308,20 @@ export default {
           captionTitle: 'my_account.recommended_users',
           Item: []
         }
-        if (data.referral_datas) {
-          data.referral_signup_history.sort((a, b) => {
-            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-          })
-          data.referrals.sort((a, b) => {
-            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-          })
-          data.referral_signup_history.length === 0 ? obj1.Item = [] : obj1.Item = [{content: [this.$t('my_account.account'), this.$t('my_account.ip_adress'), this.$t('my_account.login_location'), this.$t('my_account.browser'), this.$t('my_account.login_time'), this.$t('my_account.activated')]}].concat(data.referral_signup_history.map((_, index) => {
+        if (data.referrals) {
+          // data.referral_signup_history.sort((a, b) => {
+          //   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          // })
+          // data.referrals.sort((a, b) => {
+          //   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          // })
+          data.referrals.length === 0 ? obj1.Item = [] : obj1.Item = [{content: [this.$t('my_account.account'), this.$t('my_account.ip_adress'), this.$t('my_account.login_location'), this.$t('my_account.browser'), this.$t('my_account.login_time'), this.$t('my_account.activated')]}].concat(data.referrals.map((_, index) => {
             return {
               content: [
-                data.referrals_account_name[index],
-                data.referral_signup_history[index].ip,
-                data.referral_signup_history[index].location ? data.referral_signup_history[index].location : 'N/A',
-                this.bser(data.referral_signup_history[index].ua),
+                data.referrals[index].account_name,
+                data.referrals[index].signup_history.ip,
+                data.referrals[index].signup_history.location ? data.referrals[index].signup_history.location : 'N/A',
+                this.bser(data.referrals[index].signup_history.ua),
                 this.$moment(data.referrals[index].created_at).format('YYYY-MM-DD H:mm:ss'),
                 data.referrals[index].activated ? this.$t('my_account.yes') : this.$t('my_account.no')
               ]

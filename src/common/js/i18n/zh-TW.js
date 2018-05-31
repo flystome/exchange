@@ -237,6 +237,8 @@ const zh = {
     "markets": "市場",
     "404": "404 頁面",
     "form_order": "下單記錄",
+    "form_registered_referral": "註冊推薦",
+    "form_referral": "推薦用戶",
     "form_trade": "成交記錄",
     "form_news": "我的消息",
     "form_account": "充值提現記錄",
