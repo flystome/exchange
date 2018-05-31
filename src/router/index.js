@@ -206,6 +206,7 @@ const router = new Router({
     {
       path: `${version}/form`,
       component: Form,
+      name: 'From',
       children: [
         {
           path: '',

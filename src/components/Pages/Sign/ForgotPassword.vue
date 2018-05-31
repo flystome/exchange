@@ -113,7 +113,6 @@ export default {
           this.getCaptch()
           this.$store.commit('PopupBoxDisplay', {type: 'error', message: this.$t(`api_server.send_eamil.error_${d.data.error.code}`)})
           Object.assign(this.SendEmailData, {
-            email: '',
             verify_code: ''
           })
         }
