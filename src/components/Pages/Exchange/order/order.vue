@@ -295,7 +295,7 @@ export default {
         this.resetOrderStatus()
         this.$emit('play', 'order_audio')
       } else if (data.error.code === 1102) {
-        location.href = `${ROUTER_VERSION}/login?from=${location.href}`
+        location.href = `${this.ROUTER_VERSION}/login?from=${location.href}`
       } else if (data.error.code === 1002) {
         this.showDialog = true
         this.ordering = false
@@ -318,7 +318,7 @@ export default {
     },
     loginCheck: function () {
       if (this.loginData === 'none') {
-        location.href = `${ROUTER_VERSION}/login?from=${location.href}`
+        location.href = `${this.ROUTER_VERSION}/login?from=${location.href}`
       }
     },
     orderBid: function () {
