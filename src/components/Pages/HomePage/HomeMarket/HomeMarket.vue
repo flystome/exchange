@@ -10,7 +10,7 @@
             <i v-else-if="times == 1 && currencyIndex == index" class="homemarket-up" />
             <i v-else-if="times == 2 && currencyIndex == index" class="homemarket-down" />
           </th>
-          <th>{{ $t('homepage.price_trend') }}</th>
+          <th>{{ $t('homepage.price_trend') }} (1{{$t('week')}})</th>
         </tr>
       </thead>
       <tbody ref="itemlength" class="btc-b-t">
@@ -103,6 +103,7 @@ export default {
   },
   methods: {
     matchName (name, index) {
+      if (this.search && !/^[a-zA-Z]+$/.test(this.search)) return false
       var reg = new RegExp(`${this.search}`, 'i')
       return reg.test(name.match(/[A-Z]+/ig)[0])
     },

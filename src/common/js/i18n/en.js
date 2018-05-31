@@ -8,6 +8,7 @@ const en = {
     'currency': 'Currency',
     'time': 'time',
     "reply": "Reply",
+    "week": 'wk',
     "auth": {
       "email": "Verify Email",
       "phone": "Verify Cell Phone",

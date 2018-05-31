@@ -7,6 +7,7 @@ const zh = {
   'currency': '幣種',
   'time': '次',
   "reply": "回復",
+  "week": '星期',
   'auth': {
     'email': `郵箱驗證`,
     'phone': `手機認證`,
