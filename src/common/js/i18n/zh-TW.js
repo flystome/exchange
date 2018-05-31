@@ -176,7 +176,8 @@ const zh = {
     "google": "Google",
     "sms": "手機",
     "poundage": "手續費",
-    "withdraw_confirm_completed": "提現確認完成"
+    "withdraw_confirm_success": "提現確認完成",
+    "withdraw_confirm_error": "連結過期或無效"
   },
   "deposit_currency": {
     "deposit_address": "地址",

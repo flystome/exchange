@@ -342,8 +342,7 @@ export default {
 
       this.TotalAssetsa = Number(d.total_assets.btc_worth).toFixed(8)
       if (d.notice) {
-        console.log(d)
-        this.PopupBoxDisplay({message: this.$t('withdraw_currency.withdraw_confirm_completed'), type: d.notice.type})
+        this.PopupBoxDisplay({message: this.$t(`withdraw_currency.withdraw_confirm_${d.notice.type}`), type: d.notice.type})
       }
       d.rucaptcha && (this.Rucaptcha = d.rucaptcha)
       d.currencies.forEach((a) => {

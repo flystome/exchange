@@ -176,7 +176,8 @@ const en = {
       "google": "Google ",
       "sms": "SMS ",
       "poundage": "Fee",
-      "withdraw_confirm_completed": "Withdraw confirm is completed"
+      "withdraw_confirm_success": "Withdraw confirm is completed",
+      "withdraw_confirm_error": "The link is expired or invalid",
     },
     "deposit_currency": {
       "deposit_address": "Address",
