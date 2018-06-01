@@ -315,6 +315,7 @@ export default {
 
       channel.bind('deposits', (data) => {
         var d = data.attributes
+        if (d.currency !== this.CurrencyType) return
         if (this.depositId.includes(d.id)) {
           this.$set(this.depositRecord.item, 0, 0)
           this.depositRecord.item[this.depositId.indexOf(d.id)] = {
@@ -322,7 +323,7 @@ export default {
               this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
               {hover: true, context: d.txid, url: d.blockchain_url},
               d.amount,
-              d.confirmations,
+              `${d.confirmations} / ${this.confirm_num}`,
               this.$t(`withdraw_currency.${d.aasm_state}`)
             ]
           }
@@ -333,7 +334,7 @@ export default {
               this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
               {hover: true, context: d.txid, url: d.blockchain_url},
               d.amount,
-              d.confirmations,
+              `${d.confirmations} / ${this.confirm_num}`,
               this.$t(`withdraw_currency.${d.aasm_state}`)
             ]
           })
@@ -578,7 +579,7 @@ export default {
               this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
               {hover: 'true', context: d.txid, url: d.blockchain_url},
               d.amount,
-              d.confirmations === null ? '0' : d.confirmations,
+              d.confirmations === null ? '0' : `${d.confirmations} / ${this.confirm_num}`,
               this.$t(`withdraw_currency.${d.aasm_state}`)
             ]
           }

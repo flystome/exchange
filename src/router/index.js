@@ -174,7 +174,7 @@ const router = new Router({
     },
     {
       path: `${version}/404`,
-      alias: `${version}/500`,
+      alias: [`${version}/422`, `${version}/500`, `${version}/502`],
       name: 'notFound',
       component: Page404
     },
@@ -207,7 +207,6 @@ const router = new Router({
     {
       path: `${version}/form`,
       component: Form,
-      name: 'From',
       children: [
         {
           path: '',
@@ -232,11 +231,6 @@ const router = new Router({
           path: 'account',
           name: 'FormAccount',
           component: FormAccount
-        },
-        {
-          path: 'withdraw_cancel',
-          name: 'WithdrawCancel',
-          component: WithdrawCancel
         },
         {
           path: 'withdraw_cancel',

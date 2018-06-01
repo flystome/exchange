@@ -89,6 +89,7 @@ const en = {
       "recommended_links": "Referral Link",
       "effective_recommended": "My Valid Referrals",
       "my_trade_discount": "My Commission Discount",
+      "use_platform_currency": "Use platform currency to pay transaction fees"
     },
     "validate_identity": {
       "uploading_photos": "Uploading Photos",
@@ -238,6 +239,9 @@ const en = {
       "referral": "Referral",
       "markets": "Markets",
       "404": "404 Not Found",
+      "502": "502 Bad Gateway",
+      "422": "422 Unprocessable Entity",
+      "500": "500 Internal Server Error",
       "form_order": "Order History",
       "form_trade": "Trade History",
       "form_registered_referral": "Registered Referrals",
@@ -680,10 +684,12 @@ const en = {
       "email_verify_code": "Email Verify Code"
     },
     "page_not_found": {
-      "lost": "The page is lost,",
+      "404": "The page is lost,",
       "click": "click",
       "back": " back to the home page",
-      "server": "Service error,"
+      "500": "Service error,",
+      "502": "Request response time out,",
+      "422": "The request you wanted was rejected"
     },
     "sign": {
       "login_account": "Login Account",

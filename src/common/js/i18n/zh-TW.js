@@ -87,7 +87,8 @@ const zh = {
     "referrals_title": "邀請好友通過你的專屬二維碼或連結注册並交易",
     "recommended_links": "推薦鏈接",
     "effective_recommended": "我的有效推薦用戶個數",
-    "my_trade_discount": "我的交易折扣"
+    "my_trade_discount": "我的交易折扣",
+    "use_platform_currency": "使用平台幣支付交易費"
   },
   "validate_identity": {
     "uploading_photos": "上傳照片中",
@@ -238,6 +239,9 @@ const zh = {
     "referral": "推薦用戶",
     "markets": "市場",
     "404": "404 頁面",
+    "502": "502 壞閘道",
+    "422": "422 無法處理的實體",
+    "500": "500 服務器錯誤",
     "form_order": "下單記錄",
     "form_registered_referral": "註冊推薦",
     "form_referral": "推薦用戶",
@@ -680,10 +684,12 @@ const zh = {
     "email_verify_code": "郵箱驗證碼"
   },
   "page_not_found": {
-    "lost": "頁面丟失,",
+    "404": "頁面丟失,",
     "click": "點擊",
     "back": "返回首頁",
-    "server": "服務器錯誤,"
+    "500": "服務器錯誤,",
+    "502": "請求的響應超時,",
+    "422": "您要求的請求被拒絕,"
   },
   "sign": {
     "login_account": "登入帳戶",

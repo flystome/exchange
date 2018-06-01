@@ -2,29 +2,37 @@
   <div>
     <div class="btc-member-center container">
       <div v-if="!(step === 1 && fromApp) " class="btc-container-block btc-membercenter-header" :class="{'btc-member-padding' : step === 1}">
-        <div class="col-md-6">
-          <div class="btc-member-info">
-            <span class="btc-member-infoEmail">{{ loginData.show_name }}</span>
-            <router-link :to="`${ROUTER_VERSION}/change_password`">
-              {{$t("my_account.change_password")}}
-            </router-link>
+        <div style='overflow: hidden;'>
+          <div class="col-md-6">
+            <div class="btc-member-info">
+              <span class="btc-member-infoEmail">{{ loginData.show_name }}</span>
+              <router-link :to="`${ROUTER_VERSION}/change_password`">
+                {{$t("my_account.change_password")}}
+              </router-link>
+            </div>
+          </div>
+          <div class="btc-member-bt">
+            <!-- <span @click="account" :class="{'btc-link': step === 1 }">{{$t("my_account.account")}}</span>
+            <span>|</span>
+            <span @click="referrals" :class="{'btc-link': step === 2 }">
+              {{$t('my_account.recommended_statistics')}}
+            </span> -->
+            <menu-underline
+            ref="menu"
+            :route="'my_account'"
+            v-model='step'
+            :menu-index='step'
+            :underline-margin="'5px'"
+            :menu-margin="'24px'"
+            :menu-list="[$t('my_account.account'), $t('my_account.recommended_statistics')]">
+            </menu-underline>
           </div>
         </div>
-        <div class="btc-member-bt">
-          <!-- <span @click="account" :class="{'btc-link': step === 1 }">{{$t("my_account.account")}}</span>
-          <span>|</span>
-          <span @click="referrals" :class="{'btc-link': step === 2 }">
-            {{$t('my_account.recommended_statistics')}}
-          </span> -->
-          <menu-underline
-          ref="menu"
-          :route="'my_account'"
-          v-model='step'
-          :menu-index='step'
-          :underline-margin="'5px'"
-          :menu-margin="'24px'"
-          :menu-list="[$t('my_account.account'), $t('my_account.recommended_statistics')]">
-          </menu-underline>
+        <div class="btc-memeber-platformCoin btc-paddingL15 btc-paddingT10">
+          {{$t('my_account.use_platform_currency')}}
+          <span @click='ChangePlatformCoin' class='btc-marginL15' :disabled='disabled'>
+            <a :class="{'active': PlatFormState}">ON</a><a :class="{'active': !PlatFormState}">OFF</a>
+          </span>
         </div>
       </div>
       <div class="btc-member-ver" v-if="step === 0">
@@ -417,6 +425,23 @@ export default {
     },
     moment (date) {
       return this.$moment(date).format('YYYY-MM-DD H:mm:ss')
+    },
+    ChangePlatformCoin () {
+      if (this.disabled) return
+      this.disabled = true
+      this._post({
+        url: '/settings/set_platform_coin_for_fee.json',
+        data: {
+          operate: !this.PlatFormState ? 'enable' : 'disable'
+        }
+      }, (d) => {
+        this.disabled = false
+        if (d.data.success) {
+          Object.assign(this.$store.state.loginData.platform_coin, {
+            use_platform_coin_for_fee: !this.PlatFormState
+          })
+        }
+      })
     }
   },
   computed: {
@@ -444,6 +469,9 @@ export default {
       }
       this.getTicket()
       return obj
+    },
+    PlatFormState () {
+      return this.loginData.platform_coin.use_platform_coin_for_fee
     }
   },
   watch: {

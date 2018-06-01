@@ -1,9 +1,11 @@
 <template>
   <div class="btc-404">
     <img v-if="status === 404" src="~Img/large/404.png" >
-    <img v-else src="~Img/large/500.png" >
+    <img v-if="status === 500" src="~Img/large/500.png" >
+    <img v-if="status === 502" src="~Img/large/502.png" >
+    <img v-if="status === 422" src="~Img/large/422.png" >
     <div class="text-center btc-marginT30">
-      {{ status === 404 ? $t('page_not_found.lost') : $t('page_not_found.server') }}<span @click="$router.push('/')" class="btc-link btc-marginL5 btc-marginR5">{{$t('page_not_found.click')}}</span>{{ $t('page_not_found.back') }}
+      {{ $t(`page_not_found.${status}`) }}<span @click="$router.push('/')" class="btc-link btc-marginL5 btc-marginR5">{{$t('page_not_found.click')}}</span>{{ $t('page_not_found.back') }}
     </div>
   </div>
 </template>
@@ -17,11 +19,7 @@ export default {
     }
   },
   created () {
-    if (/500/.test(this.$route.path)) {
-      this.status = 500
-    } else {
-      this.status = 404
-    }
+    this.status = Number(this.$route.path.match(/\d+/g)[this.$route.path.match(/\d+/g).length - 1])
   }
 }
 </script>

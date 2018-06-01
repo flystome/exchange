@@ -21,7 +21,7 @@ a{
 }
 .btc-member-center {
   .btc-membercenter-header{
-    padding: 12px 30px 112px 25px;
+    padding: 12px 30px 98px 25px;
     background: url("~Img/large/membercenter.png") no-repeat center;
   }
   .btc-member-ver{
@@ -93,6 +93,38 @@ a{
   }
 }
 
+.btc-memeber-platformCoin{
+  color: white;
+  a{
+    color: white
+  }
+  .active{
+    background:#4382f7
+  }
+  span {
+    cursor: pointer;
+  }
+  span[disabled=disabled]{
+    cursor: not-allowed!important;
+  }
+  span a{
+    color: white;
+    background: #49627b;
+    padding: 1px 9px;
+    border-radius: 2px;
+  }
+  span{
+    &>:first-child{
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &>:last-child{
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}
+
 .btc-member-center > div:last-child .btc-tableTextleft{
   text-align: center!important;
 }
@@ -122,7 +154,10 @@ a{
     font-size: 16px;
   }
   >a{
-    color: #4f89f5;
+    background: #4382f7;
+    color: white;
+    padding: 1px 7px;
+    border-radius: 2px;
   }
 }
 
@@ -367,6 +402,11 @@ a{
 }
 
 @media (max-width: 991px) {
+  .btc-memeber-platformCoin{
+    display: block;
+    margin-top: 0;
+    margin-left: 0;
+  }
   .btc-table-more.btc-b-l{
     border-left: none!important;
   }
@@ -419,7 +459,8 @@ a{
     float: none;
   }
   .btc-membercenter-header{
-    padding-bottom: 88px !important;
+    padding-bottom: 75px !important;
+    margin-top: -4px;
   }
   .media{
     width: 100% !important;
