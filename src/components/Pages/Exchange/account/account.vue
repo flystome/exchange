@@ -21,7 +21,7 @@
           </tr>
         </tbody>
       </table>
-      <a href="/currency/withdraw" class="viewAll">{{$t('exchange.allAccount')}}</a>
+      <a :href="`${ROUTER_VERSION}/currency/withdraw`" class="viewAll">{{$t('exchange.allAccount')}}</a>
     </div>
   </div>
 </template>
@@ -32,6 +32,7 @@ export default {
   props: ['totalAssets', 'accounts', 'market'],
   data () {
     return {
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
       show: false
     }
   }
