@@ -1,5 +1,5 @@
 <template>
-  <div @keyup.enter="login">
+  <div>
     <div class="btc-homepage-header">
       <swiper class="carousel" :options="swiperOption">
         <div v-if="Notice.length === 0" style="min-height:480px">
@@ -32,7 +32,7 @@
         <div class="btc-homepage-login">
           <div class="btc-nologin" v-if="loginData === 'none' || loginData.errors">
           <!-- <div class="btc-nologin"> -->
-            <div class="form">
+            <div class="form" @keyup.enter="login">
               <span>{{ $t('homepage.login') }}</span>
               <basic-input :delay='1000' ref="email" :validate='"required|email"' v-model="email" :placeholder="this.$t('homepage.enter_the_mailbox')" class="btc-input"></basic-input>
               <basic-input :delay='1000' ref="password" type='password' :validate='"required|empty_password"' v-model="password" :placeholder="this.$t('homepage.enter_the_password')" class="btc-input"></basic-input>

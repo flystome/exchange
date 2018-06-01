@@ -100,7 +100,7 @@ export default {
             assets: loginData.assets
           })
           this.$store.dispatch('GetMarketData')
-          this.$router.push(`/`)
+          this.$router.push(`${this.from ? this.from : '/'}`)
           this.random = false
         } else {
           this.$store.commit('PopupBoxDisplay', {type: 'error', message: this.$t(`api_server.homepage.error_${d.data.error.code}`)})

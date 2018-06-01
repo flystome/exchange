@@ -174,6 +174,7 @@ const router = new Router({
     },
     {
       path: `${version}/404`,
+      alias: `${version}/500`,
       name: 'notFound',
       component: Page404
     },

@@ -38,7 +38,7 @@ const actions = {
           return
         } // unredirct pages
         if (d.data.error) {
-          router.replace(`${process.env.ROUTER_VERSION}/login?from=${location.href}`)
+          router.replace(`${process.env.ROUTER_VERSION}/login?from=${route.path}`)
           return
         }
         commit('GetCmsUrl')

@@ -680,9 +680,10 @@ const en = {
       "email_verify_code": "Email Verify Code"
     },
     "page_not_found": {
-      "lost": "The page is lost, ",
+      "lost": "The page is lost,",
       "click": "click",
-      "back": " back to the home page"
+      "back": " back to the home page",
+      "server": "Service error,"
     },
     "sign": {
       "login_account": "Login Account",
@@ -699,7 +700,7 @@ const en = {
       "official_email": "Official Email",
       "old_password": "Old Password",
       "referrer": "Referrer",
-      "login_failure": "Login Failure",
+      "login_failure": "Please log in first",
       "check_agreement": "Please agree to the User Agreement",
       "reset_password": "Reset Password",
       "new_password": "New Password"

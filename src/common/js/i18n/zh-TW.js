@@ -682,7 +682,8 @@ const zh = {
   "page_not_found": {
     "lost": "頁面丟失,",
     "click": "點擊",
-    "back": "返回首頁"
+    "back": "返回首頁",
+    "server": "服務器錯誤,"
   },
   "sign": {
     "login_account": "登入帳戶",
@@ -699,7 +700,7 @@ const zh = {
     "official_email": "官方郵件",
     "old_password": "舊密碼",
     "referrer": "推薦者",
-    "login_failure": "登入失敗",
+    "login_failure": "請先登錄",
     "check_agreement": "請勾選用戶協議",
     "reset_password": "重置密碼",
     "new_password": "新密碼"

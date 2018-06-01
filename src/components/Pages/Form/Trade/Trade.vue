@@ -84,7 +84,8 @@ export default {
             this.ToFixed(data.price),
             // data.quote_currency.toUpperCase(),
             `${this.ToFixed(data.amount)} ${lastName}`,
-            `${(data.kind !== 'ask' ? data.quote_currency : data.base_currency).toUpperCase()} ${this.ToFixed(data.fee)}`
+            `${data.fee_currency.toUpperCase()} ${this.ToFixed(data.fee)}`
+            // `${(data.kind !== 'ask' ? data.quote_currency : data.base_currency).toUpperCase()} ${this.ToFixed(data.fee)}`
           ]
         }
       }))
