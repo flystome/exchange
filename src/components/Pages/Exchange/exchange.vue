@@ -8,7 +8,7 @@
       <div class="header_rt">
         <account v-if='loginData !== "none"' :totalAssets='TotalAssets' :accounts='accounts' :market='market'></account>
         <div v-if='loginData === "none"' class="loginTip">
-          <p>{{$t('exchange.unlogin.please')}}<a :href="`${ROUTER_VERSION}/login?from=${location}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${ROUTER_VERSION}/register?from=${location}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
+          <p>{{$t('exchange.unlogin.please')}}<a :href="`${ROUTER_VERSION}/login?from=${ROUTER_VERSION}/exchange/${market.code}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${ROUTER_VERSION}/register?from=${ROUTER_VERSION}/exchange/${market.code}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
         </div>
         <setting v-if='loginData !== "none"' :loginData='loginData'
           @controlSound='controlSound'

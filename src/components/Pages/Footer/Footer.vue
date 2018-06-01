@@ -8,9 +8,9 @@
       </div>
       <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
         <li class=""><strong>{{ $t("footer.support") }}</strong></li>
-        <li>
+        <!-- <li>
           <a :href="`${HOST_URL}/documents/api_v2`">{{ $t("footer.api") }}</a>
-        </li>
+        </li> -->
         <li>
           <a :href="CmsUrl.helper_center">{{ $t("footer.help") }}</a>
         </li>
