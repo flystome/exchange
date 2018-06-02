@@ -10,7 +10,7 @@
             <i v-else-if="times == 1 && currencyIndex == index" class="homemarket-up" />
             <i v-else-if="times == 2 && currencyIndex == index" class="homemarket-down" />
           </th>
-          <th>{{ $t('homepage.price_trend') }} (1{{$t('week')}})</th>
+          <th>{{ $t('homepage.price_trend') }} (7d)</th>
         </tr>
       </thead>
       <tbody ref="itemlength" class="btc-b-t">
