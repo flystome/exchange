@@ -19,8 +19,8 @@
     </ul>
     <div class="tip_box" v-if="!sn">
       <div class="loginBox">
-        <a class="signin" :href="`${HOST_URL}/signin`">{{$t('orders.login')}}</a>
-        <a class="signup" :href="`${HOST_URL}/signup`">{{$t('orders.register')}}</a>
+        <a class="signin" :href="`${ROUTER_VERSION}/login?from=${ROUTER_VERSION}/market/${curMarket}`">{{$t('orders.login')}}</a>
+        <a class="signup" :href="`${ROUTER_VERSION}/register?from=${ROUTER_VERSION}/market/${curMarket}`">{{$t('orders.register')}}</a>
       </div>
     </div>
     <vue-simple-spinner v-if='!curListData' size="66" class="loading"></vue-simple-spinner>
@@ -73,7 +73,6 @@ export default {
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
-      HOST_URL: process.env.HOST_URL,
       hds: ['markets.quotes', 'markets.trade', 'markets.pending'],
       filterButtons: ['orders.all', 'orders.buy', 'orders.sell'],
       currencyindex: 2,

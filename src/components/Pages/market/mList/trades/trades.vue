@@ -483,9 +483,8 @@ export default {
       }, 5000)
     },
     loginCheck: function () {
-      console.log(this.sn)
       if (!this.sn || this.sn === 'none') {
-        location.href = `${process.env.HOST_URL}/signin?from=${location.href}`
+        location.href = `${ROUTER_VERSION}/login?from=${ROUTER_VERSION}/markets/${this.curMarket}`
       }
     },
     orderBid: function () {
