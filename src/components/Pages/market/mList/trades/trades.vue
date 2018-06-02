@@ -484,7 +484,7 @@ export default {
     },
     loginCheck: function () {
       if (!this.sn || this.sn === 'none') {
-        location.href = `${ROUTER_VERSION}/login?from=${ROUTER_VERSION}/markets/${this.curMarket}`
+        location.href = `${this.ROUTER_VERSION}/login?from=${this.ROUTER_VERSION}/markets/${this.curMarket}`
       }
     },
     orderBid: function () {
