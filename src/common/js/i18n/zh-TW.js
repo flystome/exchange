@@ -718,7 +718,21 @@ const zh = {
     "reset_password": "重置密碼",
     "new_password": "新密碼"
   },
-  "unsupported_countries_and_regions": "HotEx 目前不支持來自下列國家或地區的客戶：中國香港、古巴、伊朗、朝鮮、克裏米亞、蘇丹、馬來西亞、敘利亞、美國[包括所有美國領土，如波多黎各、美屬薩摩亞、關島、北馬裏亞納群島邦、美屬維爾京群島（聖克羅伊島，聖約翰島和聖托馬斯島）]、孟加拉國、玻利維亞、厄瓜多爾和吉爾吉斯斯坦。如欲了解更多詳情，請參閱我們的服務條款及我們的風險與合規聲明。"
+  "unsupported_countries_and_regions": `
+    <div class='text-left' style='font-size: 13px'>
+      <div>
+        <strong class='text-center' style='font-size: 14px'>
+          HotEx 目前不支持來自下列國家或地區的客戶：
+        </strong>
+      </div>
+      <div class='btc-marginT15'>
+        中國香港、古巴、伊朗、朝鮮、克裏米亞、蘇丹、馬來西亞、敘利亞、美國[包括所有美國領土，如波多黎各、美屬薩摩亞、關島、北馬裏亞納群島邦、美屬維爾京群島（聖克羅伊島，聖約翰島和聖托馬斯島）]、孟加拉國、玻利維亞、厄瓜多爾和吉爾吉斯斯坦。
+      </div>
+      <div class='btc-marginT15'>
+        如欲了解更多詳情，請參閱我們的服務條款及我們的風險與合規聲明。
+      </div>
+    </div>
+  `
 }
 
 export default zh

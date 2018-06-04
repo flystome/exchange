@@ -27,7 +27,7 @@ const en = {
       "phone_ps": "Use your ID-identified mobile phone for authentication",
       "hints": {
         "app": "Google Authenticator will re-generate a new password every thirty seconds, please input timely.",
-        "sms": "Well send a text message to you phone with verify code."
+        "sms": "Well send a text message to you phone with verification code."
       },
     },
     "nav": {
@@ -192,7 +192,7 @@ const en = {
       "trading_hash": "Tx ID",
       "recharge_amount": "Deposit Amount",
       "confirmation_number": "Confirmation Number",
-      "identifying_code": "Verify Code",
+      "identifying_code": "verification code",
       "temporarily_unable_deposit": "Temporarily unable to deposit",
       "warn1": "Warning! Only transfer COIN to this address. Transfer other coins to this address will result in lost of your coins.",
       "copy_success": "Copied!",
@@ -508,7 +508,7 @@ const en = {
       },
       "validate_email": {
         'error_1001': "miss params",
-        'error_1002': "verify code error",
+        'error_1002': "verification code error",
         'error_1003': "Verify the code failure, please resend the mailbox"
       },
       "forgot_password": {
@@ -667,7 +667,7 @@ const en = {
       "reply_can_not_be_empty": "Reply can not be empty"
     },
     "validation": {
-      "verify_code": 'verify code',
+      "verify_code": 'verification code',
       "no_empty": " can not be empty",
       "field": "The % field",
       "password_fail": "The password should be at least 8 characters, and contain letters and numbers",
@@ -677,7 +677,7 @@ const en = {
       "password": "Password",
       "empty_password": "Password",
       "cellphone": "phone number",
-      "google_verify_code": "google verify code",
+      "google_verify_code": "google verification code",
       "first_name": "first name",
       "last_name": "last name",
       "IdCard": "IdCard",
@@ -687,7 +687,7 @@ const en = {
       "withdraw_amount_NaN": "withdraw amount must be a number",
       "withdraw_address": "withdraw address",
       "inconsistency_of_password": "Inconsistency Of Password",
-      "email_verify_code": "Email Verify Code",
+      "email_verify_code": "Email verification code",
       "email_captcha": "Email Captcha"
     },
     "page_not_found": {
@@ -718,7 +718,21 @@ const en = {
       "reset_password": "Reset Password",
       "new_password": "New Password"
     },
-    "unsupported_countries_and_regions": "Hotex presently does not serve customers in the following countries/regions/territories: Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan. For more details, please read our Terms of Service and Risks and Compliance Disclosures."
+    "unsupported_countries_and_regions": `
+      <div class='text-left'>
+        <div>
+          <strong class='text-center'>
+            Hotex presently does not serve customers in the following countries/regions/territories:
+          </strong>
+        </div>
+        <div class='btc-marginT15'>
+        Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan.
+        </div>
+        <div class='btc-marginT15'>
+        For more details, please read our Terms of Service and Risks and Compliance Disclosures.
+        </div>
+      </div>
+    `
   }
 }
 
