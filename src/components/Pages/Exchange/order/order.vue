@@ -60,7 +60,7 @@
       <div class="tip">
         <div class="success" v-if='buySuccess'><i class="fa fa-check"></i>{{$t('exchange.success')}}</div>
         <div class="fail" v-if='buyFail'><i class="fa fa-close"></i>{{$t('exchange.fail')}}</div>
-        <p v-if='loginData === "none"' class="loginTip">{{$t('exchange.unlogin.please')}}<a :href="`${ROUTER_VERSION}/login?from=${ROUTER_VERSION}/exchange/${market.code}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${ROUTER_VERSION}/register?from=${ROUTER_VERSION}/exchange/${market.code}`">{{$t('exchange.unlogin.register')}}</a></p>
+        <p v-if='loginData === "none"' class="loginTip">{{$t('exchange.unlogin.please')}}<a :href="`${ROUTER_VERSION}/login?from=${ROUTER_VERSION}/exchange/${curMarket}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${ROUTER_VERSION}/register?from=${ROUTER_VERSION}/exchange/${curMarket}`">{{$t('exchange.unlogin.register')}}</a></p>
         <div v-if='loginData !== "none"' class="myTotal">{{buyAccount | fixedNum(market.price_fixed, market.volume_fixed)}} {{market.base_currency | upper}}</div>
       </div>
       <a class="buy_btn btn" href="###" @click.prevent="orderBid()">{{$t('exchange.buy')}}{{market.quote_currency | upper}}</a>
@@ -69,7 +69,7 @@
       <div class="put">
         <div class="name">{{$t('markets.price')}}</div>
         <div class="price input_box">
-          <input type="number" step="0.00000001" v-model='sellPrice' @change='handlePrice($event.target.value, "sell")' :placeholder="$t('markets.price')">
+          <input type="number" v-model='sellPrice' @change='handlePrice($event.target.value, "sell")' :placeholder="$t('markets.price')">
           <span>{{market.base_currency | upper}}</span>
           <transition name="fade">
             <div class="warning" v-if='sellwarning'>{{$t('exchange.priceWarn')}}</div>
@@ -79,14 +79,14 @@
       <div class="put">
         <div class="name">{{$t('exchange.volume')}}</div>
         <div class="volume input_box">
-          <input type="number" step="0.00000001" v-model='sellVolume' @input='handleVol($event.target.value, "sell")' :placeholder="$t('exchange.volume')">
+          <input type="number" v-model='sellVolume' @input='handleVol($event.target.value, "sell")' :placeholder="$t('exchange.volume')">
           <span>{{market.quote_currency | upper}}</span>
         </div>
       </div>
       <div class="put">
         <div class="name">{{$t('markets.total')}}</div>
         <div class="total input_box">
-          <input type="number" step="0.00000001" v-model='sellTotal' @input='handleTotal($event.target.value, "sell")' :placeholder="$t('markets.total')">
+          <input type="number" v-model='sellTotal' @input='handleTotal($event.target.value, "sell")' :placeholder="$t('markets.total')">
           <span>{{market.base_currency | upper}}</span>
         </div>
       </div>
@@ -98,7 +98,7 @@
       <div class="tip">
         <div class="success" v-if='sellSuccess'><i class="fa fa-check"></i>{{$t('exchange.success')}}</div>
         <div class="fail" v-if='sellFail'><i class="fa fa-close"></i>{{$t('exchange.fail')}}</div>
-        <p v-if='loginData === "none"' class="loginTip">{{$t('exchange.unlogin.please')}}<a :href="`${ROUTER_VERSION}/login?from=${ROUTER_VERSION}/exchange/${market.code}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${ROUTER_VERSION}/register?from=${ROUTER_VERSION}/exchange/${market.code}`">{{$t('exchange.unlogin.register')}}</a></p>
+        <p v-if='loginData === "none"' class="loginTip">{{$t('exchange.unlogin.please')}}<a :href="`${ROUTER_VERSION}/login?from=${ROUTER_VERSION}/exchange/${curMarket}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${ROUTER_VERSION}/register?from=${ROUTER_VERSION}/exchange/${curMarket}`">{{$t('exchange.unlogin.register')}}</a></p>
         <div v-if='loginData !== "none"' class="myTotal">{{sellAccount | fixedNum(market.volume_fixed)}} {{market.quote_currency | upper}}</div>
       </div>
       <a class="sell_btn btn" @click.prevent="orderAsk()">{{$t('exchange.sell')}}{{market.quote_currency | upper}}</a>
@@ -113,7 +113,7 @@ import { bus } from '@/common/js/bus/index'
 
 export default {
   name: 'order',
-  props: ['market', 'type', 'accounts', 'loginData'],
+  props: ['market', 'type', 'accounts', 'loginData', 'curMarket'],
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
@@ -207,20 +207,20 @@ export default {
       if (value < 0) {
         value = Math.abs(value)
       }
-      var p = new BigNumber(price)
-      var v = new BigNumber(volume)
       if (!value) {
+        var p = new BigNumber(price)
+        var v = new BigNumber(volume)
         value = p.multipliedBy(v)
       }
       if (type === 'buy') {
-        if (value > this.buyAccount) {
+        if (this.buyAccount && value > this.buyAccount) {
           value = new BigNumber(this.buyAccount)
           v = value.dividedBy(price)
           this.handleVol(v, 'buy', 'total')
           // value = this.fixNum(this.buyAccount, this.market.volume_fixed, this.market.price_fixed)
         }
       } else if (type === 'sell') {
-        if (volume > this.sellAccount) {
+        if (this.sellAccount && volume > this.sellAccount) {
           v = new BigNumber(this.sellAccount)
           value = volume.multipliedBy(p)
           this.handleVol(v, 'sell', 'total')

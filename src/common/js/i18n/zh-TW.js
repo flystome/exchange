@@ -387,6 +387,10 @@ const zh = {
     "grand": '累计',
     "maker": '做市商',
     "maker_24h": '24h成交量',
+    "platform_use":'已启用',
+    "platform_use_no":'尚未启用',
+    "platform_pay": "支付交易费",
+    "toSet": "去设置",
     'myorder': {
       'pending': '當前委託',
       'history': '歷史委託',

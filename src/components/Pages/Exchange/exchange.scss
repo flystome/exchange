@@ -158,6 +158,37 @@
       background: #101622;
       height: 234px;
     }
+    .set_platform {
+      display: none;
+    }
+    &.logined {
+      position: relative;
+      &>div {
+        min-height: 693px;
+      }
+      .list_box {
+        height: calc(100% - 264px);
+        min-height: 426px;
+      }
+      .set_platform {
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding: 0 10px;
+        margin-top: 3px;
+        height: 24px;
+        line-height: 24px;
+        min-height: 24px;
+        background: #101622;
+        color: #818b95;
+        a {
+          float: right;
+          color: #4382f7;
+        }
+      }
+    }
   }
   .vue-scrollbar__scrollbar-vertical:hover, .vue-scrollbar__scrollbar-horizontal {
     background: none;

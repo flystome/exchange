@@ -11,7 +11,7 @@ Pusher.Runtime.createXHR = function () {
   return xhr
 }
 var pusher = new Pusher(config.key, {
-  authEndpoint: process.env.HOST_URL + '/pusher/auth',
+  authEndpoint: process.env.HOST_URL + '/pusher/auth.json',
   wsHost: config.wsHost,
   wsPort: config.wsPort,
   wssPort: config.wssPort,

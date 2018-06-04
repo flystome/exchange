@@ -31,7 +31,7 @@
         <div class="btc-memeber-platformCoin btc-paddingL15 btc-paddingT10">
           <a>{{$t('my_account.use_platform_currency')}}</a>
           <span @click='ChangePlatformCoin' class='btc-marginL15' :disabled='disabled'>
-            <a :class="{'active': PlatFormState}">ON</a><a :class="{'active': !PlatFormState}">OFF</a>
+            <a :class="{'active': PlatformState}">ON</a><a :class="{'active': !PlatformState}">OFF</a>
           </span>
         </div>
       </div>
@@ -432,13 +432,13 @@ export default {
       this._post({
         url: '/settings/set_platform_coin_for_fee.json',
         data: {
-          operate: !this.PlatFormState ? 'enable' : 'disable'
+          operate: !this.PlatformState ? 'enable' : 'disable'
         }
       }, (d) => {
         this.disabled = false
         if (d.data.success) {
           Object.assign(this.$store.state.loginData.platform_coin, {
-            use_platform_coin_for_fee: !this.PlatFormState
+            use_platform_coin_for_fee: !this.PlatformState
           })
         }
       })
@@ -470,8 +470,8 @@ export default {
       this.getTicket()
       return obj
     },
-    PlatFormState () {
-      return this.loginData.platform_coin.use_platform_coin_for_fee
+    PlatformState () {
+      return this.loginData.platform_coin && this.loginData.platform_coin.use_platform_coin_for_fee
     }
   },
   watch: {
