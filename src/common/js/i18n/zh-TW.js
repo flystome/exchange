@@ -248,6 +248,8 @@ const zh = {
     "form_trade": "成交記錄",
     "form_news": "我的消息",
     "form_account": "充值提現記錄",
+    "form_withdraw": "提現記錄",
+    "form_deposit": "充值記錄",
     "api": "Api",
     "api_new": "新建金鑰",
     "api_edit": "編輯金鑰",
@@ -681,7 +683,8 @@ const zh = {
     "withdraw_amount_NaN": "提幣金額數量必須為數位",
     "withdraw_address": "提币地址",
     "inconsistency_of_password": "密碼不一致",
-    "email_verify_code": "郵箱驗證碼"
+    "email_verify_code": "郵箱驗證碼",
+    "email_captcha": "驗證碼"
   },
   "page_not_found": {
     "404": "頁面丟失,",

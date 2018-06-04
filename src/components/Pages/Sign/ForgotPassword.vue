@@ -21,7 +21,7 @@
         <div v-show="step === 1">
           <basic-input :danger='true' type='password' ref="password" v-model="ChangePasswordData.password" :validate='"required|password"' :placeholder="$t('sign.new_password')"></basic-input>
           <basic-input :invalid='invalid' type='password' class="btc-marginT15" v-model="ChangePasswordData.password_confirmation" :placeholder="$t('sign.confirm_password')"></basic-input>
-          <basic-input :danger='true' ref="verify_email_code" class="btc-marginT15" :validate='"required|verify_code"' v-model="ChangePasswordData.verify_code" :placeholder="$t('validation.verify_code')"></basic-input>
+          <basic-input :danger='true' ref="verify_email_code" class="btc-marginT15" :validate='"required|verify_code"' v-model="ChangePasswordData.verify_code" :placeholder="$t('validation.email_captcha')"></basic-input>
           <div class="btc-marginT15 btc-color999">
             {{ $t('validation.password_fail') }}
           </div>
@@ -33,10 +33,10 @@
         </div>
       </div>
     </div>
-    <footer class="btc-font12 btc-marginT30 text-center" style="color: #9b9b9b">
+    <!-- <footer class="btc-font12 btc-marginT30 text-center" style="color: #9b9b9b">
       <div>© 2018 hotex.com All Rights Reserved</div>
       <div class="btc-marginT5">{{$t('sign.official_website')}}：www.hotex.com {{$t('sign.official_email')}}：<a href="mailto:support@hotex.com">support@hotex.com</a></div>
-    </footer>
+    </footer> -->
   </div>
 </template>
 

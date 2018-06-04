@@ -166,7 +166,7 @@
         <div class="clearfix">
         </div>
         <div class="col-md-8 btc-deposit-confirNum">
-          {{$t('deposit_currency.confirm_num_descirbe')}}<span style="color: #ff7f18;">{{ ConfirmNum }}</span>{{$t('deposit_currency.about_time')}}<router-link class='btc-link' :to="`${ROUTER_VERSION}/form/account`">{{$t('deposit_currency.form_account')}}</router-link>{{ $t('deposit_currency.in_query') }}
+          {{$t('deposit_currency.confirm_num_descirbe')}}<span style="color: #ff7f18;">{{ ConfirmNum }}</span>{{$t('deposit_currency.about_time')}}<router-link class='btc-link' :to="`${ROUTER_VERSION}/form/deposit?currency=${CurrencyType}`">{{$t('title.form_deposit')}}</router-link>{{ $t('deposit_currency.in_query') }}
         </div>
         <ul class="btc-marginT80">
             <strong class="btc-withdraw-remind">{{ $t('withdraw_currency.reminder') }}</strong>
@@ -190,7 +190,7 @@
         </a>
       </template> -->
       <div slot="more" class="text-center btc-b-t btc-table-more col-md-6">
-        <router-link class="btc-link" :to="`${ROUTER_VERSION}/form/account`">
+        <router-link class="btc-link" :to="`${ROUTER_VERSION}/form/withdraw?currency=${CurrencyType}`">
           {{$t('my_account.show_more')}}
         </router-link>
       </div>
@@ -208,7 +208,7 @@
         </span>
       </template>
       <div slot="more" class="text-center btc-b-t btc-table-more">
-        <router-link class="btc-link" :to="`${ROUTER_VERSION}/form/account`">
+        <router-link class="btc-link" :to="`${ROUTER_VERSION}/form/deposit?currency=${CurrencyType}`">
           {{$t('my_account.show_more')}}
         </router-link>
       </div>
@@ -895,6 +895,7 @@ export default {
   },
   watch: {
     $route (to) {
+      if (to.name !== 'WithdrawCurrency') return
       if (/withdraw/.test(to.path)) {
         this.route = 'withdraw'
         this.step = 1
@@ -909,7 +910,7 @@ export default {
       }
     },
     DepositAddress (to, from) {
-      if (!/deposit/.test(this.$route.path)) return
+      if (this.$route.name === 'WithdrawCurrency' && !/deposit/.test(this.$route.path)) return
       if (Object.keys(to).length > Object.keys(from).length) {
         if(Number(Object.keys(to)[0]) !== this.account_id) {
           this.$set(this, 'DepositAddress', '')

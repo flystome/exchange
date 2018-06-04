@@ -403,9 +403,16 @@ a{
 
 @media (max-width: 991px) {
   .btc-memeber-platformCoin{
-    display: block;
     margin-top: 0;
     margin-left: 0;
+    >a{
+      display: block;
+      margin-bottom: 10px;
+    }
+    .btc-marginL15{
+      margin-left: 0;
+      margin-top: 5px;
+    }
   }
   .btc-table-more.btc-b-l{
     border-left: none!important;

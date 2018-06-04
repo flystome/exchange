@@ -248,6 +248,8 @@ const en = {
       "form_referral": "Referrals",
       "form_news": "My Messages",
       "form_account": "Transfer History",
+      "form_withdraw": "Withdraw History",
+      "form_deposit": "Deposit History",
       "api": "Api",
       "api_new": "New Key",
       "api_edit": "Edit Key",
@@ -681,7 +683,8 @@ const en = {
       "withdraw_amount_NaN": "withdraw amount must be a number",
       "withdraw_address": "withdraw address",
       "inconsistency_of_password": "Inconsistency Of Password",
-      "email_verify_code": "Email Verify Code"
+      "email_verify_code": "Email Verify Code",
+      "email_captcha": "Email Captcha"
     },
     "page_not_found": {
       "404": "The page is lost,",
@@ -689,7 +692,7 @@ const en = {
       "back": " back to the home page",
       "500": "Service error,",
       "502": "Request response time out,",
-      "422": "The request you wanted was rejected"
+      "422": "The request you wanted was rejected,"
     },
     "sign": {
       "login_account": "Login Account",

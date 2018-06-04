@@ -20,10 +20,10 @@
         <basic-button :disabled="disabled" @click.native='ChangePassword' class="btn btc-marginB30" :text='$t("nav.register")'></basic-button>
       </div>
     </div>
-    <footer class="btc-font12 btc-marginT30 text-center" style="color: #9b9b9b">
+    <!-- <footer class="btc-font12 btc-marginT30 text-center" style="color: #9b9b9b">
       <div>© 2018 hotex.com All Rights Reserved</div>
       <div class="btc-marginT5">{{$t('sign.official_website')}}：www.hotex.com {{$t('sign.official_email')}}：<a href="mailto:support@hotex.com">support@hotex.com</a></div>
-    </footer>
+    </footer> -->
   </div>
 </template>
 

@@ -75,7 +75,8 @@ export default {
         url: `/withdraws.json`,
         data: {
           cancelable: true,
-          page: num
+          page: num,
+          per_page: 20
         }
       }, (d) => {
         this.loading = false

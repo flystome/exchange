@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="btc-memeber-platformCoin btc-paddingL15 btc-paddingT10">
-          {{$t('my_account.use_platform_currency')}}
+          <a>{{$t('my_account.use_platform_currency')}}</a>
           <span @click='ChangePlatformCoin' class='btc-marginL15' :disabled='disabled'>
             <a :class="{'active': PlatFormState}">ON</a><a :class="{'active': !PlatFormState}">OFF</a>
           </span>

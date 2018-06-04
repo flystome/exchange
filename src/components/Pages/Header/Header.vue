@@ -81,7 +81,8 @@
                 <li class="divider" role="separator"></li>
                 <li><a @click="goPath('/form/order')">{{$t("title.form_order")}}</a></li>
                 <li><a @click="goPath('/form/trade')">{{$t("title.form_trade")}}</a></li>
-                <li><a @click="goPath('/form/account')">{{$t("title.form_account")}}</a></li>
+                <li><a @click="goPath('/form/deposit')">{{$t("title.form_deposit")}}</a></li>
+                <li><a @click="goPath('/form/withdraw')">{{$t("title.form_withdraw")}}</a></li>
                 <li class="divider" role="separator"></li>
                 <!-- <li><a @click="goPath('/api')">{{$t("my_account.api")}}</a></li> -->
                 <li><a @click="goPath('/ticket')">{{$t("title.ticket")}}</a></li>

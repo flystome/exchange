@@ -24,7 +24,7 @@
         <basic-input ref="verify_code" :danger='true' :validate='"required|verify_code"' v-model="SignUpData._rucaptcha" :placeholder="$t('validation.verify_code')"></basic-input>
         <img class="btc-pointer" :src="Rucaptcha" @click="changeCaptcha">
         <div class="btc-authentication btc-marginT10">
-          <span @click="read = !read" :class="{'btc-authentication-right': read}"></span>{{ $t('market_apply.read_and_agree') }} <a :href="`${$store.state.CmsUrl.user_agreement}`" class="btc-link">{{ $t('footer.user_agreement') }}</a>
+          <span @click="read = !read" :class="{'btc-authentication-right': read}"></span><a class="btc-pointer" @click="read = !read">{{ $t('market_apply.read_and_agree') }}</a> <a :href="`${$store.state.CmsUrl.user_agreement}`" class="btc-link">{{ $t('footer.user_agreement') }}</a>
         </div>
         <basic-button  :disabled="disabled" @click.native='register' class="btn" :text='$t("nav.register")'></basic-button>
         <div class="form-footer">
@@ -33,10 +33,10 @@
         </div>
       </div>
     </div>
-    <footer class="btc-font12 btc-marginT30 text-center" style="color: #9b9b9b">
+    <!-- <footer class="btc-font12 btc-marginT30 text-center" style="color: #9b9b9b">
       <div>© 2018 hotex.com All Rights Reserved</div>
       <div class="btc-marginT5">{{$t('sign.official_website')}}：www.hotex.com {{$t('sign.official_email')}}：<a href="mailto:support@hotex.com">support@hotex.com</a></div>
-    </footer>
+    </footer> -->
   </div>
 </template>
 

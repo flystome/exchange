@@ -36,7 +36,9 @@ const FormOrder = () => import(/* webpackChunkName: "FormOrder" */ 'Pages/Form/O
 const WithdrawCancel = () => import(/* webpackChunkName: "FormOrder" */ 'Pages/Form/WithdrawCancel/WithdrawCancel.vue')
 const FormNews = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/News/News.vue')
 const FormTrade = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Trade/Trade.vue')
-const FormAccount = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Account/Account.vue')
+// const FormAccount = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Account/Account.vue')
+const FormDeposit = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Deposit/Deposit.vue')
+const FormWithdraw = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Withdraw/Withdraw.vue')
 const RegisteredReferral = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/RegisteredReferral/RegisteredReferral.vue')
 const Referral = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Referral/Referral.vue')
 
@@ -227,11 +229,11 @@ const router = new Router({
           name: 'FormNews',
           component: FormNews
         },
-        {
-          path: 'account',
-          name: 'FormAccount',
-          component: FormAccount
-        },
+        // {
+        //   path: 'account',
+        //   name: 'FormAccount',
+        //   component: FormAccount
+        // },
         {
           path: 'withdraw_cancel',
           name: 'WithdrawCancel',
@@ -246,6 +248,16 @@ const router = new Router({
           path: 'referral',
           name: 'FormReferral',
           component: Referral
+        },
+        {
+          path: 'withdraw',
+          name: 'FormWithdraw',
+          component: FormWithdraw
+        },
+        {
+          path: 'deposit',
+          name: 'FormDeposit',
+          component: FormDeposit
         }
       ]
     },
