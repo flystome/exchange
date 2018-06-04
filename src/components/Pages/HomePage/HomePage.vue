@@ -397,7 +397,6 @@ export default {
             this.PopupBoxDisplay({type: 'error', message: this.$t(`api_server.homepage.error_${d.data.error.code}`)})
           }
         }
-        console.log(process.env.HOST_URL)
       })
     },
     marketChange ({ index, type, status }) {

@@ -385,6 +385,10 @@ const en = {
       "grand": 'Grand Total',
       "maker": 'Market Maker',
       "maker_24h": 'Vol(24h)',
+      "platform_use":'Using ',
+      "platform_use_no":'Not using ',
+      "platform_pay": " for fees",
+      "toSet": "Set",
       'myorder': {
         'pending': 'Pending Orders',
         'history': 'History Orders',

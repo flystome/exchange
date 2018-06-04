@@ -31,7 +31,7 @@
     </div>
     <div class="tab_bd">
       <div v-if='loginData === "none"' class="loginTip">
-        <p>{{$t('exchange.unlogin.please')}}<a :href="`${ROUTER_VERSION}/login?from=${ROUTER_VERSION}/exchange/${market.code}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${ROUTER_VERSION}/register?from=${ROUTER_VERSION}/exchange/${market.code}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
+        <p>{{$t('exchange.unlogin.please')}}<a :href="`${ROUTER_VERSION}/login?from=${ROUTER_VERSION}/exchange/${curMarket}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${ROUTER_VERSION}/register?from=${ROUTER_VERSION}/exchange/${curMarket}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
       </div>
       <div v-if='loginData !== "none"'>
         <div class="noneData" v-show="curOrders && curOrders.length === 0">{{$t('exchange.myorder.noData')}}</div>
@@ -48,7 +48,7 @@ import orderList from './orderList/orderList'
 
 export default {
   name: 'myOrder',
-  props: ['myOrders', 'market', 'markets', 'loginData'],
+  props: ['myOrders', 'market', 'markets', 'loginData', 'curMarket'],
   components: {
     orderList
   },

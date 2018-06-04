@@ -434,6 +434,23 @@
       }
     }
   }
+  .set_platform {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 44px;
+    line-height: 44px;
+    font-size: 14px;
+    padding: 0 15px;
+    background: #273442;
+    color: #728eaa;
+    width: 100%;
+    a {
+      float: right;
+      color: #4382f7;
+      font-size: 14px;
+    }
+  }
 }
 @keyframes fadeIn {
   0% {

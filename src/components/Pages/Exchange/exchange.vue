@@ -8,7 +8,7 @@
       <div class="header_rt">
         <account v-if='loginData !== "none"' :totalAssets='TotalAssets' :accounts='accounts' :market='market'></account>
         <div v-if='loginData === "none"' class="loginTip">
-          <p>{{$t('exchange.unlogin.please')}}<a :href="`${ROUTER_VERSION}/login?from=${ROUTER_VERSION}/exchange/${market.code}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${ROUTER_VERSION}/register?from=${ROUTER_VERSION}/exchange/${market.code}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
+          <p>{{$t('exchange.unlogin.please')}}<a :href="`${ROUTER_VERSION}/login?from=${ROUTER_VERSION}/exchange/${curMarket}`">{{$t('exchange.unlogin.login')}}</a>{{$t('exchange.unlogin.or')}}<a :href="`${ROUTER_VERSION}/register?from=${ROUTER_VERSION}/exchange/${curMarket}`">{{$t('exchange.unlogin.register')}}</a>{{$t('exchange.unlogin.operate')}}</p>
         </div>
         <setting v-if='loginData !== "none"' :loginData='loginData'
           @controlSound='controlSound'
@@ -32,10 +32,10 @@
       </div>
       <div class="my_order">
         <audio id="order_cancel" src="/static/media/cancel.mp3"></audio>
-        <myOrder :myOrders='my_orders' :market="market" :markets='markets' @getMyOrder='getMyOrder' :loginData='loginData'></myOrder>
+        <myOrder :myOrders='my_orders' :market="market" :markets='markets' @getMyOrder='getMyOrder' :loginData='loginData' :curMarket='curMarket'></myOrder>
       </div>
     </section>
-    <section class="list">
+    <section class="list" :class="{'logined': loginData !== 'none'}">
       <audio id="order_audio" src="/static/media/order.mp3"></audio>
       <audio id="order_ok" src="/static/media/settle.mp3"></audio>
       <div class="list_lt w240">
@@ -43,7 +43,8 @@
           <trades :depthData='depth_data' :market='market'></trades>
         </div>
         <div class="order buy">
-          <order :market='market' :type='"buy"' :accounts='accounts' @play='play' :loginData='loginData'></order>
+          <order :market='market' :type='"buy"' :accounts='accounts' @play='play' :loginData='loginData'
+          :curMarket='curMarket'></order>
         </div>
       </div>
       <div class="list_rt w240">
@@ -51,8 +52,14 @@
           <allOrder :tradesData="all_trades" :market='market'></allOrder>
         </div>
         <div class="order sell">
-          <order :market='market' :type='"sell"' :accounts='accounts' @play='play' :loginData='loginData'></order>
+          <order :market='market' :type='"sell"' :accounts='accounts' @play='play' :loginData='loginData'
+          :curMarket='curMarket'></order>
         </div>
+      </div>
+      <div class="set_platform" v-if='loginData !== "none"'>
+        <span v-if='platform_coin && platform_coin.use_platform_coin_for_fee'>{{$t('exchange.platform_use')}}{{platform_coin.code}}{{$t('exchange.platform_pay')}}</span>
+        <span v-else>{{$t('exchange.platform_use_no')}}{{platform_coin && platform_coin.code}}{{$t('exchange.platform_pay')}}</span>
+        <a v-if='platform_coin.enable' :href="`${ROUTER_VERSION}/my_account`">{{$t('exchange.toSet')}}</a>
       </div>
     </section>
   </section>
@@ -102,7 +109,8 @@ export default {
       moveToLeft1: false,
       moveToLeft2: false,
       moveToRight1: false,
-      moveToRight2: false
+      moveToRight2: false,
+      platform_coin: {}
     }
   },
   components: {
@@ -122,6 +130,7 @@ export default {
     this.curMarket = this.$route.params.id
     this.init()
     if (this.loginData && this.loginData.sn) {
+      this.platform_coin = this.loginData.platform_coin
       this.privateRefresh(this.loginData.sn)
     }
   },
@@ -132,6 +141,7 @@ export default {
     },
     loginData (val) {
       this.loginName = val.show_name
+      this.platform_coin = val.platform_coin
       this.sn = val.sn
       this.privateRefresh(this.sn)
     }

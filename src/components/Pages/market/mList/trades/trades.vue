@@ -140,7 +140,7 @@
         </div>
       </div>
     </div>
-    <div class="new_order" v-if='tradeShow'>
+    <div class="new_order" v-if='tradeShow && trades.length !== 0'>
       <h2>{{$t("markets.myHistory")}}</h2>
       <ul class="order_hd">
         <li v-for="head in heads" :key="head">{{$t(head)}}</li>
@@ -154,6 +154,11 @@
           </li>
         </transition-group>
       </ul>
+    </div>
+    <div class="set_platform" v-if='loginData !== "none"'>
+      <span v-if='platform_coin && platform_coin.use_platform_coin_for_fee'>{{$t('exchange.platform_use')}}{{platform_coin.code}}{{$t('exchange.platform_pay')}}</span>
+      <span v-else>{{$t('exchange.platform_use_no')}}{{platform_coin && platform_coin.code}}{{$t('exchange.platform_pay')}}</span>
+      <a v-if='!platform_coin.enable' :href="`${ROUTER_VERSION}/my_account`">{{$t('exchange.toSet')}}</a>
     </div>
   </div>
 </template>
@@ -190,7 +195,8 @@ export default {
       amount_sell: '',
       amount: '',
       version: 0,
-      depthUpdate: {}
+      depthUpdate: {},
+      platform_coin: {}
     }
   },
   mounted: function () {
@@ -198,6 +204,7 @@ export default {
     this.tradeShow = false
     if (this.loginData && this.loginData !== 'none') {
       this.sn = this.loginData.sn
+      this.platform_coin = this.loginData.platform_coin
       this.tradeShow = true
       this.fetchTrades(this.curMarket)
       this.getRefresh(this.sn)
@@ -218,6 +225,7 @@ export default {
       if (!this.sn) {
         this.getRefresh(val.sn)
       }
+      this.platform_coin = val.platform_coin
       this.tradeShow = true
       var m = this.$route.params.id
       this.fetchTrades(m)
