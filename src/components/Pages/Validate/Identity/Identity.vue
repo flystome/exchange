@@ -18,16 +18,6 @@
           <div>
             <basic-select :data='countries' :value="selectedCountry"  v-on:selected="selectedCountry = arguments[0]">>
             </basic-select>
-            <!--<div class="btc-fl btc-marginR25">-->
-              <!--<input type="radio" id="country-china" value="1" v-model="user.country">-->
-              <!--<label for="country-china">韩国</label>-->
-              <!--<img class="btc-marginL5" src="~Img/validate-china.jpg">-->
-            <!--</div>-->
-            <!--<div>-->
-              <!--<input type="radio" id="country-others" value="2" v-model="user.country">-->
-              <!--<label for="country-others">其他国家或者地区</label>-->
-              <!--<img class="btc-marginL5" src="~Img/validate-country.jpg">-->
-            <!--</div>-->
           </div>
           <div class=" btc-marginT15">
               {{$t('validate_identity.using_true_identity')}}
@@ -35,12 +25,8 @@
         </div>
         <div class="btc-marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
-            <basic-input style="min-height:66px"  ref='first_name' :placeholder='$t("validate_identity.surname")' :validate='"required|first_name"' v-model="user.first_name"></basic-input>
-          <!--<div class=" btc-marginT20">-->
-            <!--<span class="btc-marginR20 btc-marginL40 btc-fl">名字</span>-->
-            <!--<basic-input  v-model="user.name"></basic-input>-->
-          <!--</div>-->
-            <basic-input style="min-height:66px"  ref='last_name' :placeholder='$t("validate_identity.name")' :validate='"required|last_name"'  v-model="user.last_name"></basic-input>
+            <basic-input style="min-height:66px"  ref='first_name' :placeholder='$t("validate_identity.first_name")' :validate='"required|first_name"' v-model="user.first_name"></basic-input>
+            <basic-input style="min-height:66px"  ref='last_name' :placeholder='$t("validate_identity.last_name")' :validate='"required|last_name"'  v-model="user.last_name"></basic-input>
             <basic-input style="min-height:66px"  ref="IdCard"  :placeholder='$t("validate_identity.valid_id_card")' :validate='"required|IdCard"'  v-model="user.IdCard"></basic-input>
         </div>
       </div>

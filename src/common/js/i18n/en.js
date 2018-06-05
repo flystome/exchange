@@ -15,7 +15,7 @@ const en = {
       "google": "Google Auth",
       "send_email": "Send Email",
       "real_name": "Verify Real Name",
-      "please_active_two_factor": "Please set mobile number or google authenticator first.",
+      "please_active_two_factor": "Please setup mobile number or google authenticator first.",
       "submit": "Submit",
       "otp_placeholder": "6-digit code",
       "google_app": "Google Authenticator",
@@ -89,23 +89,23 @@ const en = {
       "recommended_links": "Referral Link",
       "effective_recommended": "My Valid Referrals",
       "my_trade_discount": "My Commission Discount",
-      "use_platform_currency": "Use platform currency to pay transaction fees"
+      "use_platform_currency": "Use platform token to pay transaction fees"
     },
     "validate_identity": {
       "uploading_photos": "Uploading Photos",
       "real_name_authentication": "Real Name Verification",
-      "surname": "Surname/Given Name",
-      "name": "Family Name",
+      "first_name": "Given Name / First Name",
+      "last_name": "Surname / Family Name / Last Name",
       "valid_id_card": "ID Card Number",
       "positive_identity_card_photo": "ID Card Front",
-      "only_support_jpg_photo": "Make sure the content of the photo is complete and clearly visible, only JPG format acceptable.",
-      "ID_card_must_be_written": "Please ensure that the contents of the photos are complete and clearly visible.The ID card must be in the period of validity, Handwritten HotEx ID contains dates, including the JPG format.",
+      "only_support_jpg_photo": "Make sure the content of the photo is complete and clearly visible, only JPG format is accepted.",
+      "ID_card_must_be_written": "Please ensure that the contents of the photos are clearly visible, include handwritten HotEx account, date and ID card. The ID card must be in the period of validity. In JPG format.",
       "id_card_back_photo": "ID Card Back",
       "utilities_credit_card_bills": "Proof Of Residence",
       "three_months_bill": "Proof of residence document must contain name, address and be dated less than 3 months ago.",
       "submissions": "Submit",
       "using_true_identity": "Verify using your real identity, and your personal information won't be disclosed to others.",
-      "held_id_card": "Upload a photo with your face and your ID card inside. Only JPG format accepted.",
+      "held_id_card": "Upload a photo with your face and your ID card inside. Only JPG format is accepted.",
       "example": "Example",
       "click_upload": "Click To Upload",
       "information_upload_success": "Real-name authentication information upload success",
@@ -432,9 +432,9 @@ const en = {
     "api_server": {
       "validate_google": {
         "error_1002": "Password incorrect, please check it",
-        "error_1001": "The google authentication code you enter are incorrect, please check it",
+        "error_1001": "The google authentication code you entered is incorrect, please retry.",
         "error_1003": "Sms code incorrect, please check it",
-        "success_200": "Google Authentication bound successfully!"
+        "success_200": "Google Authenticator has been bound successfully!"
       },
       "validate_identity": {
         "success_200": "Uploading Photo Succeed.",
@@ -442,7 +442,7 @@ const en = {
       },
       "my_account": {
         "success_200": "Email has been sent, please check it",
-        "error_1001": "An confirm email has been sent to your mailbox",
+        "error_1001": "A verification email has been sent to your mailbox",
         "error_1002": "Already Activated"
       },
       "withdraw_currency": {
