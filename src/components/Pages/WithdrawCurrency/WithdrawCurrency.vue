@@ -770,10 +770,6 @@ export default {
             this.PopupBoxDisplay({message: `${this.$t(`withdraw_currency.${this.$refs['select'].value.match(/\w+/g)[0].toLowerCase()}`)}${this.$t('api_server.withdraw_currency.create_withdraw_1002')}`, type: 'error'})
             return
           }
-          this.WithdrawData.otp = ''
-          this.WithdrawData.amount = ''
-          this.WithdrawData.remark = ''
-          this.WithdrawData.newAddress = ''
           if (d.data.error.code === 1009) {
             this.WithdrawData.rucaptcha = ''
           }
