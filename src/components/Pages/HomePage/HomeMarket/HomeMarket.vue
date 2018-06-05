@@ -36,7 +36,7 @@
           </td>
           <td class="btc-homepage-trend">
             <trend style="position: absolute;left: 25px;"
-              viewBox="0 0 500 75"
+              viewBox="-10 0 500 75"
               :data="trendArray(item)"
               :gradient="['#4382f7']"
               :padding="'0'"
