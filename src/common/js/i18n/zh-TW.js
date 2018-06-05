@@ -98,6 +98,7 @@ const zh = {
     "valid_id_card": "身份證號碼",
     "positive_identity_card_photo": "身份證正面",
     "only_support_jpg_photo": "確保照片的內容完整且清晰可見，只有JPG格式可以接受.",
+    "ID_card_must_be_written": "請確保照片的內容完整並清晰可見，身份證必須在有效期內，手寫HotEx ID包含日期，僅支持jpg格式",
     "id_card_back_photo": "身份證反面",
     "utilities_credit_card_bills": "居住證明",
     "three_months_bill": "居住證明文件必須包含姓名，地址，並且要在3個月以內註明.",
@@ -114,7 +115,7 @@ const zh = {
     "binding_cell_phone_authentication": "驗證您的手機號碼",
     "send_identify_code": "發送驗證碼",
     "confirm": "提交",
-    "verification_code": "驗證碼",
+    "verification_code": "手機驗證碼",
     "use_right_code": "請使用正確的國家區號",
     "google_verification_code": "Google驗證碼"
   },
@@ -687,7 +688,8 @@ const zh = {
     "withdraw_amount_NaN": "提幣金額數量必須為數位",
     "withdraw_address": "提币地址",
     "inconsistency_of_password": "密碼不一致",
-    "email_verify_code": "郵箱驗證碼"
+    "email_verify_code": "郵箱驗證碼",
+    "sms_verification_code": "手機驗證碼"
   },
   "page_not_found": {
     "404": "頁面丟失,",

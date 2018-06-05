@@ -89,7 +89,7 @@
             </div>
             <div class="row" v-if="loginData.sms_activated">
               <div class="col-md-offset-2 col-md-9 col-xs-12">
-                <basic-input  style="min-height:66px" class="col-md-9 col-xs-9 btc-paddingL0" @focus.native="promptEmpty()" ref="smscode" :validate='"required|verify_code"' :placeholder='$t("validate_sms.verification_code")' v-model="sms_code">
+                <basic-input  style="min-height:66px" class="col-md-9 col-xs-9 btc-paddingL0" @focus.native="promptEmpty()" ref="smscode" :validate='"required|sms_verification_code"' :placeholder='$t("validate_sms.verification_code")' v-model="sms_code">
                 </basic-input>
                 <button class="btc-white-btn col-md-3 col-xs-3" :disabled="disabled" @click.prevent="SendSms">
                   {{ timer }}

@@ -70,7 +70,8 @@ export default {
         data: {
           page: num,
           currency: currency,
-          per_page: 20
+          per_page: 20,
+          fuzzy_search: true
         }
       }, (d) => {
         this.loading = false

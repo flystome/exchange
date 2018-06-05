@@ -148,9 +148,7 @@
           </div>
           <div class="btc-deposit-address col-md-5">
             <div class="btc-address-div">
-              <div id="copy" class="btc-b btc-color666">
-                {{ deposit_address === false ? '' : deposit_address  }}
-              </div>
+              <div id="copy" class="btc-b btc-color666">{{ deposit_address === false ? '' : deposit_address  }}</div>
               <div class="btc-address-warn btc-marginT10">
                 {{ ReplaceCurrency }}
                 <!-- {{ $t('deposit_currency.warn1') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn2') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn3') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn4') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn5') }} -->
@@ -289,6 +287,7 @@ export default {
       }) //account pusher
 
       MarketChannel.bind('tickers', _debounce((data) => {
+        if (!this.$store.state.marketData) return
         var BtcMarket = this.$store.state.marketData["btc"].reduce((a, b) => {
           return a.concat(Object.keys(b)[0])
         }, [])

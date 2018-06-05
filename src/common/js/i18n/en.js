@@ -99,6 +99,7 @@ const en = {
       "valid_id_card": "ID Card Number",
       "positive_identity_card_photo": "ID Card Front",
       "only_support_jpg_photo": "Make sure the content of the photo is complete and clearly visible, only JPG format acceptable.",
+      "ID_card_must_be_written": "Please ensure that the contents of the photos are complete and clearly visible.The ID card must be in the period of validity, Handwritten HotEx ID contains dates, including the JPG format.",
       "id_card_back_photo": "ID Card Back",
       "utilities_credit_card_bills": "Proof Of Residence",
       "three_months_bill": "Proof of residence document must contain name, address and be dated less than 3 months ago.",
@@ -115,7 +116,7 @@ const en = {
       "binding_cell_phone_authentication": "Verify Your Cell Phone",
       "send_identify_code": "Send Code",
       "confirm": "Submit",
-      "verification_code": "Verification Code",
+      "verification_code": "SMS Verification Code",
       "use_right_code": "Please use the correct national area code",
       "google_verification_code": "Google Verification Code"
     },
@@ -160,7 +161,7 @@ const en = {
       "delete": "Delete",
       "cancel": "Cancel",
       "resend": "Resend",
-      "temporarily_can_not_withdraw": "temporarily Can Not Withdraw",
+      "temporarily_can_not_withdraw": "Temporarily can not withdraw",
       "canceled": "Canceled",
       "submitting": "Submitting",
       "submitted": "Submitted",
@@ -687,7 +688,8 @@ const en = {
       "withdraw_amount_NaN": "withdraw amount must be a number",
       "withdraw_address": "withdraw address",
       "inconsistency_of_password": "Inconsistency Of Password",
-      "email_verify_code": "Email verification code"
+      "email_verify_code": "Email verification code",
+      "sms_verification_code": "SMS Verification Code"
     },
     "page_not_found": {
       "404": "The page is lost,",

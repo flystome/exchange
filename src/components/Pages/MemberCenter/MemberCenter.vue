@@ -168,9 +168,7 @@
                 <news-prompt :text='prompt'></news-prompt>
               </div>
               <div class="btc-referrals-address">
-                <span v-if="loginData !== 'none'" id="copy1" class="btc-b">
-                  {{ `${BASE_URL}/register?r=${loginData.promotion_id}` }}
-                </span>
+                <span v-if="loginData !== 'none'" id="copy1" class="btc-b">{{ `${BASE_URL}/register?r=${loginData.promotion_id}` }}</span>
                 <basic-button class='btn-copy1' data-clipboard-target="#copy1" :text="$t('my_account.copy')"></basic-button>
               </div>
               <div class="btc-marginB20 btc-bottom">

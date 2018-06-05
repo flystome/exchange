@@ -26,7 +26,7 @@
         </basic-input>
       </div>
       <div class="btc-sms-code">
-        <basic-input  style="min-height:66px" :validate='"required|verify_code"' ref="verifiycode" :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
+        <basic-input  style="min-height:66px" :validate='"required|sms_verification_code"' ref="verifiycode" :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
         </basic-input>
         <span :disabled="disabled" class="btc-white-btn" @click="SendSms">
           {{ timer }}
@@ -69,8 +69,8 @@ export default {
       resend: false,
       SmsData: {
         CellPhone: '',
-        CellPhonecode: '86',
-        CountryName: 'CN',
+        CellPhonecode: '1',
+        CountryName: 'US',
         verifyCode: '',
         Time: '',
         googlecode: ''

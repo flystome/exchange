@@ -68,7 +68,7 @@
     <div class="btc-indentity-prompt">
       <upload-img id="indentity3" ref="id_document_selfie_holding_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.held_id_card"),
-        ImgExplain: $t("validate_identity.only_support_jpg_photo"),
+        ImgExplain: $t("validate_identity.ID_card_must_be_written"),
         ImgModel: "validate-indentity3.png"
       }'
       v-on:prompt='verifymsg.indentity3 = ""'

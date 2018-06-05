@@ -35,9 +35,7 @@
               <news-prompt class="btc-fl btc-marginL10" :text='prompt1'></news-prompt>
               <div class="clearfix"></div>
             </div>
-            <span id="copy2">
-              {{ access_key }}
-            </span>
+            <span id="copy2">{{ access_key }}</span>
             <span class='btn-copy2 btc-link btc-fr' data-clipboard-target="#copy2">
               {{ $t('my_account.copy') }}
             </span>
@@ -50,9 +48,7 @@
               <news-prompt class="btc-fl btc-marginL10" :text='prompt'></news-prompt>
               <div class="clearfix"></div>
             </div>
-            <span id="copy1">
-              {{ secret_key }}
-            </span>
+            <span id="copy1">{{ secret_key }}</span>
             <span class='btn-copy1 btc-link btc-fr' data-clipboard-target="#copy1">
               {{ $t('my_account.copy') }}
             </span>
