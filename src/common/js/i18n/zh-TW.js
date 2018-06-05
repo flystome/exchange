@@ -94,8 +94,8 @@ const zh = {
   "validate_identity": {
     "uploading_photos": "上傳照片中",
     "real_name_authentication": "實名認證",
-    "surname": "名",
-    "name": "姓",
+    "first_name": "名",
+    "last_name": "姓",
     "valid_id_card": "身份證號碼",
     "positive_identity_card_photo": "身份證正面",
     "only_support_jpg_photo": "確保照片的內容完整且清晰可見，只有JPG格式可以接受.",
@@ -520,7 +520,7 @@ const zh = {
     }
   },
   "footer": {
-    "introduction": "權威透明的數字資產交易平台",
+    "introduction": "極速，穩定的數字資產交易平台",
     "copyright": "©2017-2018 hotex.com Copyright",
     "support": "支持",
     "api": "API",
@@ -583,7 +583,7 @@ const zh = {
     "introduce_5": "hotex收集，處理和存儲的個人數據，是通過您使用我們的服務所取得的，或者已經獲得了您的同意，我們會謹慎對待您的個人隱私",
     "introduce_6": "團隊成員來自證券，期貨，外匯，量化投資等行業，有多年同類產品研發和運營經驗，在業內擁有廣泛的人脈和資源",
     "introduce_7": '數位密碼幣的交易存在風險，在全球範圍內一周7天，一天24小時，一年365天無休止交易，沒有每日漲停跌停限制，價格受各國政策，市場，等多種因素影響。我們強烈建議您事先調查瞭解在自身所能承受的風險範圍內參與交易。',
-    "trading_platform": "急速，穩定的虛擬資產交易平臺",
+    "trading_platform": "極速，穩定的虛擬資產交易平臺",
     "cross_platform":"閃電般極速下單，覆蓋iOS，Android，手機web，PC四大終端，卓越的平臺效能保障，可接納海量用戶的真實業務場景，讓交易更專注。"
   },
   "form": {
