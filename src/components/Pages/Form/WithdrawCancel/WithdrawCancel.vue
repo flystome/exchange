@@ -95,6 +95,7 @@ export default {
       return [{content: [
         this.$t('withdraw_currency.number'),
         this.$t('withdraw_currency.withdraw_time'),
+        this.$t('currency'),
         this.$t('withdraw_currency.withdraw_address'),
         this.$t('withdraw_currency.actual_account'),
         this.$t('withdraw_currency.absenteeism_expenses'),
@@ -104,6 +105,7 @@ export default {
           content: [
             d.id,
             this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
+            d.currency.toUpperCase(),
             d.fund_uid,
             d.amount,
             d.fee,
