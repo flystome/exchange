@@ -78,7 +78,7 @@ const en = {
       "api": "API",
       "email_sent_message": "Mail is sent, please go to your mailbox to activate your account.",
       "1001_hint": "Please verify your email",
-      "1002_hint": "Please do Google validation or Cell Phone validation",
+      "1002_hint": "Please setup Google Authenticator or SMS verfication",
       "1003_hint": "Please real name authentication",
       "1004_hint": "Please do Google validation",
       "200_hint": "Email Verified!",
@@ -118,7 +118,7 @@ const en = {
       "confirm": "Submit",
       "verification_code": "SMS Verification Code",
       "use_right_code": "Please use the correct national area code",
-      "google_verification_code": "Google Verification Code",
+      "google_verification_code": "Google Authenticator Code",
       "area": "Country or Region"
     },
     "browser": {
@@ -140,7 +140,7 @@ const en = {
       "google_validate": "Google Validate",
       "withdraw_all": "Withdraw All",
       "reminder": "Guide",
-      "min_currency": "Do not tell other people your mobile phone verification code or Google verification code",
+      "min_currency": "Do not tell other people your mobile phone verification code or Google Authenticator code",
       "confirm_apply_for_success": "After the withdrawal request is successful, please go to the email and click the link to confirm the withdrawal request. You can track the status on the withdrawal history page.",
       "make_sure_safe": "Make sure your computer and browser is secure, to prevent information from being tampered with or leaked.",
       "withdraw_currency_record": "Withdraw Currency Record",
@@ -267,7 +267,7 @@ const en = {
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
-      "not_certified": "Phone or Google is unverified",
+      "not_certified": "Neither cellphone number nor Google Auth has been verified. Please complete tier 2 verification first.",
       "google_not_certified": "Google Auth not bound",
       "phone_not_certified": "Phone Auth not bound",
       "not_certified_prompt": "Help us keeping bad guys out of your account by using both your phone",
@@ -286,7 +286,7 @@ const en = {
       "using": "Using",
       "google_to_verify_app": "Google Authenticator",
       "scan_qrcode": "to scan QR code",
-      "cant_scan_enter_keys": "If scaning doesn't work, please manually enter the 16 character key into Google Authenticator",
+      "cant_scan_enter_keys": "If scaning doesn't work, please manually enter the above 16 character key into Google Authenticator",
       "refresh_qrcode": "Refresh qrcode",
       "prve": "Back",
       "login_password": "Login Password",
@@ -427,7 +427,7 @@ const en = {
       "go_tickets": "Server error occurred. Do you want to tell us?",
       "yes": "Yes",
       "generating_address": "We are generating deposit address, please wait a few seconds.",
-      "completion": "Completion",
+      "completion": "Done",
       "server_exception": "Server Exception"
     },
     "api_server": {
@@ -472,7 +472,7 @@ const en = {
         "send_code_1001": "Send too fast, please wait for one minute",
         "auth_sms_200": "SMS verificaiton succeed.",
         "auth_sms_1001": "Verification Failed",
-        "auth_sms_1002": "The Google verification code is incorrect",
+        "auth_sms_1002": "The Google Authenticator code is incorrect",
       },
       "homepage": {
         "error_1003":  "Incorrect Email or password, please try again",
@@ -565,7 +565,6 @@ const en = {
       "exchange_rate_details": "Commission",
       "apply_to_list": "Apply To List",
       "privacy_clause": "Privacy",
-      "transaction_describe": "Risk Tip: Investing on blockchain assets is always with high risk. Blockchain asset is the asset that has very big volatility. The price of some assets can change greatly, sometimes greater than 10% of the intital price of the day. Only take the risk that you can afford!",
       "currency": "Pair",
       "price_trend": "Price Trend",
       "no_matching_currency": "No Matching Pairs",
@@ -582,7 +581,7 @@ const en = {
       "introduce_4": "Want token be listed on hotex.com? Please click the link to the new page to provide the details of your token.",
       "introduce_5": "HotEx collection, processing and storage of personal data, which you have obtained by using our service, or with your consent, we will be cautious to your personal privacy.",
       "introduce_6": "Team members from securities, futures, forex, quantitative investment and other industries, have many years of research and development and operation of similar products, in the industry has a wide range of contacts and resources.",
-      "introduce_7": 'The transaction of digital cipher currency has a risk. It has 7 days a week, 24 hours a day, 365 days a year and no stop trading. There is no daily limit of price and stop, the price is affected by various factors, such as policy, market, and so on. We strongly recommend that you investigate in advance and understand the risks involved in the transaction.',
+      "introduce_7": 'The price of blockchain assets has high volatility, investing blockchain assets comes with high risk. It has 7 days a week, 24 hours a day, 365 days a year and no stop trading. There is no daily limit of price and stop, the price is affected by various factors, such as policy, market, and so on. We strongly recommend that you investigate in advance and understand the risks involved in the transaction.',
       "trading_platform": "Rapid, Robust Blockchain Assets Trading Platform",
       "cross_platform": "Lightning fast order matching engine. Providing you 4 terminals including iOS, Android, Mobile Web, Desktop Web. Trading anywhere at your first convenience."
     },
@@ -637,7 +636,7 @@ const en = {
       "entrustment_scope": "Entrustment Scope",
       "label": "Label",
       "label_describe": "Labels will help you identify addresses, not mandatory",
-      "google_verification_code": "Google Verification Code",
+      "google_verification_code": "Google Authenticator Code",
       "confirm": "Confirm",
       "cancel": "Cancel",
       "secretkey_describe": "Please copy and paste the following Secret Key copy into a safe place. After the page is closed, Secret Key is no longer displayed",
@@ -679,7 +678,7 @@ const en = {
       "password": "Password",
       "empty_password": "Password",
       "cellphone": "phone number",
-      "google_verify_code": "Google Verification Code",
+      "google_verify_code": "Google Authenticator Code",
       "first_name": "first name",
       "last_name": "last name",
       "IdCard": "IdCard",
@@ -724,7 +723,7 @@ const en = {
       <div class='text-left'>
         <div>
           <strong class='text-center'>
-            Hotex presently does not serve customers in the following countries/regions/territories:
+            Apologies! HotEx presently does not serve customers in the following countries/regions/territories:
           </strong>
         </div>
         <div class='btc-marginT15'>

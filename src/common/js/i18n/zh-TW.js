@@ -565,7 +565,6 @@ const zh = {
     "exchange_rate_details": "費率詳情",
     "apply_to_list": "上幣申請",
     "privacy_clause": "隱私條款",
-    "transaction_describe": "數字密碼幣的交易存在風險。在全球範圍內一周7天，一天24小時，一年365天無休止交易，沒有每日漲停跌停限制。價格受各國政策，市場等因素影響。我們強烈建議您事先進行調查，以便在您再自身所能承擔的風險範圍內參與交易。",
     "currency": "幣種",
     "price_trend": "價格趨勢",
     "no_matching_currency": "無貨幣匹配",
