@@ -4,7 +4,7 @@ const en = {
     "submit": "Submit",
     "cancel": "Cancel",
     "confirm": "Confirm",
-    "slogen": "Hotex - Rapid, stable virtual asset trading platform",
+    "slogen": "HotEx - Rapid, Robust Blockchain Assets Trading Platform",
     'currency': 'Currency',
     'time': 'time',
     "reply": "Reply",
@@ -81,7 +81,7 @@ const en = {
       "1002_hint": "Please do Google validation or Cell Phone validation",
       "1003_hint": "Please real name authentication",
       "1004_hint": "Please do Google validation",
-      "200_hint": "Verify Email Success",
+      "200_hint": "Email Verified!",
       "verifying": "verifying",
       "success_200": "Email has been sent, please check it",
       "error_1001": "Token errors, please Reconfirm",
@@ -192,7 +192,7 @@ const en = {
       "trading_hash": "Tx ID",
       "recharge_amount": "Deposit Amount",
       "confirmation_number": "Confirmation Number",
-      "identifying_code": "verification code",
+      "identifying_code": "Verification Code",
       "temporarily_unable_deposit": "Temporarily unable to deposit",
       "warn1": "Warning! Only transfer COIN to this address. Transfer other coins to this address will result in lost of your coins.",
       "copy_success": "Copied!",
@@ -260,7 +260,7 @@ const en = {
       "market_maker": "Market Marker",
       "market_apply": "Market Apply",
       "login": "Login",
-      "register": "register",
+      "register": "Register",
       "change_password": "Change Password"
     },
     "prompt": {
@@ -508,16 +508,16 @@ const en = {
       },
       "validate_email": {
         'error_1001': "miss params",
-        'error_1002': "verification code error",
-        'error_1003': "Verify the code failure, please resend the mailbox"
+        'error_1002': "Verification code error",
+        'error_1003': "Failed to verify Email, please retry."
       },
       "forgot_password": {
-        'error_1001': "password format error",
-        'success_200': "reset password success",
+        'error_1001': "Password format error.",
+        'success_200': "Reset password successfully.",
       }
     },
     "footer": {
-      "introduction": "Authoritative And Transparent Digital Asset Trading Platform",
+      "introduction": "Rapid, Robust Blockchain Assets Trading Platform",
       "copyright": "©2017-2018 hotex.com",
       "support": "Support",
       "api": "API",
@@ -542,7 +542,7 @@ const en = {
       "desktop_end": "Switch To PC"
     },
     "homepage": {
-      "coming_soon": "Coming Soon",
+      "coming_soon": "Stay Tuned!",
       "banner_describe1": "High Quality Block Chain Assets",
       "banner_describe2": "Subtitle you Want to ",
       "login": "Login",
@@ -563,7 +563,7 @@ const en = {
       "exchange_rate_details": "Commission",
       "apply_to_list": "Apply To List",
       "privacy_clause": "Privacy",
-      "transaction_describe": "Risk Tip: Investing on Cryptocurrency is always with high risk. Cryptocurrency is the asset that has very big volatility. The price of some cryptocurrency can change greatly, sometimes greater than 10% of the intital price of the day. Only take the risk that you can afford!",
+      "transaction_describe": "Risk Tip: Investing on blockchain assets is always with high risk. Blockchain asset is the asset that has very big volatility. The price of some assets can change greatly, sometimes greater than 10% of the intital price of the day. Only take the risk that you can afford!",
       "currency": "Pair",
       "price_trend": "Price Trend",
       "no_matching_currency": "No Matching Pairs",
@@ -575,14 +575,14 @@ const en = {
       "off": "Off",
       "api_interface": "API Interface",
       "introduce_1": "Please send mail to support@hotex.com to contact us",
-      "introduce_2": "Provide a safe, reliable, detailed and timely API interface for developers.",
-      "introduce_3": "A highly competitive market transaction rate, recommending users to participate in the transaction can also get transaction discount rates.",
-      "introduce_4": "If your virtual currency is going to hotex.com, please click the jump to the new page to provide the details of your currency. We will provide meticulous service for the money.",
-      "introduce_5": "Hotex collection, processing and storage of personal data, which you have obtained by using our service, or with your consent, we will be cautious to your personal privacy.",
-      "introduce_6": "Team members from securities, futures, foreign exchange, quantitative investment and other industries, have many years of research and development and operation of similar products, in the industry has a wide range of contacts and resources.",
+      "introduce_2": "We provide safe, reliable and fast API for developers.",
+      "introduce_3": "A highly competitive commission rate, participating in referral incentive program could also get commission discount.",
+      "introduce_4": "Want token be listed on hotex.com? Please click the link to the new page to provide the details of your token.",
+      "introduce_5": "HotEx collection, processing and storage of personal data, which you have obtained by using our service, or with your consent, we will be cautious to your personal privacy.",
+      "introduce_6": "Team members from securities, futures, forex, quantitative investment and other industries, have many years of research and development and operation of similar products, in the industry has a wide range of contacts and resources.",
       "introduce_7": 'The transaction of digital cipher currency has a risk. It has 7 days a week, 24 hours a day, 365 days a year and no stop trading. There is no daily limit of price and stop, the price is affected by various factors, such as policy, market, and so on. We strongly recommend that you investigate in advance and understand the risks involved in the transaction.',
-      "trading_platform": "Rapid, stable virtual asset trading platform",
-      "cross_platform": "Lightning fast order, covering iOS, Android, mobile web, PC four terminal, excellent platform performance guarantee, can accept the real business scene of mass users, make the transaction more focused."
+      "trading_platform": "Rapid, Robust Blockchain Assets Trading Platform",
+      "cross_platform": "Lightning fast order matching engine. Providing you 4 terminals including iOS, Android, Mobile Web, Desktop Web. Trading anywhere at your first convenience."
     },
     "form": {
       "previous": "Prev",
@@ -677,7 +677,7 @@ const en = {
       "password": "Password",
       "empty_password": "Password",
       "cellphone": "phone number",
-      "google_verify_code": "google verification code",
+      "google_verify_code": "Google Verification Code",
       "first_name": "first name",
       "last_name": "last name",
       "IdCard": "IdCard",
@@ -707,7 +707,7 @@ const en = {
       "create_my_account": "Create My Account",
       "confirm_password": "Confirm Password",
       "already_registered": "Already registered?",
-      "log_in": "log in",
+      "log_in": "Login",
       "official_website": "Official Website",
       "official_email": "Official Email",
       "old_password": "Old Password",
@@ -725,7 +725,7 @@ const en = {
           </strong>
         </div>
         <div class='btc-marginT15'>
-        Hong Kong, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan.
+        P.R. China, Hong Kong SAR, Cuba, Iran, North Korea, Crimea, Sudan, Malaysia, Syria, USA [including all USA territories like Puerto Rico, American Samoa, Guam, Northern Mariana Island, and the US Virgin Islands (St. Croix, St. John and St. Thomas)], Bangladesh, Bolivia, Ecuador, and Kyrgyzstan.
         </div>
         <div class='btc-marginT15'>
         For more details, please read our Terms of Service and Risks and Compliance Disclosures.
