@@ -687,8 +687,7 @@ const zh = {
     "withdraw_amount_NaN": "提幣金額數量必須為數位",
     "withdraw_address": "提币地址",
     "inconsistency_of_password": "密碼不一致",
-    "email_verify_code": "郵箱驗證碼",
-    "email_captcha": "驗證碼"
+    "email_verify_code": "郵箱驗證碼"
   },
   "page_not_found": {
     "404": "頁面丟失,",

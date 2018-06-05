@@ -667,7 +667,7 @@ const en = {
       "reply_can_not_be_empty": "Reply can not be empty"
     },
     "validation": {
-      "verify_code": 'verification code',
+      "verify_code": 'Captcha',
       "no_empty": " can not be empty",
       "field": "The % field",
       "password_fail": "The password should be at least 8 characters, and contain letters and numbers",
@@ -687,8 +687,7 @@ const en = {
       "withdraw_amount_NaN": "withdraw amount must be a number",
       "withdraw_address": "withdraw address",
       "inconsistency_of_password": "Inconsistency Of Password",
-      "email_verify_code": "Email verification code",
-      "email_captcha": "Email Captcha"
+      "email_verify_code": "Email verification code"
     },
     "page_not_found": {
       "404": "The page is lost,",

@@ -21,7 +21,7 @@
         <div v-show="step === 1">
           <basic-input :danger='true' type='password' ref="password" v-model="ChangePasswordData.password" :validate='"required|password"' :placeholder="$t('sign.new_password')"></basic-input>
           <basic-input :invalid='invalid' type='password' class="btc-marginT15" v-model="ChangePasswordData.password_confirmation" :placeholder="$t('sign.confirm_password')"></basic-input>
-          <basic-input :danger='true' ref="verify_email_code" class="btc-marginT15" :validate='"required|verify_code"' v-model="ChangePasswordData.verify_code" :placeholder="$t('validation.email_captcha')"></basic-input>
+          <basic-input :danger='true' ref="verify_email_code" class="btc-marginT15" :validate='"required|verify_code"' v-model="ChangePasswordData.verify_code" :placeholder="$t('validation.email_verify_code')"></basic-input>
           <div class="btc-marginT15 btc-color999">
             {{ $t('validation.password_fail') }}
           </div>
