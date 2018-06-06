@@ -5,6 +5,7 @@ const zh = {
   'confirm': `確認`,
   "slogen": "Hotex - 急速，穩定的虛擬資產交易平臺",
   'currency': '幣種',
+  "function_not_open": "此功能暫未開放，敬請期待",
   'time': '次',
   "reply": "回復",
   "week": '星期',

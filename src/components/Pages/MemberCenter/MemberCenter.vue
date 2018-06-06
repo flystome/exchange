@@ -425,6 +425,10 @@ export default {
       return this.$moment(date).format('YYYY-MM-DD H:mm:ss')
     },
     ChangePlatformCoin () {
+      if (this.loginData.platform_coin.enable === false) {
+        this.PopupBoxDisplay({message: this.$t('function_not_open'), type: 'warn'})
+        return
+      }
       if (this.disabled) return
       this.disabled = true
       this._post({

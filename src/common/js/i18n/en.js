@@ -6,6 +6,7 @@ const en = {
     "confirm": "Confirm",
     "slogen": "HotEx - Rapid, Robust Blockchain Assets Trading Platform",
     'currency': 'Currency',
+    "function_not_open": "This function is not open for the time being. Please look forward to it",
     'time': 'time',
     "reply": "Reply",
     "week": 'wk',
