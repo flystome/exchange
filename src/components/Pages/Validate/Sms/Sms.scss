@@ -26,7 +26,6 @@
   }
   .btc-sms-code{
     display: flex;
-    height: 60px;
     & > div{
       flex: 1
     }
@@ -73,6 +72,7 @@
     top: 32px;
     width: 100%;
     border-top: none;
+    left: 0;
     cursor: pointer;
     .btc-code-number{
       float: left;
