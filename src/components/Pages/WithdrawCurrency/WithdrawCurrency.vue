@@ -100,7 +100,7 @@
                   <basic-button :disabled='disabled' @click.native="WithdrawAll" class="btc-link btn" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
                 </basic-input>
               <div class="btc-withdraw-explain">
-                <span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }} {{ 2 * withdraw_fee }}</span>
+                <span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }} {{ currency_precision }}</span>
                 <span class="btc-fr">{{ $t('withdraw_currency.poundage') }} {{ withdraw_fee }}</span>
                 </div>
               <div class="btc-choice-validate">
@@ -544,6 +544,7 @@ export default {
         this.account_id = d.account.account_id
         this.confirm_num = d.deposit_max_confirmation
         this.withdraw_fee = d.withdraw_fee
+        this.currency_precision = Math.max(2 * d.withdraw_fee, 1 / Math.pow(10, d.currency_precision))
         this.equivalence = (c || 'btc') === 'btc' ? '' : (d.today_withdraw_remain_btc ? d.today_withdraw_remain_btc : 0)
         this.WithdrAwable = d.withdrawable
         this.Remain = d.today_withdraw_remain ? d.today_withdraw_remain : 0
@@ -692,8 +693,8 @@ export default {
         this.withdraw_prompt = withdraw_amount.error
         return
       } else {
-        if (this.WithdrawData.amount < this.withdraw_fee * 2) {
-          this.withdraw_prompt = `${this.$t('validation.less_then')} ${this.withdraw_fee * 2} ${this.CurrencyType.toUpperCase()}`
+        if (this.WithdrawData.amount < this.currency_precision) {
+          this.withdraw_prompt = `${this.$t('validation.less_then')} ${this.currency_precision} ${this.CurrencyType.toUpperCase()}`
           this.invalid = true
           return
         }
