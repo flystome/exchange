@@ -9,12 +9,7 @@
         <span class="btc-color999">{{$t('validate_sms.area')}}:</span> {{ Country }}
       </div>
       <div class="btc-sms-phone">
-        <div class="btc-sms-choice btc-b-def">
-          <span>+</span>
-          <div-contenteditable @keyup.stop.native v-model="SmsData.CellPhonecode">
-          </div-contenteditable>
-          <i @click.stop="ShowCallingcode(true)" class="sms-triangle" />
-        </div>
+
       <div class="btc-code-list btc-b-def" v-if="callDisplay">
         <ul>
           <li v-for='data in callingdata' :key="data.name">
@@ -25,6 +20,14 @@
           </li>
         </ul>
       </div>
+              <div class="btc-sms-choice btc-b-def">
+          <span>+</span>
+          <div-contenteditable @keyup.stop.native v-model="SmsData.CellPhonecode">
+          </div-contenteditable>
+          <i @click.stop="ShowCallingcode(true)" class="sms-triangle" />
+        </div>
+          <!-- <div-contenteditable @keyup.stop.native v-model="SmsData.CellPhonecode">
+          </div-contenteditable> -->
         <basic-input style="min-height:66px" :validate='"required|cellphone"' ref="cellphone" :placeholder='$t("placeholder.cell_phone_number")' v-model="SmsData.CellPhone">
         </basic-input>
       </div>
@@ -188,7 +191,7 @@ export default {
       })
       if (!lock) {
         this.SmsData.CountryName = ''
-        this.Country = 'N/A'
+        this.Country = ''
       }
     }, 500)
     // $route (to) {

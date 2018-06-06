@@ -14,7 +14,7 @@
   .btc-sms-choice{
     height: 32px;
     border-right: none;
-    flex: 0.1!important;
+    // flex: 0.1!important;
     white-space: nowrap;
   }
   .btc-sms-phone{
@@ -22,6 +22,9 @@
     display: flex;
     & > div{
       flex: 1
+    }
+    .btc-sms-choice{
+      flex: none
     }
   }
   .btc-sms-code{
