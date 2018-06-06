@@ -50,7 +50,7 @@ const en = {
       "total_assets": "Total Assets",
       "change_password": "Change Password",
       "login_record": "Login Record (Last 5)",
-      "login_time": "Register Time",
+      "login_time": "Login Time",
       "ip_adress": "IP Address",
       "login_location": "Login Location",
       "have_questions_to_contact_us": "If any suspicious login show up, please contact us immediately.",
@@ -118,7 +118,8 @@ const en = {
       "confirm": "Submit",
       "verification_code": "SMS Verification Code",
       "use_right_code": "Please use the correct national area code",
-      "google_verification_code": "Google Verification Code"
+      "google_verification_code": "Google Verification Code",
+      "area": "Country or Region"
     },
     "browser": {
       "chrome": "Chrome",

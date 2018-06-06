@@ -49,7 +49,7 @@ const zh = {
     "total_assets": "總資產",
     "change_password": "更改密碼",
     "login_record": "登錄記錄（近五次）",
-    "login_time": "註冊時間",
+    "login_time": "登錄時間",
     "ip_adress": "IP 地址",
     "login_location": "登錄地址",
     "have_questions_to_contact_us": "如果有可疑的登錄信息，請立即與我們聯繫.",
@@ -117,7 +117,8 @@ const zh = {
     "confirm": "提交",
     "verification_code": "手機驗證碼",
     "use_right_code": "請使用正確的國家區號",
-    "google_verification_code": "Google驗證碼"
+    "google_verification_code": "Google驗證碼",
+    "area": "國家或地區"
   },
   "browser": {
     "chrome": "Google瀏覽器",

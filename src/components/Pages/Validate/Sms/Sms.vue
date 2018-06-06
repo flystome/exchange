@@ -5,6 +5,9 @@
     </header>
     <div class="btc-sms-container">
       <news-prompt :text='prompt'></news-prompt>
+      <div class="btc-marginB5">
+        <span class="btc-color999">{{$t('validate_sms.area')}}:</span> {{ Country }}
+      </div>
       <div class="btc-sms-phone">
         <div class="btc-sms-choice btc-b-def">
           <span>+</span>
@@ -67,6 +70,7 @@ export default {
       callingcode: '',
       second: -1,
       resend: false,
+      Country: 'United States',
       SmsData: {
         CellPhone: '',
         CellPhonecode: '1',
@@ -178,11 +182,13 @@ export default {
       callingdata.forEach((d) => {
         if (d.number.slice(1) === this.SmsData.CellPhonecode) {
           this.SmsData.CountryName = d.alpha
+          this.Country = d.name
           lock = true
         }
       })
       if (!lock) {
         this.SmsData.CountryName = ''
+        this.Country = 'N/A'
       }
     }, 500)
     // $route (to) {

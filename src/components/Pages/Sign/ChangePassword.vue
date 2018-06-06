@@ -17,7 +17,7 @@
         <basic-input  type='password' :invalid="invalid" v-model="ChangePasswordData.identity.password_confirmation" :validate='`confirmed:${ChangePasswordData.identity.password}`' :placeholder="$t('sign.confirm_password')"></basic-input>
         <basic-input ref="verify_code" :danger='true' :validate='"required|verify_code"' v-model="ChangePasswordData._rucaptcha" :placeholder="$t('validation.verify_code')"></basic-input>
         <img class="btc-pointer btc-marginT5" :src="Rucaptcha" @click="changeCaptcha">
-        <basic-button :disabled="disabled" @click.native='ChangePassword' class="btn btc-marginB30" :text='$t("nav.register")'></basic-button>
+        <basic-button :disabled="disabled" @click.native='ChangePassword' class="btn btc-marginB30" :text='$t("confirm")'></basic-button>
       </div>
     </div>
     <!-- <footer class="btc-font12 btc-marginT30 text-center" style="color: #9b9b9b">
