@@ -199,7 +199,7 @@ const en = {
       "copy_success": "Copied!",
       "confirm_num_descirbe": "After the completion of the above operation, click send payment, this transaction will be broadcast to the whole network, you can see the state of this transaction, when the transaction reaches ",
       "confirm_num": "the NUM confirmation of the whole network",
-      "about_time": "(about 10 to 60 minutes), the system will automatically be recharged to the account. You can query it in",
+      "about_time": "(about 10 to 60 minutes), the system will automatically be recharged to the account. You can query it in ",
       "in_query": "",
       "form_account": " Transfer History"
     },
