@@ -150,6 +150,18 @@
   }
 }
 
+@media (max-width: 434px) {
+  .btc-validate-textCenter{
+    .col-xs-6{
+      float: none;
+      width: auto;
+      &:nth-child(2){
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
 @media (max-width: 409px) {
   .btc-marginT20 .btc-marginR5{
     margin-right:0;
