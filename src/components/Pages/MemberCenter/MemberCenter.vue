@@ -122,7 +122,9 @@
         </header>
         <div @click='goTicket(data.id)' class="btc-member-qContainer" v-for="(data, index) in tickets" :key="index" v-if="index < 5" :class="{'btc-border-none': index === tickets.length - 1 }">
           <div class="btc-member-question" :class="{'is-dispose':data.aasm_state === 'closed' }">
-            {{data.content}}
+            <span class='btc-member-qContext'>
+              {{data.content}}
+            </span>
             <span class="btc-member-qTime">{{ moment(data.created_at) }}</span>
           </div>
           <div class="btc-member-qTitle btc-marginB5" :class="{'is-dispose':data.aasm_state === 'closed' }">

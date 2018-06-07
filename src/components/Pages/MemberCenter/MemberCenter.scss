@@ -226,10 +226,6 @@ a{
   min-height: 22px;
 }
 
-.btc-member-qContext{
-  padding: 14px 0 21px 0;
-  line-height: 24px;
-}
 
 .btc-textCenter{
   text-align: center;
@@ -389,6 +385,14 @@ a{
   }
 }
 
+.btc-member-qContext{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 70%;
+  display: inline-block;
+}
+
 @media(max-width: 1200px){
   .btc-member-ver{
     padding-left: 0 !important;
@@ -509,10 +513,19 @@ a{
     display: block;
     float: none !important;
   }
+  .btc-member-qContainer{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 
 
 @media (max-width: 492px) {
+  .btc-member-qContext{
+    width: 42%;
+  }
   .btc-member-handleNew{
     float: initial;
     display: block;
