@@ -199,8 +199,12 @@ a{
   padding-left: 22px;
   padding-bottom: 5px;
   margin-left: 15px;
+  margin-right: 15px;
   border-bottom: 1px solid #f2f2f2;
   font-family: '微软雅黑';
+  &:nth-last-child(3){
+    border:none;
+  }
 }
 
 .btc-member-question{
