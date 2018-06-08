@@ -141,7 +141,7 @@ export default {
     max-width: 399px;
   }
   .btc-background-999{
-    background: #999999;
+    background: #a5a5a5;
   }
   button{
     width: 100%;

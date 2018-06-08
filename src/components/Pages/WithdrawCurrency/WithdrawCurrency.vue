@@ -290,6 +290,7 @@ export default {
 
       MarketChannel.bind('tickers', _debounce((data) => {
         if (!this.$store.state.marketData) return
+        if (!this.$store.state.assets) return
         var BtcMarket = this.$store.state.marketData["btc"].reduce((a, b) => {
           return a.concat(Object.keys(b)[0])
         }, [])
