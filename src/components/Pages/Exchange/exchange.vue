@@ -502,7 +502,7 @@ export default {
       if (!this.noticeAllow) return
       Notification.requestPermission((permit) => {
         if (permit === 'granted') {
-          new Notification('Trade', {
+          new Notification('Order Filled', {
             dir: 'auto',
             icon: '../../../../static/img/notification1.png',
             body: `Price: ${price}\nVoluume: ${volume}`,
