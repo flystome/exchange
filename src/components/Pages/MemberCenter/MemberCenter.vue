@@ -136,7 +136,7 @@
               <div class="btc-marginT70 btc-marginB70 btc-font12 btc-color999">{{$t('my_account.no_record')}}</div>
           </div>
           <div class="text-center btc-table-more btc-b-t" style="margin-bottom:0px;">
-            <a :href="`${HOST_URL}/tickets/new`" class="btc-link ">{{$t('my_account.new_questions')}}</a>
+            <a :href="`${ROUTER_VERSION}/ticket/new`" class="btc-link ">{{$t('my_account.new_questions')}}</a>
           </div>
         </div>
         <template v-else>
