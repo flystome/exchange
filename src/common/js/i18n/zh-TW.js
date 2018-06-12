@@ -83,7 +83,7 @@ const zh = {
     "1004_hint": "請進行Google驗證",
     "200_hint": "驗證電子郵件成功",
     "verifying": "驗證中",
-    "success_200": "Email has been sent, please check it",
+    "success_200": "電子郵件已發送，請檢查",
     "error_1001": "Token errors, please Reconfirm",
     "referrals_title": "邀請好友通過你的專屬二維碼或連結注册並交易",
     "recommended_links": "推薦鏈接",
