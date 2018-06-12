@@ -335,7 +335,7 @@ export default {
       currencyindex: 0,
       search: '',
       open: !Cookies.get('total_hide'),
-      currency: ['usdt', 'btc', 'eth', 'my_optional'],
+      currency: ['btc', 'eth', 'usdt', 'my_optional'],
       getetc: '',
       change: 'no',
       curData: '',
@@ -453,9 +453,9 @@ export default {
     GetmarketData () {
       if (this.marketData) {
         this.curData = []
-        this.curData.push(this.getItem(this.marketData['usdt']))
         this.curData.push(this.getItem(this.marketData['btc']))
         this.curData.push(this.getItem(this.marketData['eth']))
+        this.curData.push(this.getItem(this.marketData['usdt']))
         if (this.loginData === 'none') {
           this.curData.push(this.getLocal(this.marketData))
         } else {
@@ -516,6 +516,7 @@ export default {
       this.channelTime++
       var PersonalChannel = pusher.subscribe(`private-${this.loginData.sn}`)
       PersonalChannel.bind('account', (data) => {
+        if (!this.$store.state.assets) return
         this.$store.state.assets[data.currency].balance && (this.$store.state.assets[data.currency].balance = Number(data.balance))
         this.$store.state.assets[data.currency].locked && (this.$store.state.assets[data.currency].locked = Number(data.locked))
       }) // account pusher

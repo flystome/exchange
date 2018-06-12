@@ -183,7 +183,7 @@ var Trend$1 = {
     height: Number,
     width: Number,
     padding: {
-      type: String,
+      type: Number,
       default: 8
     },
     radius: {
