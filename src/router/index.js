@@ -65,6 +65,8 @@ const ForgotPassword = () => import(/* webpackChunkName: "sign" */'Pages/Sign/Fo
 
 const ChangePassword = () => import(/* webpackChunkName: "ChangePassword" */'Pages/Sign/ChangePassword.vue')
 
+const AssetPie = () => import(/* webpackChunkName: "Dashboard" */'Pages/Dashboard/AssetPie/AssetPie.vue')
+
 Vue.use(Router)
 
 const version = process.env.ROUTER_VERSION
@@ -310,6 +312,11 @@ const router = new Router({
           component: ApiEdit
         }
       ]
+    },
+    {
+      path: `${version}/dashboard/pie`,
+      name: 'AssetPie',
+      component: AssetPie
     },
     {
       path: `${version}/mobile`,
