@@ -47,10 +47,11 @@ export default {
       this.getData()
     },
     getMarket (val, oldVal) {
-      if (val === '/') return
       if (!val) {
         this.searchDel = false
         this.getData()
+      } else if (/\W/.test(val)) {
+        this.curData[this.currencyIndex] = []
       } else {
         this.searchDel = true
         this.getData()
