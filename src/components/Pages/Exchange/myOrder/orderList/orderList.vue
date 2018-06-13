@@ -25,7 +25,7 @@
 
             <div class="volume">{{item.origin_volume | fixedNum(markets[item.market].volume_fixed)}}</div>
             <div class="percent">{{(item.origin_volume - item.volume) * 100 / item.origin_volume | fixed2}}%</div>
-            <div class="traded">{{item.origin_volume - item.volume | fixedNum(markets[item.market].volume_fixed)}}</div>
+            <div class="traded">{{(item.origin_volume - item.volume) * item.price | fixedNum(markets[item.market].volume_fixed, markets[item.market].price_fixed)}}</div>
             <div class="status">{{$t('exchange.myorder.'+item.state)}}</div>
             <div class="cancel" v-show='cancel && id === item.id' @click="cancelOrder(item.id)">{{$t('exchange.myorder.cancel_one')}}</div>
           </li>
