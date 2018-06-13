@@ -223,16 +223,18 @@ export default {
   created () {
     this.RegionHint()
     this.BindChannel()
-    var code = Cookies.get('code')
-    if (code) {
-      if (code.match(/\d+/g)[0] === '200') {
-        this.PopupBoxDisplay({message: this.$t(`my_account.200_hint`), type: 'success'})
+    ;(() => {
+      var code = Cookies.get('code')
+      if (code) {
+        if (code.match(/\d+/g)[0] === '200') {
+          this.PopupBoxDisplay({message: this.$t(`my_account.200_hint`), type: 'success'})
+          Cookies.remove('code')
+          return
+        }
+        this.PopupBoxDisplay({message: this.$t(`my_account.${code.match(/\d+/g)[0]}_hint`), type: 'warn'})
         Cookies.remove('code')
-        return
-      }
-      this.PopupBoxDisplay({message: this.$t(`my_account.${code.match(/\d+/g)[0]}_hint`), type: 'warn'})
-      Cookies.remove('code')
-    } // rails flash
+      } // rails flash
+    })()
 
     this._get({
       url: '/k/trends.json'

@@ -232,17 +232,17 @@ export default {
       var channel = pusher.subscribe(`private-${d.sn}`)
       var MarketChannel = pusher.subscribe(`market-global`)
       channel.bind('deposit_address', (data) => {
-        if (data.attributes.account_id === this.account_id) {
+        if (data.attributes.currency === this.CurrencyType) {
           this.deposit_address = data.attributes.deposit_address
           this.deposit_address_display = true
         }
         if (typeof this.DepositAddress !== 'object') {
           this.DepositAddress = {
-            [data.attributes.account_id]: data.attributes.deposit_address
+            [data.attributes.currency]: data.attributes.deposit_address
           }
         } else {
-          if (!Object.keys(this.DepositAddress).includes((data.attributes.account_id).toString())) {
-            this.$set(this.DepositAddress, data.attributes.account_id, data.attributes.deposit_address)
+          if (!Object.keys(this.DepositAddress).includes((data.attributes.currency).toString())) {
+            this.$set(this.DepositAddress, data.attributes.currency, data.attributes.deposit_address)
           }
         }
       })
@@ -912,7 +912,7 @@ export default {
     DepositAddress (to, from) {
       if (this.$route.name === 'WithdrawCurrency' && !/deposit/.test(this.$route.path)) return
       if (Object.keys(to).length > Object.keys(from).length) {
-        if(Number(Object.keys(to)[0]) !== this.account_id) {
+        if(Object.keys(to)[0] !== this.CurrencyType) {
           this.$set(this, 'DepositAddress', '')
           return
         }
