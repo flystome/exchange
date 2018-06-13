@@ -29,7 +29,7 @@ const state = {
     editKey: '',
     editIndex: ''
   },
-  assets: '',
+  assets: {},
   TotalAssets: '',
   LockedAssets: '',
   Location: ''

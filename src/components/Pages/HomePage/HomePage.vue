@@ -245,30 +245,31 @@ export default {
     var channel = pusher.subscribe('market-global')
     channel.bind('tickers', _debounce((data) => {
       if (!this.$store.state.marketData) return
-      if (!this.$store.state.assets) return
+      if (Object.keys(this.$store.state.assets).length === 0) return
       var BtcMarket = this.$store.state.marketData['btc'].reduce((a, b) => {
         return a.concat(Object.keys(b)[0])
       }, [])
       Object.keys(data).forEach((key) => {
-        if (this.$store.state.assets !== '') {
-          if (data[key].base_currency === 'usdt') {
-            if (key === 'btcusdt') {
-              this.$store.state.assets['usdt'].price = 1 / Number(data[key].last)
-            }
-            return
+        if (data[key].base_currency === 'usdt') {
+          if (key === 'btcusdt') {
+            if (!this.$store.state.assets['usdt']) return
+            this.$store.state.assets['usdt'].price = 1 / Number(data[key].last)
           }
-          if (data[key].base_currency === 'btc') {
-            this.$store.state.assets[data[key].quote_currency].price = data[key].last
-            return
-          }
-          if (data[key].base_currency === 'eth') {
-            if (!BtcMarket.includes(`${data[key].quote_currency}/btc`)) {
-              this.$store.state.assets[data[key].quote_currency].price = data[key].last * this.$store.state.assets['eth'].price
-            }
+          return
+        }
+        if (data[key].base_currency === 'btc') {
+          if (!this.$store.state.assets[data[key].quote_currency]) return
+          this.$store.state.assets[data[key].quote_currency].price = data[key].last
+          return
+        }
+        if (data[key].base_currency === 'eth') {
+          if (!BtcMarket.includes(`${data[key].quote_currency}/btc`)) {
+            if (!this.$store.state.assets[data[key].quote_currency] && !this.$store.state.assets['eth']) return
+            this.$store.state.assets[data[key].quote_currency].price = data[key].last * this.$store.state.assets['eth'].price
           }
         }
       })
-    }, 5000))
+    }, 5000)) // market pusher
 
     channel.bind('tickers', (data) => {
       if (this.curData === '') return
@@ -516,7 +517,7 @@ export default {
       this.channelTime++
       var PersonalChannel = pusher.subscribe(`private-${this.loginData.sn}`)
       PersonalChannel.bind('account', (data) => {
-        if (!this.$store.state.assets) return
+        if (!this.$store.state.assets[data.currency]) return
         this.$store.state.assets[data.currency].balance && (this.$store.state.assets[data.currency].balance = Number(data.balance))
         this.$store.state.assets[data.currency].locked && (this.$store.state.assets[data.currency].locked = Number(data.locked))
       }) // account pusher

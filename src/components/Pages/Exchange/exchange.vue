@@ -421,6 +421,7 @@ export default {
         this.isMine(res, 'trade')
       })
       privateAccount.bind('account', (res) => {
+        if (!this.$store.state.assets[res.currency]) return
         this.accounts[res.currency].balance = res.balance
         this.accounts[res.currency].locked = res.locked
         this.$store.state.assets[res.currency].balance = Number(res.balance)
