@@ -139,11 +139,12 @@ export default {
       }
     },
     cancelAll () {
-      if (this.myOrders[0] === this.myOrders[0].length === 0) {
+      if (this.myOrders[0] && this.myOrders[0].length === 0) {
         return ''
+      } else {
+        this.cancelNum = 'all'
+        this.showDialog = true
       }
-      this.cancelNum = 'all'
-      this.showDialog = true
     },
     cancelOne: function (id) {
       this.cancelNum = 'one'
