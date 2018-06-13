@@ -482,8 +482,8 @@ export default {
       if (!type) return
       if (this.disabled) return
       this.length = index
-      this.GetCoin(this.currencies[index].code)
       this.CurrencyType = this.currencies[index].code
+      this.GetCoin(this.currencies[index].code)
       this.Address = 'withdraw_currency.withdraw_currency_address'
       this.WithdrawData.Address_id = ''
       this.WithdrawData.amount = ''
@@ -532,17 +532,20 @@ export default {
         this._get({
           url: `/funds/${c || 'btc'}/account_info.json`
         }, (d) => {
+        var d = d.data.success
         this.GeneratAddress = false
         this.disabled = false
-        var d = d.data.success
         this.loading = false
-        if (d.code === 201 && !this.pusherCurreny.includes(`${c || 'btc'}`)) {
-          this.pusherCurreny.push(`${c || 'btc'}`)
-          this.GeneratAddress = true
-          if (/deposit/.test(this.$route.path)) {
-            this.Generating()
+        ;(() => {
+          if (d.code === 201 && !this.pusherCurreny.includes(`${c || 'btc'}`)) {
+            if (this.CurrencyType === `${c || 'btc'}` && this.deposit_address) return
+            this.pusherCurreny.push(`${c || 'btc'}`)
+            this.GeneratAddress = true
+            if (/deposit/.test(this.$route.path)) {
+              this.Generating()
+            }
           }
-        }
+        })()
         this.account_id = d.account.account_id
         this.confirm_num = d.deposit_max_confirmation
         this.withdraw_fee = d.withdraw_fee
@@ -552,13 +555,16 @@ export default {
         this.Remain = d.today_withdraw_remain ? d.today_withdraw_remain : 0
         var withdraws = d.withdraws
         var deposits = d.deposits
-        if (d.address) {
-          this.deposit_address_display = true
-          this.deposit_address = d.address
-        } else {
-          this.deposit_address_display = false
-          this.deposit_address = ''
-        }
+        ;(() => {
+          if (d.address) {
+            this.deposit_address_display = true
+            this.deposit_address = d.address
+          } else {
+            if (this.CurrencyType === `${c || 'btc'}` && this.deposit_address) return
+            this.deposit_address_display = false
+            this.deposit_address = ''
+          }
+        })()
         d.account && (this.Balance = d.account.balance)
         obj.item = []
         objd.item = []
@@ -921,11 +927,13 @@ export default {
         this.$set(this, 'DepositAddress', '')
         clearTimeout(this.Time)
         if (this.Time === false) return
+
         this.ChangePopupBox({
           type: 'success',
           message: this.$t('hint.completion')
         })
         setTimeout(() => {
+          if (!this.$store.state.PopupBox.status) return
           this.PopupBoxDisplay()
           this.ChangePopupBox({
             buttondisplay: true
