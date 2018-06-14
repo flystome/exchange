@@ -120,16 +120,16 @@ export default {
           resolution: '1',
           chartType: 3
         }, {
-          label: '1M',
+          label: '1m',
           resolution: '1'
         }, {
-          label: '5M',
+          label: '5m',
           resolution: '5'
         }, {
-          label: '15M',
+          label: '15m',
           resolution: '15'
         }, {
-          label: '30M',
+          label: '30m',
           resolution: '30'
         }, {
           label: '1H',
@@ -156,7 +156,7 @@ export default {
 
         buttons.forEach((item, index) => {
           let button = widget.createButton({align: 'left'})
-          // item.resolution === widget.options.interval && updateSelectedIntervalButton(button)
+          item.resolution === interval && updateSelectedIntervalButton(button)
           button.attr('data-resolution', item.resolution)
             .attr('data-chart-type', item.chartType === undefined ? 1 : item.chartType)
             .html('<span>' + item.label + '</span>')
