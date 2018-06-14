@@ -169,6 +169,10 @@ export default {
   },
   methods: {
     handlePrice (value, type) {
+      if (this.loginData === 'none') {
+        this[type + 'Price'] = ''
+        return
+      }
       if (value === '') return ''
       this[type + 'Price'] = this.fixNum(value, this.market.price_fixed)
       var distance = Math.abs(this[type + 'Price'] - this.market.last) / this.market.last
@@ -183,6 +187,10 @@ export default {
       }
     },
     handleVol (value, type, from) {
+      if (this.loginData === 'none') {
+        this[type + 'Volume'] = ''
+        return
+      }
       if (value === '') return ''
       if (value < 0) {
         value = Math.abs(value)
@@ -203,6 +211,10 @@ export default {
       }
     },
     handleTotal (value, type, price, volume) {
+      if (this.loginData === 'none') {
+        this[type + 'Total'] = ''
+        return
+      }
       if (value === ' ') return ''
       if (value < 0) {
         value = Math.abs(value)
@@ -295,7 +307,7 @@ export default {
         this.resetOrderStatus()
         this.$emit('play', 'order_audio')
       } else if (data.error.code === 1102) {
-        location.href = `${this.ROUTER_VERSION}/login?from=${location.href}`
+        location.href = `${this.ROUTER_VERSION}/login?from=${this.location}`
       } else if (data.error.code === 1002) {
         this.showDialog = true
         this.ordering = false
@@ -316,13 +328,16 @@ export default {
         clearTimeout(time)
       }, 5000)
     },
-    loginCheck: function () {
-      if (this.loginData === 'none') {
-        location.href = `${this.ROUTER_VERSION}/login?from=${location.href}`
-      }
-    },
+    // loginCheck: function () {
+    //   if (this.loginData === 'none') {
+    //     location.href = `${this.ROUTER_VERSION}/login?from=${location.href}`
+    //   }
+    // },
     orderBid: function () {
-      this.loginCheck()
+      if (this.loginData === 'none') {
+        location.href = `${this.ROUTER_VERSION}/login?from=${this.ROUTER_VERSION}/exchange/${this.curMarket}`
+        return ''
+      }
       if (!this.buyPrice || !this.buyVolume) {
         return
       }
@@ -332,7 +347,10 @@ export default {
       this.tips = false
     },
     orderAsk: function () {
-      this.loginCheck()
+      if (this.loginData === 'none') {
+        location.href = `${this.ROUTER_VERSION}/login?from=${this.ROUTER_VERSION}/exchange/${this.curMarket}`
+        return ''
+      }
       if (!this.sellPrice || !this.sellVolume) {
         return
       }
