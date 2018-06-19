@@ -264,7 +264,9 @@ const zh = {
     "market_apply": "做市商申請",
     "login": "登錄",
     "register": "注册",
-    "change_password": "修改密碼"
+    "change_password": "修改密碼",
+    "dashboard_pie": "資產分佈",
+    "dashboard_line": "資產曲線"
   },
   "prompt": {
     "email_not_certified": "郵件未驗證",
@@ -722,7 +724,8 @@ const zh = {
   },
   "dashboard": {
     "asset_distribution": "資產分佈",
-    "asset_curve": "資產曲線"
+    "asset_curve": "資產曲線",
+    "others": "其他",
   },
   "unsupported_countries_and_regions": `
     <div class='text-left' style='font-size: 13px'>

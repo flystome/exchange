@@ -264,7 +264,9 @@ const en = {
       "market_apply": "Market Apply",
       "login": "Login",
       "register": "Register",
-      "change_password": "Change Password"
+      "change_password": "Change Password",
+      "dashboard_pie": "Asset Distribution",
+      "dashboard_line": "Asset Curve"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
@@ -722,7 +724,8 @@ const en = {
     },
     "dashboard": {
       "asset_distribution": "Asset Distribution",
-      "asset_curve": "Asset Curve"
+      "asset_curve": "Asset Curve",
+      "others": "Others"
     },
     "unsupported_countries_and_regions": `
       <div class='text-left'>

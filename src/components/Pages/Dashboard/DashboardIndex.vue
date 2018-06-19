@@ -1,6 +1,7 @@
 <template>
   <div class="btc-container-block">
     <menu-underline
+    :route="'AssetsDashboard'"
     v-model='step'
     :menu-index='step'
     :underline-margin="'9px'"
@@ -35,6 +36,7 @@ export default {
       if (this.$route.name === 'notFound') return
       var route = `Asset${[...this.$route.params.dashboard][0].toUpperCase()}${this.$route.params.dashboard.slice(1)}`
       if (Object.keys(components).includes(route)) {
+        this.step = Object.keys(components).indexOf(route)
         return route
       } else {
         this.$router.replace(`${this.ROUTER_VERSION}/404`)
@@ -53,6 +55,7 @@ export default {
 <style lang="scss" scoped>
 .btc-container-block{
   padding: 14px 30px 0 30px;
+  min-height: 70vh;
   & /deep/ ul {
     border-bottom: 1px solid #f2f2f2
   }
