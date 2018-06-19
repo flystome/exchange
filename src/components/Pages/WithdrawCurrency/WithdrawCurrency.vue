@@ -247,43 +247,14 @@ export default {
         }
       })
 
-      // channel.bind('withdraws', (data) => {
-      //   // if (data.type === 'create') {
-      //   //   var d = data.attributes
-      //   //   var time = new Date(d.created_at).getTime()
-      //   //   this.WithdrawRecord.item.unshift({
-      //   //     content: [
-      //   //       d.id,
-      //   //       this.$moment(d.created_at).format('L H:mm:ss'),
-      //   //       d.fund_uid,
-      //   //       d.amount,
-      //   //       d.fee,
-      //   //       { type: {
-      //   //         "id": d.id,
-      //   //         "created_at": time,
-      //   //         "amount": d.amount,
-      //   //         "fee": d.fee,
-      //   //         "aasm_state": d.aasm_state,
-      //   //         "fund_uid": d.fund_uid
-      //   //       }, context: this.$t(`withdraw_currency.${d.aasm_state}`), id: d.id }
-      //   //     ]
-      //   //   })
-      //   // }
-      // }) //withdraws pusher
+      channel.bind('pusher:subscription_succeeded', () => {
+        this.GetCoin(false, d.fund_sources, d.sn)
+      })
 
       channel.bind('account', (data) => {
         if (!this.$store.state.assets[data.currency]) return
         this.$store.state.assets[data.currency].balance && (this.$store.state.assets[data.currency].balance = Number(data.balance))
         this.$store.state.assets[data.currency].locked && (this.$store.state.assets[data.currency].locked = Number(data.locked))
-        // this.equivalence = this.CurrencyType === data.currency ? this.equivalence : data.today_withdraw_remain_btc
-        // if (this.CurrencyType === 'btc') {
-        //   if (data.currency === 'btc') this.Remain = data.today_withdraw_remain_btc
-        // } else {
-        //   if (data.currency !== 'btc') {
-        //     this.Remain = data.today_withdraw_remain
-        //     this.equivalence = data.today_withdraw_remain_btc
-        //   }
-        // }
         if (data.currency !== this.CurrencyType) return
         this.Balance = data.balance
       }) //account pusher
@@ -363,7 +334,6 @@ export default {
         }
       })
       this.FundSources = d.fund_sources
-      this.GetCoin(false, d.fund_sources, d.sn)
     })
     this.route = this.$route.path.slice(this.$route.path.lastIndexOf('/') + 1)
   },
@@ -482,8 +452,8 @@ export default {
       if (!type) return
       if (this.disabled) return
       this.length = index
-      this.GetCoin(this.currencies[index].code)
       this.CurrencyType = this.currencies[index].code
+      this.GetCoin(this.currencies[index].code)
       this.Address = 'withdraw_currency.withdraw_currency_address'
       this.WithdrawData.Address_id = ''
       this.WithdrawData.amount = ''
@@ -532,17 +502,20 @@ export default {
         this._get({
           url: `/funds/${c || 'btc'}/account_info.json`
         }, (d) => {
+        var d = d.data.success
         this.GeneratAddress = false
         this.disabled = false
-        var d = d.data.success
         this.loading = false
-        if (d.code === 201 && !this.pusherCurreny.includes(`${c || 'btc'}`)) {
-          this.pusherCurreny.push(`${c || 'btc'}`)
-          this.GeneratAddress = true
-          if (/deposit/.test(this.$route.path)) {
-            this.Generating()
+        ;(() => {
+          if (d.code === 201 && !this.pusherCurreny.includes(`${c || 'btc'}`)) {
+            if (this.CurrencyType === `${c || 'btc'}` && this.deposit_address) return
+            this.pusherCurreny.push(`${c || 'btc'}`)
+            this.GeneratAddress = true
+            if (/deposit/.test(this.$route.path)) {
+              this.Generating()
+            }
           }
-        }
+        })()
         this.account_id = d.account.account_id
         this.confirm_num = d.deposit_max_confirmation
         this.withdraw_fee = d.withdraw_fee
@@ -552,13 +525,16 @@ export default {
         this.Remain = d.today_withdraw_remain ? d.today_withdraw_remain : 0
         var withdraws = d.withdraws
         var deposits = d.deposits
-        if (d.address) {
-          this.deposit_address_display = true
-          this.deposit_address = d.address
-        } else {
-          this.deposit_address_display = false
-          this.deposit_address = ''
-        }
+        ;(() => {
+          if (d.address) {
+            this.deposit_address_display = true
+            this.deposit_address = d.address
+          } else {
+            if (this.CurrencyType === `${c || 'btc'}` && this.deposit_address) return
+            this.deposit_address_display = false
+            this.deposit_address = ''
+          }
+        })()
         d.account && (this.Balance = d.account.balance)
         obj.item = []
         objd.item = []
@@ -921,11 +897,13 @@ export default {
         this.$set(this, 'DepositAddress', '')
         clearTimeout(this.Time)
         if (this.Time === false) return
+
         this.ChangePopupBox({
           type: 'success',
           message: this.$t('hint.completion')
         })
         setTimeout(() => {
+          if (!this.$store.state.PopupBox.status) return
           this.PopupBoxDisplay()
           this.ChangePopupBox({
             buttondisplay: true
