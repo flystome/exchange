@@ -720,6 +720,10 @@ const en = {
       "reset_password": "Reset Password",
       "new_password": "New Password"
     },
+    "dashboard": {
+      "asset_distribution": "Asset Distribution",
+      "asset_curve": "Asset Curve"
+    },
     "unsupported_countries_and_regions": `
       <div class='text-left'>
         <div>

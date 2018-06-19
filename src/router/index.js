@@ -65,7 +65,8 @@ const ForgotPassword = () => import(/* webpackChunkName: "sign" */'Pages/Sign/Fo
 
 const ChangePassword = () => import(/* webpackChunkName: "ChangePassword" */'Pages/Sign/ChangePassword.vue')
 
-const AssetPie = () => import(/* webpackChunkName: "Dashboard" */'Pages/Dashboard/AssetPie/AssetPie.vue')
+// const AssetPie = () => import(/* webpackChunkName: "Dashboard" */'Pages/Dashboard/AssetPie/AssetPie.vue')
+const DashboardIndex = () => import(/* webpackChunkName: "Dashboard" */'Pages/Dashboard/DashboardIndex')
 
 Vue.use(Router)
 
@@ -314,9 +315,20 @@ const router = new Router({
       ]
     },
     {
-      path: `${version}/dashboard/pie`,
-      name: 'AssetPie',
-      component: AssetPie
+      path: `${version}/dashboard/:dashboard`,
+      name: 'AssetsDashboard',
+      component: DashboardIndex
+      // children: [
+      //   {
+      //     path: '',
+      //     redirect: `${version}/dashboard/pie`
+      //   },
+      //   {
+      //     path: 'pie',
+      //     name: 'AssetPie',
+      //     component: AssetPie
+      //   }
+      // ]
     },
     {
       path: `${version}/mobile`,

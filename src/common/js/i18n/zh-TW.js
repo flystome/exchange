@@ -720,6 +720,10 @@ const zh = {
     "reset_password": "重置密碼",
     "new_password": "新密碼"
   },
+  "dashboard": {
+    "asset_distribution": "資產分佈",
+    "asset_curve": "資產曲線"
+  },
   "unsupported_countries_and_regions": `
     <div class='text-left' style='font-size: 13px'>
       <div>
