@@ -56,7 +56,7 @@ module.exports = {
       {
         test: /\.js$/,
         use: 'happypack/loader?id=js',
-        include: [resolve('src'), resolve('node_modules/webpack-dev-server/client')]
+        include: [resolve('src'), resolve('node_modules/webpack-dev-server/client'), resolve('node_modules/vue-echarts'), resolve('node_modules/resize-detector')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
