@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     componentId () {
-      if (this.$route.name === 'notFound') return
+      if (this.$route.name !== 'AssetsDashboard') return
       var route = `Asset${[...this.$route.params.dashboard][0].toUpperCase()}${this.$route.params.dashboard.slice(1)}`
       if (Object.keys(components).includes(route)) {
         this.step = Object.keys(components).indexOf(route)
@@ -56,6 +56,7 @@ export default {
 .btc-container-block{
   padding: 14px 30px 0 30px;
   min-height: 70vh;
+  margin-bottom: 10px;
   & /deep/ ul {
     border-bottom: 1px solid #f2f2f2
   }

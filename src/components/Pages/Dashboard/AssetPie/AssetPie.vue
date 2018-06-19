@@ -2,7 +2,7 @@
   <div>
     <chart :options='PieOption'></chart>
     <div class="btc-pie-legend">
-      <div v-for="(data, index) in PieData" :key="data.value">
+      <div v-for="(data, index) in PieData" :key="data.name">
         <div class="legend-value">${{ data.value }}</div>
         <div>{{ ComputePercent(data.value) }}</div>
         <div class="legend-div" :style="`background:${Color[index]}`"></div>
@@ -24,7 +24,7 @@ export default {
   methods: {
     ComputePercent (n) {
       var num = new BigNumber(n.toString()).dividedBy(this.TotalAssets.toString()).multipliedBy(100)
-      return `${Number(num).toFixed(2)}%`
+      return `${Number(num).toFixed(2) === '0.00' ? '0.01' : Number(num).toFixed(2)}%`
     }
   },
   computed: {
@@ -40,8 +40,9 @@ export default {
       data = data.filter((d) => {
         return d.value > 0
       }).sort((a, b) => {
-        return a.value < b.value
-      }).slice(0, 10)
+        return b.value - a.value
+      })
+      global.bbb = data
       return data
     },
     PieData () {
@@ -57,7 +58,20 @@ export default {
       //     }
       //   })
       // })
-      return this.Data
+      return this.Data.slice(0, 10).concat(this.Others)
+    },
+    Others () {
+      if (this.Data.length > 10) {
+        var num = new BigNumber(this.TotalAssets.toString()).minus(this.Data.slice(0, 10).reduce((n, d) => {
+          return n.plus(d.value.toString())
+        }, new BigNumber(0)))
+        return [{
+          name: this.$t('dashboard.others'),
+          value: Number(num)
+        }]
+      } else {
+        return []
+      }
     },
     CoinRanking () {
       var data = []
@@ -114,8 +128,8 @@ export default {
     },
     TotalAssets () {
       return this.$store.getters.ToFixed(Object.keys(this.$store.state.assets).reduce((a, b) => {
-        return a + this.$store.state.assets[b].usdt_worth
-      }, 0))
+        return a.plus(this.$store.state.assets[b].usdt_worth.toString())
+      }, new BigNumber(0)))
     },
     Color () {
       return ['#efae00', '#ffc600', '#38ada9', '#0a3d62', '#3c6382', '#0c2461', '#f58c26', '#079992', '#474787', '#82ccdd', '#6a89cc']
