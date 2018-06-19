@@ -5,8 +5,6 @@ import '@/common/css/bootstrap.css'
 import 'font-awesome/css/font-awesome.min.css'
 import '@/common/css/style.scss'
 
-/* eslint no-unused-vars: "error" */
-import pusher from '@/common/js/pusher'
 // template dependencies
 import BasicButton from 'Components/BasicButton/BasicButton'
 import BasicInput from 'Components/BasicInput/BasicInput'
@@ -25,7 +23,6 @@ import Paginate from 'Components/Paginate'
 import Spinner from 'vue-simple-spinner'
 
 // js dependencies
-
 import Vue from 'vue'
 import { sync } from 'vuex-router-sync'
 import store from './store'

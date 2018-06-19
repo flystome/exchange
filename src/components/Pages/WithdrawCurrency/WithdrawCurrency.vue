@@ -247,43 +247,14 @@ export default {
         }
       })
 
-      // channel.bind('withdraws', (data) => {
-      //   // if (data.type === 'create') {
-      //   //   var d = data.attributes
-      //   //   var time = new Date(d.created_at).getTime()
-      //   //   this.WithdrawRecord.item.unshift({
-      //   //     content: [
-      //   //       d.id,
-      //   //       this.$moment(d.created_at).format('L H:mm:ss'),
-      //   //       d.fund_uid,
-      //   //       d.amount,
-      //   //       d.fee,
-      //   //       { type: {
-      //   //         "id": d.id,
-      //   //         "created_at": time,
-      //   //         "amount": d.amount,
-      //   //         "fee": d.fee,
-      //   //         "aasm_state": d.aasm_state,
-      //   //         "fund_uid": d.fund_uid
-      //   //       }, context: this.$t(`withdraw_currency.${d.aasm_state}`), id: d.id }
-      //   //     ]
-      //   //   })
-      //   // }
-      // }) //withdraws pusher
+      channel.bind('pusher:subscription_succeeded', () => {
+        this.GetCoin(false, d.fund_sources, d.sn)
+      })
 
       channel.bind('account', (data) => {
         if (!this.$store.state.assets[data.currency]) return
         this.$store.state.assets[data.currency].balance && (this.$store.state.assets[data.currency].balance = Number(data.balance))
         this.$store.state.assets[data.currency].locked && (this.$store.state.assets[data.currency].locked = Number(data.locked))
-        // this.equivalence = this.CurrencyType === data.currency ? this.equivalence : data.today_withdraw_remain_btc
-        // if (this.CurrencyType === 'btc') {
-        //   if (data.currency === 'btc') this.Remain = data.today_withdraw_remain_btc
-        // } else {
-        //   if (data.currency !== 'btc') {
-        //     this.Remain = data.today_withdraw_remain
-        //     this.equivalence = data.today_withdraw_remain_btc
-        //   }
-        // }
         if (data.currency !== this.CurrencyType) return
         this.Balance = data.balance
       }) //account pusher
@@ -363,7 +334,6 @@ export default {
         }
       })
       this.FundSources = d.fund_sources
-      this.GetCoin(false, d.fund_sources, d.sn)
     })
     this.route = this.$route.path.slice(this.$route.path.lastIndexOf('/') + 1)
   },
