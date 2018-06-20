@@ -504,7 +504,7 @@ export default {
       this.noticeAllow = bool
     },
     showNotice (price, volume) {
-      if (!this.noticeAllow) return
+      if (!this.noticeAllow) return null
       Notification.requestPermission((permit) => {
         if (permit === 'granted') {
           new Notification('Order Filled', {
