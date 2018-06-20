@@ -9,6 +9,10 @@ const zh = {
   'time': '次',
   "reply": "回復",
   "week": '星期',
+  "a_week": '一星期',
+  "three_months": '三個月',
+  "six_months": '六個月',
+  "a_year": "一年",
   'auth': {
     'email': `郵箱驗證`,
     'phone': `手機認證`,
@@ -726,6 +730,8 @@ const zh = {
     "asset_distribution": "資產分佈",
     "asset_curve": "資產曲線",
     "others": "其他",
+    "historical_income": "歷史收益",
+    "benchmark": "基準"
   },
   "unsupported_countries_and_regions": `
     <div class='text-left' style='font-size: 13px'>

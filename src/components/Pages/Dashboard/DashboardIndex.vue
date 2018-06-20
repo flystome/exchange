@@ -8,7 +8,9 @@
     :menu-margin="'64px'"
     :menu-list="[$t('dashboard.asset_distribution'), $t('dashboard.asset_curve')]">
     </menu-underline>
-    <component :is="componentId()"></component>
+    <keep-alive>
+      <component :is="componentId()"></component>
+    </keep-alive>
   </div>
 </template>
 
@@ -56,6 +58,7 @@ export default {
 .btc-container-block{
   padding: 14px 30px 0 30px;
   min-height: 70vh;
+  position: relative;
   margin-bottom: 10px;
   & /deep/ ul {
     border-bottom: 1px solid #f2f2f2

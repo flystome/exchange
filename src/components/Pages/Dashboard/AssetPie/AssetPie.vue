@@ -42,22 +42,9 @@ export default {
       }).sort((a, b) => {
         return b.value - a.value
       })
-      global.bbb = data
       return data
     },
     PieData () {
-      // var data = this.Data.map((d) => {
-      //   return Object.assign(d, {
-      //      label: {
-      //       normal: {
-      //         formatter: [
-      //           `${this.$store.getters.ToFixed(d.value)}`,
-      //           '{d}%'
-      //         ].join('\n'),
-      //       }
-      //     }
-      //   })
-      // })
       return this.Data.slice(0, 10).concat(this.Others)
     },
     Others () {
@@ -97,15 +84,6 @@ export default {
           trigger: 'item',
           formatter: `{b} : \${c} ({d}%)`
         },
-        // legend: {
-        //   top: '58%',
-        //   left: 'center',
-        //   data: this.CoinRanking,
-        //   textStyle: {
-        //     padding: [0, 20, 0, 0],
-        //   },
-        //   shadowBlur: 50
-        // },
         color: this.Color,
         series: [{
           type: 'pie',

@@ -10,6 +10,10 @@ const en = {
     'time': 'time',
     "reply": "Reply",
     "week": 'wk',
+    "a_week": 'A Week',
+    "three_months": "Three Months",
+    "six_months": 'Six months',
+    "a_year": "A Year",
     "auth": {
       "email": "Verify Email",
       "phone": "Verify Cell Phone",
@@ -725,7 +729,9 @@ const en = {
     "dashboard": {
       "asset_distribution": "Asset Distribution",
       "asset_curve": "Asset Curve",
-      "others": "Others"
+      "others": "Others",
+      "historical_income": "Historical Income",
+      "benchmark": "Benchmark"
     },
     "unsupported_countries_and_regions": `
       <div class='text-left'>

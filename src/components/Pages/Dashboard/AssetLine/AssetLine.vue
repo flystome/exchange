@@ -1,21 +1,127 @@
 <template>
-    <!-- <chart :options="line"></chart> -->
-    <div>
-      123
-    </div>
+  <div>
+    <header>
+      <div class="text-center">{{ $t('dashboard.historical_income') }}</div>
+      <div>
+        <div class="btc-line-date">
+          <span v-for="(date, index) in DateList" :key="date" @click="ChangeDate(index)" :class="{'active': index === DateIndex}">
+            {{ $t(`${date}`) }}
+          </span>
+        </div>
+        <div class="btc-line-mark">
+          <span>
+            <a style="background: #2686ff"></a>
+            BTC{{$t('dashboard.benchmark')}}
+          </span>
+          <span>
+            <a style="background: #50b125"></a>
+            USD{{$t('dashboard.benchmark')}}
+          </span>
+        </div>
+      </div>
+    </header>
+    <chart :options="Option"></chart>
+  </div>
 </template>
 
 <script>
 import ECharts from 'vue-echarts/components/ECharts.vue'
 import 'echarts/lib/chart/line'
 import 'echarts/lib/component/tooltip'
-import 'echarts/lib/component/title'
 import 'echarts/lib/component/legend'
+import 'echarts/lib/component/dataZoom'
+import 'echarts/lib/component/dataZoomInside'
 
 export default {
   name: 'AssetLine',
   data () {
     return {
+      DateIndex: 0,
+      DateList: ['a_week', 'three_months', 'six_months', 'a_year']
+    }
+  },
+  methods: {
+    ChangeDate (index) {
+      this.DateIndex = index
+    }
+  },
+  computed: {
+    Option () {
+      return {
+        grid: {
+          top: '20',
+          left: '40',
+          right: '40',
+          containLabel: true
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            animation: false
+          }
+        },
+        axisPointer: {
+          link: {
+            xAxisIndex: 'all'
+          }
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          data: this.DayList
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [{
+          name: 'BTC',
+          data: this.BtcData,
+          type: 'line',
+          smooth: true,
+          itemStyle: {
+            normal: {
+              color: '#50b125'
+            }
+          }
+        },
+        {
+          name: 'USTD',
+          data: this.UsdData,
+          type: 'line',
+          smooth: true,
+          itemStyle: {
+            normal: {
+              color: '#2686ff'
+            }
+          },
+          areaStyle: {
+            normal: {
+              color: '#d0dffc',
+              origin: 'start'
+            }
+          }
+        }],
+        dataZoom: [{
+          start: 0,
+          type: 'inside'
+        }, {
+          type: 'slider',
+          realtime: true,
+          left: 90,
+          right: 90
+        }]
+      }
+    },
+    DayList () {
+      return new Array(8).fill().map((a, index) => {
+        return `2017-04-1${index}`
+      })
+    },
+    BtcData () {
+      return [0.2, 0.4, 0.3, 0.5, 0.55, 0.56, 0.3, 0.3]
+    },
+    UsdData () {
+      return [0.2, 0.4, 0.3, 0.5, 0.55, 0.56, 0.3, 0.3].reverse()
     }
   },
   components: {
@@ -25,8 +131,56 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.echarts{
-  width: inherit;
-  min-height: 70vh;
-}
+  header{
+    margin-bottom: 2px;
+    & > .text-center{
+      font-size: 16px;
+      margin-top: 48px;
+      margin-bottom: 43px;
+    }
+  }
+  .echarts {
+    width: inherit;
+    min-height: 240px;
+    min-height: 240px;
+    position: absolute;
+    left: 0;
+    right: 0;
+
+  }
+  .btc-line-date{
+    display: inline-block;
+    span{
+      font-size: 12px;
+      border: 1px solid #999999;
+      padding: 2px 3px;
+      margin-right: 10px;
+      text-align: center;
+      min-width: 46px;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .active{
+      background: #2686ff;
+      color: white;
+      border: none;
+      padding: 3px 4px;
+    }
+  }
+  .btc-line-mark{
+    display: inline-block;
+    &>:first-child{
+      margin-left: 12px;
+    }
+    span{
+      font-size: 12px;
+      margin-left: 24px;
+    }
+    a{
+      $len: 10px;
+      display: inline-block;
+      width: $len;
+      height: $len;
+    }
+  }
 </style>
