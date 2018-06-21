@@ -455,7 +455,7 @@ export default {
         }
         this.my_orders_cache.map((ele, i) => {
           var len = ele.length
-          if (len > 30) {
+          if (len > 30 && i !== 0) {
             ele.splice(30, len - 30)
           }
         })
