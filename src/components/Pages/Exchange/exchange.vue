@@ -98,6 +98,7 @@ export default {
       loginName: '',
       total_assets: {},
       my_orders: [[], [], []],
+      my_orders_cache: [[], [], []],
       depth_data: [],
       sn: '',
       // my_trades: [],
@@ -176,8 +177,34 @@ export default {
       this.version = this.depth_data && this.depth_data.version
       this.marketRefresh()
       this.globalRefresh()
+      this.version = this.depth_data && this.depth_data.version
+      this.all_trades_cache = JSON.parse(JSON.stringify(this.all_trades))
+      this.my_orders_cache = JSON.parse(JSON.stringify(this.my_orders))
       // this.initMine()
       document.title = `${this.market.last} ${this.market.quote_currency.toUpperCase()}/${this.market.base_currency.toUpperCase()} - ${this.$t('brand')}`
+      this.interval()
+    },
+    interval () {
+      var timer = null
+      clearInterval(timer)
+      timer = setInterval(() => {
+        this.all_trades = JSON.parse(JSON.stringify(this.all_trades_cache))
+        this.my_orders = JSON.parse(JSON.stringify(this.my_orders_cache))
+      }, 1000)
+    },
+    initMine () {
+      this.initTrend()
+      if (this.my_trades) {
+        this.my_trades.map((ele1) => {
+          this.all_trades_cache.map((ele2, i) => {
+            if (ele1.id === ele2.tid) {
+              ele2.isMine = true
+              this.$set(this.all_trades_cache, i, ele2)
+            }
+          })
+        })
+      }
+>>>>>>> 412cabb... too many order when test
     },
     // initMine () {
     //   this.initTrend()
@@ -220,6 +247,7 @@ export default {
         }, function (res) {
           if (res.status === 200) {
             self.$set(self.my_orders, 1, res.data.orders)
+            self.$set(self.my_orders_cache, 1, res.data.orders)
           }
         })
       } else if (index === 2) {
@@ -229,6 +257,7 @@ export default {
         }, function (res) {
           if (res.status === 200) {
             self.$set(self.my_orders, 2, res.data.trades)
+            self.$set(self.my_orders_cache, 2, res.data.trades)
           }
         })
       }
@@ -397,33 +426,39 @@ export default {
       var privateAccount = pusher.subscribe('private-' + sn)
       privateAccount.bind('order', (data) => {
         if (data.state === 'wait') {
-          var arr = this.my_orders[0].map(function (ele) {
+          var arr = this.my_orders_cache[0].map(function (ele) {
             return ele.id
           })
           var index = arr.indexOf(data.id)
           if (index !== -1) {
-            this.$set(this.my_orders[0], index, data)
+            this.$set(this.my_orders_cache[0], index, data)
           } else {
-            this.my_orders[0].unshift(data)
+            this.my_orders_cache[0].unshift(data)
           }
         } else if (data.state === 'cancel') {
           this.play('order_cancel')
-          this.my_orders[0].map(function (ele, i, arr) {
+          this.my_orders_cache[0].map(function (ele, i, arr) {
             if (ele.id === data.id) {
               arr.splice(i, 1)
             }
           })
-          this.my_orders[1].unshift(data)
+          this.my_orders_cache[1].unshift(data)
         } else if (data.state === 'done') {
           this.showNotice(data.price, data.origin_volume - data.volume)
-          this.my_orders[0].map(function (ele, i, arr) {
+          this.my_orders_cache[0].map(function (ele, i, arr) {
             if (ele.id === data.id) {
               arr.splice(i, 1)
             }
           })
-          this.my_orders[1].unshift(data)
-          this.my_orders[2].unshift(data)
+          this.my_orders_cache[1].unshift(data)
+          this.my_orders_cache[2].unshift(data)
         }
+        this.my_orders_cache.map((ele, i) => {
+          var len = ele.length
+          if (len > 30) {
+            ele.splice(30, len - 30)
+          }
+        })
       })
       privateAccount.bind('trade', (res) => {
         // this.my_trades.unshift(res)

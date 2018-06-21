@@ -119,7 +119,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .box-account-search{
+  .box-account-search {
     background: #f2f2f2;
     padding: 5px 8px;
     margin-bottom: 4px;
@@ -130,30 +130,27 @@ export default {
     }
   }
 
-  .form-account{
+  .form-account {
     caption{
       strong{
         line-height: 33px
       }
     }
   }
-</style>
 
-<style lang="scss" scoped>
-i{
-  display: inline-block;
-  position: relative;
-  top: 3px;
-  cursor: pointer;
-  margin-right: 3px;
-}
+  i {
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    cursor: pointer;
+    margin-right: 3px;
+  }
 
-.account-search{
-  @include sprite($home-search)
-}
+  .account-search {
+    @include sprite($home-search)
+  }
 
-.account-delete{
-  @include sprite($search-delete)
-}
-
+  .account-delete {
+    @include sprite($search-delete)
+  }
 </style>

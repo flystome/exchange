@@ -233,7 +233,7 @@ export default {
         if (this.sellAccount && volume > this.sellAccount) {
           v = new BigNumber(this.sellAccount)
           value = volume.multipliedBy(p)
-          this.handleVol(v, 'sell', 'total')
+          // this.handleVol(v, 'sell', 'total')
         }
       }
       value = +value.toString()

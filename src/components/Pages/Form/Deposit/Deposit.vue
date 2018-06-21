@@ -136,23 +136,19 @@ export default {
       }
     }
   }
-</style>
+  i{
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    cursor: pointer;
+    margin-right: 3px;
+  }
 
-<style lang="scss" scoped>
-i{
-  display: inline-block;
-  position: relative;
-  top: 3px;
-  cursor: pointer;
-  margin-right: 3px;
-}
+  .account-search{
+    @include sprite($home-search)
+  }
 
-.account-search{
-  @include sprite($home-search)
-}
-
-.account-delete{
-  @include sprite($search-delete)
-}
-
+  .account-delete{
+    @include sprite($search-delete)
+  }
 </style>
