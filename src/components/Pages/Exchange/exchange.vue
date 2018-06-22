@@ -381,10 +381,10 @@ export default {
             res.trade.trend = 'down'
           }
         }
-        this.all_trades.unshift(res.trade)
-        var len = this.all_trades.length
-        if (len >= 150) {
-          this.all_trades.splice(150, len - 149)
+        this.all_trades_cache.unshift(res.trade)
+        var len = this.all_trades_cache.length
+        if (len >= 200) {
+          this.all_trades_cache.pop()
         }
       })
     },

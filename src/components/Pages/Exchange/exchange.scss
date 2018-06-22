@@ -268,12 +268,15 @@
     }
   }
 
-  .slide-fade-enter-active {
+  .slide-fade-enter-active, .noSlide-enter-active {
     animation: fadeIn 0.6s ease;
   }
   .slide-fade-leave-active {
     animation: fadeOut 0.6s ease;
   }
+  // .noSlide-enter-active {
+  //   animation: fadeOut 0.6s ease;
+  // }
   .slide-fade-move {
     transition: transform 0.6s;
   }
