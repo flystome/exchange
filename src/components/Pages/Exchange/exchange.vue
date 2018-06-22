@@ -383,7 +383,7 @@ export default {
         }
         this.all_trades_cache.unshift(res.trade)
         var len = this.all_trades_cache.length
-        if (len >= 200) {
+        if (len >= 150) {
           this.all_trades_cache.pop()
         }
       })
