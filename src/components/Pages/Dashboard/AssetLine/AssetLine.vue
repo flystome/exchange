@@ -51,7 +51,7 @@ export default {
       return {
         grid: {
           top: '20',
-          left: '40',
+          left: '0',
           right: '40',
           containLabel: true
         },
@@ -81,18 +81,6 @@ export default {
           smooth: true,
           itemStyle: {
             normal: {
-              color: '#50b125'
-            }
-          }
-        },
-        {
-          name: 'USTD',
-          data: this.UsdData,
-          type: 'line',
-          smooth: true,
-          z: 1,
-          itemStyle: {
-            normal: {
               color: '#2686ff'
             }
           },
@@ -100,6 +88,18 @@ export default {
             normal: {
               color: '#d0dffc',
               origin: 'start'
+            }
+          }
+        },
+        {
+          name: 'USD',
+          data: this.UsdData,
+          type: 'line',
+          smooth: true,
+          z: 1,
+          itemStyle: {
+            normal: {
+              color: '#50b125'
             }
           }
         }],
@@ -115,15 +115,37 @@ export default {
       }
     },
     DayList () {
-      return new Array(8).fill().map((a, index) => {
-        return `2017-04-1${index}`
-      })
+      return this.LineData.map((data) => {
+        return this.$moment(data.timestamp).format('YYYY-MM-DD')
+      }).concat(new Array(this.Index - this.LineData.length).fill('').map((data, index) => {
+        return this.$moment(this.LineData[this.LineData.length - 1].timestamp + ((index + 1) * 86400000)).format('YYYY-MM-DD')
+      }))
     },
     BtcData () {
-      return [0.2, 0.4, 0.3, 0.5, 0.55, 0.56, 0.3, 0.3]
+      return this.LineData.map((data) => {
+        return data.btc_gains
+      })
     },
     UsdData () {
-      return [0.2, 0.4, 0.3, -0.5, 0.55, 0.56, 0.3, 0.3].reverse()
+      return this.LineData.map((data) => {
+        return data.usdt_gains
+      })
+    },
+    Profit () {
+      return this.$store.state.loginData.profit
+    },
+    Index () {
+      return this.DateAmount[this.DateIndex]
+    },
+    LengthJudge () {
+      return this.Profit.length <= this.Index
+    },
+    LineData () {
+      if (this.LengthJudge) {
+        return this.Profit
+      } else {
+        return this.Profit.slice(this.Profit.length - this.Index, this.Profit.length)
+      }
     }
   },
   components: {
@@ -145,7 +167,7 @@ export default {
     width: inherit;
     min-height: 240px;
     min-height: 240px;
-    position: absolute;
+    // position: absolute;
     left: 0;
     right: 0;
 

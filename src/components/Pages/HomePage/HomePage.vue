@@ -70,11 +70,11 @@
               </span>
             </div>
             <div class="btc-marginT25">
-              <router-link :to="`${ROUTER_VERSION}/currency/deposit`">
+              <router-link :to="`${ROUTER_VERSION}/funds/deposit`">
                 <basic-button class="btc-button" :text="$t('homepage.deposit')">
                 </basic-button>
               </router-link>
-              <router-link :to="`${ROUTER_VERSION}/currency/withdraw`">
+              <router-link :to="`${ROUTER_VERSION}/funds/withdraw`">
                 <basic-button class="btc-button pull-right" :text="$t('homepage.withdraw')"></basic-button>
               </router-link>
             </div>

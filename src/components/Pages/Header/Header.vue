@@ -149,7 +149,7 @@ export default {
       if (!this.loginData.activated) {
         this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
       } else {
-        this.goPath('/currency/deposit')
+        this.goPath('/funds/deposit')
       }
     },
     goPath (path, status, href) {

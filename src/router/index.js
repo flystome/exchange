@@ -167,8 +167,8 @@ const router = new Router({
       component: ValidateIdentity
     },
     {
-      path: `${version}/currency/withdraw`,
-      alias: `${version}/currency/deposit`,
+      path: `${version}/funds/withdraw`,
+      alias: [`${version}/funds/deposit`, `${version}/funds/pie`, `${version}/funds/line`],
       name: 'WithdrawCurrency',
       component: WithdrawCurrency
     },
@@ -318,17 +318,6 @@ const router = new Router({
       path: `${version}/dashboard/:dashboard`,
       name: 'AssetsDashboard',
       component: DashboardIndex
-      // children: [
-      //   {
-      //     path: '',
-      //     redirect: `${version}/dashboard/pie`
-      //   },
-      //   {
-      //     path: 'pie',
-      //     name: 'AssetPie',
-      //     component: AssetPie
-      //   }
-      // ]
     },
     {
       path: `${version}/mobile`,
@@ -387,9 +376,13 @@ router.afterEach(() => {
   var user = navigator.userAgent
   var mobile = user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
   if (mobile) {
-    if (route.name === 'HomePage' || route.name === 'home') {
+    console.log(route.name)
+    if (route.name === 'HomePage' || route.name === 'home' || route.name === 'WithdrawCurrency') {
+      var min = document.getElementById('meta').content.match(/minimum-scale=(\d\.\d+)/) && document.getElementById('meta').content.match(/minimum-scale=(\d\.\d+)/)[0]
+      if (min && min.match(/(\d\.\d+)/)[0] !== '1') return
       document.getElementById('meta').content = `initial-scale=1,minimum-scale=${document.body.offsetWidth / 1200},maximum-scale=0,user-scalable=yes`
     } else {
+      console.log(route.name)
       document.getElementById('meta').content = `width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=0,user-scalable=no`
     }
   }

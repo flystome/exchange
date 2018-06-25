@@ -72,7 +72,7 @@ export default {
     PieOption () {
       return {
         title: {
-          text: `${this.$t('my_account.total_assets')}  $${this.TotalAssets} USDT`,
+          text: `${this.$t('my_account.total_assets')}  $${this.TotalAssets} USD`,
           left: 'center',
           top: '70%',
           textStyle: {

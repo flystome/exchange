@@ -240,8 +240,8 @@ const en = {
       "validate_google": "Validate Google",
       "validate_identity": "Validate Identity",
       "validate_sms": "Validate SMS",
-      "currency_withdraw": "Withdraw Currency",
-      "currency_deposit": "Deposit Currency",
+      "funds_withdraw": "Withdraw Currency",
+      "funds_deposit": "Deposit Currency",
       "homepage": "Homepage",
       "referral": "Referral",
       "markets": "Markets",
@@ -269,8 +269,8 @@ const en = {
       "login": "Login",
       "register": "Register",
       "change_password": "Change Password",
-      "dashboard_pie": "Asset Distribution",
-      "dashboard_line": "Asset Curve"
+      "funds_pie": "Asset Distribution",
+      "funds_line": "Asset Curve"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
@@ -731,7 +731,7 @@ const en = {
       "asset_curve": "Asset Curve",
       "others": "Others",
       "historical_income": "Historical Income",
-      "benchmark": "Benchmark"
+      "benchmark": " Benchmark"
     },
     "unsupported_countries_and_regions": `
       <div class='text-left'>

@@ -70,7 +70,7 @@ Validator.extend('withdraw_amount', {
   validate (value) {
     return new Promise(resolve => {
       try {
-        new BigNumber(value)
+        new BigNumber(value.toString())
         resolve({
           valid: true
         })

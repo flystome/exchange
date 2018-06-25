@@ -240,8 +240,8 @@ const zh = {
     "validate_google": "驗證Google",
     "validate_identity": "驗證身份",
     "validate_sms": "驗證短信",
-    "currency_withdraw": "提幣",
-    "currency_deposit": "充值",
+    "funds_withdraw": "提幣",
+    "funds_deposit": "充值",
     "homepage": "首頁",
     "referral": "推薦用戶",
     "markets": "市場",
@@ -269,8 +269,8 @@ const zh = {
     "login": "登錄",
     "register": "注册",
     "change_password": "修改密碼",
-    "dashboard_pie": "資產分佈",
-    "dashboard_line": "資產曲線"
+    "funds_pie": "資產分佈",
+    "funds_line": "資產曲線"
   },
   "prompt": {
     "email_not_certified": "郵件未驗證",

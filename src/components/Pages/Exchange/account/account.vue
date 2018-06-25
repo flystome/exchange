@@ -21,7 +21,7 @@
           </tr>
         </tbody>
       </table>
-      <a :href="`${ROUTER_VERSION}/currency/withdraw`" class="viewAll">{{$t('exchange.allAccount')}}</a>
+      <a :href="`${ROUTER_VERSION}/funds/withdraw`" class="viewAll">{{$t('exchange.allAccount')}}</a>
     </div>
   </div>
 </template>

@@ -48,7 +48,7 @@ export const redirect = (state, action, route) => {
         code = 1001
       } else if (!(state.loginData.app_activated || state.loginData.sms_activated))  {
         if (typeof(hotex_android) != 'undefined') {
-          router.push(`${ROUTER_VERSION}/currency/deposit`)
+          router.push(`${ROUTER_VERSION}/funds/deposit`)
           hotex_android.toRedirect('/my_account')
           return
         } else if (window.webkit) {
@@ -102,13 +102,14 @@ const mutations = {
   gotoPc (state) {
     state.Pc = true
   },
-  // changeMarket (state, { index, currency }) {
-  //   state.
-  // },
   getData (state, data) {
-    // data.data.referrals.map((d, index) => {
-    //   d['referrals_account_name'] = data.data.referrals_account_name[index]
-    // })
+    // data.data.profit = data.data.profit.concat(new Array(200).fill('').map((b, index) => {
+    //   return {
+    //     usdt_gains: data.data.profit[1].usdt_gains + index * 100,
+    //     btc_gains: data.data.profit[1].btc_gains + index * 100,
+    //     timestamp: data.data.profit[data.data.profit.length - 1].timestamp + ((index + 1) * 86400000)
+    //   }
+    // }))
     state.loginData = data.data
     state.assets = data.data.assets
   },
