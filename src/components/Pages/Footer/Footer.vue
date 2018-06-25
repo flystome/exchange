@@ -118,7 +118,7 @@ export default {
 </style>
 
 <style>
-.btc-home-contain .btc-footer{
+.footer-from-home{
   min-width: 1200px;
 }
 </style>

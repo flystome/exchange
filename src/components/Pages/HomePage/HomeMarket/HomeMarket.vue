@@ -28,7 +28,7 @@
             <span>{{ item.last }}<span style="color:#999"> / ${{ item.legal_worth }}</span></span>
           </td>
           <td>{{ item.volume }}</td>
-          <td>{{ (Number(item.volume) * Number(item.last)).toFixed(2) }}</td>
+          <td>{{ ComputeTurnover(item) }}</td>
           <td class="btc-percent" style="color:#fff">
             <div v-if="Number(item.percent) > 0"><span style="background:#40b246">+{{ Number(item.percent).toFixed(2) }}%</span></div>
             <div v-else-if="Number(item.percent) < 0"><span style="background:#e9454d">{{ Number(item.percent).toFixed(2) }}%</span></div>
@@ -53,6 +53,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { BigNumber } from 'bignumber.js'
 export default {
   name: 'home-market',
   props: ['curData', 'currency', 'search', 'trend'],
@@ -101,6 +102,9 @@ export default {
     }
   },
   methods: {
+    ComputeTurnover (item) {
+      return Number(new BigNumber(item.volume.toString()).multipliedBy(item.last.toString())).toFixed(2)
+    },
     matchName (name, index) {
       if (this.search && !/^[a-zA-Z]+$/.test(this.search)) return false
       var reg = new RegExp(`${this.search}`, 'i')
@@ -203,7 +207,7 @@ export default {
       localStorage.setItem('markets', arr)
     },
     trendArray (item) {
-      return this.trend === '' ? [0, 0] : this.trend[`${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`]
+      return this.trend === '' ? [0, 0] : (this.trend[`${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`] ? this.trend[`${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`] : [0, 0])
     }
   },
   computed: {

@@ -2,7 +2,7 @@
   <div class="menu-underline btc-link"
 >
     <nav>
-      <ul ref="MenuList">
+      <ul ref="MenuList" :style="`${Bold ? 'font-weight: bold' : ''}`">
         <li  v-for="(data, DataIndex) in MenuList" :key="data" @click="ChangeIndex(DataIndex)" :style="{'margin-left': MenuMargin, 'padding-bottom': UnderlineMargin}">{{ data }}</li>
         <span
         :style="{'background': UnderlineColor, 'height': UnderlineHeight, width: UnderlineWidth, left: UnderlineLeft}"
@@ -20,7 +20,8 @@ export default {
     return {
       index: 0,
       UnderlineLeft: 0,
-      UnderlineWidth: 0
+      UnderlineWidth: 0,
+      Bold: false
     }
   },
   props: {
@@ -60,6 +61,9 @@ export default {
     changeOffset () {
       this.UnderlineWidth = this.$refs['MenuList'].querySelectorAll('li')[this.index].offsetWidth + 'px'
       this.UnderlineLeft = this.$refs['MenuList'].querySelectorAll('li')[this.index].offsetLeft + 'px'
+      this.$nextTick(function () {
+        this.Bold = true
+      })
     }
   },
   watch: {

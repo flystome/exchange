@@ -9,6 +9,10 @@ const zh = {
   'time': '次',
   "reply": "回復",
   "week": '星期',
+  "a_week": '一星期',
+  "three_months": '三個月',
+  "six_months": '六個月',
+  "a_year": "一年",
   'auth': {
     'email': `郵箱驗證`,
     'phone': `手機認證`,
@@ -236,8 +240,8 @@ const zh = {
     "validate_google": "驗證Google",
     "validate_identity": "驗證身份",
     "validate_sms": "驗證短信",
-    "currency_withdraw": "提幣",
-    "currency_deposit": "充值",
+    "funds_withdraw": "提幣",
+    "funds_deposit": "充值",
     "homepage": "首頁",
     "referral": "推薦用戶",
     "markets": "市場",
@@ -264,7 +268,9 @@ const zh = {
     "market_apply": "做市商申請",
     "login": "登錄",
     "register": "注册",
-    "change_password": "修改密碼"
+    "change_password": "修改密碼",
+    "funds_pie": "資產分佈",
+    "funds_line": "資產曲線"
   },
   "prompt": {
     "email_not_certified": "郵件未驗證",
@@ -719,6 +725,13 @@ const zh = {
     "check_agreement": "請勾選用戶協議",
     "reset_password": "重置密碼",
     "new_password": "新密碼"
+  },
+  "dashboard": {
+    "asset_distribution": "資產分佈",
+    "asset_curve": "資產曲線",
+    "others": "其他",
+    "historical_income": "歷史收益",
+    "benchmark": "基準"
   },
   "unsupported_countries_and_regions": `
     <div class='text-left' style='font-size: 13px'>

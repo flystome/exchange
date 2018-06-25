@@ -10,6 +10,10 @@ const en = {
     'time': 'time',
     "reply": "Reply",
     "week": 'wk',
+    "a_week": 'A Week',
+    "three_months": "Three Months",
+    "six_months": 'Six months',
+    "a_year": "A Year",
     "auth": {
       "email": "Verify Email",
       "phone": "Verify Cell Phone",
@@ -236,8 +240,8 @@ const en = {
       "validate_google": "Validate Google",
       "validate_identity": "Validate Identity",
       "validate_sms": "Validate SMS",
-      "currency_withdraw": "Withdraw Currency",
-      "currency_deposit": "Deposit Currency",
+      "funds_withdraw": "Withdraw Currency",
+      "funds_deposit": "Deposit Currency",
       "homepage": "Homepage",
       "referral": "Referral",
       "markets": "Markets",
@@ -264,7 +268,9 @@ const en = {
       "market_apply": "Market Apply",
       "login": "Login",
       "register": "Register",
-      "change_password": "Change Password"
+      "change_password": "Change Password",
+      "funds_pie": "Asset Distribution",
+      "funds_line": "Asset Curve"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
@@ -719,6 +725,13 @@ const en = {
       "check_agreement": "Please agree to the User Agreement",
       "reset_password": "Reset Password",
       "new_password": "New Password"
+    },
+    "dashboard": {
+      "asset_distribution": "Asset Distribution",
+      "asset_curve": "Asset Curve",
+      "others": "Others",
+      "historical_income": "Historical Income",
+      "benchmark": " Benchmark"
     },
     "unsupported_countries_and_regions": `
       <div class='text-left'>
