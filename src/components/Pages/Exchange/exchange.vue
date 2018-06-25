@@ -173,9 +173,9 @@ export default {
       } = res.data)
       res.data.my_orders && res.data.my_orders.length !== 0 && this.$set(this.my_orders, 0, res.data.my_orders.reverse())
       this.TotalAssets = this.total_assets && (+this.total_assets.btc_worth).toFixed(8)
+      this.version = this.depth_data && this.depth_data.version
       this.marketRefresh()
       this.globalRefresh()
-      this.version = this.depth_data && this.depth_data.version
       this.initMine()
       document.title = `${this.market.last} ${this.market.quote_currency.toUpperCase()}/${this.market.base_currency.toUpperCase()} - ${this.$t('brand')}`
     },
@@ -308,6 +308,8 @@ export default {
         bids: [],
         U: 0
       }
+      var i = 0
+      var flag = true
       market.bind('depthUpdate', (res) => {
         if (res.U <= this.version + 1 && res.u >= this.version + 1) {
           var asks = this.addOrderList(res.asks, this.depth_data.asks)
@@ -315,24 +317,34 @@ export default {
           this.version = res.u
           this.depth_data = Object.assign({}, this.depth_data, {'asks': asks.reverse(), 'bids': bids})
         } else if (res.U > this.version + 1) {
+          var asks = this.addOrderList(res.asks, this.depth_data.asks)
+          var bids = this.addOrderList(res.bids, this.depth_data.bids)
+          this.version = res.u
+          this.depth_data = Object.assign({}, this.depth_data, {'asks': asks.reverse(), 'bids': bids})
+
           this.addOrderList(res.asks, lost.asks)
           this.addOrderList(res.bids, lost.bids)
           if (lost.U === 0) lost.U = res.U
           lost.u = Math.max(lost.u, res.u)
-          this._get({
-            url: '/markets/' + self.market.code + '/get_depth_data.json'
-          }, function (res) {
-            var data = res.data.success.depth_data
-            var asks = self.addOrderList(lost.asks, data.asks)
-            var bids = self.addOrderList(lost.bids, data.bids)
-            self.version = data.version
-            self.depth_data = Object.assign({}, self.depth_data, {'asks': asks.reverse(), 'bids': bids})
-            lost = {
-              asks: [],
-              bids: [],
-              U: 0
-            }
-          })
+          console.log(i++)
+          if (flag) {
+            flag = false
+            this._get({
+              url: '/markets/' + self.market.code + '/get_depth_data.json'
+            }, function (res) {
+              var data = res.data.success.depth_data
+              var asks = self.addOrderList(lost.asks, data.asks)
+              var bids = self.addOrderList(lost.bids, data.bids)
+              self.version = data.version
+              self.depth_data = Object.assign({}, self.depth_data, {'asks': asks.reverse(), 'bids': bids})
+              lost = {
+                asks: [],
+                bids: [],
+                U: 0
+              }
+              flag = true
+            })
+          }
         }
       })
       market.bind('trade', (res) => {
