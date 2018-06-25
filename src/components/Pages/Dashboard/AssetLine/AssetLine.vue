@@ -37,7 +37,8 @@ export default {
   data () {
     return {
       DateIndex: 0,
-      DateList: ['a_week', 'three_months', 'six_months', 'a_year']
+      DateList: ['a_week', 'three_months', 'six_months', 'a_year'],
+      DateAmount: [7, 90, 180, 365]
     }
   },
   methods: {
@@ -89,6 +90,7 @@ export default {
           data: this.UsdData,
           type: 'line',
           smooth: true,
+          z: 1,
           itemStyle: {
             normal: {
               color: '#2686ff'
@@ -121,7 +123,7 @@ export default {
       return [0.2, 0.4, 0.3, 0.5, 0.55, 0.56, 0.3, 0.3]
     },
     UsdData () {
-      return [0.2, 0.4, 0.3, 0.5, 0.55, 0.56, 0.3, 0.3].reverse()
+      return [0.2, 0.4, 0.3, -0.5, 0.55, 0.56, 0.3, 0.3].reverse()
     }
   },
   components: {
