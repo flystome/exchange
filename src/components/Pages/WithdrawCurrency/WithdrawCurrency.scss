@@ -32,10 +32,13 @@
 }
 
 @media (max-width: 991px) {
-  .btc-currency-frommoblie /deep/ .menu-underline ul{
-    justify-content: space-between;
-    li{
-      margin-left: 0px !important;
+  .btc-currency-withdraw{
+    .btc-currency-frommoblie /deep/ .menu-underline ul{
+      justify-content: space-between;
+      li{
+        margin-left: 0px!important;
+        margin-right: 0px!important;
+      }
     }
   }
   .btc-table-more.btc-b-l{
