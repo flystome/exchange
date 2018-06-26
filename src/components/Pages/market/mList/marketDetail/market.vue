@@ -122,7 +122,9 @@ export default {
     getPusher: function () {
       var market = pusher.subscribe('market-' + this.curmarket + '-global')
       market.bind('trades', (data) => {
-        this.trades.pop()
+        if (this.trades.length > 15) {
+          this.trades.pop()
+        }
         this.trades.unshift(data['trades'][0])
       })
       var channel = pusher.subscribe('market-global')
@@ -162,7 +164,7 @@ export default {
           trades: this.trades
         } = initdata)
         if (this.trades && this.trades.length !== 0) {
-          this.trades = initdata.trades.slice(0, 10)
+          this.trades = initdata.trades.slice(0, 15)
         }
         if (this.logined) {
           this.favorite = initdata.market['is_portfolios']

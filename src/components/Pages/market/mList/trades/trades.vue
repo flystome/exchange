@@ -270,35 +270,37 @@ export default {
         bids: [],
         U: 0
       }
+      var flag = true
       marketPush.bind('depthUpdate', (res) => {
-        if (res.U <= this.version + 1 && res.u >= this.version + 1) {
-          var asks = this.addOrderList(res.asks, this.depthUpdate.asks)
-          var bids = this.addOrderList(res.bids, this.depthUpdate.bids)
-          this.version = res.u
-          this.depthUpdate = Object.assign({}, this.depthUpdate, {'asks': asks.reverse(), 'bids': bids})
-          this.sellList = this.depthUpdate.asks && this.depthUpdate.asks.slice(-8).reverse()
-          this.buyList = this.depthUpdate.bids && this.depthUpdate.bids.slice(0, 8)
-        } else if (res.U > this.version + 1) {
+        var asks = this.addOrderList(res.asks, this.depthUpdate.asks)
+        var bids = this.addOrderList(res.bids, this.depthUpdate.bids)
+        this.version = res.u
+        this.depthUpdate = Object.assign({}, this.depthUpdate, {'asks': asks.reverse(), 'bids': bids})
+        this.sellList = this.depthUpdate.asks && this.depthUpdate.asks.slice(-8).reverse()
+        this.buyList = this.depthUpdate.bids && this.depthUpdate.bids.slice(0, 8)
+        if (res.U > this.version + 1) {
           this.addOrderList(res.asks, lost.asks)
           this.addOrderList(res.bids, lost.bids)
           if (lost.U === 0) lost.U = res.U
           lost.u = Math.max(lost.u, res.u)
-          this._get({
-            url: '/markets/' + this.market.code + '/get_depth_data.json'
-          }, (res) => {
-            var data = res.data.success.depth_data
-            var asks = this.addOrderList(lost.asks, data.asks)
-            var bids = this.addOrderList(lost.bids, data.bids)
-            this.version = data.version
-            this.depthUpdate = Object.assign({}, this.depthUpdate, {'asks': asks.reverse(), 'bids': bids})
-            this.sellList = this.depthUpdate.asks && this.depthUpdate.asks.slice(-8).reverse()
-            this.buyList = this.depthUpdate.bids && this.depthUpdate.bids.slice(0, 8)
-            lost = {
-              asks: [],
-              bids: [],
-              U: 0
-            }
-          })
+          if (flag) {
+            this._get({
+              url: '/markets/' + this.market.code + '/get_depth_data.json'
+            }, (res) => {
+              var data = res.data.success.depth_data
+              var res_asks = this.addOrderList(lost.asks, data.asks)
+              var res_bids = this.addOrderList(lost.bids, data.bids)
+              this.version = data.version
+              this.depthUpdate = Object.assign({}, this.depthUpdate, {'asks': res_asks.reverse(), 'bids': res_bids})
+              this.sellList = this.depthUpdate.asks && this.depthUpdate.asks.slice(-8).reverse()
+              this.buyList = this.depthUpdate.bids && this.depthUpdate.bids.slice(0, 8)
+              lost = {
+                asks: [],
+                bids: [],
+                U: 0
+              }
+            })
+          }
         }
       })
       var channel = pusher.subscribe('market-global')
@@ -406,6 +408,9 @@ export default {
         privateAccount.bind('order', (data) => {
           if (data.state === 'done') {
             this.trades.unshift(data)
+            if (this.trades.length > 30) {
+              this.trades.pop()
+            }
           }
         })
       }

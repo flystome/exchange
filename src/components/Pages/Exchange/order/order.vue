@@ -142,18 +142,15 @@ export default {
     }
   },
   mounted () {
-    bus.$on('addOrder', (type, price, val) => {
-      var expand = Math.pow(10, this.market.price_fixed)
+    bus.$on('addOrder', (type, price, vol) => {
       this.buyPrice = price
       this.sellPrice = price
       if (type === 'sell') {
-        this.buyVolume = val
-        this.buyTotal = Math.floor(price * val * expand) / expand
+        this.handleVol(vol, 'buy')
         this.sellVolume = ''
         this.sellTotal = ''
       } else {
-        this.sellVolume = val
-        this.sellTotal = Math.floor(price * val * expand) / expand
+        this.handleVol(vol, 'sell')
         this.buyVolume = ''
         this.buyTotal = ''
       }

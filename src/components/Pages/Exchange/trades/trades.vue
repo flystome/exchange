@@ -81,6 +81,7 @@ export default {
         }
       }
       result = Math.floor(expand * result) / expand
+      console.log(result)
       bus.$emit('addOrder', type, price, result)
     }
   }

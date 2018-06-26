@@ -308,35 +308,29 @@ export default {
         bids: [],
         U: 0
       }
-      var i = 0
       var flag = true
       market.bind('depthUpdate', (res) => {
-        if (res.U <= this.version + 1 && res.u >= this.version + 1) {
-          var asks = this.addOrderList(res.asks, this.depth_data.asks)
-          var bids = this.addOrderList(res.bids, this.depth_data.bids)
-          this.version = res.u
-          this.depth_data = Object.assign({}, this.depth_data, {'asks': asks.reverse(), 'bids': bids})
-        } else if (res.U > this.version + 1) {
-          var asks = this.addOrderList(res.asks, this.depth_data.asks)
-          var bids = this.addOrderList(res.bids, this.depth_data.bids)
-          this.version = res.u
-          this.depth_data = Object.assign({}, this.depth_data, {'asks': asks.reverse(), 'bids': bids})
-
+        var asks = this.addOrderList(res.asks, this.depth_data.asks)
+        var bids = this.addOrderList(res.bids, this.depth_data.bids)
+        this.version = res.u
+        this.depth_data = Object.assign({}, this.depth_data, {'asks': asks.reverse(), 'bids': bids})
+        // if (res.U <= this.version + 1 && res.u >= this.version + 1) {
+        // } else
+        if (res.U > this.version + 1) {
           this.addOrderList(res.asks, lost.asks)
           this.addOrderList(res.bids, lost.bids)
           if (lost.U === 0) lost.U = res.U
           lost.u = Math.max(lost.u, res.u)
-          console.log(i++)
           if (flag) {
             flag = false
             this._get({
               url: '/markets/' + self.market.code + '/get_depth_data.json'
             }, function (res) {
               var data = res.data.success.depth_data
-              var asks = self.addOrderList(lost.asks, data.asks)
-              var bids = self.addOrderList(lost.bids, data.bids)
+              var res_asks = self.addOrderList(lost.asks, data.asks)
+              var res_bids = self.addOrderList(lost.bids, data.bids)
               self.version = data.version
-              self.depth_data = Object.assign({}, self.depth_data, {'asks': asks.reverse(), 'bids': bids})
+              self.depth_data = Object.assign({}, self.depth_data, {'asks': res_asks.reverse(), 'bids': res_bids})
               lost = {
                 asks: [],
                 bids: [],
