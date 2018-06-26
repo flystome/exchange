@@ -1,5 +1,5 @@
 <template>
-  <div class="btc-member-center" @click="ChoiceStatus(false)" @keyup.enter="Withdraw">
+  <div class="btc-member-center" @click="ChoiceStatus(false)" @keyup.enter="Withdraw" :class="{'btc-currency-frommoblie': FromMoblie}">
     <div class="btc-container-block">
       <div class="btc-currency-withdraw">
           <div class="btc-fl">
@@ -30,7 +30,7 @@
           v-model='step'
           :menu-index='step'
           :underline-margin="'5px'"
-          :menu-margin="'28px'"
+          :menu-margin="'23px'"
           :menu-list="[$t('dashboard.asset_distribution'), $t('dashboard.asset_curve'), $t('withdraw_currency.deposit'), $t('withdraw_currency.withdraw')]">
           </menu-underline>
         </div>
@@ -812,6 +812,10 @@ export default {
   computed: {
     LockAssets () {
       return this.$store.getters.LockAssets()
+    },
+    FromMoblie () {
+      var user = navigator.userAgent
+      return user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
     },
     TotalAssets () {
       return this.$store.getters.TotalAssets()

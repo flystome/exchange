@@ -3,9 +3,9 @@
 >
     <nav>
       <ul ref="MenuList" :style="`${Bold ? 'font-weight: bold' : ''}`">
-        <li  v-for="(data, DataIndex) in MenuList" :key="data" @click="ChangeIndex(DataIndex)" :style="{'margin-left': MenuMargin, 'padding-bottom': UnderlineMargin}">{{ data }}</li>
+        <li v-for="(data, DataIndex) in MenuList" :key="data" @click="ChangeIndex(DataIndex)" :style="{'margin-left': MenuMargin, 'padding-bottom': UnderlineMargin}">{{ data }}</li>
         <span
-        :style="{'background': UnderlineColor, 'height': UnderlineHeight, width: UnderlineWidth, left: UnderlineLeft}"
+        :style="{'background': UnderlineColor, 'height': UnderlineHeight, width: UnderlineWidth, left: UnderlineLeft, top: UnderlineTop}"
         >
         </span>
       </ul>
@@ -20,6 +20,7 @@ export default {
     return {
       index: 0,
       UnderlineLeft: 0,
+      UnderlineTop: '',
       UnderlineWidth: 0,
       Bold: false
     }
@@ -61,8 +62,10 @@ export default {
     changeOffset () {
       this.UnderlineWidth = this.$refs['MenuList'].querySelectorAll('li')[this.index].offsetWidth + 'px'
       this.UnderlineLeft = this.$refs['MenuList'].querySelectorAll('li')[this.index].offsetLeft + 'px'
-      this.$nextTick(function () {
+      this.$nextTick(() => {
         this.Bold = true
+        var ele = this.$refs['MenuList'].querySelectorAll('li')[this.index]
+        this.UnderlineTop = (ele.offsetHeight - this.UnderlineHeight.replace('px', '') + ele.offsetTop) + 'px'
       })
     }
   },
@@ -86,6 +89,10 @@ export default {
     }
   },
   computed: {
+    FormMobile () {
+      var user = navigator.userAgent
+      return user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
+    },
     ...mapState(['language'])
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <chart :options='PieOption'></chart>
+    <chart :options='PieOption' :auto-resize='true'></chart>
     <div class="btc-pie-legend">
       <div v-for="(data, index) in PieData" :key="data.name">
         <div class="legend-value">${{ ToLocaleString(data.value) }}</div>
@@ -130,8 +130,8 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 771px;
-  margin: auto;
+  margin: 0 auto;
+  justify-content: center;
   & > div {
     text-align: center;
     margin: 0px 14px;
