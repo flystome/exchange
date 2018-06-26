@@ -105,9 +105,9 @@ const mutations = {
   getData (state, data) {
     // data.data.profit = data.data.profit.concat(new Array(200).fill('').map((b, index) => {
     //   return {
-    //     usdt_gains: data.data.profit[1].usdt_gains + index * 100,
-    //     btc_gains: data.data.profit[1].btc_gains + index * 100,
-    //     timestamp: data.data.profit[data.data.profit.length - 1].timestamp + ((index + 1) * 86400000)
+    //     usdt_gains: 2.54645445 + index * 1000000000,
+    //     btc_gains: 3.54645445 + index * 10000000000,
+    //     timestamp: (new Date().getTime()) + ((index + 1) * 86400000)
     //   }
     // }))
     state.loginData = data.data

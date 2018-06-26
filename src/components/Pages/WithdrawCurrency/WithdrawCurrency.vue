@@ -9,7 +9,7 @@
             </span>
             <i class="withdraw-freeze btc-marginL45 btc-marginR5"></i>
             <a class='btc-color999'>
-              {{$t('withdraw_currency.frozen_assets')}} {{ LockAssets }} BTC
+              {{$t('withdraw_currency.frozen_assets')}} {{ LockAssets | toLocaleString }} BTC
             </a>
           </div>
         <div class="btc-fr">
@@ -94,7 +94,7 @@
                 </basic-input>
               </div>
               <div class="btc-withdraw-explain">
-                <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance | toFixed }} {{ CurrencyType | toUpperCase }} <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain | toFixed }} {{ CurrencyType | toUpperCase }}<span v-if="equivalence" style="color:black">≈{{ equivalence | toFixed }} BTC</span>
+                <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance | toFixed | toLocaleString }} {{ CurrencyType | toUpperCase }} <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain | toFixed | toLocaleString }} {{ CurrencyType | toUpperCase }}<span v-if="equivalence" style="color:black">≈{{ equivalence | toFixed | toLocaleString }} BTC</span>
               </div>
               <template v-if="Address !== 'withdraw_currency.withdraw_currency_address' || withdrawAddress">
                 <basic-input :validate='"required|withdraw_amount"' :invalid='invalid' :danger='true' ref='withdraw_amount' v-model="WithdrawData.amount" class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
@@ -255,6 +255,10 @@ export default {
       channel.bind('pusher:subscription_succeeded', () => {
         this.GetCoin(false, d.fund_sources, d.sn)
       })
+
+      if (pusher.connection.state === "connected") {
+        this.GetCoin(false, d.fund_sources, d.sn)
+      }
 
       channel.bind('account', (data) => {
         if (!this.$store.state.assets[data.currency]) return

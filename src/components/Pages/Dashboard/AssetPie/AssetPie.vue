@@ -3,7 +3,7 @@
     <chart :options='PieOption'></chart>
     <div class="btc-pie-legend">
       <div v-for="(data, index) in PieData" :key="data.name">
-        <div class="legend-value">${{ data.value }}</div>
+        <div class="legend-value">${{ ToLocaleString(data.value) }}</div>
         <div>{{ ComputePercent(data.value) }}</div>
         <div class="legend-div" :style="`background:${Color[index]}`"></div>
         <div>{{ data.name }}</div>
@@ -25,6 +25,9 @@ export default {
     ComputePercent (n) {
       var num = new BigNumber(n.toString()).dividedBy(this.TotalAssets.toString()).multipliedBy(100)
       return `${Number(num).toFixed(2) === '0.00' ? '0.01' : Number(num).toFixed(2)}%`
+    },
+    ToLocaleString (num) {
+      return Number(Number(num).toFixed(2)).toLocaleString()
     }
   },
   computed: {
@@ -72,7 +75,7 @@ export default {
     PieOption () {
       return {
         title: {
-          text: `${this.$t('my_account.total_assets')}  $${this.TotalAssets} USD`,
+          text: `${this.$t('my_account.total_assets')}  $${this.ToLocaleString(this.TotalAssets)} USD`,
           left: 'center',
           top: '70%',
           textStyle: {
@@ -81,8 +84,7 @@ export default {
           }
         },
         tooltip: {
-          trigger: 'item',
-          formatter: `{b} : \${c} ({d}%)`
+          trigger: 'item'
         },
         color: this.Color,
         series: [{

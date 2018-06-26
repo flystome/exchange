@@ -60,9 +60,10 @@ export default {
 <style lang="scss" scoped>
 .btc-container-block{
   padding: 14px 30px 0 30px;
-  min-height: 70vh;
+  min-height: 61vh;
   position: relative;
   margin-bottom: 10px;
+  padding-top: 0!important;
   & /deep/ ul {
     border-bottom: 1px solid #f2f2f2
   }

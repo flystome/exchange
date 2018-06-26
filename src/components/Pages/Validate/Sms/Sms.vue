@@ -180,10 +180,10 @@ export default {
     }
   },
   watch: {
-    'SmsData.CellPhonecode': _debounce(function () {
+    'SmsData.CellPhonecode': _debounce(function (a) {
       var lock = false
       callingdata.forEach((d) => {
-        if (d.number.slice(1) === this.SmsData.CellPhonecode) {
+        if (d.number.slice(1) === this.SmsData.CellPhonecode.replace(/<\/div>/g, '').replace(/<br>/g, '')) {
           this.SmsData.CountryName = d.alpha
           this.Country = d.name
           lock = true

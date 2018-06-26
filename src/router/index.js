@@ -376,13 +376,11 @@ router.afterEach(() => {
   var user = navigator.userAgent
   var mobile = user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
   if (mobile) {
-    console.log(route.name)
     if (route.name === 'HomePage' || route.name === 'home' || route.name === 'WithdrawCurrency') {
       var min = document.getElementById('meta').content.match(/minimum-scale=(\d\.\d+)/) && document.getElementById('meta').content.match(/minimum-scale=(\d\.\d+)/)[0]
       if (min && min.match(/(\d\.\d+)/)[0] !== '1') return
       document.getElementById('meta').content = `initial-scale=1,minimum-scale=${document.body.offsetWidth / 1200},maximum-scale=0,user-scalable=yes`
     } else {
-      console.log(route.name)
       document.getElementById('meta').content = `width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=0,user-scalable=no`
     }
   }

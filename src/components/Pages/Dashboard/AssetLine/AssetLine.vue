@@ -51,7 +51,7 @@ export default {
       return {
         grid: {
           top: '20',
-          left: '0',
+          left: '40',
           right: '40',
           containLabel: true
         },
@@ -118,7 +118,7 @@ export default {
       return this.LineData.map((data) => {
         return this.$moment(data.timestamp).format('YYYY-MM-DD')
       }).concat(new Array(this.Index - this.LineData.length).fill('').map((data, index) => {
-        return this.$moment(this.LineData[this.LineData.length - 1].timestamp + ((index + 1) * 86400000)).format('YYYY-MM-DD')
+        return this.$moment(this.LineData[this.LineData.length - 1] ? this.LineData[this.LineData.length - 1].timestamp : (new Date().getTime() - 86400000) + ((index + 1) * 86400000)).format('YYYY-MM-DD')
       }))
     },
     BtcData () {
@@ -158,8 +158,8 @@ export default {
   header{
     margin-bottom: 2px;
     & > .text-center{
-      font-size: 16px;
-      margin-top: 48px;
+      font-size: 20px;
+      margin-top: 43px;
       margin-bottom: 43px;
     }
   }
