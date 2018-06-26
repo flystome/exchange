@@ -45,8 +45,6 @@ Vue.use(window.VeeValidate)
 
 Vue.use(Trend)
 
-window.QRCode = window.qrcode
-
 Vue.config.productionTip = false
 Vue.prototype._post = _post
 Vue.prototype._get = _get

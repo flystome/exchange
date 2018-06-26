@@ -69,14 +69,6 @@ export default {
   },
   async mounted () {
     await this.$nextTick()
-    // setTimeout(() => {
-    //   Object.assign(this.SignUpData, {
-    //     password_confirmation: '',
-    //     password: '',
-    //     _rucaptcha: '',
-    //     email: ''
-    //   })
-    // }, 0)
       Object.assign(this.SignUpData, {
         password_confirmation: '',
         password: '',
@@ -86,12 +78,6 @@ export default {
   },
   methods: {
     initReferrer () {
-      // if (!this.$route.query.r) {
-      //   this.referrer = ''
-      // } else {
-      //   this.referrer = this.$route.query.r
-      //   this.SignUpData.referrer = this.referrer
-      // }
       if (Cookies.get('referrer')) {
         if (!this.$route.query.r) {
           this.referrer = Cookies.get('referrer')

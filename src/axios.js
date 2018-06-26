@@ -15,6 +15,14 @@ axios.interceptors.request.use(function (config) {
   return config
 })
 
+axios.interceptors.response.use(response => {
+  console.log(response)
+  return response;
+},
+(err) => {
+  console.log(err)
+})
+
 export const _post = async ({url, data, headers}, callback) => {
   const ajax = await axios({
     method: 'post',

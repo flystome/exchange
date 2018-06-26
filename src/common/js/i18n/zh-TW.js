@@ -724,7 +724,8 @@ const zh = {
     "login_failure": "請先登錄",
     "check_agreement": "請勾選用戶協議",
     "reset_password": "重置密碼",
-    "new_password": "新密碼"
+    "new_password": "新密碼",
+    "ip_change": "IP已變更，完成驗證後方可繼續操作"
   },
   "dashboard": {
     "asset_distribution": "投資組合",

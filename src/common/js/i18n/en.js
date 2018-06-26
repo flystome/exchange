@@ -724,7 +724,8 @@ const en = {
       "login_failure": "Please log in first",
       "check_agreement": "Please agree to the User Agreement",
       "reset_password": "Reset Password",
-      "new_password": "New Password"
+      "new_password": "New Password",
+      "ip_change": "IP has been changed, after completion of verification can continue operation"
     },
     "dashboard": {
       "asset_distribution": "Portfolio",

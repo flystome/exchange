@@ -9,7 +9,8 @@ export const unLogin = [
   'home',
   'MexchangeOrders',
   'notFound',
-  'Exchange'
+  'Exchange',
+  'LoginVerfication'
 ]
 
 export const unsupportedRegionNames = [

@@ -60,6 +60,7 @@ const MarketApply = () => import(/* webpackChunkName: "MarketMaker" */'Pages/Mar
 
 // signin and signup
 const SignIn = () => import(/* webpackChunkName: "sign" */'Pages/Sign/SignIn.vue')
+const LoginVerfication = () => import(/* webpackChunkName: "sign" */'Pages/Sign/Verification.vue')
 const SignUp = () => import(/* webpackChunkName: "sign" */'Pages/Sign/SignUp.vue')
 const ForgotPassword = () => import(/* webpackChunkName: "sign" */'Pages/Sign/ForgotPassword.vue')
 
@@ -84,6 +85,11 @@ const router = new Router({
       path: `${version}/login`,
       name: 'SignIn',
       component: SignIn
+    },
+    {
+      path: `${version}/login/verify`,
+      name: 'LoginVerfication',
+      component: LoginVerfication
     },
     {
       path: `${version}/register`,
@@ -151,11 +157,11 @@ const router = new Router({
       alias: `${version}/referral`,
       component: MemberCenter
     },
-    {
-      path: `${version}/validate/email`,
-      name: 'ValidateEmail',
-      component: ValidateEmail
-    },
+    // {
+    //   path: `${version}/validate/email`,
+    //   name: 'ValidateEmail',
+    //   component: ValidateEmail
+    // },
     {
       path: `${version}/validate/google`,
       name: 'ValidateGoogle',
