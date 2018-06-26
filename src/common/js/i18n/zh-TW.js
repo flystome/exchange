@@ -136,7 +136,7 @@ const zh = {
   "withdraw_currency": {
     "cancel_withdraw": "撤銷提幣",
     "total_assets": "總資產",
-    "frozen_assets": "凍結資產",
+    "frozen_assets": "在途資產",
     "deposit": "充值",
     "withdraw": "提幣",
     "withdraw_currency_address": "提取貨幣地址",
@@ -269,7 +269,7 @@ const zh = {
     "login": "登錄",
     "register": "注册",
     "change_password": "修改密碼",
-    "funds_pie": "資產分佈",
+    "funds_pie": "投資組合",
     "funds_line": "資產曲線"
   },
   "prompt": {
@@ -383,7 +383,7 @@ const zh = {
     'signout': '安全退出',
     'coin': '幣種',
     'total': '總計',
-    'freeze': '凍結',
+    'freeze': '在途',
     'allAccount': '查看全部賬戶',
     'tradeTitle': '買賣盤',
     'volume': '数量',
@@ -727,7 +727,7 @@ const zh = {
     "new_password": "新密碼"
   },
   "dashboard": {
-    "asset_distribution": "資產分佈",
+    "asset_distribution": "投資組合",
     "asset_curve": "資產曲線",
     "others": "其他",
     "historical_income": "歷史收益",

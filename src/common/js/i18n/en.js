@@ -10,10 +10,10 @@ const en = {
     'time': 'time',
     "reply": "Reply",
     "week": 'wk',
-    "a_week": 'A Week',
+    "a_week": 'One Week',
     "three_months": "Three Months",
-    "six_months": 'Six months',
-    "a_year": "A Year",
+    "six_months": 'Six Months',
+    "a_year": "One Year",
     "auth": {
       "email": "Verify Email",
       "phone": "Verify Cell Phone",
@@ -137,9 +137,9 @@ const en = {
     "withdraw_currency": {
       "cancel_withdraw": "Pending Withdrawal",
       "total_assets": "Total Assets",
-      "frozen_assets": "Frozen Assets",
+      "frozen_assets": "Assets On Hold",
       "deposit": "Deposit",
-      "withdraw": "Withdraw",
+      "withdraw": "Withdrawal",
       "withdraw_currency_address": "Withdraw Currency Address",
       "Amount_to_withdraw": "Amount to withdraw",
       "google_validate": "Google Validate",
@@ -269,7 +269,7 @@ const en = {
       "login": "Login",
       "register": "Register",
       "change_password": "Change Password",
-      "funds_pie": "Asset Distribution",
+      "funds_pie": "Portfolio",
       "funds_line": "Asset Curve"
     },
     "prompt": {
@@ -727,11 +727,11 @@ const en = {
       "new_password": "New Password"
     },
     "dashboard": {
-      "asset_distribution": "Asset Distribution",
-      "asset_curve": "Asset Curve",
+      "asset_distribution": "Portfolio",
+      "asset_curve": "Profit Curve",
       "others": "Others",
-      "historical_income": "Historical Income",
-      "benchmark": " Benchmark"
+      "historical_income": "Historical Profit",
+      "benchmark": " Base"
     },
     "unsupported_countries_and_regions": `
       <div class='text-left'>
