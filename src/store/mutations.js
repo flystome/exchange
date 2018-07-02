@@ -11,6 +11,10 @@ export const redirect = (state, action, route) => {
   // var path = type ? state.route.from.path : state.route.path
   // i18n.locale = CookieLocale
   var flag = true
+  // if (state.two_factors) {
+  //    router.push({path: `${ROUTER_VERSION}/login/verify`})
+  //   return false
+  // }
   switch (route.name) {
     case 'ValidateGoogle':
       if (!state.loginData.activated) {
@@ -91,6 +95,7 @@ export const redirect = (state, action, route) => {
     if (state.loginData !== 'none') {
       router.replace({path: `/`})
     }
+    break
   }
   return flag
 }

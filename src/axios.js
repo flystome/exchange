@@ -1,6 +1,10 @@
 // import qs from 'qs'
+import router from './router'
+import state from './store/state'
 const requestUrl = process.env.HOST_URL
+const ROUTER_VERSION = process.env.ROUTER_VERSION
 axios.defaults.withCredentials = true
+var times = 0
 
 axios.interceptors.request.use(function (config) {
   if (typeof config.headers === 'object') {
@@ -16,7 +20,19 @@ axios.interceptors.request.use(function (config) {
 })
 
 axios.interceptors.response.use(response => {
-  console.log(response)
+  if (response.data.error && response.data.error.code === 1107) {
+    if (times !== 0) return
+    var loginData = JSON.parse(localStorage.getItem('UserInfo'))
+    Object.assign(state, {
+      sms_activated: response.data.error.sms_activated,
+      app_activated: response.data.error.app_activated,
+      loginData: loginData,
+      assets: loginData.assets,
+      two_factors: true
+    })
+    router.replace(`${ROUTER_VERSION}/login/verify`)
+  }
+  times++
   return response;
 },
 (err) => {
@@ -43,6 +59,7 @@ export const _get = async ({url, data, headers}, callback) => {
     params: data
   }).catch(error => {
     if (/settings\/member/.test(url)) {
+      console.log(error)
       callback({error: 'login error'})
     }
     lock = true

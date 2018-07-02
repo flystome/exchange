@@ -95,6 +95,19 @@ export default {
         this.disabled = false
         if (d.data.success) {
           var loginData = JSON.parse(d.data.success.user_info)
+          if (d.data.success.login_2fa_required) {
+            Object.assign(this.$store.state, {
+              app_activated: loginData.app_activated,
+              sms_activated: loginData.sms_activated,
+              two_factors: true,
+              loginData: loginData,
+              assets: loginData.assets
+            })
+            localStorage.setItem('UserInfo', JSON.stringify(loginData))
+            this.$router.push(`${this.ROUTER_VERSION}/login/verify`)
+            this.$store.dispatch('GetMarketData')
+            return
+          }
           Object.assign(this.$store.state, {
             loginData: loginData,
             assets: loginData.assets

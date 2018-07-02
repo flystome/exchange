@@ -6,7 +6,7 @@ import { redirect } from '../store/mutations'
 var route = ''
 const MemberCenter = () => import(/* webpackChunkName: "MemberCenter" */ 'Pages/MemberCenter/MemberCenter')
 // validate
-const ValidateEmail = () => import(/* webpackChunkName: "ValidateEmail" */'Pages/Validate/Email/Email')
+// const ValidateEmail = () => import(/* webpackChunkName: "ValidateEmail" */'Pages/Validate/Email/Email')
 const ValidateGoogle = () => import(/* webpackChunkName: "ValidateGoogle" */'Pages/Validate/Google/Google')
 const ValidateIdentity = () => import(/* webpackChunkName: "ValidateIdentity" */'Pages/Validate/Identity/Identity')
 const WithdrawCurrency = () => import(/* webpackChunkName: "WithdrawCurrency" */'Pages/WithdrawCurrency/WithdrawCurrency')
@@ -349,6 +349,12 @@ var Time = 0
 
 router.beforeEach(async (to, from, next) => {
   route = to
+  if (to.name !== 'LoginVerfication') {
+    if (store.state.two_factors) {
+      next(`${version}/login/verify`)
+      return
+    }
+  }
   if (to.query.from === 'app') {
     store.state.fromApp = true
   }

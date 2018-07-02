@@ -32,7 +32,10 @@ const state = {
   assets: {},
   TotalAssets: '',
   LockedAssets: '',
-  Location: ''
+  Location: '',
+  two_factors: '',
+  app_activated: '',
+  sms_activated: ''
 }
 
 export default state
