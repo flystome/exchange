@@ -100,7 +100,7 @@ export default {
       my_orders: [[], [], []],
       depth_data: [],
       sn: '',
-      my_trades: [],
+      // my_trades: [],
       version: 0,
       soundAllow: true,
       noticeAllow: true,
@@ -163,7 +163,7 @@ export default {
     },
     handleGlobal (res) {
       ({
-        my_trades: this.my_trades,
+        // my_trades: this.my_trades,
         trades: this.all_trades,
         market: this.market,
         markets: this.markets,
@@ -176,22 +176,22 @@ export default {
       this.version = this.depth_data && this.depth_data.version
       this.marketRefresh()
       this.globalRefresh()
-      this.initMine()
+      // this.initMine()
       document.title = `${this.market.last} ${this.market.quote_currency.toUpperCase()}/${this.market.base_currency.toUpperCase()} - ${this.$t('brand')}`
     },
-    initMine () {
-      this.initTrend()
-      if (this.my_trades) {
-        this.my_trades.map((ele1) => {
-          this.all_trades.map((ele2, i) => {
-            if (ele1.id === ele2.tid) {
-              ele2.isMine = true
-              this.$set(this.all_trades, i, ele2)
-            }
-          })
-        })
-      }
-    },
+    // initMine () {
+    //   this.initTrend()
+    //   if (this.my_trades) {
+    //     this.my_trades.map((ele1) => {
+    //       this.all_trades.map((ele2, i) => {
+    //         if (ele1.id === ele2.tid) {
+    //           ele2.isMine = true
+    //           this.$set(this.all_trades, i, ele2)
+    //         }
+    //       })
+    //     })
+    //   }
+    // },
     initTrend () {
       this.all_trades.map((ele, i, arr) => {
         var len = arr.length
@@ -342,7 +342,7 @@ export default {
         }
       })
       market.bind('trade', (res) => {
-        this.isMine(res.trade, 'trades')
+        // this.isMine(res.trade, 'trades')
         if (this.all_trades.length === 0) {
           res.trade.trend = 'up'
         } else {
@@ -426,9 +426,9 @@ export default {
         }
       })
       privateAccount.bind('trade', (res) => {
-        this.my_trades.unshift(res)
+        // this.my_trades.unshift(res)
         this.play('order_ok')
-        this.isMine(res, 'trade')
+        // this.isMine(res, 'trade')
       })
       privateAccount.bind('account', (res) => {
         if (!this.$store.state.assets[res.currency]) return
@@ -440,24 +440,24 @@ export default {
         this.accountsTotal()
       })
     },
-    isMine (data, from) {
-      if (from === 'trade') {
-        this.all_trades.map((ele, i) => {
-          if (data.id === ele.tid) {
-            ele.isMine = true
-            this.$set(this.all_trades, i, ele)
-          }
-        })
-      } else if (from === 'trades') {
-        if (this.my_trades) {
-          this.my_trades.map((ele) => {
-            if (data.tid === ele.id) {
-              data.isMine = true
-            }
-          })
-        }
-      }
-    },
+    // isMine (data, from) {
+    //   if (from === 'trade') {
+    //     this.all_trades.map((ele, i) => {
+    //       if (data.id === ele.tid) {
+    //         ele.isMine = true
+    //         this.$set(this.all_trades, i, ele)
+    //       }
+    //     })
+    //   } else if (from === 'trades') {
+    //     if (this.my_trades) {
+    //       this.my_trades.map((ele) => {
+    //         if (data.tid === ele.id) {
+    //           data.isMine = true
+    //         }
+    //       })
+    //     }
+    //   }
+    // },
     controlSound (bool) {
       this.soundAllow = bool
     },
