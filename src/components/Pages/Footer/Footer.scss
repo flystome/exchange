@@ -1,16 +1,16 @@
-.btc-footer {
+.footer {
   box-sizing: border-box;
   font-family:  'Roboto'
 }
 
-.btc-footer {
+.footer {
   color: #777777;
   background-color: #272727;
   width: 100%;
   margin-top: -217px;
 }
 
-.btc-footer ul {
+.footer ul {
   padding: 0;
   list-style: none;
 }
@@ -22,8 +22,8 @@ a{
   }
 }
 
-.btc-footer {
-  .btc-footer-logo{
+.footer {
+  .footer-logo{
     margin-top: 24px;
     margin-left: 32px;
     color: #797a7a;
@@ -32,7 +32,7 @@ a{
       height: 25px;
     }
   }
-  .btc-info{
+  .info{
     margin-top: 30px;
     >li{
       margin-bottom: 12px;
@@ -52,11 +52,11 @@ a{
 }
 
 .footer-from-home{
-  .btc-info{
+  .info{
     width: 8.33333333%;
     float: left;
   }
-  .btc-footer-logo {
+  .footer-logo {
     width: 41.66666667%;
     float: left;
   }
@@ -69,30 +69,30 @@ a{
 }
 
 @media (max-width: 768px) {
-  .btc-footer{
+  .footer{
     margin-top: 0;
   }
 }
 
 @media (min-width: 750px) {
-  .btc-footer {
+  .footer {
     padding: 27.5px 0;
   }
 
-  .btc-footer .col-sm-6 {
+  .footer .col-sm-6 {
     padding-left: 60px;
   }
 }
 @media (max-width: 750px) {
-  .btc-footer > .container {
+  .footer > .container {
     padding: 10px 0;
   }
 }
 
-.btc-footer a {
+.footer a {
   color: #777777;
 }
 
-.btc-footer .btn-danger {
+.footer .btn-danger {
   color: white;
 }

@@ -1,27 +1,27 @@
 <template>
-  <div @click="promptEmpty" class="btc-UploadImg">
-    <div class="btc-Upload-block">
+  <div @click="promptEmpty" class="UploadImg">
+    <div class="Upload-block">
       <div>
       </div>
-      <div class="btc-UploadExplain btc-marginR20 btc-marginT25">
+      <div class="UploadExplain marginR20 marginT25">
         <strong>{{ Upload.UploadExplain }}</strong>
       </div>
-      <div class=" btc-marginT20 btc-marginB20">
+      <div class="marginT20 marginB20">
         {{ Upload.ImgExplain }}
       </div>
       <div class="validate-uploadImg" style="overflow: hidden;">
-        <div class="col-xs-6 btc-UploadImg-model">
+        <div class="col-xs-6 UploadImg-model">
           <img :src="requireImg(Upload.ImgModel)" ref="height"  >
           <span>{{$t('validate_identity.example')}}</span>
         </div>
-        <div class="uploading col-xs-6 ">
+        <div class="uploading col-xs-6">
           <span v-if="UploadImg === ''">{{$t('validate_identity.click_upload')}}</span>
           <img src="~Img/large/validate-uploading.png" v-if="UploadImg === ''" width="100%">
           <img width="100%" height="100%" class="alredy-img" style="z-index:10" :src="UploadImg" v-else>
-          <input type="file" ref="input" style="z-index:10" @change='ShowImg'  accept="image/jpeg,image/jpg" slot="file">
+          <input type="file" ref="input" style="z-index:10" @change='ShowImg' accept="image/jpeg,image/jpg" slot="file">
         </div>
-        <news-prompt class="btc-Upload-prompt" :text='verifyImg'></news-prompt>
-        <news-prompt class="btc-Upload-prompt" :text='prompt'></news-prompt>
+        <news-prompt class="Upload-prompt" :text='verifyImg'></news-prompt>
+        <news-prompt class="Upload-prompt" :text='prompt'></news-prompt>
       </div>
     </div>
   </div>

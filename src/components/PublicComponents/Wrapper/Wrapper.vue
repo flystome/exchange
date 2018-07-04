@@ -1,5 +1,5 @@
 <template>
-  <div v-if="Wrapper" class="btc-wrapper">
+  <div v-if="Wrapper" class="wrapper">
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .btc-wrapper{
+  .wrapper{
     position: absolute;
     top: 0;
     width: 100%;

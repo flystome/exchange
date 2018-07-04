@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="edit-div"
-    v-html="innerText" :contenteditable="canEdit"
-    :value='value'
-    @keyup="changeText">
+      v-html="innerText" :contenteditable="canEdit"
+      :value='value'
+      @keyup="changeText">
     </div>
     <slot v-if="!value" name='placeholder'></slot>
   </div>

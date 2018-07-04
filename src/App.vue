@@ -1,18 +1,18 @@
 <template>
-  <div id="app" :class="{'btc-home-contain': this.$route.path === `${version}/funds/line` || this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'btc-backround-white': isWhiteBackground, 'btc-lang-long': language !== 'zh-TW'}">
-    <ul class="btc-homepage-newCoin" v-if="FROM_HOME && new_coin.length !== 0">
+  <div id="app" :class="{'home-contain': this.$route.path === `${version}/funds/line` || this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'backround-white': isWhiteBackground, 'lang-long': language !== 'zh-TW'}">
+    <ul class="homepage-newCoin" v-if="FROM_HOME && new_coin.length !== 0">
       <div class="container">
         <li v-for="data in new_coin" :key='data.id'>
           <a :href="data.url">{{ data.the_title }}</a>
         </li>
       </div>
     </ul>
-    <section class="btc-main" :class="{'btc-home-contain': this.$route.path === `${version}/funds/line` || this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange', 'btc-backround-white': isWhiteBackground}">
+    <section class="main" :class="{'home-contain': this.$route.path === `${version}/funds/line` || this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange', 'backround-white': isWhiteBackground}">
       <header :FROM='FROM_HOME'  v-if="!fromApp && !exChange" is='Header' />
-      <div style="position:relative;z-index:999;background:#f2f2f2" class="btc-global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
+      <div style="position:relative;z-index:999;background:#f2f2f2" class="global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
         <vue-simple-spinner size="88"></vue-simple-spinner>
       </div>
-      <div v-else class="btc-container container" :class="{'noPadding':noPadding}">
+      <div v-else class="box-container container" :class="{'noPadding':noPadding}">
         <keep-alive :exclude="['LoginVerfication','Form', 'SignUp', 'ValidateSms', 'ForgotPassword', 'SignIn', 'ValidateIdentity', 'ValidateGoogle']">
           <router-view></router-view>
         </keep-alive>
@@ -110,17 +110,17 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-.btc-main{
+.main{
   background:#f2f2f2;
 }
-.btc-backround-white{
+.backround-white{
   background: white;
-  .btc-container{
+  .container{
     background: white;
   }
 }
-// .btc-home-contain{
-//   .btc-container{
+// .home-contain{
+//   .container{
 //   background: white;
 //   }
 // }
@@ -129,7 +129,7 @@ export default {
   width: 100%;
   min-width: 1200px;
   height: 100%;
-  .btc-container {
+  .container {
     width: 100%;
     height: 100%;
     background: none;
@@ -137,7 +137,7 @@ export default {
   }
 }
 
-.btc-homepage-newCoin{
+.homepage-newCoin{
   min-width: 1200px;
   font-size: 12px;
   left: 0;
@@ -171,29 +171,29 @@ export default {
 <style lang="scss">
 @for $len from 0 through 100 {
   @if $len%5 == 0{
-  .btc-marginT#{$len}{
+  .marginT#{$len}{
     margin-top: #{$len}px
   }
-  .btc-marginL#{$len}{
+  .marginL#{$len}{
     margin-left: #{$len}px
   }
-  .btc-marginR#{$len}{
+  .marginR#{$len}{
     margin-right: #{$len}px
   }
-  .btc-marginB#{$len}{
+  .marginB#{$len}{
     margin-bottom: #{$len}px
   }
 
-  .btc-paddingT#{$len}{
+  .paddingT#{$len}{
     padding-top: #{$len}px
   }
-  .btc-paddingB#{$len}{
+  .paddingB#{$len}{
     padding-bottom: #{$len}px
   }
-  .btc-paddingL#{$len}{
+  .paddingL#{$len}{
     padding-left: #{$len}px
   }
-  .btc-paddingR#{$len}{
+  .paddingR#{$len}{
     padding-right: #{$len}px
   }
   }

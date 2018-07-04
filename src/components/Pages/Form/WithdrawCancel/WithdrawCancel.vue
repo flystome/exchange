@@ -1,18 +1,18 @@
 <template>
-  <div class="btc-form">
-    <div class="btc-container-block">
+  <div class="form">
+    <div class="container-block">
       <basic-table style="margin-top:0px" :SpinnerSize='150' :loading='loading' :len='xhrData.length' :captionTitle='captionTitle' :item='getRecord'>
         <template slot="cancel"
           slot-scope="props">
           <a>
-            / <span style="position: relative;top: -1px;padding: 0;font-size: 12px;" :disabled='disabled' @click="cancelWithdraw(props.id, props.data)" class="btc-link btn">{{$t(`withdraw_currency.cancel`)}}</span>
+            / <span style="position: relative;top: -1px;padding: 0;font-size: 12px;" :disabled='disabled' @click="cancelWithdraw(props.id, props.data)" class="link btn">{{$t(`withdraw_currency.cancel`)}}</span>
           </a>
         </template>
       </basic-table>
     </div>
     <paginate
       ref="paginate"
-      class="btc-fr"
+      class="fr"
       :disabled="disabled"
       v-if="pagination !== 0"
       :page-count="pagination"

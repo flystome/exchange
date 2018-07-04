@@ -1,49 +1,49 @@
 <template>
-  <div @click="promptEmpty" @keyup.enter="Reply" class="btc-ticket-replay">
-    <div class="btc-block-container">
+  <div @click="promptEmpty" @keyup.enter="Reply" class="ticket-replay">
+    <div class="block-container">
       <template v-if="!loading">
-        <div class="btc-ticketReplay-header btc-marginB25">
+        <div class="ticketReplay-header marginB25">
           <basic-button @click.native="goPath(`/ticket/${state}`)" :text="$t('ticket.return')">
           </basic-button>
-          <div class="btc-fr" v-if="state === 'open' && !loading">
-          <basic-button :disabled='disabled' @click.native="Remind" :text="$t('ticket.reminder')" class="btn btc-marginR25">
+          <div class="fr" v-if="state === 'open' && !loading">
+          <basic-button :disabled='disabled' @click.native="Remind" :text="$t('ticket.reminder')" class="btn marginR25">
           </basic-button>
           <basic-button class="btn" :disabled='disabled' @click.native="CloseTicket" :text="$t('ticket.close_ticket')">
           </basic-button>
           </div>
         </div>
-        <div class="btc-ticketReplay-origin">
+        <div class="ticketReplay-origin">
           <header>
             <strong v-text="title">
             </strong>
-            <span v-text="created_at" class="btc-font12 btc-color999 btc-fr">
+            <span v-text="created_at" class="font12 color999 fr">
             </span>
           </header>
-          <article v-text="content" class="btc-marginT20 btc-marginB15">
+          <article v-text="content" class="marginT20 marginB15">
           </article>
           <img v-if="attachment_url" :src="attachment_url">
         </div>
-        <div v-if="this.comments.length !== 0" class="btc-ticketReplay-replay btc-font12">
-          <div class="btc-ticket-triangle">
+        <div v-if="this.comments.length !== 0" class="ticketReplay-replay font12">
+          <div class="ticket-triangle">
             <a></a>
           </div>
-          <div class="btc-ticketReplay-block" v-for="(d, index) in comments" :key="d.id">
-            <section class="btc-paddingB30" :class="{'btc-ticket-BroderNone': index === comments.length - 1}">
-              <header :class="{'btc-ticketReplay-byReplay': d.reply_from_admin}">
+          <div class="ticketReplay-block" v-for="(d, index) in comments" :key="d.id">
+            <section class="paddingB30" :class="{'ticket-BroderNone': index === comments.length - 1}">
+              <header :class="{'ticketReplay-byReplay': d.reply_from_admin}">
                 <div>
                   {{d.reply_from_admin ? $t('ticket.customer_service_reply') : $t('ticket.reply_to_customer_service')}} <span v-text="d.content"></span>
                 </div>
               </header>
-              <img v-if="d.attachment_url" class="btc-marginT15"  :src="d.attachment_url" />
-              <div class="btc-marginT15 btc-ticketReplay-byAdmin btc-color999">
-                <!-- <div v-if="d.reply_from_admin" class="btc-pointer btc-fl" @click="ShowReply(d)">
+              <img v-if="d.attachment_url" class="marginT15"  :src="d.attachment_url" />
+              <div class="marginT15 ticketReplay-byAdmin color999">
+                <!-- <div v-if="d.reply_from_admin" class="pointer fl" @click="ShowReply(d)">
                   <i class="ticket-replay">
                   </i>
-                  <span class="btc-link">
+                  <span class="link">
                     {{ $t('reply') }}
                   </span>
                 </div> -->
-                <div class="btc-fr">
+                <div class="fr">
                   {{ $moment(d.created_at).format('YYYY-MM-DD H:mm:ss') }}
                 </div>
               </div>
@@ -53,30 +53,30 @@
           </div>
         </div>
       </template>
-      <vue-simple-spinner class="btc-marginT100 btc-marginB100" size="88" v-else></vue-simple-spinner>
-      <div v-if="!loading && this.state !== 'closed'" class="btc-ticketReplay-textarea btc-marginT15 btc-font12">
-        <div class="btc-ticket-flex" style="display:flex">
+      <vue-simple-spinner class="marginT100 marginB100" size="88" v-else></vue-simple-spinner>
+      <div v-if="!loading && this.state !== 'closed'" class="ticketReplay-textarea marginT15 font12">
+        <div class="ticket-flex" style="display:flex">
           {{ $t('ticket.reply_to_customer_service') }}
-          <input v-model="context"  type="text" class="btc-marginL10"  v-focus>
+          <input v-model="context"  type="text" class="marginL10"  v-focus>
         </div>
-        <div class="btc-marginT15" style="position: relative;">
-          <span class="btc-link btc-fl">
+        <div class="marginT15" style="position: relative;">
+          <span class="link fl">
             <a>
               <i class="ticket-upload"></i>
               {{ $t('ticket.upload_photo') }}
             </a>
             <input type="file" ref='file' @change="AddFile">
           </span>
-          <div class="btc-fl btc-ticket-delte" v-if="FileName !== ''">
+          <div class="fl ticket-delte" v-if="FileName !== ''">
             <div v-text="FileName">
             </div>
-            <i class="btc-ticket-newDelete btc-pointer" @click="DeleteFile"></i>
+            <i class="ticket-newDelete pointer" @click="DeleteFile"></i>
           </div>
-          <basic-button :disabled="disabled" @click.native.stop="Reply" class="btc-fr btn" :text="$t('reply')"></basic-button>
+          <basic-button :disabled="disabled" @click.native.stop="Reply" class="fr btn" :text="$t('reply')"></basic-button>
         </div>
         <div class="clearfix"></div>
       </div>
-      <news-prompt class="btc-fl" :text='prompt'></news-prompt>
+      <news-prompt class="fl" :text='prompt'></news-prompt>
     </div>
   </div>
 </template>

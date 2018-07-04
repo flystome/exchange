@@ -1,6 +1,6 @@
 <template>
     <transition name="PopupBox">
-      <component :key="'hint'" class="btc-popupBox" v-if="PopupBox.status" :is="component"></component>
+      <component :key="'hint'" class="popupBox" v-if="PopupBox.status" :is="component"></component>
     </transition>
 </template>
 
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .btc-popupBox{
+  .popupBox{
     position: fixed;
     top: 0;
     width: 100%;

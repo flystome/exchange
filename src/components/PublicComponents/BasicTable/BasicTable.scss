@@ -1,10 +1,10 @@
-.btc-tableRemark{
+.tableRemark{
   float: right;
   color: #999999;
   font-size: 12px;
 }
 
-td[class=btc-tablehover]{
+td[class=tablehover]{
   display: block;
   width: 380px!important;
   overflow:hidden;
@@ -12,49 +12,49 @@ td[class=btc-tablehover]{
   white-space:nowrap;
 }
 
-.btc-table-container{
+.table-container{
   background: #fff;
   margin-top: 10px;
   overflow: auto;
 }
 
-.btc-table{
+.box-table{
   color: #666666;
   padding: 8px 15px;
   overflow: auto;
 }
 
-.btc-table table{
+.box-table table{
   margin-bottom: 0;
   font-size: 13px;
 }
 
-.btc-table caption{
+.box-table caption{
   color: #000;
   border-bottom: 1px solid #f2f2f2;
   margin: 0 5px;
   padding-top: 4px;
 }
 
-.btc-table tbody tr td{
+.box-table tbody tr td{
     text-align: center;
     border: none;
     white-space: nowrap;
 }
 
-.btc-tableTextright{
+.tableTextright{
   text-align: left!important;
 }
 
-.btc-tableTextleft{
+.tableTextleft{
   text-align: right!important;
 }
 
-.btc-table-record > div{
+.table-record > div{
   margin: 70px 0;
 }
 
-.btc-table-more{
+.table-more{
   padding-top: 6px;
   padding-bottom: 6px;
   margin-top: 6px;
@@ -62,13 +62,13 @@ td[class=btc-tablehover]{
 }
 
 @media(max-width: 1200px){
-  td[class=btc-tablehover]{
+  td[class=tablehover]{
     width: 240px!important;
   }
 }
 
 @media(max-width: 692px){
-  td[class=btc-tablehover]{
+  td[class=tablehover]{
     width: 160px!important;
   }
 }

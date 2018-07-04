@@ -4,7 +4,7 @@
   position: relative;
 }
 
-.btc-main{
+.main{
   min-height: 100%;
   padding-bottom: 217px;
 }
@@ -47,19 +47,19 @@ body{
   font-family: 'Roboto','Arial', sans-serif;
 }
 
-.btc-white-btn{
+.white-btn{
   border: 1px solid #4382f7;
   color: #4382f7;
   background: white;
 }
 
-.btc-container{
+.box-container{
   background: #f2f2f2;
   padding-bottom: 13px;
   min-height: 70vh;
 }
 
-.btc-container-block{
+.container-block{
   background: white;
   margin-top: 10px;
   overflow: hidden;
@@ -77,21 +77,21 @@ body{
   color: white
 }
 
-.btc-link{
+.link{
   color: #4382f7!important;
   cursor: pointer;
 }
 
-.btc-link:hover{
+.link:hover{
   text-decoration: none!important;
   color: #4382f7!important;
 }
 
-.btc-white-btn:hover,.btc-white-btn:focus{
+.white-btn:hover,.white-btn:focus{
   color: #4382f7;
 }
 
-.btc-basic-button:hover,.btc-basic-button:focus{
+.basic-button:hover,.basic-button:focus{
   color: white;
 }
 
@@ -99,55 +99,59 @@ body{
   cursor: not-allowed
 }
 
-.btc-pointer{
+.pointer{
   cursor: pointer;
 }
 
-.btc-b-def{
+.b-def{
   border: 1px solid #dfe0e1;
 }
 
-.btc-b{
+.b{
   border: 1px solid #f2f2f2;
 }
 
-.btc-b-r{
+.b-r{
   border-right:1px solid #f2f2f2;
 }
 
-.btc-b-l{
+.b-l{
   border-left:1px solid #f2f2f2;
 }
 
-.btc-b-t{
+.b-t{
   border-top:1px solid #f2f2f2;
 }
 
-.btc-b-b{
+.b-b{
   border-bottom:1px solid #f2f2f2;
 }
 
-.btc-fr{
+.fr{
   float: right;
 }
 
-.btc-fl{
+.fl{
   float: left;
 }
 
-.btc-font12{
+.fz12 {
   font-size: 12px;
 }
 
-.btc-color333{
+.font12{
+  font-size: 12px;
+}
+
+.color333{
   color: #333333;
 }
 
-.btc-color666{
+.color666{
   color: #666666;
 }
 
-.btc-color999{
+.color999{
   color: #999999;
 }
 
@@ -165,15 +169,15 @@ ul,li {
     zoom:1;
 }
 
-.btc-absolute {
+.absolute {
   position: absolute
 }
 
-.btc-relative {
+.relative {
   position: relative
 }
 
-.btc-global-loading{
+.global-loading{
   .vue-simple-spinner{
     position: fixed;
     left: 50%;
@@ -197,21 +201,16 @@ a{
 }
 
 @media (max-width: 768px) {
-  .btc-main{
+  .main{
     padding-bottom: 0;
   }
-  .btc-container {
+  .box-container {
     padding: 6px;
   }
   .noPadding {
     padding: 0;
   }
-  // .btc-home-contain{
-  //   .container{
-  //     width: 750px
-  //   }
-  // }
-  .btc-global-loading{
+  .global-loading{
     min-height: calc(100vh - 52px);
     >div{
       margin-top: 55%;
@@ -224,7 +223,7 @@ a{
 }
 
 @media (min-width: 992px){
-  .btc-home-contain{
+  .home-contain{
     .container {
       width: auto;
     }
@@ -232,7 +231,7 @@ a{
 }
 
 @media (min-width: 768px){
-  .btc-home-contain{
+  .home-contain{
     .container {
       width: auto;
     }
@@ -240,30 +239,27 @@ a{
 }
 
 @media (max-width: 1200px){
-  .btc-homepage-markets{
+  .homepage-markets{
     padding: 0 11px;
   }
-  .btc-homepage-introduce{
+  .homepage-introduce{
     padding-left: 28px;
   }
-  .btc-home-contain{
+  .home-contain{
     .navbar-Home .navbar-brand{
       margin-left: 21px;
     }
   }
 }
 
-.btc-home-contain{
+.home-contain{
   min-width: 1200px;
   .container{
     width: 1200px;
   }
-  .btc-container{
+  .box-container{
     padding: 0
   }
-  // >div{
-  //   min-width: 1080px!important
-  // }
 }
 
 /* -----------------------------------animation-------------------------- */

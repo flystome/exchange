@@ -1,5 +1,5 @@
-.btc-form-news{
-  .btc-news-radio{
+.form-news{
+  .news-radio{
     margin-top: 8px;
     margin-bottom: 8px;
     padding: 22px 0;
@@ -21,7 +21,7 @@
           text-align: center;
           border: 1px solid #4382f7;
         }
-        .btc-radio{
+        .radio{
           &:after{
             content: '';
             display: inline-block;
@@ -35,14 +35,14 @@
           }
         }
       }
-      .btc-form-disabled{
+      .form-disabled{
         cursor: not-allowed;
         opacity: .65;
       }
     }
   }
-  .btc-news{
-    .btc-news-block{
+  .news{
+    .news-block{
       margin-top: 8px;
       background: white;
       overflow: hidden;
@@ -59,14 +59,14 @@
         margin-top: 23px;
       }
     }
-    .btc-news-select{
+    .news-select{
       position: absolute;
       top: 50%;
       right: 0;
       margin-top: -9px;
       margin-right: 30px;
     }
-    .btc-news-time{
+    .news-time{
       font-size: 12px;
       color: #999999;
       margin-left: 12px;
@@ -80,10 +80,10 @@
       float: left;
     }
   }
-  .btc-news-minheight{
+  .news-minheight{
     min-height: 70vh;
   }
-  .btc-news-unread{
+  .news-unread{
     position: absolute;
     left: -6px;
     top: 3px;
@@ -99,17 +99,17 @@
       right: -3px;
     }
   }
-  .btc-news-read{
+  .news-read{
     color: #999999
   }
 }
 
 @media (max-width: 766px){
-  .btc-news-radio{
+  .news-radio{
     >div{
       float: none;
     }
-    .btc-fr{
+    .fr{
       span{
         display: inline-block;
         margin-top: 15px;

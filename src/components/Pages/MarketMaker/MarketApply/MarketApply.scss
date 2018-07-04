@@ -1,5 +1,5 @@
-.btc-MarketApply{
-  .btc-MarketApply-title{
+.MarketApply{
+  .MarketApply-title{
     color: #333333;
     font-size: 20px;
     margin-top: 77px;
@@ -8,7 +8,7 @@
     margin-top: 15px;
     margin-bottom: 65px
   }
-  .btc-MarketApply-section{
+  .MarketApply-section{
     section{
       float: left;
       width: 23%;
@@ -31,7 +31,7 @@
       }
     }
   }
-  .btc-MarketApply-authentication{
+  .MarketApply-authentication{
     margin-top: 65px;
     margin-bottom: 35px;
     >:nth-child(1){
@@ -44,7 +44,7 @@
       margin-right: 6px;
       cursor: pointer;
     }
-    .btc-marketApply-right{
+    .marketApply-right{
       border: none;
       &:after{
         content: '';
@@ -53,7 +53,7 @@
       }
     }
   }
-  .btc-marketApply-apply{
+  .marketApply-apply{
     background: #4382f7;
     color: white;
     cursor: pointer;
@@ -62,21 +62,21 @@
     padding: 12px 20px;
     margin-bottom: 50px;
   }
-  .btc-choice{
+  .choice{
     background: #d9d9d9;
     cursor: not-allowed;
   }
 }
 
 @media (max-width: 1200px) {
-  .btc-MarketApply .btc-MarketApply-section section{
+  .MarketApply .MarketApply-section section{
     margin-left: 46px;
     width: 27%;
   }
 }
 
 @media (max-width: 992px) {
-  .btc-MarketApply .btc-MarketApply-section section{
+  .MarketApply .MarketApply-section section{
     width: 46%;
     min-width: 264px;
     float: none;

@@ -1,9 +1,9 @@
 <template>
   <transition name='SideSlipMenu'>
-    <div class='btc-SideSlipMenu' v-if='SideSlipMenu' @click='SideSlipMenuDisplay(false)'>
+    <div class='SideSlipMenu' v-if='SideSlipMenu' @click='SideSlipMenuDisplay(false)'>
       <div>
         <ul @click.stop>
-          <li class='btc-marginL30 btc-marginT30'>
+          <li class='marginL30 marginT30'>
             {{ loginData.show_name }}
           </li>
           <li v-if="loginData !== 'none'">
@@ -22,14 +22,14 @@
               </span>
             </div>
           </li>
-          <li class="marketlist" :class="{'btc-sideslip-marignB0': market}">
+          <li class="marketlist" :class="{'sideslip-marignB0': market}">
             <div @click="market = !market">
               <img src='@/common/svg/sideslip-market.svg' /> {{$t('nav.transaction')}}
-              <span class="btc-fr btc-marginR20">
+              <span class="fr marginR20">
                 <img src='@/common/svg/sideslip-dropdown.svg' class="sideslip-triangle" :class="`${!market ? 'sideslip-triangle-down' : 'sideslip-triangle-up'}`">
               </span>
             </div>
-            <ul v-if="market" class="btc-marginT60 btc-marginL30">
+            <ul v-if="market" class="marginT60 marginL30">
                <li v-for="d in marketData" :key="Object.keys(d)[0]">
                   <a :href="`${ROUTER_VERSION}/exchange/${Object.keys(d)[0]}`">
                     {{ d[Object.keys(d)[0]].name }}
@@ -37,23 +37,23 @@
                 </li>
             </ul>
           </li>
-          <li class='btc-paddingB0' :class="{'btc-sideslip-marignB0': Consulting}">
+          <li class='paddingB0' :class="{'sideslip-marignB0': Consulting}">
             <div @click="Consulting = !Consulting">
               <img src='@/common/svg/sideslip-consulting.svg' /> {{ $t('side_slip_menu.consulting_center') }}
-              <span class="btc-fr btc-marginR20">
+              <span class="fr marginR20">
                 <img src='@/common/svg/sideslip-dropdown.svg' class="sideslip-triangle" :class="`${!Consulting ? 'sideslip-triangle-down' : 'sideslip-triangle-up'}`">
               </span>
             </div>
             <ul v-if="Consulting">
-              <li class='btc-paddingT60 btc-marginL30'>
+              <li class='paddingT60 marginL30'>
                 <a :href="CmsUrl.announcement">
                   {{ $t('side_slip_menu.announcement') }}
                 </a>
               </li>
-              <li class='btc-marginL30'>
+              <li class='marginL30'>
                 <a :href="CmsUrl.helper_center">FAQ</a>
               </li>
-              <li class='btc-marginL30 btc-marginB0'>
+              <li class='marginL30 marginB0'>
                 <a @click="goPath('/form/news')">
                   {{ $t('side_slip_menu.news') }}
                 </a>
@@ -64,15 +64,15 @@
             <img src='@/common/svg/sideslip-myaccount.svg' />
             {{ $t('side_slip_menu.my_account') }}
           </li>
-          <li :class="{'btc-sideslip-marignB0': Lang}">
+          <li :class="{'sideslip-marignB0': Lang}">
             <div @click="Lang = !Lang">
               <img src='@/common/svg/sideslip-lang.svg' /> {{ $t('side_slip_menu.language') }}
-              <span class="btc-fr btc-marginR20">
+              <span class="fr marginR20">
                 <img src='@/common/svg/sideslip-dropdown.svg' class="sideslip-triangle" :class="`${!Lang ? 'sideslip-triangle-down' : 'sideslip-triangle-up'}`">
               </span>
             </div>
-            <ul v-if="Lang" class="btc-marginT60">
-              <li v-for="data in locale" @click="changeLang(data.language)" :key="data.name" class='btc-marginL30'>
+            <ul v-if="Lang" class="marginT60">
+              <li v-for="data in locale" @click="changeLang(data.language)" :key="data.name" class='marginL30'>
                 {{ data.name }}
               </li>
             </ul>

@@ -1,12 +1,12 @@
 <template>
-  <footer class="btc-footer hidden-xs" :class="{'footer-from-home': FROM}">
+  <footer class="footer hidden-xs" :class="{'footer-from-home': FROM}">
     <nav class="container">
-      <div class="btc-footer-logo col-md-5">
+      <div class="footer-logo col-md-5">
         <img src="@/common/svg/logo.svg" alt="">
-        <p class="btc-marginB15">{{ $t("footer.introduction") }}</p>
+        <p class="marginB15">{{ $t("footer.introduction") }}</p>
         <p>{{ $t("footer.copyright") }}</p>
       </div>
-      <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
+      <ul class="info col-md-1 col-sm-2 marginL40">
         <li class=""><strong>{{ $t("footer.support") }}</strong></li>
         <!-- <li>
           <a :href="`${HOST_URL}/documents/api_v2`">{{ $t("footer.api") }}</a>
@@ -18,28 +18,28 @@
            <a :href="CmsUrl.announcement">{{ $t("footer.announcements") }}</a>
         </li>
       </ul>
-      <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
+      <ul class="info col-md-1 col-sm-2 marginL40">
         <li class=""><strong>{{ $t("footer.service") }}</strong></li>
         <li>
           <a :href="CmsUrl.application">{{ $t("footer.application") }}</a>
         </li>
         <li><a :href="CmsUrl.rate_details">{{ $t("footer.rate_details") }}</a></li>
       </ul>
-      <ul class="btc-info col-md-1 col-sm-2 btc-marginL40">
+      <ul class="info col-md-1 col-sm-2 marginL40">
         <li class=""><strong>{{ $t("footer.about") }}</strong></li>
         <li><a :href="`${CmsUrl.about_us}`">{{ $t("footer.about_us") }}</a></li>
         <li><a :href="`${CmsUrl.user_agreement}`">{{ $t("footer.user_agreement") }}</a></li>
         <li><a :href="CmsUrl.privacy_policy">{{ $t("footer.privacy_policy") }}</a></li>
       </ul>
-      <ul class="btc-info pull-right btc-marginT30 btc-marginR30 dropup">
-        <li class="btc-marginB30">
+      <ul class="info pull-right marginT30 marginR30 dropup">
+        <li class="marginB30">
          <a style="cursor:initial">
             <strong>{{ $t('homepage.contact_us') }}</strong>
         </a>
         </li>
-        <li class="btc-marginB15"><a href="mailto:support@hotex.com">support@hotex.com</a></li>
-        <li role="presentation" class="dropdown btc-country btc-img-position">
-          <a class="dropdown-toggle btc-paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        <li class="marginB15"><a href="mailto:support@hotex.com">support@hotex.com</a></li>
+        <li role="presentation" class="dropdown country img-position">
+          <a class="dropdown-toggle paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
             <span>{{getLanguage.name}}</span><span class="caret">
             </span>
           </a>

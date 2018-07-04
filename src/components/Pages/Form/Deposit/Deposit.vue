@@ -1,15 +1,15 @@
 <template>
-  <div class="btc-form">
-    <div class="btc-form-account btc-container-block">
+  <div class="form">
+    <div class="form-account container-block">
       <basic-table style="margin-top:0px" :SpinnerSize='150' :loading='loading' :len='xhrData.length' :captionTitle='captionTitle' :item='getRecord'>
-        <div slot='remark' @keyup.esc="search = ''" class="btc-account-search btc-fr btc-b">
-          <input v-model="search" class="btc-search" :placeholder='$t("homepage.search")' />
+        <div slot='remark' @keyup.esc="search = ''" class="box-account-search fr b">
+          <input v-model="search" class="search" :placeholder='$t("homepage.search")' />
           <i v-if='!search' class="account-search"></i>
           <i v-else class="account-delete" @click="search = ''" ></i>
         </div>
         <template slot="href"
           slot-scope="props">
-          <span class="btc-pointer btc-link" @click="OpenWindow(props.data.url)">
+          <span class="pointer link" @click="OpenWindow(props.data.url)">
             {{ props.data.context }}
           </span>
         </template>
@@ -17,7 +17,7 @@
     </div>
     <paginate
       ref="pagination"
-      class="btc-fr"
+      class="fr"
       :disabled="disabled"
       v-if="pagination !== 0"
       :page-count="pagination"
@@ -118,7 +118,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .btc-account-search{
+  .box-account-search{
     background: #f2f2f2;
     padding: 5px 8px;
     margin-bottom: 4px;
@@ -129,7 +129,7 @@ export default {
     }
   }
 
-  .btc-form-account{
+  .form-account{
     caption{
       strong{
         line-height: 33px

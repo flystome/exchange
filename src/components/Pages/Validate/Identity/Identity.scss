@@ -1,27 +1,27 @@
-.btc-validateIdentity{
+.validateIdentity{
   padding: 12px 190px 15px;
-  .btc-validateIdentity-uploadimg .btc-UploadExplain{
+  .validateIdentity-uploadimg .UploadExplain{
     margin-top: 10px
   }
 }
 
-.btc-validateIdentity .btc-UploadExplain{
+.validateIdentity .UploadExplain{
   // width: 140px;
 }
 
-.btc-validateIdentity .btc-Upload-block{
+.validateIdentity .Upload-block{
   // margin-top: 15px;
 }
 
-.btc-validateIdentity footer{
+.validateIdentity footer{
   overflow: hidden;
 }
 
-.btc-validateIdentity footer button{
+.validateIdentity footer button{
   margin-top: 15px;
 }
 
-.btc-validateIdentity input[type='file']{
+.validateIdentity input[type='file']{
   position: absolute;
   cursor: pointer;
   width: 100%;
@@ -30,22 +30,22 @@
   top: 0;
 }
 
-.btc-validateIdentity{
+.validateIdentity{
   input[type='radio']{
     position: relative;
     top: 2px
   }
-  .btc-news-prompt{
+  .news-prompt{
     height: 26px;
     right: -75px;
   }
 }
 
-// .btc-basicInput{
+// .basicInput{
 //   width: 360px;
 // }
 
-.btc-UploadExplain:first-child{
+.UploadExplain:first-child{
   margin-top: 200px
 }
 
@@ -55,7 +55,7 @@
   margin-bottom: 17px;
 }
 
-.btc-basicselect{
+.basicselect{
   border: none;
   border: 1px solid #dfe0e1;
   border-right: none;
@@ -64,29 +64,29 @@
   padding-left: 7px;
 }
 
-.btc-indentity-prompt{
+.indentity-prompt{
   position: relative;
   padding-bottom: 25px;
-  .btc-newsPrompt{
+  .newsPrompt{
     position: absolute;
     bottom: 0;
     right: 0;
-    .btc-news-animation{
+    .news-animation{
       position: relative;
     }
   }
 }
 
 @media (max-width: 990px){
-  .btc-validateIdentity{
+  .validateIdentity{
     padding: 12px 100px 15px;
   }
-  .btc-b-t{
+  .b-t{
     border-top:none;
   }
 }
 @media (max-width: 550px){
-  .btc-validateIdentity{
+  .validateIdentity{
     padding: 12px 10px 15px;
   }
 }

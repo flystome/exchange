@@ -1,9 +1,9 @@
-.btc-news-animation{
+.news-animation{
   color: #fc4a4a;
   // position: absolute;
 }
 
-.btc-newsPrompt{
+.newsPrompt{
   transition: all 0.5s;
 }
 .prompt-enter, .prompt-leave-to {
@@ -12,7 +12,7 @@
   opacity: 0;
 }
 
-// .btc-newsPrompt{
+// .newsPrompt{
 //   height: 22px;
 //   display: inline-block;
 //   width: 100%;

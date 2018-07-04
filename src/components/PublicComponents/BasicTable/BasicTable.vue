@@ -1,8 +1,9 @@
 <template>
-  <div class="btc-table-container">
-    <div class="bs-example btc-table" data-example-id="simple-table">
+  <div class="table-container">
+    <div class="bs-example box-table" data-example-id="simple-table">
       <table class="table table-condensed">
-        <caption class="font-w"><strong>{{ perfix ? perfix : '' }} {{$t(captionTitle)}}</strong>
+        <caption class="font-w">
+          <strong>{{ perfix ? perfix : '' }} {{$t(captionTitle)}}</strong>
           <slot name='remark'></slot>
         </caption>
         <tbody v-if="item.length > 1">
@@ -11,14 +12,12 @@
             :key="index"
             :style="Object.assign({}, data.style, style)"
             :class="{
-            'btc-tableTextright':index === 0,
-            'btc-tableTextleft': index === item.content.length-1,
-            'btc-tablehover':  Object.prototype.toString.call(data) === '[object Object]' ? data.hover : false
+            'tableTextright':index === 0,
+            'tableTextleft': index === item.content.length-1,
+            'tablehover':  Object.prototype.toString.call(data) === '[object Object]' ? data.hover : false
             }">
             {{ Object.prototype.toString.call(data) !== '[object Object]' ? data : (data.hover ? '' : data.context) }}
-            <slot v-if='data.hover' name="href"
-            :data='data'>
-            </slot>
+            <slot v-if='data.hover' name="href" :data='data'></slot>
             <slot v-if="(Object.prototype.toString.call(data) === '[object Object]' && data.type && data.type['aasm_state'] && ((data.type['aasm_state'] === 'submitting') || (data.type['aasm_state'] === 'submitted') || (data.type['aasm_state'] === 'email_expired') )) "
             name="cancel"
             :data='data'
@@ -27,11 +26,11 @@
             </td>
           </tr>
         </tbody>
-        <vue-simple-spinner class="btc-table-spinner" :size="SpinnerSize" v-if="loading" style="margin: 34.5px 0;">
+        <vue-simple-spinner class="table-spinner" :size="SpinnerSize" v-if="loading" style="margin: 34.5px 0;">
         </vue-simple-spinner>
-        <div class="text-center btc-table-record" v-if="!loading && !(item.length > 1)">
+        <div class="text-center table-record" v-if="!loading && !(item.length > 1)">
           <div>
-            <div class="btc-marginT15 btc-font12 btc-color999">{{$t('my_account.no_record')}}</div>
+            <div class="marginT15 font12 color999">{{$t('my_account.no_record')}}</div>
           </div>
         </div>
       </table>

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="btc-homepage-header">
+    <div class="homepage-header">
       <swiper class="carousel" :options="swiperOption">
         <div v-if="Notice.length === 0" style="min-height:480px">
-            <vue-simple-spinner  style="position: absolute;left: 50%;margin-left: -75px;margin-top: -75px;top:50%;" class="btc-notice-loading" size="150"></vue-simple-spinner>
+            <vue-simple-spinner  style="position: absolute;left: 50%;margin-left: -75px;margin-top: -75px;top:50%;" class="notice-loading" size="150"></vue-simple-spinner>
         </div>
         <swiper-slide v-for="data in Notice" :key="data.id">
           <!-- 'background': 'url('+ data.thumb + ') 50% 50%', -->
           <div :style="{ 'background-repeat': 'no-repeat'}" class=" img-container">
-            <div class="container btc-notice">
+            <div class="container notice">
                 <div>
                   <a :href="data.url">
                     <p>{{ data.the_title }}</p>
@@ -29,67 +29,67 @@
         </div>
       </swiper>
       <div class="from-container">
-        <div class="btc-homepage-login">
-          <div class="btc-nologin" v-if="loginData === 'none' || loginData.errors">
-          <!-- <div class="btc-nologin"> -->
+        <div class="homepage-login">
+          <div class="nologin" v-if="loginData === 'none' || loginData.errors">
+          <!-- <div class="nologin"> -->
             <div class="form" @keyup.enter="login">
               <span>{{ $t('homepage.login') }}</span>
-              <basic-input :delay='1000' ref="email" :validate='"required|email"' v-model="email" :placeholder="this.$t('homepage.enter_the_mailbox')" class="btc-input"></basic-input>
-              <basic-input :delay='1000' ref="password" type='password' :validate='"required|empty_password"' v-model="password" :placeholder="this.$t('homepage.enter_the_password')" class="btc-input"></basic-input>
-              <basic-button :disabled='disabled' @click.native="login" class="btn btc-button" :text="this.$t('homepage.login')"></basic-button>
+              <basic-input :delay='1000' ref="email" :validate='"required|email"' v-model="email" :placeholder="this.$t('homepage.enter_the_mailbox')" class="input"></basic-input>
+              <basic-input :delay='1000' ref="password" type='password' :validate='"required|empty_password"' v-model="password" :placeholder="this.$t('homepage.enter_the_password')" class="input"></basic-input>
+              <basic-button :disabled='disabled' @click.native="login" class="btn button" :text="this.$t('homepage.login')"></basic-button>
               <div>
-                <router-link class='btc-link' :to="`${ROUTER_VERSION}/register`">{{ $t('homepage.free_registration') }}</router-link>
-                <router-link :to="`${ROUTER_VERSION}/forgot_password`" :class='{"pull-right": language !=="en", "btc-homepage-block": language!=="zh-TW"}' class="btc-pointer btc-link">{{ $t('homepage.forget_the_password') }}</router-link>
+                <router-link class='link' :to="`${ROUTER_VERSION}/register`">{{ $t('homepage.free_registration') }}</router-link>
+                <router-link :to="`${ROUTER_VERSION}/forgot_password`" :class='{"pull-right": language !=="en", "homepage-block": language!=="zh-TW"}' class="pointer link">{{ $t('homepage.forget_the_password') }}</router-link>
               </div>
             </div>
           </div>
-          <div class="btc-logining" v-else>
+          <div class="logining" v-else>
             <span>{{ $t('homepage.welcome_to_use') }}
               <span>
-              <router-link class="btc-link" :to="`${ROUTER_VERSION}/my_account`">
+              <router-link class="link" :to="`${ROUTER_VERSION}/my_account`">
                 {{loginData.show_name}}
               </router-link>
               </span>
             </span>
-            <div class="btc-discount">
+            <div class="discount">
               <span style="color:#999999">{{ $t('homepage.discounts_of_transaction_costs') }}</span>
               <span>
-                <router-link class="btc-link" :to="`${ROUTER_VERSION}/referral`">
+                <router-link class="link" :to="`${ROUTER_VERSION}/referral`">
                   {{ factor }} {{ $t('homepage.off') }}
                 </router-link>
               </span>
             </div>
-            <div class="btc-marginT20">
+            <div class="marginT20">
               <span style="color:#999999">{{ $t('homepage.total_asset_estimation') }}</span>
               <span v-if="open"><i class="fa fa-btc"/> {{ TotalAssets | toLocaleString }}
-                <i class="pull-right btc-pointer home-open" @click="displaystate"/>
+                <i class="pull-right pointer home-open" @click="displaystate"/>
               </span>
               <span v-else>
                 *******
-                <i class="pull-right btc-pointer home-hide" @click="displaystate"/>
+                <i class="pull-right pointer home-hide" @click="displaystate"/>
               </span>
             </div>
-            <div class="btc-marginT25">
+            <div class="marginT25">
               <router-link :to="`${ROUTER_VERSION}/funds/deposit`">
-                <basic-button class="btc-button" :text="$t('homepage.deposit')">
+                <basic-button class="button" :text="$t('homepage.deposit')">
                 </basic-button>
               </router-link>
               <router-link :to="`${ROUTER_VERSION}/funds/withdraw`">
-                <basic-button class="btc-button pull-right" :text="$t('homepage.withdraw')"></basic-button>
+                <basic-button class="button pull-right" :text="$t('homepage.withdraw')"></basic-button>
               </router-link>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="btc-homepage-notice">
+    <div class="homepage-notice">
     </div>
-    <div class="btc-homepage-main">
-      <div class="btc-homepage-markets btc-marginT30">
-        <basic-button v-for="(item,index) in currency" :data-id="item" :key="item" class="btc-button pull-left" :class="{'btc-active':!(currencyindex == index)}"
+    <div class="homepage-main">
+      <div class="homepage-markets marginT30">
+        <basic-button v-for="(item,index) in currency" :data-id="item" :key="item" class="button pull-left" :class="{'active':!(currencyindex == index)}"
         @click.native="changemarket(index,item)" :text="item === 'my_optional' ? $t('homepage.my_optional') : `${item.toUpperCase()} ${$t('homepage.trading_area')}`"></basic-button>
-        <div @keyup.esc="search = ''" class="btc-homepage-search btc-fr btc-b">
-          <input v-model="search" class="btc-search" :placeholder='$t("homepage.search")' />
+        <div @keyup.esc="search = ''" class="homepage-search fr b">
+          <input v-model="search" class="search" :placeholder='$t("homepage.search")' />
           <i v-if='!search' class="home-search"></i>
           <i @click="search = ''" v-else class="home-search-delete"></i>
         </div>
@@ -101,45 +101,45 @@
           </div>
         </keep-alive>
       </div>
-      <div class="btc-homepage-logo text-center">
+      <div class="homepage-logo text-center">
         <i class="home-log"></i>
       </div>
-      <div class="btc-marginT50 btc-homepage-introduce">
+      <div class="marginT50 homepage-introduce">
         <div>
         </div>
         <div>
         </div>
-        <div id='btc-homepage-introduce'>
+        <div id='homepage-introduce'>
           <div>
             <a href="mailto:support@hotex.com">
-              <section :class="{'btc-homepage-transition': transition}" class="btc-margin0">
+              <section :class="{'homepage-transition': transition}" class="margin0">
                 <div class="text-center">
                   <i class="home-contact"/>
                   <div>{{ $t('homepage.contact_us') }}</div>
                 </div>
-                <div class="btc-font12 btc-color999">
+                <div class="font12 color999">
                   {{ $t('homepage.introduce_1') }}
                 </div>
               </section>
             </a>
             <a :href="`${HOST_URL}/documents/api_v2`">
-              <section :class="{'btc-homepage-transition': transition}">
+              <section :class="{'homepage-transition': transition}">
                 <div class="text-center">
                   <i class="home-api"/>
                   <div>{{ $t('homepage.api_interface') }}</div>
                 </div>
-                <div class="btc-font12 btc-color999">
+                <div class="font12 color999">
                   {{ $t('homepage.introduce_2') }}
                 </div>
               </section>
             </a>
             <a :href="`${CmsUrl.rate_details}`">
-              <section :class="{'btc-homepage-transition': transition}">
+              <section :class="{'homepage-transition': transition}">
                 <div class="text-center">
                   <i class="home-apply"/>
                   <div>{{ $t('footer.rate_details') }}</div>
                 </div>
-                <div class="btc-font12 btc-color999">
+                <div class="font12 color999">
                   {{ $t('homepage.introduce_3') }}
                 </div>
               </section>
@@ -147,46 +147,46 @@
           </div>
           <div>
             <a :href="CmsUrl.application">
-              <section :class="{'btc-homepage-transition': transition}" class="btc-margin0">
+              <section :class="{'homepage-transition': transition}" class="margin0">
                 <div class="text-center">
                   <i class="home-application"/>
                   <div>{{ $t('footer.application') }}</div>
                 </div>
-                <div class="btc-font12 btc-color999">
+                <div class="font12 color999">
                   {{ $t('homepage.introduce_4') }}
                 </div>
               </section>
             </a>
             <a :href="CmsUrl.privacy_policy">
-              <section :class="{'btc-homepage-transition': transition}">
+              <section :class="{'homepage-transition': transition}">
                 <div class="text-center">
                   <i class="home-privacy"/>
                   <div>{{ $t('footer.privacy_policy') }}</div>
                 </div>
-                <div class="btc-font12 btc-color999">
+                <div class="font12 color999">
                   {{ $t('homepage.introduce_5') }}
                 </div>
               </section>
             </a>
             <a :href="CmsUrl.about_us">
-              <section :class="{'btc-homepage-transition': transition}">
+              <section :class="{'homepage-transition': transition}">
                 <div class="text-center">
                   <i class="home-aboutus"/>
                   <div>{{ $t('footer.about_us') }}</div>
                 </div>
-                <div class="btc-font12 btc-color999">
+                <div class="font12 color999">
                   {{ $t('homepage.introduce_6') }}
                 </div>
               </section>
             </a>
           </div>
-          <div class="btc-color999 btc-introduce-describe">
+          <div class="color999 introduce-describe">
             <span>{{ $t('homepage.introduce_7') }}</span>
           </div>
         </div>
       </div>
-      <div class="btc-homepage-end">
-        <div class="btc-fl home-end-img">
+      <div class="homepage-end">
+        <div class="fl home-end-img">
           <img class="home-end" src="~Img/large/home-pc.png" />
           <img class="home-end" src="~Img/large/home-iphone.png" />
           <img class="home-end" src="~Img/large/home-android.png" />
@@ -310,7 +310,7 @@ export default {
     sr.reveal('#home-end-font', {
       origin: 'right'
     })
-    sr.reveal('#btc-homepage-introduce section', {
+    sr.reveal('#homepage-introduce section', {
       origin: 'top',
       distance: '20px',
       afterReveal () {
@@ -320,7 +320,7 @@ export default {
         }
       }
     }, 100)
-    sr.reveal('.btc-introduce-describe', {
+    sr.reveal('.introduce-describe', {
       origin: 'bottom',
       distance: '40px'
     }, 100)
@@ -581,15 +581,15 @@ export default {
 </style>
 
 <style lang='scss'>
-.btc-homepage-header .swiper-pagination-bullet{
+.homepage-header .swiper-pagination-bullet{
   background: white!important;
   opacity: .5!important;
 }
-.btc-homepage-header .swiper-pagination-bullet-active{
+.homepage-header .swiper-pagination-bullet-active{
   opacity: 1!important;
 }
 
-.btc-homepage-header {
+.homepage-header {
   .swiper-button-prev-div{
     left: 16px !important;
     position: absolute;
@@ -621,7 +621,7 @@ export default {
   }
 }
 
-.btc-homepage-header {
+.homepage-header {
   .swiper-button-next-div{
     right: 16px !important;
     position: absolute;
@@ -652,7 +652,7 @@ export default {
   }
 }
 
-.btc-homepage-header .btc-nologin input{
+.homepage-header .nologin input{
   font-size: 12px;
 }
 </style>

@@ -1,8 +1,8 @@
-.btc-container.container{
+.box-container.container{
   width: 100% !important;
   padding: 0;
   background-color: #fff;
-  .btc-homepage-header{
+  .homepage-header{
     min-height: 480px;
     margin-top: -3px;
     // background:linear-gradient(to bottom, #206eff, #2f9aff);
@@ -26,7 +26,7 @@
         background-repeat: no-repeat;
         // background:linear-gradient(to bottom, #206eff, #2f9aff);
       }
-      .btc-notice{
+      .notice{
         a{
           color: white;
         }
@@ -68,7 +68,7 @@
         .container{
           top: 68px;
         }
-        .btc-slide-info{
+        .slide-info{
           text-align: left;
           left: 0;
           margin-top:60px;
@@ -80,7 +80,7 @@
     .from-container{
       z-index: 1;
       position: relative;
-      .btc-homepage-login{
+      .homepage-login{
         width: 260px;
         background-color: #fff;
         position: absolute;
@@ -88,23 +88,23 @@
         top: 147px;
         padding: 25px 20px 0 20px;
         padding-bottom: 10px;
-        .btc-nologin{
+        .nologin{
           >.form{
             >span{
               display: block;
               margin-bottom: 21px;
               font-size: 13px;
             }
-            .btc-input{
+            .input{
               min-height: 50px !important;
             }
-            .btc-button{
+            .button{
               width: 100%;
               margin-bottom: 8px;
             }
           }
         }
-        .btc-logining{
+        .logining{
           >span{
             display: block;
             margin-bottom: 30px;
@@ -130,7 +130,7 @@
       }
     }
   }
-  // .btc-homepage-newCoin{
+  // .homepage-newCoin{
   //   padding-left: 10px;
   //   position: absolute;
   //   left: 0;
@@ -152,31 +152,31 @@
   //     }
   //   }
   // }
-  .btc-homepage-main{
+  .homepage-main{
     margin-top: 69px;
     background-color: #fff;
-    .btc-homepage-markets{
+    .homepage-markets{
       min-height: 400px;
       position: relative;
-      .btc-button{
+      .button{
         padding:  10px 12px;
       }
-      .btc-search{
+      .search{
         min-height: 0 !important;
         >input{
           background: url("~Img/sprites/home-search.png") no-repeat right;
         }
       }
-      .btc-active{
+      .active{
         outline: none;
         background-color: #fff;
         color: #333333;
       }
     }
-    .btc-homepage-logo{
+    .homepage-logo{
       margin-top: 120px;
     }
-    .btc-homepage-intr{
+    .homepage-intr{
       >span{
         display: block;
         border: 1px solid #f2f2f2;
@@ -188,7 +188,7 @@
         }
       }
     }
-    .btc-homepage-info{
+    .homepage-info{
       >a{
         >span{
           display: block;
@@ -199,7 +199,7 @@
         text-decoration: none
       }
     }
-    .btc-homepage-prompt{
+    .homepage-prompt{
       padding-bottom: 300px;
       >div{
         line-height: 24px;
@@ -214,7 +214,7 @@
       margin-right: 3px;
     }
   }
-  .btc-homepage-search{
+  .homepage-search{
     background: #f2f2f2;
     padding: 4px 8px;
     margin-top: 1px;
@@ -225,7 +225,7 @@
       background: #f2f2f2;
     }
   }
-  .btc-homepage-block{
+  .homepage-block{
     display: block;
     margin-top: 4px;
     z-index: 16;
@@ -233,14 +233,14 @@
   }
 }
 
-.btc-homepage-info{
+.homepage-info{
   span{
     cursor: pointer
   }
 }
 
-.btc-homepage-introduce{
-  .btc-homepage-transition{
+.homepage-introduce{
+  .homepage-transition{
     transition: all .3s ease!important;
   }
   height: 583px;
@@ -268,7 +268,7 @@
     height: 100%;
     padding-top: 92px;
     padding-bottom: 96px;
-    .btc-margin0{
+    .margin0{
       margin:0
     }
     >div>a>section{
@@ -320,7 +320,7 @@
   }
 }
 
-.btc-homepage-end{
+.homepage-end{
   margin: 128px 0;
   overflow: hidden;
   .home-end-img {
@@ -353,10 +353,10 @@
 
 
 @media (max-width: 1302px){
-  .btc-homepage-login{
+  .homepage-login{
     right: 75px!important;
   }
-  .btc-homepage-header .carousel .btc-notice{
+  .homepage-header .carousel .notice{
     p,span{
       margin-left: 58px;
     }

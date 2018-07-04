@@ -1,8 +1,8 @@
 <template>
-  <div v-if="!loginData.app_activated && loginData.activated" class="btc-validateGoogle  btc-container-block">
-    <div class="row btc-color666">
-      <span class="btc-color333">
-        <router-link :to="`${ROUTER_VERSION}/my_account`" class="btc-link">
+  <div v-if="!loginData.app_activated && loginData.activated" class="validateGoogle  container-block">
+    <div class="row color666">
+      <span class="color333">
+        <router-link :to="`${ROUTER_VERSION}/my_account`" class="link">
           {{$t('title.my_account')}}
         </router-link>
         >
@@ -12,23 +12,23 @@
       </span>
     </div>
     <template v-if="step === 1">
-      <div class="row btc-validate-gpt btc-marginB60" style="margin-bottom: 150px;">
-        <div class="col-md-4 col-xs-12 col-md-offset-2 text-center btc-b-r  btc-validate-googleApp">
+      <div class="row validate-gpt marginB60" style="margin-bottom: 150px;">
+        <div class="col-md-4 col-xs-12 col-md-offset-2 text-center b-r  validate-googleApp">
             <img src="~Img/large/google-authentication.png">
-          <div class="row btc-f btc-marginT10">
+          <div class="row f marginT10">
             <strong>
               Google Authenticator
             </strong>
           </div>
         </div>
-        <div class="col-md-5 col-xs-12 col-md-offset-1  btc-marginT30 btc-validate-textCenter">
+        <div class="col-md-5 col-xs-12 col-md-offset-1  marginT30 validate-textCenter">
           <div class='row'>
             {{$t('validate_google.download_authenticator_at_store')}}
           </div>
-          <div class="row btc-marginT20">
+          <div class="row marginT20">
             <div class="col-xs-6">
               <a href="https://itunes.apple.com/cn/app/google-authent icator/id388497605?mt=8" target="_blank">
-                <i class='google-ios btc-marginR5 googleImg'></i>
+                <i class='google-ios marginR5 googleImg'></i>
               </a>
             </div>
             <div class="col-xs-6">
@@ -39,37 +39,37 @@
           </div>
         </div>
       </div>
-      <div class="text-right btc-marginT40">
+      <div class="text-right marginT40">
         <basic-button :disabled="disabled" class="btn col-xs-12 col-md-1 pull-right" @click.native="addStep" :text='$t("validate_google.next")'></basic-button>
       </div>
     </template>
     <template v-if="step === 2">
-      <div class="row btc-validate-gpt" @keyup.enter='gValidate'>
+      <div class="row validate-gpt" @keyup.enter='gValidate'>
         <div class="col-md-6">
           <div class="col-md-6 text-center">
             <div class='row'>
               <qr-code v-if="!loading" :length='"160px"' :dateUrl="qrcode(loginData.google_uri)"></qr-code>
               <vue-simple-spinner v-else style="margin-bottom:25px" size="135"></vue-simple-spinner>
             </div>
-            <div class="row btc-marginT15 btc-margin-left useGoogle">
+            <div class="row marginT15 margin-left useGoogle">
               {{$t('validate_google.using')}}
               <strong>{{$t('validate_google.google_to_verify_app')}}</strong>
             </div>
-            <div class="row btc-marginT5 useGoogle">
+            <div class="row marginT5 useGoogle">
               {{$t('validate_google.scan_qrcode')}}
             </div>
           </div>
-          <div class="col-md-6 btc-validate-textCenter btc-validate-googlekey">
-              <div class="row btc-marginT10" style="height:20px">
-                <strong v-if="!loading" class="btc-link ">
+          <div class="col-md-6 validate-textCenter validate-googlekey">
+              <div class="row marginT10" style="height:20px">
+                <strong v-if="!loading" class="link ">
                   {{ loginData.google_otp_secret }}
                 </strong>
               </div>
-              <div class="row btc-marginT20">
+              <div class="row marginT20">
               <span style="display: block;">
                 {{$t('validate_google.cant_scan_enter_keys')}}
               </span>
-              <div class="refreshqrcode btc-marginT15 btn" :disabled="disabled" @click="RenovateQrcode">
+              <div class="refreshqrcode marginT15 btn" :disabled="disabled" @click="RenovateQrcode">
                 <i class="google-refresh"></i>
                 {{$t('validate_google.refresh_qrcode')}}
               </div>
@@ -77,8 +77,8 @@
           </div>
         </div>
         <div class="col-md-6">
-          <form class="btc-b-l">
-            <div class="col-md-12 btc-validate-prompt">
+          <form class="b-l">
+            <div class="col-md-12 validate-prompt">
               <news-prompt :text='prompt'></news-prompt>
             </div>
             <div class='row'>
@@ -89,9 +89,9 @@
             </div>
             <div class="row" v-if="loginData.sms_activated">
               <div class="col-md-offset-2 col-md-9 col-xs-12">
-                <basic-input  style="min-height:66px" class="col-md-9 col-xs-9 btc-paddingL0" @focus.native="promptEmpty()" ref="smscode" :validate='"required|sms_verification_code"' :placeholder='$t("validate_sms.verification_code")' v-model="sms_code">
+                <basic-input  style="min-height:66px" class="col-md-9 col-xs-9 paddingL0" @focus.native="promptEmpty()" ref="smscode" :validate='"required|sms_verification_code"' :placeholder='$t("validate_sms.verification_code")' v-model="sms_code">
                 </basic-input>
-                <button class="btc-white-btn col-md-3 col-xs-3" :disabled="disabled" @click.prevent="SendSms">
+                <button class="white-btn col-md-3 col-xs-3" :disabled="disabled" @click.prevent="SendSms">
                   {{ timer }}
                 </button>
               </div>
@@ -99,9 +99,9 @@
           </form>
         </div>
       </div>
-      <div class="text-right btc-marginT65 minusStep">
-        <span @click="minusStep" class="col-xs-12 col-md-1 btc-link btc-fl btc-marginT10 btc-poniter" style="display:inline-block">{{$t('validate_google.prve')}}</span>
-        <basic-button  @click.native='gValidate' :disabled="disabled" class="btn col-xs-12 col-md-2 pull-right btc-marginT10" :text='$t("validate_google.google_verification")'></basic-button>
+      <div class="text-right marginT65 minusStep">
+        <span @click="minusStep" class="col-xs-12 col-md-1 link fl marginT10 poniter" style="display:inline-block">{{$t('validate_google.prve')}}</span>
+        <basic-button  @click.native='gValidate' :disabled="disabled" class="btn col-xs-12 col-md-2 pull-right marginT10" :text='$t("validate_google.google_verification")'></basic-button>
       </div>
     </template>
   </div>

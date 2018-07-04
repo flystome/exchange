@@ -13,12 +13,12 @@
           <th>{{ $t('homepage.price_trend') }} (7d)</th>
         </tr>
       </thead>
-      <tbody ref="itemlength" class="btc-b-t">
+      <tbody ref="itemlength" class="b-t">
         <tr v-for='(item , index) in oldData' :key='item.name' v-if="matchName(item.name, index)">
           <td>
-            <a class="btc-homepage-currency" style="color: #333333;">
+            <a class="homepage-currency" style="color: #333333;">
               <span>
-                <router-link class="btc-homepage-market" :to="`${ROUTER_VERSION}/exchange/${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`">{{item.quote_currency}}<span style="color:#999;min-width: auto;">/{{ item.base_currency }}</span>
+                <router-link class="homepage-market" :to="`${ROUTER_VERSION}/exchange/${item.quote_currency.toLowerCase()}${item.base_currency.toLowerCase()}`">{{item.quote_currency}}<span style="color:#999;min-width: auto;">/{{ item.base_currency }}</span>
                 </router-link>
               </span>
               <i :disabled="disabled" @click="portfolios(item, index)" class="far fa fa-star mylove" :class="{'is-star': item.is_portfolios}"></i>
@@ -29,12 +29,12 @@
           </td>
           <td>{{ item.volume }}</td>
           <td>{{ ComputeTurnover(item) }}</td>
-          <td class="btc-percent" style="color:#fff">
+          <td class="percent" style="color:#fff">
             <div v-if="Number(item.percent) > 0"><span style="background:#40b246">+{{ Number(item.percent).toFixed(2) }}%</span></div>
             <div v-else-if="Number(item.percent) < 0"><span style="background:#e9454d">{{ Number(item.percent).toFixed(2) }}%</span></div>
             <div v-else><span style="background:#999999">+{{ Number(item.percent).toFixed(2) }}</span></div>
           </td>
-          <td class="btc-homepage-trend">
+          <td class="homepage-trend">
             <trend v-if="trend" ref='trend' style="position: absolute; left: -7px;"
               viewBox="0 0 250 70"
               :data="trendArray(item)"
@@ -45,7 +45,7 @@
         </tr>
       </tbody>
     </table>
-    <div class="btc-currency-none text-center btc-marginT150" v-if="itemLength === 0">
+    <div class="currency-none text-center marginT150" v-if="itemLength === 0">
       {{ $t('homepage.no_matching_currency') }}
     </div>
   </div>

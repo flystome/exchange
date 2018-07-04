@@ -12,20 +12,20 @@
             <i v-if="FROM" class='header-hlog'/>
             <img v-else src="@/common/svg/logo.svg">
           </router-link>
-          <div class="btc-header-sideslip" @click="SideSlipMenuDisplay(true)">
+          <div class="header-sideslip" @click="SideSlipMenuDisplay(true)">
             <a></a>
           </div>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="z-index:100">
           <ul class="nav navbar-nav">
-            <li class="btc-link">
+            <li class="link">
                 <router-link to="/">
                   {{$t('nav.home')}}
                   <span class="sr-only">(current)</span>
                 </router-link>
             </li>
-            <li role="presentation" class="dropdown btc-country btc-market btc-img-position">
-              <a class="dropdown-toggle btc-paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <li role="presentation" class="dropdown country market img-position">
+              <a class="dropdown-toggle paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <span style="font-size: 14px;">{{$t('nav.transaction')}}</span><span class="caret">
                 </span>
               </a>
@@ -40,16 +40,16 @@
                 </li>
               </ul>
             </li>
-            <li class="btc-link"><a @click="validateEmail">{{$t('nav.wallet')}}</a></li>
-            <li class="btc-link"><a :href="CmsUrl.announcement">{{$t('nav.announcement')}}</a></li>
-            <li class="btc-link"><a :href="CmsUrl.helper_center">{{$t('nav.qa')}}</a></li>
+            <li class="link"><a @click="validateEmail">{{$t('nav.wallet')}}</a></li>
+            <li class="link"><a :href="CmsUrl.announcement">{{$t('nav.announcement')}}</a></li>
+            <li class="link"><a :href="CmsUrl.helper_center">{{$t('nav.qa')}}</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right btc-header-signin btc-marginT15" v-if="loginData === 'none' || loginData.errors">
+          <ul class="nav navbar-nav navbar-right header-signin marginT15" v-if="loginData === 'none' || loginData.errors">
             {{$t('nav.please')}}<router-link :to="`${ROUTER_VERSION}/login`">{{$t('nav.login')}}</router-link>{{$t('nav.or')}}<router-link :to="`${ROUTER_VERSION}/register`">{{$t('nav.register')}}</router-link>
           </ul>
           <ul class="nav navbar-nav navbar-right" v-else>
-            <li class="btc-marginL15">
-              <router-link :to="`${ROUTER_VERSION}/ticket/open`" class="btc-header-letter">
+            <li class="marginL15">
+              <router-link :to="`${ROUTER_VERSION}/ticket/open`" class="header-letter">
                 <span :class="{'nav-unread': loginData.has_unread_tickets}">
                   <i v-if="FROM" class='header-hticket' style="top: 4px;"/>
                   <i v-else class='header-ticket' style="top: 4px;"/>
@@ -57,8 +57,8 @@
                 <span class="message">{{ $t("nav.message") }}</span>
               </router-link>
             </li>
-            <li class="btc-marginL15">
-              <router-link :to="`${ROUTER_VERSION}/form/news`" class="btc-header-letter">
+            <li class="marginL15">
+              <router-link :to="`${ROUTER_VERSION}/form/news`" class="header-letter">
                 <span :class="{'nav-unread': loginData.has_unread_conversations}">
                   <i v-if="FROM" class='header-hletterlog' style="top: 4px;"/>
                   <i v-else class='header-letterlog' style="top: 4px;"/>
@@ -66,11 +66,11 @@
                 <span class="message">{{ $t("nav.message") }}</span>
               </router-link>
             </li>
-            <li class="btc-img-position dropdown btc-ifo" style="cursor: pointer">
-              <!-- <img src="~Img/avatarlog.png" class="btc-header-avatar">
+            <li class="img-position dropdown ifo" style="cursor: pointer">
+              <!-- <img src="~Img/avatarlog.png" class="header-avatar">
               {{ this.loginData.email }} -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <!-- <img src="~Img/header-avatarlog.png" class="btc-header-avatar"> -->
+                <!-- <img src="~Img/header-avatarlog.png" class="header-avatar"> -->
                 <i v-if="FROM" class='header-havatarlog'/>
                 <i v-else class='header-avatarlog'/>
                 {{ this.loginData.show_name }}
@@ -90,8 +90,8 @@
                 <li><a :href="`${HOST_URL}/signout`">{{$t('nav.exit')}}</a></li>
               </ul>
             </li>
-            <!-- <li role="presentation" class="dropdown btc-country btc-img-position">
-              <a class="dropdown-toggle btc-paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <!-- <li role="presentation" class="dropdown country img-position">
+              <a class="dropdown-toggle paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <span>{{getLanguage.name}}</span><span class="caret">
                 </span>
               </a>

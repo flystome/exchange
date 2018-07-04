@@ -1,4 +1,4 @@
-.btc-sign-block{
+.sign-block{
   width: 465px;
   margin: 0 auto;
   footer{
@@ -8,7 +8,7 @@
   }
 }
 
-.btc-sign-form{
+.sign-form{
   margin-top: 70px;
   header{
     padding:35px;
@@ -24,18 +24,18 @@
     .title{
       font-size: 16px
     }
-    .btc-basic-button{
+    .basic-button{
       width: 100%;
       padding: 11px 14px;
     }
     .form-footer{
-      .btc-fr{
+      .fr{
         color: #888888;
         a{
           margin-left: 7px
         }
       }
-      .btc-fl{
+      .fl{
         color: #888888;
         a{
           margin-left: 7px
@@ -46,14 +46,14 @@
 }
 
 @media (max-width: 537px){
-  .btc-sign-block{
+  .sign-block{
     width: 96%;
     .form{
       padding: 0 23px;
       padding-top: 31px;
     }
   }
-  .btc-referrer{
+  .referrer{
     float: none;
     display: block;
     margin-top: 5px;

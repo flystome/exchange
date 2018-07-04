@@ -34,7 +34,7 @@ table{
         line-height: 40px;
         border-bottom: 1px solid #f2f2f2;
         white-space: nowrap;
-        .btc-percent{
+        .percent{
           color:#999999;
           .text-up{
             color:#fd4041
@@ -60,7 +60,7 @@ table{
         }
       }
     }
-    .btc-homepage-trend{
+    .homepage-trend{
       max-width: 155px;
       padding-right: 25px;
       width: 220px;
@@ -71,7 +71,7 @@ table{
   }
 }
 
-.btc-percent span{
+.percent span{
   width: 80px;
   height: 25px;
   display: inline-block;
@@ -89,7 +89,7 @@ th{
   }
 }
 
-.btc-homepage-currency{
+.homepage-currency{
   position: relative;
   >div{
     display: inline-block;
@@ -121,11 +121,11 @@ i[disabled='disabled']{
   cursor: not-allowed
 }
 
-.btc-currency-none{
+.currency-none{
   margin-top: 150px
 }
 
-.btc-homepage-market{
+.homepage-market{
   color: black;
   &:hover{
     text-decoration: none;

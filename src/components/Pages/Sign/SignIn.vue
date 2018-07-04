@@ -1,28 +1,28 @@
 <template>
-  <div @keyup.enter="login" class="btc-signIn btc-sign-block">
-    <div class="btc-sign-form">
+  <div @keyup.enter="login" class="signIn sign-block">
+    <div class="sign-form">
       <header class="text-center">
         <img src="~Img/large/sign-logo.png">
       </header>
       <div class="form">
-        <div class="title btc-color333">
+        <div class="title color333">
           {{ $t('sign.login_account') }}
         </div>
         <news-prompt :Time='3000' v-on:bind='prompt = $event' :text="prompt"></news-prompt>
         <basic-input :danger='true' ref="email" v-model="SignInData.email" :validate='"required|email"' :placeholder="$t('sign.email_address')"></basic-input>
-        <basic-input :danger='true' type='password' ref="password" v-model="SignInData.password" :validate='"required|empty_password"' class="btc-marginT15" :placeholder="$t('sign.login_password')"></basic-input>
-        <basic-input class="btc-marginT15" v-if="random" :validate='"required|verify_code"' :danger='true' ref="verify_code" v-model="SignInData.verifycode" :placeholder="$t('validation.verify_code')"></basic-input>
-        <img v-if="random" class="btc-pointer" :src="Rucaptcha" @click="changeCaptcha">
+        <basic-input :danger='true' type='password' ref="password" v-model="SignInData.password" :validate='"required|empty_password"' class="marginT15" :placeholder="$t('sign.login_password')"></basic-input>
+        <basic-input class="marginT15" v-if="random" :validate='"required|verify_code"' :danger='true' ref="verify_code" v-model="SignInData.verifycode" :placeholder="$t('validation.verify_code')"></basic-input>
+        <img v-if="random" class="pointer" :src="Rucaptcha" @click="changeCaptcha">
         <basic-button :disabled="disabled" class="btn" @click.native='login' :text='$t("sign.login")'></basic-button>
         <div class="form-footer">
-          <span><router-link class="btc-link" :to="`${ROUTER_VERSION}/forgot_password`">{{$t('homepage.forget_the_password')}}</router-link></span>
-          <span :class="lang === 'en' ? 'btc-fl' : 'btc-fr'">{{$t('sign.no_account_number')}}<router-link :to='`${ROUTER_VERSION}/register`' class="btc-link">{{$t('sign.to_register')}}</router-link></span>
+          <span><router-link class="link" :to="`${ROUTER_VERSION}/forgot_password`">{{$t('homepage.forget_the_password')}}</router-link></span>
+          <span :class="lang === 'en' ? 'fl' : 'fr'">{{$t('sign.no_account_number')}}<router-link :to='`${ROUTER_VERSION}/register`' class="link">{{$t('sign.to_register')}}</router-link></span>
         </div>
       </div>
     </div>
-    <!-- <footer class="btc-font12 btc-marginT30 text-center" style="color: #9b9b9b">
+    <!-- <footer class="font12 marginT30 text-center" style="color: #9b9b9b">
       <div>© 2018 hotex.com All Rights Reserved</div>
-      <div class="btc-marginT5">{{$t('sign.official_website')}}：www.hotex.com {{$t('sign.official_email')}}：<a href="mailto:support@hotex.com">support@hotex.com</a></div>
+      <div class="marginT5">{{$t('sign.official_website')}}：www.hotex.com {{$t('sign.official_email')}}：<a href="mailto:support@hotex.com">support@hotex.com</a></div>
     </footer> -->
   </div>
 </template>
@@ -148,7 +148,7 @@ export default {
 
 <style lang="scss" scoped>
 @import './common.scss';
-.btc-basic-button{
+.basic-button{
   margin-top: 24px;
 }
 .form-footer{
@@ -158,7 +158,7 @@ export default {
 </style>
 
 <style>
-.btc-sign-block .btc-basicInput{
+.sign-block .basicInput{
   height:39px;
   font-size: 14px;
 }

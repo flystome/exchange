@@ -1,25 +1,25 @@
 <template>
-  <div class="btc-member-center" @click="ChoiceStatus(false)" @keyup.enter="Withdraw" :class="{'btc-currency-frommoblie': FromMoblie}">
-    <div class="btc-container-block">
-      <div class="btc-currency-withdraw">
-          <div class="btc-fl">
+  <div class="member-center" @click="ChoiceStatus(false)" @keyup.enter="Withdraw" :class="{'currency-frommoblie': FromMoblie}">
+    <div class="container-block">
+      <div class="currency-withdraw">
+          <div class="fl">
             <span>
               <i class="withdraw-asset"></i>
               {{$t('withdraw_currency.total_assets')}} <span>{{ TotalAssets | toLocaleString }}</span> BTC
             </span>
-            <i class="withdraw-freeze btc-marginL45 btc-marginR5"></i>
-            <a class='btc-color999'>
+            <i class="withdraw-freeze marginL45 marginR5"></i>
+            <a class='color999'>
               {{$t('withdraw_currency.frozen_assets')}} {{ LockAssets | toLocaleString }} BTC
             </a>
           </div>
-        <div class="btc-fr">
-          <!-- <router-link :to="`${ROUTER_VERSION}/funds/deposit`" class="btc-poniter" :class="{'btc-link':route === 'deposit'}">
+        <div class="fr">
+          <!-- <router-link :to="`${ROUTER_VERSION}/funds/deposit`" class="poniter" :class="{'link':route === 'deposit'}">
             <strong>
               {{ $t('withdraw_currency.deposit') }}
             </strong>
           </router-link>
           <span>|</span>
-          <router-link :to="`${ROUTER_VERSION}/funds/withdraw`" class="btc-poniter" :class="{'btc-link':route === 'withdraw'}">
+          <router-link :to="`${ROUTER_VERSION}/funds/withdraw`" class="poniter" :class="{'link':route === 'withdraw'}">
             <strong>
               {{ $t('withdraw_currency.withdraw') }}
           </strong>
@@ -37,35 +37,31 @@
       </div>
     </div>
     <template v-if='route === "deposit" || route === "withdraw"'>
-      <div class="btc-container-block">
-        <div class="btc-withdraw-coin">
+      <div class="container-block">
+        <div class="withdraw-coin">
           <a v-for="(coin,index) in this.currencies"
           :disabled='disabled'
-          :class="{'is-chioce':index === length, 'is-enabled': !coin.node_enabled, 'btc-indent': !(requireImg(`market/market-${coin.code}`))}"
+          :class="{'is-chioce':index === length, 'is-enabled': !coin.node_enabled, 'indent': !(requireImg(`market/market-${coin.code}`))}"
           @click='ChoiceCoin(index, coin.node_enabled)'
-          class="btc-b btn"
+          class="b btn"
           :key="coin.code">
             <img v-if="requireImg(`market/market-${coin.code}.svg`)" :src="requireImg(`market/market-${coin.code}.svg`)">
-            <span :class='{"btc-withoutimg": !requireImg(`market/market-${coin.code}.svg`)}'>
+            <span :class='{"withoutimg": !requireImg(`market/market-${coin.code}.svg`)}'>
               {{ coin.code | toUpperCase }}
             </span>
           </a>
         </div>
-        <div class="btc-b btc-withdraw-formContainer" v-if="route === 'withdraw'">
-          <div class="btc-withdraw-form">
-            <!-- <basic-option :data='[{
-              name: "withdraw_currency_address",
-              value: this.$t("withdraw_currency.withdraw_currency_address")
-            }]' v-model="this.withdrawAddress"></basic-option> -->
+        <div class="b withdraw-formContainer" v-if="route === 'withdraw'">
+          <div class="withdraw-form">
             <news-prompt :Time='3000' v-on:bind='withdraw_prompt = $event' :text='withdraw_prompt'></news-prompt>
-            <div @click.stop="ChoiceStatus(!choice)" class="btc-withdraw-address btc-b-l" :style="{background:`url('${requireImg('large/select.png')}') 100% 100% no-repeat`}">
+            <div @click.stop="ChoiceStatus(!choice)" class="withdraw-address b-l" :style="{background:`url('${requireImg('large/select.png')}') 100% 100% no-repeat`}">
               {{ Address !== 'withdraw_currency.withdraw_currency_address' ? Address : $t('withdraw_currency.withdraw_currency_address') }}
             </div>
-            <div v-show="choice" @click.stop="ChoiceStatus(true)" class='btc-b btc-address-contain'>
-              <div class="btc-address-height">
-                <div class="btc-pointer" v-for="(data, index) in FundSources[CurrencyType]" :key="index" @click.stop="ChoiceAddress(index, data.id)">
-                    <div class="btc-fl">
-                      <div class="btc-color999">
+            <div v-show="choice" @click.stop="ChoiceStatus(true)" class='b address-contain'>
+              <div class="address-height">
+                <div class="pointer" v-for="(data, index) in FundSources[CurrencyType]" :key="index" @click.stop="ChoiceAddress(index, data.id)">
+                    <div class="fl">
+                      <div class="color999">
                         <strong style="height: 16px;display: block;">
                           {{ data.extra }}
                         </strong>
@@ -76,59 +72,59 @@
                         </strong>
                       </div>
                   </div>
-                  <div class="btc-fr"><span
+                  <div class="fr"><span
                   @click.stop="DefaultFunds(data.id, index)">{{$t('withdraw_currency.set_as_default')}}</span>丨<span
                   @click.stop="DeleteFunds(data.id, FundSources[CurrencyType], index)">{{$t('withdraw_currency.delete')}}</span></div>
                   </div>
               </div>
-              <div class="btc-addnew btc-pointer text-center" @click.stop="AddAddress">
+              <div class="addnew pointer text-center" @click.stop="AddAddress">
                   <i class="withdraw-add"></i>
                   {{$t('withdraw_currency.use_a_new_address')}}
               </div>
             </div>
             <div v-show='!choice'>
-              <div class="btc-marginT15 btc-withdraw-add" style="display: flex" v-if="withdrawAddress">
-                <basic-input class="btc-withdraw-all" v-model="WithdrawData.remark" :placeholder='$t("withdraw_currency.remark_label")'>
+              <div class="marginT15 withdraw-add" style="display: flex" v-if="withdrawAddress">
+                <basic-input class="withdraw-all" v-model="WithdrawData.remark" :placeholder='$t("withdraw_currency.remark_label")'>
                 </basic-input>
-                <basic-input class="btc-withdraw-all" :validate='"required|withdraw_address"' :danger='true' ref="withdraw_address" v-model="WithdrawData.newAddress" :placeholder='$t("withdraw_currency.withdraw_currency_address")'>
+                <basic-input class="withdraw-all" :validate='"required|withdraw_address"' :danger='true' ref="withdraw_address" v-model="WithdrawData.newAddress" :placeholder='$t("withdraw_currency.withdraw_currency_address")'>
                 </basic-input>
               </div>
-              <div class="btc-withdraw-explain">
-                <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance | toFixed | toLocaleString }} {{ CurrencyType | toUpperCase }} <span class="btc-marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain | toFixed | toLocaleString }} {{ CurrencyType | toUpperCase }}<span v-if="equivalence" style="color:black">≈{{ equivalence | toFixed | toLocaleString }} BTC</span>
+              <div class="withdraw-explain">
+                <span>{{ $t('withdraw_currency.available_balance') }}</span> {{ Balance | toFixed | toLocaleString }} {{ CurrencyType | toUpperCase }} <span class="marginL15">{{ $t('withdraw_currency.remaining_withdraw') }}</span> {{ Remain | toFixed | toLocaleString }} {{ CurrencyType | toUpperCase }}<span v-if="equivalence" style="color:black">≈{{ equivalence | toFixed | toLocaleString }} BTC</span>
               </div>
               <template v-if="Address !== 'withdraw_currency.withdraw_currency_address' || withdrawAddress">
-                <basic-input :validate='"required|withdraw_amount"' :invalid='invalid' :danger='true' ref='withdraw_amount' v-model="WithdrawData.amount" class="btc-withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
-                    <basic-button :disabled='disabled' @click.native="WithdrawAll" class="btc-link btn" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
+                <basic-input :validate='"required|withdraw_amount"' :invalid='invalid' :danger='true' ref='withdraw_amount' v-model="WithdrawData.amount" class="withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
+                    <basic-button :disabled='disabled' @click.native="WithdrawAll" class="link btn" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
                   </basic-input>
-                <div class="btc-withdraw-explain">
+                <div class="withdraw-explain">
                   <span>{{ $t('withdraw_currency.minimum_withdraw_amount_of_money') }} {{ currency_precision }}</span>
-                  <span class="btc-fr">{{ $t('withdraw_currency.poundage') }} {{ withdraw_fee }}</span>
+                  <span class="fr">{{ $t('withdraw_currency.poundage') }} {{ withdraw_fee }}</span>
                   </div>
-                <div class="btc-choice-validate">
-                  <select class="btc-select-option" ref='select'
+                <div class="choice-validate">
+                  <select class="select-option" ref='select'
                   v-model="validate"
                   :disabled="disabled">
                     <option v-if="loginData.app_activated" value="google">{{ this.$t('withdraw_currency.google_validate') }}</option>
                     <option v-if="loginData.sms_activated" value="sms">{{ this.$t('withdraw_currency.sms') }}</option>
                   </select>
-                  <basic-input :danger='true' ref='verify_code' :validate='"required|verify_code"'  v-model="WithdrawData.otp"  :key="validate" class="btc-marginB10">
+                  <basic-input :danger='true' ref='verify_code' :validate='"required|verify_code"'  v-model="WithdrawData.otp"  :key="validate" class="marginB10">
                   </basic-input>
-                  <button :disabled='disabled' @click="SendSms" v-if="validate === 'sms'" class="btc-white-btn btn">{{ timer }}</button>
+                  <button :disabled='disabled' @click="SendSms" v-if="validate === 'sms'" class="white-btn btn">{{ timer }}</button>
                 </div>
                 <div v-if="Rucaptcha">
-                  <basic-input :danger='true' ref='rucaptcha' :validate='"required|verify_code"' :placeholder="$t('deposit_currency.identifying_code')" v-model="WithdrawData.rucaptcha"  class="btc-marginT10">
+                  <basic-input :danger='true' ref='rucaptcha' :validate='"required|verify_code"' :placeholder="$t('deposit_currency.identifying_code')" v-model="WithdrawData.rucaptcha"  class="marginT10">
                   </basic-input>
-                  <img @click="ChangeRucaptcha" class="btc-pointer btc-marginB10" :key="'rucaptcha'" :src="`${HOST_URL}${Rucaptcha}`">
+                  <img @click="ChangeRucaptcha" class="pointer marginB10" :key="'rucaptcha'" :src="`${HOST_URL}${Rucaptcha}`">
                 </div>
-              <basic-button class="btn" :disabled='disabled' :class="{'btc-marginT30': !Rucaptcha}" @click.native="Withdraw" style="width:100%" :text="$t('withdraw_currency.withdraw')">
+              <basic-button class="btn" :disabled='disabled' :class="{'marginT30': !Rucaptcha}" @click.native="Withdraw" style="width:100%" :text="$t('withdraw_currency.withdraw')">
               </basic-button>
               </template>
 
             </div>
           </div>
-          <div class="btc-withdraw-currency">
+          <div class="withdraw-currency">
             <ul>
-              <strong class="btc-withdraw-remind">{{ $t('withdraw_currency.reminder') }}</strong>
+              <strong class="withdraw-remind">{{ $t('withdraw_currency.reminder') }}</strong>
               <li>
                 {{ $t('withdraw_currency.min_currency') }}
               </li>
@@ -141,18 +137,18 @@
             </ul>
           </div>
         </div>
-        <div v-if="route === 'deposit'" class="btc-deposit-currency btc-paddingT40 btc-b">
+        <div v-if="route === 'deposit'" class="deposit-currency paddingT40 b">
           <template v-if="deposit_address !== ''">
-            <div class="text-right btc-deposit-qrcode  btc-marginT5 col-md-5">
+            <div class="text-right deposit-qrcode  marginT5 col-md-5">
               <!-- col-md-5 -->
               <qr-code v-if="deposit_address_display" :length='"230"' :dateUrl="qrcode(deposit_address)"></qr-code>
-              <vue-simple-spinner class="btc-withdraw-loading" v-else size="185"></vue-simple-spinner>
+              <vue-simple-spinner class="withdraw-loading" v-else size="185"></vue-simple-spinner>
             </div>
-            <div class="btc-deposit-address col-md-5">
+            <div class="deposit-address col-md-5">
               <!-- col-md-5 -->
-              <div class="btc-address-div">
-                <div id="copy" class="btc-b btc-color666">{{ deposit_address === false ? '' : deposit_address  }}</div>
-                <div class="btc-address-warn btc-marginT10">
+              <div class="address-div">
+                <div id="copy" class="b color666">{{ deposit_address === false ? '' : deposit_address  }}</div>
+                <div class="address-warn marginT10">
                   {{ ReplaceCurrency }}
                   <!-- {{ $t('deposit_currency.warn1') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn2') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn3') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn4') }}{{CurrencyType | toUpperCase}}{{ $t('deposit_currency.warn5') }} -->
                 </div>
@@ -166,12 +162,12 @@
           </div>
           <div class="clearfix">
           </div>
-          <div class=" btc-deposit-confirNum col-md-8">
+          <div class=" deposit-confirNum col-md-8">
             <!-- col-md-8 -->
-            {{$t('deposit_currency.confirm_num_descirbe')}}<span style="color: #ff7f18;">{{ ConfirmNum }}</span>{{$t('deposit_currency.about_time')}}<router-link class='btc-link' :to="`${ROUTER_VERSION}/form/deposit?currency=${CurrencyType}`">{{$t('title.form_deposit')}}</router-link>{{ $t('deposit_currency.in_query') }}
+            {{$t('deposit_currency.confirm_num_descirbe')}}<span style="color: #ff7f18;">{{ ConfirmNum }}</span>{{$t('deposit_currency.about_time')}}<router-link class='link' :to="`${ROUTER_VERSION}/form/deposit?currency=${CurrencyType}`">{{$t('title.form_deposit')}}</router-link>{{ $t('deposit_currency.in_query') }}
           </div>
-          <ul class="btc-marginT80">
-              <strong class="btc-withdraw-remind">{{ $t('withdraw_currency.reminder') }}</strong>
+          <ul class="marginT80">
+              <strong class="withdraw-remind">{{ $t('withdraw_currency.reminder') }}</strong>
               <li>
                 {{ $t('deposit_currency.use_wallet_service') }}
               </li>
@@ -185,15 +181,15 @@
         </div>
       </div>
       <basic-table :loading='withdraw_loading' :captionTitle='WithdrawRecord.captionTitle' :item='getWithdrawRecord' :perfix='CurrencyType.toUpperCase()' v-if="route === 'withdraw'">
-        <div slot="more" class="text-center btc-b-t btc-table-more col-md-6">
+        <div slot="more" class="text-center b-t table-more col-md-6">
           <!-- col-md-6 -->
-          <router-link class="btc-link" :to="`${ROUTER_VERSION}/form/withdraw?currency=${CurrencyType}`">
+          <router-link class="link" :to="`${ROUTER_VERSION}/form/withdraw?currency=${CurrencyType}`">
             {{$t('my_account.show_more')}}
           </router-link>
         </div>
-        <div slot="more" class="btc-b-t text-center btc-table-more btc-b-l col-md-6">
+        <div slot="more" class="b-t text-center table-more b-l col-md-6">
           <!-- col-md-6 -->
-          <router-link :to="`${ROUTER_VERSION}/form/withdraw_cancel`" class='btc-link '>
+          <router-link :to="`${ROUTER_VERSION}/form/withdraw_cancel`" class='link '>
             {{$t('withdraw_currency.cancel_withdraw')}}
           </router-link>
         </div>
@@ -201,12 +197,12 @@
       <basic-table :loading='deposit_loading' :captionTitle='depositRecord.captionTitle' :perfix='CurrencyType.toUpperCase()' :item='getDepositRecord' v-else>
         <template slot="href"
         slot-scope="props">
-          <span class="btc-pointer btc-link" @click="OpenWindow(props.data.url)">
+          <span class="pointer link" @click="OpenWindow(props.data.url)">
             {{ props.data.context }}
           </span>
         </template>
-        <div slot="more" class="text-center btc-b-t btc-table-more">
-          <router-link class="btc-link" :to="`${ROUTER_VERSION}/form/deposit?currency=${CurrencyType}`">
+        <div slot="more" class="text-center b-t table-more">
+          <router-link class="link" :to="`${ROUTER_VERSION}/form/deposit?currency=${CurrencyType}`">
             {{$t('my_account.show_more')}}
           </router-link>
         </div>
@@ -963,7 +959,7 @@ export default {
 
 <style lang='css'>
 @media (max-width: 991px) {
-  .btc-deposit-address .btc-newsPrompt .btc-news-animation{
+  .deposit-address .newsPrompt .news-animation{
     width: 100%;
     left: 0;
   }

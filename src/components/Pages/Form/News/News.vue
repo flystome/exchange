@@ -1,45 +1,45 @@
 <template>
-  <div class="btc-form-news">
-    <div :class="{'btc-news-minheight': !(pagination === 0 && firstLoad)}">
-      <header class="btc-news-radio">
-        <div class="btc-fl">
+  <div class="form-news">
+    <div :class="{'news-minheight': !(pagination === 0 && firstLoad)}">
+      <header class="news-radio">
+        <div class="fl">
           <strong style="color:black">{{$t('title.form_news')}}</strong>
         </div>
-        <div class="btc-fr">
-          <span :class="{'btc-form-disabled': clearList.length === xhrData.length}" @click="selectAll">
-            <a :class="{'btc-radio': all}">
+        <div class="fr">
+          <span :class="{'form-disabled': clearList.length === xhrData.length}" @click="selectAll">
+            <a :class="{'radio': all}">
             </a>
             {{ $t('form.news.select_all') }}
           </span>
-          <span :class="{'btc-form-disabled': clearList.length === 0}" @click="selectNone">
-            <a :class="{'btc-radio': none}">
+          <span :class="{'form-disabled': clearList.length === 0}" @click="selectNone">
+            <a :class="{'radio': none}">
             </a>
             {{ $t('form.news.select_none') }}
           </span>
-          <span :class="{'btc-form-disabled': clearList.length === 0 || !havaUnread}" class="btc-marginR0" @click="marketRead">
+          <span :class="{'form-disabled': clearList.length === 0 || !havaUnread}" class="marginR0" @click="marketRead">
             {{ $t('form.news.marked') }}
           </span>
-          <span :class="{'btc-form-disabled': clearList.length === 0}" class="btc-marginR0" @click="clearRecord">
+          <span :class="{'form-disabled': clearList.length === 0}" class="marginR0" @click="clearRecord">
             {{ $t('form.news.clear') }}
           </span>
         </div>
         <div style="clear:both">
         </div>
       </header>
-      <vue-simple-spinner class="btc-marginT100" size="88" v-if="loading"></vue-simple-spinner>
-      <div class="btc-news" v-if="!loading">
-        <div class="btc-news-block" :class="{'btc-news-read': !d.unread}" v-for="(d, index) in xhrData" @click="addClearList(d.id, index)" :key="d.id">
-          <section class="btc-fl">
+      <vue-simple-spinner class="marginT100" size="88" v-if="loading"></vue-simple-spinner>
+      <div class="news" v-if="!loading">
+        <div class="news-block" :class="{'news-read': !d.unread}" v-for="(d, index) in xhrData" @click="addClearList(d.id, index)" :key="d.id">
+          <section class="fl">
             <header>
-              <i v-if="d.unread" class="btc-news-unread"></i>
+              <i v-if="d.unread" class="news-unread"></i>
               <strong>{{d.subject}}</strong>
-              <span class="btc-news-time">{{ $moment(d.created_at).format('YYYY-MM-DD H:mm:ss') }}</span>
+              <span class="news-time">{{ $moment(d.created_at).format('YYYY-MM-DD H:mm:ss') }}</span>
             </header>
             <article>
               {{ d.message }}
             </article>
           </section>
-          <div v-if="d.choice" class="btc-news-select">
+          <div v-if="d.choice" class="news-select">
             <i class="form-select"></i>
           </div>
         </div>
@@ -47,7 +47,7 @@
     </div>
     <paginate
       ref="paginate"
-      class="btc-fr"
+      class="fr"
       :disabled="disabled"
       v-if="pagination !== 0"
       :page-count="pagination"
@@ -59,7 +59,7 @@
       :next-text="`${$t('form.next')}`"
       :page-class="'page-item'">
     </paginate>
-    <div class="btc-no-record" v-if="pagination === 0 && firstLoad">
+    <div class="no-record" v-if="pagination === 0 && firstLoad">
       <span>
         {{ $t('my_account.no_record') }}
       </span>

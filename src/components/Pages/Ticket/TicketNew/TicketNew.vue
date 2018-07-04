@@ -1,30 +1,30 @@
 <template>
-  <div @keyup.enter="sumbit" @click="promptEmpty" class="btc-ticket-new">
-    <div class="btc-container-block">
+  <div @keyup.enter="sumbit" @click="promptEmpty" class="ticket-new">
+    <div class="container-block">
       <header>
         <strong>
           {{ $t('title.ticket_new') }}
         </strong>
       </header>
       <div>
-        <div class="btc-color999">
+        <div class="color999">
           {{ $t('ticket.ticket_describe') }}
         </div>
-        <div class="btc-ticket-from">
-        <news-prompt style="display: block;margin-left:0;top: -10px;" class="btc-marginL25" :text='prompt'></news-prompt>
+        <div class="ticket-from">
+        <news-prompt style="display: block;margin-left:0;top: -10px;" class="marginL25" :text='prompt'></news-prompt>
           <basic-input v-model="newTicket.label" :placeholder="$t('ticket.title')">
           </basic-input>
-          <div-contenteditable class="btc-marginT15 btc-ticket-editDiv" @keyup.enter.stop.native  v-model="newTicket.details" :placeholder="$t('ticket.detailed_description')">
+          <div-contenteditable class="marginT15 ticket-editDiv" @keyup.enter.stop.native  v-model="newTicket.details" :placeholder="$t('ticket.detailed_description')">
             <span slot="placeholder">{{ $t('ticket.detailed_description') }}</span>
           </div-contenteditable>
-          <div class="btc-ticket-flex btc-marginT15">
+          <div class="ticket-flex marginT15">
             <basic-input readonly="readonly">
-              <basic-button :disabled='disabled' @click.native="$refs['file'].click()" class="btc-link btn" slot="button" :text="$t('ticket.choose')">
+              <basic-button :disabled='disabled' @click.native="$refs['file'].click()" class="link btn" slot="button" :text="$t('ticket.choose')">
                 <!-- <input type="file" @change="addFile" ref="file" accept="image/jpeg,image/jpg" slot="file" slot-scope="props"> -->
               </basic-button>
             </basic-input>
             <input type="file" @change="addFile" ref="file" accept="image/jpeg,image/jpg" />
-            <div class="btc-ticket-files">
+            <div class="ticket-files">
               <span>
                 {{ $t('ticket.upload_attachment') }}
               </span>
@@ -32,16 +32,16 @@
                 <div>
                   {{ this.FileName }}
                 </div>
-                <i class="btc-ticket-newDelete" @click="DeleteFile"></i>
+                <i class="ticket-newDelete" @click="DeleteFile"></i>
               </div>
             </div>
           </div>
-          <div class="btc-ticket-explain btc-color999">
+          <div class="ticket-explain color999">
             {{ $t('ticket.upload_describe') }}
           </div>
-          <div class="btc-ticket-explain btc-color999 btc-paddingB45">
+          <div class="ticket-explain color999 paddingB45">
             <basic-button :disabled='disabled' @click.native.stop="sumbit" class="btn" :text="$t('submit')"></basic-button>
-            <button @click="goTicket" class="btc-white-btn">{{ $t('cancel') }}</button>
+            <button @click="goTicket" class="white-btn">{{ $t('cancel') }}</button>
           </div>
         </div>
       </div>
@@ -155,7 +155,7 @@ export default {
 </style>
 
 <style lang='css'>
-  .btc-ticket-new .edit-div{
+  .ticket-new .edit-div{
     background: #f2f2f2;
     min-height: 200px;
     padding: 10px 8px;

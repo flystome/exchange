@@ -1,11 +1,11 @@
 <template>
-  <div class="btc-404">
+  <div class="404">
     <img v-if="status === 404" src="~Img/large/404.png" >
     <img v-if="status === 500" src="~Img/large/500.png" >
     <img v-if="status === 502" src="~Img/large/502.png" >
     <img v-if="status === 422" src="~Img/large/422.png" >
-    <div class="text-center btc-marginT30">
-      {{ $t(`page_not_found.${status}`) }}<span @click="$router.push('/')" class="btc-link btc-marginL5 btc-marginR5">{{$t('page_not_found.click')}}</span>{{ $t('page_not_found.back') }}
+    <div class="text-center marginT30">
+      {{ $t(`page_not_found.${status}`) }}<span @click="$router.push('/')" class="link marginL5 marginR5">{{$t('page_not_found.click')}}</span>{{ $t('page_not_found.back') }}
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style lang='scss'>
-.btc-404{
+.404{
   img{
     display: block;
     margin: auto;
@@ -36,7 +36,7 @@ export default {
   img{
     width: 100%
   }
-  .btc-404{
+  .404{
     padding: 0 15px;
   }
 }

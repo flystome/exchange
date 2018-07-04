@@ -50,7 +50,7 @@
   margin: 0 6px;
 }
 
-.btc-country{
+.country{
   .dropdown-menu{
     margin-top: 1px !important;
     text-align: center;
@@ -70,7 +70,7 @@
       margin-top: 3px;
     }
   }
-  .btc-ifo{
+  .ifo{
     .dropdown-toggle{
       background: #181f28!important;
     }
@@ -79,7 +79,7 @@
       margin-top: 4px;
     }
   }
-  .btc-country{
+  .country{
     cursor: pointer;
     .dropdown-toggle{
       background-color: #181f28;
@@ -103,7 +103,7 @@
       }
     }
   }
-  .btc-header-signin{
+  .header-signin{
     a{
       margin: 6px;
       color: #337ab7;
@@ -142,7 +142,7 @@
           .message{
             display: none;
           }
-          .btc-country{
+          .country{
             >a{
               padding-left: 0;
             }
@@ -168,7 +168,7 @@
   .title {
     font-size: 16px;
   }
-  .btc-img-position{
+  .img-position{
     position: relative;
     top: 2px;
     cursor: pointer;
@@ -176,20 +176,20 @@
       font-size: 12px;
     }
   }
-  .btc-header-avatar{
+  .header-avatar{
     position: relative;
     top: -2px;
   }
-  .btc-header-asset{
+  .header-asset{
     position: relative;
     top: -2px;
   }
-  .btc-header-letter{
+  .header-letter{
     padding-left: 0;
     padding-right: 0;
     position: relative;
   }
-  .btc-header-sideslip{
+  .header-sideslip{
     float: right;
     display: none;
     a {
@@ -214,7 +214,7 @@
     margin-top: 3px;
   }
   .navbar-right{
-    .btc-header-letter{
+    .header-letter{
       >img{
         display: none;
       }
@@ -222,10 +222,10 @@
     .message{
       display: inline-block !important;
     }
-    .btc-ifo{
+    .ifo{
       border-top: 1px solid #343b42;
     }
-    .btc-country{
+    .country{
       padding-left: 15px;
     }
   }
@@ -234,7 +234,7 @@
   }
 }
 
-.btc-market{
+.market{
   top: 0!important;
   ul{
     width: 314px!important;
@@ -272,16 +272,16 @@
       }
     }
   }
-  .btc-country .dropdown-toggle{
+  .country .dropdown-toggle{
     background: none;
     &:hover,&:focus{
       background: none!important
     }
   }
-  .btc-ifo .dropdown-toggle{
+  .ifo .dropdown-toggle{
     background: none!important;
   }
-  .btc-header-signin{
+  .header-signin{
     color: white;
     a{
       color: white;
@@ -290,7 +290,7 @@
       }
     }
   }
-  .btc-country .dropdown-menu{
+  .country .dropdown-menu{
     margin-top: -15px !important;
   }
 }
@@ -303,11 +303,11 @@
 }
 
 @media(max-width: 991px){
-  .btc-header-sideslip{
+  .header-sideslip{
     display: block!important;
   }
-  .btc-home-contain{
-    .btc-header-sideslip{
+  .home-contain{
+    .header-sideslip{
       // display: none!important;
     }
   }
@@ -326,7 +326,7 @@
   // }
 }
 
-.btc-header-sideslip a{
+.header-sideslip a{
   @include sprite($header-more)
 }
 

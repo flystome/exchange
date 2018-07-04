@@ -1,15 +1,15 @@
 <template>
-  <div class="btc-MarketMaker">
+  <div class="MarketMaker">
     <header>
-      <a class="btc-MarketMaker-title">
+      <a class="MarketMaker-title">
         {{ $t('market_maker.current_market') }}
       </a>
-      <span class="btc-marginL10 btc-color999 btc-font12">
+      <span class="marginL10 color999 font12">
         {{ $t('market_maker.preferential_describe') }}
       </span>
       <div>
         <a :href="`${HOST_URL}/documents/api_v2`">
-          <basic-button class="btc-marginR20" :text="$t('market_maker.market_maker_program_access')">
+          <basic-button class="marginR20" :text="$t('market_maker.market_maker_program_access')">
           </basic-button>
         </a>
         <basic-button :text="$t('market_maker.apply_for_market_making')">
@@ -21,7 +21,7 @@
         <table>
           <thead>
             <tr>
-              <th class="btc-color999 btc-font12" v-for="(d, index) in MarketMakerTitle" :key="d" :class="`${index === MarketMakerTitle.length - 1 ? 'text-right' : ''}`">
+              <th class="color999 font12" v-for="(d, index) in MarketMakerTitle" :key="d" :class="`${index === MarketMakerTitle.length - 1 ? 'text-right' : ''}`">
                 {{ d }}
               </th>
             </tr>
@@ -35,7 +35,7 @@
           </tbody>
         </table>
       </div>
-      <div class="btc-MarketMaker-norecord btc-marginT65" v-else>
+      <div class="MarketMaker-norecord marginT65" v-else>
         {{ $t('my_account.no_record') }}
       </div>
     </template>

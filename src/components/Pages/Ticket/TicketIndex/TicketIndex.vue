@@ -1,10 +1,10 @@
 <template>
-  <div class="btc-ticket-container">
-    <header class="btc-ticket-header">
+  <div class="ticket-container">
+    <header class="ticket-header">
       <router-link :to="`${ROUTER_VERSION}/ticket/new`">
-        <basic-button class="btc-fl btc-ticket-appButton" :text="$t('ticket.new_ticket')"></basic-button>
+        <basic-button class="fl ticket-appButton" :text="$t('ticket.new_ticket')"></basic-button>
       </router-link>
-      <div class="btc-ticket-slide">
+      <div class="ticket-slide">
         <keep-alive>
           <menu-underline
           ref="menu"
@@ -18,29 +18,29 @@
         </keep-alive>
       </div>
       <router-link :to="`${ROUTER_VERSION}/ticket/new`">
-        <basic-button class="btc-fr btc-ticket-frbutton" :text="$t('ticket.new_ticket')"></basic-button>
+        <basic-button class="fr ticket-frbutton" :text="$t('ticket.new_ticket')"></basic-button>
       </router-link>
     </header>
     <template v-if="!loading">
-      <div v-if="setp === 0" class="btc-ticket" >
-        <div @click="TicketDetails(d)" class="btc-ticket-block btc-pointer" v-for="d in openData" :key="d.id">
-          <section class="btc-fl">
+      <div v-if="setp === 0" class="ticket" >
+        <div @click="TicketDetails(d)" class="ticket-block pointer" v-for="d in openData" :key="d.id">
+          <section class="fl">
             <header>
-              <i v-if="d.unread" class="btc-ticket-unread"></i>
+              <i v-if="d.unread" class="ticket-unread"></i>
               <strong v-text="d.title"></strong>
-              <span class="btc-ticket-time">{{ $moment(d.created_at).format('YYYY-MM-DD H:mm:ss') }}</span>
+              <span class="ticket-time">{{ $moment(d.created_at).format('YYYY-MM-DD H:mm:ss') }}</span>
             </header>
             <article v-text="d.content">
             </article>
           </section>
         </div>
       </div>
-      <div v-else class="btc-ticket">
-        <div @click="TicketDetails(d)" class="btc-ticket-block btc-pointer" v-for="d in closedData" :key="d.id">
-          <section class="btc-fl">
+      <div v-else class="ticket">
+        <div @click="TicketDetails(d)" class="ticket-block pointer" v-for="d in closedData" :key="d.id">
+          <section class="fl">
             <header>
               <strong v-text="d.title"></strong>
-              <span class="btc-ticket-time">{{ $moment(d.created_at).format('YYYY-MM-DD H:mm:ss') }}</span>
+              <span class="ticket-time">{{ $moment(d.created_at).format('YYYY-MM-DD H:mm:ss') }}</span>
             </header>
             <article v-text="d.content">
             </article>
@@ -49,7 +49,7 @@
       </div>
     </template>
     <paginate
-      class="btc-fr"
+      class="fr"
       key='pagination'
       ref="pagination"
       :disabled="disabled"
@@ -64,7 +64,7 @@
       :page-class="'page-item'">
     </paginate>
     <paginate
-      class="btc-fr"
+      class="fr"
       key='pagination1'
       ref="pagination1"
       :disabled="disabled"
@@ -78,12 +78,12 @@
       :next-text="`${$t('form.next')}`"
       :page-class="'page-item'">
     </paginate>
-    <div class="text-center btc-paddingT40 btc-paddingB40" style="margin-top:8px;background:white" v-if="!loading && (setp === 0 ? openData.length === 0 : closedData.length === 0)">
+    <div class="text-center paddingT40 paddingB40" style="margin-top:8px;background:white" v-if="!loading && (setp === 0 ? openData.length === 0 : closedData.length === 0)">
       <strong>
         {{ $t('my_account.no_record') }}
       </strong>
     </div>
-    <vue-simple-spinner class="btc-marginT100" size="88" v-if="loading"></vue-simple-spinner>
+    <vue-simple-spinner class="marginT100" size="88" v-if="loading"></vue-simple-spinner>
     <!-- <menu-underline
     :menu-list="[$t('ticket.open_tickets'), $t('ticket.closed_tickets')]">
     </menu-underline> -->
@@ -236,7 +236,7 @@ export default {
 </style>
 
 <style lang="css">
-.btc-ticket-container nav li {
+.ticket-container nav li {
   font-weight: 700
 }
 </style>

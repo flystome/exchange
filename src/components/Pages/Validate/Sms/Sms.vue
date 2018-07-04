@@ -1,26 +1,26 @@
 <template>
-  <div v-if="!loginData.sms_activated && loginData.activated" @keyup.enter='Validate' class="btc-validate-sms btc-container-block" @click="ShowCallingcode(false);prompt = ''">
-    <header class="btc-color666">
-      <router-link :to="`${ROUTER_VERSION}/my_account`" class="btc-link">{{$t('title.my_account')}}</router-link> > <span>{{$t('title.validate_sms')}}</span>
+  <div v-if="!loginData.sms_activated && loginData.activated" @keyup.enter='Validate' class="validate-sms container-block" @click="ShowCallingcode(false);prompt = ''">
+    <header class="color666">
+      <router-link :to="`${ROUTER_VERSION}/my_account`" class="link">{{$t('title.my_account')}}</router-link> > <span>{{$t('title.validate_sms')}}</span>
     </header>
-    <div class="btc-sms-container">
+    <div class="sms-container">
       <news-prompt :text='prompt'></news-prompt>
-      <div class="btc-marginB5">
-        <span class="btc-color999">{{$t('validate_sms.area')}}:</span> {{ Country }}
+      <div class="marginB5">
+        <span class="color999">{{$t('validate_sms.area')}}:</span> {{ Country }}
       </div>
-      <div class="btc-sms-phone">
+      <div class="sms-phone">
 
-      <div class="btc-code-list btc-b-def" v-if="callDisplay">
+      <div class="code-list b-def" v-if="callDisplay">
         <ul>
           <li v-for='data in callingdata' :key="data.name">
             <div class="text-center" @click="PutCode(data.number, data.name, data.alpha)">
-              <span class="btc-code-number">{{ data.number }}</span>
-              <span class="btc-code-name">{{ data.name }}</span>
+              <span class="code-number">{{ data.number }}</span>
+              <span class="code-name">{{ data.name }}</span>
             </div>
           </li>
         </ul>
       </div>
-              <div class="btc-sms-choice btc-b-def">
+              <div class="sms-choice b-def">
           <span>+</span>
           <div-contenteditable @keyup.stop.native v-model="SmsData.CellPhonecode">
           </div-contenteditable>
@@ -31,14 +31,14 @@
         <basic-input style="min-height:66px" :validate='"required|cellphone"' ref="cellphone" :placeholder='$t("placeholder.cell_phone_number")' v-model="SmsData.CellPhone">
         </basic-input>
       </div>
-      <div class="btc-sms-code">
+      <div class="sms-code">
         <basic-input  style="min-height:66px" :validate='"required|sms_verification_code"' ref="verifiycode" :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
         </basic-input>
-        <span :disabled="disabled" class="btc-white-btn" @click="SendSms">
+        <span :disabled="disabled" class="white-btn" @click="SendSms">
           {{ timer }}
         </span>
       </div>
-      <div class="btc-sms-google btc-marginB30" v-if="loginData.app_activated">
+      <div class="sms-google marginB30" v-if="loginData.app_activated">
         <basic-input  style="min-height:66px"  :placeholder='$t("validate_sms.google_verification_code")' :validate='"required|google_verify_code"' ref="googlecode" v-model="SmsData.googlecode">
         </basic-input>
       </div>

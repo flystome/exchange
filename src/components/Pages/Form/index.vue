@@ -9,8 +9,8 @@ export default {
 </script>
 
 <style lang="scss">
-.btc-form{
-  .btc-container-block .btc-table-container{
+.form{
+  .container-block .table-container{
     min-height: 70vh;
     position: relative;
   }
@@ -23,7 +23,7 @@ export default {
   }
 }
 
-.btc-no-record{
+.no-record{
   min-height: 61vh;
   background: white;
   position: relative;
@@ -39,7 +39,7 @@ export default {
   }
 }
 
-.btc-form .btc-table-spinner{
+.form .table-spinner{
   position: absolute;
   top: 50%;
   margin-top: -75px!important;

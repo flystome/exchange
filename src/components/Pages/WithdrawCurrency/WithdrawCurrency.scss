@@ -1,39 +1,39 @@
 @media (min-width: 1200px) {
-  .btc-withdraw-coin a {
+  .withdraw-coin a {
       padding: 0 38.9px !important;
   }
 }
 
 @media (max-width: 1200px) {
-  .btc-address-height{
-    .btc-fr{
+  .address-height{
+    .fr{
       float: left;
     }
-    .btc-fl{
+    .fl{
       display: block;
       float: none;
     }
   }
-  .btc-withdraw-loading{
+  .withdraw-loading{
     margin-left: 78px!important;
   }
-  .btc-tableHover{
+  .tableHover{
     width:  250px!important;
   }
-  .btc-deposit-confirNum{
+  .deposit-confirNum{
     margin-left: 104px!important;
   }
 }
 
 @media (min-width: 992px) {
-  .btc-withdraw-coin a {
+  .withdraw-coin a {
       padding: 0 39.9px !important;
   }
 }
 
 @media (max-width: 991px) {
-  .btc-currency-withdraw{
-    .btc-currency-frommoblie /deep/ .menu-underline ul{
+  .currency-withdraw{
+    .currency-frommoblie /deep/ .menu-underline ul{
       justify-content: space-between;
       li{
         margin-left: 0px!important;
@@ -41,70 +41,70 @@
       }
     }
   }
-  .btc-table-more.btc-b-l{
+  .table-more.b-l{
     margin-top: 0
   }
-  .btc-marginL50 {
+  .marginL50 {
       margin-left: 0;
   }
-  .btc-withdraw-form {
+  .withdraw-form {
       padding: 40px 100px!important
   }
-  .btc-currency-withdraw .btc-fr {
+  .currency-withdraw .fr {
       float: none;
       margin-top: 10px
   }
-  .btc-currency-withdraw .btc-fl {
+  .currency-withdraw .fl {
       float: none
   }
-  .btc-deposit-qrcode{
+  .deposit-qrcode{
     text-align: center;
     margin-bottom: 20px;
   }
-  .btc-fr.btc-link{
+  .fr.link{
     display: block;
     float: none;
   }
-  .btc-member-center .btc-deposit-currency ul{
+  .member-center .deposit-currency ul{
     padding-left: 7%;
   }
-  .btc-qrcode{
+  .qrcode{
     margin-left: -10px!important;
   }
-  .btc-deposit-currency{
+  .deposit-currency{
     border: none;
     padding: 0!important;
     padding-top: 40px!important;
-    .btc-deposit-address{
+    .deposit-address{
       text-align: center;
       padding: 0;
     }
   }
-  .btc-withdraw-loading{
+  .withdraw-loading{
     margin-left: 0!important;
   }
-  .btc-deposit-confirNum{
+  .deposit-confirNum{
     margin-left: 0!important;
     margin-top: 20px;
   }
 }
 
 @media (max-width: 768px) {
-  .btc-withdraw-form {
+  .withdraw-form {
       padding: 40px 50px!important
   }
-  .btc-withdraw-formContainer{
+  .withdraw-formContainer{
     border: none;
-    .btc-withdraw-form{
+    .withdraw-form{
       padding: 0!important;
       margin-top: 40px;
     }
   }
-  .btc-marginL15{
+  .marginL15{
     display: inline-block;
     margin: 0
   }
-  .btc-currency-withdraw .btc-fl  {
+  .currency-withdraw .fl  {
     & > span{
       display: block;
       margin-bottom: 8px;
@@ -113,45 +113,45 @@
       margin-left: 0
     }
   }
-  .btc-withdraw-currency{
+  .withdraw-currency{
     padding: 30px 0 30px 21px!important;
   }
-  .btc-withdraw-currency ul{
+  .withdraw-currency ul{
     padding-left: 0
   }
-.btc-withdraw-coin a {
+.withdraw-coin a {
   width: 20%!important
   }
 }
 
 @media (max-width: 536px) {
-  .btc-withdraw-coin a {
+  .withdraw-coin a {
     width: 25%!important
   }
 }
 
 @media (max-width: 425px) {
-  .btc-withdraw-coin a {
+  .withdraw-coin a {
     width: 33%!important
   }
 }
 
 @media (min-width: 768px) {
-.btc-withdraw-coin a {
+.withdraw-coin a {
     padding: 0 39.9px !important;
   }
 }
 
 // @media (max-width: 1200px) {
-//   .btc-member-center{
-//     & /deep/ td[class=btc-tablehover] {
+//   .member-center{
+//     & /deep/ td[class=tablehover] {
 //       width: 380px !important;
 //     }
 //   }
 // }
 
-// .btc-member-center{
-//   & /deep/ .btc-table-container{
+// .member-center{
+//   & /deep/ .table-container{
 //     margin-bottom: 10px;
 //   }
 //   .col-md-5{
@@ -168,7 +168,7 @@
 //   }
 // }
 ////////media
-.btc-currency-withdraw{
+.currency-withdraw{
   & /deep/ .menu-underline ul{
     flex-wrap: wrap;
     li:nth-child(3) {
@@ -180,8 +180,8 @@
   }
 }
 
-.btc-member-center {
-  .btc-address-div{
+.member-center {
+  .address-div{
     #copy{
       padding: 10px;
       height: 97px;
@@ -189,13 +189,13 @@
       overflow: auto;
       font-weight: 700;
     }
-    .btc-address-warn {
+    .address-warn {
       font-size: 14px;
       color: #ff7f18;
       word-wrap: break-word;
     }
   }
-    .btc-container-block {
+    .container-block {
         padding: 20px 30px;
         a {
             color: #000000;
@@ -204,11 +204,11 @@
             text-decoration: none;
             color: #000000;
         }
-        .btc-currency-withdraw {
+        .currency-withdraw {
             img {
                 vertical-align: top;
             }
-            .btc-fl {
+            .fl {
                 span {
                     img {
                         position: relative;
@@ -219,24 +219,24 @@
                   color: #999999
                 }
             }
-            .btc-fr {
+            .fr {
                 span {
                     margin: 0 18px;
                 }
             }
         }
-        .btc-withdraw-form {
+        .withdraw-form {
             padding: 40px 230px;
             border-top: none;
-            .btc-newsPrompt{
+            .newsPrompt{
               margin-left: 0;
               line-height: 13px;
             }
         }
-        .btc-withdraw-explain {
+        .withdraw-explain {
             line-height: 33px;
             font-size: 12px;
-            .btc-fr {
+            .fr {
                 img {
                     position: relative;
                     top: -1px;
@@ -244,7 +244,7 @@
                 }
             }
         }
-        .btc-withdraw-currency,.btc-deposit-currency{
+        .withdraw-currency,.deposit-currency{
             padding: 30px;
             strong {
                 margin-left: -17px
@@ -257,12 +257,12 @@
                 }
             }
         }
-        .btc-withdraw-explain span,
-        .btc-withdraw-currency {
+        .withdraw-explain span,
+        .withdraw-currency {
             color: #999999;
             font-size: 12px;
         }
-        .btc-withdraw-all button {
+        .withdraw-all button {
             outline: none;
             background: white;
             margin-top: 0;
@@ -270,7 +270,7 @@
             border: 1px solid #dfe0e1;
             border-left: none;
         }
-        .btc-withdraw-coin {
+        .withdraw-coin {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
@@ -295,7 +295,7 @@
                 display: inline-block;
                 text-indent: 2px;
             }
-            // .btc-withoutimg {
+            // .withoutimg {
             //   text-indent: 0;
             //   margin: auto;
             //   position: absolute;
@@ -303,15 +303,15 @@
             //   text-align: center;
             //   left: 0;
             // }
-            .btc-indent{
+            .indent{
               position: relative;
             }
         }
     }
-    .btc-tableTextleft span{
+    .tableTextleft span{
       font-size: 12px
     }
-    .btc-deposit-currency{
+    .deposit-currency{
       ul{
         display: inline-block;
         li{
@@ -319,7 +319,7 @@
         }
       }
     }
-    .btc-withdraw-address {
+    .withdraw-address {
         height: 32px;
         background-size: cover!important;
         color: #757575;
@@ -331,7 +331,7 @@
         text-overflow: ellipsis;
         padding-right: 41px;
     }
-    .btc-tableTextleft{
+    .tableTextleft{
       span{
         padding: 0;
         &:hover{
@@ -339,14 +339,14 @@
         }
       }
     }
-    .btc-address-contain {
+    .address-contain {
         background: #f2f2f2;
         border-color: #dfe0e1;
-        .btc-address-height{
+        .address-height{
           min-height: 190px;
           max-height: 190px;
           overflow: auto;
-          .btc-fl{
+          .fl{
             max-width: 72%;
             div:nth-child(2){
               overflow: hidden;
@@ -357,7 +357,7 @@
           &>div{
             overflow: hidden;
           }
-          .btc-fr{
+          .fr{
             color: #4382f7;
             line-height: 32px;
           }
@@ -374,21 +374,21 @@
             }
         }
     }
-    .btc-withdraw-add {
-        .btc-withdraw-all:nth-child(1) {
+    .withdraw-add {
+        .withdraw-all:nth-child(1) {
             margin-right: 10px;
             width: 113px;
         }
-        .btc-withdraw-all:nth-child(2) {
+        .withdraw-all:nth-child(2) {
             flex: 1
         }
     }
-    .btc-addnew{
+    .addnew{
       padding: 7px;
       background: white;
       color: #4382f7;
     }
-    .btc-choice-validate{
+    .choice-validate{
       display: flex;
       select{
         height: 32px;
@@ -408,23 +408,23 @@
         border-left: none;
       }
     }
-    .btc-qrcode{
+    .qrcode{
       margin-top: -25px;
       margin-left: -20px;
     }
-    .btc-newsPrompt{
+    .newsPrompt{
       line-height: 25px;
     }
-    .btc-withdraw-loading{
+    .withdraw-loading{
       margin-left: 170px;height: 205px;
     }
-    .btc-deposit-confirNum{
+    .deposit-confirNum{
       margin-left: 186px;
       margin-top: 5px
     }
 }
 
-.btc-select-option{
+.select-option{
   padding: 4px;
   width: 100%;
   background: #f2f2f2;

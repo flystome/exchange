@@ -1,7 +1,7 @@
 <template>
   <div>
     <chart :options='PieOption' :auto-resize='true'></chart>
-    <div class="btc-pie-legend">
+    <div class="pie-legend">
       <div v-for="(data, index) in PieData" :key="data.name">
         <div class="legend-value">${{ ToLocaleString(data.value) }}</div>
         <div>{{ ComputePercent(data.value) }}</div>
@@ -126,7 +126,7 @@ export default {
   width: inherit;
   min-height: 400px;
 }
-.btc-pie-legend{
+.pie-legend{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

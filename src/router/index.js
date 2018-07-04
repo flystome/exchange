@@ -5,8 +5,8 @@ import { redirect } from '../store/mutations'
 
 var route = ''
 const MemberCenter = () => import(/* webpackChunkName: "MemberCenter" */ 'Pages/MemberCenter/MemberCenter')
+
 // validate
-// const ValidateEmail = () => import(/* webpackChunkName: "ValidateEmail" */'Pages/Validate/Email/Email')
 const ValidateGoogle = () => import(/* webpackChunkName: "ValidateGoogle" */'Pages/Validate/Google/Google')
 const ValidateIdentity = () => import(/* webpackChunkName: "ValidateIdentity" */'Pages/Validate/Identity/Identity')
 const WithdrawCurrency = () => import(/* webpackChunkName: "WithdrawCurrency" */'Pages/WithdrawCurrency/WithdrawCurrency')
@@ -25,10 +25,6 @@ const Page404 = () => import(/* webpackChunkName: "Page404" */'Pages/Page404/Pag
 // Mobile pages
 const Mobile = () => import('Pages/Mobile')
 const MobilePersonal = () => import('Pages/Mobile/Personal/Personal.vue')
-// const AboutUs = () => import('Pages/Instructions/AboutUs/AboutUs')
-// const Instructions = () => import('Pages/Instructions')
-// const Fee = () => import('Pages/Instructions/Fee/Fee')
-// const Help = () => import('Pages/Instructions/Help/Help')
 
 // Form
 const Form = () => import('Pages/Form')

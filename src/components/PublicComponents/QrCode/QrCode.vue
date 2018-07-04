@@ -1,5 +1,5 @@
 <template>
-    <div class="btc-qrcode">
+    <div class="qrcode">
       <img :src="dateUrl" :width='length' :height='length'/>
     </div>
 </template>

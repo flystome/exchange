@@ -1,5 +1,5 @@
 <template>
-  <ul class="pagination" :class="Object.assign({}, containerClass, {'btc-paginate-disabled': disabled})" v-if="!noLiSurround">
+  <ul class="pagination" :class="Object.assign({}, containerClass, {'paginate-disabled': disabled})" v-if="!noLiSurround">
     <li v-if="firstLastButton" :class="[pageClass, firstPageSelected() ? disabledClass : '']">
       <a :disabled="disabled" @click="selectFirstPage()" @keyup.enter="selectFirstPage()" :class="pageLinkClass">{{ firstButtonText }}</a>
     </li>
@@ -272,7 +272,7 @@ export default {
 a {
   cursor: pointer;
 }
-.btc-paginate-disabled{
+.paginate-disabled{
   opacity: .65;
   a{
     cursor: not-allowed;

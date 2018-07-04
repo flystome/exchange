@@ -1,10 +1,10 @@
 <template>
   <div
   v-if="!(loginData.id_document && loginData.id_document.aasm_state !=='unverified') && (loginData.sms_activated || loginData.app_activated) &&  loginData.activated"
-  class="btc-container-block btc-validateIdentity"
+  class="container-block validateIdentity"
   @keyup.enter="uploadImg">
     <header class="title">
-        <router-link :to="`${ROUTER_VERSION}/my_account`" class="btc-link">
+        <router-link :to="`${ROUTER_VERSION}/my_account`" class="link">
           {{$t('title.my_account')}}
         </router-link>
         >
@@ -12,18 +12,18 @@
           {{$t('title.validate_identity')}}
         </span>
     </header>
-    <div class=" btc-marginL0">
+    <div class=" marginL0">
       <div>
         <div>
           <div>
             <basic-select :data='countries' :value="selectedCountry"  v-on:selected="selectedCountry = arguments[0]">>
             </basic-select>
           </div>
-          <div class=" btc-marginT15">
+          <div class=" marginT15">
               {{$t('validate_identity.using_true_identity')}}
           </div>
         </div>
-        <div class="btc-marginT25">
+        <div class="marginT25">
           <news-prompt :prompt="prompt"></news-prompt>
             <basic-input style="min-height:66px"  ref='first_name' :placeholder='$t("validate_identity.first_name")' :validate='"required|first_name"' v-model="user.first_name"></basic-input>
             <basic-input style="min-height:66px"  ref='last_name' :placeholder='$t("validate_identity.last_name")' :validate='"required|last_name"'  v-model="user.last_name"></basic-input>
@@ -31,8 +31,8 @@
         </div>
       </div>
     </div>
-    <div class="btc-indentity-prompt">
-      <upload-img id="indentity1" class="btc-validateIdentity-uploadimg" ref="id_document_front_file_attributes" :Upload='{
+    <div class="indentity-prompt">
+      <upload-img id="indentity1" class="validateIdentity-uploadimg" ref="id_document_front_file_attributes" :Upload='{
           UploadExplain: $t("validate_identity.positive_identity_card_photo"),
           ImgExplain: $t("validate_identity.only_support_jpg_photo"),
           ImgModel: "validate-indentity1.png"
@@ -41,7 +41,7 @@
         :verifyImg='verifymsg.indentity1'
         ></upload-img>
     </div>
-    <div class="btc-indentity-prompt">
+    <div class="indentity-prompt">
       <upload-img id="indentity2" ref="id_document_back_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.id_card_back_photo"),
         ImgExplain: $t("validate_identity.only_support_jpg_photo"),
@@ -51,7 +51,7 @@
       :verifyImg='verifymsg.indentity2'
       ></upload-img>
     </div>
-    <div class="btc-indentity-prompt">
+    <div class="indentity-prompt">
       <upload-img id="indentity3" ref="id_document_selfie_holding_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.held_id_card"),
         ImgExplain: $t("validate_identity.ID_card_must_be_written"),
@@ -61,7 +61,7 @@
       :verifyImg='verifymsg.indentity3'
       ></upload-img>
     </div>
-    <div class="btc-indentity-prompt">
+    <div class="indentity-prompt">
       <upload-img id="indentity4" ref="id_bill_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.utilities_credit_card_bills"),
         ImgExplain: $t("validate_identity.three_months_bill"),
@@ -71,8 +71,8 @@
       :verifyImg='verifymsg.indentity4'
       ></upload-img>
     </div>
-    <footer class="btc-b-t btc-marginT25">
-      <basic-button id="myButton" data-loading-text="Loading..." autocomplete="off" @click.native.enter="uploadImg" class="btn btc-fr col-xs-12 col-md-1 pull-right" :disabled="disabled" :text='$t("validate_identity.submissions")'>
+    <footer class="b-t marginT25">
+      <basic-button id="myButton" data-loading-text="Loading..." autocomplete="off" @click.native.enter="uploadImg" class="btn fr col-xs-12 col-md-1 pull-right" :disabled="disabled" :text='$t("validate_identity.submissions")'>
       </basic-button>
     </footer>
   </div>

@@ -1,55 +1,55 @@
 <template>
-  <div @keyup.enter="NewKey" class="btc-api-new">
-    <div class="btc-container-block">
+  <div @keyup.enter="NewKey" class="api-new">
+    <div class="container-block">
       <header>
         <strong>
           {{ $t('api.create_New_Key') }}
         </strong>
       </header>
-      <div class="btc-api-newContain" v-if="setp === 0">
+      <div class="api-newContain" v-if="setp === 0">
         <basic-input :placeholder="$t('api.label')" v-model="parme.label">
         </basic-input>
-        <div class="btc-explain">
+        <div class="explain">
           {{ $t('api.label_describe') }}
         </div>
         <basic-input ref="gV" :validate='"required|google_verify_code"' :placeholder="$t('api.google_verification_code')" v-model="parme.otp">
         </basic-input>
-        <div class="btc-marginT30 btc-marginB40">
+        <div class="marginT30 marginB40">
           <basic-button class="btn" :disabled="disabled" @click.native='NewKey' :text='$t("api.confirm")'></basic-button>
           <router-link :disabled="disabled" :to="`${ROUTER_VERSION}/api`">
-            <button class="btc-white-btn">{{ $t("api.cancel") }}</button>
+            <button class="white-btn">{{ $t("api.cancel") }}</button>
           </router-link>
         </div>
       </div>
-      <div v-else class="btc-api-show">
-        <div class="btc-marginB20">
+      <div v-else class="api-show">
+        <div class="marginB20">
             <strong>
               {{ $t('api.secretkey_describe') }}
             </strong>
           </div>
-          <div class="btc-marginT40 btc-color666">
-            <div class="btc-marginB10">
-              <strong class="btc-fl">
+          <div class="marginT40 color666">
+            <div class="marginB10">
+              <strong class="fl">
                 Access Key
               </strong>
-              <news-prompt class="btc-fl btc-marginL10" :text='prompt1'></news-prompt>
+              <news-prompt class="fl marginL10" :text='prompt1'></news-prompt>
               <div class="clearfix"></div>
             </div>
             <span id="copy2">{{ access_key }}</span>
-            <span class='btn-copy2 btc-link btc-fr' data-clipboard-target="#copy2">
+            <span class='btn-copy2 link fr' data-clipboard-target="#copy2">
               {{ $t('my_account.copy') }}
             </span>
           </div>
-          <div class="btc-marginT20 btc-color666">
-            <div class="btc-marginB10">
-              <strong class="btc-fl">
+          <div class="marginT20 color666">
+            <div class="marginB10">
+              <strong class="fl">
                 Secret Key
               </strong>
-              <news-prompt class="btc-fl btc-marginL10" :text='prompt'></news-prompt>
+              <news-prompt class="fl marginL10" :text='prompt'></news-prompt>
               <div class="clearfix"></div>
             </div>
             <span id="copy1">{{ secret_key }}</span>
-            <span class='btn-copy1 btc-link btc-fr' data-clipboard-target="#copy1">
+            <span class='btn-copy1 link fr' data-clipboard-target="#copy1">
               {{ $t('my_account.copy') }}
             </span>
           </div>
@@ -175,22 +175,22 @@ export default {
 
 <style lang="scss" scoped>
 @media (max-width: 992px) {
-  .btc-api-newContain{
+  .api-newContain{
     width: 96%!important
   }
 }
-.btc-api-newContain{
+.api-newContain{
   width: 61.2%;
   margin: 0 auto;
-  .btc-explain{
+  .explain{
    margin: 10px 0;
    font-size: 12px;
    color: #999999;
   }
-  .btc-basic-button{
+  .basic-button{
     width: 48%;
   }
-  .btc-white-btn{
+  .white-btn{
     width: 48%;
     float: right;
     padding: 5px 0;
@@ -205,12 +205,12 @@ export default {
     display: inline-block;
 }
 
-.btc-newsPrompt{
+.newsPrompt{
   width: auto;
   margin-left: 10px;
 }
-.btc-api-show{
-  .btc-basic-button{
+.api-show{
+  .basic-button{
     width: 100%;
     margin: 75px 0;
   }
@@ -218,7 +218,7 @@ export default {
 </style>
 
 <style>
-.btc-api-newContain .help{
+.api-newContain .help{
   position: absolute;
 }
 </style>

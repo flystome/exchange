@@ -1,6 +1,6 @@
 
-.btc-UploadImg{
-  .btc-UploadExplain{
+.UploadImg{
+  .UploadExplain{
     vertical-align: top;
   }
   & > div{
@@ -32,7 +32,7 @@
     }
   }
 
-  .btc-UploadImg-model{
+  .UploadImg-model{
     width: 320px;
     height: 200px;
     margin-right: 120px;
@@ -52,29 +52,29 @@
   }
 }
 
-.btc-Upload-prompt{
+.Upload-prompt{
   width: 100%;
   text-align: right;
   position: absolute;
   bottom: 0;
 }
 
-.btc-validateIdentity{
+.validateIdentity{
   padding: 12px 190px 15px;
-  .btc-validateIdentity-uploadimg .btc-UploadExplain{
+  .validateIdentity-uploadimg .UploadExplain{
     margin-top: 10px
   }
 }
 
-.btc-validateIdentity footer{
+.validateIdentity footer{
   overflow: hidden;
 }
 
-.btc-validateIdentity footer button{
+.validateIdentity footer button{
   margin-top: 15px;
 }
 
-.btc-validateIdentity input[type='file']{
+.validateIdentity input[type='file']{
   position: absolute;
   cursor: pointer;
   width: 100%;
@@ -84,29 +84,29 @@
   left: 0;
 }
 
-.btc-validateIdentity{
+.validateIdentity{
   input[type='radio']{
     position: relative;
     top: 2px
   }
-  .btc-news-prompt{
+  .news-prompt{
     height: 26px;
     right: -75px;
   }
 }
 
-// .btc-basicInput{
+// .basicInput{
 //   width: 360px;
 // }
 
-.btc-UploadExplain:first-child{
+.UploadExplain:first-child{
   margin-top: 200px
 }
 
-.btc-indentity-prompt{
+.indentity-prompt{
   position: relative;
   padding-bottom: 25px;
-  .btc-newsPrompt{
+  .newsPrompt{
     position: absolute;
     bottom: 0;
     right: 0;
@@ -114,20 +114,20 @@
   }
 }
 
-.btc-newsPrompt /deep/ span.btc-news-animation{
+.newsPrompt /deep/ span.news-animation{
   right: 0;
 }
 
 
 @media (min-width: 1200px) {
-  .btc-marginR100{
+  .marginR100{
     margin-right: 0;
   }
   .validate-uploadImg{
     .col-xs-6{
       padding: 0;
     }
-    .btc-UploadImg-model{
+    .UploadImg-model{
 
     }
     .uploading{
@@ -141,7 +141,7 @@
     .col-xs-6{
       width: 50% !important;
     }
-    .btc-UploadImg-model{
+    .UploadImg-model{
       width: 100%;
       height: 100%;
       margin-right: 0;
@@ -211,7 +211,7 @@
     .col-xs-6{
       height: 89px;
     }
-    .btc-UploadImg-model{
+    .UploadImg-model{
       padding-left: 5px;
       >span{
         padding: 0 2px;

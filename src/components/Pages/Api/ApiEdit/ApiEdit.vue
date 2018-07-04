@@ -1,30 +1,30 @@
 <template>
-  <div @keyup.enter="editApi" v-if="this.api.editId !== ''" class="btc-api-edit">
-    <div class="btc-container-block">
+  <div @keyup.enter="editApi" v-if="this.api.editId !== ''" class="api-edit">
+    <div class="container-block">
       <header>
         <strong>
           {{ $t('api.api_key') }}
         </strong>
       </header>
-      <div class="btc-api-editContain">
+      <div class="api-editContain">
         <basic-input :placeholder="$t('api.label')" v-model="parme.label">
         </basic-input>
-        <div class="btc-explain">
+        <div class="explain">
           {{ $t('api.label_describe') }}
         </div>
         <basic-input :placeholder="'ACCESS KEY'" v-model="this.api.editKey" readonly="readonly">
         </basic-input>
-        <basic-input class="btc-marginT15" :placeholder="$t('api.ip_white_list')" v-model="parme.ip">
+        <basic-input class="marginT15" :placeholder="$t('api.ip_white_list')" v-model="parme.ip">
         </basic-input>
-        <div class="btc-explain">
+        <div class="explain">
           {{ $t('api.ip_input') }}
         </div>
         <basic-input ref="gV" :validate='"required|google_verify_code"' :placeholder="$t('api.google_verification_code')" v-model="parme.otp">
         </basic-input>
-        <div class="btc-marginT30 btc-marginB40">
+        <div class="marginT30 marginB40">
           <basic-button class="btn" :disabled="disabled" @click.native="editApi" :text='$t("api.confirm")'></basic-button>
           <router-link :disabled="disabled" :to="`${ROUTER_VERSION}/api`">
-            <button class="btc-white-btn">{{ $t("api.cancel") }}</button>
+            <button class="white-btn">{{ $t("api.cancel") }}</button>
           </router-link>
         </div>
       </div>
@@ -119,23 +119,23 @@ export default {
 
 <style lang="scss" scoped>
 @media (max-width: 992px) {
-  .btc-api-editContain{
+  .api-editContain{
     width: 96%!important
   }
 }
 
-.btc-api-editContain{
+.api-editContain{
   width: 61.2%;
   margin: 0 auto;
-  .btc-explain{
+  .explain{
    margin: 10px 0;
    font-size: 12px;
    color: #999999;
   }
-  .btc-basic-button{
+  .basic-button{
     width: 48%;
   }
-  .btc-white-btn{
+  .white-btn{
     width: 48%;
     float: right;
     padding: 5px 0;
@@ -144,7 +144,7 @@ export default {
 </style>
 
 <style>
-.btc-api-editContain .help{
+.api-editContain .help{
   position: absolute;
 }
 </style>

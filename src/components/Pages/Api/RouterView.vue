@@ -1,5 +1,5 @@
 <template>
-  <div class="btc-api">
+  <div class="api">
     <keep-alive>
       <router-view>
       </router-view>
@@ -14,8 +14,8 @@ export default {
 </script>
 
 <style lang="scss">
-.btc-api{
-  .btc-container-block{
+.api{
+  .container-block{
     padding: 13px 30px 0 30px
   }
   header{

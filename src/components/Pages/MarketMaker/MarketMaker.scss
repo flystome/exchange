@@ -1,4 +1,4 @@
-.btc-MarketMaker{
+.MarketMaker{
   overflow: hidden;
   header {
     margin: 46px 0;
@@ -50,13 +50,13 @@
       color: #00c4a2;
     }
   }
-  .btc-MarketMaker-norecord{
+  .MarketMaker-norecord{
     text-align: center;
   }
 }
 
-.btc-lang-long{
-  .btc-MarketMaker header > div{
+.lang-long{
+  .MarketMaker header > div{
     float: none;
     margin-top: 15px;
     top: 0;
@@ -64,13 +64,13 @@
 }
 
 @media (max-width: 992px) {
-  .btc-MarketMaker header > div{
+  .MarketMaker header > div{
     float: none;
     margin-top: 15px;
     top: 0;
   }
-  .btc-lang-long{
-    .btc-MarketMaker header > div{
+  .lang-long{
+    .MarketMaker header > div{
       >:nth-child(2){
         margin-top: 13px;
         margin-left: 0;

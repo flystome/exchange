@@ -1,28 +1,28 @@
 <template>
   <div>
-    <div class="btc-hint">
+    <div class="hint">
       <transition name="hint">
         <template v-if="tick">
-          <div  :class="{'btc-hint-large': PopupBox.largeWidth}" class="text-center btc-hint-middle">
+          <div :class="{'hint-large': PopupBox.largeWidth}" class="text-center hint-middle">
             <div>
               <i v-if="PopupBox.type === 'success' " class="Hint-success" />
               <i v-else-if="PopupBox.type === 'warn'" class="Hint-warn" />
               <self-building-square-spinner
               v-else-if="PopupBox.type === 'loading'"
-              class="btc-hint-loading"
+              class="hint-loading"
               :animation-duration="6000"
               :size="45"
               color="#3e81ff"
               />
               <i v-else class="Hint-error" />
             </div>
-          <div v-html="PopupBox.message" style="padding-left:35px;padding-right:35px;margin-top: 15px;" :class="{'btc-paddingB45': !this.PopupBox.buttondisplay}">
+          <div v-html="PopupBox.message" class="paddingL35 paddingR35 marginT15" :class="{'paddingB45': !this.PopupBox.buttondisplay}">
           </div>
-          <div v-if="this.PopupBox.buttondisplay" class="btc-hint-confirm">
+          <div v-if="this.PopupBox.buttondisplay" class="hint-confirm">
             <span style="display:flex">
-              <basic-button @click.native.stop="confirm" v-if='PopupBox.confirm'  class="btn"  :text='$t(`hint.yes`)'>
+              <basic-button @click.native.stop="confirm" v-if='PopupBox.confirm' class="btn" :text='$t(`hint.yes`)'>
               </basic-button>
-              <basic-button @click.native.stop="gopath" class="btn"  :text='buttonText' :class="{'btc-background-999': PopupBox.confirm}">
+              <basic-button @click.native.stop="gopath" class="btn" :text='buttonText' :class="{'background-999': PopupBox.confirm}">
               </basic-button>
             </span>
           </div>
@@ -113,18 +113,18 @@ export default {
     transform: scale(1);
   }
 }
-.btc-hint{
+.hint{
   margin-top: 203px;
   z-index: 3;
-  .btc-hint-confirm{
+  .hint-confirm{
     position: relative;
     bottom: -1px;
-    .btc-basic-button{
+    .basic-button{
       margin-top: 30px;
       outline: none;
     }
   }
-  .btc-hint-middle{
+  .hint-middle{
     transition: all .4;
     background: #ffffff;
     position: relative;
@@ -137,16 +137,16 @@ export default {
       margin-top: 27px;
     }
   }
-  .btc-hint-large{
+  .hint-large{
     max-width: 399px;
   }
-  .btc-background-999{
+  .background-999{
     background: #a5a5a5;
   }
   button{
     width: 100%;
   }
-  .btc-hint-loading{
+  .hint-loading{
     margin: 0 auto;
     margin-bottom: 46px;
     top: 24px!important;

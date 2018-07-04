@@ -1,20 +1,20 @@
 <template>
   <div>
-    <div class="btc-member-center container">
-      <div v-if="!(step === 1 && fromApp) " class="btc-container-block btc-membercenter-header" :class="{'btc-member-padding' : step === 1}">
+    <div class="member-center container">
+      <div v-if="!(step === 1 && fromApp) " class="container-block membercenter-header" :class="{'member-padding' : step === 1}">
         <div style='overflow: hidden;'>
           <div class="col-md-6">
-            <div class="btc-member-info">
-              <span class="btc-member-infoEmail">{{ loginData.show_name }}</span>
+            <div class="member-info">
+              <span class="member-infoEmail">{{ loginData.show_name }}</span>
               <router-link :to="`${ROUTER_VERSION}/change_password`">
                 {{$t("my_account.change_password")}}
               </router-link>
             </div>
           </div>
-          <div class="btc-member-bt">
-            <!-- <span @click="account" :class="{'btc-link': step === 1 }">{{$t("my_account.account")}}</span>
+          <div class="member-bt">
+            <!-- <span @click="account" :class="{'link': step === 1 }">{{$t("my_account.account")}}</span>
             <span>|</span>
-            <span @click="referrals" :class="{'btc-link': step === 2 }">
+            <span @click="referrals" :class="{'link': step === 2 }">
               {{$t('my_account.recommended_statistics')}}
             </span> -->
             <menu-underline
@@ -28,14 +28,14 @@
             </menu-underline>
           </div>
         </div>
-        <div class="btc-memeber-platformCoin btc-paddingL15 btc-paddingT10">
+        <div class="memeber-platformCoin paddingL15 paddingT10">
           <a>{{$t('my_account.use_platform_currency')}}</a>
-          <span @click='ChangePlatformCoin' class='btc-marginL15' :disabled='disabled'>
+          <span @click='ChangePlatformCoin' class='marginL15' :disabled='disabled'>
             <a :class="{'active': PlatformState}">ON</a><a :class="{'active': !PlatformState}">OFF</a>
           </span>
         </div>
       </div>
-      <div class="btc-member-ver" v-if="step === 0">
+      <div class="member-ver" v-if="step === 0">
         <div class="media">
           <div>
             <div class="media-left sprite-member-email">
@@ -43,7 +43,7 @@
             </div>
             <div class="media-body">
               <h5 class="media-heading">{{$t("my_account.tier_1")}}</h5>
-              <span class="btc-member-validata btc-link" @click="sendEmail" :class="{'btc-active': !loginData.activated}">
+              <span class="member-validata link" @click="sendEmail" :class="{'active': !loginData.activated}">
                 <span v-if='loginData.activated'>{{$t("auth.email")}}</span>
                 <button type="button" id="myButton" data-text="Loading..." class="btn sendbutton" autocomplete="off" :disabled="disabled" v-else >
                   {{$t("auth.send_email")}}
@@ -64,11 +64,11 @@
             </div>
             <div class="media-body">
               <h5 class="media-heading">{{$t("my_account.korean_user_use_twice_verification")}}</h5>
-              <span class="btc-member-validata btc-link" @click="validatephone" :class="{'btc-active': !loginData.sms_activated}">
+              <span class="member-validata link" @click="validatephone" :class="{'active': !loginData.sms_activated}">
                   <span>{{ $t("auth.phone") }}</span>
                   <i v-if='loginData.sms_activated' class='account-validate-true' />
                 </span>
-                <span class="btc-member-validata btc-link" :class="{'btc-active': !loginData.app_activated}" @click="validateAuth">
+                <span class="member-validata link" :class="{'active': !loginData.app_activated}" @click="validateAuth">
                   <span>{{$t("auth.google")}}</span>
                   <i v-if='loginData.app_activated' class='account-validate-true' />
                 </span>
@@ -86,10 +86,10 @@
             </div>
             <div class="media-body">
               <h5 class="media-heading">{{$t("my_account.completion_of_real_name_authentication")}}</h5>
-              <div class="btc-verifying-prompt">
-                <span class="btc-member-validata btc-link"
-                  :class="{'btc-active': loginData.id_document && loginData.id_document.aasm_state==='unverified',
-                  'btc-verifying':(loginData.id_document && loginData.id_document.aasm_state)==='verifying'}" @click="validateAll">
+              <div class="verifying-prompt">
+                <span class="member-validata link"
+                  :class="{'active': loginData.id_document && loginData.id_document.aasm_state==='unverified',
+                  'verifying':(loginData.id_document && loginData.id_document.aasm_state)==='verifying'}" @click="validateAll">
                   <span>{{$t("auth.real_name")}}</span>
                   <i class='account-validate-true' v-if='(loginData.id_document && loginData.id_document.aasm_state)==="verified"'/>
                   <i class='account-verifying' v-else-if='(loginData.id_document && loginData.id_document.aasm_state)==="verifying"'></i>
@@ -111,42 +111,42 @@
     <template v-if="step === 0">
       <div class="container table">
       <basic-table :captionTitle='getLoginRecord.captionTitle' :item='getLoginRecord.Item'>
-      <router-link :to="`${ROUTER_VERSION}/ticket/new`" slot="remark" class="btc-tableRemark">{{$t('my_account.have_questions_to_contact_us')}}</router-link>
+      <router-link :to="`${ROUTER_VERSION}/ticket/new`" slot="remark" class="tableRemark">{{$t('my_account.have_questions_to_contact_us')}}</router-link>
       </basic-table>
-      <div class="btc-member-handleRecord  btc-container-block">
-        <header class="btc-member-blockHeader">
-          <span class="btc-member-handleCount"><strong>{{$t('my_account.customer_service_record')}}</strong></span>
-          <router-link :to='`${ROUTER_VERSION}/ticket/closed`' class="btc-member-handleServer btc-link">
+      <div class="member-handleRecord  container-block">
+        <header class="member-blockHeader">
+          <span class="member-handleCount"><strong>{{$t('my_account.customer_service_record')}}</strong></span>
+          <router-link :to='`${ROUTER_VERSION}/ticket/closed`' class="member-handleServer link">
             {{$t('my_account.view_the_end_service_list')}}
           </router-link>
         </header>
-        <div @click='goTicket(data.id)' class="btc-member-qContainer" v-for="(data, index) in tickets" :key="index" v-if="index < 5" :class="{'btc-border-none': index === tickets.length - 1 }">
-          <div class="btc-member-question" :class="{'is-dispose':data.aasm_state === 'closed' }">
-            <span class='btc-member-qContext'>
+        <div @click='goTicket(data.id)' class="member-qContainer" v-for="(data, index) in tickets" :key="index" v-if="index < 5" :class="{'border-none': index === tickets.length - 1 }">
+          <div class="member-question" :class="{'is-dispose':data.aasm_state === 'closed' }">
+            <span class='member-qContext'>
               {{data.content}}
             </span>
-            <span class="btc-member-qTime">{{ moment(data.created_at) }}</span>
+            <span class="member-qTime">{{ moment(data.created_at) }}</span>
           </div>
-          <div class="btc-member-qTitle btc-marginB5" :class="{'is-dispose':data.aasm_state === 'closed' }">
+          <div class="member-qTitle marginB5" :class="{'is-dispose':data.aasm_state === 'closed' }">
             {{data.title}}
           </div>
         </div>
-        <div class="text-center btc-table-record" v-if="this.tickets.length === 0">
+        <div class="text-center table-record" v-if="this.tickets.length === 0">
           <div>
-              <div class="btc-marginT70 btc-marginB70 btc-font12 btc-color999">{{$t('my_account.no_record')}}</div>
+              <div class="marginT70 marginB70 font12 color999">{{$t('my_account.no_record')}}</div>
           </div>
-          <div class="text-center btc-table-more btc-b-t" style="margin-bottom:0px;">
-            <a :href="`${ROUTER_VERSION}/ticket/new`" class="btc-link ">{{$t('my_account.new_questions')}}</a>
+          <div class="text-center table-more b-t" style="margin-bottom:0px;">
+            <a :href="`${ROUTER_VERSION}/ticket/new`" class="link ">{{$t('my_account.new_questions')}}</a>
           </div>
         </div>
         <template v-else>
-          <div class="text-center btc-table-more btc-b-t col-md-6">
-            <router-link :to="`${ROUTER_VERSION}/ticket/open`" class='btc-link '>
+          <div class="text-center table-more b-t col-md-6">
+            <router-link :to="`${ROUTER_VERSION}/ticket/open`" class='link '>
               {{$t('my_account.show_more')}}
             </router-link>
           </div>
-          <div class="text-center btc-table-more btc-b-l btc-b-t col-md-6">
-            <router-link :to="`${ROUTER_VERSION}/ticket/new`" class='btc-link '>
+          <div class="text-center table-more b-l b-t col-md-6">
+            <router-link :to="`${ROUTER_VERSION}/ticket/new`" class='link '>
               {{$t('my_account.new_questions')}}
             </router-link>
           </div>
@@ -156,24 +156,24 @@
     </template>
     <template v-if="step === 1">
       <div class="container">
-        <div class="btc-container-block btc-member-handleRecord btc-referral">
-          <div class="btc-member-blockHeader">
+        <div class="container-block member-handleRecord referral">
+          <div class="member-blockHeader">
             <strong>{{ $t('my_account.referrals_title') }}</strong>
           </div>
-          <div class="btc-referral-container">
-            <div class="btc-referral-qrcode btc-fl">
+          <div class="referral-container">
+            <div class="referral-qrcode fl">
               <qr-code v-if="loginData !== 'none'" :length='"200px"' :dateUrl="qrcode(`${HOST_URL}?r=${loginData.promotion_id}`)"></qr-code>
             </div>
-            <div class="btc-fl btc-referral-data">
+            <div class="fl referral-data">
               <div>
                 <strong>{{ $t('my_account.recommended_links') }}</strong>
                 <news-prompt :text='prompt'></news-prompt>
               </div>
-              <div class="btc-referrals-address">
-                <span v-if="loginData !== 'none'" id="copy1" class="btc-b">{{ `${BASE_URL}/register?r=${loginData.promotion_id}` }}</span>
+              <div class="referrals-address">
+                <span v-if="loginData !== 'none'" id="copy1" class="b">{{ `${BASE_URL}/register?r=${loginData.promotion_id}` }}</span>
                 <basic-button class='btn-copy1' data-clipboard-target="#copy1" :text="$t('my_account.copy')"></basic-button>
               </div>
-              <div class="btc-marginB20 btc-bottom">
+              <div class="marginB20 bottom">
                 {{ $t('my_account.effective_recommended') }}: <strong>{{ loginData.promotion_amount }}</strong>
               </div>
               <div>
@@ -183,13 +183,13 @@
           </div>
         </div>
       <basic-table :loading='referral_loading' :captionTitle='getRecommendCount.captionTitle' :item='getRecommendCount.Item'>
-      <div slot="more" class="text-center btc-b-t btc-table-more">
-        <router-link :to="`${ROUTER_VERSION}/form/referral`" class="btc-link ">{{$t('my_account.show_more')}}</router-link>
+      <div slot="more" class="text-center b-t table-more">
+        <router-link :to="`${ROUTER_VERSION}/form/referral`" class="link ">{{$t('my_account.show_more')}}</router-link>
       </div>
       </basic-table>
       <basic-table :loading='referral_loading' :captionTitle='getRecommendUser.captionTitle' :item='getRecommendUser.Item'>
-         <div slot="more" class="text-center btc-b-t btc-table-more">
-          <router-link :to="`${ROUTER_VERSION}/form/registered_referral`" class="btc-link ">{{$t('my_account.show_more')}}</router-link>
+         <div slot="more" class="text-center b-t table-more">
+          <router-link :to="`${ROUTER_VERSION}/form/registered_referral`" class="link ">{{$t('my_account.show_more')}}</router-link>
         </div>
       </basic-table>
       </div>

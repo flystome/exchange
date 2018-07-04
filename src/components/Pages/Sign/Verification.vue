@@ -1,18 +1,18 @@
 <template>
-  <div class="btc-verfication" @keyup.enter="Verfiy">
-    <div class="btc-container-block">
+  <div class="verfication" @keyup.enter="Verfiy">
+    <div class="container-block">
       <div>
         <a>{{ $t('sign.ip_change') }}</a>
         <news-prompt :Time='3000' v-on:bind='prompt = $event' :text='prompt'></news-prompt>
-        <!-- <div class="btc-sms-code" v-if="sms_activated">
+        <!-- <div class="sms-code" v-if="sms_activated">
           <basic-input style="min-height:62px" :validate='"required|sms_verification_code"' ref="verifiycode" :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
           </basic-input>
-          <span :disabled="disabled" class="btc-white-btn" @click="SendSms">
+          <span :disabled="disabled" class="white-btn" @click="SendSms">
             {{ timer }}
           </span>
         </div> -->
-        <div class="btc-verify">
-          <select class="btc-select-option" ref='select'
+        <div class="verify">
+          <select class="select-option" ref='select'
           v-model="validate"
           :disabled="disabled">
             <option v-if="app_activated" value="google">{{ this.$t('withdraw_currency.google_validate') }}</option>
@@ -20,7 +20,7 @@
           </select>
           <basic-input :danger='true' ref="verify_code" style="min-height:66px" :validate='"required|verify_code"' v-model="verifycode">
           </basic-input>
-          <span v-if="validate === 'sms'" :disabled="disabled" class="btc-white-btn" @click="SendSms">
+          <span v-if="validate === 'sms'" :disabled="disabled" class="white-btn" @click="SendSms">
             {{ timer }}
           </span>
         </div>
@@ -138,7 +138,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.btc-container-block{
+.container-block{
   min-height: 70vh;
   > div{
     padding: 130px 31% 195px 31%;
@@ -147,25 +147,25 @@ export default {
     }
   }
 }
-.btc-sms-code{
+.sms-code{
   display: flex;
   > div{
     flex: 1;
   }
 }
 
-.btc-verify{
+.verify{
   display: flex;
   > div {
     flex: 1
   }
 }
 
-.btc-basic-button{
+.basic-button{
   width: 100%
 }
 
-.btc-white-btn{
+.white-btn{
   height: 32px;
   margin-left: 10px;
   line-height: 29px;
@@ -182,13 +182,13 @@ select{
 }
 
 @media (max-width: 992px){
-  .btc-container-block > div{
+  .container-block > div{
     padding: 130px 150px 195px 150px!important;
   }
 }
 
 @media (max-width: 768px){
-  .btc-container-block > div{
+  .container-block > div{
     padding: 63px 15px 195px 15px!important;
   }
 }

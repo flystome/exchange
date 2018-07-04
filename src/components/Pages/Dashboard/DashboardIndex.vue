@@ -1,5 +1,5 @@
 <template>
-  <div class="btc-container-block" v-show='(route === "pie" || route === "line")'>
+  <div class="container-block" v-show='(route === "pie" || route === "line")'>
     <!-- <menu-underline
     :route="'AssetsDashboard'"
     v-model='step'
@@ -58,7 +58,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.btc-container-block{
+.container-block{
   padding: 14px 30px 0 30px;
   min-height: 61vh;
   position: relative;

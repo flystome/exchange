@@ -1,28 +1,28 @@
 <template>
-  <div @keyup.enter="ChangePassword" class="btc-changePassword btc-sign-block">
-    <div class="btc-sign-form">
+  <div @keyup.enter="ChangePassword" class="changePassword sign-block">
+    <div class="sign-form">
       <header class="text-center">
         <img src="~Img/large/sign-logo.png">
       </header>
       <div class="form">
-        <div class="title btc-color333">
+        <div class="title color333">
           {{ $t('title.change_password') }}
         </div>
         <news-prompt :Time='3000' v-on:bind='prompt = $event' :text="prompt"></news-prompt>
         <basic-input type='password' :danger='true' ref="old_password" :validate='"required|password"' class="old_password" v-model="ChangePasswordData.identity.old_password" :placeholder="$t('sign.old_password')"></basic-input>
         <basic-input :danger='true' type='password' ref="password" :validate='"required|password"' v-model="ChangePasswordData.identity.password" :placeholder="$t('sign.new_password')"></basic-input>
-        <div class="btc-marginT15 btc-color999">
+        <div class="marginT15 color999">
           {{ $t('validation.password_fail') }}
         </div>
         <basic-input  type='password' :invalid="invalid" v-model="ChangePasswordData.identity.password_confirmation" :validate='`confirmed:${ChangePasswordData.identity.password}`' :placeholder="$t('sign.confirm_password')"></basic-input>
         <basic-input ref="verify_code" :danger='true' :validate='"required|verify_code"' v-model="ChangePasswordData._rucaptcha" :placeholder="$t('validation.verify_code')"></basic-input>
-        <img class="btc-pointer btc-marginT5" :src="Rucaptcha" @click="changeCaptcha">
-        <basic-button :disabled="disabled" @click.native='ChangePassword' class="btn btc-marginB30" :text='$t("confirm")'></basic-button>
+        <img class="pointer marginT5" :src="Rucaptcha" @click="changeCaptcha">
+        <basic-button :disabled="disabled" @click.native='ChangePassword' class="btn marginB30" :text='$t("confirm")'></basic-button>
       </div>
     </div>
-    <!-- <footer class="btc-font12 btc-marginT30 text-center" style="color: #9b9b9b">
+    <!-- <footer class="font12 marginT30 text-center" style="color: #9b9b9b">
       <div>© 2018 hotex.com All Rights Reserved</div>
-      <div class="btc-marginT5">{{$t('sign.official_website')}}：www.hotex.com {{$t('sign.official_email')}}：<a href="mailto:support@hotex.com">support@hotex.com</a></div>
+      <div class="marginT5">{{$t('sign.official_website')}}：www.hotex.com {{$t('sign.official_email')}}：<a href="mailto:support@hotex.com">support@hotex.com</a></div>
     </footer> -->
   </div>
 </template>
@@ -142,22 +142,22 @@ export default {
 
 <style lang="scss" scoped>
 @import './common.scss';
-.btc-basic-button{
+.basic-button{
   margin-top: 16px
 }
 </style>
 
 <style>
-.btc-sign-block .btc-basicInput{
+.sign-block .basicInput{
   height:39px;
   font-size: 14px;
 }
 
-.btc-changePassword .btc-basicInput{
+.changePassword .basicInput{
   margin-top: 16px;
 }
 
-.btc-changePassword .old_password input{
+.changePassword .old_password input{
   margin-top: 5px;
 }
 </style>

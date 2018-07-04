@@ -1,11 +1,11 @@
 <template>
-  <div class="btc-form">
-    <div class="btc-container-block">
+  <div class="form">
+    <div class="container-block">
       <basic-table style="margin-top:0px" :loading='loading' :SpinnerSize='150' :len='xhrData.length' :captionTitle='captionTitle' :item='getRecord'>
       </basic-table>
     </div>
     <paginate
-      class="btc-fr"
+      class="fr"
       :disabled="disabled"
       v-if="pagination !== 0"
       :page-count="pagination"

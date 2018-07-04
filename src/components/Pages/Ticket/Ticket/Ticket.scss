@@ -1,13 +1,13 @@
-.btc-ticket-replay{
-  .btc-block-container {
+.ticket-replay{
+  .block-container {
     background: white;
     margin-top: 8px;
     padding: 16px 30px 24px 30px;
-    .btc-ticketReplay-header{
+    .ticketReplay-header{
       font-size: 12px;
     }
   }
-  .btc-basic-button{
+  .basic-button{
     min-width: auto;
     padding: 3px 15px;
   }
@@ -16,10 +16,10 @@
     height: 300px;
     border: 1px solid #dfe0e1;
   }
-  .btc-ticketReplay-replay{
+  .ticketReplay-replay{
     margin-top: 18px;
     background: #f2f2f2;
-    .btc-ticketReplay-block{
+    .ticketReplay-block{
       padding: 16px 20px;
       padding-bottom: 0;
       header{
@@ -34,17 +34,17 @@
       border-bottom: 1px solid #dfe0e1;
       overflow: hidden;
     }
-    .btc-ticket-BroderNone{
+    .ticket-BroderNone{
       border: none
     }
-    .btc-ticketReplay-byAdmin{
+    .ticketReplay-byAdmin{
       float: right;
       position: absolute;
       bottom: 8px;
       right: 0;
       padding-bottom: 0;
     }
-    .btc-ticket-triangle{
+    .ticket-triangle{
       height: 14px;
       background: white;
       a{
@@ -60,10 +60,10 @@
       }
     }
   }
-  .btc-ticketReplay-byReplay{
+  .ticketReplay-byReplay{
     color: #ff7f18;
   }
-  .btc-newsPrompt{
+  .newsPrompt{
     margin-left: 0;
     font-size: 12px;
 
@@ -74,7 +74,7 @@
   font-size: 12px;
 }
 
-.btc-ticketReplay-textarea{
+.ticketReplay-textarea{
   padding: 20px 0;
   padding-bottom: 7px;
   input[type=text]{
@@ -93,7 +93,7 @@
     cursor: pointer;
     left: -76px;
   }
-  .btc-link{
+  .link{
     position: relative;
     top: 8px;
     display: inline-block;
@@ -102,7 +102,7 @@
       vertical-align: top;
     }
   }
-  .btc-ticket-delte{
+  .ticket-delte{
     margin-left: 7px;
     display: flex;
     position: relative;
@@ -113,7 +113,7 @@
       margin-left: 5px;
     }
   }
-  .btc-newsPrompt{
+  .newsPrompt{
     margin-top: 8px;
     margin-left: 8px;
     position: absolute;
@@ -126,19 +126,19 @@
   }
 }
 
-.btc-ticket-flex{
+.ticket-flex{
   display: flex
 }
 
 @media (max-width: 992px) {
-  .btc-ticket-replay img{
+  .ticket-replay img{
     width: 100%!important;
     height: 100%!important;
   }
 }
 
 @media (max-width: 768px) {
-  .btc-ticket-flex{
+  .ticket-flex{
     display: block!important;
     input{
       margin-top: 20px;
@@ -156,6 +156,6 @@
   @include sprite($ticket-upload);
 }
 
-.btc-ticket-newDelete{
+.ticket-newDelete{
   @include sprite($delete);
 }

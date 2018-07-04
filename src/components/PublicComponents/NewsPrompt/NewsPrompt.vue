@@ -1,10 +1,10 @@
 <template>
   <div style="min-height: 22px;">
     <transition name="prompt">
-      <div v-if="text" class="btc-newsPrompt">
-        <span class="btc-news-animation">
+      <div v-if="text" class="newsPrompt">
+        <span class="news-animation">
           <strong>
-            {{ this.text }}
+            {{ text }}
           </strong>
         </span>
       </div>

@@ -1,6 +1,6 @@
 <template>
-  <div class="btc-api-index">
-    <div class="btc-container-block">
+  <div class="api-index">
+    <div class="container-block">
       <header>
         <strong>
           {{ $t('api.api_key') }}
@@ -9,17 +9,17 @@
           <basic-button :text="$t('api.create_New_Key')"></basic-button>
         </router-link>
       </header>
-      <div class="btc-api-indexContain btc-marginB30">
-        <div class="btc-marginB20">
+      <div class="api-indexContain marginB30">
+        <div class="marginB20">
           <strong>
             {{ $t('api.my_api_key') }}
           </strong>
         </div>
-        <div class="btc-marginT15 btc-color999">
+        <div class="marginT15 color999">
           {{ $t('api.key_describe') }}
         </div>
-        <div class="btc-api-index-key btc-marginT30" v-if="api.apiData.length !== 0">
-          <div class="btc-color666 btc-api-accesskey">
+        <div class="api-index-key marginT30" v-if="api.apiData.length !== 0">
+          <div class="color666 api-accesskey">
             <strong>
               {{ $t('api.mechanism') }}
             </strong>
@@ -27,43 +27,43 @@
               Access Key
             </strong>
           </div>
-          <div class="btc-marginT15 btc-api-accesskey" v-for="(data, index) in api.apiData" :key="data.id">
+          <div class="marginT15 api-accesskey" v-for="(data, index) in api.apiData" :key="data.id">
             <span>
               {{ data.label }}
             </span>
             <span>
               {{ data.access_key }}
             </span>
-            <span class="btc-api-opreate">
-             <span class="btc-link" @click="editApi(data, index)">{{ $t('api.edit') }}</span> <span class="btc-link">|</span> <a @click="marketIndex(data.id, index)" class="btc-link">{{ $t('api.delete') }}</a>
+            <span class="api-opreate">
+             <span class="link" @click="editApi(data, index)">{{ $t('api.edit') }}</span> <span class="link">|</span> <a @click="marketIndex(data.id, index)" class="link">{{ $t('api.delete') }}</a>
             </span>
           </div>
         </div>
-        <div v-if='api.apiData.length === 0 && loading !== true' class="btc-api-norecord">
+        <div v-if='api.apiData.length === 0 && loading !== true' class="api-norecord">
           {{ $t('my_account.no_record') }}
         </div>
-        <div class="btc-marginT30" v-if="loading === true">
+        <div class="marginT30" v-if="loading === true">
           <vue-simple-spinner size="88"></vue-simple-spinner>
         </div>
       </div>
     </div>
-    <div class="btc-container-block">
+    <div class="container-block">
       <header>
         <strong>
           {{ $t('api.application_binding') }}
         </strong>
       </header>
-      <div class="btc-api-indexContain btc-marginB30">
-        <div class="btc-marginB20">
+      <div class="api-indexContain marginB30">
+        <div class="marginB20">
           <strong>
             {{ $t('api.bind_third_app') }}
           </strong>
         </div>
-        <div class="btc-marginT15 btc-color999">
+        <div class="marginT15 color999">
           {{ $t('api.manage_all_app') }}
         </div>
-        <div class="btc-api-index-key btc-marginT30" v-if="apiDataa.length !== 0">
-          <div class="btc-color666 btc-api-bindapp">
+        <div class="api-index-key marginT30" v-if="apiDataa.length !== 0">
+          <div class="color666 api-bindapp">
             <strong>
               {{ $t('api.application_name') }}
             </strong>
@@ -74,7 +74,7 @@
               {{ $t('api.entrustment_scope') }}
             </strong>
           </div>
-          <div class="btc-marginT15 btc-api-bindapp" v-for="data in apiDataa" :key="data.g">
+          <div class="marginT15 api-bindapp" v-for="data in apiDataa" :key="data.g">
             <span>
               {{ data.g }}
             </span>
@@ -84,12 +84,12 @@
             <span>
               {{ data.c }}
             </span>
-            <span class="btc-api-opreate">
-              <router-link class="btc-link" :to="`${ROUTER_VERSION}/api/edit`">{{ $t('api.edit') }}</router-link> <span class="btc-link">|</span> <a class="btc-link">{{ $t('api.delete') }}</a>
+            <span class="api-opreate">
+              <router-link class="link" :to="`${ROUTER_VERSION}/api/edit`">{{ $t('api.edit') }}</router-link> <span class="link">|</span> <a class="link">{{ $t('api.delete') }}</a>
             </span>
           </div>
         </div>
-        <div v-else class="btc-api-norecord">
+        <div v-else class="api-norecord">
           {{ $t('my_account.no_record') }}
         </div>
       </div>
@@ -182,13 +182,13 @@ export default {
 
 <style lang="scss">
 @media (max-width: 766px){
-  .btc-api-index-key{
-    .btc-api-accesskey{
+  .api-index-key{
+    .api-accesskey{
       >:nth-child(2){
         width: 50%!important
       }
     }
-    .btc-api-bindapp{
+    .api-bindapp{
       >:nth-child(2){
         width: 29%!important;
       }
@@ -197,12 +197,12 @@ export default {
       }
     }
   }
-  .btc-api .btc-container-block{
+  .api .container-block{
     padding: 13px 10px 0 10px!important;
   }
 }
 
-@mixin btc-api-list {
+@mixin api-list {
   display: inline-block;
   overflow:hidden;
   text-overflow:ellipsis;
@@ -210,56 +210,56 @@ export default {
   padding-right: 13px;
 }
 
-.btc-api-index{
-  .btc-basic-button{
+.api-index{
+  .basic-button{
     padding: 5px 9px !important;
     min-width: initial !important;
     float: right;
     margin-top: -6px;
   }
-  .btc-api-indexContain{
-    .btc-api-index-key{
+  .api-indexContain{
+    .api-index-key{
       font-size: 12px;
       >div{
         &:hover{
-          .btc-api-opreate{
+          .api-opreate{
             visibility: visible;
             opacity: 1;
           }
         }
-        .btc-api-opreate{
+        .api-opreate{
           visibility: hidden;
           float: right;
           opacity: 0;
           transition: all .23s;
         }
       }
-      .btc-api-accesskey{
+      .api-accesskey{
         >:first-child{
-          @include btc-api-list;
+          @include api-list;
           width: 21%;
         }
         >:nth-child(2){
-          @include btc-api-list;
+          @include api-list;
           width: 65%;
         }
       }
-      .btc-api-bindapp{
+      .api-bindapp{
         >:first-child{
-          @include btc-api-list;
+          @include api-list;
           width: 21%;
         }
         >:nth-child(2){
-          @include btc-api-list;
+          @include api-list;
           width: 44%;
         }
         >:nth-child(3){
-          @include btc-api-list;
+          @include api-list;
           width: 20%;
         }
       }
     }
-    .btc-api-norecord{
+    .api-norecord{
       text-align: center;
       margin: 30px 0;
     }

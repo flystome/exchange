@@ -1,17 +1,17 @@
-// .btc-color666 > span{
+// .color666 > span{
 //   margin-left: 30px;
 // }
 
-.btc-validateGoogle{
+.validateGoogle{
   padding: 25px 40px;
   padding-bottom: 55px;
   position: relative;
   min-height: 70vh;
-  .btc-validate-gpt{
+  .validate-gpt{
     padding-top: 135px;
   }
 
-  .btc-validate-gmr{
+  .validate-gmr{
     margin-right: -90px;
   }
 
@@ -25,28 +25,28 @@
     margin-top: 4px;
   }
 
-  .btc-validate-gmr form input{
+  .validate-gmr form input{
     width: 360px;
     height: 40px;
     font-size: 15px;
     padding: 0 5px;
   }
 
-  .btc-validate-gmr form :nth-child(1) span{
+  .validate-gmr form :nth-child(1) span{
     width: 70px;
     display: inline-block;
     text-align: right;
   }
-  .btc-validate-googleApp{
+  .validate-googleApp{
     margin-top: 20px;
     padding-bottom: 20px;
   }
-  .btc-basicInput{
+  .basicInput{
     font-size: 14px;
     padding: 0 17px;
   }
 
-  .btc-validate-prompt{
+  .validate-prompt{
     left: 75px;
     margin-bottom: 2px;
     text-align: start;
@@ -67,7 +67,7 @@
     }
   }
 
-  .btc-poniter{
+  .poniter{
     display: block;
     border: 1px solid #4382f7;
     text-align: center;
@@ -78,18 +78,18 @@
     margin-left: -40px;
   }
 
-  .btc-white-btn{
+  .white-btn{
     height: 32px;
     padding: 0;
   }
 
   @media (min-width: 1200px) {
-    .btc-basicInput{
+    .basicInput{
       width: 320px
     }
   }
   @media (max-width: 1200px) {
-      .btc-validate-prompt{
+      .validate-prompt{
         left: -78px;
       }
       .img-margin{
@@ -104,16 +104,16 @@
     form{
       padding: 20px 0 0 0;
     }
-    .btc-b-r{
+    .b-r{
       border-right:none;
     }
-    .btc-b-l{
+    .b-l{
       border-left:none;
     }
-    .btc-validate-textCenter{
+    .validate-textCenter{
       text-align: center
     }
-    .btc-validate-gpt{
+    .validate-gpt{
       padding-top:25px;
       margin-bottom: 0 !important;
     }
@@ -144,14 +144,14 @@
     .alreadyApp{
       float: left;
     }
-    .btc-validateGoogle .refreshqrcode{
+    .validateGoogle .refreshqrcode{
       display: block;
     }
   }
 }
 
 @media (max-width: 434px) {
-  .btc-validate-textCenter{
+  .validate-textCenter{
     .col-xs-6{
       float: none;
       width: auto;
@@ -163,14 +163,14 @@
 }
 
 @media (max-width: 409px) {
-  .btc-marginT20 .btc-marginR5{
+  .marginT20 .marginR5{
     margin-right:0;
     margin-bottom:5px;
   }
   .googleImg{
     width: 100%;
   }
-  .btc-white-btn{
+  .white-btn{
     font-size: 12px;
   }
 }

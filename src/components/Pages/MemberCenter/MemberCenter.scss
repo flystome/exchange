@@ -1,9 +1,9 @@
-.btc-member-bt{
+.member-bt{
   color: #fff;
   float: right;
   cursor: pointer;
 }
-.btc-border-none{
+.border-none{
   border: none!important;
 }
 a{
@@ -11,7 +11,7 @@ a{
     text-decoration: none;
   }
 }
-.btc-container {
+.box-container {
   >div{
     .container{
       padding: 0;
@@ -19,18 +19,18 @@ a{
     }
   }
 }
-.btc-member-center {
-  .btc-membercenter-header{
+.member-center {
+  .membercenter-header{
     padding: 12px 30px 98px 25px;
     background: url("~Img/large/membercenter.png") no-repeat center;
   }
-  .btc-member-ver{
+  .member-ver{
     // background-color: #fff;
     // max-width: 1080px;
     min-height: 96px;
     margin-top: -80px;
     // padding-left: 40px;
-    .btc-member-stepsblock{
+    .member-stepsblock{
       width: 346px;
       float: left;
       background-color: #fff;
@@ -38,23 +38,23 @@ a{
       >img{
         float: left;
       }
-      .btc-member-steps{
+      .member-steps{
         float: left;
         color: #666666;
         >div{
           font-size: 14px;
         }
-        .btc-member-validata{
+        .member-validata{
           margin-bottom: 0;
         }
       }
 
     }
   }
-  .btc-member-padding{
+  .member-padding{
     padding-bottom: 23px!important;
   }
-  .btc-member-ver{
+  .member-ver{
     max-width: 1200px;
     width: 100%;
     z-index: 2;
@@ -93,7 +93,7 @@ a{
   }
 }
 
-.btc-memeber-platformCoin{
+.memeber-platformCoin{
   color: white;
   a{
     color: white
@@ -125,11 +125,11 @@ a{
   }
 }
 
-.btc-member-center > div:last-child .btc-tableTextleft{
+.member-center > div:last-child .tableTextleft{
   text-align: center!important;
 }
 
-.btc-member-avatar{
+.member-avatar{
   $len: 64px;
   float: left;
   cursor: pointer;
@@ -137,20 +137,20 @@ a{
   max-width: $len;
 }
 
-.btc-member-handleRecord{
+.member-handleRecord{
   padding: 12px;
   padding-bottom: 0;
-  .btc-table-more{
+  .table-more{
     margin-top: 0px;
     padding: 8px 0;
     font-size: 12px;
   }
 }
 
-.btc-member-info{
+.member-info{
   float: left;
   color:  #fff;
-  .btc-member-infoEmail{
+  .member-infoEmail{
     font-size: 16px;
   }
   >a{
@@ -161,37 +161,37 @@ a{
   }
 }
 
-.btc-member-assetCount{
+.member-assetCount{
   margin-top: 7px;
   color: #bebebe;
 }
 
-.btc-member-infoEmail{
+.member-infoEmail{
   font-weight: 600;
   margin-right: 5px;
 }
 
-.btc-member-blockHeader{
+.member-blockHeader{
   border-bottom: 1px solid #f2f2f2;
   padding-bottom: 8px;
   margin: 0 9px;
   font-size: 12px;
 }
 
-.btc-member-handleServer{
+.member-handleServer{
   margin-left: 32px;
 }
 
-.btc-member-handleNew{
+.member-handleNew{
   float: right;
 }
 
-.btc-member-handleNew img{
+.member-handleNew img{
   margin-right: 5px;
   vertical-align: sub;
 }
 
-.btc-member-qContainer{
+.member-qContainer{
   color: #ccc;
   cursor: pointer;
   margin-top: 10px;
@@ -207,40 +207,40 @@ a{
   }
 }
 
-.btc-member-question{
+.member-question{
   font-size: 16px;
   font-weight: 600;
   margin-top: 14px;
 }
 
-.btc-member-qTime{
+.member-qTime{
   float: right;
   font-size: 12px;
   color: #ccc;
   font-weight: initial;
 }
 
-.btc-member-qTitle,.btc-member-question{
+.member-qTitle,.member-question{
   color: #333333;
   margin-top: 7px;
   min-height: 22px;
 }
 
 
-.btc-textCenter{
+.textCenter{
   text-align: center;
 }
 
-.btc-textCenter > div > div {
+.textCenter > div > div {
   padding: 10px 7px
 }
 
-.btc-img .btc-r-border img{
+.img .r-border img{
   position: absolute;
   left: 20px;
 }
 
-.btc-img{
+.img{
   text-align: start
 }
 
@@ -248,34 +248,34 @@ a{
   color: #999999!important
 }
 
-.btc-member-vc .btc-r-border > :first-child{
+.member-vc .r-border > :first-child{
   height: 53px;
 }
 
-.btc-member-padding{
+.member-padding{
   padding-top: 25px;
   padding-bottom: 13px;
 }
 
-.btc-r-border{
+.r-border{
   margin-bottom: 40px;
   height: 125px;
 }
 
-.btc-member-L{
+.member-L{
   position: relative;
   left: 65px;
 }
 
-.btc-member-process{
+.member-process{
   margin-top: 13px;
 }
 
-.btc-member-process img{
+.member-process img{
   margin-top: 10px
 }
 
-.btc-member-validata{
+.member-validata{
   border: 1px solid #bebebe;
   color: #999999 !important;
   padding: 2px 14px;
@@ -283,18 +283,18 @@ a{
   position: relative;
   cursor: default;
 }
-.btc-active{
+.active{
   border-color: #4382f7;
   color: #4382f7 !important;
 }
-.btc-active:hover{
+.active:hover{
   background: #4382f7;
   color: white !important;
   cursor: pointer;
 }
 
 
-.btc-verifying-prompt{
+.verifying-prompt{
   position: relative;
   padding-bottom: 13px;
   margin-top: 8px;
@@ -310,7 +310,7 @@ a{
     color: #333333;
     display: none;
   }
-  .btc-verifying{
+  .verifying{
     color: #666666 !important;
     border-color: #666666;
     &:hover{
@@ -322,13 +322,13 @@ a{
 }
 
 
-.btc-member-validata i{
+.member-validata i{
   position: absolute;
   bottom: -1px;
   right: -1px;
 }
 
-.btc-member-step{
+.member-step{
   background: #bebebe;
   padding: 0px 5px;
   font-weight: 700;
@@ -339,27 +339,27 @@ a{
   font-size: 12px;
 }
 
-.btc-member-validata span{
+.member-validata span{
   position: relative;
   z-index: 2;
 }
 
-.btc-member-p12{
+.member-p12{
   padding: 12px;
 }
 
-.btc-membercenter-identity{
+.membercenter-identity{
   border: none;
 }
 
-.btc-referral{
+.referral{
   >div{
     border: none
   }
-  .btc-qrcode{
+  .qrcode{
     margin-left: 183px;
   }
-  .btc-referral-data{
+  .referral-data{
     margin-left: 50px;
     margin-top: 17px;
     margin-bottom: 40px;
@@ -371,7 +371,7 @@ a{
     border-color: #dfe0e1;
     padding: 5px;
   }
-  .btc-referrals-address{
+  .referrals-address{
     display: flex;
     margin-top: 12px;
     margin-bottom: 27px;
@@ -379,13 +379,13 @@ a{
       white-space: nowrap;
     }
   }
-  .btc-newsPrompt{
+  .newsPrompt{
     line-height: 15px;
     margin-top: 5px;
   }
 }
 
-.btc-member-qContext{
+.member-qContext{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -394,86 +394,86 @@ a{
 }
 
 @media(max-width: 1200px){
-  .btc-member-ver{
+  .member-ver{
     padding-left: 0 !important;
     width: 100% !important;
-    .btc-member-stepsblock{
+    .member-stepsblock{
       &:nth-child(2){
         margin-left: 0;
         margin-right: 0;
       }
     }
   }
-  .btc-referral .btc-referral-data{
+  .referral .referral-data{
     width: 50%;
   }
 }
 
 @media (max-width: 991px) {
-  .btc-memeber-platformCoin{
+  .memeber-platformCoin{
     margin-top: 0;
     margin-left: 0;
     >a{
       display: block;
       margin-bottom: 10px;
     }
-    .btc-marginL15{
+    .marginL15{
       margin-left: 0;
       margin-top: 5px;
     }
   }
-  .btc-table-more.btc-b-l{
+  .table-more.b-l{
     border-left: none!important;
   }
-  .btc-referral .btc-referral-data{
+  .referral .referral-data{
     width: 70%;
     margin-left: 132px;
   }
-  .btc-referral .btc-qrcode{
+  .referral .qrcode{
     text-align: center;
     margin-left: 0;
   }
-  .btc-referral-qrcode{
+  .referral-qrcode{
     float: none;
   }
-  .btc-member-vc{
+  .member-vc{
     padding: 0
   }
-  .btc-img{
+  .img{
     text-align: center
   }
-  .btc-textCenter > div > div{
+  .textCenter > div > div{
     border-bottom: 1px solid #f2f2f2;
     padding: 25px 0;
   }
-  .btc-r-border:nth-child(2){
+  .r-border:nth-child(2){
     height: initial;
   }
-  .btc-img .btc-r-border img{
+  .img .r-border img{
     position: initial;
   }
-  .btc-member-L{
+  .member-L{
     position: initial;
     margin-top: 12px;
   }
-  .btc-img > div{
+  .img > div{
     height: initial;
   }
 }
 
 @media(max-width: 766px){
-  .btc-referral .btc-referral-data{
+  .referral .referral-data{
     margin-left: 4%;
     width: 93%;
   }
-  .btc-referral .btc-qrcode{
+  .referral .qrcode{
     text-align: center;
     margin-left: 0;
   }
-  .btc-referral-qrcode{
+  .referral-qrcode{
     float: none;
   }
-  .btc-membercenter-header{
+  .membercenter-header{
     padding-bottom: 75px !important;
     margin-top: -4px;
   }
@@ -484,7 +484,7 @@ a{
   .img-padding{
     padding-right: 8px;
   }
-  .btc-referrals-address{
+  .referrals-address{
     display: block!important;
     text-align: center;
   }
@@ -497,23 +497,23 @@ a{
     overflow: hidden;
     text-align: left;
   }
-  .btc-member-info{
+  .member-info{
     display: block;
     float: none;
   }
-  .btc-member-bt{
+  .member-bt{
     float: left;
     margin-left: 15px;
     margin-top: 10px;
   }
-  .btc-member-center .btc-membercenter-header{
+  .member-center .membercenter-header{
     padding: 12px 5px 112px 5px;
   }
-  .btc-tableRemark{
+  .tableRemark{
     display: block;
     float: none !important;
   }
-  .btc-member-qContainer{
+  .member-qContainer{
     margin-left: 10px;
     margin-right: 10px;
     padding-right: 0;
@@ -523,26 +523,26 @@ a{
 
 
 @media (max-width: 492px) {
-  .btc-member-qContext{
+  .member-qContext{
     width: 42%;
   }
-  .btc-member-handleNew{
+  .member-handleNew{
     float: initial;
     display: block;
     margin-top: 10px;
   }
-  .btc-r-border{
+  .r-border{
     margin-bottom: 56px;
   }
 }
 
-.btc-member-info .label{
+.member-info .label{
   padding: 2px 5px;
   background-color: #bebebe;
   font-weight: inherit;
 }
 
-.btc-member-handleNew {
+.member-handleNew {
   font-size: 12px;
   img {
     width: 14px;

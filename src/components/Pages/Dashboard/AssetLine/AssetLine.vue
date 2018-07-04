@@ -3,12 +3,12 @@
     <header>
       <div class="text-center">{{ $t('dashboard.historical_income') }}</div>
       <div>
-        <div class="btc-line-date">
+        <div class="line-date">
           <span v-for="(date, index) in DateList" :key="date" @click="ChangeDate(index)" :class="{'active': index === DateIndex}">
             {{ $t(`${date}`) }}
           </span>
         </div>
-        <div class="btc-line-mark">
+        <div class="line-mark">
           <span>
             <a style="background: #2686ff"></a>
             BTC{{$t('dashboard.benchmark')}}
@@ -115,19 +115,19 @@ export default {
       }
     },
     DayList () {
-      return this.LineData.map((data) => {
+      return this.LineData && this.LineData.map((data) => {
         return this.$moment(data.timestamp).format('YYYY-MM-DD')
       }).concat(new Array(this.Index - this.LineData.length).fill('').map((data, index) => {
         return this.$moment(this.LineData[this.LineData.length - 1] ? this.LineData[this.LineData.length - 1].timestamp : (new Date().getTime() - 86400000) + ((index + 1) * 86400000)).format('YYYY-MM-DD')
       }))
     },
     BtcData () {
-      return this.LineData.map((data) => {
+      return this.LineData && this.LineData.map((data) => {
         return data.btc_gains
       })
     },
     UsdData () {
-      return this.LineData.map((data) => {
+      return this.LineData && this.LineData.map((data) => {
         return data.usdt_gains
       })
     },
@@ -138,13 +138,15 @@ export default {
       return this.DateAmount[this.DateIndex]
     },
     LengthJudge () {
-      return this.Profit.length <= this.Index
+      if (this.Profit) {
+        return this.Profit && this.Profit.length <= this.Index
+      }
     },
     LineData () {
       if (this.LengthJudge) {
         return this.Profit
       } else {
-        return this.Profit.slice(this.Profit.length - this.Index, this.Profit.length)
+        return this.Profit && this.Profit.slice(this.Profit.length - this.Index, this.Profit.length)
       }
     }
   },
@@ -172,7 +174,7 @@ export default {
     right: 0;
 
   }
-  .btc-line-date{
+  .line-date{
     display: inline-block;
     span{
       font-size: 12px;
@@ -191,7 +193,7 @@ export default {
       padding: 3px 4px;
     }
   }
-  .btc-line-mark{
+  .line-mark{
     display: inline-block;
     &>:first-child{
       margin-left: 12px;

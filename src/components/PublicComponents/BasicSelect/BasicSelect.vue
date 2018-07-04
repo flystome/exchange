@@ -1,10 +1,10 @@
 <template>
-    <select class="btc-basic-option" @change="valuechange($event.target.value)">
+    <select class="basic-option" @change="valuechange($event.target.value)">
       <option
-      v-for="(data, index) of data"
-      :value="lang ? lang[index] : data"
-      :key="data">
-      {{data}}
+        v-for="(data, index) of data"
+        :value="lang ? lang[index] : data"
+        :key="data">
+        {{data}}
       </option>
     </select>
 </template>
@@ -22,5 +22,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './BasicSelect'
+  .basic-option{
+    padding: 4px;
+    width: 100%;
+    background: #f2f2f2;
+    border-color: #dfe0e1;
+    cursor: pointer;
+    appearance:none;
+    background: url("~Img/selectoption.png") no-repeat right #f2f2f2;
+  }
 </style>

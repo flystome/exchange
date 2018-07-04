@@ -1,13 +1,13 @@
 <template>
-  <div @keyup.enter="register" class="btc-signUp btc-sign-block">
-    <div class="btc-sign-form">
+  <div @keyup.enter="register" class="signUp sign-block">
+    <div class="sign-form">
       <header class="text-center">
         <img src="~Img/large/sign-logo.png">
       </header>
       <div class="form">
-        <div class="title btc-color333">
+        <div class="title color333">
           {{ $t('sign.create_my_account') }}
-          <span v-if="referrer" class="btc-fr btc-referrer" style="color:#999999;font-size:14px">
+          <span v-if="referrer" class="fr referrer" style="color:#999999;font-size:14px">
             <i class="sign-referrer" />
             {{ $t('sign.referrer') }} ID {{ referrer }}
           </span>
@@ -17,25 +17,25 @@
         <input style="visibility: hidden;position:absolute;opacity: 0;" :danger='true' class="email"  :placeholder="$t('sign.email_address')" />
         <basic-input style="visibility: hidden;position:absolute;opacity: 0;" :danger='true' type='password' :validate='"required|password"' :placeholder="$t('sign.login_password')"></basic-input>
         <basic-input :danger='true' type='password' ref="password" :validate='"required|password"' v-model="SignUpData.password" :placeholder="$t('sign.login_password')"></basic-input>
-        <div class="btc-marginT15 btc-color999">
+        <div class="marginT15 color999">
           {{ $t('validation.password_fail') }}
         </div>
         <basic-input :invalid="invalid" type='password' v-model="SignUpData.password_confirmation" :validate='`confirmed:${SignUpData.password}`' :placeholder="$t('sign.confirm_password')"></basic-input>
         <basic-input ref="verify_code" :danger='true' :validate='"required|verify_code"' v-model="SignUpData._rucaptcha" :placeholder="$t('validation.verify_code')"></basic-input>
-        <img class="btc-pointer" :src="Rucaptcha" @click="changeCaptcha">
-        <div class="btc-authentication btc-marginT10">
-          <span @click="read = !read" :class="{'btc-authentication-right': read}"></span><a class="btc-pointer" @click="read = !read">{{ $t('market_apply.read_and_agree') }}</a> <a :href="`${$store.state.CmsUrl.user_agreement}`" class="btc-link">{{ $t('footer.user_agreement') }}</a>
+        <img class="pointer" :src="Rucaptcha" @click="changeCaptcha">
+        <div class="authentication marginT10">
+          <span @click="read = !read" :class="{'authentication-right': read}"></span><a class="pointer" @click="read = !read">{{ $t('market_apply.read_and_agree') }}</a> <a :href="`${$store.state.CmsUrl.user_agreement}`" class="link">{{ $t('footer.user_agreement') }}</a>
         </div>
         <basic-button  :disabled="disabled" @click.native='register' class="btn" :text='$t("nav.register")'></basic-button>
         <div class="form-footer">
-          <span class="btc-fr">{{$t('sign.already_registered')}}<router-link :to='`${ROUTER_VERSION}/login`' class="btc-link">{{$t('sign.log_in')}}</router-link></span>
+          <span class="fr">{{$t('sign.already_registered')}}<router-link :to='`${ROUTER_VERSION}/login`' class="link">{{$t('sign.log_in')}}</router-link></span>
           <div class="clearfix"></div>
         </div>
       </div>
     </div>
-    <!-- <footer class="btc-font12 btc-marginT30 text-center" style="color: #9b9b9b">
+    <!-- <footer class="font12 marginT30 text-center" style="color: #9b9b9b">
       <div>© 2018 hotex.com All Rights Reserved</div>
-      <div class="btc-marginT5">{{$t('sign.official_website')}}：www.hotex.com {{$t('sign.official_email')}}：<a href="mailto:support@hotex.com">support@hotex.com</a></div>
+      <div class="marginT5">{{$t('sign.official_website')}}：www.hotex.com {{$t('sign.official_email')}}：<a href="mailto:support@hotex.com">support@hotex.com</a></div>
     </footer> -->
   </div>
 </template>
@@ -205,7 +205,7 @@ export default {
   padding-top: 16px;
   padding-bottom: 27px;
 }
-.btc-basic-button{
+.basic-button{
   margin-top: 16px;
   outline: none!important;
 }
@@ -214,13 +214,13 @@ i{
   display: inline-block;
 }
 
-.btc-choice{
+.choice{
   background: #d9d9d9!important;
   cursor: not-allowed;
 }
 
-.btc-authentication{
-  .btc-authentication-right{
+.authentication{
+  .authentication-right{
     border: none;
     &:after{
       content: '';
@@ -249,16 +249,16 @@ i{
 </style>
 
 <style>
-.btc-sign-block .btc-basicInput{
+.sign-block .basicInput{
   height:39px;
   font-size: 14px;
 }
 
-.btc-signUp .btc-basicInput{
+.signUp .basicInput{
   margin-top: 16px;
 }
 
-.btc-signUp .email input{
+.signUp .email input{
   margin-top: 5px;
 }
 </style>

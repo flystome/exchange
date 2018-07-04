@@ -1,10 +1,9 @@
 <template>
-  <div class="menu-underline btc-link">
+  <div class="menu-underline link">
     <nav>
       <ul ref="MenuList" :style="`${Bold ? 'font-weight: bold' : ''}`">
         <li v-for="(data, DataIndex) in MenuList" :key="data" @click="ChangeIndex(DataIndex)" :style="{'margin-left': MenuMargin, 'padding-bottom': UnderlineMargin}">{{ data }}</li>
-        <span
-        :style="{'background': UnderlineColor, 'height': UnderlineHeight, width: UnderlineWidth, left: UnderlineLeft, top: UnderlineTop}"
+        <span :style="{'background': UnderlineColor, 'height': UnderlineHeight, 'width': UnderlineWidth, 'left': UnderlineLeft, 'top': UnderlineTop}"
         >
         </span>
       </ul>

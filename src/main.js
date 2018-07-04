@@ -17,7 +17,6 @@ import NewsPrompt from 'Components/NewsPrompt/NewsPrompt'
 import DivContenteditable from 'Components/DivContenteditable/DivContenteditable'
 import Title from 'Pages/Title/Title'
 import App from './App'
-import BasicInstructions from 'Components/BasicInstructions/BasicInstructions'
 import Trend from '@/common/js/trend/vue-trend.esm.js'
 import Paginate from 'Components/Paginate'
 import Spinner from 'vue-simple-spinner'
@@ -65,7 +64,6 @@ const components = [
   UploadImg,
   NewsPrompt,
   DivContenteditable,
-  BasicInstructions,
   Spinner,
   Paginate,
   MenuUnderline

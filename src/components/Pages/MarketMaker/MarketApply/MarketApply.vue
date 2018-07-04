@@ -1,14 +1,14 @@
 <template>
-  <div class="btc-MarketApply text-center">
+  <div class="MarketApply text-center">
     <header>
-      <div class="btc-MarketApply-title">
+      <div class="MarketApply-title">
         {{$t('market_apply.market_maker_apply')}}
       </div>
-      <div class="btc-color999">
+      <div class="color999">
         {{$t('market_apply.become_market_maker')}}
       </div>
     </header>
-    <div class="btc-MarketApply-section">
+    <div class="MarketApply-section">
       <section>
         <i class="MarketMaker-free"></i>
         <span>{{$t('market_apply.zero_transaction_cost')}}</span>
@@ -26,10 +26,10 @@
       </section>
       <div class="clearfix"></div>
     </div>
-    <div class="btc-MarketApply-authentication btc-font12 btc-color999">
-      <span @click="read = !read" :class="{'btc-marketApply-right': read}"></span>{{$t('market_apply.read_and_agree')}} <span class="btc-link">{{$t('market_apply.authentication_protocol')}}</span>
+    <div class="MarketApply-authentication font12 color999">
+      <span @click="read = !read" :class="{'marketApply-right': read}"></span>{{$t('market_apply.read_and_agree')}} <span class="link">{{$t('market_apply.authentication_protocol')}}</span>
     </div>
-    <button class="btc-marketApply-apply" :class="{'btc-choice': !read}">
+    <button class="marketApply-apply" :class="{'choice': !read}">
       {{ $t('market_apply.immediate_apply') }}
     </button>
   </div>
