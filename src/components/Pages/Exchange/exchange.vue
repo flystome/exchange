@@ -175,11 +175,11 @@ export default {
       res.data.my_orders && res.data.my_orders.length !== 0 && this.$set(this.my_orders, 0, res.data.my_orders.reverse())
       this.TotalAssets = this.total_assets && (+this.total_assets.btc_worth).toFixed(8)
       this.version = this.depth_data && this.depth_data.version
-      this.marketRefresh()
-      this.globalRefresh()
-      this.version = this.depth_data && this.depth_data.version
       this.all_trades_cache = JSON.parse(JSON.stringify(this.all_trades))
       this.my_orders_cache = JSON.parse(JSON.stringify(this.my_orders))
+      this.initTrend()
+      this.marketRefresh()
+      this.globalRefresh()
       // this.initMine()
       document.title = `${this.market.last} ${this.market.quote_currency.toUpperCase()}/${this.market.base_currency.toUpperCase()} - ${this.$t('brand')}`
       this.interval()
@@ -191,20 +191,6 @@ export default {
         this.all_trades = JSON.parse(JSON.stringify(this.all_trades_cache))
         this.my_orders = JSON.parse(JSON.stringify(this.my_orders_cache))
       }, 1000)
-    },
-    initMine () {
-      this.initTrend()
-      if (this.my_trades) {
-        this.my_trades.map((ele1) => {
-          this.all_trades_cache.map((ele2, i) => {
-            if (ele1.id === ele2.tid) {
-              ele2.isMine = true
-              this.$set(this.all_trades_cache, i, ele2)
-            }
-          })
-        })
-      }
->>>>>>> 412cabb... too many order when test
     },
     // initMine () {
     //   this.initTrend()
@@ -232,6 +218,7 @@ export default {
           }
         }
       })
+      this.all_trades = Object.assign({}, this.all_trades)
     },
     getMyOrder (index, days) {
       var self = this
@@ -264,39 +251,11 @@ export default {
     },
     globalRefresh () {
       var channel = pusher.subscribe('market-global')
-      // channel.bind('tickers', _debounce((data) => {
-      //   if (this.$store.state.marketData) {
-      //     var BtcMarket = this.$store.state.marketData['btc'].reduce((a, b) => {
-      //       return a.concat(Object.keys(b)[0])
-      //     }, [])
-      //   }
-      //   Object.keys(data).forEach((key) => {
-      //     if (this.$store.state.assets !== '') {
-      //       if (data[key].base_currency === 'usdt') {
-      //         if (key === 'btcusdt') {
-      //           this.$store.state.assets['usdt'].price = 1 / Number(data[key].last)
-      //         }
-      //       }
-      //       if (data[key].base_currency === 'btc') {
-      //         this.$store.state.assets[data[key].quote_currency].price = data[key].last
-      //       }
-      //       if (data[key].base_currency === 'eth') {
-      //         if (!BtcMarket.includes(`${data[key].quote_currency}/btc`)) {
-      //           this.$store.state.assets[data[key].quote_currency].price = data[key].last * this.$store.state.assets['eth'].price
-      //         }
-      //       }
-      //     }
-      //   })
-      // }, 5000))
-
       channel.bind('tickers', (data) => {
         if (JSON.stringify(data) !== '{}') {
           for (let key in data) {
-            // var fav = this.markets[key]['is_portfolios']
             this.markets[key] = data[key]
             this.markets = Object.assign({}, this.markets)
-            // this.setPrice(key, data)
-            // this.markets = Object.assign({}, this.markets, {'is_portfolios': fav})
             if (key === this.market.code) {
               this.market = Object.assign({}, data[key], {'code': key})
             }
@@ -343,8 +302,6 @@ export default {
         var bids = this.addOrderList(res.bids, this.depth_data.bids)
         this.version = res.u
         this.depth_data = Object.assign({}, this.depth_data, {'asks': asks.reverse(), 'bids': bids})
-        // if (res.U <= this.version + 1 && res.u >= this.version + 1) {
-        // } else
         if (res.U > this.version + 1) {
           this.addOrderList(res.asks, lost.asks)
           this.addOrderList(res.bids, lost.bids)
