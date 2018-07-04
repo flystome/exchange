@@ -138,7 +138,8 @@ export default {
       buywarning: false,
       sellwarning: false,
       buyIndex: -1,
-      sellIndex: -1
+      sellIndex: -1,
+      times: 0
     }
   },
   mounted () {
@@ -278,6 +279,9 @@ export default {
         }
       }, (data) => {
         this.orderCallback(data, 'buy')
+        // for (var i = 0; i < 100; i++) {
+        //   this.testOrder(i)
+        // }
       })
     },
     confirmSell: function (bool) {
@@ -291,9 +295,28 @@ export default {
           }
         }
       }, (data) => {
+        // console.log(data)
         this.orderCallback(data, 'sell')
       })
     },
+    // testOrder (i) {
+    //   this._post({
+    //     url: '/markets/' + this.market.code + '/order_asks',
+    //     data: {
+    //       order_ask: {
+    //         ord_type: 'limit',
+    //         price: 0.5,
+    //         origin_volume: 0.6
+    //       }
+    //     }
+    //   }, (data) => {
+    //     if (data.data.success) {
+    //       this.times++
+    //       console.log(this.times)
+    //     }
+    //     this.orderCallback(data, 'sell')
+    //   })
+    // },
     orderCallback (res, type) {
       var data = res.data
       if (data.success) {
@@ -325,11 +348,6 @@ export default {
         clearTimeout(time)
       }, 5000)
     },
-    // loginCheck: function () {
-    //   if (this.loginData === 'none') {
-    //     location.href = `${this.ROUTER_VERSION}/login?from=${location.href}`
-    //   }
-    // },
     orderBid: function () {
       if (this.loginData === 'none') {
         location.href = `${this.ROUTER_VERSION}/login?from=${this.ROUTER_VERSION}/exchange/${this.curMarket}`
