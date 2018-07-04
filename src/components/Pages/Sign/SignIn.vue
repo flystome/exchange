@@ -20,10 +20,6 @@
         </div>
       </div>
     </div>
-    <!-- <footer class="font12 marginT30 text-center" style="color: #9b9b9b">
-      <div>© 2018 hotex.com All Rights Reserved</div>
-      <div class="marginT5">{{$t('sign.official_website')}}：www.hotex.com {{$t('sign.official_email')}}：<a href="mailto:support@hotex.com">support@hotex.com</a></div>
-    </footer> -->
   </div>
 </template>
 
@@ -64,10 +60,9 @@ export default {
         this.prompt = this.$t('sign.login_failure')
         this.from = this.$route.query.from
       }
-
       if (this.$route.query.captcha) {
         this.changeCaptcha()
-        this.prompt = this.$t('api_server.homepage.error_1002')
+        // this.prompt = this.$t('api_server.homepage.error_1002')
       }
     },
     async login () {
@@ -155,9 +150,6 @@ export default {
   padding-top: 42px;
   padding-bottom: 67px;
 }
-</style>
-
-<style>
 .sign-block .basicInput{
   height:39px;
   font-size: 14px;

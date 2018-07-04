@@ -33,10 +33,6 @@
         </div>
       </div>
     </div>
-    <!-- <footer class="font12 marginT30 text-center" style="color: #9b9b9b">
-      <div>© 2018 hotex.com All Rights Reserved</div>
-      <div class="marginT5">{{$t('sign.official_website')}}：www.hotex.com {{$t('sign.official_email')}}：<a href="mailto:support@hotex.com">support@hotex.com</a></div>
-    </footer> -->
   </div>
 </template>
 

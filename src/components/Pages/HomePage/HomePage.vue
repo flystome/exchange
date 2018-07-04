@@ -31,7 +31,6 @@
       <div class="from-container">
         <div class="homepage-login">
           <div class="nologin" v-if="loginData === 'none' || loginData.errors">
-          <!-- <div class="nologin"> -->
             <div class="form" @keyup.enter="login">
               <span>{{ $t('homepage.login') }}</span>
               <basic-input :delay='1000' ref="email" :validate='"required|email"' v-model="email" :placeholder="this.$t('homepage.enter_the_mailbox')" class="input"></basic-input>
@@ -46,9 +45,9 @@
           <div class="logining" v-else>
             <span>{{ $t('homepage.welcome_to_use') }}
               <span>
-              <router-link class="link" :to="`${ROUTER_VERSION}/my_account`">
-                {{loginData.show_name}}
-              </router-link>
+                <router-link class="link" :to="`${ROUTER_VERSION}/my_account`">
+                  {{loginData.show_name}}
+                </router-link>
               </span>
             </span>
             <div class="discount">
@@ -239,7 +238,7 @@ export default {
     this._get({
       url: '/k/trends.json'
     }, (d) => {
-      this.trend = d.data
+      this.trend = d && d.data
     }) // trend
 
     this.GetNewCoin()
@@ -251,7 +250,7 @@ export default {
       var BtcMarket = this.$store.state.marketData['btc'].reduce((a, b) => {
         return a.concat(Object.keys(b)[0])
       }, [])
-      Object.keys(data).forEach((key) => {
+      data && Object.keys(data).forEach((key) => {
         if (data[key].base_currency === 'usdt') {
           if (key === 'btcusdt') {
             if (!this.$store.state.assets['usdt']) return

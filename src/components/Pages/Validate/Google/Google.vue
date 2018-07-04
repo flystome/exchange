@@ -5,7 +5,7 @@
         <router-link :to="`${ROUTER_VERSION}/my_account`" class="link">
           {{$t('title.my_account')}}
         </router-link>
-        >
+        &gt;
         <span>
           {{$t('title.validate_google')}}
         </span>
@@ -14,7 +14,7 @@
     <template v-if="step === 1">
       <div class="row validate-gpt marginB60" style="margin-bottom: 150px;">
         <div class="col-md-4 col-xs-12 col-md-offset-2 text-center b-r  validate-googleApp">
-            <img src="~Img/large/google-authentication.png">
+          <img src="~Img/large/google-authentication.png">
           <div class="row f marginT10">
             <strong>
               Google Authenticator
@@ -112,13 +112,6 @@ import { mapMutations, mapState } from 'vuex'
 var QRCode = require('qrcode')
 export default {
   name: 'ValidateGoogle',
-  // updated () {
-  //   if (this.redirectLock) return
-  //   if (this.$store.state.loginData) {
-  //     this.redirectLock = true
-  //     this.$store.dispatch('redirect')
-  //   }
-  // },
   data () {
     return {
       redirectLock: false,

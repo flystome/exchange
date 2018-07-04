@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="{'home-contain': this.$route.path === `${version}/funds/line` || this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'backround-white': isWhiteBackground, 'lang-long': language !== 'zh-TW'}">
     <ul class="homepage-newCoin" v-if="FROM_HOME && new_coin.length !== 0">
-      <div class="container">
+      <div class="container bgNone">
         <li v-for="data in new_coin" :key='data.id'>
           <a :href="data.url">{{ data.the_title }}</a>
         </li>
@@ -117,13 +117,11 @@ export default {
   background: white;
   .container{
     background: white;
+    &.bgNone {
+      background: none;
+    }
   }
 }
-// .home-contain{
-//   .container{
-//   background: white;
-//   }
-// }
 .exchange {
   background: #1b242e;
   width: 100%;
@@ -149,7 +147,7 @@ export default {
     margin: 0;
     padding: 0;
   }
-  li{
+  li {
     display: inline-block;
     width: 33%;
     overflow: hidden;
@@ -159,7 +157,7 @@ export default {
     padding: 10px 0;
     padding-bottom: 5px;
   }
-  a{
+  a {
     color: #3e81ff;
     &:focus,&:hover{
       text-decoration: none;

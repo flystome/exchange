@@ -189,6 +189,7 @@ export default {
       clearInterval(timer)
       timer = setInterval(() => {
         this.all_trades = JSON.parse(JSON.stringify(this.all_trades_cache))
+        this.initTrend()
         this.my_orders = JSON.parse(JSON.stringify(this.my_orders_cache))
       }, 1000)
     },

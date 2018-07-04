@@ -4,13 +4,6 @@
       <div>
         <a>{{ $t('sign.ip_change') }}</a>
         <news-prompt :Time='3000' v-on:bind='prompt = $event' :text='prompt'></news-prompt>
-        <!-- <div class="sms-code" v-if="sms_activated">
-          <basic-input style="min-height:62px" :validate='"required|sms_verification_code"' ref="verifiycode" :placeholder='$t("validate_sms.verification_code")' v-model="SmsData.verifyCode">
-          </basic-input>
-          <span :disabled="disabled" class="white-btn" @click="SendSms">
-            {{ timer }}
-          </span>
-        </div> -->
         <div class="verify">
           <select class="select-option" ref='select'
           v-model="validate"
