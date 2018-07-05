@@ -85,7 +85,7 @@ const en = {
       "1001_hint": "Please verify your email",
       "1002_hint": "Please setup Google Authenticator or SMS verfication",
       "1003_hint": "Please real name authentication",
-      "1004_hint": "Please do Google validation",
+      "1004_hint": "Please finish Google Auth verification",
       "200_hint": "Email Verified!",
       "verifying": "Verifying",
       "success_200": "Email has been sent, please check it",
@@ -142,7 +142,7 @@ const en = {
       "withdraw": "Withdrawal",
       "withdraw_currency_address": "Withdraw Currency Address",
       "Amount_to_withdraw": "Amount to withdraw",
-      "google_validate": "Google Validate",
+      "google_validate": "Google Authenticator",
       "withdraw_all": "Withdraw All",
       "reminder": "Guide",
       "min_currency": "Do not tell other people your mobile phone verification code or Google Authenticator code",
@@ -272,7 +272,7 @@ const en = {
       "change_password": "Change Password",
       "funds_pie": "Portfolio",
       "funds_line": "Asset Curve",
-      "login_verify": "Login secondary verification"
+      "login_verify": "Two Factor Authentication for Login"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
@@ -743,7 +743,7 @@ const en = {
       "check_agreement": "Please agree to the User Agreement",
       "reset_password": "Reset Password",
       "new_password": "New Password",
-      "ip_change": "IP has been changed, after completion of verification can continue operation"
+      "ip_change": "Two factor authentication is required before proceeding."
     },
     "dashboard": {
       "asset_distribution": "Portfolio",
