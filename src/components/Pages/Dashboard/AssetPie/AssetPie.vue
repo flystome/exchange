@@ -3,7 +3,7 @@
     <chart :options='PieOption' :auto-resize='true'></chart>
     <div class="pie-legend">
       <div v-for="(data, index) in PieData" :key="data.name">
-        <div class="legend-value">${{ ToLocaleString(data.value) }}</div>
+        <div class="legend-value">{{ ToLocaleString(data.amount) }}</div>
         <div>{{ ComputePercent(data.value) }}</div>
         <div class="legend-div" :style="`background:${Color[index]}`"></div>
         <div>{{ data.name }}</div>
@@ -37,6 +37,7 @@ export default {
       Object.keys(asset).forEach((key) => {
         data.push({
           value: Number(this.$store.getters.ToFixed(asset[key].usdt_worth)),
+          amount: Number(this.$store.getters.ToFixed(asset[key].amount)),
           name: key.toUpperCase()
         })
       })

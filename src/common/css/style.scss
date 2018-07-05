@@ -253,12 +253,13 @@ a{
 }
 
 .home-contain{
-  min-width: 1200px;
+  // min-width: 1170px;
   .container{
-    width: 1200px;
+    width: 1170px;
   }
   .box-container{
-    padding: 0
+    padding: 0;
+    width: 1140px;
   }
 }
 
