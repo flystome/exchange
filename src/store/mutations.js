@@ -7,14 +7,7 @@ const ROUTER_VERSION = process.env.ROUTER_VERSION
 const HOST_URL = process.env.HOST_URL
 
 export const redirect = (state, action, route) => {
-  // var route = type ? state.route.from.name : state.route.name
-  // var path = type ? state.route.from.path : state.route.path
-  // i18n.locale = CookieLocale
   var flag = true
-  // if (state.two_factors) {
-  //    router.push({path: `${ROUTER_VERSION}/login/verify`})
-  //   return false
-  // }
   switch (route.name) {
     case 'ValidateGoogle':
       if (!state.loginData.activated) {
@@ -108,13 +101,6 @@ const mutations = {
     state.Pc = true
   },
   getData (state, data) {
-    // data.data.profit = data.data.profit.concat(new Array(200).fill('').map((b, index) => {
-    //   return {
-    //     usdt_gains: 2.54645445 + index * 1000000000,
-    //     btc_gains: 3.54645445 + index * 10000000000,
-    //     timestamp: (new Date().getTime()) + ((index + 1) * 86400000)
-    //   }
-    // }))
     state.loginData = data.data
     state.assets = data.data.assets
   },
@@ -170,23 +156,6 @@ const mutations = {
     state.SideSlipMenu = type
   },
   GetMarketData (state, data) {
-    // data.geographic_location = {
-    //   "request": "127.0.0.1",
-    //   "ip": "173.194.112.35",
-    //   "country_code2": "US",
-    //   "country_code3": "USA",
-    //   "country_name": "United States",
-    //   "continent_code": "NA",
-    //   "region_name": "CA",
-    //   "city_name": "Mountain View",
-    //   "postal_code": "94043",
-    //   "latitude": 37.41919999999999,
-    //   "longitude": -122.0574,
-    //   "dma_code": 807,
-    //   "area_code": 650,
-    //   "timezone": "America/Los_Angeles",
-    //   "real_region_name": "California"
-    //   }
     state.Location = data.geographic_location && { ...data.geographic_location }
     delete data.current_user
     delete data.geographic_location

@@ -101,7 +101,7 @@ export default {
           Object.assign(this.$store.state, {
             two_factors: ''
           })
-          this.$router.push(`${this.ROUTER_VERSION}`)
+          this.$router.push(`${this.ROUTER_VERSION}/`)
         }
       })
     },

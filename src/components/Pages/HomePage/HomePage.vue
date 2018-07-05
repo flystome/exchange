@@ -400,9 +400,9 @@ export default {
         } else {
           if (d.data.error.code === 1002) {
             this.$router.push(`${this.ROUTER_VERSION}/login?captcha=error`)
-          } else {
+          } else if (d.data.error.code === 1003) {
             if (d.data.error.captcha_required) {
-              this.$router.push(`${this.ROUTER_VERSION}/login?captcha=error`)
+              this.$router.push(`${this.ROUTER_VERSION}/login?password=error`)
               return
             }
             this.password = ''
@@ -575,12 +575,13 @@ export default {
   }
 }
 </script>
+
 <style scoped lang="scss">
-@import "./HomePage.scss"
+  @import "./HomePage.scss"
 </style>
 
-<style lang='scss'>
-.homepage-header .swiper-pagination-bullet{
+<style scoped lang="scss">
+.homepage-header .swiper-pagination-bullet {
   background: white!important;
   opacity: .5!important;
 }

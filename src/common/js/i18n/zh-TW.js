@@ -270,7 +270,8 @@ const zh = {
     "register": "注册",
     "change_password": "修改密碼",
     "funds_pie": "投資組合",
-    "funds_line": "資產曲線"
+    "funds_line": "資產曲線",
+    "login_verify": "登錄二次驗證"
   },
   "prompt": {
     "email_not_certified": "郵件未驗證",

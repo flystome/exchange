@@ -62,7 +62,10 @@ export default {
       }
       if (this.$route.query.captcha) {
         this.changeCaptcha()
-        // this.prompt = this.$t('api_server.homepage.error_1002')
+        this.prompt = this.$t('api_server.homepage.error_1002')
+      } else if (this.$route.query.password) {
+        this.changeCaptcha()
+        this.prompt = this.$t('api_server.homepage.error_1003')
       }
     },
     async login () {

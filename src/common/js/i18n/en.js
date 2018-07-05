@@ -270,7 +270,8 @@ const en = {
       "register": "Register",
       "change_password": "Change Password",
       "funds_pie": "Portfolio",
-      "funds_line": "Asset Curve"
+      "funds_line": "Asset Curve",
+      "login_verify": "Login secondary verification"
     },
     "prompt": {
       "email_not_certified": "Email is not verified.",
