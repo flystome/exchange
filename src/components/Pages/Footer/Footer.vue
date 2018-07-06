@@ -33,15 +33,13 @@
       </ul>
       <ul class="info pull-right marginT30 marginR30 dropup">
         <li class="marginB30">
-         <a style="cursor:initial">
-            <strong>{{ $t('homepage.contact_us') }}</strong>
-        </a>
+          <a style="cursor:initial"><strong>{{ $t('homepage.contact_us') }}</strong></a>
         </li>
         <li class="marginB15"><a href="mailto:support@hotex.com">support@hotex.com</a></li>
         <li role="presentation" class="dropdown country img-position">
           <a class="dropdown-toggle paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <span>{{getLanguage.name}}</span><span class="caret">
-            </span>
+            <span>{{getLanguage.name}}</span>
+            <span class="caret"></span>
           </a>
           <ul class="dropdown-menu text-center">
             <li v-for="(locale,index) in locale" :key="locale.language">
@@ -78,9 +76,9 @@ export default {
     }
   },
   methods: {
-    localed () {
-      // this.$i18n.locale = this.language
-    },
+    // localed () {
+    //   this.$i18n.locale = this.language
+    // },
     changeLang (str, index) {
       this.ChangeLanguage(str)
     },
@@ -99,7 +97,7 @@ export default {
   },
   computed: {
     getLanguage () {
-      this.localed()
+      // this.localed()
       var lang = ''
       this.locale.map((d, index) => {
         if (d.language === this.language) {
@@ -114,10 +112,7 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@import './Footer.scss'
-</style>
-
-<style>
+@import './Footer.scss';
 .footer-from-home{
   min-width: 1200px;
 }

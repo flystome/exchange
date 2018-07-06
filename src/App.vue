@@ -1,16 +1,16 @@
 <template>
-  <div id="app" :class="{'home-contain': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'backround-white': isWhiteBackground, 'lang-long': language !== 'zh-TW'}">
-    <ul class="homepage-newCoin" v-if="FROM_HOME && new_coin.length !== 0">
-      <div class="container bgNone">
+  <div id="app" :class="{'home-contain': this.$route.name === 'home', 'backround-white': isWhiteBackground, 'lang-long': language !== 'zh-TW'}">
+    <div class="homepage-newCoin" v-if="FROM_HOME && new_coin.length !== 0">
+      <ul class="w1200">
         <li v-for="data in new_coin" :key='data.id'>
           <a :href="data.url">{{ data.the_title }}</a>
         </li>
-      </div>
-      <!-- this.$route.path === `${version}/funds/line` || -->
-    </ul>
-    <section class="main" :class="{'home-contain': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange', 'backround-white': isWhiteBackground}">
+      </ul>
+    </div>
+    <!-- this.$route.path === `${version}/funds/line` || -->
+    <section class="main" :class="{'home-contain': this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange', 'backround-white': isWhiteBackground}">
       <header :FROM='FROM_HOME'  v-if="!fromApp && !exChange" is='Header' />
-      <div style="position:relative;z-index:999;background:#f2f2f2" class="global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
+      <div class="global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
         <vue-simple-spinner size="88"></vue-simple-spinner>
       </div>
       <div v-else class="box-container container" :class="{'noPadding':noPadding}">
@@ -19,7 +19,7 @@
         </keep-alive>
       </div>
     </section>
-    <footer :FROM='(FROM_HOME || this.$route.path === `${version}/funds/line`)' v-if='!fromApp && noMobile && !exChange' is='Footer' />
+    <footer :FROM='FROM_HOME' v-if='!fromApp && noMobile && !exChange' is='Footer' />
     <wrapper></wrapper>
     <popup-box></popup-box>
     <side-slip-menu></side-slip-menu>
@@ -73,7 +73,7 @@ export default {
       return false
     },
     isWhiteBackground () {
-      var route = ['MarketMaker', 'notFound', 'MarketApply', 'HomePage', 'home']
+      var route = ['MarketMaker', 'notFound', 'MarketApply', 'home']
       return route.includes(this.$route.name)
     },
     ...mapState(['fromApp', 'language']),
@@ -96,7 +96,7 @@ export default {
       if (this.noPaddingList.indexOf(to.name) !== -1) {
         this.noPadding = true
       }
-      if (to.name === 'HomePage' || to.name === 'home') {
+      if (to.name === 'home') {
         if (this.new_coin === '') this.GetNewCoin()
         this.FROM_HOME = true
       } else {
@@ -118,9 +118,6 @@ export default {
   background: white;
   .container{
     background: white;
-    &.bgNone {
-      background: none;
-    }
   }
 }
 .exchange {
@@ -136,27 +133,31 @@ export default {
   }
 }
 
+.global-loading {
+  position:relative;
+  z-index:999;
+  background:#f2f2f2
+}
+
 .homepage-newCoin{
   min-width: 1200px;
   font-size: 12px;
-  left: 0;
+  height: 36px;
   width: 100%;
   background: #232731;
   margin: 0;
   padding: 0;
-  ul,li {
-    margin: 0;
+  ul {
     padding: 0;
-  }
-  li {
-    display: inline-block;
-    width: 33%;
-    overflow: hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    text-align: center;
-    padding: 10px 0;
-    padding-bottom: 5px;
+    li {
+      display: inline-block;
+      width: 33%;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      text-align: center;
+      padding: 10px 0;
+    }
   }
   a {
     color: #3e81ff;
@@ -170,31 +171,31 @@ export default {
 <style lang="scss">
 @for $len from 0 through 100 {
   @if $len%5 == 0{
-  .marginT#{$len}{
-    margin-top: #{$len}px
-  }
-  .marginL#{$len}{
-    margin-left: #{$len}px
-  }
-  .marginR#{$len}{
-    margin-right: #{$len}px
-  }
-  .marginB#{$len}{
-    margin-bottom: #{$len}px
-  }
+    .marginT#{$len}{
+      margin-top: #{$len}px
+    }
+    .marginL#{$len}{
+      margin-left: #{$len}px
+    }
+    .marginR#{$len}{
+      margin-right: #{$len}px
+    }
+    .marginB#{$len}{
+      margin-bottom: #{$len}px
+    }
 
-  .paddingT#{$len}{
-    padding-top: #{$len}px
-  }
-  .paddingB#{$len}{
-    padding-bottom: #{$len}px
-  }
-  .paddingL#{$len}{
-    padding-left: #{$len}px
-  }
-  .paddingR#{$len}{
-    padding-right: #{$len}px
-  }
+    .paddingT#{$len}{
+      padding-top: #{$len}px
+    }
+    .paddingB#{$len}{
+      padding-bottom: #{$len}px
+    }
+    .paddingL#{$len}{
+      padding-left: #{$len}px
+    }
+    .paddingR#{$len}{
+      padding-right: #{$len}px
+    }
   }
 }
 </style>

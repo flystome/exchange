@@ -17,7 +17,7 @@ const MexchangeDetail = () => import(/* webpackChunkName: "Mexchange" */'Pages/m
 const MexchangeTrades = () => import(/* webpackChunkName: "Mexchange" */'Pages/market/mList/trades/trades')
 const MexchangeOrders = () => import(/* webpackChunkName: "Mexchange" */'Pages/market/mList/orders/orders')
 const Exchanage = () => import('Pages/Exchange/exchange')
-// import MarketList from './components/Pages/market/mList'
+
 const HomePage = () => import(/* webpackChunkName: "HomePage" */'Pages/HomePage/HomePage')
 const Prompt = () => import('Pages/Prompt/Prompt')
 const Page404 = () => import(/* webpackChunkName: "Page404" */'Pages/Page404/Page404')
@@ -32,7 +32,6 @@ const FormOrder = () => import(/* webpackChunkName: "FormOrder" */ 'Pages/Form/O
 const WithdrawCancel = () => import(/* webpackChunkName: "FormOrder" */ 'Pages/Form/WithdrawCancel/WithdrawCancel.vue')
 const FormNews = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/News/News.vue')
 const FormTrade = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Trade/Trade.vue')
-// const FormAccount = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Account/Account.vue')
 const FormDeposit = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Deposit/Deposit.vue')
 const FormWithdraw = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Withdraw/Withdraw.vue')
 const RegisteredReferral = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/RegisteredReferral/RegisteredReferral.vue')
@@ -62,7 +61,6 @@ const ForgotPassword = () => import(/* webpackChunkName: "sign" */'Pages/Sign/Fo
 
 const ChangePassword = () => import(/* webpackChunkName: "ChangePassword" */'Pages/Sign/ChangePassword.vue')
 
-// const AssetPie = () => import(/* webpackChunkName: "Dashboard" */'Pages/Dashboard/AssetPie/AssetPie.vue')
 const DashboardIndex = () => import(/* webpackChunkName: "Dashboard" */'Pages/Dashboard/DashboardIndex')
 
 Vue.use(Router)
@@ -139,8 +137,7 @@ const router = new Router({
     },
     {
       path: `${version}/`,
-      name: 'HomePage',
-      component: HomePage
+      redirect: '/'
     },
     {
       path: `${version}/prompt`,
@@ -153,11 +150,6 @@ const router = new Router({
       alias: `${version}/referral`,
       component: MemberCenter
     },
-    // {
-    //   path: `${version}/validate/email`,
-    //   name: 'ValidateEmail',
-    //   component: ValidateEmail
-    // },
     {
       path: `${version}/validate/google`,
       name: 'ValidateGoogle',
@@ -185,32 +177,6 @@ const router = new Router({
       name: 'notFound',
       component: Page404
     },
-    // {
-    //   path: `${version}/instructions`,
-    //   component: Instructions,
-    //   children: [
-    //     {
-    //       path: ``,
-    //       name: 'defalut',
-    //       component: AboutUs
-    //     },
-    //     {
-    //       path: `aboutus`,
-    //       name: 'AboutUs',
-    //       component: AboutUs
-    //     },
-    //     {
-    //       path: `fee`,
-    //       name: 'Fee',
-    //       component: Fee
-    //     },
-    //     {
-    //       path: `help`,
-    //       name: 'Help',
-    //       component: Help
-    //     }
-    //   ]
-    // },
     {
       path: `${version}/form`,
       component: Form,
@@ -234,11 +200,6 @@ const router = new Router({
           name: 'FormNews',
           component: FormNews
         },
-        // {
-        //   path: 'account',
-        //   name: 'FormAccount',
-        //   component: FormAccount
-        // },
         {
           path: 'withdraw_cancel',
           name: 'WithdrawCancel',
@@ -384,7 +345,7 @@ router.afterEach(() => {
   var user = navigator.userAgent
   var mobile = user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
   if (mobile) {
-    if (route.name === 'HomePage' || route.name === 'home' || route.path === `${version}/funds/line`) {
+    if (route.name === 'home' || route.path === `${version}/funds/line`) {
       var min = document.getElementById('meta').content.match(/minimum-scale=(\d\.\d+)/) && document.getElementById('meta').content.match(/minimum-scale=(\d\.\d+)/)[0]
       if (min && min.match(/(\d\.\d+)/)[0] !== '1') return
       document.getElementById('meta').content = `initial-scale=1,minimum-scale=${document.body.offsetWidth / 1200},maximum-scale=0,user-scalable=yes`

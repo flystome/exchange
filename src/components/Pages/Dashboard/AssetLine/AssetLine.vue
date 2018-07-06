@@ -51,7 +51,7 @@ export default {
       return {
         grid: {
           top: '20',
-          left: '40',
+          left: '20',
           right: '40',
           containLabel: true
         },
@@ -175,7 +175,6 @@ export default {
     // position: absolute;
     left: 0;
     right: 0;
-
   }
   .line-date{
     display: inline-block;
