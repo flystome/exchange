@@ -61,6 +61,7 @@ export default {
 .container-block{
   padding: 14px 30px 0 30px;
   min-height: 61vh;
+  width: 100%;
   position: relative;
   margin-bottom: 10px;
   padding-top: 0!important;

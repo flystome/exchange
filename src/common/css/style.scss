@@ -228,6 +228,9 @@ a{
       width: auto;
     }
   }
+  // .container {
+  //   width: 100%;
+  // }
 }
 
 @media (min-width: 768px){
@@ -255,11 +258,11 @@ a{
 .home-contain{
   // min-width: 1170px;
   .container{
-    width: 1170px;
+    width: 1200px;
   }
   .box-container{
     padding: 0;
-    width: 1140px;
+    width: 1200px;
   }
 }
 

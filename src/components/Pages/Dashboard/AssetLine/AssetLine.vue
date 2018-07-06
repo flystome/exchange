@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="line-box">
     <header>
       <div class="text-center">{{ $t('dashboard.historical_income') }}</div>
       <div>
@@ -20,7 +20,7 @@
         </div>
       </div>
     </header>
-    <chart :options="Option"></chart>
+    <chart :options="Option" :auto-resize='true'></chart>
   </div>
 </template>
 
@@ -157,6 +157,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .line-box {
+    width: 100%;
+  }
   header{
     margin-bottom: 2px;
     & > .text-center{
@@ -166,8 +169,8 @@ export default {
     }
   }
   .echarts {
-    width: inherit;
-    min-height: 240px;
+    width: 100%;
+    max-width: 100%;
     min-height: 240px;
     // position: absolute;
     left: 0;

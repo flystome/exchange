@@ -1,13 +1,14 @@
 <template>
-  <div id="app" :class="{'home-contain': this.$route.path === `${version}/funds/line` || this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'backround-white': isWhiteBackground, 'lang-long': language !== 'zh-TW'}">
+  <div id="app" :class="{'home-contain': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'backround-white': isWhiteBackground, 'lang-long': language !== 'zh-TW'}">
     <ul class="homepage-newCoin" v-if="FROM_HOME && new_coin.length !== 0">
       <div class="container bgNone">
         <li v-for="data in new_coin" :key='data.id'>
           <a :href="data.url">{{ data.the_title }}</a>
         </li>
       </div>
+      <!-- this.$route.path === `${version}/funds/line` || -->
     </ul>
-    <section class="main" :class="{'home-contain': this.$route.path === `${version}/funds/line` || this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange', 'backround-white': isWhiteBackground}">
+    <section class="main" :class="{'home-contain': this.$route.name === 'HomePage' ||  this.$route.name === 'home', 'exchange': this.$route.name === 'Exchange', 'backround-white': isWhiteBackground}">
       <header :FROM='FROM_HOME'  v-if="!fromApp && !exChange" is='Header' />
       <div style="position:relative;z-index:999;background:#f2f2f2" class="global-loading" v-if='!loading && !this.unLogin.includes(this.$route.name)'>
         <vue-simple-spinner size="88"></vue-simple-spinner>
