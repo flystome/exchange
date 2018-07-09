@@ -33,6 +33,7 @@ const WithdrawCancel = () => import(/* webpackChunkName: "FormOrder" */ 'Pages/F
 const FormNews = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/News/News.vue')
 const FormTrade = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Trade/Trade.vue')
 const FormDeposit = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Deposit/Deposit.vue')
+const AmountRecord = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/AmountRecord/AmountRecord.vue')
 const FormWithdraw = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Withdraw/Withdraw.vue')
 const RegisteredReferral = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/RegisteredReferral/RegisteredReferral.vue')
 const Referral = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Referral/Referral.vue')
@@ -224,6 +225,11 @@ const router = new Router({
           path: 'deposit',
           name: 'FormDeposit',
           component: FormDeposit
+        },
+        {
+          path: 'amountrecord',
+          name: 'AmountRecord',
+          component: AmountRecord
         }
       ]
     },

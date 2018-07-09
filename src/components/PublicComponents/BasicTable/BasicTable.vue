@@ -83,5 +83,5 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-  @import './BasicTable.scss'
+  @import './BasicTable.scss';
 </style>

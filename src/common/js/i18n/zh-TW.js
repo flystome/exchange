@@ -257,6 +257,7 @@ const zh = {
     "form_account": "充值提現記錄",
     "form_withdraw": "提現記錄",
     "form_deposit": "充值記錄",
+    "form_record": "資產明細",
     "api": "Api",
     "api_new": "新建金鑰",
     "api_edit": "編輯金鑰",
@@ -626,7 +627,21 @@ const zh = {
       "marked": "標記為已讀",
       "clear": "删除",
       "confirm": "您確定要刪除此記錄嗎?",
-    }
+    },
+    "record": {
+        'coin': '幣種',
+        'time': '時間',
+        "fee": "金額/手续费",
+        "action": "事件",
+        'balance': "結餘",
+        'OrderAsk': "賣出",
+        'OrderBid': "買入",
+        "Trade": "Trade",
+        "month": "最近一个月",
+        "half-year": '最近半年',
+        "year": "最近一年",
+        "filter": "篩選"
+      }
   },
   "api": {
     "api_key": "API 密鑰",

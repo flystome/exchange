@@ -7,8 +7,7 @@
           <i v-if='!search' class="account-search"></i>
           <i v-else class="account-delete" @click="search = ''" ></i>
         </div>
-        <template slot="href"
-          slot-scope="props">
+        <template slot="href" slot-scope="props">
           <span class="pointer link" @click="OpenWindow(props.data.url)">
             {{ props.data.context }}
           </span>

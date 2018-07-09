@@ -33,6 +33,9 @@ const getters = {
       return Number(result).toFixed(Math.min((!reg.test(result) ? 0 : String(result).split('.')[1]).length, 8))
     }, 0)
   },
+  assets: state => () => {
+    return Object.keys(state.assets)
+  },
   objectToFormData: (state, getters) => (obj, form, namespace) => {
     /* eslint-disable no-new */
     var fd = form || new FormData()

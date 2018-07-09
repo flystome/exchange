@@ -257,6 +257,7 @@ const en = {
       "form_account": "Transfer History",
       "form_withdraw": "Withdraw History",
       "form_deposit": "Deposit History",
+      "form_record": "Asset breakdown",
       "api": "Api",
       "api_new": "New Key",
       "api_edit": "Edit Key",
@@ -626,6 +627,20 @@ const en = {
         "marked": "Marked As Read",
         "clear": "Clear",
         "confirm": "Are you sure you want to delete the selected records? This action cannot be reverted."
+      },
+      "record": {
+        'coin': 'Coin',
+        'time': 'Time',
+        "fee": "Amount/Fee",
+        "action": "Action",
+        'balance': "Balance",
+        'OrderAsk': "Sell",
+        'OrderBid': "Buy",
+        "Trade": "Trade",
+        "month": "Last Month",
+        "half-year": 'Last 6 Months',
+        "year": "Last Year",
+        "filter": "Filter"
       }
     },
     "api": {

@@ -543,7 +543,7 @@ export default {
     },
     $route (to) {
       this.GetmarketData()
-      if (to.name === 'HomePage' || to.name === 'home') {
+      if (to.name === 'home') {
         this.RegionHint()
         this.BindChannel()
       }
@@ -577,7 +577,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "./HomePage.scss"
+  @import "./HomePage.scss";
 </style>
 
 <style scoped lang="scss">
