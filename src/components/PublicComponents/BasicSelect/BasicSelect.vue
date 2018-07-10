@@ -1,10 +1,11 @@
 <template>
     <select class="basic-option" @change="valuechange($event.target.value)">
+      <option value="all" v-if='lang'>All</option>
       <option
-        v-for="(data, index) of data"
-        :value="lang ? lang[index] : data"
-        :key="data">
-        {{data}}
+        v-for="item of data"
+        :value="item"
+        :key="item">
+        {{item}}
       </option>
     </select>
 </template>

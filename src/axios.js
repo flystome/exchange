@@ -1,6 +1,7 @@
 // import qs from 'qs'
 import router from './router'
 import state from './store/state'
+
 const requestUrl = process.env.HOST_URL
 const ROUTER_VERSION = process.env.ROUTER_VERSION
 axios.defaults.withCredentials = true
@@ -31,6 +32,8 @@ axios.interceptors.response.use(response => {
       two_factors: true
     })
     router.replace(`${ROUTER_VERSION}/login/verify`)
+  } else if (response.data.error && response.data.code === 1101) {
+    window.location.reload()
   }
   times++
   return response;

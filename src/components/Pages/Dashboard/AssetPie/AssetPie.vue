@@ -3,8 +3,8 @@
     <chart :options='PieOption' :auto-resize='true'></chart>
     <div class="pie-legend">
       <div v-for="(data, index) in PieData" :key="data.name">
-        <div class="legend-value">{{ ToLocaleString(data.amount) }}</div>
-        <div>{{ ComputePercent(data.value) }}</div>
+        <!-- <div class="legend-value">{{ ToLocaleString(data.amount) }}</div>
+        <div>{{ ComputePercent(data.value) }}</div> -->
         <div class="legend-div" :style="`background:${Color[index]}`"></div>
         <div>{{ data.name }}</div>
       </div>
@@ -91,7 +91,7 @@ export default {
         series: [{
           type: 'pie',
           center: ['50%', '43%'],
-          radius: ['12%', '40%'],
+          radius: ['25%', '40%'],
           selectedMode: 'single',
           data: this.PieData,
           label: {
