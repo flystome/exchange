@@ -1,8 +1,7 @@
 <template>
-  <div
-  v-if="!(loginData.id_document && loginData.id_document.aasm_state !=='unverified') && (loginData.sms_activated || loginData.app_activated) &&  loginData.activated"
-  class="container-block validateIdentity"
-  @keyup.enter="uploadImg">
+  <div v-if="!(loginData.id_document && loginData.id_document.aasm_state !=='unverified') && (loginData.sms_activated || loginData.app_activated) &&  loginData.activated"
+    class="container-block validateIdentity"
+    @keyup.enter="uploadImg">
     <header class="title">
         <router-link :to="`${ROUTER_VERSION}/my_account`" class="link">
           {{$t('title.my_account')}}

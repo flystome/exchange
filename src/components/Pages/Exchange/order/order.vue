@@ -332,7 +332,7 @@ export default {
         this.showDialog = true
         this.ordering = false
         this.tips = true
-      } else if (data.error.code == 1108) {
+      } else if (data.error.code === 1108) {
 
       } else {
         this[type + 'Fail'] = true

@@ -1,12 +1,18 @@
 <template>
   <div>
-    <chart :options='PieOption' :auto-resize='true'></chart>
+    <div class="total">
+      <p>{{$t('my_account.total_assets')}} &nbsp;&nbsp;{{this.ToLocaleString(this.BtcTotalAssets)}} BTC</p>
+      <p>&asymp; {{this.ToLocaleString(this.TotalAssets)}} USDT</p>
+    </div>
+    <div class="chart">
+      <chart :options='PieOption' :auto-resize='true'></chart>
+    </div>
     <div class="pie-legend">
       <div v-for="(data, index) in PieData" :key="data.name">
         <!-- <div class="legend-value">{{ ToLocaleString(data.amount) }}</div>
         <div>{{ ComputePercent(data.value) }}</div> -->
-        <div class="legend-div" :style="`background:${Color[index]}`"></div>
-        <div>{{ data.name }}</div>
+        <span class="legend-box" :style="`background:${Color[index]}`"></span>
+        <span>{{ data.name }}</span>
       </div>
     </div>
   </div>
@@ -76,9 +82,9 @@ export default {
     PieOption () {
       return {
         title: {
-          text: `${this.$t('my_account.total_assets')}  $${this.ToLocaleString(this.TotalAssets)} USD`,
+          text: `USDT \n ${this.ToLocaleString(this.TotalAssets)}`,
           left: 'center',
-          top: '70%',
+          top: '45%',
           textStyle: {
             fontWeight: 'normal',
             fontSize: 16
@@ -90,8 +96,8 @@ export default {
         color: this.Color,
         series: [{
           type: 'pie',
-          center: ['50%', '43%'],
-          radius: ['25%', '40%'],
+          center: ['50%', '50%'],
+          radius: ['38%', '56%'],
           selectedMode: 'single',
           data: this.PieData,
           label: {
@@ -112,8 +118,13 @@ export default {
         return a.plus(this.$store.state.assets[b].usdt_worth.toString())
       }, new BigNumber(0)))
     },
+    BtcTotalAssets () {
+      return this.$store.getters.ToFixed(Object.keys(this.$store.state.assets).reduce((a, b) => {
+        return a.plus(this.$store.state.assets[b].btc_worth.toString())
+      }, new BigNumber(0)))
+    },
     Color () {
-      return ['#efae00', '#ffc600', '#38ada9', '#0a3d62', '#3c6382', '#0c2461', '#f58c26', '#079992', '#474787', '#82ccdd', '#6a89cc']
+      return ['#efae00', '#ffc600', '#38ada9', '#474787', '#82ccdd', '#f58c26', '#0a3d62', '#3c6382', '#0c2461', '#079992', '#6a89cc']
     }
   },
   components: {
@@ -123,26 +134,50 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.total {
+  width: 30%;
+  float: left;
+  padding-left: 6%;
+  padding-top: 140px;
+  p {
+    font-size: 14px;
+    color: #333333;
+    &:first-child {
+      font-weight: bold;
+      line-height: 36px;
+    }
+  }
+}
+.chart {
+  width: 40%;
+  float: left;
+}
 .echarts{
-  width: inherit;
+  width: 100%;
   min-height: 400px;
 }
 .pie-legend{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  justify-content: center;
+  width: 30%;
+  float: left;
+  padding-top: 120px;
+  padding-right: 6%;
   & > div {
     text-align: center;
-    margin: 0px 14px;
-    margin-bottom: 33px;
-    flex-grow: 0;
-    width: 100px;
-    .legend-div{
-      width: 36px;
+    margin-bottom: 25px;
+    width: 33.3%;
+    float: left;
+    height: 16px;
+    line-height: 16px;
+    font-size: 12px;
+    text-align: left;
+    .legend-box{
+      display: inline-block;
+      width: 24px;
       height: 16px;
+      line-height: 16px;
       margin: auto;
+      margin-right: 4px;
+      vertical-align: -3px;
     }
     .legend-value{
       overflow: hidden;
