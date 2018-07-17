@@ -196,7 +196,7 @@ a{
   margin-left: 15px;
   margin-right: 15px;
   border-bottom: 1px solid #f2f2f2;
-  font-family: '微软雅黑';
+  // font-family: '微软雅黑';
   &.border-none {
     border: none;
   }
@@ -222,6 +222,13 @@ a{
   color: #333333;
   margin-top: 7px;
   min-height: 22px;
+}
+
+.member-qTitle {
+  width: 80%;
+  overflow:hidden; /*超出的部分隐藏起来。*/
+  white-space:nowrap;/*不显示的地方用省略号...代替*/
+  text-overflow:ellipsis;
 }
 
 
