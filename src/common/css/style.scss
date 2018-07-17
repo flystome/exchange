@@ -80,7 +80,7 @@ body{
   color: white
 }
 
-.link{
+.link {
   color: #4382f7!important;
   cursor: pointer;
 }
@@ -88,6 +88,16 @@ body{
 .link:hover{
   text-decoration: none!important;
   color: #4382f7!important;
+}
+
+.links {
+  color: #4382f7;
+  cursor: pointer;
+}
+
+.links:hover{
+  text-decoration: none;
+  color: #4382f7;
 }
 
 .white-btn:hover,.white-btn:focus{

@@ -35,7 +35,7 @@ let time = date => {
 }
 
 let dayTime = (date) => {
-  var d = new Date(date).toLocaleString()
+  var d = new Date(date).toString()
   return d.split(' ')[4]
 }
 

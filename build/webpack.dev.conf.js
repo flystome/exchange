@@ -18,6 +18,8 @@ const HappyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length})
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
+const env = require('../config/dev.env')
+
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
@@ -53,7 +55,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': require('../config/dev.env')
+      'process.env': env
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.

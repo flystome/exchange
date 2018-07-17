@@ -17,6 +17,7 @@ const zh = {
     'email': `郵箱驗證`,
     'phone': `手機認證`,
     'google': `Google認證`,
+    "google_cancel": "撤銷Google認證",
     'send_email': `發送郵件`,
     'real_name': `實名認證`,
     'please_active_two_factor': `為了您的資金安全，請先綁定手機或設置兩步驗證。`,

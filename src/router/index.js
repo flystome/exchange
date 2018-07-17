@@ -4,7 +4,7 @@ import store from '../store'
 import { redirect } from '../store/mutations'
 
 var route = ''
-const MemberCenter = () => import(/* webpackChunkName: "MemberCenter" */ 'Pages/MemberCenter/MemberCenter')
+const MemberCenter = () => import('Pages/MemberCenter/MemberCenter')
 
 // validate
 const ValidateGoogle = () => import(/* webpackChunkName: "ValidateGoogle" */'Pages/Validate/Google/Google')

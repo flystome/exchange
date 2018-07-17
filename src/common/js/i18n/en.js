@@ -18,6 +18,7 @@ const en = {
       "email": "Verify Email",
       "phone": "Verify Cell Phone",
       "google": "Google Auth",
+      "google_cancel": "Cancel Google Auth",
       "send_email": "Send Email",
       "real_name": "Verify Real Name",
       "please_active_two_factor": "Please setup mobile number or google authenticator first.",

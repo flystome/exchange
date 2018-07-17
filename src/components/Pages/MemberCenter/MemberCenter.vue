@@ -12,11 +12,6 @@
             </div>
           </div>
           <div class="member-bt">
-            <!-- <span @click="account" :class="{'link': step === 1 }">{{$t("my_account.account")}}</span>
-            <span>|</span>
-            <span @click="referrals" :class="{'link': step === 2 }">
-              {{$t('my_account.recommended_statistics')}}
-            </span> -->
             <menu-underline
             ref="menu"
             :route="'my_account'"
@@ -43,7 +38,7 @@
             </div>
             <div class="media-body">
               <h5 class="media-heading">{{$t("my_account.tier_1")}}</h5>
-              <span class="member-validata link" @click="sendEmail" :class="{'active': !loginData.activated}">
+              <span class="member-validata" @click="sendEmail" :class="{'active': !loginData.activated}">
                 <span v-if='loginData.activated'>{{$t("auth.email")}}</span>
                 <button type="button" id="myButton" data-text="Loading..." class="btn sendbutton" autocomplete="off" :disabled="disabled" v-else >
                   {{$t("auth.send_email")}}
@@ -63,19 +58,22 @@
               <i class="media-object img-padding account-phone" />
             </div>
             <div class="media-body">
-              <h5 class="media-heading">{{$t("my_account.korean_user_use_twice_verification")}}</h5>
-              <span class="member-validata link" @click="validatephone" :class="{'active': !loginData.sms_activated}">
-                  <span>{{ $t("auth.phone") }}</span>
-                  <i v-if='loginData.sms_activated' class='account-validate-true' />
-                </span>
-                <span class="member-validata link" :class="{'active': !loginData.app_activated}" @click="validateAuth">
-                  <span>{{$t("auth.google")}}</span>
-                  <i v-if='loginData.app_activated' class='account-validate-true' />
-                </span>
-            </div>
-            <div class="media-right">
-              <i class="media-object account-right" v-if='loginData.sms_activated || loginData.app_activated' />
-              <i class="media-object account-false"  v-else data-holder-rendered="true" />
+              <h5 class="media-heading">
+                <div class="media-right fr">
+                  <i class="media-object account-right" v-if='loginData.sms_activated || loginData.app_activated' />
+                  <i class="media-object account-false"  v-else data-holder-rendered="true" />
+                </div>
+                {{$t("my_account.korean_user_use_twice_verification")}}
+              </h5>
+              <span class="member-validata" @click="validatephone" :class="{'active': !loginData.sms_activated}">
+                <span>{{ $t("auth.phone") }}</span>
+                <i v-if='loginData.sms_activated' class='account-validate-true' />
+              </span>
+              <span class="member-validata active" :class="{'active': !loginData.app_activated}" @click="validateAuth">
+                <span v-if='!loginData.app_activated'>{{$t("auth.google")}}</span>
+                <span v-else>{{$t("auth.google_cancel")}}</span>
+                <!-- <i v-if='loginData.app_activated' class='account-validate-true' /> -->
+              </span>
             </div>
           </div>
         </div>
@@ -87,7 +85,7 @@
             <div class="media-body">
               <h5 class="media-heading">{{$t("my_account.completion_of_real_name_authentication")}}</h5>
               <div class="verifying-prompt">
-                <span class="member-validata link"
+                <span class="member-validata"
                   :class="{'active': loginData.id_document && loginData.id_document.aasm_state==='unverified',
                   'verifying':(loginData.id_document && loginData.id_document.aasm_state)==='verifying'}" @click="validateAll">
                   <span>{{$t("auth.real_name")}}</span>
@@ -116,19 +114,17 @@
       <div class="member-handleRecord  container-block">
         <header class="member-blockHeader">
           <span class="member-handleCount"><strong>{{$t('my_account.customer_service_record')}}</strong></span>
-          <router-link :to='`${ROUTER_VERSION}/ticket/closed`' class="member-handleServer link">
+          <router-link :to='`${ROUTER_VERSION}/ticket/closed`' class="member-handleServer links">
             {{$t('my_account.view_the_end_service_list')}}
           </router-link>
         </header>
-        <div @click='goTicket(data.id)' class="member-qContainer" v-for="(data, index) in tickets" :key="index" v-if="index < 5" :class="{'border-none': index === tickets.length - 1 }">
+        <div @click='goTicket(data.id)' class="member-qContainer" :class="{'border-none': index === tickets.length - 1 }" v-for="(data, index) in tickets" :key="index" v-if="index < 5">
           <div class="member-question" :class="{'is-dispose':data.aasm_state === 'closed' }">
-            <span class='member-qContext'>
-              {{data.content}}
-            </span>
+            <span class='member-qContext'>{{data.title}}</span>
             <span class="member-qTime">{{ moment(data.created_at) }}</span>
           </div>
           <div class="member-qTitle marginB5" :class="{'is-dispose':data.aasm_state === 'closed' }">
-            {{data.title}}
+            {{data.content}}
           </div>
         </div>
         <div class="text-center table-record" v-if="this.tickets.length === 0">
@@ -136,17 +132,17 @@
               <div class="marginT70 marginB70 font12 color999">{{$t('my_account.no_record')}}</div>
           </div>
           <div class="text-center table-more b-t" style="margin-bottom:0px;">
-            <a :href="`${ROUTER_VERSION}/ticket/new`" class="link ">{{$t('my_account.new_questions')}}</a>
+            <a :href="`${ROUTER_VERSION}/ticket/new`" class="links">{{$t('my_account.new_questions')}}</a>
           </div>
         </div>
         <template v-else>
           <div class="text-center table-more b-t col-md-6">
-            <router-link :to="`${ROUTER_VERSION}/ticket/open`" class='link '>
+            <router-link :to="`${ROUTER_VERSION}/ticket/open`" class='links'>
               {{$t('my_account.show_more')}}
             </router-link>
           </div>
           <div class="text-center table-more b-l b-t col-md-6">
-            <router-link :to="`${ROUTER_VERSION}/ticket/new`" class='link '>
+            <router-link :to="`${ROUTER_VERSION}/ticket/new`" class='links'>
               {{$t('my_account.new_questions')}}
             </router-link>
           </div>
@@ -184,12 +180,12 @@
         </div>
       <basic-table :loading='referral_loading' :captionTitle='getRecommendCount.captionTitle' :item='getRecommendCount.Item'>
       <div slot="more" class="text-center b-t table-more">
-        <router-link :to="`${ROUTER_VERSION}/form/referral`" class="link ">{{$t('my_account.show_more')}}</router-link>
+        <router-link :to="`${ROUTER_VERSION}/form/referral`" class="links">{{$t('my_account.show_more')}}</router-link>
       </div>
       </basic-table>
       <basic-table :loading='referral_loading' :captionTitle='getRecommendUser.captionTitle' :item='getRecommendUser.Item'>
          <div slot="more" class="text-center b-t table-more">
-          <router-link :to="`${ROUTER_VERSION}/form/registered_referral`" class="link ">{{$t('my_account.show_more')}}</router-link>
+          <router-link :to="`${ROUTER_VERSION}/form/registered_referral`" class="links">{{$t('my_account.show_more')}}</router-link>
         </div>
       </basic-table>
       </div>
@@ -317,12 +313,6 @@ export default {
           Item: []
         }
         if (data.referrals) {
-          // data.referral_signup_history.sort((a, b) => {
-          //   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-          // })
-          // data.referrals.sort((a, b) => {
-          //   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-          // })
           data.referrals.length === 0 ? obj1.Item = [] : obj1.Item = [{content: [this.$t('my_account.account'), this.$t('my_account.ip_adress'), this.$t('my_account.login_location'), this.$t('my_account.browser'), this.$t('my_account.login_time'), this.$t('my_account.activated')]}].concat(data.referrals.map((_, index) => {
             return {
               content: [
@@ -408,6 +398,8 @@ export default {
     validateAuth () {
       if (!this.loginData.activated) {
         this.PopupBoxDisplay({message: this.$t('prompt.email_not_certified')})
+      } else if (this.loginData.app_activated) {
+        this.goPath('/undo_google_verify', this.loginData && !this.loginData.app_activated, false)
       } else {
         this.goPath('/validate/google', this.loginData && this.loginData.app_activated, false)
       }
@@ -505,5 +497,5 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@import './MemberCenter.scss'
+@import './MemberCenter.scss';
 </style>
