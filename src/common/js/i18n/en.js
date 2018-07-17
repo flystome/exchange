@@ -134,6 +134,9 @@ const en = {
       "netscape": "Netscape",
       "ie": "IE"
     },
+    "funds": {
+      "status_and_operation": "Status / Operation",
+    },
     "withdraw_currency": {
       "cancel_withdraw": "Pending Withdrawal",
       "total_assets": "Total Assets",
@@ -270,6 +273,7 @@ const en = {
       "login": "Login",
       "register": "Register",
       "change_password": "Change Password",
+      "undo_google_verify": 'Undo Google verification',
       "funds_pie": "Portfolio",
       "funds_line": "Asset Curve",
       "login_verify": "Two Factor Authentication for Login"
@@ -510,6 +514,9 @@ const en = {
         "error_1002": "The original password you entered is incorrect",
         "error_1003": "The new password you entered can not the same as the old one",
         "error_1004": "Account password updated failed"
+      },
+      "undo_google_verify": {
+        "success_200": 'An confirm email has been sent to your mailbox',
       },
       "send_eamil": {
         'success_200': 'Send a success, please check the mailbox and fill in the verification code',

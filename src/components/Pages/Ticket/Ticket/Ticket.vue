@@ -36,13 +36,6 @@
               </header>
               <img v-if="d.attachment_url" class="marginT15"  :src="d.attachment_url" />
               <div class="marginT15 ticketReplay-byAdmin color999">
-                <!-- <div v-if="d.reply_from_admin" class="pointer fl" @click="ShowReply(d)">
-                  <i class="ticket-replay">
-                  </i>
-                  <span class="link">
-                    {{ $t('reply') }}
-                  </span>
-                </div> -->
                 <div class="fr">
                   {{ $moment(d.created_at).format('YYYY-MM-DD H:mm:ss') }}
                 </div>

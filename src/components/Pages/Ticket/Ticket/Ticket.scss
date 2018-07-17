@@ -1,4 +1,5 @@
 .ticket-replay{
+  width: 100%;
   .block-container {
     background: white;
     margin-top: 8px;
@@ -148,9 +149,9 @@
   }
 }
 
-.ticket-replay {
-  @include sprite($ticket-replay);
-}
+// .ticket-replay {
+//   @include sprite($ticket-replay);
+// }
 
 .ticket-upload {
   @include sprite($ticket-upload);

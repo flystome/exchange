@@ -61,6 +61,7 @@ const SignUp = () => import(/* webpackChunkName: "sign" */'Pages/Sign/SignUp.vue
 const ForgotPassword = () => import(/* webpackChunkName: "sign" */'Pages/Sign/ForgotPassword.vue')
 
 const ChangePassword = () => import(/* webpackChunkName: "ChangePassword" */'Pages/Sign/ChangePassword.vue')
+const undoGoogleVerify = () => import(/* webpackChunkName: "ChangePassword" */'Pages/Sign/undoGoogleVerify.vue')
 
 const DashboardIndex = () => import(/* webpackChunkName: "Dashboard" */'Pages/Dashboard/DashboardIndex')
 
@@ -100,6 +101,11 @@ const router = new Router({
       path: `${version}/change_password`,
       name: 'ChangePassword',
       component: ChangePassword
+    },
+    {
+      path: `${version}/undo_google_verify`,
+      name: 'undoGoogleVerify',
+      component: undoGoogleVerify
     },
     {
       path: `${version}/exchange/:id`,

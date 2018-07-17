@@ -1,5 +1,5 @@
 <template>
-  <div class="404">
+  <div class="page_404">
     <img v-if="status === 404" src="~Img/large/404.png" >
     <img v-if="status === 500" src="~Img/large/500.png" >
     <img v-if="status === 502" src="~Img/large/502.png" >
@@ -25,19 +25,19 @@ export default {
 </script>
 
 <style lang='scss'>
-.404{
-  img{
-    display: block;
-    margin: auto;
-    margin-top: 21%;
+  .page_404 {
+    img {
+      display: block;
+      margin: auto;
+      margin-top: 21%;
+    }
   }
-}
-@media (max-width: 430px) {
-  img{
-    width: 100%
+  @media (max-width: 430px) {
+    img{
+      width: 100%
+    }
+    .page_404{
+      padding: 0 15px;
+    }
   }
-  .404{
-    padding: 0 15px;
-  }
-}
 </style>

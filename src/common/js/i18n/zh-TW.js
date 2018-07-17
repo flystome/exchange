@@ -268,8 +268,9 @@ const zh = {
     "market_maker": "做市商",
     "market_apply": "做市商申請",
     "login": "登錄",
-    "register": "注册",
+    "register": "註冊",
     "change_password": "修改密碼",
+    "undo_google_verify": '解除谷歌驗證',
     "funds_pie": "投資組合",
     "funds_line": "資產曲線",
     "login_verify": "登錄二次驗證"
@@ -511,6 +512,9 @@ const zh = {
       "error_1003": "您輸入的新密碼不能與舊密碼相同",
       "error_1004": "帳戶密碼更新失敗"
     },
+    "undo_google_verify": {
+        "success_200": '确认电子邮件已发送到您的邮箱',
+      },
     "send_eamil": {
       'success_200': '發送成功，請檢查郵箱，填寫驗證碼',
       'error_1001': '用戶不存在',
