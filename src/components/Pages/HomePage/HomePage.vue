@@ -381,7 +381,8 @@ export default {
       }, (d) => {
         this.disabled = false
         if (d.data.success) {
-          var loginData = JSON.parse(d.data.success.user_info)
+          // var loginData = JSON.parse(d.data.success.user_info)
+          var loginData = d.data.success.user_info
           if (d.data.success.login_2fa_required) {
             Object.assign(this.$store.state, {
               two_factors: true,
