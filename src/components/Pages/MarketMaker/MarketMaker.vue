@@ -94,5 +94,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './MarketMaker.scss'
+@import './MarketMaker.scss';
 </style>

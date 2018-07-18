@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="member-center container">
-      <div v-if="!(step === 1 && fromApp) " class="container-block membercenter-header" :class="{'member-padding' : step === 1}">
+      <div v-if="!(step === 1 && fromApp)" class="container-block membercenter-header" :class="{'member-padding' : step === 1}">
         <div style='overflow: hidden;'>
           <div class="col-md-6">
             <div class="member-info">
@@ -118,7 +118,8 @@
             {{$t('my_account.view_the_end_service_list')}}
           </router-link>
         </header>
-        <div @click='goTicket(data.id)' class="member-qContainer" :class="{'border-none': index === tickets.length - 1 }" v-for="(data, index) in tickets" :key="index" v-if="index < 5">
+        <div @click='goTicket(data.id)' class="member-qContainer"
+          :class="{'border-none': index === tickets.length - 1 }" v-for="(data, index) in tickets" :key="index" v-if="index < 5">
           <div class="member-question" :class="{'is-dispose':data.aasm_state === 'closed' }">
             <span class='member-qContext'>{{data.title}}</span>
             <span class="member-qTime">{{ moment(data.created_at) }}</span>
@@ -379,13 +380,15 @@ export default {
         path: `${this.ROUTER_VERSION}${path}`
       })
     },
-    getTicket () {
-      this.tickets = this.loginData.tickets
-      this.tickets = this.tickets.filter((d) => {
-        return d.aasm_state === 'open'
-      })
-      this.tickets.sort((a, b) => {
-        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    async getTicket () {
+      this._get({
+        url: '/tickets.json'
+      }, (res) => {
+        var data = res.data.success
+        this.tickets = data.tickets
+        this.tickets = this.tickets.filter((d) => {
+          return d.aasm_state === 'open'
+        }).slice(0, 5)
       })
     },
     validatephone () {
@@ -475,6 +478,7 @@ export default {
       if (/my_account/.test(to.path)) {
         this.headerStatus = true
         this.step = 0
+        this.getTicket()
       }
       if (/referral/.test(to.path)) {
         if (this.Pc) {
