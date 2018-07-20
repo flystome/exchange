@@ -170,6 +170,8 @@ body{
 
 ul,li {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 .clearfix:after{
     display: block;
@@ -276,12 +278,13 @@ a{
   .box-container{
     padding: 0;
     width: 1200px;
+    background: none;
   }
 }
 
 /* -----------------------------------animation-------------------------- */
 .SideSlipMenu-enter, .SideSlipMenu-leave-to {
-  transform: translateX(73.4%);
+  // transform: translateX(73.4%);
 }
 
 @font-face {

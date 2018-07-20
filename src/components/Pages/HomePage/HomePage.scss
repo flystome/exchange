@@ -1,3 +1,6 @@
+#home {
+  background: #f7f9fa;
+}
 .box-container.container{
   width: 100% !important;
   padding: 0;
@@ -153,13 +156,12 @@
   //   }
   // }
   .homepage-main{
-    margin-top: 69px;
     background-color: #fff;
     .homepage-markets{
       min-height: 400px;
       position: relative;
       .button{
-        padding:  10px 12px;
+        padding:  15px 17px;
       }
       .search{
         min-height: 0 !important;
@@ -217,7 +219,8 @@
   .homepage-search{
     background: #f2f2f2;
     padding: 4px 8px;
-    margin-top: 1px;
+    margin-top: 10px;
+    margin-right: 24px;
     border: 1px solid #dfe0e1;
     input{
       outline: none;
@@ -239,35 +242,113 @@
   }
 }
 
+.homepage-header .swiper-pagination-bullet {
+  background: white !important;
+  opacity: .5 !important;
+}
+
+.homepage-header .swiper-pagination-bullet-active {
+  opacity: 1 !important;
+}
+
+.homepage-header {
+  .swiper-button-prev-div {
+    left: 16px !important;
+    position: absolute;
+    outline: none;
+    top: 50%;
+    width: 55px;
+    height: 66px;
+    margin-top: -33px;
+    z-index: 10;
+    cursor: pointer;
+    &:hover {
+      .swiper-button-prev {
+        opacity: 1
+      }
+    }
+    .swiper-button-prev {
+      width: 30px;
+      height: 30px;
+      border-top: 1px solid #fff;
+      border-right: 1px solid #fff;
+      opacity: 0.5;
+      -webkit-transform: rotate(-135deg);
+      transform: rotate(-135deg);
+      background-image: none;
+      left: 20px;
+      outline: none;
+      margin-top: -15px;
+    }
+  }
+}
+
+.homepage-header {
+  .swiper-button-next-div {
+    right: 16px !important;
+    position: absolute;
+    outline: none;
+    top: 50%;
+    width: 55px;
+    height: 66px;
+    margin-top: -33px;
+    z-index: 10;
+    cursor: pointer;
+    &:hover {
+      .swiper-button-next {
+        opacity: 1
+      }
+    }
+    .swiper-button-next {
+      width: 30px;
+      height: 30px;
+      border-top: 1px solid #fff;
+      border-right: 1px solid #fff;
+      opacity: 0.5;
+      transform: rotate(45deg);
+      background-image: none;
+      right: 20px !important;
+      outline: none;
+      margin-top: -16px;
+    }
+  }
+}
+
+.homepage-header .nologin input {
+  font-size: 12px;
+}
+
 .homepage-introduce{
   .homepage-transition{
     transition: all .3s ease!important;
   }
   height: 583px;
-  >div:nth-child(2){
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 583px;
-    min-width: 1200px;
-    background: url('~Img/large/home-background.png');
-    // padding-top: 92px;
-    // padding-bottom: 96px;
-  }
-  >div:nth-child(1){
-    background: #f2f2f2;
-    position: absolute;
-    left: 0;
-    width: 100%;
-    min-width: 1200px;
-    height: 583px;
-  }
-  >div:nth-child(3){
+  // >div:nth-child(2){
+  //   position: absolute;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 583px;
+  //   min-width: 1200px;
+  //   background: url('~Img/large/home-background.png');
+  //   // padding-top: 92px;
+  //   // padding-bottom: 96px;
+  // }
+  // >div:nth-child(1){
+  //   background: #f2f2f2;
+  //   position: absolute;
+  //   left: 0;
+  //   width: 100%;
+  //   min-width: 1200px;
+  //   height: 583px;
+  // }
+  >div{
     position: relative;
     z-index: 1;
     height: 100%;
     padding-top: 92px;
     padding-bottom: 96px;
+    width: 100%;
+    // background: url('~Img/large/home-background.png');
     .margin0{
       margin:0
     }
@@ -347,6 +428,65 @@
     >div:nth-child(2){
       margin-top: 18px;
       margin-bottom: 33px;
+    }
+  }
+}
+
+.home_mining {
+  background: #fff;
+  margin-top: 15px;
+  border-bottom: 1px solid #e6e9ea;
+  min-height: 400px;
+  position: relative;
+  .mining_h {
+    height: 120px;
+    padding: 0 30px;
+    color: #333;
+    border-top: 1px solid #e6e9ea;
+    border-bottom: 1px solid #e6e9ea;
+    h3 {
+      margin: 0;
+      padding: 25px 0 12px;
+      font-size: 24px;
+    }
+  }
+  .mining_list {
+    padding: 0 20px;
+  }
+}
+
+.dialog {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  .mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4)
+  }
+  .dia_confirm {
+    position: absolute;
+    width: 450px;
+    padding: 25px;
+    min-height: 450px;
+    left: 50%;
+    top: 50%;
+    margin-left: -225px;
+    margin-top: -230px;
+    background: #fff;
+    z-index: 101;
+    .fa-times {
+      font-weight: lighter;
+      font-weight: lighter;
+      position: absolute;
+      right: 10px;
+      top: 10px;
     }
   }
 }

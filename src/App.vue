@@ -73,7 +73,7 @@ export default {
       return false
     },
     isWhiteBackground () {
-      var route = ['MarketMaker', 'notFound', 'MarketApply', 'home']
+      var route = ['MarketMaker', 'notFound', 'MarketApply']
       return route.includes(this.$route.name)
     },
     ...mapState(['fromApp', 'language']),
@@ -119,6 +119,9 @@ export default {
   .container{
     background: white;
   }
+}
+.home-contain {
+  background: #f7f9fa;
 }
 .exchange {
   background: #1b242e;

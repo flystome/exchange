@@ -36,7 +36,6 @@ export default {
       /* eslint camelcase: "error" */
       const password = this.$refs['password']
       const verify_code = this.$refs['verify_code']
-      console.log(this.password, this.google_auth)
 
       const password_valid = await password.$validator.validateAll()
       if (!password_valid) {

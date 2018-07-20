@@ -1,5 +1,12 @@
 <template>
-  <div>
+  <div id="home">
+    <div class="dialog" v-if='showDia'>
+      <div class="mask"></div>
+      <div class="dia_confirm">
+        <a href="###" class="close" @click='closeDia'><i class="fa fa-times"></i></a>
+        <joinMin :joinData = 'joinData' @modRemain='modRemain'></joinMin>
+      </div>
+    </div>
     <div class="homepage-header">
       <swiper class="carousel" :options="swiperOption">
         <div v-if="Notice.length === 0" style="min-height:480px">
@@ -81,10 +88,20 @@
         </div>
       </div>
     </div>
-    <div class="homepage-notice">
+    <div class="home_mining">
+      <div class="mining_h">
+        <h3>{{$t('homepage.mining.head')}}</h3>
+        <p>{{$t('homepage.mining.des')}}</p>
+      </div>
+      <div class="mining_list" v-if='miningList.length !== 0'>
+        <miningTab :miningList='miningList' @participate='participate'></miningTab>
+      </div>
+      <div v-else style="position: absolute;top: 50%;left: 50%;margin-left: -44px">
+        <vue-simple-spinner size="88"></vue-simple-spinner>
+      </div>
     </div>
-    <div class="homepage-main">
-      <div class="homepage-markets marginT30">
+    <div class="homepage-main marginT15">
+      <div class="homepage-markets">
         <basic-button v-for="(item,index) in currency" :data-id="item" :key="item" class="button pull-left" :class="{'active':!(currencyindex == index)}"
         @click.native="changemarket(index,item)" :text="item === 'my_optional' ? $t('homepage.my_optional') : `${item.toUpperCase()} ${$t('homepage.trading_area')}`"></basic-button>
         <div @keyup.esc="search = ''" class="homepage-search fr b">
@@ -103,11 +120,7 @@
       <div class="homepage-logo text-center">
         <i class="home-log"></i>
       </div>
-      <div class="marginT50 homepage-introduce">
-        <div>
-        </div>
-        <div>
-        </div>
+      <div class="homepage-introduce">
         <div id='homepage-introduce'>
           <div>
             <a href="mailto:support@hotex.com">
@@ -216,12 +229,55 @@ import { unsupportedRegionNames, unsupportedCountryCodes } from '@/common/js/bus
 import Cookies from 'js-cookie'
 import pusher from '@/common/js/pusher'
 import HomeMarket from './HomeMarket/HomeMarket'
+import miningTab from './miningTab/miningTab'
+import joinMin from './joinMin/joinMin'
 const _debounce = require('lodash.debounce')
 export default {
   name: 'homepage',
+  data () {
+    return {
+      channelTime: 0,
+      currency: ['btc', 'eth', 'usdt', 'my_optional'],
+      new_coin: '',
+      transition: false,
+      email: '',
+      password: '',
+      trend: '',
+      ROUTER_VERSION: process.env.ROUTER_VERSION,
+      HOST_URL: process.env.HOST_URL,
+      currencyindex: 0,
+      search: '',
+      open: !Cookies.get('total_hide'),
+      joinData: {},
+      getetc: '',
+      change: 'no',
+      curData: '',
+      disabled: false,
+      miningList: [],
+      Notice: [],
+      showDia: false,
+      swiperOption: {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next-div',
+          prevEl: '.swiper-button-prev-div'
+        }
+      }
+    }
+  },
   created () {
     this.RegionHint()
     this.BindChannel()
+    this.getMining()
     ;(() => {
       var code = Cookies.get('code')
       if (code) {
@@ -324,45 +380,10 @@ export default {
       distance: '40px'
     }, 100)
   },
-  data () {
-    return {
-      channelTime: 0,
-      new_coin: '',
-      transition: false,
-      email: '',
-      password: '',
-      trend: '',
-      ROUTER_VERSION: process.env.ROUTER_VERSION,
-      HOST_URL: process.env.HOST_URL,
-      currencyindex: 0,
-      search: '',
-      open: !Cookies.get('total_hide'),
-      currency: ['btc', 'eth', 'usdt', 'my_optional'],
-      getetc: '',
-      change: 'no',
-      curData: '',
-      disabled: false,
-      Notice: [],
-      swiperOption: {
-        spaceBetween: 30,
-        centeredSlides: true,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
-        },
-        navigation: {
-          nextEl: '.swiper-button-next-div',
-          prevEl: '.swiper-button-prev-div'
-        }
-      }
-    }
-  },
   components: {
-    HomeMarket
+    HomeMarket,
+    miningTab,
+    joinMin
   },
   methods: {
     async login () {
@@ -410,6 +431,14 @@ export default {
             this.PopupBoxDisplay({type: 'error', message: this.$t(`api_server.homepage.error_${d.data.error.code}`)})
           }
         }
+      })
+    },
+    async getMining () {
+      this._get({
+        url: '/fixed_term_deposits.json'
+      }, res => {
+        var data = res.data.success.fixed_term_products
+        this.miningList = data.slice(0, 5)
       })
     },
     marketChange ({ index, type, status }) {
@@ -533,6 +562,24 @@ export default {
         this.$store.state.assets[data.currency].locked && (this.$store.state.assets[data.currency].locked = Number(data.locked))
       }) // account pusher
     },
+    participate (item) {
+      this.showDia = true
+      this.joinData = item
+    },
+    modRemain (remain, id) {
+      if (remain && id) {
+        this.miningList.map(ele => {
+          if (ele.id === id) {
+            ele.volume = remain
+          }
+        })
+      }
+      this.showDia = false
+    },
+    closeDia () {
+      this.showDia = false
+      this.joinData = {}
+    },
     ...mapMutations(['PopupBoxDisplay'])
   },
   watch: {
@@ -579,81 +626,4 @@ export default {
 
 <style scoped lang="scss">
   @import "./HomePage.scss";
-</style>
-
-<style scoped lang="scss">
-.homepage-header .swiper-pagination-bullet {
-  background: white!important;
-  opacity: .5!important;
-}
-.homepage-header .swiper-pagination-bullet-active{
-  opacity: 1!important;
-}
-
-.homepage-header {
-  .swiper-button-prev-div{
-    left: 16px !important;
-    position: absolute;
-    outline: none;
-    top: 50%;
-    width: 55px;
-    height: 66px;
-    margin-top: -33px;
-    z-index: 10;
-    cursor: pointer;
-    &:hover{
-      .swiper-button-prev{
-        opacity: 1
-      }
-    }
-    .swiper-button-prev{
-      width: 30px;
-      height: 30px;
-      border-top: 1px solid #fff;
-      border-right: 1px solid #fff;
-      opacity: 0.5;
-      -webkit-transform: rotate(-135deg);
-      transform: rotate(-135deg);
-      background-image: none;
-      left: 20px;
-      outline: none;
-      margin-top: -15px;
-    }
-  }
-}
-
-.homepage-header {
-  .swiper-button-next-div{
-    right: 16px !important;
-    position: absolute;
-    outline: none;
-    top: 50%;
-    width: 55px;
-    height: 66px;
-    margin-top: -33px;
-    z-index: 10;
-    cursor: pointer;
-    &:hover{
-      .swiper-button-next{
-        opacity: 1
-      }
-    }
-    .swiper-button-next{
-      width: 30px;
-      height: 30px;
-      border-top: 1px solid #fff;
-      border-right: 1px solid #fff;
-      opacity: 0.5;
-      transform: rotate(45deg);
-      background-image: none;
-      right: 20px !important;
-      outline: none;
-      margin-top: -16px;
-    }
-  }
-}
-
-.homepage-header .nologin input{
-  font-size: 12px;
-}
 </style>
