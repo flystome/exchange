@@ -32,8 +32,8 @@ axios.interceptors.response.use(response => {
       two_factors: true
     })
     router.replace(`${ROUTER_VERSION}/login/verify`)
-  } else if (response.data.error && response.data.code === 1101) {
-    window.location.reload()
+  } else if (response.data.error && (response.data.code === 1101 || response.data.code === 1102)) {
+    router.replace(`${ROUTER_VERSION}/login`)
   }
   times++
   return response;

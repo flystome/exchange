@@ -14,6 +14,9 @@ const en = {
     "three_months": "Three Months",
     "six_months": 'Six Months',
     "a_year": "One Year",
+    'global': {
+      'err_1108': 'Your account is temporarily restricted from trading, and the time for lifting the ban:'
+    },
     "auth": {
       "email": "Verify Email",
       "phone": "Verify Cell Phone",

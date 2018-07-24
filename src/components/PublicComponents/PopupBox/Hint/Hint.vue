@@ -115,6 +115,11 @@ export default {
 }
 .hint{
   margin-top: 203px;
+  position: absolute;
+  left: 50%;
+  margin-left: -132px;
+  top: 50%;
+  margin-top: -120px;
   z-index: 3;
   .hint-confirm{
     position: relative;

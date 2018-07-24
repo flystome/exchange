@@ -13,6 +13,9 @@ const zh = {
   "three_months": '三個月',
   "six_months": '六個月',
   "a_year": "一年",
+  'global': {
+    'err_1108': '您的賬戶暫時被限制交易，解禁時間：'
+  },
   'auth': {
     'email': `郵箱驗證`,
     'phone': `手機認證`,

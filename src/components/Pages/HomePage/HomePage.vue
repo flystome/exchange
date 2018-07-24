@@ -322,7 +322,7 @@ export default {
         if (data[key].base_currency === 'eth') {
           if (!BtcMarket.includes(`${data[key].quote_currency}/btc`)) {
             if (!this.$store.state.assets[data[key].quote_currency] && !this.$store.state.assets['eth']) return
-            this.$store.state.assets[data[key].quote_currency].price = data[key].last * this.$store.state.assets['eth'].price
+            this.$store.state.assets[data[key].quote_currency].price = data[key].last * (this.$store.state.assets['eth'] ? this.$store.state.assets['eth'].price : 1)
           }
         }
       })

@@ -77,7 +77,6 @@ import setting from './setting/setting'
 import account from './account/account'
 import marketList from './marketList/marketList'
 import chart from './chart/chart'
-import orderBook from './orderBook/orderBook'
 import trades from './trades/trades'
 import order from './order/order'
 import allOrder from './allOrder/allOrder'
@@ -121,7 +120,6 @@ export default {
     account,
     marketList,
     chart,
-    orderBook,
     trades,
     order,
     allOrder,

@@ -110,6 +110,7 @@
 <script>
 import { BigNumber } from 'bignumber.js'
 import { bus } from '@/common/js/bus/index'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'order',
@@ -333,7 +334,8 @@ export default {
         this.ordering = false
         this.tips = true
       } else if (data.error.code === 1108) {
-
+        var time = this.$moment(data.error.restraint_expire_at).format('YYYY-MM-DD H:mm:ss')
+        this.PopupBoxDisplay({message: `${this.$t('global.err_1108')} ${time}`, type: 'error'})
       } else {
         this[type + 'Fail'] = true
         this.isDisabled = false
@@ -412,7 +414,8 @@ export default {
         this.sellVolume = this.fixNum(+this.accounts[this.market.quote_currency].balance * percent, this.market.volume_fixed)
         this.handleTotal(null, 'sell', p, this.sellVolume)
       }
-    }
+    },
+    ...mapMutations(['PopupBoxDisplay'])
   }
 }
 </script>

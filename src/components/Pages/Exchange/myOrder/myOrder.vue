@@ -45,6 +45,7 @@
 
 <script>
 import orderList from './orderList/orderList'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'myOrder',
@@ -57,8 +58,8 @@ export default {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       location: location.href,
       heads: ['exchange.myorder.pending', 'exchange.myorder.history', 'exchange.myorder.filling'],
-      item1: ['exchange.myorder.buy', 'exchange.myorder.sell', 'exchange.myorder.all', 'exchange.myorder.cancel_all'],
-      item2: ['exchange.myorder.last3', 'exchange.myorder.last7', 'exchange.myorder.more'],
+      // item1: ['exchange.myorder.buy', 'exchange.myorder.sell', 'exchange.myorder.all', 'exchange.myorder.cancel_all'],
+      // item2: ['exchange.myorder.last3', 'exchange.myorder.last7', 'exchange.myorder.more'],
       isOrder: true,
       currencyIndex: 0,
       curOrders: [],
@@ -127,15 +128,23 @@ export default {
         if (this.cancelNum === 'one') {
           this._delete({
             url: '/markets/' + this.market.code + '/orders/' + this.id
-          })
+          }, this.handleErr)
         } else if (this.cancelNum === 'all') {
           this._delete({
             url: '/markets/' + this.market.code + '/orders/' + 0,
             data: {
               cancel_all: 'TRUE'
             }
-          })
+          }, this.handleErr)
         }
+      }
+    },
+    handleErr (res) {
+      console.log(res)
+      var data = res.data
+      if (data.error && data.error.code === 1108) {
+        var time = this.$moment(data.error.restraint_expire_at).format('YYYY-MM-DD H:mm:ss')
+        this.PopupBoxDisplay({message: `${this.$t('global.err_1108')} ${time}`, type: 'error'})
       }
     },
     cancelAll () {
@@ -159,14 +168,14 @@ export default {
     },
     goMore () {
       var routeData = ''
-      console.log(this.hisOrders, this.filling)
       if (this.hisOrFill === 'his') {
         routeData = this.$router.resolve({path: `${this.ROUTER_VERSION}/form/order`})
       } else if (this.hisOrFill === 'fill') {
         routeData = this.$router.resolve({path: `${this.ROUTER_VERSION}/form/trade`})
       }
       window.open(routeData.href, '_blank')
-    }
+    },
+    ...mapMutations(['PopupBoxDisplay'])
   }
 }
 </script>
