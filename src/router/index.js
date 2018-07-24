@@ -37,6 +37,7 @@ const AmountRecord = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form
 const FormWithdraw = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Withdraw/Withdraw.vue')
 const RegisteredReferral = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/RegisteredReferral/RegisteredReferral.vue')
 const Referral = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/Referral/Referral.vue')
+const InterestMining = () => import(/* webpackChunkName: "FormOrder" */'Pages/Form/InterestMining/InterestMining.vue')
 
 // Api
 const Api = () => import(/* webpackChunkName: "Api" */ 'Pages/Api/RouterView')
@@ -236,6 +237,11 @@ const router = new Router({
           path: 'amountrecord',
           name: 'AmountRecord',
           component: AmountRecord
+        },
+        {
+          path: 'interestmining',
+          name: 'InterestMining',
+          component: InterestMining
         }
       ]
     },

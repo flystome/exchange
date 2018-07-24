@@ -683,6 +683,17 @@ const en = {
         "half-year": 'Last 6 Months',
         "year": "Last Year",
         "filter": "Filter"
+      },
+      'mining': {
+        'ownership_currency': 'Ownership Currency',
+        'currency': 'Currency',
+        'cycle': 'Cycle',
+        'annualized_rate': 'Annualized Rate',
+        'own_quantity': 'Own Quantity',
+        'date_expiry': 'Date Expiry',
+        'allocated_interest': 'Allocated Insterest',
+        'my_interest_mining':'My Interest Mining',
+        'day':'Day'
       }
     },
     "api": {

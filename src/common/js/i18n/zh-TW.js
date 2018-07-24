@@ -679,6 +679,17 @@ const zh = {
       "half-year": '最近半年',
       "year": "最近一年",
       "filter": "篩選"
+    },
+    'mining': {
+      'ownership_currency': '持有幣種',
+      'currency': '幣種',
+      'cycle': '週期',
+      'annualized_rate': '年化收益率',
+      'own_quantity': '持有數量',
+      'date_expiry': '到期日期',
+      'allocated_interest': '已分配利息',
+      'my_interest_mining':'我的利息挖礦',
+      'day':'天'
     }
   },
   "api": {

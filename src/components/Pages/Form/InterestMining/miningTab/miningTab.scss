@@ -1,0 +1,22 @@
+#mining {
+  table {
+    width: 100%;
+    font-size: 14px;
+  }
+  th {
+    height: 36px;
+    line-height: 36px;
+    width: 15.45%;
+    font-weight: normal;
+  }
+  td {
+    height: 57px;
+    width: 10.5%;
+    border-top: 1px solid #e6e9ea;
+
+    span {
+      color: #009afc;
+      cursor: pointer;
+    }
+  }
+}

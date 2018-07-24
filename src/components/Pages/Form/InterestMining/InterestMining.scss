@@ -1,0 +1,27 @@
+#interest_mining {
+  background: #f7f9fa;
+}
+
+.home_mining {
+  background: #fff;
+  margin-top: 10px;
+  border-bottom: 1px solid #e6e9ea;
+  min-height: 300px;
+  position: relative;
+  .mining_h {
+    height: 46px;
+    line-height: 46px;
+    padding: 0px 24px 0px;
+    color: #333;
+    border-top: 1px solid #e6e9ea;
+    border-bottom: 1px solid #e6e9ea;
+    h3 {
+      margin: 0;
+      padding: 25px 0 12px;
+      font-size: 24px;
+    }
+  }
+  .mining_list {
+    padding: 0 20px;
+  }
+}
