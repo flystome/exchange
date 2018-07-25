@@ -23,7 +23,7 @@ export default {
         name: '正體中文'
       },
       {
-        language: 'zh',
+        language: 'zh-CN',
         name: '简体中文'
       },
       {

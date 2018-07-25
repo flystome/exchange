@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 Vue.use(VueI18n)
 const messages = {
   'zh-TW': zh_TW,
-  'zh_CN': zh_CN,
+  'zh-CN': zh_CN,
   en: en.en
 }
 
