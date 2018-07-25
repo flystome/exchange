@@ -1,4 +1,4 @@
-const zh = {
+const TW = {
   'brand': 'HotEx',
   'submit': `提交`,
   'cancel': `取消`,
@@ -93,11 +93,11 @@ const zh = {
     "verifying": "驗證中",
     "success_200": "電子郵件已發送，請檢查",
     "error_1001": "Token errors, please Reconfirm",
-    "referrals_title": "邀請好友通過你的專屬二維碼或連結注册並交易",
+    "referrals_title": "邀請好友通過你的專屬二維碼或連結註冊並交易",
     "recommended_links": "推薦鏈接",
     "effective_recommended": "我的有效推薦用戶個數",
     "my_trade_discount": "我的交易折扣",
-    "use_platform_currency": "使用平台幣支付交易費"
+    "use_platform_currency": "使用平臺幣支付交易費"
   },
   "validate_identity": {
     "uploading_photos": "上傳照片中",
@@ -118,7 +118,7 @@ const zh = {
     "click_upload": "點擊上傳",
     "information_upload_success": "實名認證信息上傳成功",
     "please_upload_file": "請上傳文件",
-    "img_to_big": "上载圖片不得超过"
+    "img_to_big": "上載圖片不得超過"
   },
   "validate_sms": {
     "binding_cell_phone_authentication": "驗證您的手機號碼",
@@ -150,10 +150,10 @@ const zh = {
     "tariff_description": "資費說明",
     "reminder": "提醒",
     "min_currency": "請勿告訴其他人你的手機驗證碼或者Google驗證碼請",
-    "confirm_apply_for_success": "提幣請求成功後，請轉至電子郵件並點擊鏈接以確認取款請求。 您可以跟踪退款歷史記錄頁面上的狀態.",
+    "confirm_apply_for_success": "提幣請求成功後，請轉至電子郵件並點擊鏈接以確認取款請求。 您可以跟蹤退款歷史記錄頁面上的狀態.",
     "make_sure_safe": "確保您的電腦和瀏覽器是安全的，以防止信息被篡改或洩漏.",
     "do_not_response": "請確保您要提幣的地址無誤，如若輸錯提幣地址，且交易完成，由您自行承擔損失，HotEx不做賠償",
-    "withdraw_currency_record": "提幣记录",
+    "withdraw_currency_record": "提幣記錄",
     "number": "ID",
     "withdraw_time": "提幣時間",
     "withdraw_address": "提幣地址",
@@ -200,9 +200,9 @@ const zh = {
     "operation_done": "完成上述操作後，點擊發送付款，交易將被廣播到整個網絡，以便您可以查看交易狀態。 當交易達到整個網絡的1次確認（大約10到60分鐘）時，系統將自動為賬戶充值。 您可以查詢資產的情況.",
     "deposit_record": "充值記錄",
     "deposit_date": "充值日期",
-    "trading_hash": "转账 ID",
+    "trading_hash": "轉賬 ID",
     "recharge_amount": "充值金額",
-    "confirmation_number": "確認次数",
+    "confirmation_number": "確認次數",
     "identifying_code": "驗證碼",
     "temporarily_unable_deposit": "暫時無法充值",
     "warn1": "禁止向COIN地址充值除COIN之外的資產，任何充入COIN地址的非COIN資產將不可找回。",
@@ -213,9 +213,9 @@ const zh = {
     "in_query": "中查詢。",
     "form_account": "充值提現記錄"
   },
-  "market_maker" :{
+  "market_maker": {
     "current_market": "當前做市幣種",
-    "preferential_describe": "做市商可獲得手續費减免等優惠",
+    "preferential_describe": "做市商可獲得手續費減免等優惠",
     "market_maker_program_access": "做市商程式接入",
     "apply_for_market_making": "申請做市",
     "Yesterday_deal": "昨日成交筆數",
@@ -225,15 +225,15 @@ const zh = {
   },
   "market_apply": {
     "market_maker_apply": "做市商申請",
-    "become_market_maker": "成为HotEx做市商，享受更多优质服务",
+    "become_market_maker": "成為HotEx做市商，享受更多優質服務",
     "zero_transaction_cost": "交易零費用",
     "free_fee": "做市商交易手續費全免，並且交易過程中用戶產生的手續費也歸於做市商",
     "exclusive_customer_service": "專屬客服",
-    "one_to_one_customer": "一對一的客服服務，對平臺使用過程中的問題能够保障快速解决",
+    "one_to_one_customer": "一對一的客服服務，對平臺使用過程中的問題能夠保障快速解決",
     "custom_activity": "定制活動",
     "network_promotion": "可根據做市商需求定制針對性全網推廣，優勢盡顯",
     "read_and_agree": "我已閱讀並同意",
-    "authentication_protocol": "《做市商认证协议》",
+    "authentication_protocol": "《做市商認證協議》",
     "immediate_apply": "立即申請"
   },
   "title": {
@@ -284,7 +284,7 @@ const zh = {
     "not_certified": "手機或者Google沒有驗證",
     "google_not_certified": "Google身份驗證沒有驗證",
     "phone_not_certified": "手機沒有驗證",
-    "not_certified_prompt": "為了不影響你在HotEx平台上的用戶體驗，請前往驗證",
+    "not_certified_prompt": "為了不影響你在HotEx平臺上的用戶體驗，請前往驗證",
     "go_validate": "驗證",
     "log_and_operate": "請登入後再操作"
   },
@@ -308,7 +308,7 @@ const zh = {
     "google_verification": "驗證",
     "app_already_installed": "APP已安裝APP",
   },
-  "markets":{
+  "markets": {
     "volume": "成交量",
     "coinAndVolume": "幣種/成交量",
     "newPrice": "最新價",
@@ -320,7 +320,7 @@ const zh = {
     "volume24": "24h成交量",
     "high": "24h最高價",
     "low": "24h最低價",
-    "candle": "K线圖",
+    "candle": "K線圖",
     "depth": "深度圖",
     "history": "最新成交",
     "myHistory": "我的最新成交",
@@ -355,9 +355,9 @@ const zh = {
     "bid": "買",
     "ask": "賣",
     "cancel": "撤銷",
-    "tip": "请登錄或注册后再操作",
+    "tip": "請登錄或註冊後再操作",
     "login": "登錄",
-    "register": "注册",
+    "register": "註冊",
     'dialog': {
       'cancel': "確認撤銷此單嗎？",
       'cancel_all': "確認撤銷全部訂單嗎？"
@@ -367,8 +367,8 @@ const zh = {
     'header': {
       'last_price': '最新價',
       'change_24': '24小時漲跌',
-      'high_price': '24小时最高',
-      'low_price': '24小时最低'
+      'high_price': '24小時最高',
+      'low_price': '24小時最低'
     },
     'find': '搜索幣種',
     'trades': {
@@ -377,14 +377,14 @@ const zh = {
       'volume': '成交量'
     },
     'unlogin': {
-      'please': '请',
+      'please': '請',
       'or': '或',
-      'operate': '后进行操作',
+      'operate': '後進行操作',
       'login': '登錄',
-      'register': '注册'
+      'register': '註冊'
     },
-    'success': "下单成功",
-    'fail': "下单失败",
+    'success': "下單成功",
+    'fail': "下單失敗",
     'setting': '賬戶設置',
     'history': '歷史記錄',
     'signout': '安全退出',
@@ -393,20 +393,20 @@ const zh = {
     'freeze': '在途',
     'allAccount': '查看全部賬戶',
     'tradeTitle': '買賣盤',
-    'volume': '数量',
+    'volume': '數量',
     "buy": "買入",
     "sell": "賣出",
-    'marketClose':'市场暂时关闭',
-    'priceWarn': '偏離現價10%，請核准！',
+    'marketClose': '市場暫時關閉',
+    'priceWarn': '偏離現價10%，請核準！',
     "candle": "K線",
     "depth": "深度",
-    "grand": '累计',
+    "grand": '累計',
     "maker": '做市商',
     "maker_24h": '24h成交量',
-    "platform_use":'已启用',
-    "platform_use_no":'尚未启用',
-    "platform_pay": "支付交易费",
-    "toSet": "去设置",
+    "platform_use": '已啟用',
+    "platform_use_no": '尚未啟用',
+    "platform_pay": "支付交易費",
+    "toSet": "去設置",
     'myorder': {
       'pending': '當前委託',
       'history': '歷史委託',
@@ -420,13 +420,13 @@ const zh = {
       'last7': '七天',
       'more': '更多',
       'time': '時間',
-      'market': '市场',
+      'market': '市場',
       'type': '方向',
       'price': '價格',
-      'volume': '数量',
+      'volume': '數量',
       'percent': '成交率',
-      'traded': '成交金额',
-      'status': '状态',
+      'traded': '成交金額',
+      'status': '狀態',
       'noData': '當前沒有未完成委託',
       'bid': '買',
       'ask': '賣',
@@ -462,7 +462,7 @@ const zh = {
     },
     "withdraw_currency": {
       "set_fund_source_200": "提幣地址被設置為默認值",
-      "set_fund_source_1001" : "提幣地址設置為默認失敗",
+      "set_fund_source_1001": "提幣地址設置為默認失敗",
       "delete_fund_source_200": "刪除提幣地址",
       "delete_fund_source_1001": "刪除提幣地址失敗",
       "send_phone_error_1001": "發送速度太快，請等待一分鐘",
@@ -479,7 +479,7 @@ const zh = {
       "create_withdraw_1008": "金額不能為空",
       "create_withdraw_1009": "驗證碼錯誤",
       "create_withdraw_1010": "未創建資產帳戶",
-      "create_withdraw_1011": "金額不够支付費用"
+      "create_withdraw_1011": "金額不夠支付費用"
     },
     "validate_sms": {
       "send_code_1002": "電話號碼無效",
@@ -491,13 +491,13 @@ const zh = {
     "homepage": {
       "error_1003": "錯誤的帳號或密碼，請再試一次",
       "error_1002": "驗證碼錯誤",
-      "error_1001": "登錄失败次数太多，锁定3分钟",
+      "error_1001": "登錄失敗次數太多，鎖定3分鐘",
     },
     "signup": {
-      "error_1001":  "帳戶已被鎖定",
+      "error_1001": "帳戶已被鎖定",
       "error_1002": "驗證碼錯誤",
       "error_1003": "電子郵件已被使用",
-      "success_200": "注册成功。找到電子郵件啟動您的帳戶"
+      "success_200": "註冊成功。找到電子郵件啟動您的帳戶"
     },
     "ticket": {
       "success_200": "創建成功",
@@ -517,8 +517,8 @@ const zh = {
       "error_1004": "帳戶密碼更新失敗"
     },
     "undo_google_verify": {
-        "success_200": '确认电子邮件已发送到您的邮箱',
-      },
+      "success_200": '確認電子郵件已發送到您的郵箱',
+    },
     "send_eamil": {
       'success_200': '發送成功，請檢查郵箱，填寫驗證碼',
       'error_1001': '用戶不存在',
@@ -536,7 +536,7 @@ const zh = {
     }
   },
   "footer": {
-    "introduction": "極速，穩定的數字資產交易平台",
+    "introduction": "極速，穩定的數字資產交易平臺",
     "copyright": "©2017-2018 hotex.com Copyright",
     "support": "支持",
     "api": "API",
@@ -562,7 +562,7 @@ const zh = {
   },
   "homepage": {
     "coming_soon": "敬請期待",
-    "banner_describe1": "權威透明的數字資產交易平台",
+    "banner_describe1": "權威透明的數字資產交易平臺",
     "banner_describe2": "提供最佳的投資渠道",
     "login": "登錄",
     "free_registration": "免費註冊",
@@ -600,7 +600,7 @@ const zh = {
     "introduce_6": "團隊成員來自證券，期貨，外匯，量化投資等行業，有多年同類產品研發和運營經驗，在業內擁有廣泛的人脈和資源",
     "introduce_7": '數位密碼幣的交易存在風險，在全球範圍內一周7天，一天24小時，一年365天無休止交易，沒有每日漲停跌停限制，價格受各國政策，市場，等多種因素影響。我們強烈建議您事先調查瞭解在自身所能承受的風險範圍內參與交易。',
     "trading_platform": "極速，穩定的虛擬資產交易平臺",
-    "cross_platform":"閃電般極速下單，覆蓋iOS，Android，手機web，PC四大終端，卓越的平臺效能保障，可接納海量用戶的真實業務場景，讓交易更專注。",
+    "cross_platform": "閃電般極速下單，覆蓋iOS，Android，手機web，PC四大終端，卓越的平臺效能保障，可接納海量用戶的真實業務場景，讓交易更專註。",
     'mining': {
       'head': '利息挖礦',
       'des': "你不是專業投資者，無法持續進行交易挖礦？沒關係，通過利息挖礦，你也可以獲取獲取OET",
@@ -654,20 +654,20 @@ const zh = {
       "amount": "數量",
       "transaction_price": "成交價",
       "quoted_currency": "報價貨幣",
-      "money": "金额",
-      "poundage": "手续费",
+      "money": "金額",
+      "poundage": "手續費",
     },
     "news": {
       "select_none": "全不選",
       "select_all": "全選",
       "marked": "標記為已讀",
-      "clear": "删除",
+      "clear": "刪除",
       "confirm": "您確定要刪除此記錄嗎?",
     },
     "record": {
       'coin': '幣種',
       'time': '時間',
-      "fee": "金額/手续费",
+      "fee": "金額/手續費",
       "action": "事件",
       'balance': "結餘",
       'OrderAsk': "賣出",
@@ -675,7 +675,7 @@ const zh = {
       "Trade": "Trade",
       'Deposit': "充值",
       'Withdraw': "提現",
-      "month": "最近一个月",
+      "month": "最近一個月",
       "half-year": '最近半年',
       "year": "最近一年",
       "filter": "篩選"
@@ -688,8 +688,8 @@ const zh = {
       'own_quantity': '持有數量',
       'date_expiry': '到期日期',
       'allocated_interest': '已分配利息',
-      'my_interest_mining':'我的利息挖礦',
-      'day':'天'
+      'my_interest_mining': '我的利息挖礦',
+      'day': '天'
     }
   },
   "api": {
@@ -711,7 +711,7 @@ const zh = {
     "google_verification_code": "谷歌驗證碼",
     "confirm": "確認",
     "cancel": "取消",
-    "secretkey_describe": "请将以下的Secret Key复制粘贴到安全的地方保存。该页面关闭之后Secret Key不再显示",
+    "secretkey_describe": "請將以下的Secret Key復制粘貼到安全的地方保存。該頁面關閉之後Secret Key不再顯示",
     "copy": "複製",
     "return": "返回",
     "amend_the_success": "修改成功",
@@ -733,7 +733,7 @@ const zh = {
     "detailed_description": "詳細描述",
     "no_empty": "標題或說明不能為空",
     "upload_describe": "不大於1MB的.jpg, .png, .bmp文件",
-    "ticket_describe": "如果您有任何問題，意見或建議需要和我們溝通，請給我們建立一個服務單，我們會盡快回复您。",
+    "ticket_describe": "如果您有任何問題，意見或建議需要和我們溝通，請給我們建立一個服務單，我們會盡快回復您。",
     "customer_service_reply": "客服回復:",
     "reply_to_customer_service": "回復客服:",
     "upload_photo": "上傳照片",
@@ -754,11 +754,11 @@ const zh = {
     "first_name": "名字",
     "last_name": "姓",
     "IdCard": "身份證",
-    "withdraw_amount": "提幣金額数量",
+    "withdraw_amount": "提幣金額數量",
     "less_then": "最小提幣金額數量不能小於",
     "more_then": "最大提幣金額數量不能大於",
     "withdraw_amount_NaN": "提幣金額數量必須為數位",
-    "withdraw_address": "提币地址",
+    "withdraw_address": "提幣地址",
     "inconsistency_of_password": "密碼不一致",
     "email_verify_code": "郵箱驗證碼",
     "sms_verification_code": "手機驗證碼"
@@ -816,4 +816,4 @@ const zh = {
   `
 }
 
-export default zh
+export default TW

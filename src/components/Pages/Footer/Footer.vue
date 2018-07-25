@@ -70,6 +70,10 @@ export default {
         name: '正體中文'
       },
       {
+        language: 'zh',
+        name: '简体中文'
+      },
+      {
         language: 'en',
         name: 'English'
       }]
