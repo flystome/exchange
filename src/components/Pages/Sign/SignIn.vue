@@ -2,7 +2,7 @@
   <div @keyup.enter="login" class="signIn sign-block">
     <div class="sign-form">
       <header class="text-center">
-        <img src="~Img/large/sign-logo.png">
+        <router-link to="/"><img src="~Img/large/sign-logo.png"></router-link>
       </header>
       <div class="form">
         <div class="title color333">
@@ -147,6 +147,16 @@ export default {
 
 <style lang="scss" scoped>
 @import './common.scss';
+.signIn {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-left: -232px;
+  margin-top: -226px;
+  .sign-form {
+    margin-top: 0;
+  }
+}
 .basic-button{
   margin-top: 24px;
 }

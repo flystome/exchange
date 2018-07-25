@@ -42,6 +42,7 @@ export default {
       version: process.env.ROUTER_VERSION,
       noMobile: true,
       noPaddingList: ['MexchangeMarkets', 'MexchangeDetail', 'MexchangeTrades', 'MexchangeOrders'],
+      fullScreen: ['SignIn', 'SignUp', 'LoginVerfication', 'Exchanage'],
       noPadding: false,
       exChange: true,
       FROM_HOME: '',
@@ -88,7 +89,7 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      if (to.name === 'Exchange') {
+      if (this.fullScreen.indexOf(to.name) !== -1) {
         this.exChange = true
       } else {
         this.exChange = false

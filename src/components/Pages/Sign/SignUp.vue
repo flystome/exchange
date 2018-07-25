@@ -2,7 +2,7 @@
   <div @keyup.enter="register" class="signUp sign-block">
     <div class="sign-form">
       <header class="text-center">
-        <img src="~Img/large/sign-logo.png">
+        <router-link to="/"><img src="~Img/large/sign-logo.png"></router-link>
       </header>
       <div class="form">
         <div class="title color333">
@@ -197,6 +197,16 @@ export default {
 
 <style lang="scss" scoped>
 @import './common.scss';
+.signUp {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-left: -232px;
+  margin-top: -322px;
+  .sign-form {
+    margin-top: 0;
+  }
+}
 .form-footer{
   padding-top: 16px;
   padding-bottom: 27px;
