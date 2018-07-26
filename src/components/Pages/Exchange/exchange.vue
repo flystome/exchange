@@ -400,14 +400,13 @@ export default {
           })
           this.my_orders_cache[1].unshift(data)
         } else if (data.state === 'done') {
-          this.showNotice(data.price, data.origin_volume - data.volume)
+          // this.showNotice(data.price, data.origin_volume - data.volume)
           this.my_orders_cache[0].map(function (ele, i, arr) {
             if (ele.id === data.id) {
               arr.splice(i, 1)
             }
           })
           this.my_orders_cache[1].unshift(data)
-          this.my_orders_cache[2].unshift(data)
         }
         this.my_orders_cache.map((ele, i) => {
           var len = ele.length
@@ -418,7 +417,12 @@ export default {
       })
       privateAccount.bind('trade', (res) => {
         // this.my_trades.unshift(res)
+        console.log(res)
         this.play('order_ok')
+        this.showNotice(res.price, res.origin_volume - res.volume)
+        res.state = 'done'
+        res.origin_volume = res.volume
+        this.my_orders_cache[2].unshift(res)
         // this.isMine(res, 'trade')
       })
       privateAccount.bind('account', (res) => {
