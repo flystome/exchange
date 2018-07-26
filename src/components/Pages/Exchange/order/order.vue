@@ -48,7 +48,7 @@
       <div class="put">
         <div class="name">{{$t('markets.total')}}</div>
         <div class="total input_box">
-          <input type="number" v-model='buyTotal' @input='handleTotal($event.target.value, "buy")' :placeholder="$t('markets.total')">
+          <input type="number" v-model='buyTotal' @change='handleTotal($event.target.value, "buy")' :placeholder="$t('markets.total')">
           <span>{{market.base_currency | upper}}</span>
         </div>
       </div>
@@ -86,7 +86,7 @@
       <div class="put">
         <div class="name">{{$t('markets.total')}}</div>
         <div class="total input_box">
-          <input type="number" v-model='sellTotal' @input='handleTotal($event.target.value, "sell")' :placeholder="$t('markets.total')">
+          <input type="number" v-model='sellTotal' @change='handleTotal($event.target.value, "sell")' :placeholder="$t('markets.total')">
           <span>{{market.base_currency | upper}}</span>
         </div>
       </div>
@@ -196,17 +196,15 @@ export default {
         value = Math.abs(value)
       }
 
-      if (from === 'total') {
-        console.log(value)
-        value = +value.toString()
-      }
-
       this[type + 'Volume'] = this.fixNum(value, this.market.volume_fixed)
       if (type === 'sell') {
-        if (this.sellVolume > this.sellAccount) {
+        console.log(+this.sellVolume > this.sellAccount, +this.sellVolume, +this.sellAccount)
+        if (+this.sellVolume > +this.sellAccount) {
+          console.log(12)
           this.sellVolume = this.fixNum(this.sellAccount, this.market.volume_fixed)
         }
       }
+      console.log(this[type + 'Volume'], value)
       if (this[type + 'Price']) {
         this.handleTotal(null, type)
       }
@@ -220,35 +218,33 @@ export default {
         value = Math.abs(value)
       }
       if (this[type + 'Price']) {
-        var p = new BigNumber(this[type + 'Price'])
+        var p = this[type + 'Price']
       }
       if (this[type + 'Volume']) {
-        var v = new BigNumber(this[type + 'Volume'])
+        var v = this[type + 'Volume']
       }
       if (!value || (p && v)) {
-        value = p.multipliedBy(v)
-      } else {
-        value = new BigNumber(value)
+        value = p * v
       }
       if (type === 'buy') {
         if (this.buyAccount && value > this.buyAccount) {
-          value = new BigNumber(this.buyAccount)
+          value = this.buyAccount
         }
         if (p) {
-          v = value.dividedBy(p)
+          v = value / p
           this.buyVolume = this.fixNum(v, this.market.volume_fixed)
         }
       } else if (type === 'sell') {
         if (p) {
-          v = value.dividedBy(p)
+          v = value / p
           if (this.sellAccount && v > this.sellAccount) {
-            v = new BigNumber(this.sellAccount)
+            v = this.sellAccount
           }
           this.sellVolume = this.fixNum(v, this.market.volume_fixed)
         }
-        value = v.multipliedBy(p)
+        value = v * p
       }
-      value = +value.toString()
+      value = +value
       this[type + 'Total'] = this.fixNum(value, this.market.volume_fixed, this.market.price_fixed)
     },
     fixNum (value, num, num1) {

@@ -70,7 +70,7 @@ export default {
   methods: {
     addOrder (type, price, index) {
       var result = new BigNumber(0)
-      var expand = Math.pow(10, this.market.volume_fixed)
+      // var expand = Math.pow(10, this.market.volume_fixed)
       if (type === 'sell') {
         var len = this.sellList.length
         for (let i = len - 1; i >= index; i--) {
@@ -81,7 +81,8 @@ export default {
           result = result.plus(new BigNumber(this.buyList[i][1]))
         }
       }
-      result = Math.floor(expand * result) / expand
+      result = result.valueOf()
+      // result = Math.floor(expand * result) / expand
       bus.$emit('addOrder', type, price, result)
     }
   }
