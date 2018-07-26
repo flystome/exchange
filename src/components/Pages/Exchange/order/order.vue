@@ -168,35 +168,39 @@ export default {
   },
   methods: {
     handlePrice (value, type) {
-      if (this.loginData === 'none') {
+      if (this.loginData === 'none' || value === '') {
         this[type + 'Price'] = ''
         return
       }
-      if (value === '') return ''
-      this[type + 'Price'] = this.fixNum(value, this.market.price_fixed)
-      var distance = Math.abs(this[type + 'Price'] - this.market.last) / this.market.last
-      if (distance > 0.1) {
-        this[type + 'warning'] = true
-        this.resetOrderStatus()
-      }
-      if (this[type + 'Volume']) {
-        var Price = new BigNumber(this[type + 'Price'])
-        var Volume = new BigNumber(this[type + 'Volume'])
-        this.handleTotal(null, type, Price, Volume)
-      }
-    },
-    handleVol (value, type, from) {
-      if (this.loginData === 'none') {
-        this[type + 'Volume'] = ''
-        return
-      }
-      if (value === '') return ''
       if (value < 0) {
         value = Math.abs(value)
       }
+      this[type + 'Price'] = this.fixNum(value, this.market.price_fixed)
+      if (this.market.last) {
+        var distance = Math.abs(this[type + 'Price'] - this.market.last) / this.market.last
+        if (distance > 0.1) {
+          this[type + 'warning'] = true
+          this.resetOrderStatus()
+        }
+      }
+      if (this[type + 'Volume']) {
+        this.handleTotal(null, type)
+      }
+    },
+    handleVol (value, type, from) {
+      if (this.loginData === 'none' || value === '') {
+        this[type + 'Volume'] = ''
+        return
+      }
+      if (value < 0) {
+        value = Math.abs(value)
+      }
+
       if (from === 'total') {
+        console.log(value)
         value = +value.toString()
       }
+
       this[type + 'Volume'] = this.fixNum(value, this.market.volume_fixed)
       if (type === 'sell') {
         if (this.sellVolume > this.sellAccount) {
@@ -204,38 +208,45 @@ export default {
         }
       }
       if (this[type + 'Price']) {
-        var Price = new BigNumber(this[type + 'Price'])
-        var Volume = new BigNumber(this[type + 'Volume'])
-        this.handleTotal(null, type, Price, Volume)
+        this.handleTotal(null, type)
       }
     },
-    handleTotal (value, type, price, volume) {
-      if (this.loginData === 'none') {
+    handleTotal (value, type) {
+      if (this.loginData === 'none' || value === ' ') {
         this[type + 'Total'] = ''
         return
       }
-      if (value === ' ') return ''
       if (value < 0) {
         value = Math.abs(value)
       }
+      if (this[type + 'Price']) {
+        var p = new BigNumber(this[type + 'Price'])
+      }
+      if (this[type + 'Volume']) {
+        var v = new BigNumber(this[type + 'Volume'])
+      }
       if (!value) {
-        var p = new BigNumber(price)
-        var v = new BigNumber(volume)
         value = p.multipliedBy(v)
+      } else {
+        value = new BigNumber(value)
       }
       if (type === 'buy') {
         if (this.buyAccount && value > this.buyAccount) {
           value = new BigNumber(this.buyAccount)
-          v = value.dividedBy(price)
-          this.handleVol(v, 'buy', 'total')
-          // value = this.fixNum(this.buyAccount, this.market.volume_fixed, this.market.price_fixed)
+        }
+        if (p) {
+          v = value.dividedBy(p)
+          this.buyVolume = this.fixNum(v, this.market.volume_fixed)
         }
       } else if (type === 'sell') {
-        if (this.sellAccount && volume > this.sellAccount) {
-          v = new BigNumber(this.sellAccount)
-          value = volume.multipliedBy(p)
-          // this.handleVol(v, 'sell', 'total')
+        if (p) {
+          v = value.dividedBy(p)
+          if (this.sellAccount && v > this.sellAccount) {
+            v = new BigNumber(this.sellAccount)
+          }
+          this.sellVolume = this.fixNum(v, this.market.volume_fixed)
         }
+        value = v.multipliedBy(p)
       }
       value = +value.toString()
       this[type + 'Total'] = this.fixNum(value, this.market.volume_fixed, this.market.price_fixed)
@@ -269,7 +280,6 @@ export default {
       }
     },
     confirmBuy: function (bool) {
-      console.log(this.buyPrice, this.buyVolume)
       this._post({
         url: '/markets/' + this.market.code + '/order_bids',
         data: {
@@ -324,6 +334,7 @@ export default {
       if (data.success) {
         this.isDisabled = false
         this.resetForm()
+        console.log(this.buyPrice, this.sellPrice)
         this.status = 'success'
         this[type + 'Success'] = true
         this.resetOrderStatus()
@@ -365,7 +376,6 @@ export default {
       this.showDialog = true
       this.ordering = true
       this.tips = false
-      console.log(this.buyPrice, this.buyVolume)
     },
     orderAsk: function () {
       if (this.loginData === 'none') {
@@ -388,7 +398,7 @@ export default {
         this.sellPrice,
         this.sellVolume,
         this.sellTotal
-      ] = []
+      ] = ['', '', '', '', '', '']
       this.sellIndex = -1
       this.buyIndex = -1
     },
