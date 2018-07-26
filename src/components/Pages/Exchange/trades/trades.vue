@@ -81,7 +81,7 @@ export default {
           result = result.plus(new BigNumber(this.buyList[i][1]))
         }
       }
-      result = result.valueOf()
+      result = +result.valueOf()
       // result = Math.floor(expand * result) / expand
       bus.$emit('addOrder', type, price, result)
     }

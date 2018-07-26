@@ -195,16 +195,12 @@ export default {
       if (value < 0) {
         value = Math.abs(value)
       }
-
       this[type + 'Volume'] = this.fixNum(value, this.market.volume_fixed)
       if (type === 'sell') {
-        console.log(+this.sellVolume > this.sellAccount, +this.sellVolume, +this.sellAccount)
         if (+this.sellVolume > +this.sellAccount) {
-          console.log(12)
           this.sellVolume = this.fixNum(this.sellAccount, this.market.volume_fixed)
         }
       }
-      console.log(this[type + 'Volume'], value)
       if (this[type + 'Price']) {
         this.handleTotal(null, type)
       }
@@ -223,26 +219,26 @@ export default {
       if (this[type + 'Volume']) {
         var v = this[type + 'Volume']
       }
-      if (!value || (p && v)) {
-        value = p * v
+      if (!value) {
+        value = +(new BigNumber(v).multipliedBy(new BigNumber(p))).valueOf()
       }
       if (type === 'buy') {
-        if (this.buyAccount && value > this.buyAccount) {
+        if (this.buyAccount && (value > this.buyAccount)) {
           value = this.buyAccount
         }
         if (p) {
-          v = value / p
+          v = +(new BigNumber(value).dividedBy(new BigNumber(p))).valueOf()
           this.buyVolume = this.fixNum(v, this.market.volume_fixed)
         }
       } else if (type === 'sell') {
         if (p) {
-          v = value / p
-          if (this.sellAccount && v > this.sellAccount) {
+          v = +(new BigNumber(value).dividedBy(new BigNumber(p))).valueOf()
+          if (this.sellAccount && (v > this.sellAccount)) {
             v = this.sellAccount
           }
           this.sellVolume = this.fixNum(v, this.market.volume_fixed)
         }
-        value = v * p
+        value = +(new BigNumber(v).multipliedBy(new BigNumber(p))).valueOf()
       }
       value = +value
       this[type + 'Total'] = this.fixNum(value, this.market.volume_fixed, this.market.price_fixed)
@@ -330,7 +326,6 @@ export default {
       if (data.success) {
         this.isDisabled = false
         this.resetForm()
-        console.log(this.buyPrice, this.sellPrice)
         this.status = 'success'
         this[type + 'Success'] = true
         this.resetOrderStatus()
