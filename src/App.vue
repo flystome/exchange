@@ -42,7 +42,7 @@ export default {
       version: process.env.ROUTER_VERSION,
       noMobile: true,
       noPaddingList: ['MexchangeMarkets', 'MexchangeDetail', 'MexchangeTrades', 'MexchangeOrders'],
-      fullScreen: ['SignIn', 'SignUp', 'LoginVerfication', 'Exchanage'],
+      fullScreen: ['SignIn', 'SignUp', 'LoginVerfication', 'Exchange'],
       noPadding: false,
       exChange: true,
       FROM_HOME: '',

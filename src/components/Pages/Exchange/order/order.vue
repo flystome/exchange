@@ -7,7 +7,7 @@
           <h4>{{$t('markets.confirm')}}{{$t('markets.dialog.' + order_type)}}</h4>
           <ul v-if="order_type === 'buy'">
             <li><div class="value pair"><span>{{(market.quote_currency+'/'+market.base_currency)  | upper}}</span></div>{{$t('markets.pair')}}</li>
-            <li><div class="value">{{ sellPrice | fixedNum(market.price_fixed)}}<span>{{market.base_currency | upper}}</span></div>{{$t('markets.price')}}</li>
+            <li><div class="value">{{ buyPrice | fixedNum(market.price_fixed)}}<span>{{market.base_currency | upper}}</span></div>{{$t('markets.price')}}</li>
             <li><div class="value">{{ buyVolume | fixedNum(market.volume_fixed)}}<span>{{market.quote_currency | upper}}</span></div>{{$t('markets.volume')}}</li>
             <li><div class="value">{{ buyTotal | fixedNum(market.volume_fixed, market.price_fixed)}}<span>{{market.base_currency | upper}}</span></div>{{$t('markets.total')}}</li>
           </ul>
@@ -269,6 +269,7 @@ export default {
       }
     },
     confirmBuy: function (bool) {
+      console.log(this.buyPrice, this.buyVolume)
       this._post({
         url: '/markets/' + this.market.code + '/order_bids',
         data: {
@@ -364,6 +365,7 @@ export default {
       this.showDialog = true
       this.ordering = true
       this.tips = false
+      console.log(this.buyPrice, this.buyVolume)
     },
     orderAsk: function () {
       if (this.loginData === 'none') {
