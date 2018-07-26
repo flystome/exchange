@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { BigNumber } from 'bignumber.js'
 import { bus } from '@/common/js/bus/index'
 
 export default {
@@ -68,16 +69,16 @@ export default {
   },
   methods: {
     addOrder (type, price, index) {
-      var result = 0
+      var result = new BigNumber(0)
       var expand = Math.pow(10, this.market.volume_fixed)
       if (type === 'sell') {
         var len = this.sellList.length
         for (let i = len - 1; i >= index; i--) {
-          result += +this.sellList[i][1]
+          result = result.plus(new BigNumber(this.sellList[i][1]))
         }
       } else {
         for (let i = 0; i <= index; i++) {
-          result += +this.buyList[i][1]
+          result = result.plus(new BigNumber(this.buyList[i][1]))
         }
       }
       result = Math.floor(expand * result) / expand
