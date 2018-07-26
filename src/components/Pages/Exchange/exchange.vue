@@ -417,7 +417,6 @@ export default {
       })
       privateAccount.bind('trade', (res) => {
         // this.my_trades.unshift(res)
-        console.log(res)
         this.play('order_ok')
         this.showNotice(res.price, res.origin_volume - res.volume)
         res.state = 'done'

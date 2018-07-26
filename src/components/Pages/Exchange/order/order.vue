@@ -225,7 +225,7 @@ export default {
       if (this[type + 'Volume']) {
         var v = new BigNumber(this[type + 'Volume'])
       }
-      if (!value) {
+      if (!value || (p && v)) {
         value = p.multipliedBy(v)
       } else {
         value = new BigNumber(value)

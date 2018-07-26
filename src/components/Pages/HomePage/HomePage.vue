@@ -88,7 +88,7 @@
         </div>
       </div>
     </div>
-    <div class="home_mining">
+    <div class="home_mining" v-if='false'>
       <div class="mining_h">
         <h3>{{$t('homepage.mining.head')}}</h3>
         <p>{{$t('homepage.mining.des')}}</p>
