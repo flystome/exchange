@@ -136,6 +136,9 @@ export default {
   watch: {
     '$route' (to, from) {
       this.curMarket = to.params.id
+      if (from.params.id) {
+        this.unBindChannel(from.params.id)
+      }
       this.init()
     },
     loginData (val) {
@@ -286,6 +289,9 @@ export default {
         }
       }
       this.TotalAssets = total.toFixed(8)
+    },
+    unBindChannel (code) {
+      pusher.unsubscribe('market-' + code + '-global')
     },
     marketRefresh () {
       var self = this
