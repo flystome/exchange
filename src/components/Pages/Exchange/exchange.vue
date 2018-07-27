@@ -1,9 +1,9 @@
 <template>
   <section id="exchange" @click="clearStatus">
     <header class="clearfix">
-      <a class="logo" href='/'>
+      <router-link to="/" class="logo">
         <img src="@/common/svg/logo.svg">
-      </a>
+      </router-link>
       <lastPrice :market="market"></lastPrice>
       <div class="header_rt">
         <account v-if='loginData !== "none"' :totalAssets='TotalAssets' :accounts='accounts' :market='market'></account>
@@ -173,7 +173,7 @@ export default {
       res.data.my_orders && res.data.my_orders.length !== 0 && this.$set(this.my_orders, 0, res.data.my_orders.reverse())
       this.TotalAssets = this.total_assets && (+this.total_assets.btc_worth).toFixed(8)
       this.version = this.depth_data && this.depth_data.version
-      this.all_trades_cache = JSON.parse(JSON.stringify(this.all_trades))
+      // this.all_trades_cache = JSON.parse(JSON.stringify(this.all_trades))
       this.my_orders_cache = JSON.parse(JSON.stringify(this.my_orders))
       this.initTrend()
       this.marketRefresh()
@@ -186,8 +186,8 @@ export default {
       var timer = null
       clearInterval(timer)
       timer = setInterval(() => {
-        this.all_trades = JSON.parse(JSON.stringify(this.all_trades_cache))
-        this.initTrend()
+        // this.all_trades = JSON.parse(JSON.stringify(this.all_trades_cache))
+        // this.initTrend()
         this.my_orders = JSON.parse(JSON.stringify(this.my_orders_cache))
       }, 1000)
     },
@@ -217,7 +217,7 @@ export default {
           }
         }
       })
-      this.all_trades = Object.assign({}, this.all_trades)
+      this.all_trades = this.all_trades.slice()
     },
     getMyOrder (index, days) {
       var self = this
@@ -337,10 +337,14 @@ export default {
             res.trade.trend = 'down'
           }
         }
-        this.all_trades_cache.unshift(res.trade)
-        var len = this.all_trades_cache.length
+        // console.log(this.all_trades)
+        this.all_trades.unshift(res.trade)
+        var len = this.all_trades.length
+        // this.all_trades_cache.unshift(res.trade)
+        // var len = this.all_trades_cache.length
         if (len >= 150) {
-          this.all_trades_cache.pop()
+          this.all_trades.pop()
+          // this.all_trades_cache.pop()
         }
       })
     },

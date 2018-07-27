@@ -5,8 +5,8 @@
     </ul>
     <scrollBar classes='myScroll'>
       <ul class="order_bd">
-        <transition-group name="noSlide">
-          <li v-for='(item, index) in tradesData' :key='"trade"+ index +item.tid'>
+        <transition-group name="slide-fade" mode='out-in'>
+          <li v-for='item in tradesData' :key='"trade"+item.tid'>
             <div class="time">{{item.date | dayTime}}</div>
             <div class="my"><img src="~Img/ok.svg" v-show='item.isMine'></div>
             <div class="price" :class='{"up": item.trend === "up", "down": item.trend === "down"}'>{{item.price | fixedNum(market.price_fixed)}}</div>
@@ -49,5 +49,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import './allOrder.scss'
+  @import './allOrder.scss';
 </style>
