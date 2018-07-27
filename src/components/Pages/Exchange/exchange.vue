@@ -1,5 +1,5 @@
 <template>
-  <section id="exchange">
+  <section id="exchange" @click="clearStatus">
     <header class="clearfix">
       <a class="logo" href="/">
         <img src="@/common/svg/logo.svg">
@@ -516,6 +516,9 @@ export default {
           })
         }
       })
+    },
+    clearStatus () {
+
     }
   }
 }

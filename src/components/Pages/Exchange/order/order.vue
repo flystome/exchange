@@ -175,6 +175,14 @@ export default {
       if (value < 0) {
         value = Math.abs(value)
       }
+      if (type === 'buy') {
+        let max = this.buyAccount * Math.pow(10, this.market.volume_fixed)
+        value = +(value > max ? max : value)
+      } else {
+        if (value.toString().length >= 13) {
+          value = +(value.toString().slice(0, 12))
+        }
+      }
       this[type + 'Price'] = this.fixNum(value, this.market.price_fixed)
       if (this.market.last) {
         var distance = Math.abs(this[type + 'Price'] - this.market.last) / this.market.last
