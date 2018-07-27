@@ -2,7 +2,7 @@
   <div @keyup.enter="login" class="signIn sign-block">
     <div class="sign-form">
       <header class="text-center">
-        <router-link :to="`/${ROUTER_VERSION}`"><img src="~Img/large/sign-logo.png"></router-link>
+        <router-link to="/"><img src="~Img/large/sign-logo.png"></router-link>
       </header>
       <div class="form">
         <div class="title color333">

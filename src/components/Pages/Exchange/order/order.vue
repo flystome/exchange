@@ -218,7 +218,7 @@ export default {
         this[type + 'Total'] = ''
         return
       }
-      if (value < 0) {
+      if (+value < 0) {
         value = Math.abs(value)
       }
       if (this[type + 'Price']) {

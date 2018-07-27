@@ -1,7 +1,7 @@
 <template>
   <section id="exchange" @click="clearStatus">
     <header class="clearfix">
-      <a class="logo" :href="`/${ROUTER_VERSION}`">
+      <a class="logo" href='/'>
         <img src="@/common/svg/logo.svg">
       </a>
       <lastPrice :market="market"></lastPrice>
