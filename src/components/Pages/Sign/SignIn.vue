@@ -2,7 +2,7 @@
   <div @keyup.enter="login" class="signIn sign-block">
     <div class="sign-form">
       <header class="text-center">
-        <router-link to="/"><img src="~Img/large/sign-logo.png"></router-link>
+        <router-link :to="`/${ROUTER_VERSION}`"><img src="~Img/large/sign-logo.png"></router-link>
       </header>
       <div class="form">
         <div class="title color333">
@@ -168,4 +168,17 @@ export default {
   height:39px;
   font-size: 14px;
 }
+
+@media (max-width: 768px) {
+  .signIn {
+    position: static;
+    margin-left: 0;
+    margin-top: 0;
+  }
+  .sign-block {
+      width: 96%;
+      margin: 60px auto;
+  }
+}
+
 </style>

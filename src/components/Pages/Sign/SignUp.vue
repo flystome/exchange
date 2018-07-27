@@ -252,9 +252,7 @@ i{
   top: 3px;
   margin-right: 5px;
 }
-</style>
 
-<style>
 .sign-block .basicInput{
   height:39px;
   font-size: 14px;
@@ -266,5 +264,17 @@ i{
 
 .signUp .email input{
   margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+  .signUp {
+    position: static;
+    margin-left: 0;
+    margin-top: 0;
+  }
+  .sign-block {
+      width: 96%;
+      margin: 60px auto;
+  }
 }
 </style>

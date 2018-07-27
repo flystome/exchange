@@ -451,6 +451,8 @@ export default {
         } else if (this.order_type === 'sell') {
           this.confirmSell()
         }
+      } else {
+        this.isDisabled = false
       }
     },
     confirmBuy: function (bool) {
