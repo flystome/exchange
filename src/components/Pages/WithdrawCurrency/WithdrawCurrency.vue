@@ -13,17 +13,6 @@
             </a>
           </div>
         <div class="fr">
-          <!-- <router-link :to="`${ROUTER_VERSION}/funds/deposit`" class="poniter" :class="{'link':route === 'deposit'}">
-            <strong>
-              {{ $t('withdraw_currency.deposit') }}
-            </strong>
-          </router-link>
-          <span>|</span>
-          <router-link :to="`${ROUTER_VERSION}/funds/withdraw`" class="poniter" :class="{'link':route === 'withdraw'}">
-            <strong>
-              {{ $t('withdraw_currency.withdraw') }}
-          </strong>
-          </router-link> -->
           <menu-underline
           ref="menu"
           :route="'WithdrawCurrency'"
@@ -72,13 +61,14 @@
                         </strong>
                       </div>
                   </div>
-                  <div class="fr"><span
-                  @click.stop="DefaultFunds(data.id, index)">{{$t('withdraw_currency.set_as_default')}}</span>丨<span
-                  @click.stop="DeleteFunds(data.id, FundSources[CurrencyType], index)">{{$t('withdraw_currency.delete')}}</span></div>
+                  <div class="fr">
+                    <span @click.stop="DefaultFunds(data.id, index)">{{$t('withdraw_currency.set_as_default')}}</span>丨
+                    <span @click.stop="DeleteFunds(data.id, FundSources[CurrencyType], index)">{{$t('withdraw_currency.delete')}}</span>
                   </div>
+                </div>
               </div>
               <div class="addnew pointer text-center" @click.stop="AddAddress">
-                  <i class="withdraw-add"></i>
+                  <i class="withdraw-add-icon"></i>
                   {{$t('withdraw_currency.use_a_new_address')}}
               </div>
             </div>
@@ -119,7 +109,6 @@
               <basic-button class="btn" :disabled='disabled' :class="{'marginT30': !Rucaptcha}" @click.native="Withdraw" style="width:100%" :text="$t('withdraw_currency.withdraw')">
               </basic-button>
               </template>
-
             </div>
           </div>
           <div class="withdraw-currency">

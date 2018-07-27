@@ -141,33 +141,6 @@
     padding: 0 39.9px !important;
   }
 }
-
-// @media (max-width: 1200px) {
-//   .member-center{
-//     & /deep/ td[class=tablehover] {
-//       width: 380px !important;
-//     }
-//   }
-// }
-
-// .member-center{
-//   & /deep/ .table-container{
-//     margin-bottom: 10px;
-//   }
-//   .col-md-5{
-//     width: 41.66666667%;
-//     float: left;
-//   }
-//   .col-md-8{
-//     width: 66.66666667%;
-//     float: left;
-//   }
-//   .col-md-6{
-//     width: 50%;
-//     float: left;
-//   }
-// }
-////////media
 .currency-withdraw{
   & /deep/ .menu-underline ul{
     flex-wrap: wrap;
@@ -275,13 +248,12 @@
             flex-direction: row;
             flex-wrap: wrap;
             a {
-                width: 108px;
+                width: 111px;
                 border-radius: 0;
                 padding: 0 30.4px;
                 text-align: center;
                 line-height: 38px;
                 text-indent: -18px;
-                // border-width: 1px 0.5px 0.5px 0.5px;
             }
             img {
               position: relative;
@@ -295,14 +267,6 @@
                 display: inline-block;
                 text-indent: 2px;
             }
-            // .withoutimg {
-            //   text-indent: 0;
-            //   margin: auto;
-            //   position: absolute;
-            //   width: 100%;
-            //   text-align: center;
-            //   left: 0;
-            // }
             .indent{
               position: relative;
             }
@@ -465,7 +429,7 @@ a{
   @include sprite($asset-freeze)
 }
 
-.withdraw-add{
+.withdraw-add-icon{
   @include sprite($withdraw-add)
 }
 

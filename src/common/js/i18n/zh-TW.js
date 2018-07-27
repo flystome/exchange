@@ -306,7 +306,7 @@ const TW = {
     "login_password": "登錄密碼",
     "google_verification_code": "驗證代碼顯示在Google身份驗證器中",
     "google_verification": "驗證",
-    "app_already_installed": "APP已安裝APP",
+    "app_already_installed": "APP已安裝",
   },
   "markets": {
     "volume": "成交量",

@@ -36,7 +36,7 @@
             </div>
           </div>
           <div class="addnew pointer text-center" @click.stop="AddAddress">
-              <i class="withdraw-add"></i>
+              <i class="withdraw-add-icon"></i>
               {{$t('withdraw_currency.use_a_new_address')}}
           </div>
         </div>
