@@ -434,12 +434,12 @@ export default {
       })
     },
     async getMining () {
-      this._get({
-        url: '/fixed_term_deposits.json'
-      }, res => {
-        var data = res.data.success.fixed_term_products
-        this.miningList = data.slice(0, 5)
-      })
+      // this._get({
+      //   url: '/fixed_term_deposits.json'
+      // }, res => {
+      //   var data = res.data.success.fixed_term_products
+      //   this.miningList = data.slice(0, 5)
+      // })
     },
     marketChange ({ index, type, status }) {
       if (type === 'delete') {
