@@ -276,7 +276,7 @@ export default {
   },
   created () {
     this.RegionHint()
-    this.BindChannel()
+    this.BindChannel(3)
     this.getMining()
     ;(() => {
       var code = Cookies.get('code')
@@ -551,10 +551,11 @@ export default {
         this.PopupBoxDisplay({message: this.$t('unsupported_countries_and_regions'), type: 'warn', largeWidth: true})
       }
     },
-    BindChannel () {
+    BindChannel (n) {
       if (this.loginData === 'none') return
       if (this.channelTime > 0) return
       this.channelTime++
+      console.log(this.loginData.sn, n)
       var PersonalChannel = pusher.subscribe(`private-${this.loginData.sn}`)
       PersonalChannel.bind('account', (data) => {
         if (!this.$store.state.assets[data.currency]) return
@@ -584,7 +585,7 @@ export default {
   },
   watch: {
     loginData () {
-      this.BindChannel()
+      this.BindChannel(1)
     },
     marketData () {
       this.GetmarketData()
@@ -593,7 +594,7 @@ export default {
       this.GetmarketData()
       if (to.name === 'home') {
         this.RegionHint()
-        this.BindChannel()
+        this.BindChannel(2)
       }
     },
     Location () {
