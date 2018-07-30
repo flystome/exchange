@@ -553,14 +553,12 @@ export default {
         this.PopupBoxDisplay({message: this.$t('unsupported_countries_and_regions'), type: 'warn', largeWidth: true})
       }
     },
-    BindChannel (sn, n) {
-      console.log(sn)
+    BindChannel (sn) {
       if (!sn) return
       if (this.channelTime > 0) return
       this.channelTime++
       var PersonalChannel = null
       if (PersonalChannel) return
-      console.log(sn, n)
       PersonalChannel = pusher.subscribe(`private-${sn}`)
       PersonalChannel.bind('account', (data) => {
         if (!this.$store.state.assets[data.currency]) return
@@ -591,9 +589,8 @@ export default {
   watch: {
     loginData (val, oldVal) {
       if (val !== 'none') {
-        console.log(val)
         var sn = val.sn
-        this.BindChannel(sn, 1)
+        this.BindChannel(sn)
       }
     },
     marketData () {
@@ -605,7 +602,7 @@ export default {
         this.RegionHint()
         if (this.loginData !== 'none') {
           var sn = this.loginData.sn
-          this.BindChannel(sn, 2)
+          this.BindChannel(sn)
         }
       }
     },
