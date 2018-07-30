@@ -276,7 +276,7 @@ export default {
   },
   created () {
     this.RegionHint()
-    this.BindChannel(3)
+    // this.BindChannel(3)
     this.getMining()
     ;(() => {
       var code = Cookies.get('code')
@@ -404,6 +404,8 @@ export default {
         if (d.data.success) {
           // var loginData = JSON.parse(d.data.success.user_info)
           var loginData = d.data.success.user_info
+          var sn = loginData.sn
+          this.BindChannel(sn)
           if (d.data.success.login_2fa_required) {
             Object.assign(this.$store.state, {
               two_factors: true,
@@ -551,12 +553,14 @@ export default {
         this.PopupBoxDisplay({message: this.$t('unsupported_countries_and_regions'), type: 'warn', largeWidth: true})
       }
     },
-    BindChannel (n) {
-      if (this.loginData === 'none') return
+    BindChannel (sn, n) {
+      if (!this.sn) return
       if (this.channelTime > 0) return
       this.channelTime++
-      console.log(this.loginData.sn, n)
-      var PersonalChannel = pusher.subscribe(`private-${this.loginData.sn}`)
+      var PersonalChannel = null
+      if (PersonalChannel) return
+      console.log(sn, n)
+      PersonalChannel = pusher.subscribe(`private-${sn}`)
       PersonalChannel.bind('account', (data) => {
         if (!this.$store.state.assets[data.currency]) return
         this.$store.state.assets[data.currency].balance && (this.$store.state.assets[data.currency].balance = Number(data.balance))
@@ -584,8 +588,11 @@ export default {
     ...mapMutations(['PopupBoxDisplay'])
   },
   watch: {
-    loginData () {
-      this.BindChannel(1)
+    loginData (val, oldVal) {
+      if (val !== 'none') {
+        var sn = val.sn
+        this.BindChannel(sn, 1)
+      }
     },
     marketData () {
       this.GetmarketData()
@@ -594,7 +601,10 @@ export default {
       this.GetmarketData()
       if (to.name === 'home') {
         this.RegionHint()
-        this.BindChannel(2)
+        if (this.loginData !== 'none') {
+          var sn = this.loginData.sn
+          this.BindChannel(sn, 2)
+        }
       }
     },
     Location () {
