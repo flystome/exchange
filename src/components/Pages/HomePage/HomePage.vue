@@ -403,7 +403,7 @@ export default {
         this.disabled = false
         if (d.data.success) {
           // var loginData = JSON.parse(d.data.success.user_info)
-          var loginData = d.data.success.user_info
+          var loginData = JSON.parse(d.data.success.user_info)
           var sn = loginData.sn
           this.BindChannel(sn)
           if (d.data.success.login_2fa_required) {
