@@ -554,6 +554,7 @@ export default {
       }
     },
     BindChannel (sn, n) {
+      console.log(sn)
       if (!sn) return
       if (this.channelTime > 0) return
       this.channelTime++
