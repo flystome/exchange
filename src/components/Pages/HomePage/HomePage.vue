@@ -134,7 +134,8 @@
                 </div>
               </section>
             </a>
-            <a :href="`${HOST_URL}/documents/api_v2`">
+            <!-- <a :href="`${HOST_URL}/documents/api_v2`"> -->
+            <a href="###" disabled='true'>
               <section :class="{'homepage-transition': transition}">
                 <div class="text-center">
                   <i class="home-api"/>

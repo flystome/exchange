@@ -18,7 +18,7 @@
           <span v-if="UploadImg === ''">{{$t('validate_identity.click_upload')}}</span>
           <img src="~Img/large/validate-uploading.png" v-if="UploadImg === ''" width="100%">
           <img width="100%" height="100%" class="alredy-img" style="z-index:10" :src="UploadImg" v-else>
-          <input type="file" ref="input" style="z-index:10" @change='ShowImg' accept="image/jpeg,image/jpg" slot="file">
+          <input type="file" ref="input" style="z-index:10" @change='ShowImg' accept="image/jpeg,image/jpg,image/png" slot="file">
         </div>
         <news-prompt class="Upload-prompt" :text='verifyImg'></news-prompt>
         <news-prompt class="Upload-prompt" :text='prompt'></news-prompt>
