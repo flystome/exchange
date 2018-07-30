@@ -554,7 +554,7 @@ export default {
       }
     },
     BindChannel (sn, n) {
-      if (!this.sn) return
+      if (!sn) return
       if (this.channelTime > 0) return
       this.channelTime++
       var PersonalChannel = null
@@ -590,6 +590,7 @@ export default {
   watch: {
     loginData (val, oldVal) {
       if (val !== 'none') {
+        console.log(val)
         var sn = val.sn
         this.BindChannel(sn, 1)
       }
