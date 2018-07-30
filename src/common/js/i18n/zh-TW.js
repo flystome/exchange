@@ -743,7 +743,7 @@ const TW = {
     "verify_code": '驗證碼',
     "no_empty": "不能為空",
     "field": "%",
-    "password_fail": "密碼應當至少為8比特字元，並且包含字母和數位",
+    "password_fail": "密碼應當至少為8位，並且包含字母和數位",
     'password_space': "密碼的開頭和結尾不可為空格",
     "email_fail": "郵箱無效",
     "email": "郵箱",
