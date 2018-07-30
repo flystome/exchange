@@ -15,7 +15,7 @@
       <div>
         <div>
           <div>
-            <basic-select :data='countries' :value="selectedCountry"  v-on:selected="selectedCountry = arguments[0]" :i='48'>
+            <basic-select :data='countries' :value="selectedCountry"  v-on:selected="selectedCountry = arguments[0]" :i='249'>
             </basic-select>
           </div>
           <div class=" marginT15">
@@ -60,16 +60,16 @@
       :verifyImg='verifymsg.indentity3'
       ></upload-img>
     </div>
-    <div class="indentity-prompt">
-      <upload-img id="indentity4" ref="id_bill_file_attributes" :Upload='{
-        UploadExplain: $t("validate_identity.utilities_credit_card_bills"),
-        ImgExplain: $t("validate_identity.three_months_bill"),
-        ImgModel: "validate-indentity4.png",
-      }'
-      v-on:prompt='verifymsg.indentity4 = ""'
-      :verifyImg='verifymsg.indentity4'
-      ></upload-img>
-    </div>
+    <!--<div class="indentity-prompt">-->
+      <!--<upload-img id="indentity4" ref="id_bill_file_attributes" :Upload='{-->
+        <!--UploadExplain: $t("validate_identity.utilities_credit_card_bills"),-->
+        <!--ImgExplain: $t("validate_identity.three_months_bill"),-->
+        <!--ImgModel: "validate-indentity4.png",-->
+      <!--}'-->
+      <!--v-on:prompt='verifymsg.indentity4 = ""'-->
+      <!--:verifyImg='verifymsg.indentity4'-->
+      <!--&gt;</upload-img>-->
+    <!--</div>-->
     <footer class="b-t marginT25">
       <basic-button id="myButton" data-loading-text="Loading..." autocomplete="off" @click.native.enter="uploadImg" class="btn fr col-xs-12 col-md-1 pull-right" :disabled="disabled" :text='$t("validate_identity.submissions")'>
       </basic-button>
@@ -109,7 +109,7 @@ export default {
         indentity1: '',
         indentity2: '',
         indentity3: '',
-        indentity4: ''
+        // indentity4: ''
       },
       countries: countries,
       ROUTER_VERSION: process.env.ROUTER_VERSION,
@@ -150,22 +150,22 @@ export default {
         this.$refs['first_name'].$el.scrollIntoView(true)
         return
       }
-      const bill = this.$refs['id_bill_file_attributes']
-      const billFile = bill.$refs['input'].files[0]
+      // const bill = this.$refs['id_bill_file_attributes']
+      // const billFile = bill.$refs['input'].files[0]
       const holding = this.$refs['id_document_selfie_holding_file_attributes']
       const holdingFile = holding.$refs['input'].files[0]
       const back = this.$refs['id_document_back_file_attributes']
       const backF = back.$refs['input'].files[0]
       const front = this.$refs['id_document_front_file_attributes']
       const frontF = front.$refs['input'].files[0]
-      bill.promptEmpty()
+      // bill.promptEmpty()
       holding.promptEmpty()
       back.promptEmpty()
       front.promptEmpty()
-      if (!billFile) {
-        document.getElementById('indentity4').scrollIntoView(true)
-        this.verifymsg.indentity4 = this.$t('validate_identity.please_upload_file')
-      }
+      // if (!billFile) {
+      //   document.getElementById('indentity4').scrollIntoView(true)
+      //   this.verifymsg.indentity4 = this.$t('validate_identity.please_upload_file')
+      // }
       if (!holdingFile) {
         document.getElementById('indentity3').scrollIntoView(true)
         this.verifymsg.indentity3 = this.$t('validate_identity.please_upload_file')
@@ -179,7 +179,7 @@ export default {
         this.verifymsg.indentity1 = this.$t('validate_identity.please_upload_file')
       }
 
-      if (!first || !last || !IdCard || !billFile || !holdingFile || !backF || !frontF) {
+      if (!first || !last || !IdCard  || !holdingFile || !backF || !frontF) {
         return
       }
       this.disabled = true
@@ -219,9 +219,9 @@ export default {
         id_document_selfie_holding_file_attributes: {
           file: this.$refs['id_document_selfie_holding_file_attributes'].$refs['input'].files[0]
         },
-        id_bill_file_attributes: {
-          file: this.$refs['id_bill_file_attributes'].$refs['input'].files[0]
-        }
+        // id_bill_file_attributes: {
+        //   file: this.$refs['id_bill_file_attributes'].$refs['input'].files[0]
+        // }
       }, formData, 'id_document')
       this._post({
         url: '/id_document/upload_pics.json',
