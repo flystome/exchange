@@ -76,8 +76,8 @@ export default {
       Country: 'United States',
       SmsData: {
         CellPhone: '',
-        CellPhonecode: '1',
-        CountryName: 'US',
+        CellPhonecode: '86',
+        CountryName: 'China',
         verifyCode: '',
         Time: '',
         googlecode: ''
