@@ -549,7 +549,7 @@ const zh = {
     "about_us": "关于我们",
     "user_agreement": "用户协议",
     "privacy_policy": "隐私政策",
-    "contact_us": "联繫我们"
+    "contact_us": "联系我们"
   },
   "side_slip_menu": {
     "consulting_center": "谘询中心",

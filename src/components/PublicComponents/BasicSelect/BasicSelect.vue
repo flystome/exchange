@@ -1,8 +1,8 @@
 <template>
     <select class="basic-option" @change="valuechange($event.target.value)">
       <option value="all" v-if='lang'>All</option>
-      <option
-        v-for="item of data"
+      <option :selected="i === index"
+        v-for="(item, index) of data"
         :value="item"
         :key="item">
         {{item}}
@@ -13,7 +13,7 @@
 <script>
 export default {
   name: 'BasicSelect',
-  props: ['data', 'value', 'lang'],
+  props: ['data', 'value', 'lang', 'i'],
   methods: {
     valuechange (value) {
       this.$emit('selected', value)
