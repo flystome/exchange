@@ -45,7 +45,7 @@
               </span>
             </div>
             <ul v-if="Consulting">
-              <li class='paddingT60 marginL30'>
+              <li class='paddingT30 marginL30'>
                 <a :href="CmsUrl.announcement">
                   {{ $t('side_slip_menu.announcement') }}
                 </a>
@@ -71,7 +71,7 @@
                 <img src='@/common/svg/sideslip-dropdown.svg' class="sideslip-triangle" :class="`${!Lang ? 'sideslip-triangle-down' : 'sideslip-triangle-up'}`">
               </span>
             </div>
-            <ul v-if="Lang" class="marginT60">
+            <ul v-if="Lang" class="marginT30">
               <li v-for="data in locale" @click="changeLang(data.language)" :key="data.name" class='marginL30'>
                 {{ data.name }}
               </li>
@@ -115,6 +115,10 @@ export default {
       locale: [{
         language: 'zh-TW',
         name: '正體中文'
+      },
+      {
+        language: 'zh-CN',
+        name: '简体中文'
       },
       {
         language: 'en',

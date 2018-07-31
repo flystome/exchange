@@ -31,30 +31,33 @@
       </div>
     </div>
     <div class="indentity-prompt">
+      <!-- ImgModel: "validate-indentity1.png" -->
       <upload-img id="indentity1" class="validateIdentity-uploadimg" ref="id_document_front_file_attributes" :Upload='{
           UploadExplain: $t("validate_identity.positive_identity_card_photo"),
           ImgExplain: $t("validate_identity.only_support_jpg_photo"),
-          ImgModel: "validate-indentity1.png"
+          ImgModel: "id1.png"
         }'
         v-on:prompt='verifymsg.indentity1 = ""'
         :verifyImg='verifymsg.indentity1'
         ></upload-img>
     </div>
     <div class="indentity-prompt">
+      <!-- ImgModel: "validate-indentity2.png" -->
       <upload-img id="indentity2" ref="id_document_back_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.id_card_back_photo"),
         ImgExplain: $t("validate_identity.only_support_jpg_photo"),
-        ImgModel: "validate-indentity2.png"
+        ImgModel: "id2.png"
       }'
       v-on:prompt='verifymsg.indentity2 = ""'
       :verifyImg='verifymsg.indentity2'
       ></upload-img>
     </div>
     <div class="indentity-prompt">
+      <!-- ImgModel: "validate-indentity3.png" -->
       <upload-img id="indentity3" ref="id_document_selfie_holding_file_attributes" :Upload='{
         UploadExplain: $t("validate_identity.held_id_card"),
         ImgExplain: $t("validate_identity.ID_card_must_be_written"),
-        ImgModel: "validate-indentity3.png"
+        ImgModel: "id3.png"
       }'
       v-on:prompt='verifymsg.indentity3 = ""'
       :verifyImg='verifymsg.indentity3'

@@ -353,7 +353,7 @@
     .margin0{
       margin:0
     }
-    >div>a:nth-child(2)>section {
+    >div:nth-child(1)>a:nth-child(2)>section {
       cursor: not-allowed;
     }
     >div>a>section{

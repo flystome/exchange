@@ -336,7 +336,8 @@ router.beforeEach(async (to, from, next) => {
   var user = navigator.userAgent
   // '<meta id="meta" name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">'
   // '<meta id="meta" name=viewport content="initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">'
-  var mobile = user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
+  var mobile = /Android|webOS|iPhone|iPod|BlackBerry/i.test(user)
+  // var mobile = user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
   if ((to.path === '/' || to.path === `${version}` || to.path === `${version}/`) && !store.state.Pc) {
     if (mobile) {
       next(`${version}/markets`)

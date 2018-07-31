@@ -62,7 +62,7 @@ export default {
       }
     },
     requireImg (img) {
-      return require(`../../../../static/img/large/${img}`)
+      return require(`Img/large/${img}`)
     }
   }
 }

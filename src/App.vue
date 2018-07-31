@@ -22,7 +22,7 @@
     <footer :FROM='FROM_HOME' v-if='!fromApp && noMobile && !exChange' is='Footer' />
     <wrapper></wrapper>
     <popup-box></popup-box>
-    <side-slip-menu></side-slip-menu>
+    <side-slip-menu v-if='!exChange'></side-slip-menu>
   </div>
 </template>
 
