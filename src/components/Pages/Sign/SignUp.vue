@@ -13,14 +13,14 @@
           </span>
         </div>
         <news-prompt :Time='3000' v-on:bind='prompt = $event' :text="prompt"></news-prompt>
-        <basic-input :danger='true' ref="email" :validate='"required|email"' class="email" v-model="SignUpData.email" :placeholder="$t('sign.email_address')"></basic-input>
+        <basic-input :danger='true' ref="email" :validate='"required|email"' class="email marginB15" v-model="SignUpData.email" :placeholder="$t('sign.email_address')"></basic-input>
         <input style="visibility: hidden;position:absolute;opacity: 0;" :danger='true' class="email"  :placeholder="$t('sign.email_address')" />
         <basic-input style="visibility: hidden;position:absolute;opacity: 0;" :danger='true' type='password' :validate='"required|password"' :placeholder="$t('sign.login_password')"></basic-input>
         <basic-input :danger='true' type='password' ref="password" :validate='"required|password"' v-model="SignUpData.password" :placeholder="$t('sign.login_password')"></basic-input>
         <div class="marginT15 color999">
           {{ $t('validation.password_fail') }}
         </div>
-        <basic-input :invalid="invalid" type='password' v-model="SignUpData.password_confirmation" :validate='`confirmed:${SignUpData.password}`' :placeholder="$t('sign.confirm_password')"></basic-input>
+        <basic-input :invalid="invalid" class=' marginB15 marginT15' type='password' v-model="SignUpData.password_confirmation" :validate='`confirmed:${SignUpData.password}`' :placeholder="$t('sign.confirm_password')"></basic-input>
         <basic-input ref="verify_code" :danger='true' :validate='"required|verify_code"' v-model="SignUpData._rucaptcha" :placeholder="$t('validation.verify_code')"></basic-input>
         <img class="pointer" :src="Rucaptcha" @click="changeCaptcha">
         <div class="authentication marginT10">

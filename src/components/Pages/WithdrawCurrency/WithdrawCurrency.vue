@@ -365,7 +365,8 @@ export default {
 
       channel.bind('deposit_address', (data) => {
         console.log(data)
-        if (data.attributes.currency === this.CurrencyType) {
+        if (data.attributes.account_id === this.account_id) {
+        // if (data.attributes.currency === this.CurrencyType) {
           this.deposit_address = data.attributes.deposit_address
           this.deposit_address_display = true
         }
@@ -913,6 +914,7 @@ export default {
       }
     },
     DepositAddress (to, from) {
+      console.log(to, from)
       if (this.$route.name === 'WithdrawCurrency' && !/deposit/.test(this.$route.path)) return
       if (Object.keys(to).length > Object.keys(from).length) {
         if(Object.keys(to)[0] !== this.CurrencyType) {
