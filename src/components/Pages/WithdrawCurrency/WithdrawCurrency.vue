@@ -160,7 +160,7 @@
                 {{ $t('deposit_currency.font_descripe') }}
               </li>
               <li>
-                {{ $t('deposit_currency.operation_done') }}
+                {{ operationDone }}
               </li>
             </ul>
         </div>
@@ -826,6 +826,9 @@ export default {
     },
     ReplaceCurrency () {
       return this.$t('deposit_currency.warn1').replace(/COIN/g, this.CurrencyType.toUpperCase())
+    },
+    operationDone () {
+      return this.$t('deposit_currency.operation_done').replace(/1/, this.ConfirmNum)
     },
     ConfirmNum () {
       return this.$t('deposit_currency.confirm_num').replace(/NUM/g, this.confirm_num)
