@@ -15,7 +15,7 @@
       <div>
         <div>
           <div>
-            <basic-select :data='countries' :value="selectedCountry"  v-on:selected="selectedCountry = arguments[0]" :i='249'>
+            <basic-select :data='countries' :value="selectedCountry"  v-on:selected="selectedCountry = arguments[0]" :i='2'>
             </basic-select>
           </div>
           <div class=" marginT15">

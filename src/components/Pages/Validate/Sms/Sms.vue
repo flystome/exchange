@@ -9,18 +9,53 @@
         <span class="color999">{{$t('validate_sms.area')}}:</span> {{ Country }}
       </div>
       <div class="sms-phone">
-
-      <div class="code-list b-def" v-if="callDisplay">
-        <ul>
-          <li v-for='data in callingdata' :key="data.name">
-            <div class="text-center" @click="PutCode(data.number, data.name, data.alpha)">
-              <span class="code-number">{{ data.number }}</span>
-              <span class="code-name">{{ data.name }}</span>
-            </div>
-          </li>
-        </ul>
-      </div>
-              <div class="sms-choice b-def">
+        <div class="code-list b-def" v-if="callDisplay">
+          <ul>
+            <!-- <li v-for='data in callingdata' :key="data.name">
+              <div class="text-center" @click="PutCode(data.number, data.name, data.alpha)">
+                <span class="code-number">{{ data.number }}</span>
+                <span class="code-name">{{ data.name }}</span>
+              </div>
+            </li> -->
+            <li>
+              <div class="text-center" @click="PutCode(86, '中国', 'CN')">
+                <span class="code-number">86</span>
+                <span class="code-name">中国</span>
+              </div>
+            </li>
+            <li>
+              <div class="text-center" @click="PutCode(852, '香港', 'HK')">
+                <span class="code-number">852</span>
+                <span class="code-name">香港</span>
+              </div>
+            </li>
+            <li>
+              <div class="text-center" @click="PutCode(1, 'United States', 'US')">
+                <span class="code-number">1</span>
+                <span class="code-name">United States</span>
+              </div>
+            </li>
+            <li>
+              <div class="text-center" @click="PutCode(81, 'Japan', 'JP')">
+                <span class="code-number">81</span>
+                <span class="code-name">Japan</span>
+              </div>
+            </li>
+            <li>
+              <div class="text-center" @click="PutCode(1, 'Canada', 'CA')">
+                <span class="code-number">1</span>
+                <span class="code-name">Canada</span>
+              </div>
+            </li>
+            <li>
+              <div class="text-center" @click="PutCode(65, '新加坡', 'SG')">
+                <span class="code-number">65</span>
+                <span class="code-name">新加坡</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="sms-choice b-def">
           <span>+</span>
           <div-contenteditable @keyup.stop.native v-model="SmsData.CellPhonecode">
           </div-contenteditable>
