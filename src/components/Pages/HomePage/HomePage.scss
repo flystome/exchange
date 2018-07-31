@@ -319,6 +319,7 @@
 }
 
 .homepage-introduce{
+  background: #f7f9fa;
   .homepage-transition{
     transition: all .3s ease!important;
   }
@@ -406,6 +407,7 @@
 
 .homepage-end{
   margin: 128px 0;
+  height: 400px;
   overflow: hidden;
   .home-end-img {
     >img:nth-child(3){

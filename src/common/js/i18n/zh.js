@@ -743,7 +743,7 @@ const zh = {
     "verify_code": '验证码',
     "no_empty": "不能为空",
     "field": "%",
-    "password_fail": "密码应当至少为8比特字元，并且包含字母和数位",
+    "password_fail": "密码应当至少为8位，并且包含字母和数位",
     'password_space': "密码的开头和结尾不可为空格",
     "email_fail": "邮箱无效",
     "email": "邮箱",

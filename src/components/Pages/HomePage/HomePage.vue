@@ -117,7 +117,7 @@
           </div>
         </keep-alive>
       </div>
-      <div class="homepage-logo text-center">
+      <div class="homepage-logo text-center" v-if='false'>
         <i class="home-log"></i>
       </div>
       <div class="homepage-introduce">
