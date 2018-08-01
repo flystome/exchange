@@ -146,24 +146,25 @@ export default {
   },
   created () {
     this.disabled = true
-    // this._get({
-    //   url: '/funds/home.json'
-    // }, (d) => {
-    //   this.disabled = false
-    //   var d = d.data.success
-    //   var channel = pusher.subscribe(`private-${d.sn}`)
-    //   var MarketChannel = pusher.subscribe(`market-global`)
+    this._get({
+      url: '/funds/home.json'
+    }, (res) => {
+      console.log(res)
+      this.disabled = false
+      // var d = d.data.success
+      // var channel = pusher.subscribe(`private-${d.sn}`)
+      // var MarketChannel = pusher.subscribe(`market-global`)
 
-    //   channel.bind('pusher:subscription_succeeded', () => {
-    //     this.GetCoin(false, d.fund_sources, d.sn)
-    //   })
+      // channel.bind('pusher:subscription_succeeded', () => {
+      //   this.GetCoin(false, d.fund_sources, d.sn)
+      // })
 
-    //   if (pusher.connection.state === 'connected') {
-    //     this.GetCoin(false, d.fund_sources, d.sn)
-    //   }
+      // if (pusher.connection.state === 'connected') {
+      //   this.GetCoin(false, d.fund_sources, d.sn)
+      // }
 
-    //   this.route = this.$route.path.slice(this.$route.path.lastIndexOf('/') + 1)
-    // })
+      // this.route = this.$route.path.slice(this.$route.path.lastIndexOf('/') + 1)
+    })
   },
   computed: {
     ...mapGetters(['loginData'])
