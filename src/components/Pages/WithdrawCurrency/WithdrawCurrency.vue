@@ -193,7 +193,7 @@
         </div>
       </basic-table>
     </template>
-    <Desposit v-if='route === "deposit"' :home='home'></Desposit>
+    <!-- <Desposit v-if='route === "deposit"' :home='home'></Desposit> -->
     <!-- <Withdraw v-if='route === "withdraw"' :home='home'></Withdraw> -->
     <template v-show='(route === "pie" || route === "line")'>
       <DashBoard :route="route"></DashBoard>
