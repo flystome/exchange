@@ -506,6 +506,13 @@ export default {
         type: 'success',
         message: this.$t('hint.completion')
       })
+      setTimeout(() => {
+        if (!this.$store.state.PopupBox.status) return
+        this.PopupBoxDisplay()
+        this.ChangePopupBox({
+          buttondisplay: true
+        })
+      }, 2000)
     },
     GetCoin (c, funds, sn) {
       this.withdrawAddress = false
