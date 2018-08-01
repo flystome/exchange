@@ -1,10 +1,9 @@
 <template>
   <div class="container-block">
     <div class="coin-list clearfix">
-      <a v-for="(coin, index) in home.currencies" :disabled='disabled' class="b"
+      <a v-for="(coin, index) in coins" :key="coin.code" :disabled='disabled' class="b"
         :class="{'is-chioce': index === curIndex, 'is-enabled': !coin.node_enabled, 'indent': !(requireImg(`market/market-${coin.code}`))}"
-        @click='ChoiceCoin(index, coin.node_enabled)'
-        :key="coin.code">
+        @click='ChooseCoin(index, coin.node_enabled)'>
         <img v-if="requireImg(`market/market-${coin.code}.svg`)" :src="requireImg(`market/market-${coin.code}.svg`)">
         <span :class='{"withoutimg": !requireImg(`market/market-${coin.code}.svg`)}'>
           {{ coin.code | upper }}
@@ -113,22 +112,23 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'withdraw',
-  props: ['home'],
+  // props: ['home'],
   data () {
     return {
       Address: 'withdraw_currency.withdraw_currency_address',
       Balance: '',
-      coins: this.home.currencies || [],
+      coins: '',
       curIndex: 0,
       curCoin: 'btc',
       choice: false,
       currency_precision: 0,
       disabled: true,
       equivalence: '',
-      FundSources: this.home.fund_sources || {},
+      FundSources: {},
       invalid: false,
       Remain: '',
       Rucaptcha: false,
+      sn: '',
       validate: '',
       withdraw_prompt: '',
       withdrawAddress: true,
@@ -145,26 +145,8 @@ export default {
     }
   },
   created () {
-    this.disabled = true
-    this._get({
-      url: '/funds/home.json'
-    }, (res) => {
-      console.log(res)
-      this.disabled = false
-      // var d = d.data.success
-      // var channel = pusher.subscribe(`private-${d.sn}`)
-      // var MarketChannel = pusher.subscribe(`market-global`)
-
-      // channel.bind('pusher:subscription_succeeded', () => {
-      //   this.GetCoin(false, d.fund_sources, d.sn)
-      // })
-
-      // if (pusher.connection.state === 'connected') {
-      //   this.GetCoin(false, d.fund_sources, d.sn)
-      // }
-
-      // this.route = this.$route.path.slice(this.$route.path.lastIndexOf('/') + 1)
-    })
+    this.GetCoin()
+    this.init()
   },
   computed: {
     ...mapGetters(['loginData'])
@@ -182,6 +164,38 @@ export default {
     }
   },
   methods: {
+    init () {
+      this._get({
+        url: '/funds/home.json'
+      }, (res) => {
+        console.log(res.data.success)
+        var data = res.data.success
+        this.coins = this.BtcFirst(data.currencies)
+        this.sn = data.sn
+        // this.privateChannel(data.sn)
+      })
+    },
+    BtcFirst (arr) {
+      var index = -1
+      var ele = null
+      arr.filter((element, idx) => {
+        if (element.code === 'btc') {
+          ele = element
+          index = idx
+        }
+      })
+      if (index !== -1) {
+        arr.splice(index, 1)
+        arr.unshift(ele)
+      }
+      return arr
+    },
+    ChooseCoin (index, allow) {
+      if (!allow || this.disabled || this.coins[index].code === this.curCoin) return
+      this.curIndex = index
+      this.curCoin = this.coins[index].code
+      this.GetCoin(this.curCoin)
+    },
     ChoiceStatus (boolean) {
       this.choice = boolean
     },

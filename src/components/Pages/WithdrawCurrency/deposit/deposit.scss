@@ -1,0 +1,63 @@
+.w-per-80 {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.w-per-60 {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.coin-list {
+  width: 100%;
+  a {
+    display: inline-block;
+    float: left;
+    width: 111px;
+    border-radius: 0;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+    cursor: pointer;
+    &.is-chioce {
+      border-color: #4382f7;
+    }
+    &.is-enabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+    img {
+      width: 18px;
+      height: 18px;
+      margin-right: 4px;
+    }
+    span {
+      vertical-align: middle;
+    }
+  }
+}
+
+.deposit-qrcode {
+  width: 36%;
+  float: left;
+  .qrcode {
+    margin-top: -25px;
+    margin-left: -20px;
+  }
+}
+
+.deposit-address {
+  width: 64%;
+  float: right;
+  #copy {
+    padding: 10px;
+    height: 96px;
+    word-wrap: break-word;
+    overflow: auto;
+    font-weight: bold;
+  }
+  .address-warn {
+    font-size: 14px;
+    color: #ff7f18; // word-wrap: break-word;
+  }
+}

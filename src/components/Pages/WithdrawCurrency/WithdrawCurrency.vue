@@ -193,8 +193,8 @@
         </div>
       </basic-table>
     </template>
-    <!-- <Desposit v-if='route === "deposit"' :home='home'></Desposit> -->
-    <!-- <Withdraw v-if='route === "withdraw"' :home='home'></Withdraw> -->
+    <!-- <Desposit v-if='route === "deposit"' :home='home'></Desposit>
+    <Withdraw v-if='route === "withdraw"' :home='home'></Withdraw> -->
     <template v-show='(route === "pie" || route === "line")'>
       <DashBoard :route="route"></DashBoard>
     </template>
@@ -368,6 +368,7 @@ export default {
         if (data.attributes.account_id) {
           if (this.account_id) {
             if (data.attributes.account_id === this.account_id) {
+              // if (data.attributes.currency === this.CurrencyType) {
               this.completeDepositAddress()
               this.deposit_address = data.attributes.deposit_address
               this.deposit_address_display = true
@@ -376,11 +377,6 @@ export default {
             this.account_id = data.attributes.account_id
           }
         }
-        // if (data.attributes.account_id === this.account_id) {
-        // // if (data.attributes.currency === this.CurrencyType) {
-        //   this.deposit_address = data.attributes.deposit_address
-        //   this.deposit_address_display = true
-        // }
         if (typeof this.DepositAddress !== 'object') {
           this.DepositAddress = {
             [data.attributes.currency]: data.attributes.deposit_address

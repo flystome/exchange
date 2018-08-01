@@ -1,10 +1,9 @@
 <template>
   <div class="container-block">
     <div class="coin-list clearfix">
-      <a v-for="(coin, index) in home.currencies" :disabled='disabled' class="b"
+      <a v-for="(coin, index) in coins" :key="coin.code" :disabled='disabled' class="b"
         :class="{'is-chioce': index === curIndex, 'is-enabled': !coin.node_enabled, 'indent': !(requireImg(`market/market-${coin.code}`))}"
-        @click='ChoiceCoin(index, coin.node_enabled)'
-        :key="coin.code">
+        @click='ChooseCoin(index, coin.node_enabled)'>
         <img v-if="requireImg(`market/market-${coin.code}.svg`)" :src="requireImg(`market/market-${coin.code}.svg`)">
         <span :class='{"withoutimg": !requireImg(`market/market-${coin.code}.svg`)}'>
           {{ coin.code | upper }}
@@ -14,7 +13,7 @@
     <div class="deposit-currency paddingT40 b">
       <div v-if="deposit_address !== ''" class="w-per-60 clearfix">
         <div class="deposit-qrcode marginT5">
-          <qr-code v-if="deposit_address_display" :length='"230"' :dateUrl="qrcode(deposit_address)"></qr-code>
+          <qr-code v-if="deposit_address" :length='"230"' :dateUrl="qrcode(deposit_address)"></qr-code>
           <vue-simple-spinner class="withdraw-loading" v-else size="185"></vue-simple-spinner>
         </div>
         <div class="deposit-address">
@@ -58,35 +57,36 @@
 
 <script>
 import { mapMutations } from 'vuex'
-// import pusher from '@/common/js/pusher'
+import pusher from '@/common/js/pusher'
 
 var QRCode = require('qrcode')
 const timeLine = 20000
 
 export default {
   name: 'Desposit',
-  props: ['home'],
+  // props: ['home'],
   data () {
     return {
       ROUTER_VERSION: process.env.ROUTER_VERSION,
       deposit_loading: true,
       disabled: false,
-      deposit_address_display: false,
       deposit_address: this.$t('deposit_currency.deposit_address'),
       depositRecord: {
         captionTitle: 'deposit_currency.deposit_record',
         item: []
       },
-      coins: this.home.currencies,
+      coins: '',
       curIndex: 0,
       curCoin: 'btc',
       prompt: '',
-      confirm_num: ''
+      confirm_num: '',
+      sn: ''
     }
   },
   created () {
     this.disabled = true
     this.GetCoin()
+    this.init()
   },
   computed: {
     ReplaceCurrency () {
@@ -101,18 +101,40 @@ export default {
         this.$t('deposit_currency.trading_hash'),
         this.$t('deposit_currency.recharge_amount'),
         this.$t('deposit_currency.confirmation_number'),
-        this.$t('funds.status_and_operation')
+        this.$t('withdraw_currency.statu_and_operation')
       ]
       }].concat(this.depositRecord.item)
-    },
-    ...mapMutations(['PopupBoxDisplay', 'ChangePopupBox'])
+    }
   },
   methods: {
-    ChoiceCoin (index, allow) {
-      console.log(this.coins)
-      if (!allow) return
-      if (this.disabled) return
-      if (this.coins[index].code === this.curCoin) return
+    init () {
+      this._get({
+        url: '/funds/home.json'
+      }, (res) => {
+        console.log(res.data.success)
+        var data = res.data.success
+        this.coins = this.BtcFirst(data.currencies)
+        this.sn = data.sn
+        this.privateChannel(data.sn)
+      })
+    },
+    BtcFirst (arr) {
+      var index = -1
+      var ele = null
+      arr.filter((element, idx) => {
+        if (element.code === 'btc') {
+          ele = element
+          index = idx
+        }
+      })
+      if (index !== -1) {
+        arr.splice(index, 1)
+        arr.unshift(ele)
+      }
+      return arr
+    },
+    ChooseCoin (index, allow) {
+      if (!allow || this.disabled || this.coins[index].code === this.curCoin) return
       this.curIndex = index
       this.curCoin = this.coins[index].code
       this.GetCoin(this.curCoin)
@@ -125,62 +147,52 @@ export default {
       })
       return dateUrl
     },
+    completeDepositAddress () {
+      clearTimeout(this.Time)
+      this.ChangePopupBox({
+        type: 'success',
+        message: this.$t('hint.completion')
+      })
+      setTimeout(() => {
+        if (!this.$store.state.PopupBox.status) return
+        this.PopupBoxDisplay()
+        this.ChangePopupBox({
+          buttondisplay: true
+        })
+      }, 2000)
+    },
     GetCoin (c, funds, sn) {
-      var obj = this.depositRecord
       var coin = c || 'btc'
       this.deposit_loading = true
-      obj.item = []
       this.disabled = true
-      this.deposit_address = false
-      this.deposit_address_display = false
+      this.deposit_address = ''
       this.loading = true
+      this.account_id = ''
       this._get({
         url: `/funds/${coin}/account_info.json`
       }, (res) => {
         var d = res.data.success
         this.disabled = false
         this.loading = false
-
-        if (d.code === 201 && !this.pusherCurreny.includes(`${coin}`)) {
-          if (this.curCoin === `${coin}` && this.deposit_address) return
-          this.pusherCurreny.push(`${coin}`)
-          if (/deposit/.test(this.$route.path)) {
-            this.Generating()
-          }
+        if (d.code === 201) {
+          if (this.curCoin === coin && this.deposit_address) return
+          this.Generating()
         }
-
-        this.account_id = d.account.account_id
-        this.confirm_num = d.deposit_max_confirmation
-        var deposits = d.deposits
         if (d.address) {
-          this.deposit_address_display = true
           this.deposit_address = d.address
+          this.completeDepositAddress()
         } else {
-          if (this.curCoin === `${coin}` && this.deposit_address) return
-          this.deposit_address_display = false
-          this.deposit_address = ''
-        }
-        d.account && (this.Balance = d.account.balance)
-        obj.item = []
-        // this.depositId = []
-        deposits.length === 0 ? obj.item = [] : obj.item = obj.item.concat(deposits.map(d => {
-          // this.depositId.push(d.id)
-          return {
-            content: [
-              this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
-              {hover: 'true', context: d.txid, url: d.blockchain_url},
-              d.amount,
-              d.confirmations === null ? '0' : `${d.confirmations} / ${this.confirm_num}`,
-              this.$t(`withdraw_currency.${d.aasm_state}`)
-            ]
+          if (this.account_id) {
+            if (this.account_id === d.account.account_id) {
+              this.completeDepositAddress()
+            }
+          } else {
+            this.account_id = d.account.account_id
           }
-        }))
-        obj.captionTitle = 'deposit_currency.deposit_record'
-
-        this.$nextTick(() => {
-          this.deposit_loading = false
-        })
-
+        }
+        this.confirm_num = d.deposit_max_confirmation
+        this.Balance = d.account.balance
+        this.handleDeposit(d.deposits)
         // if (funds && Object.keys(funds).length > 0) {
         //   funds['btc'].forEach((d) => {
         //     if (d.is_default) {
@@ -197,9 +209,55 @@ export default {
         // }
       })
     },
+    handleDeposit (arr) {
+      var obj = this.depositRecord
+      obj.item = []
+      // this.depositId = []
+      // this.depositId.push(arr.id)
+      if (arr.length) {
+        obj.item = arr.map(ele => {
+          return {
+            content: [
+              this.$moment(ele.created_at).format('YYYY-MM-DD H:mm:ss'),
+              {hover: 'true', context: ele.txid, url: ele.blockchain_url},
+              ele.amount,
+              ele.confirmations === null ? '0' : `${ele.confirmations} / ${this.confirm_num}`,
+              this.$t(`withdraw_currency.${ele.aasm_state}`)
+            ]
+          }
+        })
+      }
+      this.deposit_loading = false
+    },
+    privateChannel (sn) {
+      var channel = pusher.subscribe(`private-${sn}`)
+      channel.bind('deposit_address', (data) => {
+        if (data.attributes.deposit_address) {
+          this.deposit_address = data.attributes.deposit_address
+          this.completeDepositAddress()
+        } else {
+          if (data.attributes.account_id) {
+            if (this.account_id) {
+              if (data.attributes.account_id === this.account_id) {
+                this.completeDepositAddress()
+              }
+            } else {
+              this.account_id = data.attributes.account_id
+            }
+          }
+        }
+        // if (typeof this.DepositAddress !== 'object') {
+        //   this.DepositAddress = {
+        //     [data.attributes.currency]: data.attributes.deposit_address
+        //   }
+        // } else {
+        //   if (!Object.keys(this.DepositAddress).includes((data.attributes.currency).toString())) {
+        //     this.$set(this.DepositAddress, data.attributes.currency, data.attributes.deposit_address)
+        //   }
+        // }
+      })
+    },
     Generating () {
-      this.deposit_address_display = false
-      this.deposit_address = ''
       this.PopupBoxDisplay({message: '', type: 'loading'})
       this.ChangePopupBox({
         buttondisplay: false,
@@ -219,80 +277,20 @@ export default {
     },
     requireImg (img) {
       try {
-        // return require(`../../../../../static/img/${img}`)
         return require(`Static/img/${img}`)
       } catch (error) {
         try {
           return require(`Static/img/${img.replace('.svg', '.png')}`)
-          // return require(`../../../../../static/img/${img.replace('.svg', '.png')}`)
         } catch (error) {
           return false
         }
       }
-    }
+    },
+    ...mapMutations(['PopupBoxDisplay', 'ChangePopupBox'])
   }
 }
 </script>
 
 <style scoped lang="scss">
-  .w-per-80 {
-    width: 80%;
-    margin: 0 auto;
-  }
-  .w-per-60 {
-    width: 60%;
-    margin: 0 auto;
-  }
-  .coin-list {
-    width: 100%;
-    a {
-      display: inline-block;
-      float: left;
-      width: 111px;
-      border-radius: 0;
-      height: 40px;
-      line-height: 38px;
-      text-align: center;
-      cursor: pointer;
-      &.is-chioce {
-        border-color: #4382f7;
-      }
-      &.is-enabled {
-        cursor: not-allowed;
-        opacity: 0.4;
-      }
-      img {
-        width: 18px;
-        height: 18px;
-        margin-right: 4px;
-      }
-      span {
-        vertical-align: middle;
-      }
-    }
-  }
-  .deposit-qrcode {
-    width: 36%;
-    float: left;
-    .qrcode {
-      margin-top: -25px;
-      margin-left: -20px;
-    }
-  }
-  .deposit-address {
-    width: 64%;
-    float: right;
-    #copy {
-      padding: 10px;
-      height: 96px;
-      word-wrap: break-word;
-      overflow: auto;
-      font-weight: bold;
-    }
-    .address-warn {
-      font-size: 14px;
-      color: #ff7f18;
-      // word-wrap: break-word;
-    }
-  }
+  @import './deposit';
 </style>
