@@ -364,12 +364,21 @@ export default {
       var channel = pusher.subscribe(`private-${sn}`)
 
       channel.bind('deposit_address', (data) => {
-        console.log(data)
-        if (data.attributes.account_id === this.account_id) {
-        // if (data.attributes.currency === this.CurrencyType) {
-          this.deposit_address = data.attributes.deposit_address
-          this.deposit_address_display = true
+        console.log(data, data.attributes.account_id, this.account_id)
+        if (data.attributes.account_id && this.account_id) {
+          if (data.attributes.account_id === this.account_id) {
+            this.completeDepositAddress()
+            this.deposit_address = data.attributes.deposit_address
+            this.deposit_address_display = true
+          } else {
+            this.account_id = data.attributes.account_id
+          }
         }
+        // if (data.attributes.account_id === this.account_id) {
+        // // if (data.attributes.currency === this.CurrencyType) {
+        //   this.deposit_address = data.attributes.deposit_address
+        //   this.deposit_address_display = true
+        // }
         if (typeof this.DepositAddress !== 'object') {
           this.DepositAddress = {
             [data.attributes.currency]: data.attributes.deposit_address
@@ -491,6 +500,13 @@ export default {
         this.Time = false
       }, timeLine)
     },
+    completeDepositAddress () {
+      clearTimeout(this.Time)
+      this.ChangePopupBox({
+        type: 'success',
+        message: this.$t('hint.completion')
+      })
+    },
     GetCoin (c, funds, sn) {
       this.withdrawAddress = false
       this.disabled = true
@@ -506,7 +522,7 @@ export default {
       objd.item = []
       this.deposit_address = false
       this.deposit_address_display = false
-
+      this.account_id = ''
       this._get({
         url: `/funds/${coin}/account_info.json`
       }, (d) => {
@@ -524,7 +540,11 @@ export default {
             }
           }
         })()
-        this.account_id = d.account.account_id
+        if (this.account_id && d.account.account_id) {
+          this.completeDepositAddress()
+        } else {
+          this.account_id = d.account.account_id
+        }
         this.confirm_num = d.deposit_max_confirmation
         this.withdraw_fee = d.withdraw_fee
         this.currency_precision = Math.max(2 * d.withdraw_fee, 1 / Math.pow(10, d.currency_precision))
@@ -914,7 +934,8 @@ export default {
       }
     },
     DepositAddress (to, from) {
-      console.log(to, from)
+      console.log(to)
+      console.log(from)
       if (this.$route.name === 'WithdrawCurrency' && !/deposit/.test(this.$route.path)) return
       if (Object.keys(to).length > Object.keys(from).length) {
         if(Object.keys(to)[0] !== this.CurrencyType) {
