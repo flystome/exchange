@@ -18,37 +18,37 @@
               </div>
             </li> -->
             <li>
-              <div class="text-center" @click="PutCode(86, '中国', 'CN')">
+              <div class="text-center" @click="PutCode('+86', '中国', 'CN')">
                 <span class="code-number">86</span>
                 <span class="code-name">中国</span>
               </div>
             </li>
             <li>
-              <div class="text-center" @click="PutCode(852, '香港', 'HK')">
+              <div class="text-center" @click="PutCode('+852', '香港', 'HK')">
                 <span class="code-number">852</span>
                 <span class="code-name">香港</span>
               </div>
             </li>
             <li>
-              <div class="text-center" @click="PutCode(1, 'United States', 'US')">
+              <div class="text-center" @click="PutCode('+1', 'United States', 'US')">
                 <span class="code-number">1</span>
                 <span class="code-name">United States</span>
               </div>
             </li>
             <li>
-              <div class="text-center" @click="PutCode(81, 'Japan', 'JP')">
+              <div class="text-center" @click="PutCode('+81', 'Japan', 'JP')">
                 <span class="code-number">81</span>
                 <span class="code-name">Japan</span>
               </div>
             </li>
             <li>
-              <div class="text-center" @click="PutCode(1, 'Canada', 'CA')">
+              <div class="text-center" @click="PutCode('+1', 'Canada', 'CA')">
                 <span class="code-number">1</span>
                 <span class="code-name">Canada</span>
               </div>
             </li>
             <li>
-              <div class="text-center" @click="PutCode(65, '新加坡', 'SG')">
+              <div class="text-center" @click="PutCode('+65', '新加坡', 'SG')">
                 <span class="code-number">65</span>
                 <span class="code-name">新加坡</span>
               </div>
