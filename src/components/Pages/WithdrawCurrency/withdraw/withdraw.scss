@@ -1,0 +1,104 @@
+.coin-list {
+  width: 100%;
+  a {
+    display: inline-block;
+    float: left;
+    width: 111px;
+    border-radius: 0;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+    cursor: pointer;
+    &.is-chioce {
+      border-color: #4382f7;
+    }
+    &.is-enabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+    img {
+      width: 18px;
+      height: 18px;
+      margin-right: 4px;
+    }
+    span {
+      vertical-align: middle;
+    }
+  }
+}
+
+.withdraw-form {
+  padding: 40px 230px;
+  border-top: none;
+}
+
+.withdraw-address {
+  height: 32px;
+  color: #757575;
+  padding: 5px;
+  position: relative;
+  cursor: pointer;
+  background: #f2f2f2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 41px;
+  background: url('~Img/large/select.png') 100% 100% no-repeat;
+  background-size: cover !important;
+}
+
+.withdraw-explain {
+  height: 33px;
+  line-height: 33px;
+  font-size: 12px;
+}
+
+.choice-validate {
+  display: flex;
+  .select-option {
+    width: 138px;
+    height: 32px;
+    border-right: none;
+    appearance: menulist;
+  }
+  &>div {
+    flex: 1;
+  }
+}
+
+.address-list {
+  height: 190px;
+  overflow: auto;
+}
+.address-contain {
+  background: #f2f2f2;
+  border-color: #dfe0e1;
+  .address-list {
+    height: 190px;
+    overflow: auto;
+  }
+  .addnew {
+    padding: 7px;
+    background: #fff;
+    color: #4382f7;
+  }
+}
+
+.withdraw-add-icon {
+  display: inline-block;
+  vertical-align: -2px;
+  margin-right: 3px;
+  @include sprite($withdraw-add)
+}
+
+.address-add {
+  display: flex;
+  width: 100%;
+  height: 32px;
+  .name {
+    margin-right: 10px;
+    width: 113px;
+  }
+  .address {
+    flex: 1;
+  }
+}

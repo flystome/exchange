@@ -13,11 +13,11 @@
     <div class="b">
       <div class="withdraw-form">
         <news-prompt :Time='3000' v-on:bind='withdraw_prompt = $event' :text='withdraw_prompt'></news-prompt>
-        <div @click.stop="ChoiceStatus(!choice)" class="withdraw-address b-l">
-          {{ Address !== 'withdraw_currency.withdraw_currency_address' ? Address : $t('withdraw_currency.withdraw_currency_address') }}
+        <div @click.stop="ChooseStatus(!choice)" class="withdraw-address b-l">
+          {{ Address || 'withdraw_currency.withdraw_currency_address' }}
         </div>
-        <div v-show="choice" @click.stop="ChoiceStatus(true)" class='b address-contain'>
-          <div class="address-height">
+        <div v-show="choice" @click.stop="ChooseStatus(true)" class='b address-contain'>
+          <div class="address-list">
             <div class="pointer" v-for="(data, index) in FundSources[curCoin]" :key="index"
               @click.stop="ChoiceAddress(index, data.id)">
               <div class="fl">
@@ -40,10 +40,10 @@
           </div>
         </div>
         <div v-show='!choice'>
-          <div class="marginT15 withdraw-add" style="display: flex" v-if="withdrawAddress">
-            <basic-input class="withdraw-all" v-model="WithdrawData.remark" :placeholder='$t("withdraw_currency.remark_label")'>
+          <div class="marginT15 address-add" style="display: flex" v-if="withdrawAddress">
+            <basic-input class="name" v-model="WithdrawData.remark" :placeholder='$t("withdraw_currency.remark_label")'>
             </basic-input>
-            <basic-input class="withdraw-all" :validate='"required|withdraw_address"' :danger='true' ref="withdraw_address" v-model="WithdrawData.newAddress" :placeholder='$t("withdraw_currency.withdraw_currency_address")'>
+            <basic-input class="address" :validate='"required|withdraw_address"' :danger='true' ref="withdraw_address" v-model="WithdrawData.newAddress" :placeholder='$t("withdraw_currency.withdraw_currency_address")'>
             </basic-input>
           </div>
           <div class="withdraw-explain">
@@ -196,14 +196,20 @@ export default {
       this.curCoin = this.coins[index].code
       this.GetCoin(this.curCoin)
     },
-    ChoiceStatus (boolean) {
+    ChooseStatus (boolean) {
       this.choice = boolean
     },
     ChoiceAddress (index, id) {
       this.WithdrawData.Address_id = id
       this.withdrawAddress = false
       this.Address = this.FundSources[this.curCoin][index].uid
-      this.ChoiceStatus(false)
+      this.ChooseStatus(false)
+    },
+    AddAddress () {
+      this.withdrawAddress = true
+      this.ChooseStatus(false)
+      this.Address = 'withdraw_currency.withdraw_currency_address'
+      this.WithdrawData.Address_id = ''
     },
     GetCoin (c, funds, sn) {
       this.withdrawAddress = false
@@ -391,7 +397,7 @@ export default {
           if (id === this.WithdrawData.Address_id) {
             this.Address = 'withdraw_currency.withdraw_currency_address'
             this.WithdrawData.Address_id = ''
-            this.ChoiceStatus(false)
+            this.ChooseStatus(false)
           }
           this.PopupBoxDisplay({message: this.$t('api_server.withdraw_currency.delete_fund_source_200'), type: 'success'})
           funds.splice(index, 1)
@@ -439,66 +445,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .coin-list {
-    width: 100%;
-    a {
-      display: inline-block;
-      float: left;
-      width: 111px;
-      border-radius: 0;
-      height: 40px;
-      line-height: 38px;
-      text-align: center;
-      cursor: pointer;
-      &.is-chioce {
-        border-color: #4382f7;
-      }
-      &.is-enabled {
-        cursor: not-allowed;
-        opacity: 0.4;
-      }
-      img {
-        width: 18px;
-        height: 18px;
-        margin-right: 4px;
-      }
-      span {
-        vertical-align: middle;
-      }
-    }
-  }
-  .withdraw-form {
-    padding: 40px 230px;
-    border-top: none;
-  }
-  .withdraw-address {
-    height: 32px;
-    color: #757575;
-    padding: 5px;
-    position: relative;
-    cursor: pointer;
-    background: #f2f2f2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding-right: 41px;
-    background: url('~Img/large/select.png') 100% 100% no-repeat;
-    background-size: cover !important;
-  }
-  .withdraw-explain {
-    height: 33px;
-    line-height: 33px;
-    font-size: 12px;
-  }
-  .choice-validate {
-    display: flex;
-    .select-option {
-      width: 138px;
-      height: 32px;
-      border-right: none;
-      appearance: menulist;
-    }
-    &>div {
-      flex: 1;
-    }
-  }
+  @import './withdraw.scss';
 </style>

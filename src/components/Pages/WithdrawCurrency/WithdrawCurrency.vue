@@ -167,13 +167,11 @@
       </div>
       <basic-table :loading='withdraw_loading' :captionTitle='WithdrawRecord.captionTitle' :item='getWithdrawRecord' :perfix='CurrencyType.toUpperCase()' v-if="route === 'withdraw'">
         <div slot="more" class="text-center b-t table-more col-md-6">
-          <!-- col-md-6 -->
           <router-link class="link" :to="`${ROUTER_VERSION}/form/withdraw?currency=${CurrencyType}`">
             {{$t('my_account.show_more')}}
           </router-link>
         </div>
         <div slot="more" class="b-t text-center table-more b-l col-md-6">
-          <!-- col-md-6 -->
           <router-link :to="`${ROUTER_VERSION}/form/withdraw_cancel`" class='link '>
             {{$t('withdraw_currency.cancel_withdraw')}}
           </router-link>
@@ -193,8 +191,8 @@
         </div>
       </basic-table>
     </template>
-    <!-- <Desposit v-if='route === "deposit"' :home='home'></Desposit>
-    <Withdraw v-if='route === "withdraw"' :home='home'></Withdraw> -->
+    <Desposit v-if='route === "deposit"' :home='home'></Desposit>
+    <Withdraw v-if='route === "withdraw"' :home='home'></Withdraw>
     <template v-show='(route === "pie" || route === "line")'>
       <DashBoard :route="route"></DashBoard>
     </template>
@@ -222,6 +220,7 @@ export default {
       currencies: [],
       choice: false,
       CurrencyType: 'btc',
+      currency_precision: 0,
       confirm_num: '',
       disabled: !false,
       deposit_address_display: false,

@@ -1,44 +1,47 @@
 <template>
-  <div class="container-block">
-    <div class="coin-list clearfix">
-      <a v-for="(coin, index) in coins" :key="coin.code" :disabled='disabled' class="b"
-        :class="{'is-chioce': index === curIndex, 'is-enabled': !coin.node_enabled, 'indent': !(requireImg(`market/market-${coin.code}`))}"
-        @click='ChooseCoin(index, coin.node_enabled)'>
-        <img v-if="requireImg(`market/market-${coin.code}.svg`)" :src="requireImg(`market/market-${coin.code}.svg`)">
-        <span :class='{"withoutimg": !requireImg(`market/market-${coin.code}.svg`)}'>
-          {{ coin.code | upper }}
-        </span>
-      </a>
-    </div>
-    <div class="deposit-currency paddingT40 b">
-      <div v-if="deposit_address !== ''" class="w-per-60 clearfix">
-        <div class="deposit-qrcode marginT5">
-          <qr-code v-if="deposit_address" :length='"230"' :dateUrl="qrcode(deposit_address)"></qr-code>
-          <vue-simple-spinner class="withdraw-loading" v-else size="185"></vue-simple-spinner>
-        </div>
-        <div class="deposit-address">
-          <div class="address-div">
-            <div id="copy" class="b color666">{{ deposit_address === false ? '' : deposit_address  }}</div>
-            <div class="address-warn marginT10">
-              {{ ReplaceCurrency }}
-            </div>
+  <div>
+    <div class="container-block">
+      <div class="coin-list clearfix">
+        <a v-for="(coin, index) in coins" :key="coin.code" :disabled='disabled' class="b"
+          :class="{'is-chioce': index === curIndex, 'is-enabled': !coin.node_enabled, 'indent': !(requireImg(`market/market-${coin.code}`))}"
+          @click='ChooseCoin(index, coin.node_enabled)'>
+          <img v-if="requireImg(`market/market-${coin.code}.svg`)" :src="requireImg(`market/market-${coin.code}.svg`)">
+          <span :class='{"withoutimg": !requireImg(`market/market-${coin.code}.svg`)}'>
+            {{ coin.code | upper }}
+          </span>
+        </a>
+      </div>
+      <div class="deposit-currency paddingT40 b">
+        <div v-if="deposit_address !== ''" class="w-per-60 clearfix">
+          <div class="deposit-qrcode marginT5">
+            <qr-code v-if="deposit_address" :length='"230"' :dateUrl="qrcode(deposit_address)"></qr-code>
+            <vue-simple-spinner class="withdraw-loading" v-else size="185"></vue-simple-spinner>
           </div>
-          <basic-button style="margin-top: 8px;" :disabled='disabled' data-clipboard-target="#copy" class="btn-copy btn" :text='$t("deposit_currency.copy_address")'></basic-button>
-          <news-prompt :text='prompt'></news-prompt>
+          <div class="deposit-address">
+            <div class="address-div">
+              <div id="copy" class="b color666">{{ deposit_address === false ? '' : deposit_address  }}</div>
+              <div class="address-warn marginT10">
+                {{ ReplaceCurrency }}
+              </div>
+            </div>
+            <basic-button style="margin-top: 8px;" :disabled='disabled' data-clipboard-target="#copy" class="btn-copy btn" :text='$t("deposit_currency.copy_address")'></basic-button>
+            <news-prompt :text='prompt'></news-prompt>
+          </div>
         </div>
+        <div v-else class='text-center'>
+          {{ $t("deposit_currency.temporarily_unable_deposit") }}
+        </div>
+        <div class="deposit-confirNum w-per-60">
+          {{$t('deposit_currency.confirm_num_descirbe')}}<span style="color: #ff7f18;">{{ ConfirmNum }}</span>{{$t('deposit_currency.about_time')}}<router-link class='link' :to="`${ROUTER_VERSION}/form/deposit?currency=${curCoin}`">{{$t('title.form_deposit')}}</router-link>{{ $t('deposit_currency.in_query') }}
+        </div>
+        <ul class="marginT80 remind">
+          <strong class="withdraw-remind">{{ $t('withdraw_currency.reminder') }}</strong>
+          <li>{{ $t('deposit_currency.use_wallet_service') }}</li>
+          <li>{{ $t('deposit_currency.font_descripe') }}</li>
+          <li>{{ $t('deposit_currency.operation_done') }}</li>
+        </ul>
       </div>
-      <div v-else class='text-center'>
-        {{ $t("deposit_currency.temporarily_unable_deposit") }}
-      </div>
-      <div class="deposit-confirNum w-per-60">
-        {{$t('deposit_currency.confirm_num_descirbe')}}<span style="color: #ff7f18;">{{ ConfirmNum }}</span>{{$t('deposit_currency.about_time')}}<router-link class='link' :to="`${ROUTER_VERSION}/form/deposit?currency=${curCoin}`">{{$t('title.form_deposit')}}</router-link>{{ $t('deposit_currency.in_query') }}
-      </div>
-      <ul class="marginT80">
-        <strong class="withdraw-remind">{{ $t('withdraw_currency.reminder') }}</strong>
-        <li>{{ $t('deposit_currency.use_wallet_service') }}</li>
-        <li>{{ $t('deposit_currency.font_descripe') }}</li>
-        <li>{{ $t('deposit_currency.operation_done') }}</li>
-      </ul>
+
     </div>
     <basic-table :loading='deposit_loading' :captionTitle='depositRecord.captionTitle' :perfix='curCoin.toUpperCase()' :item='getDepositRecord'>
       <template slot="href" slot-scope="props">
@@ -58,8 +61,9 @@
 <script>
 import { mapMutations } from 'vuex'
 import pusher from '@/common/js/pusher'
-
+import Clipboard from 'clipboard'
 var QRCode = require('qrcode')
+const _debounce = require('lodash.debounce')
 const timeLine = 20000
 
 export default {
@@ -88,6 +92,20 @@ export default {
     this.GetCoin()
     this.init()
   },
+  mounted () {
+    var clipboard = new Clipboard('.btn-copy')
+    var time = () => {
+      setTimeout(() => {
+        this.prompt = ''
+      }, 1500)
+    }
+
+    clipboard.on('success', () => {
+      clearTimeout(time)
+      this.prompt = this.$t('deposit_currency.copy_success')
+    })
+    clipboard.on('success', _debounce(time, 500))
+  },
   computed: {
     ReplaceCurrency () {
       return this.$t('deposit_currency.warn1').replace(/COIN/g, this.curCoin.toUpperCase())
@@ -111,7 +129,6 @@ export default {
       this._get({
         url: '/funds/home.json'
       }, (res) => {
-        console.log(res.data.success)
         var data = res.data.success
         this.coins = this.BtcFirst(data.currencies)
         this.sn = data.sn
@@ -193,27 +210,11 @@ export default {
         this.confirm_num = d.deposit_max_confirmation
         this.Balance = d.account.balance
         this.handleDeposit(d.deposits)
-        // if (funds && Object.keys(funds).length > 0) {
-        //   funds['btc'].forEach((d) => {
-        //     if (d.is_default) {
-        //       this.Address = d.uid
-        //     }
-        //   })
-        // } else {
-        //   if (!this.FundSources[coin]) return
-        //   this.FundSources[coin].forEach((d) => {
-        //     if (d.is_default) {
-        //       this.Address = d.uid
-        //     }
-        //   })
-        // }
       })
     },
     handleDeposit (arr) {
       var obj = this.depositRecord
       obj.item = []
-      // this.depositId = []
-      // this.depositId.push(arr.id)
       if (arr.length) {
         obj.item = arr.map(ele => {
           return {
@@ -246,16 +247,35 @@ export default {
             }
           }
         }
-        // if (typeof this.DepositAddress !== 'object') {
-        //   this.DepositAddress = {
-        //     [data.attributes.currency]: data.attributes.deposit_address
-        //   }
-        // } else {
-        //   if (!Object.keys(this.DepositAddress).includes((data.attributes.currency).toString())) {
-        //     this.$set(this.DepositAddress, data.attributes.currency, data.attributes.deposit_address)
-        //   }
-        // }
       })
+
+      channel.bind('deposits', (data) => {
+        var d = data.attributes
+        if (d.currency !== this.curCoin) return
+        if (this.depositId.includes(d.id)) {
+          this.$set(this.depositRecord.item, 0, 0)
+          this.depositRecord.item[this.depositId.indexOf(d.id)] = {
+            content: [
+              this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
+              {hover: true, context: d.txid, url: d.blockchain_url},
+              d.amount,
+              `${d.confirmations} / ${this.confirm_num}`,
+              this.$t(`withdraw_currency.${d.aasm_state}`)
+            ]
+          }
+        } else {
+          this.depositId.unshift(d.id)
+          this.depositRecord.item.unshift({
+            content: [
+              this.$moment(d.created_at).format('YYYY-MM-DD H:mm:ss'),
+              {hover: true, context: d.txid, url: d.blockchain_url},
+              d.amount,
+              `${d.confirmations} / ${this.confirm_num}`,
+              this.$t(`withdraw_currency.${d.aasm_state}`)
+            ]
+          })
+        }
+      }) // deposits pusher
     },
     Generating () {
       this.PopupBoxDisplay({message: '', type: 'loading'})
@@ -292,5 +312,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import './deposit';
+  @import './deposit.scss';
 </style>
