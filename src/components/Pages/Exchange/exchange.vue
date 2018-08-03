@@ -255,9 +255,12 @@ export default {
       var channel = pusher.subscribe('market-global')
       channel.bind('tickers', (data) => {
         if (JSON.stringify(data) !== '{}') {
+          var arr = Object.keys(this.markets)
           for (let key in data) {
-            this.markets[key] = data[key]
-            this.markets = Object.assign({}, this.markets)
+            if (arr.includes(key)) {
+              this.markets[key] = data[key]
+              this.markets = Object.assign({}, this.markets)
+            }
             if (key === this.market.code) {
               this.market = Object.assign({}, data[key], {'code': key})
             }
