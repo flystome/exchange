@@ -428,9 +428,10 @@ export default {
       privateAccount.bind('trade', (res) => {
         // this.my_trades.unshift(res)
         this.play('order_ok')
-        this.showNotice(res.price, res.origin_volume - res.volume)
         res.state = 'done'
         res.origin_volume = res.volume
+        console.log(res, res.origin_volume - res.volume)
+        this.showNotice(res.price, res.volume)
         this.my_orders_cache[2].unshift(res)
         // this.isMine(res, 'trade')
       })
@@ -517,10 +518,10 @@ export default {
       if (!this.noticeAllow) return null
       Notification.requestPermission((permit) => {
         if (permit === 'granted') {
-          new Notification('Order Filled', {
+          new Notification(`${this.$t('global.ordered')}`, {
             dir: 'auto',
             icon: '../../../../static/img/notification1.png',
-            body: `Price: ${price}\nVoluume: ${volume}`,
+            body: `${this.$t('markets.newPrice')}: ${price}\n${this.$t('markets.amount')}: ${volume}`,
             tag: 'trade',
             renotify: true
           })

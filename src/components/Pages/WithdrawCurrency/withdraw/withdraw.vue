@@ -14,9 +14,9 @@
       <div class="withdraw-form">
         <news-prompt :Time='3000' v-on:bind='withdraw_prompt = $event' :text='withdraw_prompt'></news-prompt>
         <div @click.stop="ChooseStatus(!choice)" class="withdraw-address b-l">
-          {{ Address || 'withdraw_currency.withdraw_currency_address' }}
+          {{ Address !== 'withdraw_currency.withdraw_currency_address' ? Address : $t('withdraw_currency.withdraw_currency_address') }}
         </div>
-        <div v-show="choice" @click.stop="ChooseStatus(true)" class='b address-contain'>
+        <div v-show="choice" @click.stop="ChooseStatus(true)" class='b address-list-contain'>
           <div class="address-list">
             <div class="pointer" v-for="(data, index) in FundSources[curCoin]" :key="index"
               @click.stop="ChoiceAddress(index, data.id)">
@@ -51,7 +51,7 @@
           </div>
           <template v-if="Address !== 'withdraw_currency.withdraw_currency_address' || withdrawAddress">
           <!-- <template> -->
-            <basic-input :validate='"required|withdraw_amount"' :invalid='invalid' :danger='true' ref='withdraw_amount' v-model="WithdrawData.amount" class="withdraw-all" style="display: flex;" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
+            <basic-input :validate='"required|withdraw_amount"' :invalid='invalid' :danger='true' ref='withdraw_amount' v-model="WithdrawData.amount" class="withdraw-num" :placeholder="this.$t('withdraw_currency.Amount_to_withdraw')">
               <basic-button :disabled='disabled' @click.native="WithdrawAll" class="link btn" slot="button" :text="$t('withdraw_currency.withdraw_all')"></basic-button>
             </basic-input>
             <div class="withdraw-explain">
@@ -147,6 +147,13 @@ export default {
   created () {
     this.GetCoin()
     this.init()
+  },
+  mounted () {
+    if (this.loginData.app_activated) {
+      this.validate = 'google'
+    } else if (this.loginData.sms_activated) {
+      this.validate = 'sms'
+    }
   },
   computed: {
     ...mapGetters(['loginData'])
@@ -271,6 +278,12 @@ export default {
             }
           })
         }
+      })
+    },
+    WithdrawAll () {
+      this.WithdrawData.amount = this.$store.getters.ToFixed(Math.min(Number(this.Remain), Number(this.Balance)))
+      this.$nextTick(() => {
+        this.$refs.withdraw_amount.$validator.validateAll()
       })
     },
     async Withdraw () {

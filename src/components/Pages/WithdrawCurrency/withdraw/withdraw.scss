@@ -59,6 +59,7 @@
     height: 32px;
     border-right: none;
     appearance: menulist;
+    border: 1px solid #dfe0e1;
   }
   &>div {
     flex: 1;
@@ -69,7 +70,7 @@
   height: 190px;
   overflow: auto;
 }
-.address-contain {
+.address-list-contain {
   background: #f2f2f2;
   border-color: #dfe0e1;
   .address-list {
@@ -100,5 +101,16 @@
   }
   .address {
     flex: 1;
+  }
+}
+.withdraw-num {
+  display: flex;
+  .btn {
+    outline: none;
+    background: #fff;
+    margin-top: 0;
+    padding: 4px;
+    border: 1px solid #dfe0e1;
+    border-left: none;
   }
 }
