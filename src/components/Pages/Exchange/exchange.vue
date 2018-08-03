@@ -535,5 +535,5 @@ export default {
 }
 </script>
 <style lang="scss">
-  @import './exchange.scss'
+  @import './exchange.scss';
 </style>
