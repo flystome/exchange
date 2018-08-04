@@ -331,15 +331,18 @@ export default {
 
     channel.bind('tickers', (data) => {
       if (this.curData === '') return
+      var arr = Object.keys(this.curData)
       Object.keys(data).forEach((key) => {
-        this.curData[this.currency.indexOf(data[key].base_currency.toLowerCase())].forEach(d => {
-          if (key === d.name.toLowerCase().replace('/', '')) {
-            d.last = data[key].last
-            d.legal_worth = data[key].legal_worth
-            d.volume = data[key].volume
-            d.percent = data[key].percent
-          }
-        })
+        if (arr.includes(key)) {
+          this.curData[this.currency.indexOf(data[key].base_currency.toLowerCase())].forEach(d => {
+            if (key === d.name.toLowerCase().replace('/', '')) {
+              d.last = data[key].last
+              d.legal_worth = data[key].legal_worth
+              d.volume = data[key].volume
+              d.percent = data[key].percent
+            }
+          })
+        }
       })
       this.$refs['market'].$emit('market')
     }) // pusher
