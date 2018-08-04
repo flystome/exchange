@@ -56,7 +56,7 @@
         display: inline-block;
         a {
           display: inline-block;
-          @include sprite($header-letterlog)
+          @include sprite($header-letterlog);
           vertical-align: -2px;
           position: relative;
           &.unread {
