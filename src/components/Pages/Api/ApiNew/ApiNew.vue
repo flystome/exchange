@@ -215,9 +215,6 @@ export default {
     margin: 75px 0;
   }
 }
-</style>
-
-<style>
 .api-newContain .help{
   position: absolute;
 }

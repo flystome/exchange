@@ -15,7 +15,7 @@
   }
 </script>
 
-<style>
+<style lang="scss" scoped>
   .button-styles {
     border: 1px solid #eee;
     border-radius: 3px;

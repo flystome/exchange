@@ -988,11 +988,9 @@ export default {
 }
 </script>
 
-<style scoped lang='scss'>
+<style lang="scss" scoped>
   @import './WithdrawCurrency.scss';
-</style>
 
-<style lang='css'>
   @media (max-width: 991px) {
     .deposit-address .newsPrompt .news-animation{
       width: 100%;

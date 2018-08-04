@@ -85,7 +85,7 @@
   }
 </script>
 
-<style>
+<style lang="scss" scoped>
   .main {
     margin: 15px;
     max-width: 600px;

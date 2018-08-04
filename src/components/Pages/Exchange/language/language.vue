@@ -52,6 +52,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-  @import './language.scss'
+
+<style lang="scss" scoped>
+  @import './language.scss';
 </style>

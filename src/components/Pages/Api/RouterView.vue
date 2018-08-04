@@ -13,7 +13,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .api{
   .container-block{
     padding: 13px 30px 0 30px

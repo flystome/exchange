@@ -50,6 +50,6 @@ export default {
 }
 </script>
 
-<style lang='scss'>
-  @import './BasicInput'
+<style lang="scss" scoped>
+  @import './BasicInput';
 </style>

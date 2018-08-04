@@ -187,6 +187,6 @@ export default {
 }
 </script>
 
-<style lang='scss'>
-  @import './candleStick.scss'
+<style lang="scss" scoped>
+  @import './candleStick.scss';
 </style>

@@ -232,10 +232,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./TicketIndex.scss"
-</style>
-
-<style lang="css">
+@import "./TicketIndex.scss";
 .ticket-container nav li {
   font-weight: 700
 }

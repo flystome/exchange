@@ -431,6 +431,6 @@ export default {
 }
 </script>
 
-<style lang="scss">
-  @import './order.scss'
+<style lang="scss" scoped>
+  @import './order.scss';
 </style>

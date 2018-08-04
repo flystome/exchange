@@ -116,7 +116,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .box-account-search{
     background: #f2f2f2;
     padding: 5px 8px;

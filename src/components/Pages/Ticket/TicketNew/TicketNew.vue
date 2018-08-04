@@ -151,10 +151,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import './TicketNew.scss'
-</style>
-
-<style lang='css'>
+  @import './TicketNew.scss';
   .ticket-new .edit-div{
     background: #f2f2f2;
     min-height: 200px;

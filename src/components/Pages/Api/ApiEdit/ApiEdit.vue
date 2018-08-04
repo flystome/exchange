@@ -141,9 +141,6 @@ export default {
     padding: 5px 0;
   }
 }
-</style>
-
-<style>
 .api-editContain .help{
   position: absolute;
 }

@@ -8,7 +8,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .form{
   .container-block .table-container{
     min-height: 70vh;
