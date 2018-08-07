@@ -19,11 +19,11 @@
     </ul>
     <div class="tip_box" v-if="!sn">
       <div class="loginBox">
-        <a class="signin" :href="`${ROUTER_VERSION}/login?from=${ROUTER_VERSION}/market/${curMarket}`">{{$t('orders.login')}}</a>
-        <a class="signup" :href="`${ROUTER_VERSION}/register?from=${ROUTER_VERSION}/market/${curMarket}`">{{$t('orders.register')}}</a>
+        <a class="signin" :href="`${ROUTER_VERSION}/login?from=${ROUTER_VERSION}/markets/${curMarket}/orders`">{{$t('orders.login')}}</a>
+        <a class="signup" :href="`${ROUTER_VERSION}/register?from=${ROUTER_VERSION}/markets/${curMarket}/orders`">{{$t('orders.register')}}</a>
       </div>
     </div>
-    <vue-simple-spinner v-if='!curListData' size="66" class="loading"></vue-simple-spinner>
+    <vue-simple-spinner v-if='loading && loginData !== "none"' size="66" class="loading"></vue-simple-spinner>
     <div class="orderBd" v-if="sn">
       <div class="operate">
         <div class="cancel_all" @click="cancelAll()">{{$t("orders.cancel_all")}}</div>
@@ -76,6 +76,7 @@ export default {
       hds: ['markets.quotes', 'markets.trade', 'markets.pending'],
       filterButtons: ['orders.all', 'orders.buy', 'orders.sell'],
       currencyindex: 2,
+      loading: true,
       marketData: null,
       curMarket: '',
       curData: [],
@@ -115,35 +116,34 @@ export default {
   },
   methods: {
     fetchData: function () {
-      var self = this
       this._get({
         url: '/markets/pending_orders.json',
         data: {}
-      }, function (data) {
+      }, (data) => {
+        this.loading = false
         var initdata = JSON.parse(data.request.response)
         if (!initdata.success) {
-          self.curData = []
+          this.curData = []
         } else {
-          self.curData = initdata.success.orders
+          this.curData = initdata.success.orders
         }
-        self.curListData = self.curData
-        document.title = `Markets - ${self.$t('brand')}`
+        this.curListData = this.curData
+        document.title = `Markets - ${this.$t('brand')}`
       })
     },
     getRefresh: function (sn) {
       var privateAccount = pusher.subscribe('private-' + sn)
-      var self = this
       privateAccount.bind('order', (data) => {
         if (data.state === 'wait') {
-          self.curData.unshift(data)
+          this.curData.unshift(data)
         } else if (data.state === 'cancel' || data.state === 'done') {
           for (var i in this.curData) {
-            if (self.curData[i].id === data.id) {
-              self.curData.splice(i, 1)
+            if (this.curData[i].id === data.id) {
+              this.curData.splice(i, 1)
             }
           }
         }
-        self.fiterList(self.curfilter)
+        this.fiterList(this.curfilter)
       })
     },
     goPath: function (index) {

@@ -3,7 +3,7 @@
     <ul class="market_hd clearfix">
       <li v-for="(hd,index) in hds" :key='hd' :class="{'check': currencyindex == index}" @click="goPath(index)">{{$t(hd)}}</li>
     </ul>
-    <vue-simple-spinner v-if='trades.length === 0' size="66" class="loading"></vue-simple-spinner>
+    <vue-simple-spinner v-if='loading' size="66" class="loading"></vue-simple-spinner>
     <div class="detail">
       <div class="detail_top">
         <div class="add_favorite">
@@ -87,6 +87,7 @@ export default {
       ticker: {},
       trades: [],
       logined: false,
+      loading: true,
       favorite: false,
       localList: null
     }
@@ -156,6 +157,7 @@ export default {
         url: '/markets/' + market + '.json',
         data: {}
       }, (data) => {
+        this.loading = false
         var initdata = JSON.parse(data.request.response);
         ({
           ticker: this.ticker,

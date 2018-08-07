@@ -30,9 +30,6 @@
                 </span>
               </a>
               <ul class="dropdown-menu text-center">
-                <!-- <li>123</li>
-                <li>123</li>
-                <li>123</li> -->
                 <li v-for="d in markList" :key="Object.keys(d)[0]">
                   <a :href="`${ROUTER_VERSION}/exchange/${Object.keys(d)[0]}`">
                     {{ d[Object.keys(d)[0]].name }}
@@ -90,17 +87,6 @@
                 <li><a :href="`${HOST_URL}/signout`">{{$t('nav.exit')}}</a></li>
               </ul>
             </li>
-            <!-- <li role="presentation" class="dropdown country img-position">
-              <a class="dropdown-toggle paddingL0" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <span>{{getLanguage.name}}</span><span class="caret">
-                </span>
-              </a>
-              <ul class="dropdown-menu text-center">
-                <li v-for="(locale,index) in locale" :key="locale.language">
-                  <a @click="changeLang(locale.language, index + 1)">{{locale.name}}</a>
-                </li>
-              </ul>
-            </li> -->
           </ul>
         </div>
     </nav>

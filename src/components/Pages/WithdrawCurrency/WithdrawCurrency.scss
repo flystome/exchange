@@ -439,3 +439,9 @@ i{
   top: 3px;
   margin-right: 3px;
 }
+
+@media (max-width: 992px) {
+  .member-center .container-block {
+    padding: 20px 15px;
+  }
+}

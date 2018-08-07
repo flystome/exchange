@@ -29,6 +29,7 @@ export default {
     marketList
   },
   mounted: function () {
+    this.handleMarketData()
     this.init()
     window.onpageshow = function (e) {
       if (e.persisted) {
@@ -44,12 +45,7 @@ export default {
     },
     marketData (val) {
       if (val) {
-        var obj = {}
-        val.map((ele, index) => {
-          var key = Object.keys(ele)[0]
-          obj[key] = ele[key]
-        })
-        this.listData = obj
+        this.handleMarketData()
         this.getCurData()
       }
     }
@@ -78,6 +74,14 @@ export default {
           this.getCurData(this.listData)
         }
       })
+    },
+    handleMarketData () {
+      var obj = {}
+      this.marketData.map((ele, index) => {
+        var key = Object.keys(ele)[0]
+        obj[key] = ele[key]
+      })
+      this.listData = obj
     },
     getCurData: function () {
       this.curData = []

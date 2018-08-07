@@ -186,4 +186,26 @@ export default {
     }
   }
 }
+@media (max-width: 992px) {
+  .total {
+    width: 100%;
+    padding: 15px 0 0;
+  }
+  .chart {
+    width: 70%;
+    min-height: 300px;
+  }
+  .pie-legend {
+    padding-right: 0;
+    padding-top: 140px;
+    div {
+      width: 50%;
+      text-align: center;
+      span {
+        margin-right: 0 !important;
+        display: block;
+      }
+    }
+  }
+}
 </style>

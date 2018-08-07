@@ -1,6 +1,6 @@
 <template>
-  <div class="line-box">
-    <header>
+  <div>
+    <section>
       <div class="text-center">{{ $t('dashboard.historical_income') }}</div>
       <div>
         <div class="line-date">
@@ -19,7 +19,7 @@
           </span>
         </div>
       </div>
-    </header>
+    </section>
     <chart :options="Option" :auto-resize='true'></chart>
   </div>
 </template>
@@ -160,7 +160,7 @@ export default {
   .line-box {
     width: 100%;
   }
-  header{
+  section{
     margin-bottom: 2px;
     & > .text-center{
       font-size: 20px;

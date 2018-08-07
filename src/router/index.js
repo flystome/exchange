@@ -364,7 +364,7 @@ router.afterEach(() => {
   var user = navigator.userAgent
   var mobile = user.toLowerCase().indexOf('android') !== -1 || user.toLowerCase().indexOf('iphone') !== -1
   if (mobile) {
-    if (route.name === 'home' || route.path === `${version}/funds/line`) {
+    if (route.name === 'home') {
       var min = document.getElementById('meta').content.match(/minimum-scale=(\d\.\d+)/) && document.getElementById('meta').content.match(/minimum-scale=(\d\.\d+)/)[0]
       if (min && min.match(/(\d\.\d+)/)[0] !== '1') return
       document.getElementById('meta').content = `initial-scale=1,minimum-scale=${document.body.offsetWidth / 1200},maximum-scale=0,user-scalable=yes`

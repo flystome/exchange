@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <vue-simple-spinner v-if='!sellList' size="66" class="loading"></vue-simple-spinner>
+    <vue-simple-spinner v-if='loading' size="66" class="loading"></vue-simple-spinner>
     <ul class="trade_hd clearfix">
       <li v-for="(hd,index) in hds" :key='hd' :class="{'check': currencyindex == index}" @click="goPath(index)">{{$t(hd)}}</li>
     </ul>
@@ -179,6 +179,7 @@ export default {
       check_type: '',
       ticker: {},
       market: {},
+      loading: true,
       sellList: [],
       buyList: [],
       isDisabled: true,
@@ -360,6 +361,7 @@ export default {
         url: '/markets/' + market + '.json',
         data: {}
       }, (data) => {
+        this.loading = false;
         ({
           ticker: this.ticker,
           depth_data: this.depthUpdate,
