@@ -62,7 +62,7 @@ export default {
           // per_page: '3'
         }
       }, (d) => {
-        this.new_coin = d.data
+        this.new_coin = d && d.data
       })
     }
   },

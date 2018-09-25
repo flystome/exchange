@@ -19,7 +19,7 @@ const actions = {
         } // getMaretData
         if (route === undefined) route = state.route
         if (unLogin.includes(route.name)) {
-          if (d.data && !d.data.error) commit('getData', d)
+          if (d && d.data && !d.data.error) commit('getData', d)
           if (!redirect(state, arguments[0], route)) {
             resolve(true)
           } else {

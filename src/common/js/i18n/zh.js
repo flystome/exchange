@@ -384,6 +384,7 @@ const zh = {
       'login': '登录',
       'register': '注册'
     },
+    'tradeH': '交易',
     'success': "下单成功",
     'fail': "下单失败",
     'setting': '账户设置',

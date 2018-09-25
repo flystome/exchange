@@ -1,7 +1,10 @@
 <template>
   <section id="trades">
     <ul class="tab_hd">
-      <li class="on">{{$t('exchange.tradeTitle')}}</li>
+      <li>
+        <div class="newPirce"><span>{{market.last | fixedNum(market.price_fixed)}}</span> ({{market.base_currency | upper}})</div>
+        <span>{{$t('exchange.tradeTitle')}}</span>
+      </li>
     </ul>
     <div class="bd">
       <div class="hd clearfix">
@@ -20,9 +23,7 @@
           <!-- </transition-group> -->
         </ul>
       </div>
-      <div class="newPirce">
-        <div><span>{{market.last | fixedNum(market.price_fixed)}}</span> ({{market.base_currency | upper}})</div>
-      </div>
+      <hr>
       <div class="buy lists">
         <ul class="listbox">
           <!-- <transition-group name="slide-fade"> -->

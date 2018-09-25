@@ -5,15 +5,17 @@
   position: relative;
   .hd {
     width: 100%;
-    padding: 0 5px;
-    height: 30px;
+    height: 40px;
+    line-height: 24px;
     padding: 8px;
+    background: #1b1e2e;
     li {
       display: inline-block;
       width: 33.3%;
       float: left;
       text-align: right;
       color: #818b95;
+      font-size: 14px;
       &:first-child {
         text-align: left;
       }
@@ -56,7 +58,7 @@
   .myScroll {
     width: 100%;
     background: none;
-    max-height: calc(100% - 30px);
+    max-height: calc(100% - 40px);
     margin-right: 0;
     padding-right: 2px;
   }

@@ -1,29 +1,33 @@
 #order {
-  padding: 15px 10px;
+  padding: 5px 0;
   .handleOrder {
     .put {
-      padding-left: 45px;
+      // padding-left: 45px;
       &>.input_box {
-        width: 175px;
-        height: 28px;
-        margin-bottom: 8px;
+        width: 100%;
+        height: 40px;
+        margin-bottom: 16px;
         color: #85a7c8;
-        background: #37506e;
-        font-size: 12px;
-        padding-right: 5px;
+        background: #1e2235;
+        border: 1px solid #4e5b85;
+        font-size: 14px;
+        padding-right: 10px;
+        &:hover {
+          border-color: #7a98f7;
+        }
         &.price {
           position: relative;
         }
         input {
           background: none;
           outline: none;
-          border: 0;
+          border: none;
           color: #fff;
-          height: 28px;
-          line-height: 28px;
-          font-size: 12px;
-          width: 130px;
-          padding-left: 5px;
+          height: 40px;
+          line-height: 40px;
+          font-size: 14px;
+          width: calc(100% - 50px);
+          padding-left: 10px;
           box-shadow: none;
           &::-webkit-input-placeholder {
             color: #85a7c8;
@@ -40,6 +44,9 @@
           &::-ms-clear {
             display: none;
           }
+          &:focus {
+            border-color: #7a98f7;
+          }
         }
         input[type="number"]{-moz-appearance:textfield;}
         span {
@@ -47,7 +54,7 @@
           float: right;
           width: 40px;
           text-align: right;
-          line-height: 28px;
+          line-height: 40px;
         }
         .warning {
           position: absolute;
@@ -62,17 +69,19 @@
         }
       }
       &>.name {
-        width: 40px;
-        display: inline-block;
+        // width: 40px;
+        // display: inline-block;
         height: 28px;
         line-height: 28px;
-        float: left;
-        margin-left: -45px;
+        margin-bottom: 8px;
+        // float: left;
+        // margin-left: -45px;
         color: #818b95;
       }
     }
     .percent {
-      height: 20px;
+      height: 30px;
+      margin-top: 20px;
       span {
         display: inline-block;
         float: left;
@@ -80,10 +89,10 @@
         font-size: 12px;
         margin-right: 2%;
         text-align: center;
-        height: 20px;
-        line-height: 20px;
+        height: 30px;
+        line-height: 30px;
         cursor: pointer;
-        background: #37506e;
+        background: #1e2235;
         color: #85a7c8;
         border-radius: 2px;
         &.on {
@@ -96,10 +105,11 @@
       }
     }
     .tip {
-      height: 20px;
-      line-height: 20px;
+      height: 30px;
+      line-height: 30px;
       margin-top: 12px;
       margin-bottom: 12px;
+      font-size: 14px;
       div {
         display: inline-block;
         i {
@@ -116,25 +126,30 @@
         color: #ff1e00;
       }
       .loginTip {
-        height: 20px;
+        height: 30px;
+        a {
+          margin: 0 5px;
+          color: #4382f7;
+        }
       }
     }
     .btn {
       display: inline-block;
       width: 100%;
-      height: 32px;
-      line-height: 30px;
+      height: 40px;
+      line-height: 38px;
       border-radius: 2px;
       color: #fff;
       font-size: 16px;
       text-align: center;
       padding: 0;
+      background: #4e5b85;
     }
     .buy_btn {
-      background: #40b246;
+      // background: #40b246;
     }
     .sell_btn {
-      background: #e9454d;
+      // background: #e9454d;
     }
   }
   .dialog {

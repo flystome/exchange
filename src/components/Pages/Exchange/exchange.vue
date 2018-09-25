@@ -34,32 +34,36 @@
         <audio id="order_cancel" src="/static/media/cancel.mp3"></audio>
         <myOrder :myOrders='my_orders' :market="market" :markets='markets' @getMyOrder='getMyOrder' :loginData='loginData' :curMarket='curMarket'></myOrder>
       </div>
-    </section>
-    <section class="list" :class="{'logined': loginData !== 'none'}">
-      <audio id="order_audio" src="/static/media/order.mp3"></audio>
-      <audio id="order_ok" src="/static/media/settle.mp3"></audio>
-      <div class="list_lt w240">
-        <div class="list_box trades">
-          <trades :depthData='depth_data' :market='market'></trades>
+      <div class="list clearfix" :class="{'logined': loginData !== 'none'}">
+        <audio id="order_audio" src="/static/media/order.mp3"></audio>
+        <audio id="order_ok" src="/static/media/settle.mp3"></audio>
+        <div class="w240">
+          <div class="list_box trades">
+            <trades :depthData='depth_data' :market='market'></trades>
+          </div>
+          <!-- <div class="order buy">
+            <order :market='market' :type='"buy"' :accounts='accounts' @play='play' :loginData='loginData'
+            :curMarket='curMarket'></order>
+          </div> -->
         </div>
-        <div class="order buy">
-          <order :market='market' :type='"buy"' :accounts='accounts' @play='play' :loginData='loginData'
-          :curMarket='curMarket'></order>
+        <div class="order_box clearfix">
+          <h3>{{$t('exchange.tradeH')}}</h3>
+          <div class="box">
+            <div class="order buy fl">
+              <order :market='market' :type='"buy"' :accounts='accounts' @play='play' :loginData='loginData'
+              :curMarket='curMarket'></order>
+            </div>
+            <div class="order sell fr">
+              <order :market='market' :type='"sell"' :accounts='accounts' @play='play' :loginData='loginData'
+              :curMarket='curMarket'></order>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="list_rt w240">
-        <div class="list_box history">
-          <allOrder :tradesData="all_trades" :market='market'></allOrder>
+        <div class="w240">
+          <div class="list_box history">
+            <allOrder :tradesData="all_trades" :market='market'></allOrder>
+          </div>
         </div>
-        <div class="order sell">
-          <order :market='market' :type='"sell"' :accounts='accounts' @play='play' :loginData='loginData'
-          :curMarket='curMarket'></order>
-        </div>
-      </div>
-      <div class="set_platform" v-if='loginData !== "none"'>
-        <span v-if='platform_coin && platform_coin.use_platform_coin_for_fee'>{{$t('exchange.platform_use')}}{{platform_coin.code}}{{$t('exchange.platform_pay')}}</span>
-        <span v-else>{{$t('exchange.platform_use_no')}}{{platform_coin && platform_coin.code}}{{$t('exchange.platform_pay')}}</span>
-        <a v-if='platform_coin.enable' :href="`${ROUTER_VERSION}/my_account`">{{$t('exchange.toSet')}}</a>
       </div>
     </section>
   </section>

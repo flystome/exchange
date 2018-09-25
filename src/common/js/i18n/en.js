@@ -387,6 +387,7 @@ const en = {
         'login': 'Login',
         'register': 'Register'
       },
+      'tradeH': 'Trade',
       'success': "Success",
       'fail': "Fail",
       'setting': 'Profile',

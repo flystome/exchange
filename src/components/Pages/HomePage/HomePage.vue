@@ -88,18 +88,6 @@
         </div>
       </div>
     </div>
-    <div class="home_mining" v-if='false'>
-      <div class="mining_h">
-        <h3>{{$t('homepage.mining.head')}}</h3>
-        <p>{{$t('homepage.mining.des')}}</p>
-      </div>
-      <div class="mining_list" v-if='miningList.length !== 0'>
-        <miningTab :miningList='miningList' @participate='participate'></miningTab>
-      </div>
-      <div v-else style="position: absolute;top: 50%;left: 50%;margin-left: -44px">
-        <vue-simple-spinner size="88"></vue-simple-spinner>
-      </div>
-    </div>
     <div class="homepage-main marginT15">
       <div class="homepage-markets">
         <basic-button v-for="(item,index) in currency" :data-id="item" :key="item" class="button pull-left" :class="{'active':!(currencyindex == index)}"
@@ -546,7 +534,7 @@ export default {
           // per_page: '8'
         }
       }).then(d => {
-        self.Notice = d.data
+        self.Notice = d && d.data
       }) // new_coin
     },
     RegionHint () {

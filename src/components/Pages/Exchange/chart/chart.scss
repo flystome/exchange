@@ -7,14 +7,14 @@
     margin-bottom: 0;
   }
   .chart_hd {
-    height: 32px;
-    background: #18283b;
+    height:40px;
+    background: #1b1e2e;
     li {
       cursor: pointer;
-      font-size: 13px;
+      font-size: 14px;
       display: inline-block;
-      padding: 0 15px;
-      line-height: 32px;
+      padding: 0 25px;
+      line-height:40px;
       color: #87a3bf;
       margin: 0;
       &.on {
@@ -25,7 +25,7 @@
     }
   }
   .chart_bd {
-    height: calc(100% - 32px);
+    height: calc(100% - 40px);
     width: 100%;
     position: relative;
     .candle {

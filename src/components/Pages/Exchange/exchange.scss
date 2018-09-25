@@ -1,9 +1,8 @@
 #exchange {
   width: 100%;
-  height: 100%;
   color: #fff;
   font-size: 12px;
-  background: #1f344e;
+  background: #262a42;
   min-width: 1200px;
   min-height: 768px;
   ul, li {
@@ -18,7 +17,7 @@
   }
   .loginTip {
     display: inline-block;
-    height: 32px;
+    height: 48px;
     color: #87a3bf;
     font-size: 12px;
     p {
@@ -77,32 +76,30 @@
   }
   .w240 {
     display: inline-block;
-    width: 240px;
+    width: 360px;
     background: #101622;
     height: 100%;
     float: left;
   }
   .content {
     display: inline-block;
-    float: left;
-    height: calc(100vh - 48px);
-    width: calc(100% - 492px);
-    min-height: 720px;
+    padding: 10px;
+    min-height: calc(100vh - 58px);
+    width: 100%;
     min-width: 708px;
-    margin: 0 3px 0 3px;
     .top_content {
       width: 100%;
-      height: calc(100% - 219px);
-      margin-bottom: 3px;
+      min-height: 600px;
+      margin-bottom: 10px;
       position: relative;
       .chart {
         display: inline-block;
         position: absolute;
-        left: 243px;
+        left: 370px;
         top: 0;
-        width: calc(100% - 243px);
+        width: calc(100% - 370px);
         height: 100%;
-        background: #101622;
+        background: #181b2a;
         &.move-right {
           animation: expandRight 0.6s ease forwards;
         }
@@ -114,7 +111,7 @@
         position: absolute;
         left: 0;
         top: 0;
-        width: 240px;
+        width: 360px;
         &.move-left {
           animation: expandLeft 0.6s ease forwards;
         }
@@ -124,38 +121,51 @@
       }
     }
     .my_order {
+      display: none;
       width: 100%;
       height: 216px;
       background: #232e3a;
     }
   }
   .list {
-    display: inline-block;
-    float: right;
-    width: 483px;
-    height: calc(100vh - 48px);
-    margin-right: 3px;
+    width: 100%;
+    height: 500px;
     &>div {
       background: none;
       height: 100%;
-      min-height: 720px;
-    }
-    .list_lt {
       float: left;
-    }
-    .list_rt {
-      float: right;
+      margin-right: 10px;
+      background: #181b2a;
+      &:last-child {
+        margin-right: 0;
+      }
+      &.order_box {
+        width: calc(100% - 740px);
+        .box {
+          width: 100%;
+          padding: 10px 20px 10px;
+        }
+        h3 {
+          height: 40px;
+          line-height: 40px;
+          font-size: 14px;
+          font-weight: 700;
+          background: #1b1e2e;
+          margin: 0;
+          text-indent: 20px;
+        }
+        .order {
+          width: calc(50% - 10px);
+        }
+      }
     }
     .list_box {
-      height: calc(100% - 237px);
-      min-height: 453px;
+      height: 100%;
       overflow-y:hidden;
-      background: #232e3a;
-      margin-bottom: 3px;
+      margin-bottom: 10px;
     }
     .order {
-      background: #101622;
-      height: 234px;
+      height: 500px;
     }
     .set_platform {
       display: none;
@@ -163,7 +173,7 @@
     &.logined {
       position: relative;
       &>div {
-        min-height: 693px;
+        min-height: 700px;
       }
       .list_box {
         height: calc(100% - 264px);
@@ -176,7 +186,7 @@
         bottom: 0;
         width: 100%;
         padding: 0 10px;
-        margin-top: 3px;
+        margin-top: 10px;
         height: 24px;
         line-height: 24px;
         min-height: 24px;
